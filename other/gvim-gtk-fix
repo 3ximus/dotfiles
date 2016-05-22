@@ -1,0 +1,6 @@
+# paste on ~/.gtkrc-2.0
+style "vimfix"
+{
+	bg[NORMAL] = "#32302f" # this matches gruvbox theme
+}
+widget "vim-main-window.*GtkForm" style "vimfix"

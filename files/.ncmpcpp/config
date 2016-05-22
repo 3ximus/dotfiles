@@ -1,0 +1,96 @@
+##### song format #####
+##
+## %l - length
+## %f - filename
+## %D - directory
+## %a - artist
+## %A - album artist
+## %t - title
+## %b - album
+## %y - year
+## %n - track number (01/12 -> 01)
+## %N - full track info (01/12 -> 01/12)
+## %g - genre
+## %c - composer
+## %p - performer
+## %d - disc
+## %C - comment
+## $R - begin right alignment
+##
+## you can also put them in { } and then it will be displayed
+## only if all requested values are available and/or define alternate
+## value with { }|{ } eg. {%a - %t}|{%f}
+##
+## Note: Format that is similar to "%a - %t" (i.e. without any additional
+## braces) is equal to "{%a - %t}", so if one of the tags is missing,
+## you'll get nothing.
+##
+## text can also have different color than the main window has,
+## eg. if you want length to be green, write $3%l$9
+##
+## available values:
+##
+## - 0 - default window color (discards all other colors)
+## - 1 - black
+## - 2 - red
+## - 3 - green
+## - 4 - yellow
+## - 5 - blue
+## - 6 - magenta
+## - 7 - cyan
+## - 8 - white
+## - 9 - end of current color
+##
+## Note: colors can be nested.
+
+
+% egrep -v '^#' .ncmpcpp/config
+mpd_music_dir = "/home/eximus/Music/"
+mpd_host = "127.0.0.1"
+mpd_port = "6601"
+mpd_crossfade_time = "5"
+
+message_delay_time = "3"
+playlist_shorten_total_times = "yes"
+playlist_display_mode = "columns"
+browser_display_mode = "columns"
+search_engine_display_mode = "columns"
+playlist_editor_display_mode = "columns"
+autocenter_mode = "yes"
+centered_cursor = "yes"
+follow_now_playing_lyrics = "yes"
+locked_screen_width_part = "60"
+external_editor = "vim"
+display_bitrate = "yes"
+use_console_editor = "yes"
+cyclic_scrolling = "yes"
+mouse_list_scroll_whole_page = "yes"
+lines_scrolled = "1"
+#ask_before_clearing_main_playlist = "yes"
+enable_window_title = "yes"
+
+# Style
+user_interface = "alternative"
+progressbar_look = "─╸"
+visualizer_in_stereo = "yes"
+visualizer_fifo_path = "/tmp/mpd.fifo"
+visualizer_output_name = "my_fifo"
+visualizer_sync_interval = "10"
+visualizer_type = "spectrum"
+#visualizer_type = "wave" (spectrum/wave)
+#visualizer_look = "◆▋"
+
+# Colors
+header_window_color = "blue"
+volume_color = "cyan"
+state_line_color = "white"
+state_flags_color = "cyan"
+main_window_color = "green"
+main_window_highlight_color = "red"
+progressbar_color = "white"
+statusbar_color = "white"
+active_column_color = "red"
+visualizer_color = "green"
+song_columns_list_format = "(25)[green]{a} (40)[white]{f} (30)[green]{b} (7f)[white]{l}"
+#alternative_header_first_line_format = "$b$1$aqqu$/a$9 {%t}|{%f} $1$atqq$/a$9$/b"
+alternative_header_second_line_format = "{{$3$b%a$/b$9}{ - $8%b$9} {$3[%y]$9}}|{%D}"

@@ -1,0 +1,115 @@
+! Configuration for X client applications
+
+!name can be found with fc-list
+urxvt*font:				xft:Hack:style=Regular:size=8, \
+						xft:Roboto\ Mono\ for\ Powerline:style=Regular:size=8, \
+						xft:FreeSerif:style=Regular, \
+						xft:unifont:style=Medium:antialias=false
+urxvt*termName:         rxvt
+urxvt*scrollBar:        false
+urxvt*matcher.button:   1
+URxvt.transparent:   false
+!comment to allow bold
+URxvt.boldFont:
+Xft*dpi:                96
+Xft*antialias:          true
+Xft*hinting:            full
+
+! clipboard
+urxvt.perl-ext-common: default,clipboard,keyboard-select
+urxvt.keysym.M-Escape: perl:keyboard-select:activate
+urxvt.keysym.M-C-c:   perl:clipboard:copy
+!urxvt.keysym.M-S-v:   perl:clipboard:paste_escaped
+urxvt.keysym.M-C-v: perl:clipboard:paste
+urxvt.clipboard.copycmd:  xsel -ib
+urxvt.clipboard.pastecmd: xsel -ob
+
+URxvt*geometry: 75x35
+URxvt*fading:        0
+URxvt*tintColor:     #ffffff
+URxvt*shading:        0
+URxvt*inheritPixmap:     False
+
+urxvt*foreground:       #dedede
+urxvt*background: #2d2d2d
+
+! Lighter colors
+!*cursorColor:	#ecf0f1
+
+! Lighter colors
+!*cursorColor:	#ecf0f1
+!*color0:	#3e464e
+!*color8:	#3e464e
+!*color1:	#db0a5b
+!*color9:	#db0a5b
+!*color2:	#3fc380
+!*color10:	#3fc380
+!*color3:	#f2784b
+!*color11:	#f2784b
+!*color4:	#22a7f0
+!*color12:	#22a7f0
+!*color5:	#f64747
+!*color13:	#f64747
+!*color6:	#55aeae
+!*color14:	#55aeae
+!*color7:	#ecf0f1
+!*color15:	#ecf0f1
+
+! Dimmer colors
+*.cursorColor:  #c5c8c6
+*.color0:       #212d32
+*.color8:       #37474f
+*.color1:       #ec5f67
+*.color9:       #f77669
+*.color2:       #8bd649
+*.color10:      #c3e88d
+*.color3:       #f1e655
+*.color11:      #f8e71c
+*.color4:       #7986cb
+*.color12:      #82b1ff
+*.color5:       #85678f
+*.color13:      #5f819d
+*.color6:       #5c7e8c
+*.color14:      #80cbc4
+*.color7:       #707880
+*.color15:      #cdd3de
+
+!cool colors
+!#define base00 #2C3E50
+!#define base01 #34495E
+!#define base02 #7F8C8D
+!#define base03 #95A5A6
+!#define base04 #BDC3C7
+!#define base05 #e0e0e0
+!#define base06 #f5f5f5
+!#define base07 #ECF0F1
+!#define base08 #E74C3C
+!#define base09 #E67E22
+!#define base0A #F1C40F
+!#define base0B #2ECC71
+!#define base0C #1ABC9C
+!#define base0D #3498DB
+!#define base0E #9B59B6
+!#define base0F #be643c
+!
+!*.foreground:   base02
+!*.background:   base07
+!*.cursorColor:  base02
+!
+!*.color0:       base00
+!*.color1:       base08
+!*.color2:       base0B
+!*.color3:       base0A
+!*.color4:       base0D
+!*.color5:       base0E
+!*.color6:       base0C
+!*.color7:       base05
+!
+!*.color8:       base03
+!*.color9:       base08
+!*.color10:      base0B
+!*.color11:      base0A
+!*.color12:      base0D
+!*.color13:      base0E
+!*.color14:      base0C
+!*.color15:      base07
