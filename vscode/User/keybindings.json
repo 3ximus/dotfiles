@@ -1,0 +1,47 @@
+// Place your key bindings in this file to overwrite the defaults
+[
+//
+	{ "key": "ctrl+shift+s", "command": "workbench.action.toggleStatusbarVisibility" },
+	{ "key": "ctrl+b", "command": "workbench.action.toggleSidebarVisibility" },
+	{ "key": "shift+alt+h", "command": "workbench.action.toggleEditorGroupLayout" },
+	{ "key": "shift+alt+r", "command": "workbench.action.reloadWindow" },
+
+// visual block
+	{ "key": "ctrl+v", "command": "extension.vim_ctrl+v", "when": "editorTextFocus && !inDebugRepl && vim.mode != 'Insert Mode'" },
+
+// move lines
+	{ "key": "ctrl+j", "command": "editor.action.moveLinesDownAction", "when": "editorTextFocus && !editorReadonly" },
+	{ "key": "ctrl+k", "command": "editor.action.moveLinesUpAction", "when": "editorTextFocus && !editorReadonly" },
+
+// terminal
+	{ "key": "ctrl+f1", "command": "workbench.action.terminal.toggleTerminal" },
+
+// vim keys :)
+	{ "key": "ctrl+n","command": "acceptQuickFixSuggestion", "when": "editorFocus && quickFixWidgetVisible" },
+	{ "key": "ctrl+n","command": "acceptSelectedSuggestion", "when": "editorTextFocus && suggestWidgetVisible" },
+	{ "key": "ctrl+p","command": "selectPrevSuggestion", "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible" },
+	{ "key": "ctrl+n","command": "selectNextSuggestion", "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible" },
+
+// this fixes bug where some times tab completion puts '<tab>' instead
+	{ "key": "tab","command": "acceptQuickFixSuggestion", "when": "editorFocus && quickFixWidgetVisible" },
+	{ "key": "tab","command": "acceptSelectedSuggestion", "when": "editorTextFocus && suggestWidgetVisible" },
+
+// remove trailing white spaces
+	{ "key": "alt+shift+t","command": "trailing-spaces.deleteTrailingSpaces", "when": "editorTextFocus" },
+	{ "key": "ctrl+n", "command": "workbench.action.nextEditor", "when": "editorTextFocus && vim.mode != 'Insert Mode'" },
+	{ "key": "ctrl+p", "command": "workbench.action.previousEditor", "when": "editorTextFocus && vim.mode != 'Insert Mode'" },
+
+// tasks
+	{ "key": "f7", "command": "workbench.action.tasks.build" },
+	{ "key": "f6", "command": "workbench.action.tasks.runTask" },
+
+// close tab
+	{ "key": "ctrl+x","command": "workbench.action.closeActiveEditor" },
+
+// other
+	{ "key": "f2", "command": "workbench.action.gotoSymbol" },
+	{ "key": "f3", "command": "workbench.action.showAllSymbols" },
+	{ "key": "f4", "command": "workbench.action.quickOpen" },
+	{ "key": "f8", "command": "workbench.action.openRecent" }
+
+]

@@ -1,8 +1,0 @@
-{
-	// Draws text centered in the window rather than left aligned
-    "draw_centered": true,
-    // Text past wrap_width is sent to new line
-    "word_wrap": true,
-    // Width after wich text is wraped
-    "wrap_width": 130,
-}

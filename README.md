@@ -1,2 +1,5 @@
 ## dotfiles
-All my configuration fles
+My configuration fles
+
+### notes
+gdbinit depends on [pwndbg](https://github.com/pwndbg/pwndbg)

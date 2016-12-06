@@ -1,0 +1,47 @@
+$include /etc/inputrc
+
+# input modes
+set keymap emacs
+set editing-mode emacs
+set show-mode-in-prompt off
+
+set vi-ins-mode-string "\033[40;33m ins \033[42;30m\033[0m"
+set vi-cmd-mode-string "\033[40;34m cmd \033[42;30m\033[0m"
+set visible-stats on
+
+# correct completion from the middle of a word
+set skip-completed-text on
+# ignore path case
+set completion-ignore-case on
+
+# cicle through completions
+"\C-n": menu-complete
+"\e[Z": menu-complete
+
+"\C-p": history-search-backward
+"\C-b": history-search-forward
+
+"\C-x\C-r": re-read-init-file
+"\C-x\C-x": redraw-current-line
+
+
+$if mode=vi
+# make emacsm-insert behave like usual emacs
+"\C-k": kill-line
+"\C-a": beginning-of-line
+"\C-e": end-of-line
+"\C-l": clear-screen
+"\eb": backward-word
+"\ef": forward-word
+$endif
+
+# quote word near cursor
+"\C-xq": "\eb\"\ef\""
+# transform text in variable assignment
+"\C-xv": "\C-a\C-k$\C-y\C-e="
+# make previous path an absolute path
+"\C-xv": "\C-a\C-k$\C-y\C-e="
+# Add a binding to refresh the line, which is unbound
+# edit the path
+"\C-xp": "PATH=${PATH}\e\C-e\C-a\ef\C-f"
+

@@ -1,0 +1,47 @@
+// Place your settings in this file to overwrite the default settings
+{
+     // Controls the font
+    //"editor.fontFamily": "'Roboto Mono for Powerline'",
+    //"editor.fontFamily": "'monofur for Powerline'",
+    //"editor.fontFamily": "'Liberation Mono for Powerline'",
+    "editor.fontFamily": "'Source Code Pro for Powerline'",
+    //"editor.fontFamily": "'Fira Mono for Powerline'",
+    "editor.fontSize": 12.5,
+    // Controls the display of line numbers. Possible values are 'on', 'off', and 'relative'. 'relative' shows the line count from the current cursor position.
+    "editor.lineNumbers": "relative",
+    "editor.insertSpaces": false,
+    "editor.snippetSuggestions": "top",
+
+     // default python
+    "python.pythonPath": "/usr/bin/python2.7",
+	// Disabling a bunch of stupid warnings
+	"python.linting.pylintArgs": [
+        "--disable=W0312,C,R0903, R0902, R0913"
+    ],
+	// Fully qualified path to tag file (exuberant ctag file), used to provide workspace symbols.
+	"python.workspaceSymbols.tagFilePath": "${workspaceRoot}/.tags",
+
+
+    //"terminal.integrated.shell.windows": "C:\\Windows\\sysnative\\bash.exe",
+    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+
+    //"vim.useCtrlKeys": true,
+    "vim.autoindent": false,
+
+    "trailing-spaces.highlightCurrentLine": false,
+    "trailing-spaces.trimOnSave": true,
+
+    //user settings
+    "GitHubIssues.authToken": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "GitHubIssues.countInAllLabels": true,
+    "GitHubIssues.showLabelAs": {
+        "bug":"bug",
+        "feature":"gear",
+        "improvement":"arrow-up",
+        "enhancement":"arrow-up"
+    }
+,
+"window.zoomLevel": 0,
+"editor.cursorStyle": "block",
+"editor.cursorBlinking": "blink"
+}
