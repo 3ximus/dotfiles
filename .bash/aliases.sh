@@ -43,5 +43,6 @@ fi
 # program aliases
 alias vi='vim'
 alias python='python2'
+alias pip='pip2'
 alias ssh-new-session='eval `ssh-agent` && ssh-add'
 

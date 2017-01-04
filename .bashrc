@@ -40,8 +40,8 @@ fi
 
 if [ "$color_prompt" = yes ]; then
 	# load default bash_prompt
-	if [ -f ~/.bash/prompt_2 ]; then
-		source ~/.bash/prompt_2
+	if [ -f ~/.bash/prompt_4 ]; then
+		source ~/.bash/prompt_4
 	fi
 else
     PS1='\u@\h:\w\$ '
@@ -60,9 +60,9 @@ fi
 # print_on_exit () { printf "$(cat ~/.banner)"; sleep 0.3; }
 # trap print_on_exit EXIT
 
-# Alias definitions. If available try to load them from a .bash_aliases file.
-if [ -f ~/.bash/bash_aliases ]; then
-    . ~/.bash/bash_aliases
+# Alias definitions. If available try to load them from a aliases file.
+if [ -f ~/.bash/aliases.sh ]; then
+    . ~/.bash/aliases.sh
 fi
 
 # expands bang combinations and variables to their values - remember !$ last arg / !^ first arg / !* all args
@@ -80,9 +80,17 @@ fi
 # add more colors filetypes printed with ls command
 #export LS_COLORS="$LS_COLORS:*.c=1;36:*.h=00;36"
 
-# Function definitions. If available try to load them from a .bash_functions file.
-if [ -f ~/.bash/bash_functions ]; then
-    . ~/.bash/bash_functions
+# Function definitions. If available try to load them from a functions file.
+if [ -f ~/.bash/functions.sh ]; then
+    . ~/.bash/functions.sh
+fi
+
+# konsole background blur
+konsolex=$(qdbus | grep konsole | cut -f 2 -d\ )
+if [ -n konsolex ]; then
+	for konsole in $konsolex; do
+		xprop -f _KDE_NET_WM_BLUR_BEHIND_REGION 32c -set _KDE_NET_WM_BLUR_BEHIND_REGION 0 -id `qdbus $konsole /konsole/MainWindow_1 winId`;
+	done
 fi
 
 export PATH=$PATH:$HOME/.gem/ruby/2.3.0/bin

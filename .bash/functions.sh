@@ -68,9 +68,9 @@ record() {
 	x=$(xrandr | grep '*' -m1 | cut -d' ' -f4 | cut -d'x' -f1)
 	y=$(xrandr | grep '*' -m1 | cut -d' ' -f4 | cut -d'x' -f2)
 	if [ $1 == "1" ]; then
-		recordmydesktop --width $x --height $y
+		recordmydesktop --width $x --height $y "${@:2}"
 	else
-		recordmydesktop -x $x --width $x --height $y
+		recordmydesktop -x $x --width $x --height $y "${@:2}"
 	fi
 }
 
