@@ -1,0 +1,20 @@
+! ------------------------------------------------------------------------------
+! ROFI Color theme
+! ------------------------------------------------------------------------------
+! generated at https://davedavenport.github.io/rofi/p11-Generator.html
+
+rofi.color-enabled: true
+rofi.color-window: argb:dc353946, argb:0606060, argb:c2626262
+rofi.color-normal: argb:00353946, #a8a8a8, argb:00353946, #5294e2, #ffffff
+rofi.color-active: argb:00353946, #5294e2, argb:00353946, #5294e2, #fdf6e3
+rofi.color-urgent: argb:00353946, #dc322f, argb:00353946, #dc322f, #fdf6e3
+
+! Separator style (none, dash, solid)
+rofi.separator-style:                solid
+!rofi.fullscreen:        true
+rofi.padding:           400
+rofi.hide-scrollbar:    true
+rofi.width:				1920
+!rofi.yoffset:           0
+!rofi.xoffset:           0
+
