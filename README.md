@@ -13,7 +13,7 @@ My configuration files:
 
 - firefox contains my stylish.sqlite file for [stylish](https://addons.mozilla.org/en-US/firefox/addon/stylish/) addon
 
-### -> fonts in .fonts are mostly fonts for [powerline](https://github.com/powerline/fonts) support
+- fonts in .fonts are mostly fonts for [powerline](https://github.com/powerline/fonts) support
 
 ## vim plugins
 
