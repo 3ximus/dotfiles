@@ -1,6 +1,6 @@
 
 # Load pwndbg
-source /home/eximus/Documents/rep/pwndbg/gdbinit.py
+source ~/Documents/rep/pwndbg/gdbinit.py
 
 # Better GDB defaults ----------------------------------------------------------
 
