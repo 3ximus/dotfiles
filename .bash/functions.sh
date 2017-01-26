@@ -1,20 +1,10 @@
 #! /bin/sh
 
-# find process by name
-psgrep() {
-	ps -aux | grep $1 --color=always | grep -v grep
-}
-
-# kill process by name
-pskill() {
-	local pid
-	local psout
-	psout=$(ps -ax | grep $1| grep -v grep)
-	pid=$(echo $psout|  awk '{ print $1 }')
-	echo -n "killing $(echo $psout|  awk '{ print $5 }') (process $pid)..."
-	kill -9 $pid
-	echo "slaughtered."
-}
+# ==================================
+# ----------------------------------
+# -------------WRAPPERS-------------
+# ----------------------------------
+# ==================================
 
 # Color man pages
 man() {
@@ -23,7 +13,7 @@ man() {
 		LESS_TERMCAP_md=$(printf "\e[1;31m") \
 		LESS_TERMCAP_me=$(printf "\e[0m") \
 		LESS_TERMCAP_se=$(printf "\e[0m") \
-		LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+		LESS_TERMCAP_so=$(printf "\e[1;44;30m") \
 		LESS_TERMCAP_ue=$(printf "\e[0m") \
 		LESS_TERMCAP_us=$(printf "\e[1;32m") \
 			man "$@"
@@ -51,16 +41,6 @@ extract () {
      fi
 }
 
-# fork to the background silently and send its output to the /dev/null
-# NOTES: generic form #>/dev/null (# is 1 by default)
-#		2>&-			---->		#>&-   (close fd)
-#		|&				---->		2>&1
-#		&>/dev/null		---->		1>/dev/null 2>&1
-ds() {
-	echo "$@ |& > /dev/null &"
-	"$@" |& > /dev/null &
-}
-
 # record desktop
 record() {
 	local x
@@ -73,6 +53,51 @@ record() {
 		recordmydesktop -x $x --width $x --height $y "${@:2}"
 	fi
 }
+
+
+
+
+
+# ==================================
+# ----------------------------------
+# -------------ALIASES--------------
+# ----------------------------------
+# ==================================
+
+# find process by name
+psgrep() {
+	ps -aux | grep $1 --color=always | grep -v grep
+}
+
+vboxsave() {
+	vboxmanage controlvm $1 savestate
+}
+
+# fork to the background silently and send its output to the /dev/null
+# NOTES: generic form #>/dev/null (# is 1 by default)
+#		2>&-			---->		#>&-   (close fd)
+#		|&				---->		2>&1
+#		&>/dev/null		---->		1>/dev/null 2>&1
+ds() {
+	echo "$@ |& > /dev/null &"
+	"$@" |& > /dev/null &
+}
+
+# fork and dissown command
+dss() {
+	$@ |& > /dev/null &
+	disown %-
+}
+
+
+
+
+# ==================================
+# ----------------------------------
+# -------------OTHERS---------------
+# ----------------------------------
+# ==================================
+
 
 # change input mode to emacs or vim
 chinput() {
@@ -90,12 +115,14 @@ chinput() {
 	bind -f $inputrc
 }
 
+# Use -p to make prompt changes permanent on .bashrc
 prompt() {
 	local bashrc
 	bashrc=$([[ -L "$HOME/.bashrc" ]] && echo `file "$HOME/.bashrc" | cut -d' ' -f5` || echo "$HOME/.bashrc")
-	if [ -f ~/.bash/prompt_$1 ]; then
-		[[ ! -z $2 ]] && [[ $2 == "-p" ]] && sed -i "s/prompt_[0-9][^\ \n]*/prompt_$1/" $bashrc;
-		source ~/.bash/prompt_$1
+	if [ -f ~/.bash/prompts/prompt_${1}.sh ]; then
+		[[ ! -z $2 ]] && [[ $2 == "-p" ]] && sed -i "s/prompt_[0-9]\.sh[^\ \n]*/prompt_${1}\.sh/" $bashrc;
+		echo "Sourcing ~/.bash/prompts/prompt_${1}.sh"
+		source ~/.bash/prompts/prompt_${1}.sh
 	fi
 }
 
@@ -116,4 +143,17 @@ colors() {
 		echo;
 	done
 	echo
+}
+
+colorsplus() {
+	for i in $(seq 0 4 255); do
+		for j in $(seq $i $(expr $i + 3)); do
+			for k in $(seq 1 $(expr 3 - ${#j})); do
+				printf " "
+			done
+			echo -en "\033[38;5;${j}mcolour${j}"
+			[[ $(expr $j % 4) != 3 ]] && echo -n "    "
+		done
+		echo "\n"
+	done
 }

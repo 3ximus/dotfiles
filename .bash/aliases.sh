@@ -1,14 +1,16 @@
 #! /bin/sh
 
-# enable color support of ls and also add handy aliases
+# enable color support of ls
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    alias grep='grep --color=auto'
-    alias egrep='egrep --color=auto'
 fi
 
-# some more aliases
+# enables grep color support
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+
+# more ls aliases
 alias ll='ls -lF'
 alias la='ls -AF'
 alias lla='ls -lFA'
@@ -44,5 +46,8 @@ fi
 alias vi='vim'
 alias python='python2'
 alias pip='pip2'
-alias ssh-new-session='eval `ssh-agent` && ssh-add'
+alias mux='tmuxinator'
+
+alias ssh-new-bash-session='eval `ssh-agent` && ssh-add'
+alias ssh-new-session='keychain ~/.ssh/id_rsa && source ~/.keychain/$HOSTNAME-s'
 
