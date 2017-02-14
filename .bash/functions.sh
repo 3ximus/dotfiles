@@ -41,20 +41,6 @@ extract () {
      fi
 }
 
-# record desktop
-record() {
-	local x
-	local y
-	x=$(xrandr | grep '*' -m1 | cut -d' ' -f4 | cut -d'x' -f1)
-	y=$(xrandr | grep '*' -m1 | cut -d' ' -f4 | cut -d'x' -f2)
-	if [ $1 == "1" ]; then
-		recordmydesktop --width $x --height $y "${@:2}"
-	else
-		recordmydesktop -x $x --width $x --height $y "${@:2}"
-	fi
-}
-
-
 
 
 
@@ -131,7 +117,6 @@ colors() {
 	local T
 	T='gYw'
 	echo -e "\n                 40m     41m     42m     43m	 44m     45m     46m     47m";
-
 	for FGs in '    m' '   1m' '  30m' '1;30m' '  31m' '1;31m' '  32m' \
 		'1;32m' '  33m' '1;33m' '  34m' '1;34m' '  35m' '1;35m' \
 			'  36m' '1;36m' '  37m' '1;37m';
@@ -146,14 +131,25 @@ colors() {
 }
 
 colorsplus() {
-	for i in $(seq 0 4 255); do
-		for j in $(seq $i $(expr $i + 3)); do
-			for k in $(seq 1 $(expr 3 - ${#j})); do
-				printf " "
-			done
-			echo -en "\033[38;5;${j}mcolour${j}"
-			[[ $(expr $j % 4) != 3 ]] && echo -n "    "
-		done
-		echo "\n"
+	echo -en '\n  '
+	for i in {0..15} ; do
+		[[ $i == 8 ]] && echo -en '\e[0m  '
+		printf "\e[48;5;%dm%3d" $i $i
 	done
+	echo -ne '\e[0m\n\n  '
+	base=( 16 52 88 124 196 232 34 70 106 142 214 250)
+	for i in {0..17}; do
+		for column in $(seq 0 $((${#base[@]} - 1))) ; do
+			if [[ ${column} -ge 6 ]] ; then
+				fg='38;5;232';
+			else
+				fg=''
+			fi
+			[[ $column == 6 ]] && echo -en '\e[0m  '
+			printf "\e[${fg};48;5;%dm% 4d" ${base[$column]} ${base[$column]}
+			base[$column]=$((${base[$column]} + 1))
+		done
+		echo -ne '\e[0m\n  '
+	done
+	echo
 }

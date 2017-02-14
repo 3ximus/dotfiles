@@ -26,9 +26,11 @@ alias ......='cd ../../../../../'
 repo_path="$HOME/Documents/rep/"
 if [ -d $repo_path ];then
 	for i in $(ls $repo_path);do
-		ni=$(echo $i | sed 's/\-/_/g')
-		alias "R_$ni"="cd \"$repo_path$i\""
-		declare "R_$ni"="$repo_path$i"
+		if [ -d $repo_path/$i ];then
+			ni=$(echo $i | sed 's/\-/_/g')
+			alias "R_$ni"="cd \"$repo_path$i\""
+			declare "R_$ni"="$repo_path$i"
+		fi
 	done
 fi
 
@@ -36,9 +38,11 @@ fi
 code_path="$HOME/Documents/code/"
 if [ -d $code_path ];then
 	for i in $(ls $code_path);do
-		ni=$(echo $i | sed 's/\-/_/g')
-		alias "C_$ni"="cd \"$code_path$i\""
-		declare "C_$ni"="$code_path$i"
+		if [ -d $code_path/$i ];then
+			ni=$(echo $i | sed 's/\-/_/g')
+			alias "C_$ni"="cd \"$code_path$i\""
+			declare "C_$ni"="$code_path$i"
+		fi
 	done
 fi
 

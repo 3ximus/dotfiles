@@ -19,6 +19,11 @@ if [[ ${EUID} == 0 ]]; then
 	BGMainColor="4$MainColor"
 	FGMainColor="0"
 	sFGMainColor="3$MainColor" # background as foreground
+elif [[ -n $SSH_CLIENT ]]; then
+	MainColor="2" # green
+	BGMainColor="4$MainColor"
+	FGMainColor="0"
+	sFGMainColor="3$MainColor" # background as foreground
 else
 	MainColor="0" # black
 	BGMainColor="4$MainColor"
@@ -69,7 +74,7 @@ __add_venv_info () {
 
 ALT_PS1="$(__colorize "$FGMainColor;1;$BGMainColor") \u@\h $(__colorize "0;$sFGMainColor;$BGAltColor")\$(__add_venv_info)$(__colorize "$FGAltColor;1;$BGAltColor") \$(__path) $(__colorize "0;$sFGAltColor") \[\033[0m\]\e[?7l$DASHES\e[?7h\e[\$(echo -e \$(__git_ps1 '\ \(%s)')\ \d\ \ \ \ \$(tty | sed 's/\/dev\///') | wc -c)D"
 
-ALT_PS2="\[\033[${sFGAltColor}m\]$(__colorize "1;$FGAltColor;$BGAltColor") \$(tty | sed 's/\/dev\///') $(__colorize "0;$sFGMainColor;$BGAltColor")$(__colorize "$FGMainColor;1;$BGMainColor") \d \[\033[0m\]\n\$([ \j -gt 0 ] && echo -e \"$(__colorize "$FGAltColor;4$JobColor") \j $(__colorize "$BGMainColor;3$JobColor")\")$(__colorize "0;$FGMainColor;1;$BGMainColor") \\$ \$([[ \$_COMMAND_FAILED_ == 1 ]] && echo -e \"$(__colorize "0;$sFGMainColor;41")\[\033[0;41m\] \342\234\226 \[\033[0;31m\]\" || echo -e \"\[\033[0;${sFGMainColor}m\]\" )\[\033[0m\] "
+ALT_PS2="\[\033[${sFGAltColor}m\]$(__colorize "1;$FGAltColor;$BGAltColor") \$(tty | sed 's/\/dev\///') $(__colorize "0;$sFGMainColor;$BGAltColor")$(__colorize "$FGMainColor;1;$BGMainColor") \d \[\033[0m\]\n\$([ \j -gt 0 ] && echo -e \"$(__colorize "$FGAltColor;4$JobColor") \j $(__colorize "$BGMainColor;3$JobColor")\")$(__colorize "0;$FGMainColor;1;$BGMainColor") \\$ \$([[ \$_COMMAND_FAILED_ == 1 ]] && echo -e \"$(__colorize "0;$sFGMainColor;41")\[\033[0;41m\] ✖ \[\033[0;31m\]\" || echo -e \"\[\033[0;${sFGMainColor}m\]\" )\[\033[0m\] "
 
 # use prompt command to save last command exit status to a variable and generate the rest of the prompt
 PROMPT_COMMAND='[[ $? != 0 ]] && _COMMAND_FAILED_=1 || _COMMAND_FAILED_=0; __git_ps1 "$ALT_PS1" "$ALT_PS2" "$(__colorize "3$GitColor")$(__colorize "$FGAltColor;1;43")  %s $(__colorize "0;43")"'
