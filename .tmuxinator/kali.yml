@@ -7,7 +7,7 @@ root: ~/
 # socket_name: foo
 
 # Runs before everything. Use it to start daemons etc.
-pre: vboxmanage startvm kali; xdotool set_num_desktops 5; xdotool search --name kali set_desktop_for_window %1 4
+pre: vboxmanage startvm kali; xdotool set_num_desktops 5; xdotool set_desktop_for_window  $(xdotool search --name kali | tail -n1) 4; echo -e "\n\nWaiting for vbox to start\n[Press Enter when ready]"; read; echo -e "Starting sshd on guest machine..."; xdotool search --name kali windowactivate key Return sleep 1 key alt+Return sleep 3 type /usr/sbin/sshd; xdotool key Return
 # To save this vm and poweroff use `vboxmanage controlvm protostar savestate` (or simply "shutdown")
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
@@ -38,7 +38,9 @@ windows:
         - kali1:
           - ssh -p 2223 eximus@localhost
           - sudo -i
+          - mypasswd
         - kali2:
           - ssh -p 2223 eximus@localhost
           - sudo -i
+          - mypasswd
         - clear

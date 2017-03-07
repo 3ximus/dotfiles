@@ -7,7 +7,7 @@ My configuration files:
 - .tmux contains parts from [tmux-powerline](https://github.com/erikw/tmux-powerline)
 - .irssi for irssi IRC client
 - .mpd and .ncmpcpp ([ncmpcpp](http://rybczak.net/ncmpcpp/) is not configured for [mpd](https://github.com/MaxKellermann/MPD) because i use [mopidy](https://github.com/mopidy/mopidy) enabled as a service)
-- .gdb-dashboard can be used instead of .gdbinit since this depends on [pwndbg](https://github.com/pwndbg/pwndbg)
+- .gdb-dashboard can be used as .gdbinit (by renaming it to .gdbinit) since this depends on [pwndbg](https://github.com/pwndbg/pwndbg)
 - .bash, .bashrc, .bash_profile, .inputrc used for bash and readline configuration
 
 
