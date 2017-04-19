@@ -26,7 +26,7 @@ set completion-ignore-case on
 
 
 $if mode=vi
-# make emacsm-insert behave like usual emacs
+# make emacsm-insert behave like usual vi
 "\C-k": kill-line
 "\C-a": beginning-of-line
 "\C-e": end-of-line
@@ -37,11 +37,13 @@ $endif
 
 # quote word near cursor
 "\C-xq": "\eb\"\ef\""
-# transform text in variable assignment
+
+# reload bashrc
+"\C-xb": "\C-usource ~/.bashrc\C-m"
+
+# transform text in variable assignment - not useful at all
 "\C-xv": "\C-a\C-k$\C-y\C-e="
-# make previous path an absolute path
-"\C-xv": "\C-a\C-k$\C-y\C-e="
-# Add a binding to refresh the line, which is unbound
+
 # edit the path
 "\C-xp": "PATH=${PATH}\e\C-e\C-a\ef\C-f"
 

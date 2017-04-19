@@ -13,12 +13,27 @@
     "editor.insertSpaces": false,
     "editor.snippetSuggestions": "inline",
 
-    "editor.cursorStyle": "block",
-    "editor.cursorBlinking": "phase",
+	"editor.cursorStyle": "block",
+	"editor.cursorBlinking": "phase",
 
-    "window.fullScreenZenMode": false,
+    "zenMode.hideTabs": true,
+    "zenMode.fullScreen": false,
+
+	"workbench.statusBar.visible": true,
+	"window.zoomLevel": 0,
+	"workbench.sideBar.location": "left",
+	"workbench.activityBar.visible": true,
+	"window.menuBarVisibility": "toggle",
+	//"editor.minimap.enabled": true,
+	"editor.minimap.renderCharacters": false,
+
+    // themes
+	"vsicons.dontShowNewVersionMessage": true,
+	"workbench.colorTheme": "Bluloco Dark",
+	"workbench.iconTheme": "vscode-icons",
 
 
+	"git.confirmSync": false,
     "markdown.preview.fontFamily": "'Roboto Mono for Powerline', 'Segoe WPC', 'Segoe UI', 'SFUIText-Light', 'HelveticaNeue-Light'",
 
      // default python
@@ -37,11 +52,32 @@
     //"vim.useCtrlKeys": true,
     "vim.autoindent": false,
 
+	// TODO */
+	// other
     "trailing-spaces.highlightCurrentLine": false,
 	"trailing-spaces.trimOnSave": true,
-	"git.confirmSync": false,
-	"workbench.statusBar.visible": true,
-	"window.zoomLevel": 0,
-	"workbench.sideBar.location": "left",
-	"workbench.activityBar.visible": true
+	"todohighlight.isEnable": true,
+	"todohighlight.keywords": [{
+            "text": "NOTE",
+            "color": "#282c34",
+            "backgroundColor": "#c9ff65"
+            //"overviewRulerColor": "grey" //the color of the ruler mark
+        },
+        {
+            "text": "FIXME",
+            "color": "white",
+            "backgroundColor": "#ff5e7c"
+        },
+        {
+            "text": "TODO",
+            "color": "white",
+            "backgroundColor": "#ff733c"
+        }
+	],
+	"[cpp]": {
+		"editor.quickSuggestions": false
+	},
+	"[c]": {
+		"editor.quickSuggestions": false
+	}
 }

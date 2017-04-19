@@ -66,8 +66,8 @@ fi
 
 if [ "$color_prompt" = yes ]; then
 	# load default bash_prompt
-	if [ -f ~/.bash/prompts/prompt_4.sh ]; then
-		source ~/.bash/prompts/prompt_4.sh
+	if [ -f ~/.bash/prompts/prompt_5.sh ]; then
+		source ~/.bash/prompts/prompt_5.sh
 	fi
 else
     PS1='\u@\h:\w\$ '
@@ -104,5 +104,6 @@ fi
 #export LS_COLORS="$LS_COLORS:*.c=1;36:*.h=00;36"
 export MYSQL_PS1="\u - \d > "
 export EDITOR="vim"
-export PATH=$PATH:$HOME/.gem/ruby/2.3.0/bin
+# add customs scripts and gem installed packages
+export PATH=$PATH:$HOME/.bash/scripts:$HOME/.gem/ruby/2.3.0/bin
 

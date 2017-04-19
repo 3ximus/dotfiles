@@ -1,6 +1,7 @@
 // Place your key bindings in this file to overwrite the defaults
 [
 //
+	{ "key": "shift+alt+v", "command": "workbench.action.splitEditor" },
 	{ "key": "shift+alt+h", "command": "workbench.action.toggleEditorGroupLayout" },
 	{ "key": "shift+alt+r", "command": "workbench.action.reloadWindow" },
 	{ "key": "shift+alt+z","command": "workbench.action.toggleZenMode" },

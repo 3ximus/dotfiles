@@ -19,6 +19,16 @@ man() {
 			man "$@"
 }
 
+# Simplify searching for keyword in current dir, and allow to pass more parameters to find
+findhere() {
+    find . -iname "*$1*" "${@:2}"
+}
+
+# Simplify searching for keyword in current dir, and allow to pass more parameters to grep
+grephere() {
+    grep -e "$1" "${@:2}" -d recurse .
+}
+
 # Extract files
 extract () {
     if [ -f $1 ] ; then
@@ -52,7 +62,7 @@ extract () {
 
 # find process by name
 psgrep() {
-	ps -aux | grep $1 --color=always | grep -v grep
+	ps aux | grep $1 --color=always | grep -v grep
 }
 
 vboxsave() {
