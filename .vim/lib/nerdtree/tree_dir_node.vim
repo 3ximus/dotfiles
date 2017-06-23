@@ -117,28 +117,14 @@ endfunction
 "FUNCTION: TreeDirNode.getCascade() {{{1
 "Return an array of dir nodes (starting from self) that can be cascade opened.
 function! s:TreeDirNode.getCascade()
+    if !self.isCascadable()
+        return [self]
+    endif
 
-    let rv = [self]
-    let node = self
+    let vc = self.getVisibleChildren()
+    let visChild = vc[0]
 
-    while 1
-        let vc = node.getVisibleChildren()
-        if len(vc) != 1
-            break
-        endif
-
-        let visChild = vc[0]
-
-        "TODO: optimize
-        if !visChild.path.isDirectory
-            break
-        endif
-
-        call add(rv, visChild)
-        let node = visChild
-    endwhile
-
-    return rv
+    return [self] + visChild.getCascade()
 endfunction
 
 "FUNCTION: TreeDirNode.getChildCount() {{{1
@@ -220,6 +206,25 @@ function! s:TreeDirNode.getDirChildren()
     return filter(self.children, 'v:val.path.isDirectory == 1')
 endfunction
 
+"FUNCTION: TreeDirNode._getGlobDir() {{{1
+"Return a string giving the pathname related to this TreeDirNode. The returned
+"pathname is in a glob-friendly format and is relative to the current working
+"directory, if this TreeDirNode's path is under the current working directory.
+function! s:TreeDirNode._getGlobDir()
+    " Gets a relative path, if possible. This ensures that 'wildignore' rules
+    " for relative paths will be obeyed.
+    let l:globDir = fnamemodify(self.path.str({'format': 'Glob'}), ':.')
+
+    " Calling fnamemodify() with ':.' on Windows systems strips the leading
+    " drive letter from paths that aren't under the working directory. Here,
+    " the drive letter is added back to the pathname.
+    if nerdtree#runningWindows() && l:globDir[0] == '\'
+        let l:globDir = self.path.drive . l:globDir
+    endif
+
+    return l:globDir
+endfunction
+
 "FUNCTION: TreeDirNode.GetSelected() {{{1
 "Returns the current node if it is a dir node, or else returns the current
 "nodes parent
@@ -264,6 +269,10 @@ endfunction
 "FUNCTION: TreeDirNode.isCascadable() {{{1
 "true if this dir has only one visible child - which is also a dir
 function! s:TreeDirNode.isCascadable()
+    if g:NERDTreeCascadeSingleChildDir == 0
+        return 0
+    endif
+
     let c = self.getVisibleChildren()
     return len(c) == 1 && c[0].path.isDirectory
 endfunction
@@ -281,8 +290,7 @@ function! s:TreeDirNode._initChildren(silent)
     let self.children = []
 
     "get an array of all the files in the nodes dir
-    let dir = self.path
-    let globDir = dir.str({'format': 'Glob'})
+    let globDir = self._getGlobDir()
 
     if version >= 703
         let filesStr = globpath(globDir, '*', !g:NERDTreeRespectWildIgnore) . "\n" . globpath(globDir, '.*', !g:NERDTreeRespectWildIgnore)
@@ -454,8 +462,7 @@ function! s:TreeDirNode.refresh()
         "go thru all the files/dirs under this node
         let newChildNodes = []
         let invalidFilesFound = 0
-        let dir = self.path
-        let globDir = dir.str({'format': 'Glob'})
+        let globDir = self._getGlobDir()
         let filesStr = globpath(globDir, '*') . "\n" . globpath(globDir, '.*')
         let files = split(filesStr, "\n")
         for i in files
@@ -466,7 +473,7 @@ function! s:TreeDirNode.refresh()
 
             " Regular expression is too expensive. Use simply string comparison
             " instead
-            if i[len(i)-3:2] != ".." && i[len(i)-2:2] != ".." && 
+            if i[len(i)-3:2] != ".." && i[len(i)-2:2] != ".." &&
              \ i[len(i)-2:1] != "." && i[len(i)-1] != "."
                 try
                     "create a new path and see if it exists in this nodes children

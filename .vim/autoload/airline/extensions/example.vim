@@ -1,5 +1,7 @@
-" MIT License. Copyright (c) 2013-2015 Bailey Ling.
+" MIT License. Copyright (c) 2013-2016 Bailey Ling.
 " vim: et ts=2 sts=2 sw=2
+
+scriptencoding utf-8
 
 " we don't actually want this loaded :P
 finish
