@@ -19,49 +19,60 @@ man() {
 			man "$@"
 }
 
-# Simplify searching for keyword in current dir, and allow to pass more parameters to find
+# execute a function as sudo
+sudofunction() {
+	local tmpfile="/dev/shm/$RANDOM"
+	declare -f "$1" | head -n -1 | tail -n +3 > "$tmpfile"
+	sudo bash "$tmpfile" "${@:2}"
+	rm "$tmpfile"
+}
+
+# Simplify searching for keyword in current dir
+#  Note: since argument order of find command matters i didn't made it possible to give it extra arguments
 findhere() {
-    find . "${@:2}" -iname "*$1*" -printf '"%p"\n'
+	find . -iname "*$1*" -printf '"%p"\n'
+}
+
+# Delete files with patern in current dir
+findremove() {
+	files=$(find . -iname "*$1*" -print | tee /dev/tty)
+	read -r -n 1 -p "Remove these files? [y/n]: " REPLY
+	case "$REPLY" in
+		[yY])		echo; rm -r $files ;;
+		*) 			echo -e "\nNothing deleted." ;;
+	esac
+
 }
 
 # Simplify searching for keyword in current dir, and allow to pass more parameters to grep
 grephere() {
-    grep -e "$1" "${@:2}" -d recurse .
+	grep -e "$1" "${@:2}" -d recurse .
 }
 
 # Extract files
 extract () {
-    if [ -f $1 ] ; then
-      case $1 in
-        *.tar.bz2)   echo "tar xjf $1"  && tar xjf $1        ;;
-        *.tar.gz)    echo "tar xzf $1"  && tar xzf $1        ;;
-        *.bz2)       echo "bunzip2 $1"  && bunzip2 $1        ;;
-        *.rar)       echo "unrar e $1"  && unrar e $1        ;;
-        *.gz)        echo "gunzip $1"  && gunzip $1          ;;
-        *.tar)       echo "tar xf $1"  && tar xf $1          ;;
-        *.tbz2)      echo "tar xjf $1"  && tar xjf $1        ;;
-        *.tgz)       echo "tar xzf $1"  && tar xzf $1        ;;
-        *.zip)       echo "unzip $1"  && unzip $1            ;;
-        *.Z)         echo "uncompress $1"  && uncompress $1  ;;
-        *.7z)        echo "7z x $1"  && 7z x $1              ;;
-        *)     echo "'$1' cannot be extracted via extract()" ;;
-         esac
-     else
-         echo "'$1' is not a valid file"
-     fi
+	if [ -f $1 ] ; then
+	  case $1 in
+		*.tar.bz2)	 echo "tar xjf $1"	&& tar xjf $1		 ;;
+		*.tar.gz)	 echo "tar xzf $1"	&& tar xzf $1		 ;;
+		*.bz2)		 echo "bunzip2 $1"	&& bunzip2 $1		 ;;
+		*.rar)		 echo "unrar e $1"	&& unrar e $1		 ;;
+		*.gz)		 echo "gunzip $1"  && gunzip $1			 ;;
+		*.tar)		 echo "tar xf $1"  && tar xf $1			 ;;
+		*.tbz2)		 echo "tar xjf $1"	&& tar xjf $1		 ;;
+		*.tgz)		 echo "tar xzf $1"	&& tar xzf $1		 ;;
+		*.zip)		 echo "unzip $1"  && unzip $1			 ;;
+		*.Z)		 echo "uncompress $1"  && uncompress $1  ;;
+		*.7z)		 echo "7z x $1"  && 7z x $1				 ;;
+		*)	   echo "'$1' cannot be extracted via extract()" ;;
+		 esac
+	 else
+		 echo "'$1' is not a valid file"
+	 fi
 }
 
 # i hate typing extract...
 alias un=extract
-
-
-
-
-# ==================================
-# ----------------------------------
-# -------------ALIASES--------------
-# ----------------------------------
-# ==================================
 
 # find process by name
 psgrep() {
@@ -119,7 +130,7 @@ prompt() {
 	local bashrc
 	bashrc=$([[ -L "$HOME/.bashrc" ]] && echo `file "$HOME/.bashrc" | cut -d' ' -f5` || echo "$HOME/.bashrc")
 	if [ -f ~/.bash/prompts/prompt_${1}.sh ]; then
-		[[ ! -z $2 ]] && [[ $2 == "-p" ]] && sed -i "s/prompt_[0-9]\.sh[^\ \n]*/prompt_${1}\.sh/" $bashrc;
+		[[ ! -z $2 ]] && [[ $2 == "-p" ]] && sed -i "s/prompt_[0-9]\.sh[^\ \n]*/prompt_${1}\.sh/" $bashrc || echo "Use -p to make changes permanent on .bashrc";
 		echo "Sourcing ~/.bash/prompts/prompt_${1}.sh"
 		source ~/.bash/prompts/prompt_${1}.sh
 	fi
@@ -142,6 +153,7 @@ colors() {
 	done
 	echo
 }
+
 
 colorsplus() {
 	echo -en '\n  '

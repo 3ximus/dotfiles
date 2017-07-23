@@ -2,12 +2,12 @@
 [
 //
 	{ "key": "shift+alt+v", "command": "workbench.action.splitEditor" },
+	{ "key": "shift+alt+j", "command": "workbench.action.joinTwoGroups" },
 	{ "key": "shift+alt+h", "command": "workbench.action.toggleEditorGroupLayout" },
 	{ "key": "shift+alt+r", "command": "workbench.action.reloadWindow" },
 	{ "key": "shift+alt+z","command": "workbench.action.toggleZenMode" },
 	{ "key": "ctrl+f11","command": "workbench.action.toggleZenMode" },
-// visual block
-	{ "key": "ctrl+v", "command": "extension.vim_ctrl+v", "when": "editorTextFocus && !inDebugRepl && vim.mode != 'Insert Mode'" },
+	{ "key": "alt+shift+l", "command": "gitlens.showQuickFileHistory" },
 
 // move lines
 	{ "key": "ctrl+j", "command": "editor.action.moveLinesDownAction", "when": "editorTextFocus && !editorReadonly" },
@@ -18,17 +18,17 @@
 	{ "key": "ctrl+f1", "command": "workbench.action.terminal.toggleTerminal"},
 	{ "key": "shift+alt+p", "command": "workbench.action.togglePanel"},
 	{ "key": "shift+alt+o", "command": "workbench.action.output.toggleOutput"},
-	{ "key": "shift+alt+l", "command": "editor.action.clearoutput"},
-
-// left pannels
 	{ "key": "ctrl+t", "command": "workbench.action.toggleSidebarVisibility" },
 
 // vim keys :)
-	{ "key": "ctrl+p","command": "selectPrevSuggestion", "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible" },
-	{ "key": "ctrl+n","command": "selectNextSuggestion", "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible" },
+	//{ "key": "ctrl+p","command": "selectPrevSuggestion", "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible" },
+	//{ "key": "ctrl+n","command": "selectNextSuggestion", "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible" },
 	{ "key": "ctrl+a","command": "extension.vim_ctrl+a", "when": "editorTextFocus && !inDebugRepl" },
+
 // unbind ctrl+n
 	{ "key": "ctrl+n","command": "-workbench.action.files.newUntitledFile" },
+	{ "key": "ctrl+f", "command": "-extension.vim_ctrl+f"},
+	{ "key": "ctrl+o", "command": "-extension.vim_ctrl+o"},
 
 // this fixes bug where some times tab completion puts '<tab>' instead
 	{ "key": "tab","command": "acceptQuickFixSuggestion", "when": "editorFocus && quickFixWidgetVisible" },
@@ -36,22 +36,23 @@
 
 // remove trailing white spaces
 	{ "key": "shift+alt+t","command": "trailing-spaces.deleteTrailingSpaces", "when": "editorTextFocus" },
-	{ "key": "ctrl+n", "command": "workbench.action.nextEditor", "when": "editorTextFocus && vim.mode != 'Insert Mode'" },
-	{ "key": "ctrl+p", "command": "workbench.action.previousEditor", "when": "editorTextFocus && vim.mode != 'Insert Mode'" },
 
 // tasks
 	{ "key": "f7", "command": "workbench.action.tasks.build" },
 	{ "key": "ctrl+f7", "command": "workbench.action.tasks.test" },
 	{ "key": "f6", "command": "workbench.action.tasks.runTask" },
 
-// close tab
+// tabs
 	{ "key": "ctrl+x","command": "workbench.action.closeActiveEditor" },
+	{ "key": "ctrl+n", "command": "workbench.action.nextEditor", "when": "editorTextFocus && vim.mode != 'Insert'" },
+	{ "key": "ctrl+p", "command": "workbench.action.previousEditor", "when": "editorTextFocus && vim.mode != 'Insert'" },
 
 // other
 	{ "key": "f2", "command": "workbench.action.gotoSymbol" },
-	{ "key": "f3", "command": "workbench.action.showAllSymbols" },
 	{ "key": "f4", "command": "workbench.action.quickOpen" },
 	{ "key": "f8", "command": "workbench.action.openRecent" },
-
-	{ "key": "ctrl+f4","command": "workbench.action.selectTheme" }
+	{
+		"key": "ctrl+f4",
+		"command": "workbench.action.selectTheme"
+	}
 ]

@@ -7,77 +7,136 @@
     "editor.fontFamily": "'Source Code Pro for Powerline'",
     //"editor.fontFamily": "'Fira Mono for Powerline'",
     "editor.fontSize": 12,
-	"editor.fontWeight": "500",
-	"editor.lineHeight": 0,
+    "editor.fontWeight": "500",
+    "editor.lineHeight": 0,
     "editor.lineNumbers": "relative",
     "editor.insertSpaces": false,
     "editor.snippetSuggestions": "inline",
+    "editor.wordWrap": "on",
+    "editor.wrappingIndent": "indent",
 
-	"editor.cursorStyle": "block",
-	"editor.cursorBlinking": "phase",
+    "editor.cursorStyle": "block",
+    "editor.cursorBlinking": "phase",
 
     "zenMode.hideTabs": true,
     "zenMode.fullScreen": false,
 
-	"workbench.statusBar.visible": true,
-	"window.zoomLevel": 0,
-	"workbench.sideBar.location": "left",
-	"workbench.activityBar.visible": true,
-	"window.menuBarVisibility": "toggle",
-	//"editor.minimap.enabled": true,
-	"editor.minimap.renderCharacters": false,
+    "workbench.statusBar.visible": true,
+    "window.zoomLevel": 0,
+    "workbench.sideBar.location": "left",
+    "workbench.activityBar.visible": true,
+    "window.menuBarVisibility": "toggle",
+    //"editor.minimap.enabled": true,
+    "editor.minimap.renderCharacters": false,
 
     // themes
-	"vsicons.dontShowNewVersionMessage": true,
-	"workbench.colorTheme": "Bluloco Dark",
-	"workbench.iconTheme": "vscode-icons",
+    "vsicons.dontShowNewVersionMessage": true,
+    "workbench.colorTheme": "Nord",
+    "workbench.iconTheme": "material-icon-theme",
 
 
-	"git.confirmSync": false,
+    "workbench.colorCustomizations": {
+//        // gruvbox
+//        "activityBar.background": "#282828",
+//        "activityBar.foreground": "#ebdbb2",
+//        "activityBarBadge.background": "#458588",
+//        "activityBarBadge.foreground": "#ebdbb2",
+//        "sideBar.background": "#282828",
+//
+//        "focusBorder": "#bdae93",
+//        //"foreground": "#fbf1c7",
+//
+//        "list.activeSelectionBackground": "#665c54",
+//        "list.inactiveSelectionBackground": "#504945",
+//
+//        "statusBar.background": "#282828",
+//        "statusBar.noFolderBackground": "#282828",
+//        "statusBar.foreground": "#ebdbb2",
+//        "editorGroupHeader.tabsBackground": "#282828",
+//        "tab.activeForeground": "#ebdbb2",
+//
+//        "input.background": "#282828",
+//        "input.border": "#504945",
+//
+//        "editorWidget.background": "#282828",
+//
+//        "editor.selectionHighlightBackground": "#665c54",
+//        "editor.selectionBackground": "#504945",
+//        "editor.wordHighlightStrongBackground": "#928374",
+//
+//        "peekViewEditor.background": "#282828",
+//        "peekViewResult.background": "#282828",
+//        "peekViewResult.selectionBackground": "#928374",
+//        "peekView.border": "#928374"
+
+    },
+    "vim.searchHighlightColor": "rgba(150, 150, 255, 0.3)",
+
+
+    "git.confirmSync": false,
     "markdown.preview.fontFamily": "'Roboto Mono for Powerline', 'Segoe WPC', 'Segoe UI', 'SFUIText-Light', 'HelveticaNeue-Light'",
 
      // default python
-    "python.pythonPath": "/usr/bin/python2.7",
-	// Disabling a bunch of stupid warnings
-	"python.linting.pylintArgs": [
-        "--disable=W0312,W0212,C,R0903,R0902,R0913,E1136"
+    //"python.pythonPath": "/usr/bin/python2.7",
+    // Disabling a bunch of stupid warnings
+    "python.linting.pylintArgs": [
+        "--disable=W0312,W0212,W0621,C,R0903,R0902,R0913,E1136"
     ],
-	// Fully qualified path to tag file (exuberant ctag file), used to provide workspace symbols.
-	"python.workspaceSymbols.tagFilePath": "${workspaceRoot}/.tags",
+    // Fully qualified path to tag file (exuberant ctag file), used to provide workspace symbols.
+    "python.workspaceSymbols.tagFilePath": "${workspaceRoot}/.tags",
 
     //"terminal.integrated.shell.windows": "C:\\Windows\\sysnative\\bash.exe",
     "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
-	"terminal.integrated.fontSize": 11,
+    "terminal.integrated.fontSize": 11,
 
-    //"vim.useCtrlKeys": true,
     "vim.autoindent": false,
+    "vim.hlsearch": true,
+    "vim.disableAnnoyingNeovimMessage": true,
+    "vim.foldfix": true,
+    "vim.easymotion": true,
+    "vim.easymotionMarkerFontFamily": "'Source Code Pro for Powerline'",
+    "vim.easymotionMarkerForegroundColorTwoChar": "#c9ff65",
+    "vim.easymotionMarkerForegroundColorOneChar": "#ff3333",
+    "vim.easymotionMarkerBackgroundColor": "#282c34",
+    "vim.easymotionMarkerFontSize": "13",
+    "vim.easymotionMarkerHeight": 15,
+    "vim.otherModesKeyBindingsNonRecursive": [{
+        "before": [ "t" ],
+        "after": [ "leader", "leader", "s" ]
+    }],
 
-	// TODO */
-	// other
+    // other
     "trailing-spaces.highlightCurrentLine": false,
-	"trailing-spaces.trimOnSave": true,
-	"todohighlight.isEnable": true,
-	"todohighlight.keywords": [{
+    "trailing-spaces.trimOnSave": true,
+    "todohighlight.isEnable": true,
+    "todohighlight.keywords": [{
             "text": "NOTE",
             "color": "#282c34",
             "backgroundColor": "#c9ff65"
             //"overviewRulerColor": "grey" //the color of the ruler mark
         },
         {
-            "text": "FIXME",
+            "text": "XXX",
+            "color": "#282c34",
+            "backgroundColor": "#33ff99"
+            //"overviewRulerColor": "grey" //the color of the ruler mark
+        },
+        {
+            "text": "PLACEHOLDER",
             "color": "white",
             "backgroundColor": "#ff5e7c"
+            //"overviewRulerColor": "grey" //the color of the ruler mark
+        },
+        {
+            "text": "FIXME",
+            "color": "white",
+            "backgroundColor": "#ff3333"
         },
         {
             "text": "TODO",
             "color": "white",
             "backgroundColor": "#ff733c"
         }
-	],
-	"[cpp]": {
-		"editor.quickSuggestions": false
-	},
-	"[c]": {
-		"editor.quickSuggestions": false
-	}
+    ],
+    "java.errors.incompleteClasspath.severity": "ignore"
 }

@@ -2,18 +2,15 @@
 # Originally stolen from http://unix.stackexchange.com/questions/41346/upload-download-speed-in-tmux-status-line
 
 run_segment() {
-	sleeptime="0.5"
+	sleeptime="1"
+	iface=$(ip route | grep -Pom1 "(?<=dev ).*(?= src| proto)")
 	if shell_is_osx; then
-		iface="en0"
-		type="⎆" # "☫" for wlan
 		RXB=$(netstat -i -b | grep -m 1 $iface | awk '{print $7}')
 		TXB=$(netstat -i -b | grep -m 1 $iface | awk '{print $10}')
 		sleep "$sleeptime"
 		RXBN=$(netstat -i -b | grep -m 1 $iface | awk '{print $7}')
 		TXBN=$(netstat -i -b | grep -m 1 $iface | awk '{print $10}')
 	else
-		iface="eth0"
-		type="⎆" # "☫" for wlan
 		RXB=$(</sys/class/net/"$iface"/statistics/rx_bytes)
 		TXB=$(</sys/class/net/"$iface"/statistics/tx_bytes)
 		sleep "$sleeptime"
@@ -37,6 +34,6 @@ run_segment() {
 	fi
 
 	# NOTE: '%5.01' for fixed length always
-	printf "${type} ⇊ %5.01f${RXDIF_UNIT} ⇈ %5.01f${TXDIF_UNIT}"  ${RXDIF} ${TXDIF}
+	printf "⇊ %.0f${RXDIF_UNIT} ⇈ %.0f${TXDIF_UNIT}"  ${RXDIF} ${TXDIF}
 	return 0
 }
