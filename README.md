@@ -1,5 +1,5 @@
 ## dotfiles
-My configuration files:
+My main configuration files:
 
 - .tmuxinator files are used for [tmuxinator](https://github.com/tmuxinator/tmuxinator)
 - .xDefaults used for urxvt
@@ -10,10 +10,20 @@ My configuration files:
 - .gdb-dashboard can be used as .gdbinit (by renaming it to .gdbinit) since this depends on [pwndbg](https://github.com/pwndbg/pwndbg)
 - .bash, .bashrc, .bash_profile, .inputrc used for bash and readline configuration
 
+------------------------
 
 - firefox contains my stylish.sqlite file for [stylish](https://addons.mozilla.org/en-US/firefox/addon/stylish/) addon
 
 - fonts in .fonts are mostly fonts for [powerline](https://github.com/powerline/fonts) support
+
+- vscode contains my user settings and keyboard shortcuts
+
+- konsole contains my konsole themes and profile (lives in $HOME/.local/share/konsole)
+
+- inside other there is
+	- kwinrulesrc with my kwin rules (lives in $HOME/.config)
+	- KDE_Keyboard_Shortcuts.kksrc with exported keyboard shortcuts
+
 
 ## vim plugins
 

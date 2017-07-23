@@ -1,0 +1,26 @@
+[1]
+Description=Window settings for gvim
+clientmachine=coruscant
+clientmachinematch=0
+opacityactive=95
+opacityactiverule=2
+opacityinactive=95
+opacityinactiverule=2
+strictgeometry=false
+strictgeometryrule=2
+title=option-window (~/Documents/rep/web-crawler) - GVIM1
+titlematch=0
+wmclass=gvim
+wmclasscomplete=false
+wmclassmatch=1
+
+[2]
+Description=No Borders
+noborder=true
+noborderrule=2
+wmclass=
+wmclasscomplete=true
+wmclassmatch=0
+
+[General]
+count=2
