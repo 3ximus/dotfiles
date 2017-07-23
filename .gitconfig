@@ -1,0 +1,12 @@
+[user]
+	email = fabio_r11@hotmail.com
+	name = eximus
+[push]
+	default = simple
+[core]
+	editor = vim
+[alias]
+	unstage = reset HEAD --
+	last = log -1 HEAD
+	drop = checkout --
+	logx = log --oneline --graph --decorate
