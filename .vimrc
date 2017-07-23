@@ -102,6 +102,36 @@ vnoremap <C-k> :m '<-2<CR>gv
 nmap <leader>fa :call Fold(1)<CR>:set foldmethod=manual<CR>
 " remove trailing whitespaces
 nmap <leader>s :call StripTrailingWhitespace()<CR>
+" map Goyo distraction free mode
+nnoremap <C-g> :Goyo<CR>
+
+
+" -----------------------------
+"   GUI Specific
+" -----------------------------
+
+"set gui options
+if has("gui_running")
+    "set guifont=Liberation\ Mono\ for\ Powerline\ 9 " normal
+    set guifont=Roboto\ Mono\ for\ Powerline\ Regular\ 9
+    "set guifont=monofur\ for\ Powerline\ Regular\ 11 " funny
+    "set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 9
+    "set guifont=Fira\ Mono\ for\ Powerline\ 9
+
+    set linespace=0
+
+    set guicursor+=a:blinkon0
+
+    "hide toolbar, scrollbar and menubar
+    set guioptions-=L
+    set guioptions-=l
+    set guioptions-=R
+    set guioptions-=r
+    set guioptions-=m
+    set guioptions-=T
+    set guioptions-=e
+endif
+
 
 " -----------------------------
 "   Plugins
@@ -125,30 +155,7 @@ if !has("gui_running") "running on console
     let g:airline_symbols.branch = '|'
     let g:airline_symbols.linenr = 'ln'
     let g:airline_symbols.whitespace = 'x'
-endif
-
-"set gui options
-if has("gui_running")
-    "set guifont=Liberation\ Mono\ for\ Powerline\ 9 " normal
-    set guifont=Roboto\ Mono\ for\ Powerline\ Regular\ 9
-    "set guifont=monofur\ for\ Powerline\ Regular\ 11 " funny
-    "set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 9
-    "set guifont=Fira\ Mono\ for\ Powerline\ 9
-
-    set linespace=0
-
-    set guicursor+=a:blinkon0
-
-    "hide toolbar, scrollbar and menubar
-    set guioptions-=L
-    set guioptions-=l
-    set guioptions-=R
-    set guioptions-=r
-    set guioptions-=m
-    set guioptions-=T
-    set guioptions-=e
-
-
+else
     " powerline symbols
     let g:airline_left_sep = ''
     let g:airline_left_alt_sep = ''
@@ -170,6 +177,11 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 
+"Goyo
+let g:goyo_width = 90
+let g:goyo_height= '90%'
+let g:goyo_linenr = 0
+
 "git NERDTree plugin
 let g:NERDTreeIndicatorMapCustom = {
     \ "Modified"  : "*",
@@ -182,9 +194,8 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Clean"     : "v",
     \ "Unknown"   : "?"
     \ }
+
 " config Gitgutter
 nmap <Leader>ha <Plug>GitGutterStageHunk
 nmap <Leader>hu <Plug>GitGutterRevertHunk
 nmap <Leader>hv <Plug>GitGutterPreviewHunk
-
-

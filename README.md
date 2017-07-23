@@ -32,4 +32,6 @@ My main configuration files:
 - [nerd-tree](https://github.com/scrooloose/nerdtree)
 - [vim-gitgutter](https://github.com/airblade/vim-gitgutter)
 - [vim-surround](https://github.com/tpope/vim-surround)
+- [vim-goyo](https://github.com/junegunn/goyo.vim)
+- [vim-diminactive](https://github.com/blueyed/vim-diminactive)
 
