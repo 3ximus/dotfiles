@@ -51,24 +51,27 @@ grephere() {
 
 # Extract files
 extract () {
-	if [ -f $1 ] ; then
-	  case $1 in
-		*.tar.bz2)	 echo "tar xjf $1"	&& tar xjf $1		 ;;
-		*.tar.gz)	 echo "tar xzf $1"	&& tar xzf $1		 ;;
-		*.bz2)		 echo "bunzip2 $1"	&& bunzip2 $1		 ;;
-		*.rar)		 echo "unrar e $1"	&& unrar e $1		 ;;
-		*.gz)		 echo "gunzip $1"  && gunzip $1			 ;;
-		*.tar)		 echo "tar xf $1"  && tar xf $1			 ;;
-		*.tbz2)		 echo "tar xjf $1"	&& tar xjf $1		 ;;
-		*.tgz)		 echo "tar xzf $1"	&& tar xzf $1		 ;;
-		*.zip)		 echo "unzip $1"  && unzip $1			 ;;
-		*.Z)		 echo "uncompress $1"  && uncompress $1  ;;
-		*.7z)		 echo "7z x $1"  && 7z x $1				 ;;
-		*)	   echo "'$1' cannot be extracted via extract()" ;;
-		 esac
-	 else
-		 echo "'$1' is not a valid file"
-	 fi
+	for f in "${@}" ; do
+		echo extracting $f
+		if [ -f "$f" ] ; then
+			case "$f" in
+				*.tar.bz2)	 echo "tar xjf $f"	&& tar xjf "$f"		 ;;
+				*.tar.gz)	 echo "tar xzf $f"	&& tar xzf "$f"		 ;;
+				*.bz1)		 echo "bunzip2 $f"	&& bunzip2 "$f"		 ;;
+				*.rar)		 echo "unrar e $f"	&& unrar e "$f"		 ;;
+				*.gz)		 echo "gunzip $f"  && gunzip "$f"			 ;;
+				*.tar)		 echo "tar xf $f"  && tar xf "$f"			 ;;
+				*.tbz2)		 echo "tar xjf $f"	&& tar xjf "$f"		 ;;
+				*.tgz)		 echo "tar xzf $f"	&& tar xzf "$f"		 ;;
+				*.zip)		 echo "unzip $f"  && unzip "$f"			 ;;
+				*.Z)		 echo "uncompress $f"  && uncompress "$f"  ;;
+				*.7z)		 echo "7z x $f"  && 7z x "$f"				 ;;
+				*)			 echo "'$f' cannot be extracted via extract()" ;;
+			esac
+		else
+			echo "'$f' is not a valid file"
+		fi
+	done
 }
 
 # i hate typing extract...
