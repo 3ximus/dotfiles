@@ -1,5 +1,6 @@
-## dotfiles
-My main configuration files:
+# dotfiles
+
+## My main configuration files:
 
 - .tmuxinator files are used for [tmuxinator](https://github.com/tmuxinator/tmuxinator)
 - .xDefaults used for urxvt
@@ -35,3 +36,41 @@ My main configuration files:
 - [vim-goyo](https://github.com/junegunn/goyo.vim)
 - [vim-diminactive](https://github.com/blueyed/vim-diminactive)
 
+## Screenshots
+
+These prompts are in the order that i made them so the last one is the more improved version.
+
+Prompts support:
+
+- git directories and status of the files (untracked, staged... aswell as upstream checks), but you must source `.bash/git-prompt.sh`
+- python virtual environments. **except prompt 1**
+- last command exit status ( failed or succeded )
+- compress some paths ( my repository path is compressed into "R:" . **except prompt 5**
+- background jobs counter
+- command counter **only prompt 5**
+- they all show the respective tty
+
+### Prompt 1
+
+![1](screenshots/1_normal.png)
+![1f](screenshots/1_full.png)
+
+### Prompt 2
+
+![2](screenshots/2_normal.png)
+![2f](screenshots/2_full.png)
+
+### Prompt 3
+
+![3](screenshots/3_normal.png)
+![3f](screenshots/3_full.png)
+
+### Prompt 4
+
+![4](screenshots/4_normal.png)
+![4f](screenshots/4_full.png)
+
+### Prompt 5
+
+![5](screenshots/5_normal.png)
+![5f](screenshots/5_full.png)
