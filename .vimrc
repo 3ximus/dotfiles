@@ -1,21 +1,15 @@
-"color scheme
-if has("gui_running")
-    colo gruvbox
-    let g:gruvbox_contrast_dark = 'soft'
-    let g:gruvbox_contrast_light = 'soft'
-    set background=dark
-else
-    set t_Co=256 "terminal color range
-    colo hybrid
-    "trasparent background
-    hi Normal ctermbg=none
-    highlight NonText ctermbg=none
-endif
+
+" ----------------------------
+"   General Options
+" ----------------------------
 
 let mapleader=","
 
 "encoding
 set encoding=utf-8
+
+"use X clipboard as default
+set clipboard=unnamedplus
 
 "line numbers
 set relativenumber
@@ -104,6 +98,24 @@ nmap <leader>fa :call Fold(1)<CR>:set foldmethod=manual<CR>
 nmap <leader>s :call StripTrailingWhitespace()<CR>
 " map Goyo distraction free mode
 nnoremap <C-g> :Goyo<CR>
+
+
+" -----------------------------
+"   Color Scheme
+" -----------------------------
+
+if has("gui_running")
+    colo gruvbox
+    let g:gruvbox_contrast_dark = 'soft'
+    let g:gruvbox_contrast_light = 'soft'
+    set background=dark
+else
+    set t_Co=256 "terminal color range
+    color hybrid
+    "trasparent background
+    hi Normal ctermbg=none
+    highlight NonText ctermbg=none
+endif
 
 
 " -----------------------------
@@ -199,3 +211,4 @@ let g:NERDTreeIndicatorMapCustom = {
 nmap <Leader>ha <Plug>GitGutterStageHunk
 nmap <Leader>hu <Plug>GitGutterRevertHunk
 nmap <Leader>hv <Plug>GitGutterPreviewHunk
+

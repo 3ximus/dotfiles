@@ -13,20 +13,29 @@ set visible-stats on
 set skip-completed-text on
 # ignore path case
 set completion-ignore-case on
+# use only one tab to provide glob completion
+#set show-all-if-ambiguous on
+
+# mark directorios and symlinks on completion with / or @
+set mark-directories on
+set mark-symlinked-directories on
+
+# delete until the previous path separator /
+"\C-b": unix-filename-rubout
 
 # cicle through completions
-"\C-n": menu-complete
+#"\C-i": menu-complete
+#"\e[Z": menu-complete-backward
 "\e[Z": menu-complete
 
 "\C-p": history-search-backward
-"\C-b": history-search-forward
+"\C-n": history-search-forward
 
 "\C-x\C-r": re-read-init-file
 "\C-x\C-x": redraw-current-line
 
-
 $if mode=vi
-# make emacsm-insert behave like usual vi
+# make v i-insert behave like usual emacs
 "\C-k": kill-line
 "\C-a": beginning-of-line
 "\C-e": end-of-line
@@ -41,9 +50,5 @@ $endif
 # reload bashrc
 "\C-xb": "\C-usource ~/.bashrc\C-m"
 
-# transform text in variable assignment - not useful at all
-"\C-xv": "\C-a\C-k$\C-y\C-e="
-
 # edit the path
 "\C-xp": "PATH=${PATH}\e\C-e\C-a\ef\C-f"
-

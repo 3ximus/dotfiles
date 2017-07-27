@@ -49,10 +49,16 @@ __add_venv_info () {
     fi
 }
 
-ALT_PS1="┌ $(__colorize "$DirColor")\w $(__colorize "1;$VenvColor")\$(__add_venv_info)$(__colorize 0)\e[?7l$DASHES\e[?7h\e[\$(echo -en \$(__git_ps1 'xx%s')\#xx\$([ \j -gt 0 ] && echo -en \"bg: \j\" )\$(tty | tr --delete '\n' | sed 's/\/dev\///') | wc -c)D"
+ALT_PS1="┌ $(__colorize "$DirColor")\w $(__colorize "1;$VenvColor")\$(__add_venv_info)$(__colorize 0)\e[?7l$DASHES\e[?7h\e[\$(echo -en \$(__git_ps1 'xxx%s')\#xx\$([ \j -gt 0 ] && echo -en \"bg: \j\" )\$(tty | tr --delete '\n' | sed 's/\/dev\///') | wc -c)D"
 
 ALT_PS2="\$([ \j -gt 0 ] && echo -en \"$(__colorize "$JobColor") bg:\j\")$(__colorize "0") $(__colorize "$CountColor")#\#$(__colorize "0") \$(tty | tr --delete '\n' | sed 's/\/dev\///')\n$(__colorize 0)└ $(__colorize "$MainColor")\u@\h$(__colorize 0) \$([[ \$_COMMAND_FAILED_ == 1 ]] && echo -e \" $(__colorize 31)✖ $(__colorize 0)\") \\$ "
 
 # use prompt command to save last command exit status to a variable and generate the rest of the prompt
-PROMPT_COMMAND='[[ $? != 0 ]] && _COMMAND_FAILED_=1 || _COMMAND_FAILED_=0; __git_ps1 "$ALT_PS1" "$ALT_PS2" "$(__colorize "$GitColor")⎇ %s"'
+
+prompt_function() {
+	[[ $? != 0 ]] && _COMMAND_FAILED_=1 || _COMMAND_FAILED_=0
+	__git_ps1 "$ALT_PS1" "$ALT_PS2" "$(__colorize "$GitColor")⎇ %s "
+}
+
+PROMPT_COMMAND='prompt_function'
 

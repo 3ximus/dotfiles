@@ -48,9 +48,8 @@ fi
 
 # program aliases
 alias vi='vim'
-alias python='python2'
 alias mux='tmuxinator'
 
 alias ssh-new-bash-session='eval `ssh-agent` && ssh-add'
-alias ssh-new-session='keychain ~/.ssh/id_rsa && source ~/.keychain/$HOSTNAME-s'
+alias ssh-new-session='keychain ~/.ssh/id_rsa && source ~/.keychain/$HOSTNAME-sh'
 

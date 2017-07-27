@@ -37,13 +37,13 @@ shopt -s autocd
 # the corrected file name is printed, and the command proceeds.
 shopt -s cdspell
 
+# expands bang combinations and variables to their values - remember !$ last arg / !^ first arg / !* all args
+bind Space:magic-space	# also combine these with :h (head) or :t (tail) to get path selective path expansion -> !$:h
+
 # set a fancy prompt
 case "$TERM" in
     xterm-color) color_prompt=yes;;
 esac
-
-# expands bang combinations and variables to their values - remember !$ last arg / !^ first arg / !* all args
-bind Space:magic-space	# also combine these with :h (head) or :t (tail) to get path selective path expansion -> !$:h
 
 # enable programmable completion features
 if ! shopt -oq posix; then
@@ -57,20 +57,20 @@ fi
 # Colored promp
 force_color_prompt=yes
 if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
+	if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+		color_prompt=yes
+	else
+		color_prompt=
+	fi
 fi
 
 if [ "$color_prompt" = yes ]; then
-	# load default bash_prompt
+# load default bash_prompt
 	if [ -f ~/.bash/prompts/prompt_5.sh ]; then
 		source ~/.bash/prompts/prompt_5.sh
 	fi
 else
-    PS1='\u@\h:\w\$ '
+	PS1='\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
 

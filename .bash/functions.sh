@@ -49,6 +49,12 @@ grephere() {
 	grep -e "$1" "${@:2}" -d recurse .
 }
 
+remove_space_from_name() {
+	for f in ${1}/*\ *; do
+		mv "$f" "${f// /_}";
+	done
+}
+
 # Extract files
 extract () {
 	for f in "${@}" ; do
@@ -79,7 +85,9 @@ alias un=extract
 
 # find process by name
 psgrep() {
-	ps aux | grep $1 --color=always | grep -v grep
+	list=$(ps aux)
+	echo -e "$list" | head -n1
+	echo -e "$list" | grep $1 --color=always | grep -v grep
 }
 
 vboxsave() {
