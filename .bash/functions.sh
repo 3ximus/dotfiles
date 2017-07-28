@@ -81,7 +81,7 @@ extract () {
 }
 
 # i hate typing extract...
-alias un=extract
+alias unpack=extract
 
 # find process by name
 psgrep() {
