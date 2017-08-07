@@ -1,0 +1,16 @@
+vim
+tmux
+gvim
+bash-completion
+ranger
+tree
+nload
+networkmanager
+keychain
+python2-pip
+python-pip
+python-virtualenv
+ipython
+ipython2
+
+

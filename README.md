@@ -17,13 +17,13 @@
 
 - fonts in .fonts are mostly fonts for [powerline](https://github.com/powerline/fonts) support
 
-- vscode contains my user settings and keyboard shortcuts
+- vscode contains my user settings, keyboard shortcuts and a list of installed extensions (can be installed with my install script)
 
 - konsole contains my konsole themes and profile (lives in $HOME/.local/share/konsole)
 
-- inside other there is
-	- kwinrulesrc with my kwin rules (lives in $HOME/.config)
-	- KDE_Keyboard_Shortcuts.kksrc with exported keyboard shortcuts
+- plasma contains my keybindings and window rules
+
+- package_data contains some of my archlinux packages
 
 
 ## vim plugins

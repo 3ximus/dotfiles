@@ -1,0 +1,16 @@
+PKief.material-icon-theme
+arcticicestudio.nord-visual-studio-code
+donjayamanne.githistory
+donjayamanne.javadebugger
+donjayamanne.python
+eamodio.gitlens
+jdinhlife.theme-gruvbox-dark-medium
+ms-vscode.cpptools
+redhat.java
+robertohuertasm.vscode-icons
+shardulm94.trailing-spaces
+tushortz.java-imports-snippets
+vscodevim.vim
+wayou.vscode-todo-highlight
+wmaurer.change-case
+zhuangtongfa.Material-theme

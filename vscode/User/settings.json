@@ -1,5 +1,6 @@
 // Place your settings in this file to overwrite the default settings
 {
+    "workbench.colorTheme": "Gruvbox Dark (Medium Contrast)",
      // Controls the font
     //"editor.fontFamily": "'Roboto Mono for Powerline'",
     //"editor.fontFamily": "'monofur for Powerline'",
@@ -17,6 +18,7 @@
 
     "editor.cursorStyle": "block",
     "editor.cursorBlinking": "phase",
+    "editor.renderWhitespace": "boundary",
 
     "zenMode.hideTabs": true,
     "zenMode.fullScreen": false,
@@ -26,48 +28,47 @@
     "workbench.sideBar.location": "left",
     "workbench.activityBar.visible": true,
     "window.menuBarVisibility": "toggle",
-    //"editor.minimap.enabled": true,
+    "editor.minimap.enabled": false,
     "editor.minimap.renderCharacters": false,
 
     // themes
     "vsicons.dontShowNewVersionMessage": true,
-    "workbench.colorTheme": "Nord",
     "workbench.iconTheme": "material-icon-theme",
 
 
     "workbench.colorCustomizations": {
-//        // gruvbox
-//        "activityBar.background": "#282828",
-//        "activityBar.foreground": "#ebdbb2",
-//        "activityBarBadge.background": "#458588",
-//        "activityBarBadge.foreground": "#ebdbb2",
-//        "sideBar.background": "#282828",
-//
-//        "focusBorder": "#bdae93",
-//        //"foreground": "#fbf1c7",
-//
-//        "list.activeSelectionBackground": "#665c54",
-//        "list.inactiveSelectionBackground": "#504945",
-//
-//        "statusBar.background": "#282828",
-//        "statusBar.noFolderBackground": "#282828",
-//        "statusBar.foreground": "#ebdbb2",
-//        "editorGroupHeader.tabsBackground": "#282828",
-//        "tab.activeForeground": "#ebdbb2",
-//
-//        "input.background": "#282828",
-//        "input.border": "#504945",
-//
-//        "editorWidget.background": "#282828",
-//
-//        "editor.selectionHighlightBackground": "#665c54",
-//        "editor.selectionBackground": "#504945",
-//        "editor.wordHighlightStrongBackground": "#928374",
-//
-//        "peekViewEditor.background": "#282828",
-//        "peekViewResult.background": "#282828",
-//        "peekViewResult.selectionBackground": "#928374",
-//        "peekView.border": "#928374"
+        // gruvbox
+        "activityBar.background": "#282828",
+        "activityBar.foreground": "#ebdbb2",
+        "activityBarBadge.background": "#458588",
+        "activityBarBadge.foreground": "#ebdbb2",
+        "sideBar.background": "#282828",
+
+        "focusBorder": "#bdae93",
+        //"foreground": "#fbf1c7",
+
+        "list.activeSelectionBackground": "#665c54",
+        "list.inactiveSelectionBackground": "#504945",
+
+        "statusBar.background": "#282828",
+        "statusBar.noFolderBackground": "#282828",
+        "statusBar.foreground": "#ebdbb2",
+        "editorGroupHeader.tabsBackground": "#282828",
+        "tab.activeForeground": "#ebdbb2",
+
+        "input.background": "#282828",
+        "input.border": "#504945",
+
+        "editorWidget.background": "#282828",
+
+        "editor.selectionHighlightBackground": "#665c54",
+        "editor.selectionBackground": "#504945",
+        "editor.wordHighlightStrongBackground": "#928374",
+
+        "peekViewEditor.background": "#282828",
+        "peekViewResult.background": "#282828",
+        "peekViewResult.selectionBackground": "#928374",
+        "peekView.border": "#928374"
 
     },
     "vim.searchHighlightColor": "rgba(150, 150, 255, 0.3)",
@@ -87,7 +88,7 @@
 
     //"terminal.integrated.shell.windows": "C:\\Windows\\sysnative\\bash.exe",
     "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
-    "terminal.integrated.fontSize": 11,
+    "terminal.integrated.fontSize": 13,
 
     "vim.autoindent": false,
     "vim.hlsearch": true,
@@ -138,5 +139,6 @@
             "backgroundColor": "#ff733c"
         }
     ],
-    "java.errors.incompleteClasspath.severity": "ignore"
+    "java.errors.incompleteClasspath.severity": "ignore",
+    "terminal.external.linuxExec": "konsole"
 }

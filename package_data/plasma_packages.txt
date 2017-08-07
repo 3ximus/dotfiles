@@ -1,0 +1,17 @@
+konsole
+dolphin
+gwenview
+evince
+rofi
+mpv
+scrot
+firefox
+plasma-nm
+gst-libav
+phonon-qt5-gstreamer
+gst-plugins-good
+transmission-qt
+vlc
+phonon-qt5-vlc
+phonon-qt4-vlc
+

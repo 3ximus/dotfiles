@@ -1,0 +1,6 @@
+aurvote
+dropbox
+spotify
+visual-studio-code
+python-pylint
+discord

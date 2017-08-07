@@ -1,7 +1,7 @@
 [Appearance]
-BoldIntense=false
-ColorScheme=Hybrid
-Font=DEC Terminal,10,-1,5,50,0,0,0,0,0,Regular
+BoldIntense=true
+ColorScheme=Gruvbox_Dark
+Font=Misc Fixed,10,-1,5,50,0,0,0,0,0,Regular
 
 [Cursor Options]
 CustomCursorColor=255,255,255

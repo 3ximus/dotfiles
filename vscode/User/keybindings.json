@@ -48,11 +48,8 @@
 	{ "key": "ctrl+p", "command": "workbench.action.previousEditor", "when": "editorTextFocus && vim.mode != 'Insert'" },
 
 // other
-	{ "key": "f2", "command": "workbench.action.gotoSymbol" },
+	{ "key": "f3", "command": "workbench.action.gotoSymbol" },
 	{ "key": "f4", "command": "workbench.action.quickOpen" },
 	{ "key": "f8", "command": "workbench.action.openRecent" },
-	{
-		"key": "ctrl+f4",
-		"command": "workbench.action.selectTheme"
-	}
+	{ "key": "ctrl+f4", "command": "workbench.action.selectTheme" }
 ]

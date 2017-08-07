@@ -1,10 +1,18 @@
+[KDE Keyboard Layout Switcher][Global Shortcuts]
+{0f43bdee-a936-4e53-8dde-60eb9079b10f}=Meta+Tab
+{3f94dabf-28aa-4281-89c2-20fff004e510}=Alt+Shift+Space
+{4fe1a40d-fff1-4522-ad23-4cd242185a3a}=Ctrl+Alt+F
+{92fc7430-ecac-45e7-ae3e-f6551a4fe377}=Alt+Space
+{cc0e3cd9-713e-4054-b2fc-e4ceb6a2e40e}=Alt+Return
+{d03619b6-9b3c-48cc-9d9c-a2aadb485550}=Search
+
 [kmix][Global Shortcuts]
-decrease_microphone_volume=Meta+Shift+PgDown
-decrease_volume=Meta+PgDown
-increase_microphone_volume=Meta+Shift+PgUp
-increase_volume=Meta+PgUp
-mic_mute=Meta+Shift+End
-mute=Meta+End
+decrease_microphone_volume=Microphone Volume Down; Meta+Shift+PgDown
+decrease_volume=Volume Down; Meta+PgDown
+increase_microphone_volume=Microphone Volume Up; Meta+Shift+PgUp
+increase_volume=Volume Up; Meta+PgUp
+mic_mute=Microphone Mute; Meta+Shift+End
+mute=Volume Mute; Meta+End
 
 [kwin][Global Shortcuts]
 Activate Window Demanding Attention=Ctrl+Alt+A
@@ -167,7 +175,7 @@ view_zoom_in=Meta+=
 view_zoom_out=none
 
 [mediacontrol][Global Shortcuts]
-nextmedia=Ctrl+F11
-playpausemedia=Ctrl+F9
-previousmedia=Ctrl+F10
-stopmedia=Media Stop
+nextmedia=Media Next; Ctrl+F11
+playpausemedia=Media Play; Ctrl+F9
+previousmedia=Media Previous; Ctrl+F10
+stopmedia=Media Stop; Ctrl+F8
