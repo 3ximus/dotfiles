@@ -13,13 +13,13 @@ GIT_PS1_SHOWUPSTREAM='git' # see diference from upstream: > ahead, < behind, <> 
 
 # setup color for diferent users
 if [[ ${EUID} == 0 ]]; then
-	bgcolor=";41"; # red
-	fgcolor="";
-	sfgcolor=";31";
+    bgcolor=";41"; # red
+    fgcolor="";
+    sfgcolor=";31";
 else
-	bgcolor=";42"; # green
-	fgcolor=";30";
-	sfgcolor=";32";
+    bgcolor=";42"; # green
+    fgcolor=";30";
+    sfgcolor=";32";
 fi
 
 #path calc
@@ -29,7 +29,7 @@ code="~/Documents/code/"
 code_sub="C:"
 
 _path() { # normal path can be printed on the prompt with \w
-	echo $PWD | sed "s@$HOME@\~@" | sed "s@$repo@$repo_sub@" | sed "s@$code@$code_sub@"
+    echo $PWD | sed "s@$HOME@\~@" | sed "s@$repo@$repo_sub@" | sed "s@$code@$code_sub@"
 }
 
 _add_venv_info () {
@@ -41,8 +41,8 @@ _add_venv_info () {
              [ "$VIRTUAL_ENV" != "" ] && VIRT_ENV_TXT=" venv:`basename \"$VIRTUAL_ENV\"` "
         fi
         if [ "${VIRT_ENV_TXT}" != "" ];then
-			echo -e "\b\033[$sfgcolor;40m\033[34;40m${VIRT_ENV_TXT}\033[30;44m"
-		fi
+            echo -e "\b\033[$sfgcolor;40m\033[34;40m${VIRT_ENV_TXT}\033[30;44m"
+        fi
     fi
 }
 

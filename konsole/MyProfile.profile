@@ -1,9 +1,11 @@
 [Appearance]
 BoldIntense=true
-ColorScheme=Gruvbox_Dark
-Font=Misc Fixed,10,-1,5,50,0,0,0,0,0,Regular
+ColorScheme=Gruvbox Dark Real Colors
+Font=Source Code Pro for Powerline,9,-1,5,50,0,0,0,0,0,Regular
+UseFontLineChararacters=false
 
 [Cursor Options]
+CursorShape=0
 CustomCursorColor=255,255,255
 
 [General]

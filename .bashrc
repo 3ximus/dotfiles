@@ -105,5 +105,5 @@ fi
 export MYSQL_PS1="\u - \d > "
 export EDITOR="vim"
 # add customs scripts and gem installed packages
-export PATH=$PATH:$HOME/.bash/scripts:$HOME/.gem/ruby/2.3.0/bin
+export PATH=$PATH:$HOME/.bash/scripts
 

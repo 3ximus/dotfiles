@@ -21,13 +21,13 @@ bb="\[\033[0m\]"
 
 # setup color for diferent users
 if [[ ${EUID} == 0 ]];then
-	u=$rd
-	uc=$rd
-	ub="\[\033[1;31m\]"
+    u=$rd
+    uc=$rd
+    ub="\[\033[1;31m\]"
 else
-	u=$gr
-	uc="\[\033[29m\]"
-	ub="\[\033[1;32m\]"
+    u=$gr
+    uc="\[\033[29m\]"
+    ub="\[\033[1;32m\]"
 fi
 
 #path calc
@@ -37,7 +37,7 @@ code="~/Documents/code/"
 code_sub="C:"
 
 _path() { # normal path can be printed on the prompt with \w
-	echo $PWD | sed "s@$HOME@\~@" | sed "s@$repo@$repo_sub@" | sed "s@$code@$code_sub@"
+    echo $PWD | sed "s@$HOME@\~@" | sed "s@$repo@$repo_sub@" | sed "s@$code@$code_sub@"
 }
 
 _add_venv_info () {
@@ -49,8 +49,8 @@ _add_venv_info () {
             [ "$VIRTUAL_ENV" != "" ] && VIRT_ENV_TXT=" venv:`basename \"$VIRTUAL_ENV\"` "
         fi
         if [ "${VIRT_ENV_TXT}" != "" ];then
-			echo -e "\033[35m${VIRT_ENV_TXT}"
-		fi
+            echo -e "\033[35m${VIRT_ENV_TXT}"
+        fi
     fi
 }
 

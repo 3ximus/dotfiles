@@ -56,8 +56,8 @@ ALT_PS2="\$([ \j -gt 0 ] && echo -en \"$(__colorize "$JobColor") bg:\j\")$(__col
 # use prompt command to save last command exit status to a variable and generate the rest of the prompt
 
 prompt_function() {
-	[[ $? != 0 ]] && _COMMAND_FAILED_=1 || _COMMAND_FAILED_=0
-	__git_ps1 "$ALT_PS1" "$ALT_PS2" "$(__colorize "$GitColor")⎇ %s "
+    [[ $? != 0 ]] && _COMMAND_FAILED_=1 || _COMMAND_FAILED_=0
+    __git_ps1 "$ALT_PS1" "$ALT_PS2" "$(__colorize "$GitColor")⎇ %s "
 }
 
 PROMPT_COMMAND='prompt_function'

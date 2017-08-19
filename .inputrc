@@ -34,14 +34,19 @@ set mark-symlinked-directories on
 "\C-x\C-r": re-read-init-file
 "\C-x\C-x": redraw-current-line
 
+"\C-f": shell-expand-line
+#"\C-f": glob-expand-word 
+"\C-g": dabbrev-expand 
+"\C-h": complete-into-braces
+
 $if mode=vi
 # make v i-insert behave like usual emacs
-"\C-k": kill-line
-"\C-a": beginning-of-line
-"\C-e": end-of-line
-"\C-l": clear-screen
-"\eb": backward-word
-"\ef": forward-word
+	"\C-k": kill-line
+	"\C-a": beginning-of-line
+	"\C-e": end-of-line
+	"\C-l": clear-screen
+	"\eb": backward-word
+	"\ef": forward-word
 $endif
 
 # quote word near cursor

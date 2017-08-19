@@ -1,10 +1,5 @@
 // Place your settings in this file to overwrite the default settings
 {
-    "workbench.colorTheme": "Gruvbox Dark (Medium Contrast)",
-     // Controls the font
-    //"editor.fontFamily": "'Roboto Mono for Powerline'",
-    //"editor.fontFamily": "'monofur for Powerline'",
-    //"editor.fontFamily": "'Liberation Mono for Powerline'",
     "editor.fontFamily": "'Source Code Pro for Powerline'",
     //"editor.fontFamily": "'Fira Mono for Powerline'",
     "editor.fontSize": 12,
@@ -33,49 +28,12 @@
 
     // themes
     "vsicons.dontShowNewVersionMessage": true,
-    "workbench.iconTheme": "material-icon-theme",
-
-
-    "workbench.colorCustomizations": {
-        // gruvbox
-        "activityBar.background": "#282828",
-        "activityBar.foreground": "#ebdbb2",
-        "activityBarBadge.background": "#458588",
-        "activityBarBadge.foreground": "#ebdbb2",
-        "sideBar.background": "#282828",
-
-        "focusBorder": "#bdae93",
-        //"foreground": "#fbf1c7",
-
-        "list.activeSelectionBackground": "#665c54",
-        "list.inactiveSelectionBackground": "#504945",
-
-        "statusBar.background": "#282828",
-        "statusBar.noFolderBackground": "#282828",
-        "statusBar.foreground": "#ebdbb2",
-        "editorGroupHeader.tabsBackground": "#282828",
-        "tab.activeForeground": "#ebdbb2",
-
-        "input.background": "#282828",
-        "input.border": "#504945",
-
-        "editorWidget.background": "#282828",
-
-        "editor.selectionHighlightBackground": "#665c54",
-        "editor.selectionBackground": "#504945",
-        "editor.wordHighlightStrongBackground": "#928374",
-
-        "peekViewEditor.background": "#282828",
-        "peekViewResult.background": "#282828",
-        "peekViewResult.selectionBackground": "#928374",
-        "peekView.border": "#928374"
-
-    },
+    "workbench.iconTheme": "vscode-icons",
+    "workbench.colorTheme": "Gruvbox Dark (Medium Contrast)",
     "vim.searchHighlightColor": "rgba(150, 150, 255, 0.3)",
-
+    "markdown.preview.fontFamily": "'Roboto Mono for Powerline', 'Segoe WPC', 'Segoe UI', 'SFUIText-Light', 'HelveticaNeue-Light'",
 
     "git.confirmSync": false,
-    "markdown.preview.fontFamily": "'Roboto Mono for Powerline', 'Segoe WPC', 'Segoe UI', 'SFUIText-Light', 'HelveticaNeue-Light'",
 
      // default python
     //"python.pythonPath": "/usr/bin/python2.7",
@@ -88,7 +46,7 @@
 
     //"terminal.integrated.shell.windows": "C:\\Windows\\sysnative\\bash.exe",
     "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
-    "terminal.integrated.fontSize": 13,
+    "terminal.integrated.fontSize": 12,
 
     "vim.autoindent": false,
     "vim.hlsearch": true,
@@ -139,6 +97,5 @@
             "backgroundColor": "#ff733c"
         }
     ],
-    "java.errors.incompleteClasspath.severity": "ignore",
-    "terminal.external.linuxExec": "konsole"
+    "java.errors.incompleteClasspath.severity": "ignore"
 }

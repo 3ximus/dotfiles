@@ -15,20 +15,20 @@ GIT_PS1_SHOWUPSTREAM='git' # see diference from upstream: > ahead, < behind, <> 
 
 # setup color for diferent users
 if [[ ${EUID} == 0 ]]; then
-	MainColor="1" # red
-	BGMainColor="4$MainColor"
-	FGMainColor="0"
-	sFGMainColor="3$MainColor" # background as foreground
+    MainColor="1" # red
+    BGMainColor="4$MainColor"
+    FGMainColor="0"
+    sFGMainColor="3$MainColor" # background as foreground
 elif [[ -n $SSH_CLIENT ]]; then
-	MainColor="2" # green
-	BGMainColor="4$MainColor"
-	FGMainColor="0"
-	sFGMainColor="3$MainColor" # background as foreground
+    MainColor="2" # green
+    BGMainColor="4$MainColor"
+    FGMainColor="0"
+    sFGMainColor="3$MainColor" # background as foreground
 else
-	MainColor="0" # black
-	BGMainColor="4$MainColor"
-	FGMainColor="0" # white
-	sFGMainColor="3$MainColor" # background as foreground
+    MainColor="0" # black
+    BGMainColor="4$MainColor"
+    FGMainColor="0" # white
+    sFGMainColor="3$MainColor" # background as foreground
 fi
 
 # Alternative theme color
@@ -42,20 +42,20 @@ JobColor="6"
 VenvColor="5" # virtual environment color
 
 __colorize() {
-	echo -en "\[\033[${1}m\]"
+    echo -en "\[\033[${1}m\]"
 }
 
 __path() { # normal path can be printed on the prompt with \w
-	#path calc
-	local repo
-	local repo_sub
-	local code
-	local code_sub
-	repo="~/Documents/rep/"
-	repo_sub="R:"
-	code="~/Documents/code/"
-	code_sub="C:"
-	echo $PWD | sed "s@$HOME@\~@" | sed "s@$repo@$repo_sub@" | sed "s@$code@$code_sub@"
+    #path calc
+    local repo
+    local repo_sub
+    local code
+    local code_sub
+    repo="~/Documents/rep/"
+    repo_sub="R:"
+    code="~/Documents/code/"
+    code_sub="C:"
+    echo $PWD | sed "s@$HOME@\~@" | sed "s@$repo@$repo_sub@" | sed "s@$code@$code_sub@"
 }
 
 __add_venv_info () {
@@ -67,8 +67,8 @@ __add_venv_info () {
              [ "$VIRTUAL_ENV" != "" ] && VIRT_ENV_TXT=" venv:`basename \"$VIRTUAL_ENV\"` "
         fi
         if [ "${VIRT_ENV_TXT}" != "" ];then
-			echo -e "\b\033[$sFGMainColor;4${VenvColor}m\033[1;30;4${VenvColor}m${VIRT_ENV_TXT}\033[0;3${VenvColor};${BGAltColor}m"
-		fi
+            echo -e "\b\033[$sFGMainColor;4${VenvColor}m\033[1;30;4${VenvColor}m${VIRT_ENV_TXT}\033[0;3${VenvColor};${BGAltColor}m"
+        fi
     fi
 }
 

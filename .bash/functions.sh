@@ -28,9 +28,8 @@ sudofunction() {
 }
 
 # Simplify searching for keyword in current dir
-#  Note: since argument order of find command matters i didn't made it possible to give it extra arguments
 findhere() {
-	find . -iname "*$1*" -printf '"%p"\n'
+	find . -iname "*$1*" "${@:2}"
 }
 
 # Delete files with patern in current dir
@@ -111,8 +110,6 @@ dss() {
 }
 
 
-
-
 # ==================================
 # ----------------------------------
 # -------------OTHERS---------------
@@ -147,45 +144,69 @@ prompt() {
 	fi
 }
 
-# Define function to display terminal colors
-colors() {
-	local T
-	T='☰☰☰'
-	echo -e "\n                 40m     41m     42m     43m     44m     45m     46m     47m";
-	for FGs in '    m' '   1m' '  30m' '1;30m' '  31m' '1;31m' '  32m' \
-		'1;32m' '  33m' '1;33m' '  34m' '1;34m' '  35m' '1;35m' \
-			'  36m' '1;36m' '  37m' '1;37m';
-		do FG=${FGs// /}
-		echo -en " $FGs \033[$FG  $T  "
-			for BG in 40m 41m 42m 43m 44m 45m 46m 47m;
-		do echo -en " \033[$FG\033[$BG  $T  \033[0m";
+# Display unicode chars
+unicode() {
+	for a in {0..9} {a..f}; do
+		for b in {0..9} {a..f}; do
+			printf "${a}${b}00  "
+			for c in {0..3}{{0..9},{a..f}} ; do printf "\u$a$b$c "; done
+			printf "\n${a}${b}40  "
+			for c in {4..7}{{0..9},{a..f}}; do printf "\u$a$b$c "; done
+			printf "\n${a}${b}80  "
+			for c in {{8..9},{a..b}}{{0..9},{a..f}}; do printf "\u$a$b$c "; done
+			printf "\n${a}${b}c0  "
+			for c in {c..f}{{0..9},{a..f}}; do printf "\u$a$b$c "; done
+			echo
 		done
-		echo;
-	done
-	echo
+	done | LESSUTFBINFMT='?' less
 }
 
-
-colorsplus() {
-	echo -en '\n  '
-	for i in {0..15} ; do
-		[[ $i == 8 ]] && echo -en '\e[0m  '
-		printf "\e[48;5;%dm%3d" $i $i
-	done
-	echo -ne '\e[0m\n\n  '
-	base=( 16 52 88 124 196 232 34 70 106 142 214 250)
-	for i in {0..17}; do
-		for column in $(seq 0 $((${#base[@]} - 1))) ; do
-			if [[ ${column} -ge 6 ]] ; then
-				fg='38;5;232';
-			else
-				fg=''
-			fi
-			[[ $column == 6 ]] && echo -en '\e[0m  '
-			printf "\e[${fg};48;5;%dm% 4d" ${base[$column]} ${base[$column]}
-			base[$column]=$((${base[$column]} + 1))
+# Function to display terminal colors. $1 -> (1 - simple, 2 - with numbers, 3 - 256 colors)
+colors() {
+	if [[ -z $1 || $1 == 1 ]]; then
+		echo -en '\n     '
+		for i in {0..7} ; do printf "\e[48;5;${i}m     "; done
+		echo -en '\e[0m\n     '
+		for i in {0..7} ; do printf "\e[48;5;${i}m     "; done
+		echo -en '\e[0m\n     '
+		for i in {8..15} ; do printf "\e[48;5;${i}m     "; done
+		echo -en '\e[0m\n     '
+		for i in {8..15} ; do printf "\e[48;5;${i}m     "; done
+		printf "\e[0m\n\n"
+	elif [[ $1 == 2 ]]; then
+		echo -e "\n                 40m     41m     42m     43m     44m     45m     46m     47m";
+		for FGs in '    m' '   1m' '  30m' '1;30m' '  31m' '1;31m' '  32m' \
+			'1;32m' '  33m' '1;33m' '  34m' '1;34m' '  35m' '1;35m' \
+				'  36m' '1;36m' '  37m' '1;37m';
+			do FG=${FGs// /}
+			echo -en " $FGs \033[$FG  eXz  "
+				for BG in 40m 41m 42m 43m 44m 45m 46m 47m;
+			do echo -en " \033[$FG\033[$BG  eXz  \033[0m";
+			done
+			echo;
 		done
-		echo -ne '\e[0m\n  '
-	done
-	echo
+		echo
+	elif [[ $1 == 3 ]]; then
+		echo -en '\n  '
+		for i in {0..15} ; do
+			[[ $i == 8 ]] && echo -en '\e[0m  '
+			printf "\e[48;5;%dm%3d" $i $i
+		done
+		echo -ne '\e[0m\n\n  '
+		base=( 16 52 88 124 196 232 34 70 106 142 214 250)
+		for i in {0..17}; do
+			for column in $(seq 0 $((${#base[@]} - 1))) ; do
+				if [[ ${column} -ge 6 ]] ; then
+					fg='38;5;232';
+				else
+					fg=''
+				fi
+				[[ $column == 6 ]] && echo -en '\e[0m  '
+				printf "\e[${fg};48;5;%dm% 4d" ${base[$column]} ${base[$column]}
+				base[$column]=$((${base[$column]} + 1))
+			done
+			echo -ne '\e[0m\n  '
+		done
+		echo
+	fi
 }

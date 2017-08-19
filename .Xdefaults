@@ -1,4 +1,7 @@
 ! Configuration for X client applications
+! ------------------------------------------------------------------------------
+! URXVT Color theme
+! ------------------------------------------------------------------------------
 
 !name can be found with fc-list
 urxvt*font:				xft:Hack:style=Regular:size=8, \

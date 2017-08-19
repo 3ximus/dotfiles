@@ -20,11 +20,6 @@
 	{ "key": "shift+alt+o", "command": "workbench.action.output.toggleOutput"},
 	{ "key": "ctrl+t", "command": "workbench.action.toggleSidebarVisibility" },
 
-// vim keys :)
-	//{ "key": "ctrl+p","command": "selectPrevSuggestion", "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible" },
-	//{ "key": "ctrl+n","command": "selectNextSuggestion", "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible" },
-	{ "key": "ctrl+a","command": "extension.vim_ctrl+a", "when": "editorTextFocus && !inDebugRepl" },
-
 // unbind ctrl+n
 	{ "key": "ctrl+n","command": "-workbench.action.files.newUntitledFile" },
 	{ "key": "ctrl+f", "command": "-extension.vim_ctrl+f"},
@@ -47,9 +42,14 @@
 	{ "key": "ctrl+n", "command": "workbench.action.nextEditor", "when": "editorTextFocus && vim.mode != 'Insert'" },
 	{ "key": "ctrl+p", "command": "workbench.action.previousEditor", "when": "editorTextFocus && vim.mode != 'Insert'" },
 
+// remove conflict with integrated terminal
+	{ "key": "ctrl+e", "command": "-workbench.action.quickOpen" },
+	{ "key": "ctrl+p", "command": "-workbench.action.quickOpen" }
+
 // other
 	{ "key": "f3", "command": "workbench.action.gotoSymbol" },
 	{ "key": "f4", "command": "workbench.action.quickOpen" },
 	{ "key": "f8", "command": "workbench.action.openRecent" },
-	{ "key": "ctrl+f4", "command": "workbench.action.selectTheme" }
+	{ "key": "ctrl+f4", "command": "workbench.action.selectTheme" },
+
 ]

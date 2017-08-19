@@ -114,7 +114,7 @@ nmap <leader>fa :call Fold(1)<CR>:set foldmethod=manual<CR>
 " remove trailing whitespaces
 nmap <leader>s :call StripTrailingWhitespace()<CR>
 " map Goyo distraction free mode
-nnoremap <C-g> :Goyo<CR>
+nnoremap <C-g> :Goyo<CR>:hi Normal ctermbg=none<CR>
 " display line endings and tabs
 nnoremap <F2> :<C-U>setlocal lcs=tab:>-,trail:-,eol:$ list! list? <CR>
 
@@ -130,6 +130,8 @@ if has("gui_running")
 else
 	set t_Co=256 "terminal color range
 	color hybrid
+	"color gruvbox
+	set background=dark
 	"trasparent background
 	hi Normal ctermbg=none
 	highlight NonText ctermbg=none
@@ -178,13 +180,13 @@ if !exists('g:airline_symbols')
 endif
 if !has("gui_running") "running on console
 	" unicode symbols
-	let g:airline_left_sep = ' '	 "only apllies to console
-	let g:airline_right_sep = ' '  "only applies to console
-	let g:airline_left_alt_sep = '>'
-	let g:airline_right_alt_sep = '<'
-	let g:airline_symbols.branch = '|'
-	let g:airline_symbols.linenr = 'ln'
-	let g:airline_symbols.whitespace = 'x'
+	let g:airline_left_sep = ''
+	let g:airline_right_sep = ''
+	let g:airline_left_alt_sep = ''
+	let g:airline_right_alt_sep = ''
+	let g:airline_symbols.branch = ''
+	"let g:airline_symbols.linenr = 'ln'
+	let g:airline_symbols.whitespace = ''
 else
 	" powerline symbols
 	let g:airline_left_sep = ''
@@ -206,24 +208,23 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 "arrow symbols
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
+"git NERDTree plugin
+"let g:NERDTreeIndicatorMapCustom = {
+"	\ "Modified"	: "*",
+"	\ "Staged"		: "+",
+"	\ "Untracked" : "-",
+"	\ "Renamed"		: "->",
+"	\ "Unmerged"	: "!=",
+"	\ "Deleted"		: "x",
+"	\ "Dirty"		: "~",
+"	\ "Clean"		: "v",
+"	\ "Unknown"		: "?"
+"	\ }
 
 "Goyo
 let g:goyo_width = 90
 let g:goyo_height= '90%'
 let g:goyo_linenr = 0
-
-"git NERDTree plugin
-let g:NERDTreeIndicatorMapCustom = {
-	\ "Modified"	: "*",
-	\ "Staged"		: "+",
-	\ "Untracked" : "-",
-	\ "Renamed"		: "->",
-	\ "Unmerged"	: "!=",
-	\ "Deleted"		: "x",
-	\ "Dirty"		: "~",
-	\ "Clean"		: "v",
-	\ "Unknown"		: "?"
-	\ }
 
 " config Gitgutter
 nmap <Leader>ha <Plug>GitGutterStageHunk
