@@ -1,5 +1,5 @@
 #! /bin/sh
-# SIMPLE COLORED DUAL SIDES BASH PROMPT
+# COLORED DUAL SIDES BASH PROMPT
 # by eximus
 
 DASHES="$(printf ' %0.s' {1..400})" # used to fill the screen together with escape sequences
@@ -54,7 +54,6 @@ ALT_PS1="┌ $(__colorize "$DirColor")\w $(__colorize "1;$VenvColor")\$(__add_ve
 ALT_PS2="\$([ \j -gt 0 ] && echo -en \"$(__colorize "$JobColor") bg:\j\")$(__colorize "0") $(__colorize "$CountColor")#\#$(__colorize "0") \$(tty | tr --delete '\n' | sed 's/\/dev\///')\n$(__colorize 0)└ $(__colorize "$MainColor")\u@\h$(__colorize 0) \$([[ \$_COMMAND_FAILED_ == 1 ]] && echo -e \" $(__colorize 31)✖ $(__colorize 0)\") \\$ "
 
 # use prompt command to save last command exit status to a variable and generate the rest of the prompt
-
 prompt_function() {
     [[ $? != 0 ]] && _COMMAND_FAILED_=1 || _COMMAND_FAILED_=0
     __git_ps1 "$ALT_PS1" "$ALT_PS2" "$(__colorize "$GitColor")⎇ %s "

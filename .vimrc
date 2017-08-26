@@ -25,7 +25,7 @@ set autoindent
 set smartindent
 set smarttab
 "set expandtab "tabs are spaces
-setlocal lcs=tab:>-,trail:-,eol:$ list!
+"setlocal lcs=tab:>-,trail:-,eol:$ list! " use list mode mapped to F2 when vim is opened
 
 "search settings
 set incsearch

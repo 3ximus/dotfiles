@@ -1,5 +1,5 @@
 #! /bin/sh
-# BACKGROUND COLORED DUAL SIDES BASH PROMPT
+# POWERLINE COLORED DUAL SIDES BASH PROMPT
 # Less colored variation of prompt 2 to be more adaptable with some themes
 # Currently set to fit Arc Theme
 # by eximus
@@ -67,15 +67,15 @@ __add_venv_info () {
              [ "$VIRTUAL_ENV" != "" ] && VIRT_ENV_TXT=" venv:`basename \"$VIRTUAL_ENV\"` "
         fi
         if [ "${VIRT_ENV_TXT}" != "" ];then
-            echo -e "\b\033[$sFGMainColor;4${VenvColor}m\033[1;30;4${VenvColor}m${VIRT_ENV_TXT}\033[0;3${VenvColor};${BGAltColor}m"
+            echo -e "\b\033[$sFGMainColor;4${VenvColor}m\033[30;4${VenvColor}m${VIRT_ENV_TXT}\033[0;3${VenvColor};${BGAltColor}m"
         fi
     fi
 }
 
-ALT_PS1="$(__colorize "$FGMainColor;1;$BGMainColor") \u@\h $(__colorize "0;$sFGMainColor;$BGAltColor")\$(__add_venv_info)$(__colorize "$FGAltColor;1;$BGAltColor") \$(__path) $(__colorize "0;$sFGAltColor") \[\033[0m\]\e[?7l$DASHES\e[?7h\e[\$(echo -e \$(__git_ps1 '\ \(%s)')\ \d\ \ \ \ \$(tty | sed 's/\/dev\///') | wc -c)D"
+ALT_PS1="$(__colorize "$FGMainColor;$BGMainColor") \u@\h $(__colorize "0;$sFGMainColor;$BGAltColor")\$(__add_venv_info)$(__colorize "$FGAltColor;$BGAltColor") \$(__path) $(__colorize "0;$sFGAltColor") \[\033[0m\]\e[?7l$DASHES\e[?7h\e[\$(echo -e \$(__git_ps1 '\ \(%s)')\ \d\ \ \ \ \$(tty | sed 's/\/dev\///') | wc -c)D"
 
-ALT_PS2="\[\033[${sFGAltColor}m\]$(__colorize "1;$FGAltColor;$BGAltColor") \$(tty | sed 's/\/dev\///') $(__colorize "0;$sFGMainColor;$BGAltColor")$(__colorize "$FGMainColor;1;$BGMainColor") \d \[\033[0m\]\n\$([ \j -gt 0 ] && echo -e \"$(__colorize "$FGAltColor;4$JobColor") \j $(__colorize "$BGMainColor;3$JobColor")\")$(__colorize "0;$FGMainColor;1;$BGMainColor") \\$ \$([[ \$_COMMAND_FAILED_ == 1 ]] && echo -e \"$(__colorize "0;$sFGMainColor;41")\[\033[0;41m\] ✖ \[\033[0;31m\]\" || echo -e \"\[\033[0;${sFGMainColor}m\]\" )\[\033[0m\] "
+ALT_PS2="\[\033[${sFGAltColor}m\]$(__colorize "$FGAltColor;$BGAltColor") \$(tty | sed 's/\/dev\///') $(__colorize "0;$sFGMainColor;$BGAltColor")$(__colorize "$FGMainColor;$BGMainColor") \d \[\033[0m\]\n\$([ \j -gt 0 ] && echo -e \"$(__colorize "$FGAltColor;4$JobColor") \j $(__colorize "$BGMainColor;3$JobColor")\")$(__colorize "0;$FGMainColor;$BGMainColor") \\$ \$([[ \$_COMMAND_FAILED_ == 1 ]] && echo -e \"$(__colorize "0;$sFGMainColor;41")\[\033[0;41m\] ✖ \[\033[0;31m\]\" || echo -e \"\[\033[0;${sFGMainColor}m\]\" )\[\033[0m\] "
 
 # use prompt command to save last command exit status to a variable and generate the rest of the prompt
-PROMPT_COMMAND='[[ $? != 0 ]] && _COMMAND_FAILED_=1 || _COMMAND_FAILED_=0; __git_ps1 "$ALT_PS1" "$ALT_PS2" "$(__colorize "3$GitColor")$(__colorize "$FGAltColor;1;43")  %s $(__colorize "0;43")"'
+PROMPT_COMMAND='[[ $? != 0 ]] && _COMMAND_FAILED_=1 || _COMMAND_FAILED_=0; __git_ps1 "$ALT_PS1" "$ALT_PS2" "$(__colorize "3$GitColor")$(__colorize "$FGAltColor;43")  %s $(__colorize "0;43")"'
 
