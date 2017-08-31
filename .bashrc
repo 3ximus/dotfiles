@@ -66,8 +66,8 @@ fi
 
 if [ "$color_prompt" = yes ]; then
 # load default bash_prompt
-	if [ -f ~/.bash/prompts/prompt_5.sh ]; then
-		source ~/.bash/prompts/prompt_5.sh
+	if [ -f ~/.bash/prompts/prompt_6.sh ]; then
+		source ~/.bash/prompts/prompt_6.sh
 	fi
 else
 	PS1='\u@\h:\w\$ '

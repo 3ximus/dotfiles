@@ -60,14 +60,8 @@ __path() { # normal path can be printed on the prompt with \w
 
 __add_venv_info () {
     if [ -z "$VIRTUAL_ENV_DISABLE_PROMPT" ] ; then
-        VIRT_ENV_TXT=""
-        if [ "x" != x ] ; then
-            VIRT_ENV_TXT=""
-        else
-             [ "$VIRTUAL_ENV" != "" ] && VIRT_ENV_TXT=" venv:`basename \"$VIRTUAL_ENV\"` "
-        fi
-        if [ "${VIRT_ENV_TXT}" != "" ];then
-            echo -e "\b\033[$sFGMainColor;4${VenvColor}m\033[30;4${VenvColor}m${VIRT_ENV_TXT}\033[0;3${VenvColor};${BGAltColor}m"
+        if [ "$VIRTUAL_ENV" != "" ];then
+            echo -e "\b\033[$sFGMainColor;4${VenvColor}m\033[30;4${VenvColor}m venv:`basename \"$VIRTUAL_ENV\"` \033[0;3${VenvColor};${BGAltColor}m"
         fi
     fi
 }

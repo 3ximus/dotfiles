@@ -10,6 +10,7 @@ fi
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias diff='diff --color=auto'
+alias less='less -M'
 
 # more ls aliases
 alias ll='ls -lF'
@@ -53,4 +54,6 @@ alias mux='tmuxinator'
 
 alias ssh-new-bash-session='eval `ssh-agent` && ssh-add'
 alias ssh-new-session='keychain ~/.ssh/id_rsa && source ~/.keychain/$HOSTNAME-sh'
+
+alias restart-plasmashell='killall plasmashell && kstart5 $_ &>/dev/null'
 

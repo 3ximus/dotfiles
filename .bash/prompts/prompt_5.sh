@@ -37,14 +37,8 @@ __colorize() {
 
 __add_venv_info () {
     if [ -z "$VIRTUAL_ENV_DISABLE_PROMPT" ] ; then
-        VIRT_ENV_TXT=""
-        if [ "x" != x ] ; then
-            VIRT_ENV_TXT=""
-        else
-             [ "$VIRTUAL_ENV" != "" ] && VIRT_ENV_TXT=" venv:`basename \"$VIRTUAL_ENV\"` "
-        fi
-        if [ "${VIRT_ENV_TXT}" != "" ];then
-            echo -e "${VIRT_ENV_TXT}"
+        if [ "$VIRTUAL_ENV" != "" ];then
+            echo -e " venv:`basename \"$VIRTUAL_ENV\"` "
         fi
     fi
 }

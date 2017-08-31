@@ -43,12 +43,13 @@ These prompts are in the order that i made them so the last one is the more impr
 Prompts support:
 
 - git directories and status of the files (untracked, staged... aswell as upstream checks), but you must source `.bash/git-prompt.sh`
+- diferent colors for normal user / root / ssh session user
 - python virtual environments. **except prompt 1**
 - last command exit status ( failed or succeded )
-- compress some paths ( my repository path is compressed into "R:" . **except prompt 5**
+- compress some paths ( my repository path is compressed into "R:" . **except prompt 5, 6**
 - background jobs counter
-- command counter **only prompt 5**
-- they all show the respective tty
+- command counter **only prompt 5, 6**
+- show the respective tty. **except 6**
 
 ### Prompt 1
 
@@ -74,3 +75,8 @@ Prompts support:
 
 ![5](screenshots/5_normal.png)
 ![5f](screenshots/5_full.png)
+
+### Prompt 6
+
+![6](screenshots/6_normal.png)
+![6f](screenshots/6_full.png)
