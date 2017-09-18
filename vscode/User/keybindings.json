@@ -44,12 +44,12 @@
 
 // remove conflict with integrated terminal
 	{ "key": "ctrl+e", "command": "-workbench.action.quickOpen" },
-	{ "key": "ctrl+p", "command": "-workbench.action.quickOpen" }
+	{ "key": "ctrl+p", "command": "-workbench.action.quickOpen" },
 
 // other
 	{ "key": "f3", "command": "workbench.action.gotoSymbol" },
 	{ "key": "f4", "command": "workbench.action.quickOpen" },
 	{ "key": "f8", "command": "workbench.action.openRecent" },
 	{ "key": "ctrl+f4", "command": "workbench.action.selectTheme" },
-
+	{ "key": "ctrl+7", "command": "editor.action.commentLine", "when": "editorTextFocus && !editorReadonly" }
 ]

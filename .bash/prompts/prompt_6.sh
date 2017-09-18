@@ -42,25 +42,25 @@ fi
 # -----------------
 
 __color() {
-	[[ -z $2 ]] && echo -en "\[\033[${1}m\]" || echo -en "\033[${1}m"
+	echo -en "\001\033[${1}m\002"
 }
 
 __rafg() {
 # extract background and apply it to the foreground of powerline arrow
 	# REGEX find 4 followed by a digit (negative lookback and lookahead of a digit character)
 	fg=$(echo $1 | perl -ne '/(?<!\d)(4\d)(?!\d)/; $r = $1; $r =~ s/^4/3/; print $r;')
-	[[ -z $2 ]] && echo -en "\[\033[${fg}m\]" || echo -en "\033[${fg}m"
+	echo -en "\001\033[${fg}m\002"
 }
 
 __rabg() {
 # extract background from given color and apply it to the powerline arrow
 	bg=$(echo $1 | perl -ne '/(?<!\d)(4\d)(?!\d)/; print $1;')
-	[[ -z $2 ]] && echo -en "\[\033[${bg}m\]" || echo -en "\033[${bg}m"
+	echo -en "\001\033[${bg}m\002"
 }
 
 __segment() {
 #XXX NOTE if a third argument is a given and is a non-empty string the usual escape sequences will not be printed
-	echo -en "\e[1D$(__rabg $2 $3)$(__color $2 $3) $1 $(__color 0 $3)$(__rafg $2 $3)"
+	echo -en "\001\b\002$(__rabg $2)$(__color $2) $1 $(__color 0)$(__rafg $2)"
 }
 
 __virtual_env_segment () {
@@ -69,7 +69,7 @@ __virtual_env_segment () {
 		if [ "$VIRTUAL_ENV" != "" ] ; then
 			c1=$(echo $VenvColor | perl -ne '/(?<!\d)(4\d)(?!\d)/; print $1;')
 			c2=$(echo $VenvColor | perl -ne '/(?<!\d)(4\d)(?!\d)/; $r = $1; $r =~ s/^4/3/; print $r;')
-			echo -en "\e[1D\e[${c1}m\e[${VenvColor}m venv:`basename \"$VIRTUAL_ENV\"` \e[${c2}m"
+			echo -en "\001\b\002\001\e[${c1}m\e[${VenvColor}m\002 venv:`basename \"$VIRTUAL_ENV\"` \001\e[${c2}m\002"
 		fi
 	fi
 }
@@ -79,15 +79,15 @@ __virtual_env_segment () {
 # -----------------
 
 # count segment done manually
-ALT_PS1="$(__color "$CountColor")#\#\[$(__rafg "$CountColor")\]\$([ \j -gt 0 ] && __segment \"bg:\j\" \"$JobColor\" \"-\")\$(__virtual_env_segment)$(__segment "\w" "$DirColor" )"
+ALT_PS1="\[$(__color "$CountColor")\]#\#\[$(__rafg "$CountColor")\]\[\$([ \j -gt 0 ] && __segment \"bg:\j\" \"$JobColor\")\]\$(__virtual_env_segment)$(__segment "\w" "$DirColor" )"
 
-ALT_PS2="$(__segment "\u" "$MainColor")$(__color 0)\$([[ \$_COMMAND_FAILED_ == 1 ]] && echo -e \"$(__color "$ErrorColor")\") \\$ $(__color 0)"
+ALT_PS2="$(__segment "\u" "$MainColor")\[$(__color 0)\]\$([[ \$_COMMAND_FAILED_ == 1 ]] && echo -e \"$(__color "$ErrorColor")\")\\$ $(__color 0)"
 
 # use prompt command to save last command exit status to a variable and generate the rest of the prompt
-prompt_function() {
+__prompt_function() {
 	[[ $? != 0 ]] && _COMMAND_FAILED_=1 || _COMMAND_FAILED_=0
-	__git_ps1 "$ALT_PS1" "$ALT_PS2" "\b$(__color "$GitColor") ⎇%s  \[$(__rafg $GitColor)\]"
+	__git_ps1 "$ALT_PS1" "$ALT_PS2" "\[\b\]$(__color "$GitColor") %s $(__rafg $GitColor)"
 }
 
-PROMPT_COMMAND='prompt_function'
+PROMPT_COMMAND='__prompt_function'
 

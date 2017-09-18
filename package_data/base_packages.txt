@@ -13,4 +13,3 @@ python-virtualenv
 ipython
 ipython2
 
-

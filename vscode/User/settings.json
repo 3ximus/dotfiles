@@ -15,7 +15,7 @@
     "editor.cursorBlinking": "phase",
     "editor.renderWhitespace": "boundary",
 
-    "zenMode.hideTabs": true,
+    "zenMode.hideTabs": false,
     "zenMode.fullScreen": false,
 
     "workbench.statusBar.visible": true,
@@ -27,12 +27,12 @@
     "editor.minimap.renderCharacters": false,
 
     // themes
-    "vsicons.dontShowNewVersionMessage": true,
-    "workbench.iconTheme": "vscode-icons",
+    "workbench.iconTheme": "material-icon-theme",
     "workbench.colorTheme": "Gruvbox Dark (Medium Contrast)",
     "vim.searchHighlightColor": "rgba(150, 150, 255, 0.3)",
     "markdown.preview.fontFamily": "'Roboto Mono for Powerline', 'Segoe WPC', 'Segoe UI', 'SFUIText-Light', 'HelveticaNeue-Light'",
 
+    "vsicons.dontShowNewVersionMessage": true,
     "git.confirmSync": false,
 
      // default python
@@ -97,5 +97,6 @@
             "backgroundColor": "#ff733c"
         }
     ],
-    "java.errors.incompleteClasspath.severity": "ignore"
+    "java.errors.incompleteClasspath.severity": "ignore",
+    "terminal.integrated.confirmOnExit": true
 }

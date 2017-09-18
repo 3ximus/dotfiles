@@ -17,8 +17,9 @@ set number
 set foldcolumn=1
 
 "syntax and indentation
-syntax on
-syntax enable
+if !exists("g:syntax_on")
+	syntax enable
+endif
 set ts=4 "number of spaces in a tab
 set sw=4 "number of spaces for indent
 set autoindent
@@ -145,9 +146,9 @@ endif
 "set gui options
 if has("gui_running")
 	"set guifont=Liberation\ Mono\ for\ Powerline\ 9 " normal
-	set guifont=Roboto\ Mono\ for\ Powerline\ Regular\ 9
+	"set guifont=Roboto\ Mono\ for\ Powerline\ Regular\ 9
 	"set guifont=monofur\ for\ Powerline\ Regular\ 11 " funny
-	"set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 9
+	set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 9
 	"set guifont=Fira\ Mono\ for\ Powerline\ 9
 
 	set linespace=0
