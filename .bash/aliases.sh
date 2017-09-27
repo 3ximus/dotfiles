@@ -50,12 +50,16 @@ fi
 
 # program aliases
 alias vi='vim'
-alias mux='tmuxinator'
+alias clipboard-in='xclip -in -selection clipboard'
+alias clipboard-out='xclip -out -selection clipboard'
 
+# SSH
 alias ssh-new-bash-session='eval `ssh-agent` && ssh-add'
 alias ssh-new-session='keychain ~/.ssh/id_rsa && source ~/.keychain/$HOSTNAME-sh'
 
+# PLASMA
 alias restart-plasmashell='killall plasmashell && kstart5 $_ &>/dev/null'
+alias restart-tiling='qdbus org.kde.KWin /KWin reconfigure'
 
 # PLEX
 # Add this to sudoers or a file in sudoers.d

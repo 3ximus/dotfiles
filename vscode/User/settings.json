@@ -27,12 +27,14 @@
     "editor.minimap.renderCharacters": false,
 
     // themes
+    "workbench.colorTheme": "Gruvbox Dark Medium",
     "workbench.iconTheme": "material-icon-theme",
-    "workbench.colorTheme": "Gruvbox Dark (Medium Contrast)",
-    "vim.searchHighlightColor": "rgba(150, 150, 255, 0.3)",
     "markdown.preview.fontFamily": "'Roboto Mono for Powerline', 'Segoe WPC', 'Segoe UI', 'SFUIText-Light', 'HelveticaNeue-Light'",
+    "workbench.colorCustomizations": {
+        "editorCursor.foreground": "#ebdbb299",
+        "editorCursor.background": "#1d2021"
+    },
 
-    "vsicons.dontShowNewVersionMessage": true,
     "git.confirmSync": false,
 
      // default python
@@ -48,7 +50,9 @@
     "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
     "terminal.integrated.fontSize": 12,
 
+    // VIM
     "vim.autoindent": false,
+    "vim.useSystemClipboard": true,
     "vim.hlsearch": true,
     "vim.disableAnnoyingNeovimMessage": true,
     "vim.foldfix": true,
@@ -72,19 +76,16 @@
             "text": "NOTE",
             "color": "#282c34",
             "backgroundColor": "#c9ff65"
-            //"overviewRulerColor": "grey" //the color of the ruler mark
         },
         {
             "text": "XXX",
             "color": "#282c34",
             "backgroundColor": "#33ff99"
-            //"overviewRulerColor": "grey" //the color of the ruler mark
         },
         {
             "text": "PLACEHOLDER",
             "color": "white",
             "backgroundColor": "#ff5e7c"
-            //"overviewRulerColor": "grey" //the color of the ruler mark
         },
         {
             "text": "FIXME",
@@ -97,6 +98,7 @@
             "backgroundColor": "#ff733c"
         }
     ],
+    "C_Cpp.intelliSenseEngine": "Default",
     "java.errors.incompleteClasspath.severity": "ignore",
     "terminal.integrated.confirmOnExit": true
 }

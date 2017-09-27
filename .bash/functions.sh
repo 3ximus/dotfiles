@@ -193,7 +193,7 @@ colors() {
 			printf "\e[48;5;%dm%3d" $i $i
 		done
 		echo -ne '\e[0m\n\n  '
-		base=( 16 52 88 124 196 232 34 70 106 142 214 250)
+		base=( 16 52 88 124 160 196 232 34 70 106 142 178 214 250)
 		for i in {0..17}; do
 			for column in $(seq 0 $((${#base[@]} - 1))) ; do
 				if [[ ${column} -ge 6 ]] ; then
@@ -201,7 +201,7 @@ colors() {
 				else
 					fg=''
 				fi
-				[[ $column == 6 ]] && echo -en '\e[0m  '
+				[[ $column == 7 ]] && echo -en '\e[0m  '
 				printf "\e[${fg};48;5;%dm% 4d" ${base[$column]} ${base[$column]}
 				base[$column]=$((${base[$column]} + 1))
 			done

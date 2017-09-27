@@ -1,13 +1,14 @@
+Equinusocio.vsc-material-theme
 PKief.material-icon-theme
 arcticicestudio.nord-visual-studio-code
 donjayamanne.githistory
 donjayamanne.javadebugger
 donjayamanne.python
 eamodio.gitlens
-jdinhlife.theme-gruvbox-dark-medium
+jdinhlife.gruvbox
 ms-vscode.cpptools
+octref.vetur
 redhat.java
-robertohuertasm.vscode-icons
 shardulm94.trailing-spaces
 tushortz.java-imports-snippets
 vscodevim.vim
