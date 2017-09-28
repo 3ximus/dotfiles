@@ -125,7 +125,7 @@ nnoremap <F2> :<C-U>setlocal lcs=tab:>-,trail:-,eol:$ list! list? <CR>
 
 if has("gui_running")
 	colo gruvbox
-	let g:gruvbox_contrast_dark = 'soft'
+	let g:gruvbox_contrast_dark = 'medium'
 	let g:gruvbox_contrast_light = 'soft'
 	set background=dark
 else
@@ -209,11 +209,10 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 "arrow symbols
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
-"git NERDTree plugin
 "let g:NERDTreeIndicatorMapCustom = {
 "	\ "Modified"	: "*",
 "	\ "Staged"		: "+",
-"	\ "Untracked" : "-",
+"	\ "Untracked"   : "-",
 "	\ "Renamed"		: "->",
 "	\ "Unmerged"	: "!=",
 "	\ "Deleted"		: "x",

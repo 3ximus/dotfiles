@@ -6,9 +6,8 @@
 - .xDefaults used for urxvt
 - .xResources used for [rofi](https://github.com/DaveDavenport/rofi)
 - .tmux contains parts from [tmux-powerline](https://github.com/erikw/tmux-powerline)
-- .irssi for irssi IRC client
 - .mpd and .ncmpcpp ([ncmpcpp](http://rybczak.net/ncmpcpp/) is not configured for [mpd](https://github.com/MaxKellermann/MPD) because i use [mopidy](https://github.com/mopidy/mopidy) enabled as a service)
-- .gdb-dashboard can be used as .gdbinit (by renaming it to .gdbinit) since this depends on [pwndbg](https://github.com/pwndbg/pwndbg)
+- .gdb-dashboard.py can be used as .gdbinit (by renaming it to .gdbinit) since this depends on [pwndbg](https://github.com/pwndbg/pwndbg)
 - .bash, .bashrc, .bash_profile, .inputrc used for bash and readline configuration
 
 ------------------------
@@ -25,31 +24,7 @@
 
 - package_data contains some of my archlinux packages
 
-
-## vim plugins
-
-- [vim-airline](https://github.com/vim-airline/vim-airline)
-- [vim-fugitive](https://github.com/tpope/vim-fugitive)
-- [nerd-tree](https://github.com/scrooloose/nerdtree)
-- [vim-gitgutter](https://github.com/airblade/vim-gitgutter)
-- [vim-surround](https://github.com/tpope/vim-surround)
-- [vim-goyo](https://github.com/junegunn/goyo.vim)
-- [vim-diminactive](https://github.com/blueyed/vim-diminactive)
-
 ## Screenshots
-
-These prompts are in the order that i made them so the last one is the more improved version.
-
-Prompts support:
-
-- git directories and status of the files (untracked, staged... aswell as upstream checks), but you must source `.bash/git-prompt.sh`
-- diferent colors for normal user / root / ssh session user
-- python virtual environments. **except prompt 1**
-- last command exit status ( failed or succeded )
-- compress some paths ( my repository path is compressed into "R:" . **except prompt 5, 6**
-- background jobs counter
-- command counter **only prompt 5, 6**
-- show the respective tty. **except 6**
 
 ### Prompt 1
 
@@ -80,3 +55,34 @@ Prompts support:
 
 ![6](screenshots/6_normal.png)
 ![6f](screenshots/6_full.png)
+
+These prompts are in the order that i made them so the last one is the more improved version.
+
+Prompts support:
+
+- git directories and status of the files (untracked, staged... aswell as upstream checks), but you must source `.bash/git-prompt.sh`
+- diferent colors for normal user / root / ssh session user
+- python virtual environments. **except prompt 1**
+- last command exit status ( failed or succeded )
+- compress some paths ( my repository path is compressed into "R:" . **except prompt 5, 6**
+- background jobs counter
+- command counter **only prompt 5, 6**
+- show the respective tty. **except 6**
+
+## vim plugins
+
+- [vim-airline](https://github.com/vim-airline/vim-airline)
+- [vim-fugitive](https://github.com/tpope/vim-fugitive)
+- [nerd-tree](https://github.com/scrooloose/nerdtree)
+- [vim-gitgutter](https://github.com/airblade/vim-gitgutter)
+- [vim-surround](https://github.com/tpope/vim-surround)
+- [vim-goyo](https://github.com/junegunn/goyo.vim)
+- [vim-diminactive](https://github.com/blueyed/vim-diminactive)
+
+## Vim (hybrid theme) / GVim (gruvbox theme) screenshots
+
+![7](screenshots/vim.png)
+
+## Tmux
+
+![8](screenshots/tmux.png)
