@@ -59,7 +59,6 @@ __rabg() {
 }
 
 __segment() {
-#XXX NOTE if a third argument is a given and is a non-empty string the usual escape sequences will not be printed
 	echo -en "\001\b\002$(__rabg $2)$(__color $2) $1 $(__color 0)$(__rafg $2)"
 }
 
@@ -81,12 +80,13 @@ __virtual_env_segment () {
 # count segment done manually
 ALT_PS1="\[$(__color "$CountColor")\]#\#\[$(__rafg "$CountColor")\]\[\$([ \j -gt 0 ] && __segment \"bg:\j\" \"$JobColor\")\]\$(__virtual_env_segment)$(__segment "\w" "$DirColor" )"
 
-ALT_PS2="$(__segment "\u" "$MainColor")\[$(__color 0)\]\$([[ \$_COMMAND_FAILED_ == 1 ]] && echo -e \"$(__color "$ErrorColor")\")\\$ $(__color 0)"
+ALT_PS2="$(__color 0) \$([[ \$_COMMAND_FAILED_ == 1 ]] && echo -e \"$(__color "$ErrorColor")\")\\$ $(__color 0)"
 
 # use prompt command to save last command exit status to a variable and generate the rest of the prompt
 __prompt_function() {
 	[[ $? != 0 ]] && _COMMAND_FAILED_=1 || _COMMAND_FAILED_=0
-	__git_ps1 "$ALT_PS1" "$ALT_PS2" "\[\b\]$(__color "$GitColor") %s $(__rafg $GitColor)"
+	[[ "$MainColor" != "$UserColor" ]] && _USER_=$(__segment "\u" "$MainColor") || _USER_=""
+	__git_ps1 "$ALT_PS1" "$_USER_$ALT_PS2" "\[\b\]$(__color "$GitColor") %s $(__color 0)$(__rafg $GitColor)"
 }
 
 PROMPT_COMMAND='__prompt_function'

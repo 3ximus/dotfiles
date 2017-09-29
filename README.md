@@ -61,7 +61,7 @@ These prompts are in the order that i made them so the last one is the more impr
 Prompts support:
 
 - git directories and status of the files (untracked, staged... aswell as upstream checks), but you must source `.bash/git-prompt.sh`
-- diferent colors for normal user / root / ssh session user
+- diferent colors for normal user / root / ssh session user (in **prompt 6** this segment is hidden unless the user is root or in an ssh session)
 - python virtual environments. **except prompt 1**
 - last command exit status ( failed or succeded )
 - compress some paths ( my repository path is compressed into "R:" . **except prompt 5, 6**

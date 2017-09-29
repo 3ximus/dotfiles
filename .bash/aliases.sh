@@ -10,7 +10,7 @@ fi
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias diff='diff --color=auto'
-alias less='less -M'
+alias less='less -MR'
 
 # more ls aliases
 alias ll='ls -lF'
@@ -60,6 +60,7 @@ alias ssh-new-session='keychain ~/.ssh/id_rsa && source ~/.keychain/$HOSTNAME-sh
 # PLASMA
 alias restart-plasmashell='killall plasmashell && kstart5 $_ &>/dev/null'
 alias restart-tiling='qdbus org.kde.KWin /KWin reconfigure'
+alias restart-kwin='kwin_x11 --replace &'
 
 # PLEX
 # Add this to sudoers or a file in sudoers.d
