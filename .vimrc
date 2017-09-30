@@ -130,8 +130,9 @@ if has("gui_running")
 	set background=dark
 else
 	set t_Co=256 "terminal color range
-	color hybrid
-	"color gruvbox
+	"color hybrid
+	color gruvbox
+	let g:gruvbox_termcolors = 16 "256 colors look really bad
 	set background=dark
 	"trasparent background
 	hi Normal ctermbg=none
