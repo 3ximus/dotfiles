@@ -41,7 +41,7 @@ if [ -z $TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS ]; then
 		"date_day 0 7" \
 		"date 0 7 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
 		#"time 235 136 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
-		"time 1 7" \
+		"time 1 15" \
 		#"utc_time 235 136 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
 	)
 fi

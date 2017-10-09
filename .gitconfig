@@ -9,7 +9,7 @@
 	unstage = reset HEAD --
 	last = log -1 HEAD
 	drop = checkout --
-	logx = log --oneline --graph --decorate --pretty=format:'%C(yellow)%h%Creset %s (%Cblue%an%Creset)'
+	logx = log --oneline --graph --decorate --pretty=format:'%C(yellow)%h%Creset %s (%Cblue%an%Creset, %cr)'
 [diff]
 	tool = vimdiff
 [difftool]

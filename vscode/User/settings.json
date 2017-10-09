@@ -28,8 +28,8 @@
 
     // themes
     "workbench.colorTheme": "Gruvbox Dark Medium",
-    "workbench.iconTheme": "material-icon-theme",
-    "markdown.preview.fontFamily": "'Roboto Mono for Powerline', 'Segoe WPC', 'Segoe UI', 'SFUIText-Light', 'HelveticaNeue-Light'",
+    "workbench.iconTheme": "file-icons",
+    "markdown.preview.fontFamily": "'Source Code Pro for Powerline', 'Segoe WPC', 'Segoe UI', 'SFUIText-Light', 'HelveticaNeue-Light'",
     "workbench.colorCustomizations": {
         "editorCursor.foreground": "#ebdbb299",
         "editorCursor.background": "#1d2021"

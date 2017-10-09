@@ -19,6 +19,10 @@ man() {
 			man "$@"
 }
 
+yaourt-search() {
+	yaourt --sort w -Ss "$1" --color | less -X
+}
+
 # execute a function as sudo
 sudofunction() {
 	local tmpfile="/dev/shm/$RANDOM"
