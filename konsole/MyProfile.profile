@@ -1,6 +1,6 @@
 [Appearance]
 BoldIntense=true
-ColorScheme=Gruvbox Dark Real Colors
+ColorScheme=Gruvbox_Dark_Real_Colors
 Font=Source Code Pro for Powerline,9,-1,5,50,0,0,0,0,0,Regular
 UseFontLineChararacters=false
 

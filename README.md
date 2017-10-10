@@ -1,28 +1,16 @@
-# dotfiles
+# My Dotfiles
 
 ## My main configuration files:
 
-- .tmuxinator files are used for [tmuxinator](https://github.com/tmuxinator/tmuxinator)
-- .xDefaults used for urxvt
-- .xResources used for [rofi](https://github.com/DaveDavenport/rofi)
-- .tmux contains parts from [tmux-powerline](https://github.com/erikw/tmux-powerline)
-- .mpd and .ncmpcpp ([ncmpcpp](http://rybczak.net/ncmpcpp/) is not configured for [mpd](https://github.com/MaxKellermann/MPD) because i use [mopidy](https://github.com/mopidy/mopidy) enabled as a service)
-- .gdb-dashboard.py can be used as .gdbinit (by renaming it to .gdbinit) since this depends on [pwndbg](https://github.com/pwndbg/pwndbg)
-- .bash, .bashrc, .bash_profile, .inputrc used for bash and readline configuration
-
-------------------------
-
 - firefox contains my stylish.sqlite file for [stylish](https://addons.mozilla.org/en-US/firefox/addon/stylish/) addon
-
 - fonts in .fonts are mostly fonts for [powerline](https://github.com/powerline/fonts) support
-
-- vscode contains my user settings, keyboard shortcuts and a list of installed extensions (can be installed with my install script)
-
+- vscode contains my user settings, keyboard shortcuts and a list of installed extensions
 - konsole contains my konsole themes and profile (lives in $HOME/.local/share/konsole)
-
-- plasma contains my keybindings and window rules
-
+- plasma contains my keybindings, window rules (can be imported through settins GUI) and icons to match my theme (edited from [papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme))
 - package_data contains some of my archlinux packages
+- spotify contains my spotify theme (with gruvbox colorscheme), you will need [oomox](https://github.com/actionless/oomox) installed, then run the script inside
+
+Some of my files are set with the [gruvbox](https://github.com/morhetz/gruvbox) colorscheme.
 
 ## Screenshots
 
@@ -56,7 +44,7 @@
 ![6](screenshots/6_normal.png)
 ![6f](screenshots/6_full.png)
 
-These prompts are in the order that i made them so the last one is the more improved version.
+These prompts are in the order that i made them so the last ones are improved.
 
 Prompts support:
 
@@ -86,3 +74,23 @@ Prompts support:
 ## Tmux
 
 ![8](screenshots/tmux.png)
+
+## Spotify
+
+![9](screenshots/spotify.png)
+
+## Others
+
+- .xDefaults used for urxvt
+- .xResources used for [rofi](https://github.com/DaveDavenport/rofi)
+- .tmux contains parts from [tmux-powerline](https://github.com/erikw/tmux-powerline)
+- .ncmpcpp ([ncmpcpp](http://rybczak.net/ncmpcpp/) is configured for [mopidy](https://github.com/mopidy/mopidy) enabled as a service)
+- .gdb-dashboard.py can be used as .gdbinit (by renaming it to .gdbinit) since this depends on [pwndbg](https://github.com/pwndbg/pwndbg)
+- .bash, .bashrc, .bash_profile, .inputrc used for bash and readline configuration
+
+### My other themes to go along with thr gruvbox colorscheme
+ - [GTK](https://github.com/3ximus/gruvbox-gtk)
+ - [Plasma](https://github.com/3ximus/gruvbox-plasma)
+ - [Firefox](https://github.com/3ximus/gruvbox-arc-firefox-theme)
+ - [VS Code](https://github.com/jdinhlife/vscode-theme-gruvbox)
+
