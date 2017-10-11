@@ -38,7 +38,8 @@ findhere() {
 
 # Delete files with patern in current dir
 findremove() {
-	files=$(find . -iname "*$1*" -print | tee /dev/tty)
+	local REPLY
+	local files=$(find . -iname "*$1*" -print | tee /dev/tty)
 	read -r -n 1 -p "Remove these files? [y/n]: " REPLY
 	case "$REPLY" in
 		[yY])		echo; rm -r $files ;;
@@ -53,13 +54,19 @@ grephere() {
 }
 
 remove_space_from_name() {
-	for f in ${1}/*\ *; do
-		mv "$f" "${f// /_}";
-	done
+	local f
+	if [[ -f "$1" ]]; then
+		mv "$1" "${1// /_}";
+	else
+		for f in ${1}/*\ *; do
+			mv "$f" "${f// /_}";
+		done
+	fi
 }
 
 # Extract files
 extract () {
+	local f
 	for f in "${@}" ; do
 		echo extracting $f
 		if [ -f "$f" ] ; then
@@ -88,13 +95,24 @@ alias unpack=extract
 
 # find process by name
 psgrep() {
-	list=$(ps aux)
+	local list=$(ps aux)
 	echo -e "$list" | head -n1
 	echo -e "$list" | grep $1 --color=always | grep -v grep
 }
 
 vboxsave() {
 	vboxmanage controlvm $1 savestate
+}
+
+# Blurs area behind a window on plasma
+blur_window() {
+	local lines=`paste <(xdotool search $1 2>/dev/null) <(for f in $(xdotool search $1 2>/dev/null); do xdotool getwindowname $f; done)`
+	echo "Select Window to blur:"
+	select window in $lines ; do
+		echo "Blurring window ${window/[^0-9]*/}"
+		xprop -f _KDE_NET_WM_BLUR_BEHIND_REGION 32c -set _KDE_NET_WM_BLUR_BEHIND_REGION 0 -id ${window/[^0-9]*/}
+		break
+	done
 }
 
 # fork to the background silently and send its output to the /dev/null
@@ -123,10 +141,8 @@ dss() {
 
 # change input mode to emacs or vim
 chinput() {
-	local bashrc
-	local inputrc
-	bashrc=$([[ -L "$HOME/.bashrc" ]] && echo `file "$HOME/.bashrc" | cut -d' ' -f5` || echo "$HOME/.bashrc")
-	inputrc=$([[ -L "$HOME/.inputrc" ]] && echo `file "$HOME/.inputrc" | cut -d' ' -f5` || echo "$HOME/.inputrc")
+	local bashrc=$([[ -L "$HOME/.bashrc" ]] && echo `file "$HOME/.bashrc" | cut -d' ' -f5` || echo "$HOME/.bashrc")
+	local inputrc=$([[ -L "$HOME/.inputrc" ]] && echo `file "$HOME/.inputrc" | cut -d' ' -f5` || echo "$HOME/.inputrc")
 	if [ "$1" != "vi" ]; then
 		sed -i '/.*\ vi$/s/vi/emacs/' $inputrc $bashrc;
 		sed -i '/set\ show\-mode\-in\-prompt\ on/s/on$/off/' $inputrc;
@@ -139,8 +155,7 @@ chinput() {
 
 # Use -p to make prompt changes permanent on .bashrc
 prompt() {
-	local bashrc
-	bashrc=$([[ -L "$HOME/.bashrc" ]] && echo `file "$HOME/.bashrc" | cut -d' ' -f5` || echo "$HOME/.bashrc")
+	local bashrc=$([[ -L "$HOME/.bashrc" ]] && echo `file "$HOME/.bashrc" | cut -d' ' -f5` || echo "$HOME/.bashrc")
 	if [ -f ~/.bash/prompts/prompt_${1}.sh ]; then
 		[[ ! -z $2 ]] && [[ $2 == "-p" ]] && sed -i "s/prompt_[0-9]\.sh[^\ \n]*/prompt_${1}\.sh/" $bashrc || echo "Use -p to make changes permanent on .bashrc";
 		echo "Sourcing ~/.bash/prompts/prompt_${1}.sh"
@@ -150,6 +165,7 @@ prompt() {
 
 # Display unicode chars
 unicode() {
+	local a b c
 	for a in {0..9} {a..f}; do
 		for b in {0..9} {a..f}; do
 			printf "${a}${b}00  "
