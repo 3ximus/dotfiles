@@ -71,18 +71,18 @@ extract () {
 		echo extracting $f
 		if [ -f "$f" ] ; then
 			case "$f" in
-				*.tar.bz2)	 echo "tar xjf $f"	&& tar xjf "$f"		 ;;
-				*.tar.gz)	 echo "tar xzf $f"	&& tar xzf "$f"		 ;;
-				*.bz1)		 echo "bunzip2 $f"	&& bunzip2 "$f"		 ;;
-				*.rar)		 echo "unrar e $f"	&& unrar e "$f"		 ;;
-				*.gz)		 echo "gunzip $f"  && gunzip "$f"			 ;;
-				*.tar)		 echo "tar xf $f"  && tar xf "$f"			 ;;
-				*.tbz2)		 echo "tar xjf $f"	&& tar xjf "$f"		 ;;
-				*.tgz)		 echo "tar xzf $f"	&& tar xzf "$f"		 ;;
-				*.zip)		 echo "unzip $f"  && unzip "$f"			 ;;
-				*.Z)		 echo "uncompress $f"  && uncompress "$f"  ;;
-				*.7z)		 echo "7z x $f"  && 7z x "$f"				 ;;
-				*)			 echo "'$f' cannot be extracted via extract()" ;;
+				*.tar.bz2)	 echo "tar xjf $f"	&& tar xjf "$f"				;;
+				*.tar.gz)	 echo "tar xzf $f"	&& tar xzf "$f"				;;
+				*.bz1)		 echo "bunzip2 $f"	&& bunzip2 "$f"				;;
+				*.rar)		 echo "unrar e $f"	&& unrar e "$f"				;;
+				*.gz)		 echo "gunzip $f"  && gunzip "$f"				;;
+				*.tar)		 echo "tar xf $f"  && tar xf "$f"				;;
+				*.tbz2)		 echo "tar xjf $f"	&& tar xjf "$f"				;;
+				*.tgz)		 echo "tar xzf $f"	&& tar xzf "$f"				;;
+				*.zip)		 echo "unzip $f"  && unzip "$f"					;;
+				*.Z)		 echo "uncompress $f"  && uncompress "$f"		;;
+				*.7z)		 echo "7z x $f"  && 7z x "$f"					;;
+				*)			 echo "'$f' cannot be extracted via extract()"	;;
 			esac
 		else
 			echo "'$f' is not a valid file"
@@ -105,14 +105,18 @@ vboxsave() {
 }
 
 # Blurs area behind a window on plasma
+# if argument is given it searches for that window and gives a menu to choose, otherwise it will be interactive
 blur_window() {
-	local lines=`paste <(xdotool search $1 2>/dev/null) <(for f in $(xdotool search $1 2>/dev/null); do xdotool getwindowname $f; done)`
-	echo "Select Window to blur:"
-	select window in $lines ; do
-		echo "Blurring window ${window/[^0-9]*/}"
-		xprop -f _KDE_NET_WM_BLUR_BEHIND_REGION 32c -set _KDE_NET_WM_BLUR_BEHIND_REGION 0 -id ${window/[^0-9]*/}
-		break
-	done
+	if [ -z $1 ]; then
+		xprop -f _KDE_NET_WM_BLUR_BEHIND_REGION 32c -set _KDE_NET_WM_BLUR_BEHIND_REGION 0 -id $(xwininfo | awk '/Window\ id/ {print $4;}')
+	else
+		local i list=( `xdotool search $1 2>/dev/null` )
+		for i in $(seq 0 $((${#list[@]}-1))); do list[$i]="${list[$i]} - `xdotool getwindowname ${list[$i]}`"; done
+		select window in "${list[@]}"; do
+			xprop -f _KDE_NET_WM_BLUR_BEHIND_REGION 32c -set _KDE_NET_WM_BLUR_BEHIND_REGION 0 -id ${window/[^0-9]*/}
+			break
+		done
+	fi
 }
 
 # fork to the background silently and send its output to the /dev/null
@@ -183,6 +187,7 @@ unicode() {
 
 # Function to display terminal colors. $1 -> (1 - simple, 2 - with numbers, 3 - 256 colors)
 colors() {
+	local i FGs FG column
 	if [[ -z $1 || $1 == 1 ]]; then
 		echo -en '\n     '
 		for i in {0..7} ; do printf "\e[48;5;${i}m     "; done
@@ -213,7 +218,7 @@ colors() {
 			printf "\e[48;5;%dm%3d" $i $i
 		done
 		echo -ne '\e[0m\n\n  '
-		base=( 16 52 88 124 160 196 232 34 70 106 142 178 214 250)
+		local base=( 16 52 88 124 160 196 232 34 70 106 142 178 214 250)
 		for i in {0..17}; do
 			for column in $(seq 0 $((${#base[@]} - 1))) ; do
 				if [[ ${column} -ge 6 ]] ; then

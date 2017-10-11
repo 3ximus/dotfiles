@@ -5,8 +5,8 @@ set keymap emacs
 set editing-mode emacs
 set show-mode-in-prompt off
 
-set vi-ins-mode-string "\033[40;33m ins \033[42;30m\033[0m"
-set vi-cmd-mode-string "\033[40;34m cmd \033[42;30m\033[0m"
+set vi-ins-mode-string "\033[40;33m ins \033[47;30m\033[0m"
+set vi-cmd-mode-string "\033[40;34m cmd \033[47;30m\033[0m"
 set visible-stats on
 
 # correct completion from the middle of a word
@@ -35,8 +35,8 @@ set mark-symlinked-directories on
 "\C-x\C-x": redraw-current-line
 
 "\C-f": shell-expand-line
-#"\C-f": glob-expand-word 
-"\C-g": dabbrev-expand 
+#"\C-f": glob-expand-word
+"\C-g": dabbrev-expand
 "\C-h": complete-into-braces
 
 $if mode=vi

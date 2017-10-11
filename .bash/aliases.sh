@@ -48,6 +48,8 @@ if [ -d "$code_path" ];then
 	done
 fi
 
+unset i
+
 # program aliases
 alias vi='vim'
 alias clipboard-in='xclip -in -selection clipboard'
