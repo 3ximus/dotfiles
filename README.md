@@ -65,7 +65,6 @@ Prompts support:
 - [vim-gitgutter](https://github.com/airblade/vim-gitgutter)
 - [vim-surround](https://github.com/tpope/vim-surround)
 - [vim-goyo](https://github.com/junegunn/goyo.vim)
-- [vim-diminactive](https://github.com/blueyed/vim-diminactive)
 
 ## Vim (hybrid theme) / GVim (gruvbox theme) screenshots
 
@@ -84,13 +83,17 @@ Prompts support:
 - .xDefaults used for urxvt
 - .xResources used for [rofi](https://github.com/DaveDavenport/rofi)
 - .tmux contains parts from [tmux-powerline](https://github.com/erikw/tmux-powerline)
-- .ncmpcpp ([ncmpcpp](http://rybczak.net/ncmpcpp/) is configured for [mopidy](https://github.com/mopidy/mopidy) enabled as a service)
 - .gdb-dashboard.py can be used as .gdbinit (by renaming it to .gdbinit) since this depends on [pwndbg](https://github.com/pwndbg/pwndbg)
 - .bash, .bashrc, .bash_profile, .inputrc used for bash and readline configuration
 
-### My other themes to go along with thr gruvbox colorscheme
+### My other themes to go along with the gruvbox colorscheme
  - [GTK](https://github.com/3ximus/gruvbox-gtk)
  - [Plasma](https://github.com/3ximus/gruvbox-plasma)
  - [Firefox](https://github.com/3ximus/gruvbox-arc-firefox-theme)
  - [VS Code](https://github.com/jdinhlife/vscode-theme-gruvbox)
 
+
+## More Screenshots
+
+![10](screenshots/complete1.png)
+![11](screenshots/complete2.png)

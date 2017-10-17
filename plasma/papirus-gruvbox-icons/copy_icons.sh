@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# the theme location may be diferent from depending on the way the theme was isntalled
+
 if [ -z $1 ] ; then
 	PAPIRUS=/usr/share/icons/Papirus-Dark/
 else
