@@ -20,7 +20,9 @@ Options:
                Delay before start (default: 1 second)
 
     -v, --video  Record Video (for options see man recordmydesktop)
-Aditional arguments can be given to either option and they will be passed onto their repective programs." && exit 0
+Aditional arguments can be given to either option and they will be passed onto their repective programs.
+
+NOTE: For large areas/duration of recording gif its better to record video and convert to GIF later with ffmpeg." && exit 0
 fi
 
 # Check if import command is available do interactivly determine screen region

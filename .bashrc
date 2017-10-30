@@ -2,8 +2,8 @@
 
 # If not running interactively, don't do anything
 case $- in
-    *i*) ;;
-      *) return;;
+	*i*) ;;
+	*) return;;
 esac
 
 # set edit mode
@@ -42,16 +42,16 @@ bind Space:magic-space	# also combine these with :h (head) or :t (tail) to get p
 
 # set a fancy prompt
 case "$TERM" in
-    xterm-color) color_prompt=yes;;
+	xterm-color) color_prompt=yes;;
 esac
 
 # enable programmable completion features
 if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
+	if [ -f /usr/share/bash-completion/bash_completion ]; then
+		. /usr/share/bash-completion/bash_completion
+	elif [ -f /etc/bash_completion ]; then
+		. /etc/bash_completion
+	fi
 fi
 
 # Colored promp
@@ -89,8 +89,8 @@ fi
 # trap print_on_exit EXIT
 
 # konsole background blur
-if [ $UID != 0 ]; then
-	if hash qdbus 2>/dev/null ; then
+if [[ $UID != 0 && -z $SSH_CLIENT ]]; then
+	if hash qdbus 2>/dev/null && qdbus &>/dev/null; then
 		konsolex=$(qdbus | grep konsole | cut -f 2 -d\ )
 		if [ -n konsolex ]; then
 			for konsole in $konsolex; do

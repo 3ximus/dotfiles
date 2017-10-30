@@ -3,8 +3,10 @@ tmux
 gvim
 bash-completion
 ranger
+wget
 tree
 nload
+xdotool
 networkmanager
 keychain
 python2-pip

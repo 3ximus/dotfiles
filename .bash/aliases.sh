@@ -64,6 +64,9 @@ alias restart-plasmashell='killall plasmashell && kstart5 $_ &>/dev/null'
 alias restart-tiling='qdbus org.kde.KWin /KWin reconfigure'
 alias restart-kwin='kwin_x11 --replace &'
 
+# wget to download directory, use -P to specify output directory
+alias wget-directory='wget -r -np -nc -nd -k -nv'
+
 # PLEX
 # Add this to sudoers or a file in sudoers.d
 #      %eximus ALL= NOPASSWD: /bin/systemctl start plexmediaserver.service

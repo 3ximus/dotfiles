@@ -85,7 +85,7 @@ ALT_PS2="$(__color 0) \$([[ \$_COMMAND_FAILED_ == 1 ]] && echo -e \"$(__color "$
 # use prompt command to save last command exit status to a variable and generate the rest of the prompt
 __prompt_function() {
 	[[ $? != 0 ]] && _COMMAND_FAILED_=1 || _COMMAND_FAILED_=0
-	[[ "$MainColor" != "$UserColor" ]] && _USER_=$(__segment "\u" "$MainColor") || _USER_=""
+	[[ "$MainColor" != "$UserColor" ]] && _USER_=$(__segment "\u@\h" "$MainColor") || _USER_=""
 	__git_ps1 "$ALT_PS1" "$_USER_$ALT_PS2" "\[\b\]$(__color "$GitColor") %s $(__color 0)$(__rafg $GitColor)"
 }
 
