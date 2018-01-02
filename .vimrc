@@ -1,5 +1,27 @@
 
 " ----------------------------
+" Vundle
+" ----------------------------
+
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/vundle
+call vundle#rc()
+
+Plugin 'gmarik/vundle'
+Plugin 'vim-airline/vim-airline'
+Plugin 'scrooloose/nerdtree'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-commentary'
+Plugin 'junegunn/goyo.vim'
+
+Plugin 'morhetz/gruvbox'
+
+filetype plugin indent on
+
+" ----------------------------
 " General Options
 " ----------------------------
 

@@ -57,7 +57,7 @@ Prompts support:
 - command counter **only prompt 5, 6**
 - show the respective tty. **except 6**
 
-## vim plugins
+## vim plugins (using [Vundle](https://github.com/VundleVim/Vundle.vim))
 
 - [vim-airline](https://github.com/vim-airline/vim-airline)
 - [vim-fugitive](https://github.com/tpope/vim-fugitive)
@@ -65,6 +65,7 @@ Prompts support:
 - [vim-gitgutter](https://github.com/airblade/vim-gitgutter)
 - [vim-surround](https://github.com/tpope/vim-surround)
 - [vim-goyo](https://github.com/junegunn/goyo.vim)
+- [vim-commentary](https://github.com/tpope/vim-commentary)
 
 ## Vim (hybrid theme) / GVim (gruvbox theme) screenshots
 
