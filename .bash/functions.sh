@@ -1,4 +1,6 @@
-#! /bin/sh
+# Modeline {
+#	 vi: tabstop=4 filetype=sh
+# }
 
 # ==================================
 # ----------------------------------
@@ -39,10 +41,10 @@ findhere() {
 # Delete files with patern in current dir
 findremove() {
 	local REPLY
-	local files=$(find . -iname "*$1*" -print | tee /dev/tty)
+	find . -iname "*$1*"
 	read -r -n 1 -p "Remove these files? [y/n]: " REPLY
 	case "$REPLY" in
-		[yY])		echo; rm -r $files ;;
+		[yY])		echo; find . -iname "*$1*" -exec rm -r "{}" \; ;;
 		*) 			echo -e "\nNothing deleted." ;;
 	esac
 
@@ -53,16 +55,33 @@ grephere() {
 	grep -e "$1" "${@:2}" -d recurse .
 }
 
-remove_space_from_name() {
+# run command when some file changes
+launch-when-modified() { # entr is the program that does the work
+	find . -iname "*$1*" | entr "${@:2}"
+}
+
+# attach to tmux session
+tmux-attach() {
+	tmux list-sessions
+	read -r -n 1 -p "Attach to > " REPLY
+	tmux attach-session -t $REPLY
+}
+
+remove-special-chars-from-name() {
 	local f
-	if [[ -f "$1" ]]; then
-		mv "$1" "${1// /_}";
-	else
-		for f in ${1}/*\ *; do
-			mv "$f" "${f// /_}";
+	if [[ -z $1 ]]; then
+		echo "Give a file as argument"
+		exit 1
+	fi
+	if [[ "$1" == "-r" ]]; then # all files inside a directory
+		for f in ${2}/*\ *; do
+			mv "$f" "${f//[\ \(\)\[\]]/_}";
 		done
+	else # single file
+		mv "$1" "${1//[\ \(\)\[\]]/_}";
 	fi
 }
+
 
 # Extract files
 extract () {
@@ -99,6 +118,22 @@ psgrep() {
 	echo -e "$list" | head -n1
 	echo -e "$list" | grep $1 --color=always | grep -v grep
 }
+
+memhogs () {
+	TR=`free|grep Mem:|awk '{print $2}'`
+
+	ps axo rss,comm,pid | awk -v tr=$TR '{proc_list[$2]+=$1;} END {for (proc in proc_list) {proc_pct=(proc_list[proc]/tr)*100; printf("%d\t%-16s\t%0.2f%\n",proc_list[proc],proc,proc_pct);}}' | sort -n | tail -n 10
+}
+
+psmem () {
+	PROCNAME="$@";
+
+	echo $PROCNAME IS USING \
+	$(
+		echo "scale=4; ($( ps axo rss,comm | grep $PROCNAME | awk '{ TOTAL += $1 } END { print TOTAL }' )/$( free | head -n 2 | tail -n 1 | awk '{ print $2 }' ))*100" | bc
+	)% of system RAM;
+}
+
 
 vboxsave() {
 	vboxmanage controlvm $1 savestate

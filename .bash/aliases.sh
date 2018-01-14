@@ -1,4 +1,8 @@
-#! /bin/sh
+# Modeline {
+#	 vi: tabstop=4 filetype=sh
+# }
+
+alias list-functions='select i in `grep -P "[a-zA-Z0-9_\-]+(?=\(\))" -o $HOME/.bash/functions.sh`; do declare -f $i; break; done'
 
 # enable color support of ls
 if [ -x /usr/bin/dircolors ]; then
@@ -54,6 +58,7 @@ unset i
 alias vi='vim'
 alias clipboard-in='xclip -in -selection clipboard'
 alias clipboard-out='xclip -out -selection clipboard'
+alias perl-regex='perl -p -i -e'
 
 # SSH
 alias ssh-new-bash-session='eval `ssh-agent` && ssh-add'
@@ -77,3 +82,4 @@ alias plex-status='systemctl status plexmediaserver.service'
 alias plex-stop='sudo systemctl stop plexmediaserver.service'
 alias plex-restart='sudo systemctl restart plexmediaserver.service'
 
+alias crypto-cap='coinmon -c eur -t $(($LINES / 2 - 2))'

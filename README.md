@@ -97,4 +97,5 @@ Prompts support:
 ## More Screenshots
 
 ![10](screenshots/complete1.png)
+I use [this](https://github.com/Jazqa/kwin-quarter-tiling) tilling script for KWin
 ![11](screenshots/complete2.png)

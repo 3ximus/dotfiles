@@ -107,3 +107,6 @@ export EDITOR="vim"
 # add customs scripts and gem installed packages
 export PATH=$HOME/.bash/scripts:$PATH
 
+# sync terminal sessions history
+#export PROMPT_COMMAND="${PROMPT_COMMAND};history -a; history -n"
+

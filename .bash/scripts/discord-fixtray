@@ -4,6 +4,6 @@
 
 /usr/bin/discord &
 sleep 4
-cp $HOME/Dropbox/Data/plasma/papirus-gruvbox-icons/discord-tray/linux-tray.png $HOME/.config/discord/linux-tray.png
-cp $HOME/Dropbox/Data/plasma/papirus-gruvbox-icons/discord-tray/linux-tray-unread.png $HOME/.config/discord/linux-tray-unread.png
+cp $HOME/Dropbox/data/plasma/papirus-gruvbox-icons/discord-tray/linux-tray.png $HOME/.config/discord/tray.png
+cp $HOME/Dropbox/data/plasma/papirus-gruvbox-icons/discord-tray/linux-tray-unread.png $HOME/.config/discord/tray-unread.png
 
