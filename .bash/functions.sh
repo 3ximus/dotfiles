@@ -122,7 +122,7 @@ psgrep() {
 memhogs () {
 	TR=`free|grep Mem:|awk '{print $2}'`
 
-	ps axo rss,comm,pid | awk -v tr=$TR '{proc_list[$2]+=$1;} END {for (proc in proc_list) {proc_pct=(proc_list[proc]/tr)*100; printf("%d\t%-16s\t%0.2f%\n",proc_list[proc],proc,proc_pct);}}' | sort -n | tail -n 10
+	ps axo rss,comm,pid | awk -v tr=$TR '{proc_list[$2]+=$1;} END {for (proc in proc_list) {proc_pct=(proc_list[proc]/tr)*100; printf("%d\t%-16s\t%0.2f%\n",proc_list[proc],proc,proc_pct);}}' | sort -rn | head -n 10
 }
 
 psmem () {

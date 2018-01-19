@@ -19,6 +19,7 @@ Plugin 'junegunn/goyo.vim'
 
 Plugin 'morhetz/gruvbox'
 
+call vundle#end()
 filetype plugin indent on
 
 " ----------------------------
@@ -36,7 +37,7 @@ set clipboard=unnamedplus
 "line numbers
 set relativenumber
 set number
-set foldcolumn=1
+"set foldcolumn=0
 
 "syntax and indentation
 if !exists("g:syntax_on")
@@ -108,6 +109,63 @@ function! ConvertToSpaces(spacesize)
 endfunction
 command! -nargs=1 ConvertToSpaces :call ConvertToSpaces( '<args>' )
 
+let s:hidden_all = 0
+function! ToggleHiddenAll()
+	if s:hidden_all == 0
+		let s:hidden_all = 1
+		set showtabline=0
+		set noshowmode
+		set noruler
+		set laststatus=0
+		set noshowcmd
+	else
+		let s:hidden_all = 0
+		set showtabline=2
+		set showmode
+		set ruler
+		set laststatus=2
+		set showcmd
+	endif
+endfunction
+
+" Show or hide foldcolumn when folds if there are folds present
+function UpdateFoldColumn()
+	function! HasFoldsInner()
+		let origline=line('.')
+		:norm zk
+		if origline==line('.')
+			:norm zj
+			if origline==line('.')
+				return 0
+			else
+				return 1
+			endif
+		else
+			return 1
+		endif
+		return 0
+	endfunction
+	let l:winview=winsaveview() "save window and cursor position
+	let foldsexist=HasFoldsInner()
+	if foldsexist
+		set foldcolumn=1
+	else
+		if line('.')!=1
+			:norm [z
+			:norm k
+		else
+			:norm ]z
+			:norm j
+		endif
+		let foldsexist=HasFoldsInner()
+		if foldsexist
+			set foldcolumn=1
+		else
+			set foldcolumn=0
+		endif
+	end
+	call winrestview(l:winview) "restore window/cursor position
+endfunction
 
 " -----------------------------
 " Keymaps
@@ -140,6 +198,9 @@ nmap <leader>s :call StripTrailingWhitespace()<CR>
 nnoremap <C-g> :Goyo<CR>:hi Normal ctermbg=none<CR>
 " display line endings and tabs
 nnoremap <F2> :<C-U>setlocal lcs=tab:>-,trail:-,eol:$ list! list? <CR>
+" map hidde terminal elements
+nnoremap <leader>a :call ToggleHiddenAll()<CR>
+
 
 " -----------------------------
 " Color Scheme
@@ -194,7 +255,6 @@ endif
 " -----------------------------
 
 "setup airline
-set laststatus=2
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t' "show only file names on buffer names
@@ -245,12 +305,18 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 "	\ }
 
 "Goyo
-let g:goyo_width = 90
-let g:goyo_height= '90%'
+let g:goyo_width = 80
+let g:goyo_height= '100%'
 let g:goyo_linenr = 0
 
 " config Gitgutter
 nmap <Leader>ha <Plug>GitGutterStageHunk
-nmap <Leader>hu <Plug>GitGutterRevertHunk
+nmap <Leader>hu <Plug>GitGutterUndoHunk
 nmap <Leader>hv <Plug>GitGutterPreviewHunk
 
+
+" ---------------------
+" RUN COMMAND ON EVENTS
+" ---------------------
+
+autocmd VimEnter * call ToggleHiddenAll()
