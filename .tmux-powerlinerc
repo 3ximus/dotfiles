@@ -25,17 +25,12 @@
 
 # date.sh {
 	# date(1) format for the date. If you don't, for some reason, like ISO 8601 format you might want to have "%D" or "%m/%d/%Y".
-	export TMUX_POWERLINE_SEG_DATE_FORMAT="%F"
-# }
-
-# hostname.sh {
-	# Use short or long format for the hostname. Can be {"short, long"}.
-	export TMUX_POWERLINE_SEG_HOSTNAME_FORMAT="long"
+	export TMUX_POWERLINE_SEG_DATE_FORMAT="%_d.%_m.%Y"
 # }
 
 # time.sh {
 	# date(1) format for the time. Americans might want to have "%I:%M %p".
-	export TMUX_POWERLINE_SEG_TIME_FORMAT="%H.%M %p"
+	export TMUX_POWERLINE_SEG_TIME_FORMAT="%H:%M %p"
 # }
 
 # uptime.sh {

@@ -69,11 +69,18 @@ Prompts support:
 
 ## Vim (hybrid theme) / GVim (gruvbox theme) screenshots
 
+_tabline and status bar are hidden on startup in my current configuration, they can be shown again with `<leader>+a`_
+
 ![7](screenshots/vim.png)
 
-## Tmux
+## Tmux (Powerline Theme / Clean theme )
 
 ![8](screenshots/tmux.png)
+![12](screenshots/tmux2.png)
+
+.tmux contains parts from [tmux-powerline](https://github.com/erikw/tmux-powerline)
+
+Themes can be switched by changing the theme name on `.tmux-powerlinerc` and adjust the `.tmux.conf` in the lines marked with _FOR POWERLINE_
 
 ## Spotify
 
@@ -83,7 +90,6 @@ Prompts support:
 
 - .xDefaults used for urxvt
 - .xResources used for [rofi](https://github.com/DaveDavenport/rofi)
-- .tmux contains parts from [tmux-powerline](https://github.com/erikw/tmux-powerline)
 - .gdb-dashboard.py can be used as .gdbinit (by renaming it to .gdbinit) since this depends on [pwndbg](https://github.com/pwndbg/pwndbg)
 - .bash, .bashrc, .bash_profile, .inputrc used for bash and readline configuration
 

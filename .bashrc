@@ -31,6 +31,10 @@ shopt -s extglob
 # as if it were the argument to the cd command.
 shopt -s autocd
 
+# perform word expansion when trying filename completion
+# useful when trying to type path with variable on it
+shopt -s direxpand
+
 # minor errors in the spelling of a directory component in a cd command
 # will be corrected. The errors checked for are transposed characters,
 # a missing character, and one character too many. If a correction is found,
