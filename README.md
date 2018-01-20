@@ -67,7 +67,7 @@ Prompts support:
 - [vim-goyo](https://github.com/junegunn/goyo.vim)
 - [vim-commentary](https://github.com/tpope/vim-commentary)
 
-## Vim (hybrid theme) / GVim (gruvbox theme) screenshots
+## Vim (gruvbox theme) screenshots
 
 _tabline and status bar are hidden on startup in my current configuration, they can be shown again with `<leader>+a`_
 
