@@ -30,6 +30,7 @@ alias egrep='egrep --color=auto'
 alias diff='diff --color=auto'
 alias less='less -MR'
 alias vi='vim'
+alias gdb='gdb -q'
 alias dd='dd status=progress'
 alias alert="echo -ne '\a'"
 alias clipboard-in='xclip -in -selection clipboard'

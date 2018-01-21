@@ -1,112 +1,112 @@
 [$Version]
-update_info=fonts_global.upd:Fonts_Global
+update_info=fonts_global.upd:Fonts_Global,fonts_global_toolbar.upd:Fonts_Global_Toolbar
 
 [Appmenu Style]
 Style=InApplication
 
 [ColorEffects:Disabled]
-Color=56,56,56
-ColorAmount=0
-ColorEffect=0
-ContrastAmount=0.65000000000000002
-ContrastEffect=1
-IntensityAmount=0.10000000000000001
-IntensityEffect=2
+Color=
+ColorAmount=
+ColorEffect=
+ContrastAmount=
+ContrastEffect=
+IntensityAmount=
+IntensityEffect=
 
 [ColorEffects:Inactive]
 ChangeSelectionColor=true
-Color=112,111,110
-ColorAmount=0.025000000000000001
-ColorEffect=2
-ContrastAmount=0.10000000000000001
-ContrastEffect=2
+Color=
+ColorAmount=
+ColorEffect=
+ContrastAmount=
+ContrastEffect=
 Enable=false
-IntensityAmount=0
-IntensityEffect=0
+IntensityAmount=
+IntensityEffect=
 
 [Colors:Button]
-BackgroundAlternate=64,69,82
-BackgroundNormal=92,97,108
-DecorationFocus=82,148,226
-DecorationHover=82,148,226
-ForegroundActive=61,174,233
-ForegroundInactive=137,141,153
-ForegroundLink=41,128,185
-ForegroundNegative=218,68,83
-ForegroundNeutral=246,116,0
-ForegroundNormal=211,218,227
-ForegroundPositive=39,174,96
-ForegroundVisited=127,140,141
+BackgroundAlternate=70,65,63
+BackgroundNormal=60,56,54
+DecorationFocus=131,165,152
+DecorationHover=139,175,161
+ForegroundActive=131,165,152
+ForegroundInactive=146,131,116
+ForegroundLink=69,133,136
+ForegroundNegative=251,73,52
+ForegroundNeutral=250,189,47
+ForegroundNormal=213,196,161
+ForegroundPositive=184,187,38
+ForegroundVisited=211,134,155
 
 [Colors:Complementary]
-BackgroundAlternate=59,64,69
-BackgroundNormal=49,54,59
-DecorationFocus=30,146,255
-DecorationHover=61,174,230
-ForegroundActive=246,116,0
-ForegroundInactive=175,176,179
-ForegroundLink=61,174,230
-ForegroundNegative=237,21,21
-ForegroundNeutral=201,206,59
-ForegroundNormal=239,240,241
-ForegroundPositive=17,209,22
-ForegroundVisited=61,174,230
+BackgroundAlternate=168,153,132
+BackgroundNormal=40,40,40
+DecorationFocus=131,165,152
+DecorationHover=139,175,161
+ForegroundActive=131,165,152
+ForegroundInactive=235,219,178
+ForegroundLink=69,133,136
+ForegroundNegative=251,73,52
+ForegroundNeutral=250,189,47
+ForegroundNormal=131,165,152
+ForegroundPositive=184,187,38
+ForegroundVisited=211,134,155
 
 [Colors:Selection]
-BackgroundAlternate=29,153,243
-BackgroundNormal=82,148,226
-DecorationFocus=82,148,226
-DecorationHover=82,148,226
-ForegroundActive=252,252,252
-ForegroundInactive=211,218,227
-ForegroundLink=253,188,75
-ForegroundNegative=218,68,83
-ForegroundNeutral=246,116,0
-ForegroundNormal=211,218,227
-ForegroundPositive=39,174,96
-ForegroundVisited=189,195,199
+BackgroundAlternate=123,155,143
+BackgroundNormal=131,165,152
+DecorationFocus=131,165,152
+DecorationHover=139,175,161
+ForegroundActive=40,40,40
+ForegroundInactive=146,131,116
+ForegroundLink=69,133,136
+ForegroundNegative=251,73,52
+ForegroundNeutral=250,189,47
+ForegroundNormal=235,219,178
+ForegroundPositive=184,187,38
+ForegroundVisited=177,98,134
 
 [Colors:Tooltip]
-BackgroundAlternate=56,60,74
-BackgroundNormal=56,60,74
-DecorationFocus=82,148,226
-DecorationHover=82,148,226
-ForegroundActive=61,174,233
-ForegroundInactive=137,141,153
-ForegroundLink=41,128,185
-ForegroundNegative=218,68,83
-ForegroundNeutral=246,116,0
-ForegroundNormal=211,218,227
-ForegroundPositive=39,174,96
-ForegroundVisited=127,140,141
+BackgroundAlternate=154,181,171
+BackgroundNormal=131,165,152
+DecorationFocus=131,165,152
+DecorationHover=139,175,161
+ForegroundActive=251,241,199
+ForegroundInactive=146,131,116
+ForegroundLink=69,133,136
+ForegroundNegative=251,73,52
+ForegroundNeutral=215,153,33
+ForegroundNormal=40,40,40
+ForegroundPositive=152,151,26
+ForegroundVisited=177,98,134
 
 [Colors:View]
-BackgroundAlternate=64,69,82
-BackgroundNormal=64,69,82
-DecorationFocus=82,148,226
-DecorationHover=82,148,226
-ForegroundActive=61,174,233
-ForegroundInactive=137,141,153
-ForegroundLink=41,128,185
-ForegroundNegative=218,68,83
-ForegroundNeutral=246,116,0
-ForegroundNormal=211,218,227
-ForegroundPositive=39,174,96
-ForegroundVisited=127,140,141
+BackgroundAlternate=50,46,45
+BackgroundNormal=60,56,54
+DecorationFocus=131,165,152
+DecorationHover=139,175,161
+ForegroundActive=131,165,152
+ForegroundInactive=146,131,116
+ForegroundLink=69,133,136
+ForegroundNegative=251,73,52
+ForegroundNeutral=250,189,47
+ForegroundNormal=213,196,161
+ForegroundPositive=184,187,38
+ForegroundVisited=211,134,155
 
 [Colors:Window]
-BackgroundAlternate=56,60,74
-BackgroundNormal=56,60,74
-DecorationFocus=82,148,226
-DecorationHover=82,148,226
-ForegroundActive=61,174,233
-ForegroundInactive=137,141,153
-ForegroundLink=41,128,185
-ForegroundNegative=218,68,83
-ForegroundNeutral=246,116,0
-ForegroundNormal=211,218,227
-ForegroundPositive=39,174,96
-ForegroundVisited=127,140,141
+BackgroundAlternate=30,30,30
+BackgroundNormal=40,40,40
+DecorationFocus=131,165,152
+DecorationHover=139,175,161
+ForegroundActive=131,165,152
+ForegroundInactive=146,131,116
+ForegroundLink=69,133,136
+ForegroundNegative=251,73,52
+ForegroundNeutral=250,189,47
+ForegroundNormal=213,196,161
+ForegroundPositive=184,187,38
+ForegroundVisited=211,134,155
 
 [DesktopIcons]
 ActiveColor=169,156,255
@@ -146,17 +146,21 @@ DisabledSemiTransparent=true
 DisabledValue=1
 Size=32
 
+[DirSelect Dialog]
+DirSelectDialog Size=640,480
+History Items[$e]=file:///mnt/Users/eximus/Downloads,file:$HOME/Documents/rep/TraktForVLC,file:$HOME/Downloads
+
 [General]
-ColorScheme=Arc Dark
+ColorScheme=Gruvbox Dark - KODE
 Name=Arc Dark
 XftAntialias=true
 dbfile=/home/eximus/.mozilla/firefox/bqisvtdo.default/places.sqlite
-fixed=Misc Fixed,10,-1,5,50,0,0,0,0,0,Regular
-font=Misc Fixed,10,-1,5,50,0,0,0,0,0,Regular
-menuFont=Misc Fixed,10,-1,5,50,0,0,0,0,0,Regular
+fixed=Source Code Pro Light,10,-1,5,25,0,0,0,0,0
+font=Source Code Pro Light,10,-1,5,25,0,0,0,0,0
+menuFont=Source Code Pro Light,10,-1,5,25,0,0,0,0,0
 shadeSortColumn=true
-smallestReadableFont=Misc Fixed,10,-1,5,50,0,0,0,0,0,Regular
-toolBarFont=Misc Fixed,10,-1,5,50,0,0,0,0,0,Regular
+smallestReadableFont=Source Code Pro Light,9,-1,5,25,0,0,0,0,0
+toolBarFont=Source Code Pro Light,10,-1,5,25,0,0,0,0,0
 widgetStyle=Breeze
 
 [Icons]
@@ -176,7 +180,7 @@ Breadcrumb Navigation=true
 Decoration position=0
 LocationCombo Completionmode=5
 PathCombo Completionmode=5
-Previews=false
+Previews=true
 Show Bookmarks=false
 Show Full Path=false
 Show Preview=false
@@ -185,9 +189,9 @@ Show hidden files=false
 Sort by=Name
 Sort directories first=true
 Sort reversed=false
-Speedbar Width=104
+Speedbar Width=135
 View Style=Simple
-listViewIconSize=0
+listViewIconSize=26
 
 [KShortcutsDialog Settings]
 Dialog Size=600,480
@@ -273,10 +277,10 @@ DisabledValue=1
 Size=22
 
 [WM]
-activeBackground=56,60,74
-activeBlend=211,218,227
-activeFont=Misc Fixed,10,-1,5,50,0,0,0,0,0,Regular
-activeForeground=211,218,227
-inactiveBackground=56,60,74
-inactiveBlend=56,60,74
-inactiveForeground=137,141,153
+activeBackground=40,40,40
+activeBlend=30,30,30
+activeFont=Source Code Pro Light,10,-1,5,25,0,0,0,0,0
+activeForeground=213,196,161
+inactiveBackground=40,40,40
+inactiveBlend=30,30,30
+inactiveForeground=146,131,116

@@ -2,15 +2,15 @@
 
 ## My main configuration files:
 
-- firefox contains my stylish.sqlite file for [stylish](https://addons.mozilla.org/en-US/firefox/addon/stylish/) addon
+- firefox contains my stylish.sqlite file for [stylish 2.1.1](https://addons.mozilla.org/en-US/firefox/addon/stylish/) addon
 - fonts in .fonts are mostly fonts for [powerline](https://github.com/powerline/fonts) support
-- vscode contains my user settings, keyboard shortcuts and a list of installed extensions
+- vscode contains my _user settings_, _keyboard shortcuts_ and a _list of installed extensions_
 - konsole contains my konsole themes and profile (lives in $HOME/.local/share/konsole)
-- plasma contains my keybindings, window rules (can be imported through settins GUI) and icons to match my theme (edited from [papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme))
+- plasma contains my _keybindings_, _window rules_ (can be imported through settins GUI) and _icons_ to match my theme (edited from [papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme))
 - package_data contains some of my archlinux packages
 - spotify contains my spotify theme (with gruvbox colorscheme), you will need [oomox](https://github.com/actionless/oomox) installed, then run the script inside
 
-Some of my files are set with the [gruvbox](https://github.com/morhetz/gruvbox) colorscheme.
+Most of my files are set with the [gruvbox](https://github.com/morhetz/gruvbox) colorscheme.
 
 ## Screenshots
 
@@ -44,18 +44,23 @@ Some of my files are set with the [gruvbox](https://github.com/morhetz/gruvbox) 
 ![6](screenshots/6_normal.png)
 ![6f](screenshots/6_full.png)
 
+### Prompt 7
+
+![77](screenshots/7_normal.png)
+![77f](screenshots/7_full.png)
+
 These prompts are in the order that i made them so the last ones are improved.
 
 Prompts support:
 
 - git directories and status of the files (untracked, staged... aswell as upstream checks), but you must source `.bash/git-prompt.sh`
-- diferent colors for normal user / root / ssh session user (in **prompt 6** this segment is hidden unless the user is root or in an ssh session)
+- diferent colors for normal user / root / ssh session user (in **prompt 6, 7** this segment is hidden unless the user is root or in an ssh session)
 - python virtual environments. **except prompt 1**
 - last command exit status ( failed or succeded )
-- compress some paths ( my repository path is compressed into "R:" . **except prompt 5, 6**
+- compress some paths ( my repository path is compressed into "R:" . **except prompt 5, 6, 7**
 - background jobs counter
-- command counter **only prompt 5, 6**
-- show the respective tty. **except 6**
+- command counter **only prompt 5, 6, 7**
+- show the respective tty. **except 6, 7**
 
 ## vim plugins (using [Vundle](https://github.com/VundleVim/Vundle.vim))
 
@@ -102,6 +107,7 @@ Themes can be switched by changing the theme name on `.tmux-powerlinerc` and adj
 
 ## More Screenshots
 
+I use [quarter-tiling](https://github.com/Jazqa/kwin-quarter-tiling) KWin script for window tiling
+
 ![10](screenshots/complete1.png)
-I use [this](https://github.com/Jazqa/kwin-quarter-tiling) tilling script for KWin
 ![11](screenshots/complete2.png)

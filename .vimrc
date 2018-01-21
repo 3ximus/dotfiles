@@ -264,10 +264,10 @@ if !exists('g:airline_symbols')
 endif
 if !has("gui_running") "running on console
 	" unicode symbols
-	let g:airline_left_sep = ''
-	let g:airline_right_sep = ''
-	let g:airline_left_alt_sep = ''
-	let g:airline_right_alt_sep = ''
+	" let g:airline_left_sep = ''
+	" let g:airline_right_sep = ''
+	" let g:airline_left_alt_sep = ''
+	" let g:airline_right_alt_sep = ''
 	let g:airline_symbols.branch = ''
 	"let g:airline_symbols.linenr = 'ln'
 	let g:airline_symbols.whitespace = ''
