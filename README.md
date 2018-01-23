@@ -94,7 +94,7 @@ Themes can be switched by changing the theme name on `.tmux-powerlinerc` and adj
 ## Others
 
 - .xDefaults used for urxvt
-- .xResources used for [rofi](https://github.com/DaveDavenport/rofi)
+- rofi folder used for [rofi](https://github.com/DaveDavenport/rofi) - see my custom rofi launch script inside `.bash/scripts`
 - .gdb-dashboard.py can be used as .gdbinit (by renaming it to .gdbinit) since this depends on [pwndbg](https://github.com/pwndbg/pwndbg)
 - .bash, .bashrc, .bash_profile, .inputrc used for bash and readline configuration
 

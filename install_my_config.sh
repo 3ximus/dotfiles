@@ -68,7 +68,7 @@ grab_konsole_files() {
 	if [[ -d "$DATA_PATH/konsole" ]]; then
 		konsole_files=$(find ${DATA_PATH}/konsole/* -maxdepth 0 -type f)
 		for f in $konsole_files ; do
-			files="${files}#${f}::${konsole_location}\n"
+			files="${files}#${f}::${konsole_location}/${f##*/}\n"
 		done
 	fi
 }
@@ -82,6 +82,19 @@ grab_vscode_files() {
 		vscode_files=$(find ${DATA_PATH}/vscode/User/* -maxdepth 0 -type f)
 		for f in $vscode_files ; do
 			files="${files}#${f}::${vscode_location}\n"
+		done
+	fi
+}
+
+grab_rofi_files() {
+	files="${files}\n#-------------\n# rofi files\n#-------------\n\n"
+# vscode destination
+	rofi_location="${DESTINATION_PATH}/.config/rofi"
+	if [[ -d "$DATA_PATH/rofi" ]]; then
+		# NOTE assuming filenames have no spaces here
+		rofi_files=$(find ${DATA_PATH}/rofi/* -maxdepth 0 -type f)
+		for f in $rofi_files ; do
+			files="${files}#${f}::${rofi_location}\n"
 		done
 	fi
 }
@@ -183,6 +196,7 @@ Options:
 	vscode                   Visual Studio Code files
 	firefox                  Firefox files
 	konsole                  Konsole terminal emulator files
+	rofi                     Rofi files
 	[none]                   No option or anything else assumes all files are gathered
 
 Remote:
@@ -295,6 +309,10 @@ elif [[ "$@" =~ "firefox" ]]; then
 	echo "Gathering firefox files to link..."
 	grab_firefox_files
 
+elif [[ "$@" =~ "rofi" ]]; then
+	echo "Gathering rofi files to link..."
+	grab_rofi_files
+
 elif [[ "$@" =~ "clean" ]]; then
 	echo "clean not implemented" && exit 0
 
@@ -304,6 +322,7 @@ else
 	grab_konsole_files
 	grab_firefox_files
 	grab_vscode_files
+	grab_rofi_files
 	grab_remaining_files
 fi
 
