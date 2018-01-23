@@ -1,9 +1,0 @@
-#!/bin/sh
-
-# Wrapper for discord to fix the icons in the tray
-
-/usr/bin/discord &
-sleep 4
-cp $HOME/Dropbox/data/plasma/papirus-gruvbox-icons/discord-tray/linux-tray.png $HOME/.config/discord/tray.png
-cp $HOME/Dropbox/data/plasma/papirus-gruvbox-icons/discord-tray/linux-tray-unread.png $HOME/.config/discord/tray-unread.png
-
