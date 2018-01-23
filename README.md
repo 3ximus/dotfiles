@@ -2,13 +2,15 @@
 
 ## My main configuration files:
 
-- firefox contains my stylish.sqlite file for [stylish 2.1.1](https://addons.mozilla.org/en-US/firefox/addon/stylish/) addon
+- firefox contains my stylish.sqlite file for [stylish 2.1.1](https://addons.mozilla.org/en-US/firefox/addon/stylish/versions/?page=1#version-2.1.1) addon _(new versions support site skins but not firefox skins)_
 - fonts in .fonts are mostly fonts for [powerline](https://github.com/powerline/fonts) support
 - vscode contains my _user settings_, _keyboard shortcuts_ and a _list of installed extensions_
-- konsole contains my konsole themes and profile (lives in $HOME/.local/share/konsole)
-- plasma contains my _keybindings_, _window rules_ (can be imported through settins GUI) and _icons_ to match my theme (edited from [papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme))
+- konsole contains my konsole themes and profile (lives in `$HOME/.local/share/konsole`)
+- plasma contains my _keybindings_, _window rules_ (can be imported through settings GUI)
+- icons contains [papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) icons edited to match gruvbox style _(see my topbar screenshot)_
 - package_data contains some of my archlinux packages
 - spotify contains my spotify theme (with gruvbox colorscheme), you will need [oomox](https://github.com/actionless/oomox) installed, then run the script inside
+- rofi folder used for [rofi](https://github.com/DaveDavenport/rofi) - see my custom [rofi launch script](.bash/scripts/rofi-blurred)
 
 Most of my files are set with the [gruvbox](https://github.com/morhetz/gruvbox) colorscheme.
 
@@ -79,22 +81,19 @@ _tabline and status bar are hidden on startup in my current configuration, they 
 ![7](screenshots/vim.png)
 
 ## Tmux (Powerline Theme / Clean theme )
-
 ![8](screenshots/tmux.png)
 ![12](screenshots/tmux2.png)
 
 .tmux contains parts from [tmux-powerline](https://github.com/erikw/tmux-powerline)
 
-Themes can be switched by changing the theme name on `.tmux-powerlinerc` and adjust the `.tmux.conf` in the lines marked with _FOR POWERLINE_
+Themes can be switched by changing the theme name on [.tmux-powerlinerc](.tmux-powerlinerc) and adjust the [.tmux.conf](.tmux.conf) in the lines marked with _FOR POWERLINE_
 
 ## Spotify
-
 ![9](screenshots/spotify.png)
+customized using [oomox](https://github.com/actionless/oomox) and my [customize spotify](spotify/customize_spotify.sh) script
 
 ## Others
-
 - .xDefaults used for urxvt
-- rofi folder used for [rofi](https://github.com/DaveDavenport/rofi) - see my custom rofi launch script inside `.bash/scripts`
 - .gdb-dashboard.py can be used as .gdbinit (by renaming it to .gdbinit) since this depends on [pwndbg](https://github.com/pwndbg/pwndbg)
 - .bash, .bashrc, .bash_profile, .inputrc used for bash and readline configuration
 
@@ -110,4 +109,14 @@ Themes can be switched by changing the theme name on `.tmux-powerlinerc` and adj
 I use [quarter-tiling](https://github.com/Jazqa/kwin-quarter-tiling) KWin script for window tiling
 
 ![10](screenshots/complete1.png)
+vim, htop and ranger (all in tmux sessions)
+
 ![11](screenshots/complete2.png)
+firefox, dolphin and visual studio code
+
+![12](screenshots/rofi.png)
+rofi (launched with [.bash/scripts/rofi-blurred](.bash/scripts/rofi-blurred))
+
+![13](screenshots/topbar.png)
+plasma top bar
+
