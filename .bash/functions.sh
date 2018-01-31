@@ -63,8 +63,14 @@ launch-when-modified() { # entr is the program that does the work
 # attach to tmux session
 tmux-attach() {
 	tmux list-sessions
-	read -r -n 1 -p "Attach to > " REPLY
+	read -r -p "Attach to > " REPLY
 	tmux attach-session -t $REPLY
+}
+
+tmux-kill-session(){
+	tmux list-sessions
+	read -r -p "Attach to > " REPLY
+	tmux kill-session -t $REPLY
 }
 
 remove-special-chars-from-name() {
