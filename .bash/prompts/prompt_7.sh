@@ -41,11 +41,10 @@ fi
 # -----------------
 
 __color() {
-	echo -en "\001\033[${1}m\002"
+	echo -en "\[\033[${1}m\]"
 }
 
 __virtual_env_segment () {
-# this segment has to be handmade since it is evaluated every time the prompt is written, and prompt escape sequences are not handled dynamicly apparently
 	if [ -z "$VIRTUAL_ENV_DISABLE_PROMPT" ] ; then
 		if [ "$VIRTUAL_ENV" != "" ] ; then
 			echo -en "$(__color $VenvColor) venv:`basename \"$VIRTUAL_ENV\"`"
@@ -57,15 +56,13 @@ __virtual_env_segment () {
 # PROMPT DEFINITION
 # -----------------
 
-# count segment done manually
-ALT_PS1="$(__color "$CountColor")#\#\$([ \j -gt 0 ] && echo \"$(__color $JobColor) bg:\j\")\$(__virtual_env_segment)$_USER_ $(__color "$DirColor")\w"
+ALT_PS1="$(__color "$CountColor")#\#\$([ \j -gt 0 ] && echo \"$(__color $JobColor) bg:\j\")\$(__virtual_env_segment)\$([[ \$MainColor != \$UserColor ]] && echo \"$(__color "$MainColor") \u@\h\") $(__color "$DirColor")\w"
 
 ALT_PS2="$(__color 0) \$([[ \$_COMMAND_FAILED_ == 1 ]] && echo -e \"$(__color "$ErrorColor")\")\\$ $(__color 0)"
 
 # use prompt command to save last command exit status to a variable and generate the rest of the prompt
 __prompt_function() {
 	[[ $? != 0 ]] && _COMMAND_FAILED_=1 || _COMMAND_FAILED_=0
-	[[ "$MainColor" != "$UserColor" ]] && _USER_="$(__color "$MainColor") \u@\h" || _USER_=""
 	__git_ps1 "$ALT_PS1" "$ALT_PS2" "$(__color "$GitColor") %s"
 }
 

@@ -49,6 +49,8 @@ alias restart-kwin='kwin_x11 --replace &'
 # wget to download directory, use -P to specify output directory
 alias wget-directory='wget -r -np -nc -nd -k -nv'
 
+alias pip-upgrade='pip list --outdated --format=freeze | grep -v "^\-e" | cut -d = -f 1 | xargs -n1 sudo pip install -U'
+
 # PLEX
 # Add this to sudoers or a file in sudoers.d
 #      %eximus ALL= NOPASSWD: /bin/systemctl start plexmediaserver.service
@@ -88,3 +90,6 @@ if [ -d "$code_path" ];then
 fi
 
 unset i ni
+
+# hum...
+alias star-wars='telnet towel.blinkenlights.nl'

@@ -182,6 +182,9 @@ else " no gui
 	inoremap <Nul> <C-n>
 endif
 
+" run macro saved to q
+nnoremap <Space> @q
+
 " move line
 nnoremap <C-j> :<C-U>m .+1<CR>
 nnoremap <C-k> :<C-U>m .-2<CR>

@@ -1,6 +1,10 @@
 export SSH_ASKPASS="/usr/bin/ksshaskpass"
 
-keychain ~/.ssh/id_rsa --quiet
-source "$HOME"/.keychain/"$HOSTNAME"-sh
+if [ -f "${HOME}/.ssh/id_rsa" ]; then
+	keychain "${HOME}/.ssh/id_rsa" --quiet
+	source "${HOME}/.keychain/${HOSTNAME}-sh"
+fi
 
-source ~/.bashrc
+if [ -f ~/.bashrc ]; then
+	source ~/.bashrc
+fi
