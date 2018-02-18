@@ -129,6 +129,24 @@ post_action_vscode() {
 		done
 }
 
+# -------------------------
+#    INSTALL FUNCTIONS
+# -------------------------
+
+install_whatsapp() {
+	if hash nativefier &>/dev/null ; then
+		nativefier --inject "${DATA_PATH}/css/whatsapp-web-theme.css" --icon "${DATA_PATH}/icons/whatsapp.png" --name whatsapp --counter --single-instance web.whatsapp.com /tmp/whatsapp
+		if [ -d "/opt/whatsapp" ] ; then
+			echo "Deleting previous WhatsApp installation"
+			sudo rm -r "/opt/whatsapp" 
+		fi
+		sudo mv /tmp/whatsapp/whatsapp* /opt/whatsapp
+		rm /tmp/whatsapp -r
+	else
+		echo -e '\033[31mnativefier is not installed\033[m'
+	fi
+}
+
 
 # ----------------------
 #   ACTION FUNCTIONS
@@ -197,6 +215,7 @@ Options:
 	firefox                  Firefox files
 	konsole                  Konsole terminal emulator files
 	rofi                     Rofi files
+	whatsapp                 Whatsapp files (this creates uses nativefier application)
 	[none]                   No option or anything else assumes all files are gathered
 
 Remote:
@@ -308,6 +327,10 @@ elif [[ "$@" =~ "vscode" ]]; then
 elif [[ "$@" =~ "firefox" ]]; then
 	echo "Gathering firefox files to link..."
 	grab_firefox_files
+
+elif [[ "$@" =~ "whatsapp" ]]; then
+	echo "Installing Whatsapp"
+	install_whatsapp
 
 elif [[ "$@" =~ "rofi" ]]; then
 	echo "Gathering rofi files to link..."

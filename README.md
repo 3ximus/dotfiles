@@ -10,7 +10,8 @@
 - icons contains [papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) icons edited to match gruvbox style _(see my topbar screenshot)_
 - package_data contains some of my archlinux packages
 - spotify contains my spotify theme (with gruvbox colorscheme), you will need [oomox](https://github.com/actionless/oomox) installed, then run the script inside
-- rofi folder used for [rofi](https://github.com/DaveDavenport/rofi) - see my custom [rofi launch script](.bash/scripts/rofi-blurred)
+- rofi directory used for [rofi](https://github.com/DaveDavenport/rofi) - see my custom [rofi launch script](.bash/scripts/rofi-blurred)
+- zathura directory has `zathurarc` file with gruvbox colorstyle for zathura
 
 Most of my files are set with the [gruvbox](https://github.com/morhetz/gruvbox) colorscheme.
 

@@ -31,8 +31,8 @@ set mark-symlinked-directories on
 "\C-p": history-search-backward
 "\C-n": history-search-forward
 
-"\C-x\C-r": re-read-init-file
-"\C-x\C-x": redraw-current-line
+"\C-ir": re-read-init-file
+"\C-ii": redraw-current-line
 
 "\C-f": shell-expand-line
 #"\C-f": glob-expand-word
@@ -50,10 +50,14 @@ $if mode=vi
 $endif
 
 # quote word near cursor
-"\C-xq": "\eb\"\ef\""
-
+"\C-iq": "\eb\"\ef\""
 # reload bashrc
-"\C-xb": "\C-usource ~/.bashrc\C-m"
-
+"\C-ib": "\C-usource ~/.bashrc\C-m"
 # edit the path
-"\C-xp": "PATH=${PATH}\e\C-e\C-a\ef\C-f"
+"\C-ip": "PATH=${PATH}\e\C-e\C-a\ef\C-f"
+# jump into last comand directory
+"\C-id": 'cd !$ \015'
+# make subcommand
+"\C-im": '\C-a "$(\C-e)"\C-a'
+# change comand
+"\C-ic": "\C-a\ef\C-u"
