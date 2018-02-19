@@ -88,6 +88,11 @@ remove-special-chars-from-name() {
 	fi
 }
 
+# preview markdown files as a man page
+md() {
+	pandoc -sf markdown -t man "$1" | man -l - 
+}
+
 
 # Extract files
 extract () {

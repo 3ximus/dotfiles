@@ -11,7 +11,7 @@
 - package_data contains some of my archlinux packages
 - spotify contains my spotify theme (with gruvbox colorscheme), you will need [oomox](https://github.com/actionless/oomox) installed, then run the script inside
 - rofi directory used for [rofi](https://github.com/DaveDavenport/rofi) - see my custom [rofi launch script](.bash/scripts/rofi-blurred)
-- zathura directory has `zathurarc` file with gruvbox colorstyle for zathura
+- zathura directory has `zathurarc` file with gruvbox colorstyle for zathura copied from [abdullaev](https://github.com/abdullaev/dotfiles/blob/master/.config/zathura/zathurarc)
 - css directory contains css themes (currently only whatsapp copied from [this](https://userstyles.org/styles/142096/dark-whatsapp-theme-by-mew) and changed colors to match the gruvbox colorscheme)
 
 Most of my files are set with the [gruvbox](https://github.com/morhetz/gruvbox) colorscheme.
