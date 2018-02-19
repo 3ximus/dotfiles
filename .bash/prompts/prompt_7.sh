@@ -47,7 +47,7 @@ __color() {
 __virtual_env_segment () {
 	if [ -z "$VIRTUAL_ENV_DISABLE_PROMPT" ] ; then
 		if [ "$VIRTUAL_ENV" != "" ] ; then
-			echo -en "$(__color $VenvColor) venv:`basename \"$VIRTUAL_ENV\"`"
+			echo -en " [\001\e[${VenvColor}m\002`basename \"$VIRTUAL_ENV\"`]"
 		fi
 	fi
 }

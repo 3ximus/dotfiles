@@ -168,21 +168,6 @@ dss() {
 # ----------------------------------
 # ==================================
 
-
-# change input mode to emacs or vim
-chinput() {
-	local bashrc=$([[ -L "$HOME/.bashrc" ]] && echo `file "$HOME/.bashrc" | cut -d' ' -f5` || echo "$HOME/.bashrc")
-	local inputrc=$([[ -L "$HOME/.inputrc" ]] && echo `file "$HOME/.inputrc" | cut -d' ' -f5` || echo "$HOME/.inputrc")
-	if [ "$1" != "vi" ]; then
-		sed -i '/.*\ vi$/s/vi/emacs/' $inputrc $bashrc;
-		sed -i '/set\ show\-mode\-in\-prompt\ on/s/on$/off/' $inputrc;
-	else
-		sed -i '/.*\ emacs$/s/emacs/vi/' $inputrc $bashrc;
-		sed -i '/set\ show\-mode\-in\-prompt\ off/s/off$/on/' $inputrc;
-	fi
-	bind -f $inputrc
-}
-
 # Use -p to make prompt changes permanent on .bashrc
 prompt() {
 	local bashrc=$([[ -L "$HOME/.bashrc" ]] && echo `file "$HOME/.bashrc" | cut -d' ' -f5` || echo "$HOME/.bashrc")

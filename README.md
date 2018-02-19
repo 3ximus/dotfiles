@@ -12,6 +12,7 @@
 - spotify contains my spotify theme (with gruvbox colorscheme), you will need [oomox](https://github.com/actionless/oomox) installed, then run the script inside
 - rofi directory used for [rofi](https://github.com/DaveDavenport/rofi) - see my custom [rofi launch script](.bash/scripts/rofi-blurred)
 - zathura directory has `zathurarc` file with gruvbox colorstyle for zathura
+- css directory contains css themes (currently only whatsapp copied from [this](https://userstyles.org/styles/142096/dark-whatsapp-theme-by-mew) and changed colors to match the gruvbox colorscheme)
 
 Most of my files are set with the [gruvbox](https://github.com/morhetz/gruvbox) colorscheme.
 
@@ -64,6 +65,10 @@ Prompts support:
 - background jobs counter
 - command counter **only prompt 5, 6, 7**
 - show the respective tty. **except 6, 7**
+
+**NOTE**: The readline input mode can be changed with `CTRL+E` from vim-comand directly into emacs and is displayed at the beginnig of the prompt:
+
+![cmd](screenshots/input_mode1.png) ![ins](screenshots/input_mode2.png)
 
 ## vim plugins (using [Vundle](https://github.com/VundleVim/Vundle.vim))
 

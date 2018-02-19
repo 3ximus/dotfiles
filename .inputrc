@@ -1,14 +1,5 @@
 $include /etc/inputrc
 
-# input modes
-set keymap emacs
-set editing-mode emacs
-set show-mode-in-prompt off
-
-set vi-ins-mode-string "\033[40;33m ins \033[47;30m\033[0m"
-set vi-cmd-mode-string "\033[40;34m cmd \033[47;30m\033[0m"
-set visible-stats on
-
 # correct completion from the middle of a word
 set skip-completed-text on
 # ignore path case
@@ -20,44 +11,62 @@ set completion-ignore-case on
 set mark-directories on
 set mark-symlinked-directories on
 
+set vi-ins-mode-string "\033[1;33mins\033[m "
+set vi-cmd-mode-string "\033[1;32mcmd\033[m "
+set emacs-mode-string ""
+set visible-stats on
+
+# input modes
+set show-mode-in-prompt on
+
+set keymap vi-command
+"\ee": emacs-editing-mode
+
+# key bindings to get out of vi-editing-mode
+set keymap vi-insert
+"\ee": emacs-editing-mode
+"\ex": vi-movement-mode
+# make v i-insert behave like usual emacs
+"\C-k": kill-line
+"\C-a": beginning-of-line
+"\C-e": end-of-line
+"\C-l": clear-screen
+"\eb": backward-word
+"\ef": forward-word
+
+set keymap emacs
+"\ex": vi-editing-mode
+"\ee": "\ex\ex"
+
 # delete until the previous path separator /
 "\C-b": unix-filename-rubout
 
 # cicle through completions
-#"\C-i": menu-complete
-#"\e[Z": menu-complete-backward
+# "\C-i": menu-complete
+# "\e[Z": menu-complete-backward
 "\e[Z": menu-complete
 
 "\C-p": history-search-backward
 "\C-n": history-search-forward
 
-"\C-ir": re-read-init-file
-"\C-ii": redraw-current-line
-
-"\C-f": shell-expand-line
-#"\C-f": glob-expand-word
+"\C-f": nop
+# "\C-f": shell-expand-line
+# "\C-f": glob-expand-word
 "\C-g": dabbrev-expand
 "\C-h": complete-into-braces
 
-$if mode=vi
-# make v i-insert behave like usual emacs
-	"\C-k": kill-line
-	"\C-a": beginning-of-line
-	"\C-e": end-of-line
-	"\C-l": clear-screen
-	"\eb": backward-word
-	"\ef": forward-word
-$endif
+"\C-xr": re-read-init-file
+"\C-xi": redraw-current-line
 
 # quote word near cursor
-"\C-iq": "\eb\"\ef\""
+"\C-fq": "\eb\"\ef\""
 # reload bashrc
-"\C-ib": "\C-usource ~/.bashrc\C-m"
+"\C-fb": "\C-usource ~/.bashrc\C-m"
 # edit the path
-"\C-ip": "PATH=${PATH}\e\C-e\C-a\ef\C-f"
+"\C-fp": "PATH=${PATH}\e\C-e\C-a\ef\C-f"
 # jump into last comand directory
-"\C-id": 'cd !$ \015'
+"\C-fd": 'cd !$ \015'
 # make subcommand
-"\C-im": '\C-a "$(\C-e)"\C-a'
+"\C-fm": '\C-a "$(\C-e)"\C-a'
 # change comand
-"\C-ic": "\C-a\ef\C-u"
+"\C-fc": "\C-a\ef\C-u"
