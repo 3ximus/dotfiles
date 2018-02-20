@@ -19,8 +19,6 @@ alias l.='ls -Fd .*'
 alias ..='cd ..'
 alias ...='cd ../../'
 alias ....='cd ../../../'
-alias .....='cd ../../../../'
-alias ......='cd ../../../../../'
 
 # PROGRAM ALIASES
 
@@ -36,6 +34,8 @@ alias alert="echo -ne '\a'"
 alias clipboard-in='xclip -in -selection clipboard'
 alias clipboard-out='xclip -out -selection clipboard'
 alias perl-regex='perl -p -i -e'
+alias aur-packages='pacman -Qm'
+alias list-packages='expac -H M "%m\t%n" | sort -h'
 
 # SSH
 alias ssh-new-bash-session='eval `ssh-agent` && ssh-add'

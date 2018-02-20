@@ -27,20 +27,23 @@ esac
 echo -en "\e[1;33;40mInstall base packages? \e[0m"
 read -r -n 1 -p "[y/n]: " REPLY
 case "$REPLY" in
-	[yY])		echo; sudo pacman -S $(cat "$BASE_PACKAGES") ;;
+	[yY])		echo; sudo pacman -S $(cat "$BASE_PACKAGES" | grep -v '^#') ;;
 	*) 			echo ;;
 esac
-# Start by setting up yaourt
+
 echo -en "\e[1;33;40mInstall AUR packages? \e[0m"
 read -r -n 1 -p "[y/n]: " REPLY
 case "$REPLY" in
-	[yY])		echo; yaourt -S $(cat "$AUR_PACKAGES") ;;
+	[yY])		echo; yaourt -S $(cat "$AUR_PACKAGES" | grep -v '^#') ;;
 	*) 			echo ;;
 esac
-# Start by setting up yaourt
+
 echo -en "\e[1;33;40mInstall plasma packages? \e[0m"
 read -r -n 1 -p "[y/n]: " REPLY
 case "$REPLY" in
-	[yY])		echo; sudo pacman -S $(cat "$PLASMA_PACKAGES") ;;
+	[yY])		echo; sudo pacman -S $(cat "$PLASMA_PACKAGES" | grep -v '^#') ;;
 	*) 			echo ;;
 esac
+
+# post actions
+ranger --copy-config=all

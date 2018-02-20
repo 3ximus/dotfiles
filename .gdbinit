@@ -1,6 +1,6 @@
 
 # Load pwndbg
-source ~/Documents/rep/pwndbg/gdbinit.py
+source /usr/share/pwndbg/gdbinit.py
 
 # Better GDB defaults ----------------------------------------------------------
 
