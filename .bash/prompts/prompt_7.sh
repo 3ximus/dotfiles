@@ -24,6 +24,7 @@ CountColor="37"
 GitColor="1;33"
 JobColor="1;36"
 VenvColor="1;30"
+VirtColor="1;36"
 
 ErrorColor="1;31"
 
@@ -44,19 +45,30 @@ __color() {
 	echo -en "\[\033[${1}m\]"
 }
 
-__virtual_env_segment () {
+__virtual_env () {
 	if [ -z "$VIRTUAL_ENV_DISABLE_PROMPT" ] ; then
 		if [ "$VIRTUAL_ENV" != "" ] ; then
-			echo -en " [\001\e[${VenvColor}m\002`basename \"$VIRTUAL_ENV\"`]"
+			echo -en " \001\e[${VenvColor}m[\002`basename \"$VIRTUAL_ENV\"`]"
 		fi
 	fi
+}
+
+__virtualization () {
+	if hash systemd-detect-virt 2>/dev/null ; then
+		[ `systemd-detect-virt` != "none" ]
+		out=$?
+	elif hash hostnamectl 2>/dev/null ; then
+		hostnamectl status | grep 'Virt' &>/dev/null
+		out=$?
+	fi
+	[[ $out = 0 ]] && echo -en " \001\e[${VirtColor}m(\002vm)"
 }
 
 # -----------------
 # PROMPT DEFINITION
 # -----------------
 
-ALT_PS1="$(__color "$CountColor")#\#\$([ \j -gt 0 ] && echo \"$(__color $JobColor) bg:\j\")\$(__virtual_env_segment)\$([[ \$MainColor != \$UserColor ]] && echo \"$(__color "$MainColor") \u@\h\") $(__color "$DirColor")\w"
+ALT_PS1="$(__color "$CountColor")#\#\$(__virtualization)\$([ \j -gt 0 ] && echo \"$(__color $JobColor) bg:\j\")\$([[ \$MainColor != \$UserColor ]] && echo \"$(__color "$MainColor") \u@\h\") $(__color "$DirColor")\w\$(__virtual_env)"
 
 ALT_PS2="$(__color 0) \$([[ \$_COMMAND_FAILED_ == 1 ]] && echo -e \"$(__color "$ErrorColor")\")\\$ $(__color 0)"
 

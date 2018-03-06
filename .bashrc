@@ -9,15 +9,15 @@ esac
 # set edit mode
 set -o emacs
 
-# don't put duplite lines or lines starting with space in the history.
-HISTCONTROL=ignoreboth
+# don't save duplicates
+HISTCONTROL=ignoredups:erasedups
 
 # append to the history file, don't overwrite it
 shopt -s histappend
 
 # set history length)
 HISTSIZE=1000
-HISTFILESIZE=2000
+HISTFILESIZE=10000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -82,6 +82,7 @@ unset color_prompt force_color_prompt
 for file in ~/.bash/* ; do
 	[[ -f $file ]] && source $file
 done
+unset file
 
 # source keychain file if it exists
 if [ -f ~/.keychain/$HOSTNAME-sh ]; then
@@ -112,5 +113,5 @@ export EDITOR="vim"
 export PATH=$HOME/.bash/scripts:$PATH
 
 # sync terminal sessions history
-#export PROMPT_COMMAND="${PROMPT_COMMAND};history -a; history -n"
+# export PROMPT_COMMAND="${PROMPT_COMMAND};history -a; history -n"
 

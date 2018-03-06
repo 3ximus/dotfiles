@@ -60,19 +60,6 @@ launch-when-modified() { # entr is the program that does the work
 	find . -iname "*$1*" | entr "${@:2}"
 }
 
-# attach to tmux session
-tmux-attach() {
-	tmux list-sessions
-	read -r -p "Attach to > " REPLY
-	tmux attach-session -t $REPLY
-}
-
-tmux-kill-session(){
-	tmux list-sessions
-	read -r -p "Kill session > " REPLY
-	tmux kill-session -t $REPLY
-}
-
 remove-special-chars-from-name() {
 	local f
 	if [[ -z $1 ]]; then
@@ -136,7 +123,7 @@ memhogs () {
 	ps axo rss,comm,pid | awk -v tr=$TR '{proc_list[$2]+=$1;} END {for (proc in proc_list) {proc_pct=(proc_list[proc]/tr)*100; printf("%d\t%-16s\t%0.2f%\n",proc_list[proc],proc,proc_pct);}}' | sort -rn | head -n 10
 }
 
-psmem () {
+psmem () { # not working properly
 	PROCNAME="$@";
 
 	echo $PROCNAME IS USING \

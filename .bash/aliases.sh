@@ -20,9 +20,7 @@ alias ..='cd ..'
 alias ...='cd ../../'
 alias ....='cd ../../../'
 
-# PROGRAM ALIASES
-
-# enables grep color support
+# Utilities
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias diff='diff --color=auto'
@@ -34,8 +32,19 @@ alias alert="echo -ne '\a'"
 alias clipboard-in='xclip -in -selection clipboard'
 alias clipboard-out='xclip -out -selection clipboard'
 alias perl-regex='perl -p -i -e'
+alias grep-bin='grep -obUaP' # pattern like: "\xde\xad"
+alias htop-mem='htop --sort-key=PERCENT_MEM'
+alias htop-cpu='htop --sort-key=PERCENT_CPU'
+
+# pacman / aur
 alias aur-packages='pacman -Qm'
 alias list-packages='expac -H M "%m\t%n" | sort -h'
+
+# transmission
+alias transmissiond-start='transmission-daemon -g ~eximus/.config/transmission/'
+
+# Virtualenv
+alias activate='source $(find . -regex .*activate$)'
 
 # SSH
 alias ssh-new-bash-session='eval `ssh-agent` && ssh-add'
@@ -46,8 +55,16 @@ alias restart-plasmashell='killall plasmashell && kstart5 $_ &>/dev/null'
 alias restart-tiling='qdbus org.kde.KWin /KWin reconfigure'
 alias restart-kwin='kwin_x11 --replace &'
 
+# attach/kill tmux sessions
+alias tmux-attach-session='tmux list-sessions; read -r -p "Attach to > " REPLY; tmux attach-session -t $REPLY'
+alias tmux-kill-session='tmux list-sessions; read -r -p "Kill session > " REPLY; tmux kill-session -t $REPLY'
+
+# i keep forgetting this...
+alias man-pipes='echo "Generic form #>/dev/null (# is 1 by default)"; echo "  2>&-        ----> #>&-  (close fd)"; echo "  |&          ----> 2>&1"; echo "  &>/dev/null ----> 1>/dev/null 2>&1"'
+
 # wget to download directory, use -P to specify output directory
-alias wget-directory='wget -r -np -nc -nd -k -nv'
+# -k option might give memory issues when continuing (-c) the download of large files but without it wget wont check for partially downlaoded files and will assume they are downloaded if they exist
+alias wget-directory='wget -r -np -nc -nd -k'
 
 alias pip-upgrade='pip list --outdated --format=freeze | grep -v "^\-e" | cut -d = -f 1 | xargs -n1 sudo pip install -U'
 
@@ -76,6 +93,7 @@ if [ -d "$repo_path" ];then
 		fi
 	done
 fi
+alias R_="cd $repo_path"
 
 # get list of code directories
 code_path="$HOME/Documents/code/"
@@ -91,5 +109,3 @@ fi
 
 unset i ni
 
-# hum...
-alias star-wars='telnet towel.blinkenlights.nl'

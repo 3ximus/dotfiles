@@ -15,7 +15,9 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-commentary'
+Plugin 'sjl/gundo.vim'
 Plugin 'junegunn/goyo.vim'
+Plugin 'wincent/command-t'
 
 Plugin 'morhetz/gruvbox'
 
@@ -45,11 +47,14 @@ if !exists("g:syntax_on")
 endif
 set ts=4 "number of spaces in a tab
 set sw=4 "number of spaces for indent
+set softtabstop=0 noexpandtab
+set shiftwidth=4
 set autoindent
 set smartindent
 set smarttab
-"set expandtab "tabs are spaces
-"setlocal lcs=tab:>-,trail:-,eol:$ list! " use list mode mapped to F2 when vim is opened
+autocmd FileType python setlocal tabstop=4 "because someone has too much screen space in their eyesight 
+"set expandtab "tabs are spaces, aka cancer
+"setlocal lcs=tab:>-,trail:-,eol:¬ list! " use list mode mapped to F2 when vim is opened
 
 "search settings
 set incsearch
@@ -66,6 +71,8 @@ set scrolloff=4
 "swapfiles
 set noswapfile
 set nowritebackup
+
+set autoread
 
 "enable mouse on insert mode
 "if has ("mouse")
@@ -197,13 +204,11 @@ vnoremap <C-k> :m '<-2<CR>gv
 nmap <leader>fa :call Fold(1)<CR>:set foldmethod=manual<CR>
 " remove trailing whitespaces
 nmap <leader>s :call StripTrailingWhitespace()<CR>
-" map Goyo distraction free mode
-nnoremap <C-g> :Goyo<CR>:hi Normal ctermbg=none<CR>
 " display line endings and tabs
-nnoremap <F2> :<C-U>setlocal lcs=tab:>-,trail:-,eol:$ list! list? <CR>
+nnoremap <F2> :<C-U>setlocal lcs=tab:>-,trail:-,eol:¬ list! list? <CR>
 " map hidde terminal elements
 nnoremap <leader>a :call ToggleHiddenAll()<CR>
-
+nnoremap <C-b> :ls<CR>:buffer<Space>
 
 " -----------------------------
 " Color Scheme
@@ -286,7 +291,6 @@ else
 endif
 
 "setup NERDTree
-map <C-t> :NERDTreeToggle<CR>
 "open on startup even if no files were specified
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
@@ -307,16 +311,23 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 "	\ "Unknown"		: "?"
 "	\ }
 
+
 "Goyo
 let g:goyo_width = 80
 let g:goyo_height= '100%'
 let g:goyo_linenr = 0
 
-" config Gitgutter
+" ---------------------
+" Plugin Keymaps
+" ---------------------
+
+map <C-t> :NERDTreeToggle<CR>
+nnoremap U :GundoToggle<CR>
+nnoremap <C-g> :Goyo<CR>:hi Normal ctermbg=none<CR>
 nmap <Leader>ha <Plug>GitGutterStageHunk
 nmap <Leader>hu <Plug>GitGutterUndoHunk
 nmap <Leader>hv <Plug>GitGutterPreviewHunk
-
+nnoremap <silent> <C-b> :CommandTMRU<CR>
 
 " ---------------------
 " RUN COMMAND ON EVENTS
