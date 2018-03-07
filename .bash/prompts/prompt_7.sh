@@ -17,7 +17,7 @@ GIT_PS1_DESCRIBE_STYLE='branch'
 # -----------------
 UserColor="1;30"
 RootColor="1;31"
-SSHColor="1;36"
+SSHColor="1;37"
 
 DirColor="1;34"
 CountColor="37"

@@ -5,8 +5,8 @@ DESTINATION_PATH="$HOME"
 
 TMP_FILE="/tmp/file_install_selection.cfg"
 
-DEFAULT_FILE_LIST=".bashrc .vimrc .gdbinit .gitconfig .Xdefaults .inputrc .tmux.conf .tmux-powerlinerc"
-DEFAULT_DIR_LIST=".bash .fonts .vim .tmux"
+DEFAULT_FILE_LIST=".bashrc .vimrc .gdbinit .gitconfig .inputrc .tmux.conf .tmux-powerlinerc"
+DEFAULT_DIR_LIST=".bash .vim .tmux"
 
 # will be appended by all the grab functions and contain all the path files
 # all the the files in this variable are in the format origin::destination,
@@ -225,9 +225,9 @@ Parameters:
 	--copy                 Copy files instead of linking
 							  default option for remote locations
 	--force                Force overwrite when linking
-	--data-dir=DIRECTORY   Data directory where to look for the files to link
+	--data-dir [DIRECTORY]   Data directory where to look for the files to link
 							  default: $DATA_PATH
-	--out-dir=DIRECTORY    Destination directory, probably never needed since only \$HOME is used
+	--out-dir [DIRECTORY]    Destination directory, probably never needed since only \$HOME is used
 								  default: $DESTINATION_PATH" && exit 0
 fi
 

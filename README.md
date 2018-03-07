@@ -65,6 +65,7 @@ Prompts support:
 - background jobs counter
 - command counter **only prompt 5, 6, 7**
 - show the respective tty. **except 6, 7**
+- display virtual machine environment indicator **only prompt 7**
 
 **NOTE**: The readline input mode can be changed with `CTRL+E` from vim-comand directly into emacs and is displayed at the beginnig of the prompt:
 
@@ -77,8 +78,10 @@ Prompts support:
 - [nerd-tree](https://github.com/scrooloose/nerdtree)
 - [vim-gitgutter](https://github.com/airblade/vim-gitgutter)
 - [vim-surround](https://github.com/tpope/vim-surround)
-- [vim-goyo](https://github.com/junegunn/goyo.vim)
+- [goyo](https://github.com/junegunn/goyo.vim)
 - [vim-commentary](https://github.com/tpope/vim-commentary)
+- [command-T](https://github.com/wincent/Command-T)
+- [gundo](https://github.com/sjl/gundo.vim)
 
 ## Vim (gruvbox theme) screenshots
 
