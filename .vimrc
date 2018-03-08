@@ -18,6 +18,7 @@ Plugin 'tpope/vim-commentary'
 Plugin 'sjl/gundo.vim'
 Plugin 'junegunn/goyo.vim'
 Plugin 'wincent/command-t'
+Plugin 'easymotion/vim-easymotion'
 
 Plugin 'morhetz/gruvbox'
 

@@ -81,6 +81,7 @@ Prompts support:
 - [goyo](https://github.com/junegunn/goyo.vim)
 - [vim-commentary](https://github.com/tpope/vim-commentary)
 - [command-T](https://github.com/wincent/Command-T)
+- [easymotion](https://github.com/easymotion/vim-easymotion)
 - [gundo](https://github.com/sjl/gundo.vim)
 
 ## Vim (gruvbox theme) screenshots
