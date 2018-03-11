@@ -6,18 +6,35 @@ case $- in
 	*) return;;
 esac
 
-# set edit mode
-set -o emacs
+# ===============
+# HISTORY CONTROL
+# ===============
 
 # don't save duplicates
-HISTCONTROL=ignoredups:erasedups
+HISTCONTROL=ignoreboth:erasedups
 
 # append to the history file, don't overwrite it
 shopt -s histappend
 
 # set history length)
-HISTSIZE=1000
-HISTFILESIZE=10000
+HISTSIZE=20000
+HISTFILESIZE=${HISTSIZE}
+
+# for hh -> https://github.com/dvorka/hstr
+export HH_CONFIG=hicolor         # get more colors
+export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"   # mem/file sync
+if hash /usr/bin/hh 2>/dev/null; then
+	# if this is interactive shell, then bind hh to Ctrl-r (for Vi mode check doc)
+	if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hh -- \C-m"'; fi
+	# if this is interactive shell, then bind 'kill last command' to Ctrl-x k
+	if [[ $- =~ .*i.* ]]; then bind '"\C-xk": "\C-a hh -k \C-m"'; fi
+fi
+
+
+# ===============
+
+# set edit mode
+set -o emacs
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -26,6 +43,9 @@ shopt -s checkwinsize
 # enable extended pattern matching features
 # see http://wiki.bash-hackers.org/syntax/pattern
 shopt -s extglob
+
+# turn on recursive globbing (enables ** to recurse all directories)
+shopt -s globstar 2>/dev/null
 
 # a command name that is the name of a directory is executed
 # as if it were the argument to the cd command.
@@ -39,10 +59,16 @@ shopt -s direxpand
 # will be corrected. The errors checked for are transposed characters,
 # a missing character, and one character too many. If a correction is found,
 # the corrected file name is printed, and the command proceeds.
-shopt -s cdspell
+shopt -s cdspell 2>/dev/null
 
-# expands bang combinations and variables to their values - remember !$ last arg / !^ first arg / !* all args
-bind Space:magic-space	# also combine these with :h (head) or :t (tail) to get path selective path expansion -> !$:h
+# expands bang combinations and variables to their values
+# SEE man bash / HISTORY EXPANSION  for a full list of bang features
+bind Space:magic-space	# 
+
+# disable Ctrl-S ( flow control )
+stty -ixon
+
+# ==============
 
 # set a fancy prompt
 case "$TERM" in
@@ -78,6 +104,9 @@ else
 fi
 unset color_prompt force_color_prompt
 
+# Automatically trim long paths in the prompt (requires Bash 4.x)
+# PROMPT_DIRTRIM=2
+
 # Source all files inside ./bash (only files)
 for file in ~/.bash/* ; do
 	[[ -f $file ]] && source $file
@@ -111,7 +140,4 @@ export MYSQL_PS1="\u - \d > "
 export EDITOR="vim"
 # add customs scripts and gem installed packages
 export PATH=$HOME/.bash/scripts:$PATH
-
-# sync terminal sessions history
-# export PROMPT_COMMAND="${PROMPT_COMMAND};history -a; history -n"
 
