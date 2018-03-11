@@ -22,7 +22,7 @@ SSHColor="1;37"
 DirColor="1;34"
 CountColor="37"
 GitColor="1;33"
-JobColor="1;36"
+JobColor="1;35"
 VenvColor="1;30"
 VirtColor="1;36"
 
@@ -42,13 +42,13 @@ fi
 # -----------------
 
 __color() {
-	echo -en "\[\033[${1}m\]"
+	echo -en "\001\033[${1}m\002"
 }
 
 __virtual_env () {
 	if [ -z "$VIRTUAL_ENV_DISABLE_PROMPT" ] ; then
 		if [ "$VIRTUAL_ENV" != "" ] ; then
-			echo -en " \001\e[${VenvColor}m[\002`basename \"$VIRTUAL_ENV\"`]"
+			echo -en " \001\e[${VenvColor}m\002[`basename \"$VIRTUAL_ENV\"`]"
 		fi
 	fi
 }
@@ -61,7 +61,7 @@ __virtualization () {
 		hostnamectl status | grep 'Virt' &>/dev/null
 		out=$?
 	fi
-	[[ $out = 0 ]] && echo -en " \001\e[${VirtColor}m(\002vm)"
+	[[ $out = 0 ]] && echo -en " \001\e[${VirtColor}m\002(vm)"
 }
 
 # -----------------

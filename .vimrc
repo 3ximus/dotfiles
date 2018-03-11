@@ -49,11 +49,10 @@ endif
 set ts=4 "number of spaces in a tab
 set sw=4 "number of spaces for indent
 set softtabstop=0 noexpandtab
-set shiftwidth=4
 set autoindent
 set smartindent
 set smarttab
-autocmd FileType python setlocal tabstop=4 "because someone has too much screen space in their eyesight 
+autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab autoindent "because someone has too much screen space in their eyesight 
 "set expandtab "tabs are spaces, aka cancer
 "setlocal lcs=tab:>-,trail:-,eol:¬ list! " use list mode mapped to F2 when vim is opened
 
@@ -222,7 +221,6 @@ if has("gui_running")
 	set background=dark
 else
 	set t_Co=256 "terminal color range
-	"color hybrid
 	color gruvbox
 	let g:gruvbox_termcolors = 16 "256 colors look really bad
 	set background=dark
@@ -230,6 +228,7 @@ else
 	hi Normal ctermbg=none
 	highlight NonText ctermbg=none
 endif
+hi CursorLineNr ctermbg=none
 
 
 " -----------------------------
@@ -291,7 +290,7 @@ else
 	let g:airline_symbols.linenr = ''
 endif
 
-"setup NERDTree
+"NERDTree
 "open on startup even if no files were specified
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
@@ -312,6 +311,14 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 "	\ "Unknown"		: "?"
 "	\ }
 
+"GitGutter
+if !has("gui_running") "running on console
+	highlight clear SignColumn
+	highlight GitGutterAdd ctermfg=green
+	highlight GitGutterChange ctermfg=blue
+	highlight GitGutterDelete ctermfg=red
+	highlight GitGutterChangeDelete ctermfg=blue
+endif
 
 "Goyo
 let g:goyo_width = 80
@@ -325,9 +332,9 @@ let g:goyo_linenr = 0
 map <C-t> :NERDTreeToggle<CR>
 nnoremap U :GundoToggle<CR>
 nnoremap <C-g> :Goyo<CR>:hi Normal ctermbg=none<CR>
-nmap <Leader>ha <Plug>GitGutterStageHunk
-nmap <Leader>hu <Plug>GitGutterUndoHunk
-nmap <Leader>hv <Plug>GitGutterPreviewHunk
+nmap <leader>ha <Plug>GitGutterStageHunk
+nmap <leader>hu <Plug>GitGutterUndoHunk
+nmap <leader>hv <Plug>GitGutterPreviewHunk
 nnoremap <silent> <C-b> :CommandTMRU<CR>
 
 " ---------------------

@@ -36,6 +36,9 @@ alias grep-bin='grep -obUaP' # pattern like: "\xde\xad"
 alias htop-mem='htop --sort-key=PERCENT_MEM'
 alias htop-cpu='htop --sort-key=PERCENT_CPU'
 
+# mount ntfs filesystems with correct permissions
+alias mount-ntfs='sudo mount -o uid=1000,gid=1000,dmask=027,fmask=137'
+
 # pacman / aur
 alias aur-packages='pacman -Qm'
 alias list-packages='expac -H M "%m\t%n" | sort -h'
