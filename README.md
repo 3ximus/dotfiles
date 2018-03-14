@@ -74,15 +74,16 @@ Prompts support:
 ## vim plugins (using [Vundle](https://github.com/VundleVim/Vundle.vim))
 
 - [vim-airline](https://github.com/vim-airline/vim-airline)
-- [vim-fugitive](https://github.com/tpope/vim-fugitive)
 - [nerd-tree](https://github.com/scrooloose/nerdtree)
 - [vim-gitgutter](https://github.com/airblade/vim-gitgutter)
+- [vim-fugitive](https://github.com/tpope/vim-fugitive)
 - [vim-surround](https://github.com/tpope/vim-surround)
-- [goyo](https://github.com/junegunn/goyo.vim)
 - [vim-commentary](https://github.com/tpope/vim-commentary)
+- [vim-numbertoggle](https://github.com/jeffkreeftmeijer/vim-numbertoggle)
+- [gundo](https://github.com/sjl/gundo.vim)
 - [command-T](https://github.com/wincent/Command-T)
 - [easymotion](https://github.com/easymotion/vim-easymotion)
-- [gundo](https://github.com/sjl/gundo.vim)
+- [goyo](https://github.com/junegunn/goyo.vim)
 
 ## Vim (gruvbox theme) screenshots
 

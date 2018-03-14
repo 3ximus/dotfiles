@@ -15,10 +15,11 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-commentary'
+Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 Plugin 'sjl/gundo.vim'
-Plugin 'junegunn/goyo.vim'
 Plugin 'wincent/command-t'
 Plugin 'easymotion/vim-easymotion'
+Plugin 'junegunn/goyo.vim'
 
 Plugin 'morhetz/gruvbox'
 
@@ -52,7 +53,7 @@ set softtabstop=0 noexpandtab
 set autoindent
 set smartindent
 set smarttab
-autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab autoindent "because someone has too much screen space in their eyesight
+autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab autoindent "because someone has too much screen space in their eyesight 
 "set expandtab "tabs are spaces, aka cancer
 "setlocal lcs=tab:>-,trail:-,eol:¬ list! " use list mode mapped to F2 when vim is opened
 
@@ -119,7 +120,7 @@ command! -nargs=1 ConvertToSpaces :call ConvertToSpaces( '<args>' )
 function! TabSpaceToogle()
 	if &expandtab
 		:call ConvertToTabs(&ts)
-	else
+	else 
 		:call ConvertToSpaces(&sw)
 	endif
 endfunction
@@ -212,7 +213,7 @@ vnoremap <C-k> :m '<-2<CR>gv
 nmap <leader>fa :call Fold(1)<CR>:set foldmethod=manual<CR>
 " remove trailing whitespaces
 nmap <leader>s :call StripTrailingWhitespace()<CR>
-nnoremap <leader><Tab> :call TabSpaceToogle()<CR>
+nnoremap <leader><Tab> :call TabSpaceToogle()<CR> 
 " display line endings and tabs
 nnoremap <F2> :<C-U>setlocal lcs=tab:>-,trail:-,eol:¬ list! list? <CR>
 " map hidde terminal elements
