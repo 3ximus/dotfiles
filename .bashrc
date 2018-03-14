@@ -7,30 +7,7 @@ case $- in
 esac
 
 # ===============
-# HISTORY CONTROL
-# ===============
-
-# don't save duplicates
-HISTCONTROL=ignoreboth:erasedups
-
-# append to the history file, don't overwrite it
-shopt -s histappend
-
-# set history length)
-HISTSIZE=20000
-HISTFILESIZE=${HISTSIZE}
-
-# for hh -> https://github.com/dvorka/hstr
-export HH_CONFIG=hicolor         # get more colors
-export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"   # mem/file sync
-if hash /usr/bin/hh 2>/dev/null; then
-	# if this is interactive shell, then bind hh to Ctrl-r (for Vi mode check doc)
-	if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hh -- \C-m"'; fi
-	# if this is interactive shell, then bind 'kill last command' to Ctrl-x k
-	if [[ $- =~ .*i.* ]]; then bind '"\C-xk": "\C-a hh -k \C-m"'; fi
-fi
-
-
+#    SETTINGS
 # ===============
 
 # set edit mode
@@ -63,26 +40,44 @@ shopt -s cdspell 2>/dev/null
 
 # expands bang combinations and variables to their values
 # SEE man bash / HISTORY EXPANSION  for a full list of bang features
-bind Space:magic-space	# 
+bind Space:magic-space	#
 
 # disable Ctrl-S ( flow control )
 stty -ixon
 
+# ===============
+# HISTORY CONTROL
+# ===============
+
+# don't save duplicates
+HISTCONTROL=ignoreboth:erasedups
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# set history length)
+HISTSIZE=20000
+HISTFILESIZE=10000
+
+# for hh -> https://github.com/dvorka/hstr
+export HH_CONFIG=hicolor,rawhistory
+# history file sync
+PROMPT_COMMAND="${PROMPT_COMMAND};history -a; history -n"
+if hash /usr/bin/hh 2>/dev/null; then
+	# if this is interactive shell, then bind hh to Ctrl-r (for Vi mode check doc)
+	if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hh -- \C-m"'; fi
+	# if this is interactive shell, then bind 'kill last command' to Ctrl-x k
+	if [[ $- =~ .*i.* ]]; then bind '"\C-xk": "\C-a hh -k \C-m"'; fi
+fi
+
+# ===============
+#    PROMPT
 # ==============
 
 # set a fancy prompt
 case "$TERM" in
 	xterm-color) color_prompt=yes;;
 esac
-
-# enable programmable completion features
-if ! shopt -oq posix; then
-	if [ -f /usr/share/bash-completion/bash_completion ]; then
-		. /usr/share/bash-completion/bash_completion
-	elif [ -f /etc/bash_completion ]; then
-		. /etc/bash_completion
-	fi
-fi
 
 # Colored promp
 force_color_prompt=yes
@@ -107,11 +102,22 @@ unset color_prompt force_color_prompt
 # Automatically trim long paths in the prompt (requires Bash 4.x)
 # PROMPT_DIRTRIM=2
 
+# ==============
+
 # Source all files inside ./bash (only files)
 for file in ~/.bash/* ; do
 	[[ -f $file ]] && source $file
 done
 unset file
+
+# enable programmable completion features
+if ! shopt -oq posix; then
+	if [ -f /usr/share/bash-completion/bash_completion ]; then
+		. /usr/share/bash-completion/bash_completion
+	elif [ -f /etc/bash_completion ]; then
+		. /etc/bash_completion
+	fi
+fi
 
 # source keychain file if it exists
 if [ -f ~/.keychain/$HOSTNAME-sh ]; then
@@ -135,9 +141,13 @@ if [[ $UID != 0 && -z $SSH_CLIENT ]]; then
 	fi
 fi
 
+# ==============
+#   VARIABLES
+# ==============
+
 #export LS_COLORS="$LS_COLORS:*.c=1;36:*.h=00;36"
 export MYSQL_PS1="\u - \d > "
 export EDITOR="vim"
-# add customs scripts and gem installed packages
+# add customs scripts
 export PATH=$HOME/.bash/scripts:$PATH
 

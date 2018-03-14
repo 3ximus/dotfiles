@@ -110,6 +110,10 @@ extract () {
 # i hate typing extract...
 alias unpack=extract
 
+git-delete-cached() {
+	git filter-branch --force --index-filter "git rm --cached --ignore-unmatch $@" --prune-empty --tag-name-filter cat -- --all
+}
+
 # find process by name
 psgrep() {
 	local list=$(ps aux)
