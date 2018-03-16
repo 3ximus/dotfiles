@@ -1,0 +1,50 @@
+rename clean.sh
+rename firefox
+rename plasma
+rename artificial_intelligence_ids.pdf
+mkdir staging
+rename papers-ricardo
+rename 1402.
+rename network-traffic-anomaly-detection.pdf
+mkdir network
+rename ids-nn-good-resume-on-previous-work.pdf
+rename hardening-deep-neural-network-adversarial-model-cascades.pdf
+rename mov
+rename .pdf
+rename evaluating-the-robustness-of-neural-networks.pdf
+rename learning-to-evade-static-ml-malware-models.pdf
+mkdir
+mkdir malware
+touch NOTES
+open_with 1
+touch DATASETS.txt
+rename NOTES.txt
+open_with md
+search snort
+rename spitFlows.py
+rename normalbrowsing-flow.csv
+rename nmap-flow.csv
+open_with 2
+rename Friday-WorkingHours-Afternoon-DDos.pcap-ISCX.csv
+rename Friday-WorkingHours-Afternoon-PortScan.pcap-ISCX.csv
+rename Friday-WorkingHours-Afternoon-DDos-flow.csv
+rename Friday-WorkingHours-Afternoon-PortScan-flow.csv
+rename Friday-WorkingHours-Morning-flow.csv
+rename Monday-WorkingHours-flow.csv
+rename Thursday-WorkingHours-Afternoon-Infilteration-flow.csv
+rename Tuesday-WorkingHours-flow.csv
+rename Wednesday-workingHours-flow.csv
+wq
+rename distriuted
+rename distributed
+rename test
+rename train
+mkdir layer2 layer1
+mkdir layer1
+mkdir layer2
+open_with 
+open_with vim
+open_with
+open_with q
+
+delete

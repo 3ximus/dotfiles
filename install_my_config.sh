@@ -77,26 +77,22 @@ grab_vscode_files() {
 	files="${files}\n#-------------\n# vscode files\n#-------------\n\n"
 # vscode destination
 	vscode_location="${DESTINATION_PATH}/.config/Code/User"
-	if [[ -d "$DATA_PATH/vscode/User" ]]; then
+	if [[ -d "$DATA_PATH/.config/Code/User" ]]; then
 		# NOTE assuming filenames have no spaces here
-		vscode_files=$(find ${DATA_PATH}/vscode/User/* -maxdepth 0 -type f)
+		vscode_files=$(find ${DATA_PATH}/.config/Code/User/* -maxdepth 0 -type f)
 		for f in $vscode_files ; do
 			files="${files}#${f}::${vscode_location}\n"
 		done
 	fi
 }
 
-grab_rofi_files() {
-	files="${files}\n#-------------\n# rofi files\n#-------------\n\n"
-# vscode destination
-	rofi_location="${DESTINATION_PATH}/.config/rofi"
-	if [[ -d "$DATA_PATH/rofi" ]]; then
-		# NOTE assuming filenames have no spaces here
-		rofi_files=$(find ${DATA_PATH}/rofi/* -maxdepth 0 -type f)
-		for f in $rofi_files ; do
-			files="${files}#${f}::${rofi_location}\n"
-		done
-	fi
+grab_dotconfig_files() {
+	files="${files}\n#------------\n# .config files\n#------------\n\n"
+	for f in $(find $DATA_PATH/.config -maxdepth 1 -mindepth 1 | sort); do
+		if [[ "$(basename $f)" != "Code" ]]; then
+			files="${files}#${f}::${DESTINATION_PATH}/.config\n"
+		fi
+	done
 }
 
 grab_remaining_files() {
@@ -117,12 +113,12 @@ grab_remaining_files() {
 # -------------------------
 
 post_action_vscode() {
-	diff vscode/extension_list.txt <(code --list-extensions) |
+	diff .config/Code/extension_list.txt <(code --list-extensions) |
 		grep -Po '(?<=^< ).*' |
 		while read extension ; do
 			code --install-extension ${extension}
 		done
-	diff vscode/extension_list.txt <(code --list-extensions) |
+	diff .config/Code/extension_list.txt <(code --list-extensions) |
 		grep -Po '(?<=^> ).*' |
 		while read extension ; do
 			code --uninstall-extension ${extension}
@@ -214,7 +210,6 @@ Options:
 	vscode                   Visual Studio Code files
 	firefox                  Firefox files
 	konsole                  Konsole terminal emulator files
-	rofi                     Rofi files
 	whatsapp                 Whatsapp files (this creates uses nativefier application)
 	[none]                   No option or anything else assumes all files are gathered
 
@@ -316,6 +311,7 @@ echo "              DESTINATION PATH:  $DESTINATION_PATH"
 if [[ "$@" =~ "generic" || "$@" =~ "general" ]]; then
 	echo "Gathering generic dotfiles to link..."
 	grab_dot_files
+	grab_dotconfig_files
 	grab_remaining_files
 
 elif [[ "$@" =~ "konsole" ]]; then
@@ -332,20 +328,16 @@ elif [[ "$@" =~ "whatsapp" ]]; then
 	echo "Installing Whatsapp"
 	install_whatsapp
 
-elif [[ "$@" =~ "rofi" ]]; then
-	echo "Gathering rofi files to link..."
-	grab_rofi_files
-
 elif [[ "$@" =~ "clean" ]]; then
 	echo "clean not implemented" && exit 0
 
 else
 	echo "Gathering files to link..."
 	grab_dot_files
+	grab_dotconfig_files
 	grab_konsole_files
 	grab_firefox_files
 	grab_vscode_files
-	grab_rofi_files
 	grab_remaining_files
 fi
 
