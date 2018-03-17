@@ -1,0 +1,13 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+
+#personal-bookmarks toolbarbutton .toolbarbutton-icon:not([src]),
+#personal-bookmarks toolbarbutton[label=" "] .toolbarbutton-text {
+  display: none !important;
+}
+#personal-bookmarks toolbarseparator {
+  -moz-appearance:none!important;
+  border:none!important;
+  margin:0 1px!important;
+  background-image:linear-gradient(transparent 6px,var(--urlbar-separator-color) 6px,var(--urlbar-separator-color) calc(100% - 6px),transparent calc(100% - 6px));
+  min-width:1px!important
+}

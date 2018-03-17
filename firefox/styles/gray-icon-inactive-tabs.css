@@ -1,0 +1,7 @@
+tab .tab-icon, .tab-icon-image, .tab-throbber {
+  filter: grayscale(1);
+}
+
+#TabsToolbar .tabbrowser-tab[selected] .tab-icon, #TabsToolbar .tabbrowser-tab[selected] .tab-icon-image, #TabsToolbar .tabbrowser-tab[selected] .tab-throbber {
+  filter: grayscale(0);
+}

@@ -48,9 +48,9 @@ padding-right = 0
 module-margin-right = 0
 module-margin-left = 0
 
-modules-right = keyboard separator network separator volume separator date
+modules-right = keyboard separator network separator volume separator battery separator date
 modules-center = mpd spotify
-modules-left = bspwm
+modules-left = bspwm title
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -62,7 +62,7 @@ tray-detached = false
 tray-position = right
 tray-offset-x = 0
 tray-offset-y = 0
-tray-maxsize = 16
+tray-maxsize = 30
 tray-padding = 0
 tray-transparent = false
 tray-scale = 1.0
@@ -96,6 +96,29 @@ icon-prev-padding = 1
 icon-next-padding = 1
 label-song-padding = 1
 
+[module/battery]
+type = internal/battery
+full-at = 99
+battery = BAT0
+adapter = AC0
+poll-interval = 5
+
+format-charging = <label-charging>
+format-discharging = <ramp-capacity> <label-discharging>
+format-charging-padding = 2
+format-discharging-padding = 2
+label-full =  %percentage%
+label-charging =  %percentage%%
+label-discharging = %percentage%%
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+format-padding = 2
+
 [module/bspwm]
 type = internal/bspwm
 format = <label-state> <label-mode>
@@ -126,11 +149,15 @@ ws-icon-3 = IV;
 ws-icon-4 = V;
 ws-icon-5 = VI;
 ws-icon-6 = VII
-ws-icon-7 = VIII
-ws-icon-8 = IX
-ws-icon-9 = X
+; ws-icon-7 = VIII
+; ws-icon-8 = IX
+; ws-icon-9 = X
 ws-icon-default = 
 
+[module/title]
+type = internal/xwindow
+format-padding = 2
+label-maxlen = 40
 
 [module/date]
 type = internal/date

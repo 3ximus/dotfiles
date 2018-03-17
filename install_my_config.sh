@@ -11,7 +11,8 @@ DEFAULT_DIR_LIST=".bash .vim .tmux"
 # will be appended by all the grab functions and contain all the path files
 # all the the files in this variable are in the format origin::destination,
 #    and then the linker only has to split by the semi colon
-files="\n# LIST OF FILES TO LINK\n
+files="# vi:filetype=config
+\n# LIST OF FILES TO LINK\n
 # Remove the leading \'#\' predeciding the line to link some file.
 # (this character must be the first character in a line to comment it)
 # Files are kept in the format origin::destination\n
