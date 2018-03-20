@@ -1,0 +1,113 @@
+URxvt.intensityStyles: true
+URxvt.scrollBar: false
+! This is set in compton
+/* urxvt*depth: 32 */
+/* URxvt.transparent: true */
+/* URxvt*blurRadius: 60 */
+
+! Ctrl Up and Down control font size
+/* URxvt.resize-font.smaller: C-Down */
+/* URxvt.resize-font.bigger: C-Up */
+! copy paste
+URxvt.keysym.Shift-Control-V:   perl:clipboard:paste
+URxvt.keysym.Shift-Control-C:   perl:clipboard:copy
+
+! disable ctrl-shift
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
+! font
+URxvt.font: \
+			xft:Dina:style=Regular:size=8, \
+			xft:Misc Tamsyn:style=Regular,size=10, \
+			xft:lucy tewi:style=Regular, \
+			xft:xos4 Terminus:style=Regular:size=12, \
+			xft:Unifont:style=Sans-Serif
+/* xft:Anonymous Pro for Powerline:size=9:antialias=true:hinting=true, \ */
+/* xft:FreeSerif:style=Regular, \ */
+/* xft:Roboto\ Mono\ for\ Powerline:style=Regular:size=8, \ */
+
+! terminal padding
+URxvt.internalBorder: 25
+
+Xft.autohint:   0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintfull
+Xft.hinting:    true
+Xft.antialias:  true
+/* Xft.rgba:       rgb */
+
+! clickable links, clipboard support, mouse wheel support, and on the fly font resizing
+URxvt.perl-ext-common: default,matcher,clipboard
+URxvt.url-launcher: /usr/bin/firefox
+URxvt.matcher.button: 1
+URxvt.matcher.rend.0: Bold fg6
+
+! colors
+*.cursorColor: #ebdbb2
+*.background: #282828
+*.foreground: #ebdbb2
+
+! black
+*.color0:       #282828
+*.color8:       #928374
+
+! red
+*.color1:       #cc241d
+*.color9:       #fb4934
+
+! green
+*.color2:       #98971a
+*.color10:      #b8bb26
+
+! yellow
+*.color3:       #d79921
+*.color11:      #fabd2f
+
+! blue
+*.color4:       #458588
+*.color12:      #83a598
+
+! magenta
+*.color5:       #b16286
+*.color13:      #d3869b
+
+! cyan
+*.color6:       #689d6a
+*.color14:      #8ec07c
+
+! white
+*.color7:       #a89984
+*.color15:      #ebdbb2
+
+! 256 color resources
+*.color24:  #076678
+*.color66:  #427b58
+*.color88:  #9d0006
+*.color96:  #8f3f71
+*.color100: #79740e
+*.color108: #8ec07c
+*.color109: #83a598
+*.color130: #af3a03
+*.color136: #b57614
+*.color142: #b8bb26
+*.color167: #fb4934
+*.color175: #d3869b
+*.color208: #fe8019
+*.color214: #fabd2f
+*.color223: #ebdbb2
+*.color228: #f4e8ba
+*.color229: #fdf4c1
+*.color230: #ffffc8
+*.color234: #1d2021
+*.color235: #282828
+*.color236: #32302f
+*.color237: #3c3836
+*.color239: #504945
+*.color241: #665c54
+*.color243: #7c6f64
+*.color244: #928374
+*.color245: #928374
+*.color246: #a89984
+*.color248: #bdae93
+*.color250: #d5c4a1
