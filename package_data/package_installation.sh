@@ -19,9 +19,10 @@ BSPWM_PACKAGES="bspwm_packages.cfg"
 BSPWM_AUR_PACKAGES="bspwm_aur_packages.cfg"
 
 run_with() {
+	[[ "$1" == "pacman" ]] && cmd="sudo pacman" || cmd="$1"
 	read -r -n 1 -p "[y/n]: " REPLY
 	case "$REPLY" in
-		[yY])		echo; sudo "$1" -S $(cat "$2" | grep -v '^#') ;;
+		[yY])		echo; $cmd -S $(grep -v '^#' "$2") ;;
 		*) 			echo ;;
 	esac
 }
