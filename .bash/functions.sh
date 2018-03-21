@@ -118,7 +118,7 @@ git-delete-cached() {
 psgrep() {
 	local list=$(ps aux)
 	echo -e "$list" | head -n1
-	echo -e "$list" | grep $1 --color=always | grep -v grep
+	echo -e "$list" | grep -i $1 --color=always | grep -v grep
 }
 
 memhogs () {
