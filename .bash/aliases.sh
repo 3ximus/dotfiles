@@ -24,6 +24,7 @@ alias ....='cd ../../../'
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias diff='diff --color=auto'
+alias pacman='pacman --color=auto'
 alias less='less -MR'
 alias vi='vim'
 alias gdb='gdb -q'
@@ -32,7 +33,7 @@ alias alert="echo -ne '\a'"
 alias clipboard-in='xclip -in -selection clipboard'
 alias clipboard-out='xclip -out -selection clipboard'
 alias perl-regex='perl -p -i -e'
-alias grep-bin='grep -obUaP' # pattern like: "\xde\xad"
+alias grep-bin='grep -oUaP' # pattern like: "\xde\xad"
 alias htop-mem='htop --sort-key=PERCENT_MEM'
 alias htop-cpu='htop --sort-key=PERCENT_CPU'
 
@@ -55,6 +56,7 @@ alias activate='source $(find . -regex .*activate$)'
 # SSH
 alias ssh-new-bash-session='eval `ssh-agent` && ssh-add'
 alias ssh-new-session='keychain ~/.ssh/id_rsa && source ~/.keychain/$HOSTNAME-sh'
+alias load-keychain='[[ -f "${HOME}/.ssh/id_rsa" ]] && keychain "${HOME}/.ssh/id_rsa" --quiet && source "${HOME}/.keychain/${HOSTNAME}-sh"'
 
 # PLASMA
 alias restart-plasmashell='killall plasmashell && kstart5 $_ &>/dev/null'

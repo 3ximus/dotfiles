@@ -1,14 +1,19 @@
 #!/bin/sh
 
+set -e
+
 if [ -z $1 ] ; then
-	PAPIRUS=/usr/share/icons/Papirus-Dark/
+	PAPIRUS=/usr/share/icons/Papirus-Dark
 else
 	PAPIRUS=$1
 fi
-echo -e "Copying \033[33mNormal Icons\033[m icons"
+echo -e "Copying \033[1;33mNormal Icons\033[m icons"
 sudo cp $PWD/*.svg $PAPIRUS/16x16/apps/
 
-echo -e "Copying \033[35mDiscord\033[m icons"
+# remove errors when launching GUI apps
+sudo sed -i.orig '/Inherits/ s/\(ubuntu-mono-dark\|gnome\|Mint-X\|elementary\),\?//g' $(dirname "$PAPIRUS")/{ePapirus,Papirus,Papirus-Light,Papirus-Dark}/index.theme
+
+echo -e "Copying \033[1;35mDiscord\033[m icons"
 if [[ -d /opt/discord ]]; then
 	sudo cp $PWD/discord.png /opt/discord/
 	if hash asar &>/dev/null ; then
@@ -32,8 +37,8 @@ if [[ -d /opt/discord ]]; then
 
 fi
 
-echo -e "Copying \033[32mWhatsApp\033[m icons"
-[[ -d /opt/whatsapp-web/resources/app ]] && cp $PWD/whatsapp.png /opt/whatsapp-web/resources/app/icon.png
+echo -e "Copying \033[1;32mWhatsApp\033[m icons"
+[[ -d /opt/whats-app-web/resources/app ]] && cp $PWD/whatsapp.png /opt/whats-app-web/resources/app/icon.png
 
 
 

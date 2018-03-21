@@ -43,6 +43,7 @@ run_with yaourt "$AUR_PACKAGES"
 
 echo -en "\e[1;33;40mInstall bspwm packages? \e[0m"
 run_with pacman "$BSPWM_PACKAGES"
+echo -en "\e[1;33;40mInstall bspwm AUR packages? \e[0m"
 run_with yaourt "$BSPWM_AUR_PACKAGES"
 
 echo -en "\e[1;33;40mInstall plasma packages? \e[0m"
