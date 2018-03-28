@@ -48,7 +48,7 @@ padding-right = 0
 module-margin-right = 0
 module-margin-left = 0
 
-modules-right = keyboard separator network separator volume separator battery separator date
+modules-right = keyboard separator volume separator battery separator date
 modules-center = mpd spotify
 modules-left = bspwm title
 
@@ -107,9 +107,10 @@ format-charging = <label-charging>
 format-discharging = <ramp-capacity> <label-discharging>
 format-charging-padding = 2
 format-discharging-padding = 2
-label-full =  %percentage%
+label-full =  %percentage%%
 label-charging =  %percentage%%
 label-discharging = %percentage%%
+label-full-padding = 2
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 

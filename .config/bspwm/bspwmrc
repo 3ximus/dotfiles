@@ -21,7 +21,7 @@ bspc config presel_feedback_color   "#7c6f64"
 
 # bspc rule -a urxvt desktop='^1' focus=on
 bspc rule -a Firefox desktop='^2' focus=on
-bspc rule -a Vivaldi desktop='^2' focus=on
+bspc rule -a vivaldi desktop='^2' focus=on
 bspc rule -a Spotify desktop='^4' focus=on
 
 polybar bar &
