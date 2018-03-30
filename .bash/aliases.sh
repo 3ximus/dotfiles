@@ -46,6 +46,7 @@ alias git-lfs='git rev-list --objects --all | grep "$(git verify-pack -v .git/ob
 # pacman / aur
 alias aur-packages='pacman -Qm'
 alias list-packages='expac -H M "%m\t%n" | sort -h'
+alias paccache-clean='paccache -rk1 && paccache -ruk0'
 
 # transmission
 alias transmissiond-start='transmission-daemon -g ~eximus/.config/transmission/'
