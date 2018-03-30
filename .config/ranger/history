@@ -46,5 +46,5 @@ open_with q
 cd 
 find vimr
 find tea
-delete
 search vivaldi
+delete
