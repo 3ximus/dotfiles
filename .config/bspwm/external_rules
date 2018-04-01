@@ -7,5 +7,5 @@ instance=$3
 # echo "$wid $class $instance" >> /tmp/bspwm-windows.log
 
 if [ -z "$instance" ] ; then
-	echo "desktop=^4"
+	echo "desktop=^4 focus=on"
 fi
