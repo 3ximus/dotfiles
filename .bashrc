@@ -128,18 +128,18 @@ fi
 # print_on_exit () { printf "$(cat ~/.banner)"; sleep 0.3; }
 # trap print_on_exit EXIT
 
-# konsole background blur
-if [[ $UID != 0 && -z $SSH_CLIENT ]]; then
-	if hash qdbus 2>/dev/null && qdbus &>/dev/null; then
-		konsolex=$(qdbus | grep konsole | cut -f 2 -d\ )
-		if [ -n konsolex ]; then
-			for konsole in $konsolex; do
-				xprop -f _KDE_NET_WM_BLUR_BEHIND_REGION 32c -set _KDE_NET_WM_BLUR_BEHIND_REGION 0 -id \
-					`qdbus $konsole /konsole/MainWindow_1 winId`;
-			done
-		fi
-	fi
-fi
+# konsole background blur (not needed for latest console versions)
+# if [[ $UID != 0 && -z $SSH_CLIENT ]]; then
+# 	if hash qdbus 2>/dev/null && qdbus &>/dev/null; then
+# 		konsolex=$(qdbus | grep konsole | cut -f 2 -d\ )
+# 		if [ -n konsolex ]; then
+# 			for konsole in $konsolex; do
+# 				xprop -f _KDE_NET_WM_BLUR_BEHIND_REGION 32c -set _KDE_NET_WM_BLUR_BEHIND_REGION 0 -id \
+# 					`qdbus $konsole /konsole/MainWindow_1 winId`;
+# 			done
+# 		fi
+# 	fi
+# fi
 
 # ==============
 #   VARIABLES
