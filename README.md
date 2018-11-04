@@ -4,7 +4,6 @@
 
 - firefox contains my stylish.sqlite file for [stylish 2.1.1](https://addons.mozilla.org/en-US/firefox/addon/stylish/versions/?page=1#version-2.1.1) addon _(new versions support site skins but not firefox skins)_
 - fonts in .fonts are mostly fonts for [powerline](https://github.com/powerline/fonts) support
-- vscode contains my _user settings_, _keyboard shortcuts_ and a _list of installed extensions_
 - konsole contains my konsole themes and profile (lives in `$HOME/.local/share/konsole`)
 - plasma contains my _keybindings_, _window rules_ (can be imported through settings GUI)
 - icons contains [papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) icons edited to match gruvbox style _(see my topbar screenshot)_
@@ -12,6 +11,7 @@
 - spotify contains my spotify theme (with gruvbox colorscheme), you will need [oomox](https://github.com/actionless/oomox) installed, then run the script inside
 
 ## .config files (Mainly files for [bspwm](https://github.com/baskerville/bspwm) + [sxhkd](https://github.com/baskerville/sxhkd) + [polybar](https://github.com/jaagr/polybar) + [Compton](https://github.com/chjj/compton))
+- Code contains my _user settings_, _keyboard shortcuts_ and a _list of installed extensions_
 - rofi directory used for [rofi](https://github.com/DaveDavenport/rofi) - see my custom [rofi launch script for Plasma](.bash/scripts/rofi-blurred)
 - zathura directory with gruvbox colorstyle for zathura copied from [abdullaev](https://github.com/abdullaev/dotfiles/blob/master/.config/zathura/zathurarc)
 - css directory contains css themes (currently only whatsapp copied from [this](https://userstyles.org/styles/142096/dark-whatsapp-theme-by-mew) and changed colors to match the gruvbox colorscheme)

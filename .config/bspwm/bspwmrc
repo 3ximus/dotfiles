@@ -24,6 +24,7 @@ bspc condig pointer_modifier mod2 # use Alt key with mouse to move windows
 # bspc rule -a urxvt desktop='^1' focus=on
 bspc rule -a Firefox desktop='^2' focus=on
 bspc rule -a Vivaldi-stable desktop='^2' focus=on
+bspc rule -a Code desktop='^3' focus=on
 bspc rule -a whatsapp-nativefier-7bbd2c desktop='^5' focus=on
 
 bspc config external_rules_command $HOME/.config/bspwm/external_rules

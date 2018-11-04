@@ -1,50 +1,50 @@
-mkdir staging
-rename papers-ricardo
-rename 1402.
-rename network-traffic-anomaly-detection.pdf
-mkdir network
-rename ids-nn-good-resume-on-previous-work.pdf
-rename hardening-deep-neural-network-adversarial-model-cascades.pdf
-rename mov
-rename .pdf
-rename evaluating-the-robustness-of-neural-networks.pdf
-rename learning-to-evade-static-ml-malware-models.pdf
-mkdir
-mkdir malware
-touch NOTES
-open_with 1
-touch DATASETS.txt
-rename NOTES.txt
-open_with md
-search snort
-rename spitFlows.py
-rename normalbrowsing-flow.csv
-rename nmap-flow.csv
+mkdir meira-papers
 open_with 2
-rename Friday-WorkingHours-Afternoon-DDos.pcap-ISCX.csv
-rename Friday-WorkingHours-Afternoon-PortScan.pcap-ISCX.csv
-rename Friday-WorkingHours-Afternoon-DDos-flow.csv
-rename Friday-WorkingHours-Afternoon-PortScan-flow.csv
-rename Friday-WorkingHours-Morning-flow.csv
-rename Monday-WorkingHours-flow.csv
-rename Thursday-WorkingHours-Afternoon-Infilteration-flow.csv
-rename Tuesday-WorkingHours-flow.csv
-rename Wednesday-workingHours-flow.csv
-wq
-rename distriuted
-rename distributed
-rename test
-rename train
-mkdir layer2 layer1
-mkdir layer1
-mkdir layer2
+rmdir
 open_with 
-open_with vim
-open_with
-open_with q
-
-cd 
-find vimr
-find tea
-search vivaldi
+rename benign-tekever-fastdos.csv
+rename csv-train-layer1-trainingNN1-a0519b7-c29118e
+rename csv-train-layer1-trainingNN1-c29118e
+rename csv-train-layer2-benign-tekever-bruteforce-720faa1
+bulkrename 
+rename ensemble-ids.pdf
+rename unsupervised-HTM-networks.pdf
+rename encrypted-traffic-classification-anderson.pdf
+rename deep-packet.pdf
+rename network-packet-classification-using-nn.pdf
+rename long-short-term-memory-recurrent-nn.pdf
+open_with zathura -c .
+open_with 1
+rename CIC_balanced.csv
+rename CIC_real_proportion.csv
+rename options.cfg
+rename knn.cfg
+rename rf.cfg
+rename mlp.cfg
+rename naive.cfg
+rename logistic.cfg
+rename bayes.cfg
+rename dt.cfg
+rename svm.cfg
+mkdir double
+search rbf
+search fcm
+search fuz
+search flow
+search colle
+search snort
+search ensemble
+rename 76959-fabio-almeida.pdf
+rename flow.py
+rename classify.sh
+rename extract_flows.py
+rename ids.sh
+rename classifier.py
+rename models
+rename node.py
+rename flows.py
+rename metrics.pdf
+search 
+find sh
+mkdir S2
 delete

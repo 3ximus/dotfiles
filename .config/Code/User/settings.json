@@ -36,7 +36,7 @@
     //"python.pythonPath": "/usr/bin/python2.7",
     // Disabling a bunch of stupid warnings
     "python.linting.pylintArgs": [
-        "--disable=W0312,W0212,W0621,C,R0903,R0902,R0913,E1136"
+        "--disable=W0312,W0212,W0621,W0122,W0123,C,R0903,R0902,R0913,E1136"
     ],
     // Fully qualified path to tag file (exuberant ctag file), used to provide workspace symbols.
     "python.workspaceSymbols.tagFilePath": "${workspaceRoot}/.tags",
@@ -105,6 +105,7 @@
         "suppressLineUncommittedWarning": false,
         "suppressNoRepositoryWarning": false,
         "suppressResultsExplorerNotice": false,
+        "suppressShowKeyBindingsNotice": true,
         "suppressUpdateNotice": false,
         "suppressWelcomeNotice": true
     },
@@ -124,5 +125,6 @@
     ],
     "gitlens.statusBar.enabled": false,
     "extensions.ignoreRecommendations": true,
-    "gitlens.keymap": "alternate"
+    "gitlens.keymap": "alternate",
+    "gitlens.historyExplorer.enabled": true
 }

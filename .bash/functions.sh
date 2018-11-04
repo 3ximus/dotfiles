@@ -90,6 +90,7 @@ extract () {
 			case "$f" in
 				*.tar.bz2)	 echo "tar xjf $f"	&& tar xjf "$f"				;;
 				*.tar.gz)	 echo "tar xzf $f"	&& tar xzf "$f"				;;
+				*.tar.xz)	 echo "tar xJf $f"  && gunzip "$f"				;;
 				*.bz1)		 echo "bunzip2 $f"	&& bunzip2 "$f"				;;
 				*.rar)		 echo "unrar e $f"	&& unrar e "$f"				;;
 				*.gz)		 echo "gunzip $f"  && gunzip "$f"				;;

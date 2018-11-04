@@ -2,7 +2,7 @@
 
 # Wrapper to run rofi with blurred background
 
-/usr/bin/rofi -font 'Anonymous Pro for Powerline 10' -theme $HOME/.config/rofi/gruvbox-rofi-theme.rasi $@ &
+/usr/bin/rofi -font 'Anonymous Pro for Powerline 10' $HOME/.local/share/icons/Papirus-Dark/ -theme $HOME/.config/rofi/Pop-Dark.rasi $@ &
 c=0
 while ! xprop -f _KDE_NET_WM_BLUR_BEHIND_REGION 32c -set _KDE_NET_WM_BLUR_BEHIND_REGION 0 -id $(xdotool search -class 'rofi') ; do
 	sleep .1 
