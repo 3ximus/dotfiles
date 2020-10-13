@@ -50,14 +50,21 @@ findremove() {
 
 }
 
+delete_older_than_xdays() {
+	if [ $# -eq 0 ] ; then
+		echo 'delete_older_than_xdays N_DAYS [path]'
+	else
+		if [ $# -ne 1 ] ; then 
+			find . -mtime +$1 -delete
+		else
+			find "$2" -mtime +$1 -delete
+		fi
+	fi
+}
+
 # Simplify searching for keyword in current dir, and allow to pass more parameters to grep
 grephere() {
 	grep -e "$1" "${@:2}" -d recurse .
-}
-
-# run command when some file changes
-launch-when-modified() { # entr is the program that does the work
-	find . -iname "*$1*" | entr "${@:2}"
 }
 
 remove-special-chars-from-name() {
@@ -92,7 +99,7 @@ extract () {
 				*.tar.gz)	 echo "tar xzf $f"	&& tar xzf "$f"				;;
 				*.tar.xz)	 echo "tar xJf $f"  && gunzip "$f"				;;
 				*.bz1)		 echo "bunzip2 $f"	&& bunzip2 "$f"				;;
-				*.rar)		 echo "unrar e $f"	&& unrar e "$f"				;;
+				*.rar)		 echo "unrar e $f"	&& unrar x "$f"				;;
 				*.gz)		 echo "gunzip $f"  && gunzip "$f"				;;
 				*.tar)		 echo "tar xf $f"  && tar xf "$f"				;;
 				*.tbz2)		 echo "tar xjf $f"	&& tar xjf "$f"				;;
@@ -109,8 +116,9 @@ extract () {
 }
 
 # i hate typing extract...
-alias unpack=extract
+alias un=extract
 
+# delete files from cache
 git-delete-cached() {
 	git filter-branch --force --index-filter "git rm --cached --ignore-unmatch $@" --prune-empty --tag-name-filter cat -- --all
 }
@@ -125,7 +133,7 @@ psgrep() {
 memhogs () {
 	TR=`free|grep Mem:|awk '{print $2}'`
 
-	ps axo rss,comm,pid | awk -v tr=$TR '{proc_list[$2]+=$1;} END {for (proc in proc_list) {proc_pct=(proc_list[proc]/tr)*100; printf("%d\t%-16s\t%0.2f%\n",proc_list[proc],proc,proc_pct);}}' | sort -rn | head -n 10
+	ps axo rss,comm,pid | awk -v tr=$TR '{proc_list[$2]+=$1;} END {for (proc in proc_list) {proc_pct=(proc_list[proc]/tr)*100; printf("%d\t%-16s\t%0.2f%%\n",proc_list[proc],proc,proc_pct);}}' | sort -rn | head -n 10
 }
 
 psmem () { # not working properly
@@ -135,6 +143,10 @@ psmem () { # not working properly
 	$(
 		echo "scale=4; ($( ps axo rss,comm | grep $PROCNAME | awk '{ TOTAL += $1 } END { print TOTAL }' )/$( free | head -n 2 | tail -n 1 | awk '{ print $2 }' ))*100" | bc
 	)% of system RAM;
+}
+
+download_m3u8_to_mp4() { # download m3u8 stream to an mp4 file
+	ffmpeg -i "$1" -c copy -bsf:a aac_adtstoasc output.mp4
 }
 
 

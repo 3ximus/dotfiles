@@ -41,23 +41,22 @@ grab_dot_files() {
 
 grab_firefox_files() {
 	files="${files}\n#--------------\n# firefox files\n#--------------\n\n"
-# stylish file for firefox
 	if [ -z $remote ];then
-		if [[ -f "${DATA_PATH}/firefox/stylish.sqlite" ]]; then
+		if [[ -f "${DATA_PATH}/firefox/chrome" ]]; then
 			location="$(find $DESTINATION_PATH/.mozilla/firefox/ -name *.default | tail -n1)"
 			if [ ! -z $location ] ; then
-				files="${files}#${DATA_PATH}/firefox/stylish.sqlite::${location}\n"
+				files="${files}#${DATA_PATH}/firefox/chrome::${location}\n"
 			else
-				echo -e "[\033[1;31mFAILED\033[0m] Couldn't get firefox stylish file location"
+				echo -e "[\033[1;31mFAILED\033[0m] Couldn't get firefox data location"
 			fi
 		fi
 	else
 		echo "Getting remote firefox profile path, if prompted insert remote location's password."
 		location="$(ssh $remote_location $remote_port_ssh "find $DESTINATION_PATH/.mozilla/firefox/ -name *.default | tail -n1")"
 		if [ ! -z $location ] ; then
-			files="${files}#${DATA_PATH}/firefox/stylish.sqlite::${location}\n"
+			files="${files}#${DATA_PATH}/firefox/chrome::${location}\n"
 		else
-			echo -e "[\033[1;31mFAILED\033[0m] Couldn't get firefox stylish file location"
+			echo -e "[\033[1;31mFAILED\033[0m] Couldn't get firefox data location"
 		fi
 	fi
 }
@@ -132,13 +131,18 @@ post_action_vscode() {
 
 install_whatsapp() {
 	if hash nativefier &>/dev/null ; then
-		nativefier --inject "${DATA_PATH}/css/whatsapp-web-theme.css" --icon "${DATA_PATH}/icons/whatsapp.png" --name whatsapp --counter --single-instance web.whatsapp.com /tmp/whatsapp
+		# INJECT CSS CODE, NOT WORKING FOR WHATSAPP ANYMORE
+		# echo "Choose whatsapp theme:"
+		# select theme_path in ${DATA_PATH}/css/* ; do break; done
+		# nativefier --inject $theme_path --icon "${DATA_PATH}/icons/whatsapp.png" --name whatsapp --counter --single-instance web.whatsapp.com /tmp/whatsapp
+		nativefier --icon "${DATA_PATH}/icons/whatsapp.png" --name whatsapp --counter --single-instance web.whatsapp.com /tmp/whatsapp
 		if [ -d "/opt/whatsapp" ] ; then
 			echo "Deleting previous WhatsApp installation"
 			sudo rm -r "/opt/whatsapp" 
 		fi
 		sudo mv /tmp/whatsapp/whatsapp* /opt/whatsapp
 		rm /tmp/whatsapp -r
+		echo "Whatsapp installed successfully"
 	else
 		echo -e '\033[31mnativefier is not installed\033[m'
 	fi
@@ -206,7 +210,6 @@ if [[ "$1" = "help" || "$1" = "-help" || "$1" = "--help" || "$1" = "-h" ]]; then
 	echo "Usage install_my_config [OPTIONS] [PARAMETERS] [REMOTE]
 
 Options:
-	clean                    clean all generic files
 	generic                  only dot files
 	vscode                   Visual Studio Code files
 	firefox                  Firefox files
@@ -304,6 +307,7 @@ fi
 
 echo "Running with: DATA PATH:         $DATA_PATH"
 echo "              DESTINATION PATH:  $DESTINATION_PATH"
+echo "Press any key if this is okay..."; read
 
 # ----------------------
 #      SELECT FILES

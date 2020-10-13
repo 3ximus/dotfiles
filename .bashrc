@@ -60,9 +60,9 @@ HISTSIZE=20000
 HISTFILESIZE=10000
 
 # for hh -> https://github.com/dvorka/hstr
-export HH_CONFIG=hicolor,rawhistory
-# history file sync
-PROMPT_COMMAND="${PROMPT_COMMAND};history -a; history -n"
+export HSTR_CONFIG=hicolor,rawhistory
+# history file sync ; careful with this option since history will be mixed between terminals
+# PROMPT_COMMAND="history -a; history -n"
 if hash /usr/bin/hh 2>/dev/null; then
 	# if this is interactive shell, then bind hh to Ctrl-r (for Vi mode check doc)
 	if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hh -- \C-m"'; fi

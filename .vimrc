@@ -21,6 +21,11 @@ Plugin 'wincent/command-t'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'junegunn/goyo.vim'
 
+Plugin 'PProvost/vim-ps1'
+Plugin 'vim-python/python-syntax'
+
+Plugin 'benknoble/vim-auto-origami' "auto folds
+
 Plugin 'morhetz/gruvbox'
 
 call vundle#end()
@@ -53,7 +58,7 @@ set softtabstop=0 noexpandtab
 set autoindent
 set smartindent
 set smarttab
-autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab autoindent "because someone has too much screen space in their eyesight 
+autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab autoindent "because someone has too much screen space in their eyesight
 "set expandtab "tabs are spaces, aka cancer
 "setlocal lcs=tab:>-,trail:-,eol:¬ list! " use list mode mapped to F2 when vim is opened
 
@@ -79,6 +84,12 @@ set autoread
 "if has ("mouse")
 " set mouse=i
 "endif
+
+
+" To diable bell sounds, specially on windows
+set noerrorbells visualbell t_vb=
+
+
 
 " ----------------------------
 " Functions
@@ -120,7 +131,7 @@ command! -nargs=1 ConvertToSpaces :call ConvertToSpaces( '<args>' )
 function! TabSpaceToogle()
 	if &expandtab
 		:call ConvertToTabs(&ts)
-	else 
+	else
 		:call ConvertToSpaces(&sw)
 	endif
 endfunction
@@ -209,11 +220,15 @@ inoremap <C-k> <Esc>:m .-2<CR>gi
 vnoremap <C-j> :m '>+1<CR>gv
 vnoremap <C-k> :m '<-2<CR>gv
 
+"use xclip
+vnoremap <leader>y :w !xclip -selection clipboard<CR><CR>
+nnoremap <leader>yy :w !xclip -selection clipboard<CR><CR>
+
 " fold with fold nest max of 1
 nmap <leader>fa :call Fold(1)<CR>:set foldmethod=manual<CR>
 " remove trailing whitespaces
 nmap <leader>s :call StripTrailingWhitespace()<CR>
-nnoremap <leader><Tab> :call TabSpaceToogle()<CR> 
+nnoremap <leader><Tab> :call TabSpaceToogle()<CR>
 " display line endings and tabs
 nnoremap <F2> :<C-U>setlocal lcs=tab:>-,trail:-,eol:¬ list! list? <CR>
 " map hidde terminal elements
@@ -334,6 +349,22 @@ let g:goyo_width = 80
 let g:goyo_height= '100%'
 let g:goyo_linenr = 0
 
+
+"Auto Origami (auto manage fold columns)
+
+augroup auto_origami
+	au!
+
+	au CursorHold,BufWinEnter,WinEnter * AutoOrigamiFoldColumn
+augroup END
+let g:auto_origami_foldcolumn = 1
+
+"Python syntax highlight
+let g:python_highlight_all = 1
+let g:python_highlight_indent_errors = 1
+let g:python_highlight_space_errors = 0
+let g:python_highlight_operators = 0
+
 " ---------------------
 " Plugin Keymaps
 " ---------------------
@@ -341,11 +372,11 @@ let g:goyo_linenr = 0
 map <C-t> :NERDTreeToggle<CR>
 nnoremap U :GundoToggle<CR>
 nnoremap <C-g> :Goyo<CR>:hi Normal ctermbg=none<CR>
-nmap <leader>ha <Plug>GitGutterStageHunk
-nmap <leader>hu <Plug>GitGutterUndoHunk
-nmap <leader>hv <Plug>GitGutterPreviewHunk
-nmap <leader>hn <Plug>GitGutterNextHunk
-nmap <leader>hp <Plug>GitGutterPrevHunk
+nmap <leader>ha <Plug>(GitGutterStageHunk)
+nmap <leader>hu <Plug>(GitGutterUndoHunk)
+nmap <leader>hv <Plug>(GitGutterPreviewHunk)
+nmap <leader>hn <Plug>(GitGutterNextHunk)
+nmap <leader>hp <Plug>(GitGutterPrevHunk)
 nnoremap <silent> <C-b> :CommandTMRU<CR>
 
 " ---------------------
