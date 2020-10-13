@@ -4,10 +4,12 @@ $include /etc/inputrc
 set skip-completed-text on
 # ignore path case
 set completion-ignore-case on
+# treat hyphens and underscores as equivalent
+set completion-map-case on
 # use only one tab to provide glob completion
-#set show-all-if-ambiguous on
+# set show-all-if-ambiguous on
 
-# mark directorios and symlinks on completion with / or @
+# mark directorios, executables and symlinks on completion with / , * or @
 set mark-directories on
 set mark-symlinked-directories on
 
@@ -26,7 +28,7 @@ set keymap vi-command
 set keymap vi-insert
 "\ee": emacs-editing-mode
 "\ex": vi-movement-mode
-# make v i-insert behave like usual emacs
+# make vi-insert behave like usual emacs
 "\C-k": kill-line
 "\C-a": beginning-of-line
 "\C-e": end-of-line
@@ -49,24 +51,35 @@ set keymap emacs
 "\C-p": history-search-backward
 "\C-n": history-search-forward
 
-"\C-f": nop
-# "\C-f": shell-expand-line
+"\C-f": shell-expand-line
 # "\C-f": glob-expand-word
 "\C-g": dabbrev-expand
-"\C-h": complete-into-braces
+# "\C-h": complete-into-braces
 
 "\C-xr": re-read-init-file
 "\C-xi": redraw-current-line
 
+"\C-je": edit-and-execute-command
+
+"\C-j": nop
 # quote word near cursor
-"\C-fq": "\eb\"\ef\""
+"\C-jq": "\eb\"\ef\""
 # reload bashrc
-"\C-fb": "\C-usource ~/.bashrc\C-m"
+"\C-jb": "\C-u source ~/.bashrc\C-m"
 # edit the path
-"\C-fp": "PATH=${PATH}\e\C-e\C-a\ef\C-f"
+"\C-jp": "PATH=${PATH}\e\C-e\C-a\ef\C-f"
 # jump into last comand directory
-"\C-fd": 'cd !$ \015'
+"\C-jd": 'cd !$ \015'
+# generate awk command
+"\C-ja": 'awk \'{}\'\eOD\eOD'
 # make subcommand
-"\C-fm": '\C-a "$(\C-e)"\C-a'
+"\C-jm": '\C-a "$(\C-e)"\C-a'
 # change comand
-"\C-fc": "\C-a\ef\C-u"
+"\C-jc": "\C-a\ef\C-u"
+# add sudo before command
+"\C-js": "\C-asudo \C-e"
+# run command in every subdirectory
+"\C-jf": 'for f in *; do cd $f &&  && cd .. ; done\eb\eb\eOD\eOD\eOD\eOD'
+# sync history
+"\C-jh": ' history -a; history -n\C-m'
+

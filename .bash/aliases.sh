@@ -20,22 +20,28 @@ alias ..='cd ..'
 alias ...='cd ../../'
 alias ....='cd ../../../'
 
+alias dirs='dirs -v'
+
 # Utilities
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias diff='diff --color=auto'
 alias pacman='pacman --color=auto'
-alias less='less -MR'
+alias less='less -Mrix4'
 alias vi='vim'
 alias gdb='gdb -q'
 alias dd='dd status=progress'
 alias alert="echo -ne '\a'"
-alias clipboard-in='xclip -in -selection clipboard'
-alias clipboard-out='xclip -out -selection clipboard'
 alias perl-regex='perl -p -i -e'
 alias grep-bin='grep -oUaP' # pattern like: "\xde\xad"
 alias htop-mem='htop --sort-key=PERCENT_MEM'
 alias htop-cpu='htop --sort-key=PERCENT_CPU'
+
+# Clipboard
+alias clipboard-in='xclip -in -selection clipboard'
+alias ccopy='xclip -in -selection clipboard'
+alias clipboard-out='xclip -out -selection clipboard'
+alias cpaste='xclip -out -selection clipboard'
 
 # mount ntfs filesystems with correct permissions
 alias mount-ntfs='sudo mount -o uid=1000,gid=1000,dmask=027,fmask=137'
@@ -45,7 +51,7 @@ alias git-lfs='git rev-list --objects --all | grep "$(git verify-pack -v .git/ob
 
 # pacman / aur
 alias aur-packages='pacman -Qm'
-alias list-packages='expac -H M "%m\t%n" | sort -h'
+alias list-packages='expac -H M "%m\t%-30n" | sort -rh | less'
 alias paccache-clean='paccache -rk1 && paccache -ruk0'
 
 # transmission
@@ -86,8 +92,6 @@ alias plex='sudo systemctl start plexmediaserver.service'
 alias plex-status='systemctl status plexmediaserver.service'
 alias plex-stop='sudo systemctl stop plexmediaserver.service'
 alias plex-restart='sudo systemctl restart plexmediaserver.service'
-
-alias crypto-cap='coinmon -c eur -t $(($LINES / 2 - 2))'
 
 # PATH ALIASES
 

@@ -47,8 +47,10 @@ __color() {
 
 __virtual_env () {
 	if [ -z "$VIRTUAL_ENV_DISABLE_PROMPT" ] ; then
-		if [ "$VIRTUAL_ENV" != "" ] ; then
+		if [ ! -z "$VIRTUAL_ENV" ] ; then
 			echo -en " \001\e[${VenvColor}m\002[`basename \"$VIRTUAL_ENV\"`]"
+		elif [ ! -z "$CONDA_DEFAULT_ENV" ] ; then
+			echo -en " \001\e[${VenvColor}m\002[$CONDA_DEFAULT_ENV]"
 		fi
 	fi
 }
@@ -78,5 +80,5 @@ __prompt_function() {
 	__git_ps1 "$ALT_PS1" "$ALT_PS2" "$(__color "$GitColor") %s"
 }
 
-PROMPT_COMMAND='__prompt_function'
+PROMPT_COMMAND="__prompt_function"
 
