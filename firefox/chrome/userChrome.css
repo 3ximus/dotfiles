@@ -1,9 +1,0 @@
-#nav-bar { z-index: 1 !important;}
-
-#PersonalToolbar {
-   margin-top: -23px !important;
-   transition: all 0.4s ease 0s !important;}
-
-#navigator-toolbox:hover>#PersonalToolbar {
-   margin-top: 0px !important;
-   transition: all 0.4s ease 0s !important; }

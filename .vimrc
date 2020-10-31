@@ -11,22 +11,35 @@ call vundle#rc()
 Plugin 'gmarik/vundle'
 Plugin 'vim-airline/vim-airline'
 Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
+
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-commentary'
-Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+Plugin 'jeffkreeftmeijer/vim-numbertoggle' "absolute numbers when window looses focus
 Plugin 'sjl/gundo.vim'
-Plugin 'wincent/command-t'
 Plugin 'easymotion/vim-easymotion'
-Plugin 'junegunn/goyo.vim'
+" Plugin 'junegunn/goyo.vim'
+Plugin 'AndrewRadev/linediff.vim' "diff between two chuncks of text
 
+" tmux clipboard sharing
+Plugin 'tmux-plugins/vim-tmux-focus-events'
+Plugin 'roxma/vim-tmux-clipboard'
+
+" extra syntax highlight
 Plugin 'PProvost/vim-ps1'
 Plugin 'vim-python/python-syntax'
 
 Plugin 'benknoble/vim-auto-origami' "auto folds
 
+"colorschemes
 Plugin 'morhetz/gruvbox'
+
+" Download from package manager vim-command-t
+" because it satisfies ruby support easily
+" Plugin 'wincent/command-t'
 
 call vundle#end()
 filetype plugin indent on
@@ -34,8 +47,6 @@ filetype plugin indent on
 " ----------------------------
 " General Options
 " ----------------------------
-
-let mapleader=","
 
 "encoding
 set encoding=utf-8
@@ -85,11 +96,8 @@ set autoread
 " set mouse=i
 "endif
 
-
 " To diable bell sounds, specially on windows
 set noerrorbells visualbell t_vb=
-
-
 
 " ----------------------------
 " Functions
@@ -155,52 +163,16 @@ function! ToggleHiddenAll()
 	endif
 endfunction
 
-" Show or hide foldcolumn when folds if there are folds present
-function UpdateFoldColumn()
-	function! HasFoldsInner()
-		let origline=line('.')
-		:norm zk
-		if origline==line('.')
-			:norm zj
-			if origline==line('.')
-				return 0
-			else
-				return 1
-			endif
-		else
-			return 1
-		endif
-		return 0
-	endfunction
-	let l:winview=winsaveview() "save window and cursor position
-	let foldsexist=HasFoldsInner()
-	if foldsexist
-		set foldcolumn=1
-	else
-		if line('.')!=1
-			:norm [z
-			:norm k
-		else
-			:norm ]z
-			:norm j
-		endif
-		let foldsexist=HasFoldsInner()
-		if foldsexist
-			set foldcolumn=1
-		else
-			set foldcolumn=0
-		endif
-	end
-	call winrestview(l:winview) "restore window/cursor position
-endfunction
-
 " -----------------------------
 " Keymaps
 " -----------------------------
 
+let mapleader=","
+
 " change buffers
 nmap <C-P> :bp<CR>
 nmap <C-N> :bn<CR>
+
 " remap completion
 if has("gui_running")
 	" C-Space seems to work under gVim on both Linux and win32
@@ -220,9 +192,14 @@ inoremap <C-k> <Esc>:m .-2<CR>gi
 vnoremap <C-j> :m '>+1<CR>gv
 vnoremap <C-k> :m '<-2<CR>gv
 
+" start a search for visually selected text
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+
 "use xclip
 vnoremap <leader>y :w !xclip -selection clipboard<CR><CR>
 nnoremap <leader>yy :w !xclip -selection clipboard<CR><CR>
+
+nmap <leader>x :bp<bar>bd #<CR>
 
 " fold with fold nest max of 1
 nmap <leader>fa :call Fold(1)<CR>:set foldmethod=manual<CR>
@@ -231,6 +208,8 @@ nmap <leader>s :call StripTrailingWhitespace()<CR>
 nnoremap <leader><Tab> :call TabSpaceToogle()<CR>
 " display line endings and tabs
 nnoremap <F2> :<C-U>setlocal lcs=tab:>-,trail:-,eol:¬ list! list? <CR>
+" toogle paste mode (to prevent indenting when pasting)
+set pastetoggle=<F3>
 " map hidde terminal elements
 nnoremap <leader>a :call ToggleHiddenAll()<CR>
 
@@ -296,10 +275,10 @@ if !exists('g:airline_symbols')
 endif
 if !has("gui_running") "running on console
 	" unicode symbols
-	" let g:airline_left_sep = ''
-	" let g:airline_right_sep = ''
-	" let g:airline_left_alt_sep = ''
-	" let g:airline_right_alt_sep = ''
+	let g:airline_left_sep = ''
+	let g:airline_right_sep = ''
+	let g:airline_left_alt_sep = ''
+	let g:airline_right_alt_sep = ''
 	let g:airline_symbols.branch = ''
 	"let g:airline_symbols.linenr = 'ln'
 	let g:airline_symbols.whitespace = ''
@@ -323,17 +302,22 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 "arrow symbols
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
-"let g:NERDTreeIndicatorMapCustom = {
-"	\ "Modified"	: "*",
-"	\ "Staged"		: "+",
-"	\ "Untracked"   : "-",
-"	\ "Renamed"		: "->",
-"	\ "Unmerged"	: "!=",
-"	\ "Deleted"		: "x",
-"	\ "Dirty"		: "~",
-"	\ "Clean"		: "v",
-"	\ "Unknown"		: "?"
-"	\ }
+
+"nerdtree-git
+let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
+" let g:NERDTreeGitStatusShowClean = 1 " default: 0
+" let g:NERDTreeGitStatusShowIgnored = 1 " a heavy feature may cost much more time. default: 0
+" let g:NERDTreeGitStatusIndicatorMapCustom = {
+" 	\ "Modified"	: "*",
+" 	\ "Staged"		: "+",
+" 	\ "Untracked"   : "-",
+" 	\ "Renamed"		: "->",
+" 	\ "Unmerged"	: "!=",
+" 	\ "Deleted"		: "x",
+" 	\ "Dirty"		: "~",
+" 	\ "Clean"		: "v",
+" 	\ "Unknown"		: "?"
+" 	\ }
 
 "GitGutter
 if !has("gui_running") "running on console
@@ -365,6 +349,11 @@ let g:python_highlight_indent_errors = 1
 let g:python_highlight_space_errors = 0
 let g:python_highlight_operators = 0
 
+" Gundo use python3
+if has('python3')
+	let g:gundo_prefer_python3 = 1
+endif
+
 " ---------------------
 " Plugin Keymaps
 " ---------------------
@@ -377,7 +366,19 @@ nmap <leader>hu <Plug>(GitGutterUndoHunk)
 nmap <leader>hv <Plug>(GitGutterPreviewHunk)
 nmap <leader>hn <Plug>(GitGutterNextHunk)
 nmap <leader>hp <Plug>(GitGutterPrevHunk)
+" list buffers with command-t
 nnoremap <silent> <C-b> :CommandTMRU<CR>
+
+noremap <leader>gs :Gstatus<CR>
+noremap <leader>gc :Gcommit<CR>
+noremap <leader>gd :Gdiff<CR>
+noremap <leader>gl :Glog<CR>
+noremap <leader>gv :Gblame<CR>
+
+noremap <leader>D :LinediffReset<CR>
+noremap <leader>d :Linediff<CR>
+
+" mark multiple line diffs
 
 " ---------------------
 " RUN COMMAND ON EVENTS

@@ -6,11 +6,18 @@
 [core]
 	editor = vim
 [alias]
-	unstage = reset HEAD --
+	unstage = restore --staged
 	last = log -1 HEAD
-	drop = checkout --
-	logx = log --oneline --graph --decorate --pretty=format:'%C(yellow)%h%Creset %s (%Cblue%an%Creset, %cr)'
+	logit = log --oneline --graph --pretty=format:'%C(yellow)%h%Creset %C(auto)%d%Creset %s (%Cblue%an%Creset, %cr)' --date-order  --color=always
+	log-all = log --all --graph --oneline --pretty=format:'%C(yellow)%h%Creset %C(auto)%d%Creset %s (%Cblue%an%Creset, %cr)' --date-order --color=always
 [diff]
 	tool = vimdiff
 [difftool]
 	prompt = false
+[merge]
+	tool = vimdiff
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

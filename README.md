@@ -63,6 +63,7 @@ Prompts support:
 - diferent colors for normal user / root / ssh session user (in **prompt 6, 7** this segment is hidden unless the user is root or in an ssh session)
 - python virtual environments. **except prompt 1**
 - last command exit status ( failed or succeded )
+z,s
 - compress some paths ( my repository path is compressed into "R:" . **except prompt 5, 6, 7**
 - background jobs counter
 - command counter **only prompt 5, 6, 7**
@@ -113,7 +114,6 @@ customized using [oomox](https://github.com/actionless/oomox) and my [customize 
 ### My other themes to go along with the gruvbox colorscheme
  - [GTK](https://github.com/3ximus/gruvbox-gtk)
  - [Plasma](https://github.com/3ximus/gruvbox-plasma)
- - [Firefox](https://github.com/3ximus/gruvbox-arc-firefox-theme)
  - [VS Code](https://github.com/jdinhlife/vscode-theme-gruvbox)
 
 

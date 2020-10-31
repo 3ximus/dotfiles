@@ -32,9 +32,10 @@ if ! hash import 2>/dev/null ; then
 fi
 
 echo "Select region."
-values=($(import -verbose /tmp/tmprec_region 2>/dev/null | awk -F'[ +x]' '{ print $3, $4, $7, $8}'))
+values=($(import -verbose /tmp/tmprec_region 2>&1| awk -F'[ +x]' '{ print $3, $4, $7, $8}'))
 
 # in case selected region is 1 pixel or outside border import will print some [[:alpha:]] chars (hopefully every time)
+echo $values
 if [ ! "${#values[@]}" == 4 ] || echo "${values[@]}" | grep "[[:alpha:]]" >/dev/null ; then
 	echo -e "\e[1;31mInvalid Region\e[0m"
 	exit 1
