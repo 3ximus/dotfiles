@@ -113,9 +113,14 @@ unset file
 # enable programmable completion features
 if ! shopt -oq posix; then
 	if [ -f /usr/share/bash-completion/bash_completion ]; then
-		. /usr/share/bash-completion/bash_completion
+		source /usr/share/bash-completion/bash_completion
 	elif [ -f /etc/bash_completion ]; then
-		. /etc/bash_completion
+		source /etc/bash_completion
+	fi
+
+	if [ -f /usr/share/bash-completion/completions/hub ]; then
+		source /usr/share/bash-completion/completions/hub
+		alias __git=hub
 	fi
 fi
 

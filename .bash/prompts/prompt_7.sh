@@ -9,7 +9,7 @@ GIT_PS1_SHOWDIRTYSTATE='nonempty' # show + for staged and * for unstaged
 GIT_PS1_SHOWSTASHSTATE='nonempty' # show $ for stash
 GIT_PS1_SHOWUNTRACKEDFILES='nonempty' # show % if untracked files exist
 GIT_PS1_SHOWCOLORHINTS='' # hide status colors
-GIT_PS1_SHOWUPSTREAM='verbose' # see diference from upstream: > ahead, < behind, <> diverging = equal (use verbose to see number of commits ahed or behind)
+GIT_PS1_SHOWUPSTREAM='git' # see diference from upstream: > ahead, < behind, <> diverging = equal (use verbose to see number of commits ahed or behind)
 GIT_PS1_DESCRIBE_STYLE='branch'
 
 # -----------------
@@ -80,5 +80,5 @@ __prompt_function() {
 	__git_ps1 "$ALT_PS1" "$ALT_PS2" "$(__color "$GitColor") %s"
 }
 
-PROMPT_COMMAND="__prompt_function"
+PROMPT_COMMAND='__prompt_function'
 
