@@ -2,7 +2,6 @@
 
 ## My main configuration files:
 
-- firefox contains my stylish.sqlite file for [stylish 2.1.1](https://addons.mozilla.org/en-US/firefox/addon/stylish/versions/?page=1#version-2.1.1) addon _(new versions support site skins but not firefox skins)_
 - fonts in .fonts are mostly fonts for [powerline](https://github.com/powerline/fonts) support
 - konsole contains my konsole themes and profile (lives in `$HOME/.local/share/konsole`)
 - plasma contains my _keybindings_, _window rules_ (can be imported through settings GUI)
