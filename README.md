@@ -18,6 +18,23 @@
 
 Most of my files are set with the [gruvbox](https://github.com/morhetz/gruvbox) colorscheme.
 
+## Cloning and installation
+
+This repository contains submodules for the vim extensions, therefore you have to clone the submodules for vim to work correctly. Do either:
+
+`git clone --recurse-submodules [this-repo-url]`
+
+or
+
+```
+git clone [this-repo-url]
+git submodule init
+git submodule update
+```
+
+A script is provided to link the files. Run `install_my_config.sh --help` for its usage.
+
+
 ## Screenshots
 
 ### Prompt 1

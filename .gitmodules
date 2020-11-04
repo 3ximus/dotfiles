@@ -1,0 +1,73 @@
+[submodule "gmarik/vundle"]
+	path = .vim/bundle/vundle
+	url = https://github.com/gmarik/vundle
+
+[submodule "vim-airline/vim-airline"]
+	path = .vim/bundle/vim-airline
+	url = https://github.com/vim-airline/vim-airline
+
+[submodule "scrooloose/nerdtree"]
+	path = .vim/bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree
+
+[submodule "Xuyuanp/nerdtree-git-plugin"]
+	path = .vim/bundle/nerdtree-git-plugin
+	url = https://github.com/Xuyuanp/nerdtree-git-plugin
+
+[submodule "airblade/vim-gitgutter"]
+	path = .vim/bundle/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter
+
+[submodule "tpope/vim-fugitive"]
+	path = .vim/bundle/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive
+
+[submodule "tpope/vim-surround"]
+	path = .vim/bundle/vim-surround
+	url = https://github.com/tpope/vim-surround
+
+[submodule "tpope/vim-commentary"]
+	path = .vim/bundle/vim-commentary
+	url = https://github.com/tpope/vim-commentary
+
+[submodule "jeffkreeftmeijer/vim-numbertoggle"]
+	path = .vim/bundle/vim-numbertoggle
+	url = https://github.com/jeffkreeftmeijer/vim-numbertoggle
+
+[submodule "sjl/gundo.vim"]
+	path = .vim/bundle/gundo.vim
+	url = https://github.com/sjl/gundo.vim
+
+[submodule "easymotion/vim-easymotion"]
+	path = .vim/bundle/vim-easymotion
+	url = https://github.com/easymotion/vim-easymotion
+
+[submodule "AndrewRadev/linediff.vim"]
+	path = .vim/bundle/linediff.vim
+	url = https://github.com/AndrewRadev/linediff.vim
+
+[submodule "tmux-plugins/vim-tmux-focus-events"]
+	path = .vim/bundle/vim-tmux-focus-events
+	url = https://github.com/tmux-plugins/vim-tmux-focus-events
+
+[submodule "roxma/vim-tmux-clipboard"]
+	path = .vim/bundle/vim-tmux-clipboard
+	url = https://github.com/roxma/vim-tmux-clipboard
+
+[submodule "PProvost/vim-ps1"]
+	path = .vim/bundle/vim-ps1
+	url = https://github.com/PProvost/vim-ps1
+
+[submodule "vim-python/python-syntax"]
+	path = .vim/bundle/python-syntax
+	url = https://github.com/vim-python/python-syntax
+
+[submodule "benknoble/vim-auto-origami"]
+	path = .vim/bundle/vim-auto-origami
+	url = https://github.com/benknoble/vim-auto-origami
+
+[submodule "morhetz/gruvbox"]
+	path = .vim/bundle/gruvbox
+	url = https://github.com/morhetz/gruvbox
+
+
