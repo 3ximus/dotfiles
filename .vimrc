@@ -91,6 +91,10 @@ set nowritebackup
 
 set autoread
 
+"autocomplete vim commands
+set wildmenu
+set wildmode=longest:list,full
+
 "enable mouse on insert mode
 "if has ("mouse")
 " set mouse=i
