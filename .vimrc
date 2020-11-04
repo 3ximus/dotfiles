@@ -52,6 +52,7 @@ filetype plugin indent on
 set encoding=utf-8
 
 "use X clipboard as default
+"you might need to install 'vim-gui-common' to enable clipboard support
 set clipboard=unnamedplus
 
 "line numbers
@@ -199,7 +200,8 @@ vnoremap <C-k> :m '<-2<CR>gv
 " start a search for visually selected text
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
-"use xclip
+"use xclip, this is only needed if vim clipboard support isnt enabled
+"you might need to install 'vim-gui-common' to enable clipboard support
 vnoremap <leader>y :w !xclip -selection clipboard<CR><CR>
 nnoremap <leader>yy :w !xclip -selection clipboard<CR><CR>
 
@@ -279,13 +281,13 @@ if !exists('g:airline_symbols')
 endif
 if !has("gui_running") "running on console
 	" unicode symbols
-	let g:airline_left_sep = ''
-	let g:airline_right_sep = ''
-	let g:airline_left_alt_sep = ''
-	let g:airline_right_alt_sep = ''
-	let g:airline_symbols.branch = ''
-	"let g:airline_symbols.linenr = 'ln'
-	let g:airline_symbols.whitespace = ''
+	"let g:airline_left_sep = ''
+	"let g:airline_right_sep = ''
+	"let g:airline_left_alt_sep = ''
+	"let g:airline_right_alt_sep = ''
+	"let g:airline_symbols.branch = ''
+	""let g:airline_symbols.linenr = 'ln'
+	"let g:airline_symbols.whitespace = ''
 else
 	" powerline symbols
 	let g:airline_left_sep = ''
@@ -375,6 +377,7 @@ nnoremap <silent> <C-b> :CommandTMRU<CR>
 
 noremap <leader>gs :Gstatus<CR>
 noremap <leader>gc :Gcommit<CR>
+noremap <leader>ge :Gedit<CR>
 noremap <leader>gd :Gdiff<CR>
 noremap <leader>gl :Glog<CR>
 noremap <leader>gv :Gblame<CR>
