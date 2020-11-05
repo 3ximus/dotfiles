@@ -275,7 +275,10 @@ endif
 "setup airline
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t' "show only file names on buffer names
+let g:airline#extensions#tabline#fnamemod = ':p:.' "show only file names on buffer names
+let g:airline#extensions#tabline#buffer_nr_show = 0
+let g:airline#extensions#tabline#fnamecollapse = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 if !exists('g:airline_symbols')
 	let g:airline_symbols = {}
@@ -367,7 +370,9 @@ endif
 
 map <C-t> :NERDTreeToggle<CR>
 nnoremap U :GundoToggle<CR>
-nnoremap <C-g> :Goyo<CR>:hi Normal ctermbg=none<CR>
+
+" nnoremap <C-g> :Goyo<CR>:hi Normal ctermbg=none<CR>
+
 nmap <leader>ha <Plug>(GitGutterStageHunk)
 nmap <leader>hu <Plug>(GitGutterUndoHunk)
 nmap <leader>hv <Plug>(GitGutterPreviewHunk)
