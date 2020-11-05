@@ -62,6 +62,7 @@
 	path = .vim/bundle/python-syntax
 	url = https://github.com/vim-python/python-syntax
 
+
 [submodule "benknoble/vim-auto-origami"]
 	path = .vim/bundle/vim-auto-origami
 	url = https://github.com/benknoble/vim-auto-origami
@@ -70,4 +71,6 @@
 	path = .vim/bundle/gruvbox
 	url = https://github.com/morhetz/gruvbox
 
-
+[submodule ".vim/bundle/vim-syntax-extra"]
+	path = .vim/bundle/vim-syntax-extra
+	url = https://github.com/justinmk/vim-syntax-extra
