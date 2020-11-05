@@ -29,6 +29,7 @@ Plugin 'tmux-plugins/vim-tmux-focus-events'
 Plugin 'roxma/vim-tmux-clipboard'
 
 " extra syntax highlight
+Plugin 'justinmk/vim-syntax-extra' " C
 Plugin 'PProvost/vim-ps1'
 Plugin 'vim-python/python-syntax'
 
