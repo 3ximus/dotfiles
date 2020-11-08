@@ -125,7 +125,7 @@ git-delete-cached() {
 
 # find process by name
 psgrep() {
-	local list=$(ps aux)
+	local list=$(ps -ef)
 	echo -e "$list" | head -n1
 	echo -e "$list" | grep -i $1 --color=always | grep -v grep
 }
