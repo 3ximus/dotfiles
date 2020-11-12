@@ -72,6 +72,8 @@ set autoindent
 set smartindent
 set smarttab
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab autoindent "because someone has too much screen space in their eyesight
+autocmd FileType python setlocal indentkeys-=<:> " colon will auto indent line in insert mode, remove that behavior
+autocmd FileType python setlocal indentkeys-=:
 "set expandtab "tabs are spaces, aka cancer
 "setlocal lcs=tab:>-,trail:-,eol:¬ list! " use list mode mapped to F2 when vim is opened
 
