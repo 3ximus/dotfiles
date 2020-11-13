@@ -49,10 +49,6 @@ alias mount-ntfs='sudo mount -o uid=1000,gid=1000,dmask=027,fmask=137'
 # git, the quoting hack is needed to use nested single quotes
 alias git-lfs='git rev-list --objects --all | grep "$(git verify-pack -v .git/objects/pack/*.idx | sort -k 3 -n | tail -10 | awk '"'"'{print$1}'"'"')"'
 
-# python3 alias
-alias python='python3'
-alias ipython='ipython3'
-
 # pacman / aur
 alias aur-packages='pacman -Qm'
 alias list-packages='expac -H M "%m\t%-30n" | sort -rh | less'

@@ -1,12 +1,7 @@
-from typing import List, Optional, Tuple
-
 import IPython.terminal.prompts as prompts
 from prompt_toolkit.application import get_app
 from prompt_toolkit.key_binding.vi_state import InputMode
 from pygments.token import _TokenType, Token
-
-from dataclasses import dataclass
-from typing import Any, Dict
 
 import sys, os
 sys.path.append(os.path.expanduser('~/.ipython/profile_default/'))
