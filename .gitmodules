@@ -71,6 +71,10 @@
 	path = .vim/bundle/gruvbox
 	url = https://github.com/morhetz/gruvbox
 
-[submodule ".vim/bundle/vim-syntax-extra"]
+[submodule "justinmk/vim-syntax-extra"]
 	path = .vim/bundle/vim-syntax-extra
 	url = https://github.com/justinmk/vim-syntax-extra
+
+[submodule "wincent/command-t"]
+	path = .vim/bundle/command-t
+	url = https://github.com/wincent/command-t
