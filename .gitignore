@@ -1,2 +1,4 @@
 **/__pycache__/**
 **/*.sqlite
+.ipython/profile_default/startup/
+.vim/view/
