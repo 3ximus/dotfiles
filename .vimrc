@@ -24,6 +24,10 @@ Plugin 'easymotion/vim-easymotion'
 " Plugin 'junegunn/goyo.vim'
 Plugin 'AndrewRadev/linediff.vim' "diff between two chuncks of text
 
+" Download from package manager vim-command-t
+" because it satisfies ruby support easily
+Plugin 'wincent/command-t'
+
 " tmux clipboard sharing
 Plugin 'tmux-plugins/vim-tmux-focus-events'
 Plugin 'roxma/vim-tmux-clipboard'
@@ -37,10 +41,6 @@ Plugin 'benknoble/vim-auto-origami' "auto folds
 
 "colorschemes
 Plugin 'morhetz/gruvbox'
-
-" Download from package manager vim-command-t
-" because it satisfies ruby support easily
-" Plugin 'wincent/command-t'
 
 call vundle#end()
 filetype plugin indent on
