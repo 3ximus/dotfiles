@@ -15,6 +15,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rhubarb'
 
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-commentary'
@@ -23,6 +24,8 @@ Plugin 'sjl/gundo.vim'
 Plugin 'easymotion/vim-easymotion'
 " Plugin 'junegunn/goyo.vim'
 Plugin 'AndrewRadev/linediff.vim' "diff between two chuncks of text
+
+Plugin 'junegunn/vim-peekaboo'
 
 " Download from package manager vim-command-t
 " because it satisfies ruby support easily
@@ -41,6 +44,9 @@ Plugin 'benknoble/vim-auto-origami' "auto folds
 
 "colorschemes
 Plugin 'morhetz/gruvbox'
+
+"lol
+Plugin 'mhinz/vim-startify'
 
 call vundle#end()
 filetype plugin indent on
@@ -308,7 +314,8 @@ endif
 "NERDTree
 "open on startup even if no files were specified
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
 " auto close vim if only nerdtree is open
 "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 "arrow symbols

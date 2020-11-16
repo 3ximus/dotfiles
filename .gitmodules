@@ -78,3 +78,13 @@
 [submodule "wincent/command-t"]
 	path = .vim/bundle/command-t
 	url = https://github.com/wincent/command-t
+
+[submodule "mhinz/vim-startify"]
+	path = .vim/bundle/vim-startify
+	url = https://github.com/mhinz/vim-startify
+[submodule "junegunn/vim-peekaboo"]
+	path = .vim/bundle/vim-peekaboo
+	url = https://github.com/junegunn/vim-peekaboo
+[submodule "tpope/vim-rhubarb"]
+	path = .vim/bundle/vim-rhubarb
+	url = https://github.com/tpope/vim-rhubarb
