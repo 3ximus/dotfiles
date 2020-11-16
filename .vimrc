@@ -5,48 +5,51 @@
 
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/vundle
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
 
-Plugin 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
+
 Plugin 'vim-airline/vim-airline'
 Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
 
+" GIT
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rhubarb'
 
+" TOOLS
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-commentary'
-Plugin 'jeffkreeftmeijer/vim-numbertoggle' "absolute numbers when window looses focus
 Plugin 'sjl/gundo.vim'
 Plugin 'easymotion/vim-easymotion'
-" Plugin 'junegunn/goyo.vim'
 Plugin 'AndrewRadev/linediff.vim' "diff between two chuncks of text
-
 Plugin 'junegunn/vim-peekaboo'
+" Plugin 'junegunn/goyo.vim'
 
 " Download from package manager vim-command-t
 " because it satisfies ruby support easily
 Plugin 'wincent/command-t'
 
-" tmux clipboard sharing
+" TMUX CLIPBOARD SHARING
 Plugin 'tmux-plugins/vim-tmux-focus-events'
 Plugin 'roxma/vim-tmux-clipboard'
 
-" extra syntax highlight
+" EXTRA SYNTAX HIGHLIGHT
 Plugin 'justinmk/vim-syntax-extra' " C
 Plugin 'PProvost/vim-ps1'
 Plugin 'vim-python/python-syntax'
 
-Plugin 'benknoble/vim-auto-origami' "auto folds
-
-"colorschemes
+" COLORSCHEMES
 Plugin 'morhetz/gruvbox'
 
-"lol
+" OTHER
 Plugin 'mhinz/vim-startify'
+"absolute numbers when window looses focus
+Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+"auto folds
+Plugin 'benknoble/vim-auto-origami'
 
 call vundle#end()
 filetype plugin indent on
