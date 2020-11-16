@@ -90,25 +90,42 @@ z,s
 
 ![cmd](screenshots/input_mode1.png) ![ins](screenshots/input_mode2.png)
 
-## vim plugins (using [Vundle](https://github.com/VundleVim/Vundle.vim))
+## Vim plugins (using [Vundle](https://github.com/VundleVim/Vundle.vim))
 
- - [vim-airline](https://github.com/vim-airline/vim-airline)
- - [nerdtree](https://github.com/scrooloose/nerdtree)
- - [nerdtree-git-plugin](https://github.com/Xuyuanp/nerdtree-git-plugin)
- - [vim-gitgutter](https://github.com/airblade/vim-gitgutter)
- - [vim-fugitive](https://github.com/tpope/vim-fugitive)
- - [vim-surround](https://github.com/tpope/vim-surround)
- - [vim-commentary](https://github.com/tpope/vim-commentary)
- - [vim-numbertoggle](https://github.com/jeffkreeftmeijer/vim-numbertoggle)
- - [gundo.vim](https://github.com/sjl/gundo.vim)
- - [vim-easymotion](https://github.com/easymotion/vim-easymotion)
- - [linediff.vim](https://github.com/AndrewRadev/linediff.vim)
- - [vim-tmux-focus-events](https://github.com/tmux-plugins/vim-tmux-focus-events)
- - [vim-tmux-clipboard](https://github.com/roxma/vim-tmux-clipboard)
- - [vim-ps1](https://github.com/PProvost/vim-ps1)
- - [python-syntax](https://github.com/vim-python/python-syntax)
- - [vim-auto-origami](https://github.com/benknoble/vim-auto-origami)
- - [gruvbox](https://github.com/morhetz/gruvbox)
+ -  [vim-airline](https://github.com/vim-airline/vim-airline)
+ -  [nerdtree](https://github.com/scrooloose/nerdtree)
+ -  [nerdtree-git-plugin](https://github.com/Xuyuanp/nerdtree-git-plugin)
+
+### Git
+ -  [vim-gitgutter](https://github.com/airblade/vim-gitgutter)
+ -  [vim-fugitive](https://github.com/tpope/vim-fugitive)
+ -  [vim-rhubarb](https://github.com/tpope/vim-rhubarb)
+
+### Tools
+ -  [vim-surround](https://github.com/tpope/vim-surround)
+ -  [vim-commentary](https://github.com/tpope/vim-commentary)
+ -  [gundo.vim](https://github.com/sjl/gundo.vim)
+ -  [vim-easymotion](https://github.com/easymotion/vim-easymotion)
+ -  [linediff.vim](https://github.com/AndrewRadev/linediff.vim)
+ -  [vim-peekaboo](https://github.com/junegunn/vim-peekaboo)
+ -  [command-t](https://github.com/wincent/command-t)
+
+### Tmux integration
+ -  [vim-tmux-focus-events](https://github.com/tmux-plugins/vim-tmux-focus-events)
+ -  [vim-tmux-clipboard](https://github.com/roxma/vim-tmux-clipboard)
+
+### Syntax highlight
+ -  [vim-syntax-extra](https://github.com/justinmk/vim-syntax-extra)
+ -  [vim-ps1](https://github.com/PProvost/vim-ps1)
+ -  [python-syntax](https://github.com/vim-python/python-syntax)
+
+### Colors
+ -  [gruvbox](https://github.com/morhetz/gruvbox)
+
+### Others
+ -  [vim-startify](https://github.com/mhinz/vim-startify)
+ -  [vim-numbertoggle](https://github.com/jeffkreeftmeijer/vim-numbertoggle)
+ -  [vim-auto-origami](https://github.com/benknoble/vim-auto-origami)
 
 ## Vim (gruvbox theme) screenshots
 
