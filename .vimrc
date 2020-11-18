@@ -384,6 +384,7 @@ endif
 " ---------------------
 
 map <C-t> :NERDTreeToggle<CR>
+map <leader>r :NERDTreeFind<CR>
 nnoremap U :GundoToggle<CR>
 
 " nnoremap <C-g> :Goyo<CR>:hi Normal ctermbg=none<CR>
