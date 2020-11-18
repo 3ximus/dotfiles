@@ -61,6 +61,9 @@ filetype plugin indent on
 "encoding
 set encoding=utf-8
 
+"backspace functionality
+set backspace=indent,eol,start
+
 "use X clipboard as default
 "you might need to install 'vim-gui-common' to enable clipboard support
 set clipboard=unnamedplus
