@@ -24,20 +24,18 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-commentary'
 Plugin 'sjl/gundo.vim'
 Plugin 'easymotion/vim-easymotion'
-Plugin 'AndrewRadev/linediff.vim' "diff between two chuncks of text
+Plugin 'AndrewRadev/linediff.vim'
 Plugin 'junegunn/vim-peekaboo'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'jeetsukumaran/vim-markology'
 " Plugin 'junegunn/goyo.vim'
-
-" Download from package manager vim-command-t
-" because it satisfies ruby support easily
-Plugin 'wincent/command-t'
 
 " TMUX CLIPBOARD SHARING
 Plugin 'tmux-plugins/vim-tmux-focus-events'
 Plugin 'roxma/vim-tmux-clipboard'
 
 " EXTRA SYNTAX HIGHLIGHT
-Plugin 'justinmk/vim-syntax-extra' " C
+Plugin 'justinmk/vim-syntax-extra'
 Plugin 'PProvost/vim-ps1'
 Plugin 'vim-python/python-syntax'
 
@@ -50,6 +48,7 @@ Plugin 'mhinz/vim-startify'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 "auto folds
 Plugin 'benknoble/vim-auto-origami'
+Plugin 'jmcantrell/vim-virtualenv'
 
 call vundle#end()
 filetype plugin indent on
@@ -231,8 +230,12 @@ nnoremap <leader><Tab> :call TabSpaceToogle()<CR>
 nnoremap <F2> :<C-U>setlocal lcs=tab:>-,trail:-,eol:¬ list! list? <CR>
 " toogle paste mode (to prevent indenting when pasting)
 set pastetoggle=<F3>
-" map hidde terminal elements
+" map hide terminal elements
 nnoremap <leader>a :call ToggleHiddenAll()<CR>
+
+" save and load view of files
+nmap <leader>vs :mkview<CR>
+nmap <leader>vl :loadview<CR>
 
 " -----------------------------
 " Color Scheme
@@ -353,12 +356,6 @@ if !has("gui_running") "running on console
 	highlight GitGutterChangeDelete ctermfg=blue
 endif
 
-"Goyo
-let g:goyo_width = 80
-let g:goyo_height= '100%'
-let g:goyo_linenr = 0
-
-
 "Auto Origami (auto manage fold columns)
 
 augroup auto_origami
@@ -379,15 +376,17 @@ if has('python3')
 	let g:gundo_prefer_python3 = 1
 endif
 
+let g:markology_include="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ""
+
 " ---------------------
 " Plugin Keymaps
 " ---------------------
 
 map <C-t> :NERDTreeToggle<CR>
-map <leader>r :NERDTreeFind<CR>
+map <C-f> :NERDTreeFind<CR>
 nnoremap U :GundoToggle<CR>
 
-" nnoremap <C-g> :Goyo<CR>:hi Normal ctermbg=none<CR>
+let g:ctrlp_map = '<leader>p'
 
 nmap <leader>ha <Plug>(GitGutterStageHunk)
 nmap <leader>hu <Plug>(GitGutterUndoHunk)
@@ -402,12 +401,10 @@ noremap <leader>gc :Gcommit<CR>
 noremap <leader>ge :Gedit<CR>
 noremap <leader>gd :Gdiff<CR>
 noremap <leader>gl :Glog<CR>
-noremap <leader>gv :Gblame<CR>
+noremap <leader>gb :Gblame<CR>
 
 noremap <leader>D :LinediffReset<CR>
 noremap <leader>d :Linediff<CR>
-
-" mark multiple line diffs
 
 " ---------------------
 " RUN COMMAND ON EVENTS
