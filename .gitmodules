@@ -55,9 +55,6 @@
 [submodule "justinmk/vim-syntax-extra"]
 	path = .vim/bundle/vim-syntax-extra
 	url = https://github.com/justinmk/vim-syntax-extra
-[submodule "wincent/command-t"]
-	path = .vim/bundle/command-t
-	url = https://github.com/wincent/command-t
 [submodule "mhinz/vim-startify"]
 	path = .vim/bundle/vim-startify
 	url = https://github.com/mhinz/vim-startify
@@ -67,3 +64,12 @@
 [submodule "tpope/vim-rhubarb"]
 	path = .vim/bundle/vim-rhubarb
 	url = https://github.com/tpope/vim-rhubarb
+[submodule "jeetsukumaran/vim-markology"]
+	path = .vim/bundle/vim-markology
+	url = https://github.com/jeetsukumaran/vim-markology
+[submodule "ctrlpvim/ctrlp.vim"]
+	path = .vim/bundle/ctrlp.vim
+	url = https://github.com/ctrlpvim/ctrlp.vim
+[submodule "jmcantrell/vim-virtualenv"]
+	path = vim/bundle/vim-virtualenv
+	url = https://github.com/jmcantrell/vim-virtualenv
