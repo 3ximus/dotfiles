@@ -31,6 +31,14 @@ git submodule init
 git submodule update
 ```
 
+To update the vim plugins and the repo use 
+
+```
+git pull --recurse-submodules
+```
+
+If new submodules where added you might need to run `git submodule init` again
+
 A script is provided to link the files. Run `install_my_config.sh --help` for its usage.
 
 
@@ -128,7 +136,8 @@ z,s
  -  [vim-startify](https://github.com/mhinz/vim-startify)
  -  [vim-numbertoggle](https://github.com/jeffkreeftmeijer/vim-numbertoggle)
  -  [vim-auto-origami](https://github.com/benknoble/vim-auto-origami)
- -  [vim-virtualenv](https://github.com/jmcantrell/vim-virtualenv)
+ -  [vim-anzu](https://github.com/osyo-manga/vim-anzu)
+ -  [vim-markbar](https://github.com/Yilin-Yang/vim-markbar)
 
 ## Vim (gruvbox theme) screenshots
 
