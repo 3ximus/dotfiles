@@ -70,3 +70,9 @@
 [submodule "ctrlpvim/ctrlp.vim"]
 	path = .vim/bundle/ctrlp.vim
 	url = https://github.com/ctrlpvim/ctrlp.vim
+[submodule "osyo-manga/vim-anzu"]
+	path = .vim/bundle/vim-anzu
+	url = https://github.com/osyo-manga/vim-anzu
+[submodule "Yilin-Yang/vim-markbar"]
+	path = .vim/bundle/vim-markbar
+	url = https://github.com/Yilin-Yang/vim-markbar
