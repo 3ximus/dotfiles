@@ -118,7 +118,7 @@ z,s
  -  [vim-peekaboo](https://github.com/junegunn/vim-peekaboo)
  -  [ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim)
  -  [vim-markology](https://github.com/jeetsukumaran/vim-markology)
- -  [command-t](https://github.com/wincent/command-t)
+ -  [vim-markbar](https://github.com/Yilin-Yang/vim-markbar)
 
 ### Tmux integration
  -  [vim-tmux-focus-events](https://github.com/tmux-plugins/vim-tmux-focus-events)
@@ -137,7 +137,6 @@ z,s
  -  [vim-numbertoggle](https://github.com/jeffkreeftmeijer/vim-numbertoggle)
  -  [vim-auto-origami](https://github.com/benknoble/vim-auto-origami)
  -  [vim-anzu](https://github.com/osyo-manga/vim-anzu)
- -  [vim-markbar](https://github.com/Yilin-Yang/vim-markbar)
 
 ## Vim (gruvbox theme) screenshots
 
