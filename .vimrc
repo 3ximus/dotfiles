@@ -28,6 +28,7 @@ Plugin 'AndrewRadev/linediff.vim'
 Plugin 'junegunn/vim-peekaboo'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'jeetsukumaran/vim-markology'
+Plugin 'Yilin-Yang/vim-markbar'
 
 " TMUX CLIPBOARD SHARING
 Plugin 'tmux-plugins/vim-tmux-focus-events'
@@ -49,8 +50,6 @@ Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 Plugin 'benknoble/vim-auto-origami'
 "improved incremental search
 Plugin 'osyo-manga/vim-anzu'
-"like peekaboo for marks
-Plugin 'Yilin-Yang/vim-markbar'
 
 call vundle#end()
 filetype plugin indent on
@@ -378,10 +377,18 @@ if has('python3')
     let g:gundo_prefer_python3 = 1
 endif
 
-let g:markology_include="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+let g:markology_include='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 highlight MarkologyHLl cterm=bold ctermfg=cyan ctermbg=none
-highlight MarkologyHLu cterm=bold ctermfg=cyan ctermbg=none
-highlight MarkologyHLm cterm=bold ctermfg=magenta  ctermbg=none
+highlight MarkologyHLu cterm=bold ctermfg=magenta ctermbg=none
+highlight MarkologyHLm ctermfg=black  ctermbg=magenta
+
+let markbar_mark_marker = '➜'
+let g:markbar_peekaboo_marks_to_display = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+let g:markbar_marks_to_display = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+highlight markbarContextMarkHighlight cterm=bold ctermbg=none ctermfg=magenta
+highlight markbarSectionLowercaseMark cterm=bold ctermfg=cyan ctermbg=none
+highlight markbarUppercaseMark cterm=bold ctermfg=magenta ctermbg=none
+highlight markbarSectionBrackets cterm=bold ctermfg=black ctermbg=none
 
 " ---------------------
 " Plugin Keymaps
