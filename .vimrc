@@ -28,7 +28,6 @@ Plugin 'AndrewRadev/linediff.vim'
 Plugin 'junegunn/vim-peekaboo'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'jeetsukumaran/vim-markology'
-" Plugin 'junegunn/goyo.vim'
 
 " TMUX CLIPBOARD SHARING
 Plugin 'tmux-plugins/vim-tmux-focus-events'
@@ -39,7 +38,7 @@ Plugin 'justinmk/vim-syntax-extra'
 Plugin 'PProvost/vim-ps1'
 Plugin 'vim-python/python-syntax'
 
-" COLORSCHEMES
+" COLORSCHEME
 Plugin 'morhetz/gruvbox'
 
 " OTHER
@@ -48,7 +47,10 @@ Plugin 'mhinz/vim-startify'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 "auto folds
 Plugin 'benknoble/vim-auto-origami'
-Plugin 'jmcantrell/vim-virtualenv'
+"improved incremental search
+Plugin 'osyo-manga/vim-anzu'
+"like peekaboo for marks
+Plugin 'Yilin-Yang/vim-markbar'
 
 call vundle#end()
 filetype plugin indent on
@@ -74,7 +76,7 @@ set number
 
 "syntax and indentation
 if !exists("g:syntax_on")
-	syntax enable
+    syntax enable
 endif
 set ts=4 "number of spaces in a tab
 set sw=4 "number of spaces for indent
@@ -124,62 +126,62 @@ set noerrorbells visualbell t_vb=
 
 "fold function to auto fold entire document based on indent
 function! Fold(depth)
-	let &foldnestmax = a:depth
-	set foldmethod=indent
+    let &foldnestmax = a:depth
+    set foldmethod=indent
 endfunction
 command! -nargs=1 Fold :call Fold( '<args>' ) "command to use Fold function
 
 "remove trailing whitespaces
 function StripTrailingWhitespace()
-	if !&binary && &filetype != 'diff'
-		normal mz
-		normal Hmy
-		%s/\s\+$//e
-		normal 'yz<CR>
-		normal `z
-	endif
+    if !&binary && &filetype != 'diff'
+        normal mz
+        normal Hmy
+        %s/\s\+$//e
+        normal 'yz<CR>
+        normal `z
+    endif
 endfunction
 
 function! ConvertToTabs(tabsize)
-	let &tabstop = a:tabsize
-	set noexpandtab
-	%retab!
+    let &tabstop = a:tabsize
+    set noexpandtab
+    %retab!
 endfunction
 command! -nargs=1 ConvertToTabs :call ConvertToTabs( '<args>' )
 
 function! ConvertToSpaces(spacesize)
-	let &tabstop = a:spacesize
-	let &sw = a:spacesize "number of spaces when indenting
-	set expandtab
-	%retab!
+    let &tabstop = a:spacesize
+    let &sw = a:spacesize "number of spaces when indenting
+    set expandtab
+    %retab!
 endfunction
 command! -nargs=1 ConvertToSpaces :call ConvertToSpaces( '<args>' )
 
 function! TabSpaceToogle()
-	if &expandtab
-		:call ConvertToTabs(&ts)
-	else
-		:call ConvertToSpaces(&sw)
-	endif
+    if &expandtab
+        :call ConvertToTabs(&ts)
+    else
+        :call ConvertToSpaces(&sw)
+    endif
 endfunction
 
 let s:hidden_all = 0
 function! ToggleHiddenAll()
-	if s:hidden_all == 0
-		let s:hidden_all = 1
-		set showtabline=0
-		set noshowmode
-		set noruler
-		set laststatus=0
-		set noshowcmd
-	else
-		let s:hidden_all = 0
-		set showtabline=2
-		set showmode
-		set ruler
-		set laststatus=2
-		set showcmd
-	endif
+    if s:hidden_all == 0
+        let s:hidden_all = 1
+        set showtabline=0
+        set noshowmode
+        set noruler
+        set laststatus=0
+        set noshowcmd
+    else
+        let s:hidden_all = 0
+        set showtabline=2
+        set showmode
+        set ruler
+        set laststatus=2
+        set showcmd
+    endif
 endfunction
 
 " -----------------------------
@@ -194,10 +196,10 @@ nmap <C-N> :bn<CR>
 
 " remap completion
 if has("gui_running")
-	" C-Space seems to work under gVim on both Linux and win32
-	inoremap <C-Space> <C-n>
+    " C-Space seems to work under gVim on both Linux and win32
+    inoremap <C-Space> <C-n>
 else " no gui
-	inoremap <Nul> <C-n>
+    inoremap <Nul> <C-n>
 endif
 
 " run macro saved to q
@@ -242,18 +244,18 @@ nmap <leader>vl :loadview<CR>
 " -----------------------------
 
 if has("gui_running")
-	colo gruvbox
-	let g:gruvbox_contrast_dark = 'medium'
-	let g:gruvbox_contrast_light = 'soft'
-	set background=dark
+    colo gruvbox
+    let g:gruvbox_contrast_dark = 'medium'
+    let g:gruvbox_contrast_light = 'soft'
+    set background=dark
 else
-	set t_Co=256 "terminal color range
-	color gruvbox
-	let g:gruvbox_termcolors = 16 "256 colors look really bad
-	set background=dark
-	"trasparent background
-	hi Normal ctermbg=none
-	highlight NonText ctermbg=none
+    set t_Co=256 "terminal color range
+    color gruvbox
+    let g:gruvbox_termcolors = 16 "256 colors look really bad
+    set background=dark
+    "trasparent background
+    hi Normal ctermbg=none
+    highlight NonText ctermbg=none
 endif
 hi CursorLineNr ctermbg=none
 
@@ -264,24 +266,24 @@ hi CursorLineNr ctermbg=none
 
 "set gui options
 if has("gui_running")
-	"set guifont=Liberation\ Mono\ for\ Powerline\ 9 " normal
-	"set guifont=Roboto\ Mono\ for\ Powerline\ Regular\ 9
-	"set guifont=monofur\ for\ Powerline\ Regular\ 11 " funny
-	set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 9
-	"set guifont=Fira\ Mono\ for\ Powerline\ 9
+    "set guifont=Liberation\ Mono\ for\ Powerline\ 9 " normal
+    "set guifont=Roboto\ Mono\ for\ Powerline\ Regular\ 9
+    "set guifont=monofur\ for\ Powerline\ Regular\ 11 " funny
+    set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 9
+    "set guifont=Fira\ Mono\ for\ Powerline\ 9
 
-	set linespace=0
+    set linespace=0
 
-	set guicursor+=a:blinkon0
+    set guicursor+=a:blinkon0
 
-	"hide toolbar, scrollbar and menubar
-	set guioptions-=L
-	set guioptions-=l
-	set guioptions-=R
-	set guioptions-=r
-	set guioptions-=m
-	set guioptions-=T
-	set guioptions-=e
+    "hide toolbar, scrollbar and menubar
+    set guioptions-=L
+    set guioptions-=l
+    set guioptions-=R
+    set guioptions-=r
+    set guioptions-=m
+    set guioptions-=T
+    set guioptions-=e
 endif
 
 
@@ -298,26 +300,26 @@ let g:airline#extensions#tabline#fnamecollapse = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 if !exists('g:airline_symbols')
-	let g:airline_symbols = {}
+    let g:airline_symbols = {}
 endif
 if !has("gui_running") "running on console
-	" unicode symbols
-	"let g:airline_left_sep = ''
-	"let g:airline_right_sep = ''
-	"let g:airline_left_alt_sep = ''
-	"let g:airline_right_alt_sep = ''
-	"let g:airline_symbols.branch = ''
-	""let g:airline_symbols.linenr = 'ln'
-	"let g:airline_symbols.whitespace = ''
+    " unicode symbols
+    "let g:airline_left_sep = ''
+    "let g:airline_right_sep = ''
+    "let g:airline_left_alt_sep = ''
+    "let g:airline_right_alt_sep = ''
+    "let g:airline_symbols.branch = ''
+    ""let g:airline_symbols.linenr = 'ln'
+    "let g:airline_symbols.whitespace = ''
 else
-	" powerline symbols
-	let g:airline_left_sep = ''
-	let g:airline_left_alt_sep = ''
-	let g:airline_right_sep = ''
-	let g:airline_right_alt_sep = ''
-	let g:airline_symbols.branch = ''
-	let g:airline_symbols.readonly = ''
-	let g:airline_symbols.linenr = ''
+    " powerline symbols
+    let g:airline_left_sep = ''
+    let g:airline_left_alt_sep = ''
+    let g:airline_right_sep = ''
+    let g:airline_right_alt_sep = ''
+    let g:airline_symbols.branch = ''
+    let g:airline_symbols.readonly = ''
+    let g:airline_symbols.linenr = ''
 endif
 
 "NERDTree
@@ -336,32 +338,32 @@ let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
 " let g:NERDTreeGitStatusShowClean = 1 " default: 0
 " let g:NERDTreeGitStatusShowIgnored = 1 " a heavy feature may cost much more time. default: 0
 " let g:NERDTreeGitStatusIndicatorMapCustom = {
-" 	\ "Modified"	: "*",
-" 	\ "Staged"		: "+",
-" 	\ "Untracked"   : "-",
-" 	\ "Renamed"		: "->",
-" 	\ "Unmerged"	: "!=",
-" 	\ "Deleted"		: "x",
-" 	\ "Dirty"		: "~",
-" 	\ "Clean"		: "v",
-" 	\ "Unknown"		: "?"
-" 	\ }
+"   \ "Modified"    : "*",
+"   \ "Staged"      : "+",
+"   \ "Untracked"   : "-",
+"   \ "Renamed"     : "->",
+"   \ "Unmerged"    : "!=",
+"   \ "Deleted"     : "x",
+"   \ "Dirty"       : "~",
+"   \ "Clean"       : "v",
+"   \ "Unknown"     : "?"
+"   \ }
 
 "GitGutter
 if !has("gui_running") "running on console
-	highlight clear SignColumn
-	highlight GitGutterAdd ctermfg=green
-	highlight GitGutterChange ctermfg=blue
-	highlight GitGutterDelete ctermfg=red
-	highlight GitGutterChangeDelete ctermfg=blue
+    highlight clear SignColumn
+    highlight GitGutterAdd ctermfg=green
+    highlight GitGutterChange ctermfg=blue
+    highlight GitGutterDelete ctermfg=red
+    highlight GitGutterChangeDelete ctermfg=blue
 endif
 
 "Auto Origami (auto manage fold columns)
 
 augroup auto_origami
-	au!
+    au!
 
-	au CursorHold,BufWinEnter,WinEnter * AutoOrigamiFoldColumn
+    au CursorHold,BufWinEnter,WinEnter * AutoOrigamiFoldColumn
 augroup END
 let g:auto_origami_foldcolumn = 1
 
@@ -373,13 +375,14 @@ let g:python_highlight_operators = 0
 
 " Gundo use python3
 if has('python3')
-	let g:gundo_prefer_python3 = 1
+    let g:gundo_prefer_python3 = 1
 endif
 
 let g:markology_include="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 highlight MarkologyHLl cterm=bold ctermfg=cyan ctermbg=none
 highlight MarkologyHLu cterm=bold ctermfg=cyan ctermbg=none
 highlight MarkologyHLm cterm=bold ctermfg=magenta  ctermbg=none
+
 " ---------------------
 " Plugin Keymaps
 " ---------------------
@@ -387,6 +390,13 @@ highlight MarkologyHLm cterm=bold ctermfg=magenta  ctermbg=none
 map <C-t> :NERDTreeToggle<CR>
 map <C-f> :NERDTreeFind<CR>
 nnoremap U :GundoToggle<CR>
+
+nmap <leader>m <Plug>ToggleMarkbar
+
+nmap n <Plug>(anzu-n)
+nmap N <Plug>(anzu-N)
+nmap * <Plug>(anzu-star)
+nmap # <Plug>(anzu-sharp)
 
 let g:ctrlp_map = '<leader>p'
 
