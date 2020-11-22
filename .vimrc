@@ -1,7 +1,6 @@
-
-" ----------------------------
-" Vundle
-" ----------------------------
+" ========================================
+"                 VUNDLE
+" ========================================
 
 set nocompatible
 filetype off
@@ -25,10 +24,15 @@ Plugin 'tpope/vim-commentary'
 Plugin 'sjl/gundo.vim'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'AndrewRadev/linediff.vim'
-Plugin 'junegunn/vim-peekaboo'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'jeetsukumaran/vim-markology'
+
+Plugin 'junegunn/vim-peekaboo'
 Plugin 'Yilin-Yang/vim-markbar'
+Plugin 'jeetsukumaran/vim-markology'
+
+" COMPLETION
+Plugin 'neoclide/coc.nvim'
+" Plugin 'davidhalter/jedi-vim'
 
 " TMUX CLIPBOARD SHARING
 Plugin 'tmux-plugins/vim-tmux-focus-events'
@@ -50,13 +54,15 @@ Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 Plugin 'benknoble/vim-auto-origami'
 "improved incremental search
 Plugin 'osyo-manga/vim-anzu'
+Plugin 'machakann/vim-highlightedyank'
 
 call vundle#end()
 filetype plugin indent on
 
-" ----------------------------
-" General Options
-" ----------------------------
+
+" ========================================
+"                 GENERAL
+" ========================================
 
 "encoding
 set encoding=utf-8
@@ -83,11 +89,10 @@ set softtabstop=0 noexpandtab
 set autoindent
 set smartindent
 set smarttab
-autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab autoindent "because someone has too much screen space in their eyesight
-autocmd FileType python setlocal indentkeys-=<:> " colon will auto indent line in insert mode, remove that behavior
-autocmd FileType python setlocal indentkeys-=:
 "set expandtab "tabs are spaces, aka cancer
 "setlocal lcs=tab:>-,trail:-,eol:¬ list! " use list mode mapped to F2 when vim is opened
+
+set cmdheight=2
 
 "search settings
 set incsearch
@@ -119,9 +124,22 @@ set wildmode=longest:list,full
 " To diable bell sounds, specially on windows
 set noerrorbells visualbell t_vb=
 
-" ----------------------------
-" Functions
-" ----------------------------
+" ========================================
+"               COLORSCHEME
+" ========================================
+
+set t_Co=256 "terminal color range
+color gruvbox
+let g:gruvbox_termcolors = 16 "256 colors look really bad
+set background=dark
+"trasparent background
+hi Normal ctermbg=none
+highlight NonText ctermbg=none
+hi CursorLineNr ctermbg=none
+
+" ========================================
+"                FUNCTIONS
+" ========================================
 
 "fold function to auto fold entire document based on indent
 function! Fold(depth)
@@ -183,23 +201,15 @@ function! ToggleHiddenAll()
     endif
 endfunction
 
-" -----------------------------
-" Keymaps
-" -----------------------------
+" ========================================
+"                KEYMAPS
+" ========================================
 
 let mapleader=","
 
 " change buffers
 nmap <C-P> :bp<CR>
 nmap <C-N> :bn<CR>
-
-" remap completion
-if has("gui_running")
-    " C-Space seems to work under gVim on both Linux and win32
-    inoremap <C-Space> <C-n>
-else " no gui
-    inoremap <Nul> <C-n>
-endif
 
 " run macro saved to q
 nnoremap <Space> @q
@@ -212,6 +222,14 @@ inoremap <C-k> <Esc>:m .-2<CR>gi
 vnoremap <C-j> :m '>+1<CR>gv
 vnoremap <C-k> :m '<-2<CR>gv
 
+" fold with fold nest max of 1
+nmap zF :call Fold(1)<CR>:set foldmethod=manual<CR>
+
+" display line endings and tabs
+nnoremap <F2> :<C-U>setlocal lcs=tab:>-,trail:-,eol:¬ list! list? <CR>
+" toogle paste mode (to prevent indenting when pasting)
+set pastetoggle=<F3>
+
 " start a search for visually selected text
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
@@ -222,15 +240,9 @@ nnoremap <leader>yy :w !xclip -selection clipboard<CR><CR>
 
 nmap <leader>x :bp<bar>bd #<CR>
 
-" fold with fold nest max of 1
-nmap <leader>fa :call Fold(1)<CR>:set foldmethod=manual<CR>
 " remove trailing whitespaces
 nmap <leader>s :call StripTrailingWhitespace()<CR>
 nnoremap <leader><Tab> :call TabSpaceToogle()<CR>
-" display line endings and tabs
-nnoremap <F2> :<C-U>setlocal lcs=tab:>-,trail:-,eol:¬ list! list? <CR>
-" toogle paste mode (to prevent indenting when pasting)
-set pastetoggle=<F3>
 " map hide terminal elements
 nnoremap <leader>a :call ToggleHiddenAll()<CR>
 
@@ -238,57 +250,9 @@ nnoremap <leader>a :call ToggleHiddenAll()<CR>
 nmap <leader>vs :mkview<CR>
 nmap <leader>vl :loadview<CR>
 
-" -----------------------------
-" Color Scheme
-" -----------------------------
-
-if has("gui_running")
-    colo gruvbox
-    let g:gruvbox_contrast_dark = 'medium'
-    let g:gruvbox_contrast_light = 'soft'
-    set background=dark
-else
-    set t_Co=256 "terminal color range
-    color gruvbox
-    let g:gruvbox_termcolors = 16 "256 colors look really bad
-    set background=dark
-    "trasparent background
-    hi Normal ctermbg=none
-    highlight NonText ctermbg=none
-endif
-hi CursorLineNr ctermbg=none
-
-
-" -----------------------------
-" GUI Specific
-" -----------------------------
-
-"set gui options
-if has("gui_running")
-    "set guifont=Liberation\ Mono\ for\ Powerline\ 9 " normal
-    "set guifont=Roboto\ Mono\ for\ Powerline\ Regular\ 9
-    "set guifont=monofur\ for\ Powerline\ Regular\ 11 " funny
-    set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 9
-    "set guifont=Fira\ Mono\ for\ Powerline\ 9
-
-    set linespace=0
-
-    set guicursor+=a:blinkon0
-
-    "hide toolbar, scrollbar and menubar
-    set guioptions-=L
-    set guioptions-=l
-    set guioptions-=R
-    set guioptions-=r
-    set guioptions-=m
-    set guioptions-=T
-    set guioptions-=e
-endif
-
-
-" -----------------------------
-" Plugins
-" -----------------------------
+" ========================================
+"                PLUGINS
+" ========================================
 
 "setup airline
 let g:airline_powerline_fonts=1
@@ -310,25 +274,9 @@ if !has("gui_running") "running on console
     "let g:airline_symbols.branch = ''
     ""let g:airline_symbols.linenr = 'ln'
     "let g:airline_symbols.whitespace = ''
-else
-    " powerline symbols
-    let g:airline_left_sep = ''
-    let g:airline_left_alt_sep = ''
-    let g:airline_right_sep = ''
-    let g:airline_right_alt_sep = ''
-    let g:airline_symbols.branch = ''
-    let g:airline_symbols.readonly = ''
-    let g:airline_symbols.linenr = ''
 endif
 
 "NERDTree
-"open on startup even if no files were specified
-autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-" auto close vim if only nerdtree is open
-"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-"arrow symbols
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 
@@ -349,19 +297,15 @@ let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
 "   \ }
 
 "GitGutter
-if !has("gui_running") "running on console
-    highlight clear SignColumn
-    highlight GitGutterAdd ctermfg=green
-    highlight GitGutterChange ctermfg=blue
-    highlight GitGutterDelete ctermfg=red
-    highlight GitGutterChangeDelete ctermfg=blue
-endif
+highlight clear SignColumn
+highlight GitGutterAdd ctermfg=green
+highlight GitGutterChange ctermfg=blue
+highlight GitGutterDelete ctermfg=red
+highlight GitGutterChangeDelete ctermfg=blue
 
 "Auto Origami (auto manage fold columns)
-
 augroup auto_origami
     au!
-
     au CursorHold,BufWinEnter,WinEnter * AutoOrigamiFoldColumn
 augroup END
 let g:auto_origami_foldcolumn = 1
@@ -372,16 +316,18 @@ let g:python_highlight_indent_errors = 1
 let g:python_highlight_space_errors = 0
 let g:python_highlight_operators = 0
 
-" Gundo use python3
+" Gundo
 if has('python3')
     let g:gundo_prefer_python3 = 1
 endif
 
+" Markology
 let g:markology_include='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 highlight MarkologyHLl cterm=bold ctermfg=cyan ctermbg=none
 highlight MarkologyHLu cterm=bold ctermfg=magenta ctermbg=none
 highlight MarkologyHLm ctermfg=black  ctermbg=magenta
 
+" Markbar
 let markbar_mark_marker = '➜'
 let g:markbar_peekaboo_marks_to_display = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 let g:markbar_marks_to_display = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -390,9 +336,12 @@ highlight markbarSectionLowercaseMark cterm=bold ctermfg=cyan ctermbg=none
 highlight markbarUppercaseMark cterm=bold ctermfg=magenta ctermbg=none
 highlight markbarSectionBrackets cterm=bold ctermfg=black ctermbg=none
 
-" ---------------------
-" Plugin Keymaps
-" ---------------------
+" Highlighted Yank
+highlight HighlightedyankRegion cterm=reverse gui=reverse
+
+" ========================================
+"            PLUGIN KEYMAPS
+" ========================================
 
 map <C-t> :NERDTreeToggle<CR>
 map <C-f> :NERDTreeFind<CR>
@@ -412,8 +361,6 @@ nmap <leader>hu <Plug>(GitGutterUndoHunk)
 nmap <leader>hv <Plug>(GitGutterPreviewHunk)
 nmap <leader>hn <Plug>(GitGutterNextHunk)
 nmap <leader>hp <Plug>(GitGutterPrevHunk)
-" list buffers with command-t
-nnoremap <silent> <C-b> :CommandTMRU<CR>
 
 noremap <leader>gs :Gstatus<CR>
 noremap <leader>gc :Gcommit<CR>
@@ -425,8 +372,118 @@ noremap <leader>gb :Gblame<CR>
 noremap <leader>D :LinediffReset<CR>
 noremap <leader>d :Linediff<CR>
 
-" ---------------------
-" RUN COMMAND ON EVENTS
-" ---------------------
+" ========================================
+"           COC CONFIGURATION
+" ========================================
+
+" Coc Extensions
+let g:coc_global_extensions = [
+      \'coc-python',
+      \'coc-clangd',
+      \'coc-json',
+      \'coc-sh',
+      \]
+
+inoremap <silent><expr> <c-@> coc#refresh()
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+" Add Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: vim-airline.
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Mappings for CoCList
+" Show all diagnostics.
+nnoremap <silent><nowait> <leader>ca  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent><nowait> <leader>ce  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent><nowait> <leader>cc  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent><nowait> <leader>co  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent><nowait> <leader>cs  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent><nowait> <leader>cj  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent><nowait> <leader>ck  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent><nowait> <leader>cp  :<C-u>CocListResume<CR>
+
+" ========================================
+"             FILE SPECIFIC
+" ========================================
+
+autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab autoindent "because someone has too much screen space in their eyesight
+autocmd FileType python setlocal indentkeys-=<:> " colon will auto indent line in insert mode, remove that behavior
+autocmd FileType python setlocal indentkeys-=:
+
+" ========================================
+"               GUI SPECIFIC
+" ========================================
+
+if has("gui_running")
+    colo gruvbox
+    let g:gruvbox_contrast_dark = 'medium'
+    let g:gruvbox_contrast_light = 'soft'
+    set background=dark
+
+    "set guifont=Liberation\ Mono\ for\ Powerline\ 9 " normal
+    "set guifont=Roboto\ Mono\ for\ Powerline\ Regular\ 9
+    "set guifont=monofur\ for\ Powerline\ Regular\ 11 " funny
+    set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 9
+    "set guifont=Fira\ Mono\ for\ Powerline\ 9
+
+    set linespace=0
+
+    set guicursor+=a:blinkon0
+
+    "hide toolbar, scrollbar and menubar
+    set guioptions-=L
+    set guioptions-=l
+    set guioptions-=R
+    set guioptions-=r
+    set guioptions-=m
+    set guioptions-=T
+    set guioptions-=e
+endif
+
+" ========================================
+"          RUN COMMANDS ON EVENTS
+" ========================================
 
 autocmd VimEnter * call ToggleHiddenAll()
