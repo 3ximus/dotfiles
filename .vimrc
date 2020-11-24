@@ -133,9 +133,11 @@ color gruvbox
 let g:gruvbox_termcolors = 16 "256 colors look really bad
 set background=dark
 "trasparent background
-hi Normal ctermbg=none
-highlight NonText ctermbg=none
-hi CursorLineNr ctermbg=none
+autocmd VimEnter * highlight Normal ctermbg=none
+"this fixes the problem of dark comments when the terminal colorscheme has 0/8 to be black and 7/15 to be white
+highlight Comment ctermfg=7
+" highlight NonText ctermbg=none
+" highlight CursorLineNr ctermbg=none
 
 " ========================================
 "                FUNCTIONS
@@ -447,14 +449,6 @@ nnoremap <silent><nowait> <leader>ck  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <leader>cp  :<C-u>CocListResume<CR>
 
 " ========================================
-"             FILE SPECIFIC
-" ========================================
-
-autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab autoindent "because someone has too much screen space in their eyesight
-autocmd FileType python setlocal indentkeys-=<:> " colon will auto indent line in insert mode, remove that behavior
-autocmd FileType python setlocal indentkeys-=:
-
-" ========================================
 "               GUI SPECIFIC
 " ========================================
 
@@ -485,7 +479,15 @@ if has("gui_running")
 endif
 
 " ========================================
+"             FILE SPECIFIC
+" ========================================
+
+autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab autoindent "because someone has too much screen space in their eyesight
+autocmd FileType python setlocal indentkeys-=<:> " colon will auto indent line in insert mode, remove that behavior
+autocmd FileType python setlocal indentkeys-=:
+
+" ========================================
 "          RUN COMMANDS ON EVENTS
 " ========================================
 
-autocmd VimEnter * call ToggleHiddenAll()
+" autocmd VimEnter * call ToggleHiddenAll()
