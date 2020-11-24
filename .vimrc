@@ -124,6 +124,17 @@ set ttymouse=xterm2
 " To diable bell sounds, specially on windows
 set noerrorbells visualbell t_vb=
 
+" number text object (integer and float)
+" --------------------------------------
+" in
+function! VisualNumber()
+    call search('\d\([^0-9\.]\|$\)', 'cW')
+    normal v
+    call search('\(^\|[^0-9\.]\d\)', 'becW')
+endfunction
+xnoremap in :<C-u>call VisualNumber()<CR>
+onoremap in :<C-u>normal vin<CR>
+
 " ========================================
 "               COLORSCHEME
 " ========================================
@@ -298,13 +309,6 @@ let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
 "   \ "Unknown"     : "?"
 "   \ }
 
-"GitGutter
-highlight clear SignColumn
-highlight GitGutterAdd ctermfg=green
-highlight GitGutterChange ctermfg=blue
-highlight GitGutterDelete ctermfg=red
-highlight GitGutterChangeDelete ctermfg=blue
-
 "Auto Origami (auto manage fold columns)
 augroup auto_origami
     au!
@@ -325,9 +329,6 @@ endif
 
 " Markology
 let g:markology_include='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-highlight MarkologyHLl cterm=bold ctermfg=cyan ctermbg=none
-highlight MarkologyHLu cterm=bold ctermfg=magenta ctermbg=none
-highlight MarkologyHLm ctermfg=black  ctermbg=magenta
 
 " Markbar
 let g:markbar_mark_marker = '➜'
@@ -335,13 +336,32 @@ let g:markbar_mark_marker = '➜'
 let g:markbar_explicitly_remap_mark_mappings = v:true
 let g:markbar_peekaboo_marks_to_display = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 let g:markbar_marks_to_display = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-highlight markbarContextMarkHighlight cterm=bold ctermbg=none ctermfg=magenta
-highlight markbarSectionLowercaseMark cterm=bold ctermfg=cyan ctermbg=none
-highlight markbarUppercaseMark cterm=bold ctermfg=magenta ctermbg=none
-highlight markbarSectionBrackets cterm=bold ctermfg=black ctermbg=none
 
-" Highlighted Yank
-highlight HighlightedyankRegion cterm=reverse gui=reverse
+" ========================================
+"         HIGHLIGHT REDEFINITIONS
+" ========================================
+
+if !has('gui_running')
+    "GitGutter
+    highlight clear SignColumn
+    highlight link GitGutterAdd GruvboxGreenBold
+    highlight link GitGutterChange GruvboxBlueBold
+    highlight link GitGutterDelete GruvboxRedBold
+    highlight link GitGutterChangeDelete GruvboxBlueBold
+
+    highlight link MarkologyHLl GruvboxYellowBold
+    highlight link MarkologyHLu GruvboxPurpleBold
+    highlight link MarkologyHLm GruvboxOrangeBold
+
+    highlight link markbarContextMarkHighlight GruvboxRedBold
+    highlight link markbarSectionLowercaseMark GruvboxYellowBold
+    highlight link markbarSectionUppercaseMark GruvboxPurpleBold
+    highlight link markbarSectionBrackets GruvboxFg1
+
+    " Highlighted Yank
+    highlight HighlightedyankRegion cterm=reverse gui=reverse
+endif
+
 
 " ========================================
 "            PLUGIN KEYMAPS
@@ -476,6 +496,22 @@ if has("gui_running")
     set guioptions-=m
     set guioptions-=T
     set guioptions-=e
+
+    " HIGHLIGHTS
+    highlight clear SignColumn
+    highlight link GitGutterAdd GruvboxGreen
+    highlight link GitGutterChange GruvboxBlue
+    highlight link GitGutterDelete GruvboxRed
+    highlight link GitGutterChangeDelete GruvboxBlue
+
+    highlight link MarkologyHLl GruvboxYellowBold
+    highlight link MarkologyHLu GruvboxPurpleBold
+    highlight link MarkologyHLm GruvboxOrangeBold
+
+    highlight link markbarContextMarkHighlight GruvboxRedBold
+    highlight link markbarSectionLowercaseMark GruvboxYellowBold
+    highlight link markbarSectionUppercaseMark GruvboxPurpleBold
+    highlight link markbarSectionBrackets GruvboxFg1
 endif
 
 " ========================================
