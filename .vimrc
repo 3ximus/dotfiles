@@ -116,10 +116,10 @@ set autoread
 set wildmenu
 set wildmode=longest:list,full
 
-"enable mouse on insert mode
-"if has ("mouse")
-" set mouse=i
-"endif
+
+" enable mouse for resizing window splits
+set mouse=n
+set ttymouse=xterm2
 
 " To diable bell sounds, specially on windows
 set noerrorbells visualbell t_vb=
