@@ -1,6 +1,7 @@
-" ========================================
-"                 VUNDLE
-" ========================================
+" Modeline { vi: foldmethod=marker foldlevel=0 }
+
+" VUNDLE PLUGINS {{{1
+" ===================
 
 set nocompatible
 filetype off
@@ -59,10 +60,10 @@ Plugin 'machakann/vim-highlightedyank'
 call vundle#end()
 filetype plugin indent on
 
+" }}}1
 
-" ========================================
-"                 GENERAL
-" ========================================
+" GENERIC SETTINGS {{{1
+" =====================
 
 "encoding
 set encoding=utf-8
@@ -135,9 +136,10 @@ endfunction
 xnoremap in :<C-u>call VisualNumber()<CR>
 onoremap in :<C-u>normal vin<CR>
 
-" ========================================
-"               COLORSCHEME
-" ========================================
+" }}}1
+
+" COLORSCHEME {{{1
+" ================
 
 set t_Co=256 "terminal color range
 color gruvbox
@@ -151,9 +153,36 @@ autocmd VimEnter * highlight Normal ctermbg=none
 " highlight NonText ctermbg=none
 " highlight CursorLineNr ctermbg=none
 
-" ========================================
-"                FUNCTIONS
-" ========================================
+" }}}1
+
+" HIGHLIGHT REDEFINITIONS {{{1
+" ============================
+
+if !has('gui_running')
+    "GitGutter
+    highlight clear SignColumn
+    highlight link GitGutterAdd GruvboxGreenBold
+    highlight link GitGutterChange GruvboxBlueBold
+    highlight link GitGutterDelete GruvboxRedBold
+    highlight link GitGutterChangeDelete GruvboxBlueBold
+
+    highlight link MarkologyHLl GruvboxYellowBold
+    highlight link MarkologyHLu GruvboxPurpleBold
+    highlight link MarkologyHLm GruvboxOrangeBold
+
+    highlight link markbarContextMarkHighlight GruvboxRedBold
+    highlight link markbarSectionLowercaseMark GruvboxYellowBold
+    highlight link markbarSectionUppercaseMark GruvboxPurpleBold
+    highlight link markbarSectionBrackets GruvboxFg1
+
+    " Highlighted Yank
+    highlight HighlightedyankRegion cterm=reverse gui=reverse
+endif
+
+" }}}1
+
+" FUNCTIONS {{{1
+" ==============
 
 "fold function to auto fold entire document based on indent
 function! Fold(depth)
@@ -215,9 +244,10 @@ function! ToggleHiddenAll()
     endif
 endfunction
 
-" ========================================
-"                KEYMAPS
-" ========================================
+" }}}1
+
+" KEYMAPS {{{1
+" ============
 
 let mapleader=","
 
@@ -269,9 +299,10 @@ nnoremap <leader>a :call ToggleHiddenAll()<CR>
 nmap <leader>vs :mkview<CR>
 nmap <leader>vl :loadview<CR>
 
-" ========================================
-"                PLUGINS
-" ========================================
+" }}}1
+
+" PLUGIN CONFIGURATION {{{1
+" =========================
 
 "setup airline
 let g:airline_powerline_fonts=1
@@ -342,36 +373,10 @@ let g:markbar_mark_marker = '➜'
 let g:markbar_explicitly_remap_mark_mappings = v:true
 let g:markbar_peekaboo_marks_to_display = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 let g:markbar_marks_to_display = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+" }}}1
 
-" ========================================
-"         HIGHLIGHT REDEFINITIONS
-" ========================================
-
-if !has('gui_running')
-    "GitGutter
-    highlight clear SignColumn
-    highlight link GitGutterAdd GruvboxGreenBold
-    highlight link GitGutterChange GruvboxBlueBold
-    highlight link GitGutterDelete GruvboxRedBold
-    highlight link GitGutterChangeDelete GruvboxBlueBold
-
-    highlight link MarkologyHLl GruvboxYellowBold
-    highlight link MarkologyHLu GruvboxPurpleBold
-    highlight link MarkologyHLm GruvboxOrangeBold
-
-    highlight link markbarContextMarkHighlight GruvboxRedBold
-    highlight link markbarSectionLowercaseMark GruvboxYellowBold
-    highlight link markbarSectionUppercaseMark GruvboxPurpleBold
-    highlight link markbarSectionBrackets GruvboxFg1
-
-    " Highlighted Yank
-    highlight HighlightedyankRegion cterm=reverse gui=reverse
-endif
-
-
-" ========================================
-"            PLUGIN KEYMAPS
-" ========================================
+" PLUGIN KEYMAPS {{{1
+" ===================
 
 map <C-t> :NERDTreeToggle<CR>
 map <C-f> :NERDTreeFind<CR>
@@ -403,9 +408,10 @@ noremap <leader>gb :Gblame<CR>
 noremap <leader>D :LinediffReset<CR>
 noremap <leader>d :Linediff<CR>
 
-" ========================================
-"           COC CONFIGURATION
-" ========================================
+" }}}1
+          
+" COC CONFIGURATION {{{1
+" ======================
 
 " Coc Extensions
 let g:coc_global_extensions = [
@@ -476,9 +482,10 @@ nnoremap <silent><nowait> <leader>ck  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <leader>cp  :<C-u>CocListResume<CR>
 
-" ========================================
-"               GUI SPECIFIC
-" ========================================
+" }}}1
+
+" GUI SPECIFIC {{{1
+" =================
 
 if has("gui_running")
     colo gruvbox
@@ -522,16 +529,18 @@ if has("gui_running")
     highlight link markbarSectionBrackets GruvboxFg1
 endif
 
-" ========================================
-"             FILE SPECIFIC
-" ========================================
+" }}}1
+             
+" FILE SPECIFIC {{{1
+" ==================
 
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab autoindent "because someone has too much screen space in their eyesight
 autocmd FileType python setlocal indentkeys-=<:> " colon will auto indent line in insert mode, remove that behavior
 autocmd FileType python setlocal indentkeys-=:
-
-" ========================================
-"          RUN COMMANDS ON EVENTS
-" ========================================
+" }}}1
+          
+" RUN COMMANDS ON EVENTS {{{1
+" ===========================
 
 " autocmd VimEnter * call ToggleHiddenAll()
+" }}}1
