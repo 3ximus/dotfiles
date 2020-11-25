@@ -147,6 +147,8 @@ set background=dark
 autocmd VimEnter * highlight Normal ctermbg=none
 "this fixes the problem of dark comments when the terminal colorscheme has 0/8 to be black and 7/15 to be white
 highlight Comment ctermfg=7
+highlight FoldColumn ctermfg=7
+highlight Folded ctermfg=7
 " highlight NonText ctermbg=none
 " highlight CursorLineNr ctermbg=none
 
