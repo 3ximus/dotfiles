@@ -194,11 +194,9 @@ command! -nargs=1 Fold :call Fold( '<args>' ) "command to use Fold function
 "remove trailing whitespaces
 function StripTrailingWhitespace()
     if !&binary && &filetype != 'diff'
-        normal mz
-        normal Hmy
+        normal m'
         %s/\s\+$//e
-        normal 'yz<CR>
-        normal `z
+        normal `'
     endif
 endfunction
 
@@ -409,7 +407,7 @@ noremap <leader>D :LinediffReset<CR>
 noremap <leader>d :Linediff<CR>
 
 " }}}1
-          
+
 " COC CONFIGURATION {{{1
 " ======================
 
@@ -530,7 +528,7 @@ if has("gui_running")
 endif
 
 " }}}1
-             
+
 " FILE SPECIFIC {{{1
 " ==================
 
@@ -538,7 +536,7 @@ autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandta
 autocmd FileType python setlocal indentkeys-=<:> " colon will auto indent line in insert mode, remove that behavior
 autocmd FileType python setlocal indentkeys-=:
 " }}}1
-          
+
 " RUN COMMANDS ON EVENTS {{{1
 " ===========================
 
