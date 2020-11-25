@@ -280,13 +280,13 @@ if !exists('g:airline_symbols')
 endif
 if !has("gui_running") "running on console
     " unicode symbols
-    "let g:airline_left_sep = ''
-    "let g:airline_right_sep = ''
-    "let g:airline_left_alt_sep = ''
-    "let g:airline_right_alt_sep = ''
-    "let g:airline_symbols.branch = ''
-    ""let g:airline_symbols.linenr = 'ln'
-    "let g:airline_symbols.whitespace = ''
+    " let g:airline_left_sep = ''
+    " let g:airline_right_sep = ''
+    " let g:airline_left_alt_sep = ''
+    " let g:airline_right_alt_sep = ''
+    " let g:airline_symbols.branch = ''
+    " let g:airline_symbols.linenr = 'ln'
+    " let g:airline_symbols.whitespace = ''
 endif
 
 "NERDTree
@@ -379,6 +379,7 @@ nmap * <Plug>(anzu-star)
 nmap # <Plug>(anzu-sharp)
 
 let g:ctrlp_map = '<leader>p'
+nmap <leader>b :CtrlPBuffer<CR>
 
 nmap <leader>ha <Plug>(GitGutterStageHunk)
 nmap <leader>hu <Plug>(GitGutterUndoHunk)
@@ -423,6 +424,7 @@ nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> <leader>K :execute '!' . &keywordprg . " " . expand('<cword>')<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -452,7 +454,7 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings for CoCList
 " Show all diagnostics.
-nnoremap <silent><nowait> <leader>ca  :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <leader>cd  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
 nnoremap <silent><nowait> <leader>ce  :<C-u>CocList extensions<cr>
 " Show commands.
