@@ -143,12 +143,11 @@ set t_Co=256 "terminal color range
 color gruvbox
 let g:gruvbox_termcolors = 16 "256 colors look really bad
 set background=dark
+" makes the background be this color so that when reversed for the airline
+" mode foreground it stays FUCKING BLACK!!
+hi Normal ctermbg=236
 "trasparent background
 autocmd VimEnter * highlight Normal ctermbg=none
-"this fixes the problem of dark comments when the terminal colorscheme has 0/8 to be black and 7/15 to be white
-highlight Comment ctermfg=7
-highlight FoldColumn ctermfg=7
-highlight Folded ctermfg=7
 " highlight NonText ctermbg=none
 " highlight CursorLineNr ctermbg=none
 
@@ -244,6 +243,11 @@ nmap zF :call Fold(1)<CR>:set foldmethod=manual<CR>
 nnoremap <F2> :<C-U>setlocal lcs=tab:>-,trail:-,eol:¬ list! list? <CR>
 " toogle paste mode (to prevent indenting when pasting)
 set pastetoggle=<F3>
+
+" Idenfigy syntax highlight value under the cursor
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 " start a search for visually selected text
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
