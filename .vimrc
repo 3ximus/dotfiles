@@ -178,6 +178,8 @@ if !has('gui_running')
 
     " Highlighted Yank
     highlight HighlightedyankRegion cterm=reverse gui=reverse
+
+	highlight link logLevelInfo GruvboxBlueBold
 endif
 
 " }}}
