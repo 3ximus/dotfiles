@@ -82,3 +82,6 @@
 [submodule "neoclide/coc.nvim"]
 	path = .vim/bundle/coc.nvim
 	url = https://github.com/neoclide/coc.nvim
+[submodule "MTDL9/vim-log-highlighting"]
+	path = .vim/bundle/vim-log-highlighting
+	url = https://github.com/MTDL9/vim-log-highlighting

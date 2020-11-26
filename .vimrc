@@ -43,6 +43,7 @@ Plugin 'roxma/vim-tmux-clipboard'
 Plugin 'justinmk/vim-syntax-extra'
 Plugin 'PProvost/vim-ps1'
 Plugin 'vim-python/python-syntax'
+Plugin 'MTDL9/vim-log-highlighting'
 
 " COLORSCHEME
 Plugin 'morhetz/gruvbox'
