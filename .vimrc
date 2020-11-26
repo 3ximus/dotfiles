@@ -1,6 +1,6 @@
-" Modeline { vi: foldmethod=marker foldlevel=0 }
+" vim: foldmethod=marker foldlevel=0
 
-" VUNDLE PLUGINS {{{1
+" VUNDLE PLUGINS {{{
 " ===================
 
 set nocompatible
@@ -61,9 +61,9 @@ Plugin 'machakann/vim-highlightedyank'
 call vundle#end()
 filetype plugin indent on
 
-" }}}1
+" }}}
 
-" GENERIC SETTINGS {{{1
+" GENERIC SETTINGS {{{
 " =====================
 
 "encoding
@@ -137,9 +137,9 @@ endfunction
 xnoremap in :<C-u>call VisualNumber()<CR>
 onoremap in :<C-u>normal vin<CR>
 
-" }}}1
+" }}}
 
-" COLORSCHEME {{{1
+" COLORSCHEME {{{
 " ================
 
 set t_Co=256 "terminal color range
@@ -154,9 +154,9 @@ autocmd VimEnter * highlight Normal ctermbg=none
 " highlight NonText ctermbg=none
 " highlight CursorLineNr ctermbg=none
 
-" }}}1
+" }}}
 
-" HIGHLIGHT REDEFINITIONS {{{1
+" HIGHLIGHT REDEFINITIONS {{{
 " ============================
 
 if !has('gui_running')
@@ -180,9 +180,9 @@ if !has('gui_running')
     highlight HighlightedyankRegion cterm=reverse gui=reverse
 endif
 
-" }}}1
+" }}}
 
-" FUNCTIONS {{{1
+" FUNCTIONS {{{
 " ==============
 
 "fold function to auto fold entire document based on indent
@@ -243,9 +243,9 @@ function! ToggleHiddenAll()
     endif
 endfunction
 
-" }}}1
+" }}}
 
-" KEYMAPS {{{1
+" KEYMAPS {{{
 " ============
 
 let mapleader=","
@@ -253,6 +253,10 @@ let mapleader=","
 " change buffers
 nmap <C-P> :bp<CR>
 nmap <C-N> :bn<CR>
+
+nmap <C-W>n :tabnext<CR>
+nmap <C-W>p :tabprevious<CR>
+nmap <C-W>N :tabnew<CR>
 
 " run macro saved to q
 nnoremap <Space> @q
@@ -282,7 +286,7 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
 "use xclip, this is only needed if vim clipboard support isnt enabled
-"you might need to install 'vim-gui-common' to enable clipboard support
+"you might need to install 'vim-gui-common' or 'vim-gtk' to enable clipboard support
 vnoremap <leader>y :w !xclip -selection clipboard<CR><CR>
 nnoremap <leader>yy :w !xclip -selection clipboard<CR><CR>
 
@@ -298,9 +302,9 @@ nnoremap <leader>a :call ToggleHiddenAll()<CR>
 nmap <leader>vs :mkview<CR>
 nmap <leader>vl :loadview<CR>
 
-" }}}1
+" }}}
 
-" PLUGIN CONFIGURATION {{{1
+" PLUGIN CONFIGURATION {{{
 " =========================
 
 "setup airline
@@ -372,9 +376,9 @@ let g:markbar_mark_marker = '➜'
 let g:markbar_explicitly_remap_mark_mappings = v:true
 let g:markbar_peekaboo_marks_to_display = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 let g:markbar_marks_to_display = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-" }}}1
+" }}}
 
-" PLUGIN KEYMAPS {{{1
+" PLUGIN KEYMAPS {{{
 " ===================
 
 map <C-t> :NERDTreeToggle<CR>
@@ -407,9 +411,9 @@ noremap <leader>gb :Gblame<CR>
 noremap <leader>D :LinediffReset<CR>
 noremap <leader>d :Linediff<CR>
 
-" }}}1
+" }}}
 
-" COC CONFIGURATION {{{1
+" COC CONFIGURATION {{{
 " ======================
 
 " Coc Extensions
@@ -481,9 +485,9 @@ nnoremap <silent><nowait> <leader>ck  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <leader>cp  :<C-u>CocListResume<CR>
 
-" }}}1
+" }}}
 
-" GUI SPECIFIC {{{1
+" GUI SPECIFIC {{{
 " =================
 
 if has("gui_running")
@@ -528,18 +532,18 @@ if has("gui_running")
     highlight link markbarSectionBrackets GruvboxFg1
 endif
 
-" }}}1
+" }}}
 
-" FILE SPECIFIC {{{1
+" FILE SPECIFIC {{{
 " ==================
 
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab autoindent "because someone has too much screen space in their eyesight
 autocmd FileType python setlocal indentkeys-=<:> " colon will auto indent line in insert mode, remove that behavior
 autocmd FileType python setlocal indentkeys-=:
-" }}}1
+" }}}
 
-" RUN COMMANDS ON EVENTS {{{1
+" RUN COMMANDS ON EVENTS {{{
 " ===========================
 
 " autocmd VimEnter * call ToggleHiddenAll()
-" }}}1
+" }}}
