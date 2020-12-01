@@ -9,7 +9,7 @@ GIT_PS1_SHOWDIRTYSTATE='nonempty' # show + for staged and * for unstaged
 GIT_PS1_SHOWSTASHSTATE='nonempty' # show $ for stash
 GIT_PS1_SHOWUNTRACKEDFILES='nonempty' # show % if untracked files exist
 GIT_PS1_SHOWCOLORHINTS='' # hide status colors
-GIT_PS1_SHOWUPSTREAM='git' # see diference from upstream: > ahead, < behind, <> diverging = equal (use verbose to see number of commits ahed or behind)
+GIT_PS1_SHOWUPSTREAM='auto' # see diference from upstream: > ahead, < behind, <> diverging = equal (use verbose to see number of commits ahed or behind)
 GIT_PS1_DESCRIBE_STYLE='branch'
 
 # -----------------
