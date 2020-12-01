@@ -6,6 +6,8 @@ case $- in
 	*) return;;
 esac
 
+[[ $- == *i* ]] && source $HOME/.bash/ble.sh/out/ble.sh --noattach --rcfile $HOME/.bash/blerc
+
 # ===============
 #    SETTINGS
 # ===============
@@ -45,6 +47,9 @@ bind Space:magic-space	#
 # disable Ctrl-S ( flow control )
 stty -ixon
 
+# turn off feature to send focus gain or focus lost commands ^[[O ^[[I
+printf "\e[?1004l"
+
 # ===============
 # HISTORY CONTROL
 # ===============
@@ -59,16 +64,16 @@ shopt -s histappend
 HISTSIZE=20000
 HISTFILESIZE=10000
 
-# for hh -> https://github.com/dvorka/hstr
-export HSTR_CONFIG=hicolor,rawhistory
-# history file sync ; careful with this option since history will be mixed between terminals
-# PROMPT_COMMAND="history -a; history -n"
-if hash /usr/bin/hh 2>/dev/null; then
-	# if this is interactive shell, then bind hh to Ctrl-r (for Vi mode check doc)
-	if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hh -- \C-m"'; fi
-	# if this is interactive shell, then bind 'kill last command' to Ctrl-x k
-	if [[ $- =~ .*i.* ]]; then bind '"\C-xk": "\C-a hh -k \C-m"'; fi
-fi
+# # for hh -> https://github.com/dvorka/hstr
+# export HSTR_CONFIG=hicolor,rawhistory
+# # history file sync ; careful with this option since history will be mixed between terminals
+# # PROMPT_COMMAND="history -a; history -n"
+# if hash /usr/bin/hh 2>/dev/null; then
+# 	# if this is interactive shell, then bind hh to Ctrl-r (for Vi mode check doc)
+# 	if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hh -- \C-m"'; fi
+# 	# if this is interactive shell, then bind 'kill last command' to Ctrl-x k
+# 	if [[ $- =~ .*i.* ]]; then bind '"\C-xk": "\C-a hh -k \C-m"'; fi
+# fi
 
 # ===============
 #    PROMPT
@@ -104,8 +109,8 @@ unset color_prompt force_color_prompt
 
 # ==============
 
-# Source all files inside ./bash (only files)
-for file in ~/.bash/* ; do
+# Source all .sh files inside ./bash (only files)
+for file in ~/.bash/*.sh ; do
 	[[ -f $file ]] && source $file
 done
 unset file
@@ -156,3 +161,5 @@ export EDITOR="vim"
 # add customs scripts
 export PATH=$HOME/.bash/scripts:$PATH
 
+# ble.sh
+((_ble_bash)) && ble-attach

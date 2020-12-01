@@ -49,6 +49,10 @@ alias mount-ntfs='sudo mount -o uid=1000,gid=1000,dmask=027,fmask=137'
 # git, the quoting hack is needed to use nested single quotes
 alias git-lfs='git rev-list --objects --all | grep "$(git verify-pack -v .git/objects/pack/*.idx | sort -k 3 -n | tail -10 | awk '"'"'{print$1}'"'"')"'
 
+# python3 alias
+alias python='python3'
+alias ipython='ipython3'
+
 # pacman / aur
 alias aur-packages='pacman -Qm'
 alias list-packages='expac -H M "%m\t%-30n" | sort -rh | less'
@@ -81,7 +85,7 @@ alias man-pipes='echo "Generic form #>/dev/null (# is 1 by default)"; echo "  2>
 # -k option might give memory issues when continuing (-c) the download of large files but without it wget wont check for partially downlaoded files and will assume they are downloaded if they exist
 alias wget-directory='wget -r -np -nc -nd -k'
 
-alias pip-upgrade='pip list --outdated --format=freeze | grep -v "^\-e" | cut -d = -f 1 | xargs -n1 sudo pip install -U'
+alias pip-upgrade='pip3 list --outdated --format=freeze | grep -v "^\-e" | cut -d = -f 1 | xargs -n1 sudo pip3 install -U'
 
 # PLEX
 # Add this to sudoers or a file in sudoers.d

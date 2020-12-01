@@ -85,3 +85,6 @@
 [submodule "MTDL9/vim-log-highlighting"]
 	path = .vim/bundle/vim-log-highlighting
 	url = https://github.com/MTDL9/vim-log-highlighting
+[submodule "akinomyoga/ble.sh"]
+	path = .bash/ble.sh
+	url = https://github.com/akinomyoga/ble.sh
