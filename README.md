@@ -5,6 +5,7 @@
 - fonts in .fonts are mostly fonts for [powerline](https://github.com/powerline/fonts) support
 - konsole contains my konsole themes and profile (lives in `$HOME/.local/share/konsole`)
 - icons contains [papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) icons edited to match gruvbox style _(see my topbar screenshot)_
+-
 
 ## .config files (Mainly files for [bspwm](https://github.com/baskerville/bspwm) + [sxhkd](https://github.com/baskerville/sxhkd) + [polybar](https://github.com/jaagr/polybar) + [Compton](https://github.com/chjj/compton))
 - rofi directory used for [rofi](https://github.com/DaveDavenport/rofi) - see my custom [rofi launch script for Plasma](.bash/scripts/rofi-blurred)
@@ -27,7 +28,7 @@ git submodule init
 git submodule update
 ```
 
-To update the vim plugins and the repo use 
+To update the vim plugins and the repo use
 
 ```
 git pull --recurse-submodules
@@ -156,6 +157,7 @@ customized using [oomox](https://github.com/actionless/oomox) and my [customize 
 - .xDefaults used for urxvt
 - .gdb-dashboard.py can be used as .gdbinit (by renaming it to .gdbinit) since this depends on [pwndbg](https://github.com/pwndbg/pwndbg)
 - .bash, .bashrc, .bash_profile, .inputrc used for bash and readline configuration
+- inside .bash there is `blerc` and `ble.sh` to configure [ble.sh](https://github.com/akinomyoga/ble.sh)
 
 ### My other themes to go along with the gruvbox colorscheme
  - [GTK](https://github.com/3ximus/gruvbox-gtk)
