@@ -88,3 +88,6 @@
 [submodule "akinomyoga/ble.sh"]
 	path = .bash/ble.sh
 	url = https://github.com/akinomyoga/ble.sh
+[submodule "rhysd/clever-f.vim"]
+	path = .vim/bundle/clever-f.vim
+	url = https://github.com/rhysd/clever-f.vim

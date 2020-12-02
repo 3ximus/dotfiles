@@ -111,6 +111,7 @@ z,s
  -  [vim-commentary](https://github.com/tpope/vim-commentary)
  -  [gundo.vim](https://github.com/sjl/gundo.vim)
  -  [vim-easymotion](https://github.com/easymotion/vim-easymotion)
+ -  [clever-f.vim](https://github.com/rhysd/clever-f.vim)
  -  [linediff.vim](https://github.com/AndrewRadev/linediff.vim)
  -  [vim-peekaboo](https://github.com/junegunn/vim-peekaboo)
  -  [ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim)
