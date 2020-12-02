@@ -97,32 +97,3 @@ alias plex-status='systemctl status plexmediaserver.service'
 alias plex-stop='sudo systemctl stop plexmediaserver.service'
 alias plex-restart='sudo systemctl restart plexmediaserver.service'
 
-# PATH ALIASES
-
-# get list of repos
-repo_path="$HOME/Documents/rep/"
-if [ -d "$repo_path" ];then
-	for i in $(ls $repo_path);do
-		if [ -d "$repo_path/$i" ];then
-			ni=$(echo $i | sed 's/\-/_/g')
-			alias "R_$ni"="cd \"$repo_path$i\""
-			declare "R_$ni"="$repo_path$i"
-		fi
-	done
-fi
-alias R_="cd $repo_path"
-
-# get list of code directories
-code_path="$HOME/Documents/code/"
-if [ -d "$code_path" ];then
-	for i in $(ls $code_path);do
-		if [ -d "$code_path/$i" ];then
-			ni=$(echo $i | sed 's/\-/_/g')
-			alias "C_$ni"="cd \"$code_path$i\""
-			declare "C_$ni"="$code_path$i"
-		fi
-	done
-fi
-
-unset i ni
-
