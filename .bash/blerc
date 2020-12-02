@@ -131,7 +131,7 @@ ble-color-setface syntax_quotation          fg=green,bold
 ble-color-setface syntax_expr               fg=navy
 ble-color-setface syntax_error              bg=203,fg=231
 ble-color-setface syntax_varname            fg=202
-ble-color-setface syntax_delimiter          underline
+ble-color-setface syntax_delimiter          none
 ble-color-setface syntax_param_expansion    fg=purple
 ble-color-setface syntax_history_expansion  bg=94,fg=231
 ble-color-setface syntax_function_name      fg=92,bold
