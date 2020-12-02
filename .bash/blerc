@@ -96,7 +96,7 @@ bleopt complete_ambiguous=1
 # Options are "dense" "dense-nowrap" "linewise" "desc" "desc-raw" "align" and "align-nowrap"
 bleopt complete_menu_style=align-nowrap
 bleopt complete_menu_align=20
-bleopt complete_menu_maxlines=10
+bleopt complete_menu_maxlines=20
 
 ##-----------------------------------------------------------------------------
 ## Color settings
@@ -131,7 +131,7 @@ ble-color-setface syntax_quotation          fg=green,bold
 ble-color-setface syntax_expr               fg=navy
 ble-color-setface syntax_error              bg=203,fg=231
 ble-color-setface syntax_varname            fg=202
-ble-color-setface syntax_delimiter          bold
+ble-color-setface syntax_delimiter          underline
 ble-color-setface syntax_param_expansion    fg=purple
 ble-color-setface syntax_history_expansion  bg=94,fg=231
 ble-color-setface syntax_function_name      fg=92,bold
@@ -144,18 +144,18 @@ ble-color-setface syntax_document_begin     fg=94,bold
 ble-color-setface command_builtin_dot       fg=yellow,bold
 ble-color-setface command_builtin           fg=yellow
 ble-color-setface command_alias             fg=teal
-ble-color-setface command_function          fg=orange,bold
+ble-color-setface command_function          fg=orange
 ble-color-setface command_file              none
 ble-color-setface command_keyword           fg=blue
 ble-color-setface command_jobs              fg=red,bold
 ble-color-setface command_directory         fg=blue
-ble-color-setface filename_directory        fg=blue,bold
+ble-color-setface filename_directory        fg=blue
 ble-color-setface filename_directory_sticky fg=white,bg=blue,bold
-ble-color-setface filename_link             fg=teal,bold
+ble-color-setface filename_link             fg=teal
 ble-color-setface filename_orphan           underline,fg=teal,bg=224
 ble-color-setface filename_setuid           underline,fg=black,bg=220
 ble-color-setface filename_setgid           underline,fg=black,bg=191
-ble-color-setface filename_executable       fg=green,bold
+ble-color-setface filename_executable       fg=green
 ble-color-setface filename_other            none
 ble-color-setface filename_socket           underline,fg=cyan,bg=black
 ble-color-setface filename_pipe             underline,fg=lime,bg=black
@@ -184,23 +184,9 @@ function blerc/vim-load-hook {
   # bleopt keymap_vi_macro_depth=64
   # bleopt keymap_vi_mode_string_nmap:=$'\e[1m~\e[m'
 
+  bleopt keymap_vi_mode_update_prompt=1
 
-  ## The setting "keymap_vi_mode_update_prompt" specifies that the
-  ## prompt should be recalculated on the mode change.  When this
-  ## option has a non-empty value, the prompt will be recalculated.
-
-  # bleopt keymap_vi_mode_update_prompt=
-
-
-  ## The option "keymap_vi_mode_show" controls if the mode line is
-  ## shown.  When this option has a non-empty value, the mode line is
-  ## shown.
-
-  # bleopt keymap_vi_mode_show=1
-
-
-  ## The following settings specify the name of modes in the mode
-  ## line.
+  bleopt keymap_vi_mode_show=
 
   # bleopt keymap_vi_mode_name_insert=INSERT
   # bleopt keymap_vi_mode_name_replace=REPLACE
@@ -210,36 +196,21 @@ function blerc/vim-load-hook {
   # bleopt keymap_vi_mode_name_linewise=LINE
   # bleopt keymap_vi_mode_name_blockwise=BLOCK
 
-
-  ## The following setting setups the keymap settings with Meta
-  ## modifiers
-
   # ble-decode/keymap:vi_imap/define-meta-bindings
 
   ## Cursor settings
 
-  # bleopt keymap_vi_nmap_cursor=2
-  # bleopt keymap_vi_imap_cursor=5
-  # bleopt keymap_vi_omap_cursor=4
-  # bleopt keymap_vi_xmap_cursor=2
-  # bleopt keymap_vi_cmap_cursor=0
+  bleopt keymap_vi_nmap_cursor=2
+  bleopt keymap_vi_imap_cursor=5
+  bleopt keymap_vi_omap_cursor=4
+  bleopt keymap_vi_xmap_cursor=2
+  bleopt keymap_vi_cmap_cursor=0
 
-  ## DECSCUSR setting
-  ##
-  ##   If you don't have the entry Ss in terminfo, yet your terminal supports
-  ##   DECSCUSR, please comment out the following line to enable DECSCUSR.
-  ##
-  #_ble_term_Ss=$'\e[@1 q'
-
-  ## Control sequences that will be output on entering each mode
-  # bleopt term_vi_nmap=
-  # bleopt term_vi_imap=
-  # bleopt term_vi_omap=
-  # bleopt term_vi_xmap=
-  # bleopt term_vi_cmap=
+  # Enable multiple cursors
+  _ble_term_Ss=$'\e[@1 q'
 
   ## vim-surround
-  #source "$_ble_base/lib/vim-surround.sh"
+  source "$_ble_base/lib/vim-surround.sh"
   #bleopt vim_surround_45:=$'$( \r )'
   #bleopt vim_surround_61:=$'$(( \r ))'
 
@@ -250,3 +221,15 @@ function blerc/vim-load-hook {
 }
 blehook/eval-after-load keymap_vi blerc/vim-load-hook
 
+# # Define prompt sequence >> \q{vim-mode}
+# function ble/prompt/backslash:vim-mode {
+#   bleopt keymap_vi_mode_update_prompt:=1
+#   case $_ble_decode_keymap in
+#   (vi_[on]map) ble/prompt/print 'cmd ' ;;
+#   (vi_imap) ble/prompt/print 'ins ' ;;
+#   (vi_smap) ble/prompt/print 'sel ' ;;
+#   (vi_xmap) ble/prompt/print 'vis ' ;;
+#   XXX TEST THIS:
+#   #(vi_xmap) ble/prompt/print ansi 'vis ' ;;
+#   esac
+# }
