@@ -39,27 +39,6 @@ grab_dot_files() {
 	done
 }
 
-grab_firefox_files() {
-	files="${files}\n#--------------\n# firefox files\n#--------------\n\n"
-	if [ -z $remote ];then
-		if [[ -f "${DATA_PATH}/firefox/chrome" ]]; then
-			location="$(find $DESTINATION_PATH/.mozilla/firefox/ -name *.default | tail -n1)"
-			if [ ! -z $location ] ; then
-				files="${files}#${DATA_PATH}/firefox/chrome::${location}\n"
-			else
-				echo -e "[\033[1;31mFAILED\033[0m] Couldn't get firefox data location"
-			fi
-		fi
-	else
-		echo "Getting remote firefox profile path, if prompted insert remote location's password."
-		location="$(ssh $remote_location $remote_port_ssh "find $DESTINATION_PATH/.mozilla/firefox/ -name *.default | tail -n1")"
-		if [ ! -z $location ] ; then
-			files="${files}#${DATA_PATH}/firefox/chrome::${location}\n"
-		else
-			echo -e "[\033[1;31mFAILED\033[0m] Couldn't get firefox data location"
-		fi
-	fi
-}
 
 grab_konsole_files() {
 	files="${files}\n#---------\n# konsole files\n#---------\n\n"
@@ -69,19 +48,6 @@ grab_konsole_files() {
 		konsole_files=$(find ${DATA_PATH}/konsole/* -maxdepth 0 -type f)
 		for f in $konsole_files ; do
 			files="${files}#${f}::${konsole_location}/${f##*/}\n"
-		done
-	fi
-}
-
-grab_vscode_files() {
-	files="${files}\n#-------------\n# vscode files\n#-------------\n\n"
-# vscode destination
-	vscode_location="${DESTINATION_PATH}/.config/Code/User"
-	if [[ -d "$DATA_PATH/.config/Code/User" ]]; then
-		# NOTE assuming filenames have no spaces here
-		vscode_files=$(find ${DATA_PATH}/.config/Code/User/* -maxdepth 0 -type f)
-		for f in $vscode_files ; do
-			files="${files}#${f}::${vscode_location}\n"
 		done
 	fi
 }
@@ -112,17 +78,8 @@ grab_remaining_files() {
 #   POST ACTION FUNCTIONS
 # -------------------------
 
-post_action_vscode() {
-	diff .config/Code/extension_list.txt <(code --list-extensions) |
-		grep -Po '(?<=^< ).*' |
-		while read extension ; do
-			code --install-extension ${extension}
-		done
-	diff .config/Code/extension_list.txt <(code --list-extensions) |
-		grep -Po '(?<=^> ).*' |
-		while read extension ; do
-			code --uninstall-extension ${extension}
-		done
+post_action_XXX() {
+	:
 }
 
 # -------------------------
@@ -138,7 +95,7 @@ install_whatsapp() {
 		nativefier --icon "${DATA_PATH}/icons/whatsapp.png" --name whatsapp --counter --single-instance web.whatsapp.com /tmp/whatsapp
 		if [ -d "/opt/whatsapp" ] ; then
 			echo "Deleting previous WhatsApp installation"
-			sudo rm -r "/opt/whatsapp" 
+			sudo rm -r "/opt/whatsapp"
 		fi
 		sudo mv /tmp/whatsapp/whatsapp* /opt/whatsapp
 		rm /tmp/whatsapp -r
@@ -192,10 +149,14 @@ remote_copy_files() {
 }
 
 run_post_actions() {
+	cd ${DESTINATION_PATH}/.bash/ble.sh
+	git checkout master
+	make
+
 	if [[ "$@" =~ "vscode" ]]; then
 		read -r -n 1 -p "Install VSCode Extensions? [y/n]: " REPLY
 		case "$REPLY" in
-			[yY])		echo; post_action_vscode ;;
+			[yY])		echo; post_action_XXX ;;
 			*) 			echo ;;
 		esac
 
@@ -211,8 +172,6 @@ if [[ "$1" = "help" || "$1" = "-help" || "$1" = "--help" || "$1" = "-h" ]]; then
 
 Options:
 	generic                  only dot files
-	vscode                   Visual Studio Code files
-	firefox                  Firefox files
 	konsole                  Konsole terminal emulator files
 	whatsapp                 Whatsapp files (this creates uses nativefier application)
 	[none]                   No option or anything else assumes all files are gathered
@@ -322,13 +281,6 @@ if [[ "$@" =~ "generic" || "$@" =~ "general" ]]; then
 elif [[ "$@" =~ "konsole" ]]; then
 	grab_konsole_files
 
-elif [[ "$@" =~ "vscode" ]]; then
-	grab_vscode_files
-
-elif [[ "$@" =~ "firefox" ]]; then
-	echo "Gathering firefox files to link..."
-	grab_firefox_files
-
 elif [[ "$@" =~ "whatsapp" ]]; then
 	echo "Installing Whatsapp"
 	install_whatsapp
@@ -341,8 +293,6 @@ else
 	grab_dot_files
 	grab_dotconfig_files
 	grab_konsole_files
-	grab_firefox_files
-	grab_vscode_files
 	grab_remaining_files
 fi
 
