@@ -151,6 +151,7 @@ Tmux has a lot of custom configurations added in `.tmux.conf` and a few plugins 
 
  - [tmux-prefix-highlight](https://github.com/tmux-plugins/tmux-prefix-highlight)
  - [tmux-copycat](https://github.com/tmux-plugins/tmux-copycat)
+ - [tmux-battery](https://github.com/tmux-plugins/tmux-battery)
  - [tmux-plugin-uptime](https://github.com/3ximus/tmux-plugin-uptime)
  - [tmux-plugin-datetime](https://github.com/3ximus/tmux-plugin-datetime)
 
