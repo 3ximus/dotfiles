@@ -91,3 +91,18 @@
 [submodule "rhysd/clever-f.vim"]
 	path = .vim/bundle/clever-f.vim
 	url = https://github.com/rhysd/clever-f.vim
+[submodule "tmux-plugins/tpm"]
+	path = .tmux/tpm
+	url = https://github.com/tmux-plugins/tpm
+[submodule "tmux-plugins/tmux-prefix-highlight"]
+	path = .tmux/tmux-prefix-highlight
+	url = https://github.com/tmux-plugins/tmux-prefix-highlight
+[submodule "tmux-plugins/tmux-copycat"]
+	path = .tmux/tmux-copycat
+	url = https://github.com/tmux-plugins/tmux-copycat
+[submodule "3ximus/tmux-plugin-uptime"]
+	path = .tmux/tmux-plugin-uptime
+	url = https://github.com/3ximus/tmux-plugin-uptime
+[submodule "3ximus/tmux-plugin-datetime"]
+	path = .tmux/tmux-plugin-datetime
+	url = https://github.com/3ximus/tmux-plugin-datetime
