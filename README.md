@@ -5,7 +5,9 @@
 - fonts in .fonts are mostly fonts for [powerline](https://github.com/powerline/fonts) support
 - konsole contains my konsole themes and profile (lives in `$HOME/.local/share/konsole`)
 - icons contains [papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) icons edited to match gruvbox style _(see my topbar screenshot)_
--
+- inside .bash there is `blerc` and `ble.sh` to configure [ble.sh](https://github.com/akinomyoga/ble.sh) **NOTE** You need to run make inside `.bash/ble.sh` (gawk is needed for this)
+- .gdbinit was downloaded from [gdb-dashboard](https://github.com/cyrus-and/gdb-dashboard)
+
 
 ## .config files (Mainly files for [bspwm](https://github.com/baskerville/bspwm) + [sxhkd](https://github.com/baskerville/sxhkd) + [polybar](https://github.com/jaagr/polybar) + [Compton](https://github.com/chjj/compton))
 - rofi directory used for [rofi](https://github.com/DaveDavenport/rofi) - see my custom [rofi launch script for Plasma](.bash/scripts/rofi-blurred)
@@ -152,18 +154,10 @@ Tmux has a lot of custom configurations added in `.tmux.conf` and a few plugins 
  - [tmux-plugin-uptime](https://github.com/3ximus/tmux-plugin-uptime)
  - [tmux-plugin-datetime](https://github.com/3ximus/tmux-plugin-datetime)
 
-## Others
-- .xDefaults used for urxvt
-- .gdb-dashboard.py can be used as .gdbinit (by renaming it to .gdbinit) since this depends on [pwndbg](https://github.com/pwndbg/pwndbg)
-- .bash, .bashrc, .bash_profile, .inputrc used for bash and readline configuration
-- inside .bash there is `blerc` and `ble.sh` to configure [ble.sh](https://github.com/akinomyoga/ble.sh) **NOTE** You need to run make inside `.bash/ble.sh` (gawk is needed for this)
-
-
 ### My other themes to go along with the gruvbox colorscheme
  - [GTK](https://github.com/3ximus/gruvbox-gtk)
  - [Plasma](https://github.com/3ximus/gruvbox-plasma)
  - [VS Code](https://github.com/jdinhlife/vscode-theme-gruvbox)
-
 
 ## More Screenshots
 
