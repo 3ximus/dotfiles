@@ -106,3 +106,6 @@
 [submodule "3ximus/tmux-plugin-datetime"]
 	path = .tmux/tmux-plugin-datetime
 	url = https://github.com/3ximus/tmux-plugin-datetime
+[submodule "tmux-plugins/tmux-battery"]
+	path = .tmux/tmux-battery
+	url = https://github.com/tmux-plugins/tmux-battery

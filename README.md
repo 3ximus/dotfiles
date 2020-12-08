@@ -152,10 +152,6 @@ Tmux has a lot of custom configurations added in `.tmux.conf` and a few plugins 
  - [tmux-plugin-uptime](https://github.com/3ximus/tmux-plugin-uptime)
  - [tmux-plugin-datetime](https://github.com/3ximus/tmux-plugin-datetime)
 
-## Spotify
-![9](screenshots/spotify.png)
-customized using [oomox](https://github.com/actionless/oomox) and my [customize spotify](spotify/customize_spotify.sh) script
-
 ## Others
 - .xDefaults used for urxvt
 - .gdb-dashboard.py can be used as .gdbinit (by renaming it to .gdbinit) since this depends on [pwndbg](https://github.com/pwndbg/pwndbg)
