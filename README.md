@@ -142,13 +142,15 @@ _tabline and status bar are hidden on startup in my current configuration, they 
 
 ![7](screenshots/vim.png)
 
-## Tmux (Powerline Theme / Clean theme )
-![8](screenshots/tmux.png)
+## Tmux
 ![12](screenshots/tmux2.png)
 
-.tmux contains parts from [tmux-powerline](https://github.com/erikw/tmux-powerline)
+Tmux has a lot of custom configurations added in `.tmux.conf` and a few plugins added as submodules that are managed through [TPM (Tmux Plugin Manager)](https://github.com/tmux-plugins/tpm)
 
-Themes can be switched by changing the theme name on [.tmux-powerlinerc](.tmux-powerlinerc) and adjust the [.tmux.conf](.tmux.conf) in the lines marked with _FOR POWERLINE_
+ - [tmux-prefix-highlight](https://github.com/tmux-plugins/tmux-prefix-highlight)
+ - [tmux-copycat](https://github.com/tmux-plugins/tmux-copycat)
+ - [tmux-plugin-uptime](https://github.com/3ximus/tmux-plugin-uptime)
+ - [tmux-plugin-datetime](https://github.com/3ximus/tmux-plugin-datetime)
 
 ## Spotify
 ![9](screenshots/spotify.png)
