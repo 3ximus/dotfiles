@@ -269,7 +269,7 @@ nmap <C-N> :bn<CR>
 
 nmap <C-W>n :tabnext<CR>
 nmap <C-W>p :tabprevious<CR>
-nmap <C-W>N :tabnew<CR>
+nmap <C-W>C :tabnew<CR>
 
 " run macro saved to q
 nnoremap <Space> @q
