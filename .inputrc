@@ -37,8 +37,7 @@ set keymap vi-insert
 "\ef": forward-word
 
 set keymap emacs
-"\ex": vi-editing-mode
-"\ee": "\ex\ex"
+"\ee": vi-editing-mode
 
 # delete until the previous path separator /
 "\C-b": unix-filename-rubout
@@ -59,27 +58,28 @@ set keymap emacs
 "\C-xr": re-read-init-file
 "\C-xi": redraw-current-line
 
-"\C-je": edit-and-execute-command
+# NOTE C-j is now bound in ble.sh
+# "\C-je": edit-and-execute-command
 
-"\C-j": nop
-# quote word near cursor
-"\C-jq": "\eb\"\ef\""
-# reload bashrc
-"\C-jb": "\C-u source ~/.bashrc\C-m"
-# edit the path
-"\C-jp": "PATH=${PATH}\e\C-e\C-a\ef\C-f"
-# jump into last comand directory
-"\C-jd": 'cd !$ \015'
-# generate awk command
-"\C-ja": 'awk \'{}\'\eOD\eOD'
-# make subcommand
-"\C-jm": '\C-a "$(\C-e)"\C-a'
-# change comand
-"\C-jc": "\C-a\ef\C-u"
-# add sudo before command
-"\C-js": "\C-asudo \C-e"
-# run command in every subdirectory
-"\C-jf": 'for f in *; do cd $f &&  && cd .. ; done\eb\eb\eOD\eOD\eOD\eOD'
-# sync history
-"\C-jh": ' history -a; history -n\C-m'
+# "\C-j": nop
+# # quote word near cursor
+# "\C-jq": "\eb\"\ef\""
+# # reload bashrc
+# "\C-jb": "\C-u source ~/.bashrc\C-m"
+# # edit the path
+# "\C-jp": "PATH=${PATH}\e\C-e\C-a\ef\C-f"
+# # jump into last comand directory
+# "\C-jd": 'cd !$ \015'
+# # generate awk command
+# "\C-ja": 'awk \'{}\'\eOD\eOD'
+# # make subcommand
+# "\C-jm": '\C-a "$(\C-e)"\C-a'
+# # change comand
+# "\C-jc": "\C-a\ef\C-u"
+# # add sudo before command
+# "\C-js": "\C-asudo \C-e"
+# # run command in every subdirectory
+# "\C-jf": 'for f in *; do cd $f &&  && cd .. ; done\eb\eb\eOD\eOD\eOD\eOD'
+# # sync history
+# "\C-jh": ' history -a; history -n\C-m'
 
