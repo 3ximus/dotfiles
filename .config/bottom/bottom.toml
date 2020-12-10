@@ -1,0 +1,30 @@
+# Bottom config file
+# See https://github.com/ClementTsang/bottom#config-files
+
+[flags]
+dot_marker = false
+left_legend = true
+
+# Layout
+[[row]]
+  ratio=30
+  [[row.child]]
+  type="cpu"
+[[row]]
+    ratio=20
+    [[row.child]]
+      type="mem"
+    [[row.child]]
+      type="net"
+[[row]]
+  ratio=30
+  [[row.child]]
+    ratio=2
+    type="proc"
+    default=true
+  [[row.child]]
+    [[row.child.child]]
+      type="temp"
+    [[row.child.child]]
+      type="disk"
+
