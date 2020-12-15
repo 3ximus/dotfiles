@@ -115,6 +115,9 @@ set nowritebackup
 
 set autoread
 
+"display command key pressed
+set showcmd
+
 "autocomplete vim commands
 set wildmenu
 set wildmode=longest:list,full
@@ -265,7 +268,9 @@ command! -nargs=0 ClearRegisters :call ClearRegisters()
 " KEYMAPS {{{
 " ============
 
-let mapleader=","
+" map leader to space
+nnoremap <space> <nop>
+let mapleader=" "
 
 " change buffers
 nmap <C-P> :bp<CR>
@@ -276,7 +281,7 @@ nmap <C-W>p :tabprevious<CR>
 nmap <C-W>N :tabnew<CR>
 
 " run macro saved to q
-nnoremap <Space> @q
+" nnoremap <Space> @q
 
 " move line
 nnoremap <C-j> :<C-U>m .+1<CR>
