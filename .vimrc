@@ -160,25 +160,29 @@ autocmd VimEnter * highlight Normal ctermbg=none
 " HIGHLIGHT REDEFINITIONS {{{
 " ============================
 
+"GitGutter
+highlight clear SignColumn
+highlight link GitGutterAdd GruvboxGreenBold
+highlight link GitGutterChange GruvboxBlueBold
+highlight link GitGutterDelete GruvboxRedBold
+highlight link GitGutterChangeDelete GruvboxBlueBold
+
+" Markology
+highlight link MarkologyHLl GruvboxYellowBold
+highlight link MarkologyHLu GruvboxPurpleBold
+highlight link MarkologyHLm GruvboxOrangeBold
+
+" Markbar
+highlight link markbarContextMarkHighlight GruvboxRedBold
+highlight link markbarSectionLowercaseMark GruvboxYellowBold
+highlight link markbarSectionUppercaseMark GruvboxPurpleBold
+highlight link markbarSectionBrackets GruvboxFg1
+
+" Coc
+highlight link CocErrorSign GruvboxRedBold
+highlight link CocWarningSign GruvboxYellowBold
+
 if !has('gui_running')
-	"GitGutter
-	highlight clear SignColumn
-	highlight link GitGutterAdd GruvboxGreenBold
-	highlight link GitGutterChange GruvboxBlueBold
-	highlight link GitGutterDelete GruvboxRedBold
-	highlight link GitGutterChangeDelete GruvboxBlueBold
-
-	" Markology
-	highlight link MarkologyHLl GruvboxYellowBold
-	highlight link MarkologyHLu GruvboxPurpleBold
-	highlight link MarkologyHLm GruvboxOrangeBold
-
-	" Markbar
-	highlight link markbarContextMarkHighlight GruvboxRedBold
-	highlight link markbarSectionLowercaseMark GruvboxYellowBold
-	highlight link markbarSectionUppercaseMark GruvboxPurpleBold
-	highlight link markbarSectionBrackets GruvboxFg1
-
 	" Highlighted Yank
 	highlight HighlightedyankRegion cterm=reverse gui=reverse
 
@@ -269,7 +273,7 @@ nmap <C-N> :bn<CR>
 
 nmap <C-W>n :tabnext<CR>
 nmap <C-W>p :tabprevious<CR>
-nmap <C-W>C :tabnew<CR>
+nmap <C-W>N :tabnew<CR>
 
 " run macro saved to q
 nnoremap <Space> @q
@@ -532,21 +536,6 @@ if has("gui_running")
 	set guioptions-=T
 	set guioptions-=e
 
-	" HIGHLIGHTS
-	highlight clear SignColumn
-	highlight link GitGutterAdd GruvboxGreen
-	highlight link GitGutterChange GruvboxBlue
-	highlight link GitGutterDelete GruvboxRed
-	highlight link GitGutterChangeDelete GruvboxBlue
-
-	highlight link MarkologyHLl GruvboxYellowBold
-	highlight link MarkologyHLu GruvboxPurpleBold
-	highlight link MarkologyHLm GruvboxOrangeBold
-
-	highlight link markbarContextMarkHighlight GruvboxRedBold
-	highlight link markbarSectionLowercaseMark GruvboxYellowBold
-	highlight link markbarSectionUppercaseMark GruvboxPurpleBold
-	highlight link markbarSectionBrackets GruvboxFg1
 endif
 
 " }}}
