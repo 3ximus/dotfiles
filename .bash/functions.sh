@@ -1,6 +1,4 @@
-# Modeline {
-#	 vi: tabstop=4 filetype=sh
-# }
+# vi: tabstop=4 filetype=bash
 
 # ==================================
 # ----------------------------------
@@ -19,10 +17,6 @@ man() {
 		LESS_TERMCAP_ue=$(printf "\e[0m") \
 		LESS_TERMCAP_us=$(printf "\e[1;35m") \
 			man "$@"
-}
-
-yaourt-search() {
-	yaourt --sort w -Ss "$1" --color | less -X
 }
 
 # execute a function as sudo
@@ -54,7 +48,7 @@ delete_older_than_xdays() {
 	if [ $# -eq 0 ] ; then
 		echo 'delete_older_than_xdays N_DAYS [path]'
 	else
-		if [ $# -ne 1 ] ; then 
+		if [ $# -ne 1 ] ; then
 			find . -mtime +$1 -delete
 		else
 			find "$2" -mtime +$1 -delete
@@ -84,7 +78,7 @@ remove-special-chars-from-name() {
 
 # preview markdown files as a man page
 md() {
-	pandoc -sf markdown -t man "$1" | man -l - 
+	pandoc -sf markdown -t man "$1" | man -l -
 }
 
 
@@ -123,6 +117,32 @@ git-delete-cached() {
 	git filter-branch --force --index-filter "git rm --cached --ignore-unmatch $@" --prune-empty --tag-name-filter cat -- --all
 }
 
+# activate a virtual environment
+activate() {
+	local path=${1:-'.'}
+	# local venvs=$(find . -regex .*activate$ | awk --field-separator=/ '{print $(NF-2)}')
+	local venvs=$(find . -regex .*activate$)
+	if [ $# -eq 0 ] ; then
+		if [ $(find . -regex .*activate$ |wc -l) -gt 1 ] ; then
+			echo "Found multiple Virtual Environments:"
+			select vv in $venvs ; do
+				acfile=$vv
+				break
+			done
+		else
+			acfile=$venvs
+		fi
+	else
+		acfile=$(find $path -regex .*activate$)
+	fi
+
+	[[ -f $acfile ]] && {
+		echo -e "Activating: \033[1;35m$acfile\033[m"
+		source $acfile
+	}
+
+}
+
 # find process by name
 psgrep() {
 	local list=$(ps -ef)
@@ -131,13 +151,15 @@ psgrep() {
 }
 
 memhogs () {
-	TR=`free|grep Mem:|awk '{print $2}'`
+	local TR=`free|grep Mem:|awk '{print $2}'`
 
 	ps axo rss,comm,pid | awk -v tr=$TR '{proc_list[$2]+=$1;} END {for (proc in proc_list) {proc_pct=(proc_list[proc]/tr)*100; printf("%d\t%-16s\t%0.2f%%\n",proc_list[proc],proc,proc_pct);}}' | sort -rn | head -n 10
 }
 
 psmem () { # not working properly
-	PROCNAME="$@";
+	[[ $# -eq 0 ]] && { echo "Give some process names to search for" ; return 1; }
+
+	local PROCNAME="$@";
 
 	echo $PROCNAME IS USING \
 	$(
@@ -150,10 +172,6 @@ download_m3u8_to_mp4() { # download m3u8 stream to an mp4 file
 }
 
 
-vboxsave() {
-	vboxmanage controlvm $1 savestate
-}
-
 # fork to the background silently and send its output to the /dev/null
 # NOTES: generic form #>/dev/null (# is 1 by default)
 #		2>&-			---->		#>&-   (close fd)
@@ -162,12 +180,6 @@ vboxsave() {
 ds() {
 	echo "$@ |& > /dev/null &"
 	"$@" |& > /dev/null &
-}
-
-# fork and dissown command
-dss() {
-	$@ |& > /dev/null &
-	disown %-
 }
 
 
