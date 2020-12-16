@@ -282,6 +282,7 @@ nmap <C-W>N :tabnew<CR>
 
 " run macro saved to q
 " nnoremap <Space> @q
+nnoremap <leader>q @q
 
 " move line
 nnoremap <C-j> :<C-U>m .+1<CR>

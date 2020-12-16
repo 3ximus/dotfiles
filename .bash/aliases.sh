@@ -61,9 +61,6 @@ alias paccache-clean='paccache -rk1 && paccache -ruk0'
 # transmission
 alias transmissiond-start='transmission-daemon -g ~eximus/.config/transmission/'
 
-# Virtualenv
-alias activate='source $(find . -regex .*activate$)'
-
 # SSH
 alias ssh-new-bash-session='eval `ssh-agent` && ssh-add'
 alias ssh-new-session='keychain ~/.ssh/id_rsa && source ~/.keychain/$HOSTNAME-sh'
