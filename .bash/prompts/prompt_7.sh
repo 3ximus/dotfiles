@@ -49,8 +49,8 @@ __virtual_env () {
 	if [ -z "$VIRTUAL_ENV_DISABLE_PROMPT" ] ; then
 		if [ ! -z "$VIRTUAL_ENV" ] ; then
 			echo -en " \001\e[${__VenvColor}m\002[`basename \"$VIRTUAL_ENV\"`]"
-		elif [ ! -z "$CONDA_DEFAULT_ENV" ] ; then
-			echo -en " \001\e[${__VenvColor}m\002[$CONDA_DEFAULT_ENV]"
+		elif [ ! -z "$CONDA_PROMPT_MODIFIER" ] ; then
+			echo -en " \001\e[${__VenvColor}m\002[$CONDA_PROMPT_MODIFIER]"
 		fi
 	fi
 }

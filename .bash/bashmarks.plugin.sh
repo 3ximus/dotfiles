@@ -92,7 +92,7 @@ function bm {
 function _echo_usage {
   echo 'USAGE:'
   echo "bm -h                   - Prints this usage info"
-  echo 'bm -a <bookmark_name>   - Saves the current directory as "bookmark_name" (alias a)'
+  echo 'bm -a <bookmark_name>   - Saves the current directory as "bookmark_name" (alias s)'
   echo 'bm [-g] <bookmark_name> - Goes (cd) to the directory associated with "bookmark_name" (alias g)'
   echo 'bm -p <bookmark_name>   - Prints the directory associated with "bookmark_name" (alias p)'
   echo 'bm -d <bookmark_name>   - Deletes the bookmark (alias d)'
