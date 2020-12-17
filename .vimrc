@@ -443,6 +443,10 @@ noremap <leader>d :Linediff<CR>
 " COC CONFIGURATION {{{
 " ======================
 
+" let g:coc_start_at_startup = 0
+
+let g:coc_disable_startup_warning = 1
+
 " Coc Extensions
 let g:coc_global_extensions = [
 	  \'coc-python',
