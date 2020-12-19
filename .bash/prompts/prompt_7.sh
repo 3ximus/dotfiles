@@ -70,9 +70,10 @@ __virtualization () {
 __job_count() {
 	local stopped=$(jobs -sp |wc -l)
 	local running=$(jobs -rp |wc -l)
-	((running+stopped)) && echo -n " bg:"
-	[[ $running -ne 0 ]] && echo -n "${running}r"
-	[[ $stopped -ne 0 ]] && echo -n "${stopped}s"
+	((running+stopped)) && echo -n " {"
+	[[ $stopped -ne 0 ]] && echo -n "${stopped}"
+	[[ $running -ne 0 ]] && echo -n "+${running}"
+	((running+stopped)) && echo -n "}"
 }
 
 # -----------------
