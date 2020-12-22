@@ -5,6 +5,11 @@
 dot_marker = false
 left_legend = true
 
+[colors]
+highlighted_border_color = "Yellow"
+widget_title_color="Yellow"
+avg_cpu_color = "White"
+
 # Layout
 [[row]]
   ratio=30
