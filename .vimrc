@@ -45,6 +45,7 @@ Plugin 'justinmk/vim-syntax-extra'
 Plugin 'PProvost/vim-ps1'
 Plugin 'vim-python/python-syntax'
 Plugin 'MTDL9/vim-log-highlighting'
+Plugin 'dart-lang/dart-vim-plugin'
 
 " COLORSCHEME
 Plugin 'morhetz/gruvbox'
@@ -281,7 +282,6 @@ nmap <C-W>p :tabprevious<CR>
 nmap <C-W>N :tabnew<CR>
 
 " run macro saved to q
-" nnoremap <Space> @q
 nnoremap <leader>q @q
 
 " move line
@@ -412,7 +412,7 @@ map <C-t> :NERDTreeToggle<CR>
 map <C-f> :NERDTreeFind<CR>
 nnoremap U :GundoToggle<CR>
 
-nmap <leader>m <Plug>ToggleMarkbar
+nmap <leader>' <Plug>ToggleMarkbar
 
 nmap n <Plug>(anzu-n)
 nmap N <Plug>(anzu-N)
@@ -450,10 +450,13 @@ let g:coc_disable_startup_warning = 1
 " Coc Extensions
 let g:coc_global_extensions = [
 	  \'coc-python',
-	  \'coc-clangd',
 	  \'coc-json',
 	  \'coc-sh',
 	  \]
+
+" other extensions
+	  " \'coc-clangd',
+	  " \'coc-flutter-tools',
 
 inoremap <silent><expr> <c-@> coc#refresh()
 
