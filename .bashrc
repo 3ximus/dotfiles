@@ -126,8 +126,8 @@ unset color_prompt force_color_prompt
 
 # ==============
 
-# Source all .sh files inside ./bash (only files)
-for file in ~/.bash/*.sh ; do
+# Source all .sh and .bash files inside ./bash (only files)
+for file in ~/.bash/*.sh ~/.bash/*.bash ; do
     [[ -f $file ]] && source $file
 done
 unset file
