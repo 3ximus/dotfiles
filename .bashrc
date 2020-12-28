@@ -64,17 +64,6 @@ shopt -s histappend
 HISTSIZE=20000
 HISTFILESIZE=10000
 
-# # for hh -> https://github.com/dvorka/hstr
-# export HSTR_CONFIG=hicolor,rawhistory
-# # history file sync ; careful with this option since history will be mixed between terminals
-# # PROMPT_COMMAND="history -a; history -n"
-# if hash /usr/bin/hh 2>/dev/null; then
-#   # if this is interactive shell, then bind hh to Ctrl-r (for Vi mode check doc)
-#   if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hh -- \C-m"'; fi
-#   # if this is interactive shell, then bind 'kill last command' to Ctrl-x k
-#   if [[ $- =~ .*i.* ]]; then bind '"\C-xk": "\C-a hh -k \C-m"'; fi
-# fi
-
 # ==================
 #    TTY SPECIFIC
 # ==================
@@ -161,16 +150,11 @@ if [ -f ~/.keychain/$HOSTNAME-sh ]; then
     source ~/.keychain/$HOSTNAME-sh
 fi
 
-# Print logo when exiting
-# print_on_exit () { printf "$(cat ~/.banner)"; sleep 0.3; }
-# trap print_on_exit EXIT
-
 # ==============
 #   VARIABLES
 # ==============
+# This are basic variables, extra ones should be defined in variables.sh inside .bash
 
-#export LS_COLORS="$LS_COLORS:*.c=1;36:*.h=00;36"
-export MYSQL_PS1="\u - \d > "
 export EDITOR="vim"
 # add customs scripts
 export PATH=$HOME/.bash/scripts:$PATH

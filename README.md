@@ -6,6 +6,7 @@
 - konsole contains my konsole themes and profile (lives in `$HOME/.local/share/konsole`)
 - icons contains [papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) icons edited to match gruvbox style _(see my topbar screenshot)_
 - inside .bash there is `blerc` and `ble.sh` to configure [ble.sh](https://github.com/akinomyoga/ble.sh) **NOTE** You need to run make inside `.bash/ble.sh` (gawk is needed for this)
+  - there is also [fzf-bindings.sh](https://github.com/junegunn/fzf/blob/master/shell/key-bindings.bash) for fzf bindings and [fzf-marks-plugin.sh](https://github.com/urbainvaes/fzf-marks) for directory marks with fzf
 - .gdbinit was downloaded from [gdb-dashboard](https://github.com/cyrus-and/gdb-dashboard)
 
 
