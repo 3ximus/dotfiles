@@ -41,6 +41,10 @@ If new submodules where added you might need to run `git submodule init` again
 
 A script is provided to link the files. Run `install_my_config.sh --help` for its usage.
 
+### Dependencies for bash
+
+ - `gawk` for building ble.sh
+ - `fzf` for some keybindings and bookmark directories in bash
 
 ## Screenshots
 
