@@ -132,7 +132,9 @@ function jump {
 }
 
 function pmark {
-    echo $(echo "${1}" | sed 's/.*: \(.*\)$/\1/' | sed "s#^~#${HOME}#")
+  local selected="$(echo "${1}" | sed 's/.*: \(.*\)$/\1/' | sed "s#^~#${HOME}#")"
+  READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}$selected${READLINE_LINE:$READLINE_POINT}"
+  READLINE_POINT=$(( READLINE_POINT + ${#selected} ))
 }
 
 function dmark {
@@ -157,7 +159,8 @@ function dmark {
     setup_completion
 }
 
-bind "\"${FZF_MARKS_JUMP:-\C-g}\":\"fzm\\n\""
+bind -x "\"${FZF_MARKS_JUMP:-\C-g}\":\"fzm\""
+# bind "\"${FZF_MARKS_JUMP:-\C-g}\":\"fzm\\n\""
 if [ "${FZF_MARKS_DMARK}" ]; then
     bind "\"${FZF_MARKS_DMARK}\":\"dmark\\n\""
 fi

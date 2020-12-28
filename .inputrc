@@ -50,9 +50,9 @@ set keymap emacs
 "\C-p": history-search-backward
 "\C-n": history-search-forward
 
-"\C-f": shell-expand-line
+# "\C-f": shell-expand-line
 # "\C-f": glob-expand-word
-"\C-g": dabbrev-expand
+# "\C-g": dabbrev-expand
 # "\C-h": complete-into-braces
 
 "\C-xr": re-read-init-file
