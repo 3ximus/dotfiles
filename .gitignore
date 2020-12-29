@@ -1,4 +1,6 @@
 **/__pycache__/**
 **/*.sqlite
 .ipython/profile_default/startup/
+.config/ranger/tagged
+.config/ranger/history
 .vim/view/

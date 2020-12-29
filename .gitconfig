@@ -5,7 +5,7 @@
 	default = simple
 [core]
 	editor = vim
-    pager = delta
+	pager = delta
 [alias]
 	unstage = restore --staged
 	last = log -1 HEAD
@@ -25,13 +25,12 @@
 
 # delta settings
 [interactive]
-    diffFilter = delta --color-only
+	diffFilter = delta --color-only
 
 [delta]
-    features = side-by-side line-numbers decorations
-    whitespace-error-style = 22 reverse
+	features = side-by-side unobtrusive-line-numbers decorations
+	whitespace-error-style = 22 reverse
 
 [delta "decorations"]
-    commit-decoration-style = bold yellow box ul
-    file-style = bold yellow ul
-    file-decoration-style = none
+	file-style = bold yellow ul
+	file-decoration-style = none

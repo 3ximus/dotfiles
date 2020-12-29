@@ -159,6 +159,9 @@ export EDITOR="vim"
 # add customs scripts
 export PATH=$HOME/.bash/scripts:$PATH
 
+# fzf CTRL_T options, since i already have a script to generate previews lets use it...
+export FZF_CTRL_T_OPTS="--preview '[ -f {} ] && { [ -f ~/.config/ranger/scope.sh ] ~/.config/ranger/scope.sh {} || file {} ; } '"
+
 # ============================
 # ble.sh
 ((_ble_bash)) && ble-attach
