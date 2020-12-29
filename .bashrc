@@ -160,7 +160,7 @@ export EDITOR="vim"
 export PATH=$HOME/.bash/scripts:$PATH
 
 # fzf CTRL_T options, since i already have a script to generate previews lets use it...
-export FZF_CTRL_T_OPTS="--preview '[ -f {} ] && { [ -f ~/.config/ranger/scope.sh ] ~/.config/ranger/scope.sh {} || file {} ; } '"
+export FZF_CTRL_T_OPTS="--preview '[ -f {} ] && { if [ -e ~/.config/ranger/scope.sh ] ; then ~/.config/ranger/scope.sh {} ; else file {} ; fi } '"
 
 # ============================
 # ble.sh
