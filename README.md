@@ -69,10 +69,6 @@ z,s
 - show the respective tty. **except 6, 7**
 - display virtual machine environment indicator **only prompt 7**
 
-**NOTE**: The readline input mode can be changed with `CTRL+E` from vim-comand directly into emacs and is displayed at the beginnig of the prompt:
-
-![cmd](screenshots/input_mode1.png) ![ins](screenshots/input_mode2.png)
-
 ## Vim plugins (using [Vundle](https://github.com/VundleVim/Vundle.vim))
 
  -  [vim-airline](https://github.com/vim-airline/vim-airline)
@@ -116,8 +112,6 @@ z,s
 
 ## Vim (gruvbox theme) screenshots
 
-_tabline and status bar are hidden on startup in my current configuration, they can be shown again with `<leader>+a`_
-
 ![7](screenshots/vim.png)
 
 ## Tmux
@@ -142,7 +136,7 @@ Tmux has a lot of custom configurations added in `.tmux.conf` and a few plugins 
 vim, htop and ranger (all in tmux sessions)
 
 ![12](screenshots/rofi.png)
-rofi (launched with [.bash/scripts/rofi-blurred](.bash/scripts/rofi-blurred))
+rofi (launched with [.bash/scripts/rofi-blurred.sh](.bash/scripts/rofi-blurred.sh))
 
 ![13](screenshots/topbar.png)
 plasma top bar
