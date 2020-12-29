@@ -5,6 +5,7 @@
 	default = simple
 [core]
 	editor = vim
+    pager = delta
 [alias]
 	unstage = restore --staged
 	last = log -1 HEAD
@@ -21,3 +22,16 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+
+# delta settings
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    features = side-by-side line-numbers decorations
+    whitespace-error-style = 22 reverse
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
