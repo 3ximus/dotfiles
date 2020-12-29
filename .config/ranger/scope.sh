@@ -66,7 +66,7 @@ fi
 case "$extension" in
     # Archive extensions:
     a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|gz|jar|lha|lz|lzh|lzma|lzo|\
-    rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z|zip)
+    rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z)
         try als "$path" && { dump | trim; exit 0; }
         try acat "$path" && { dump | trim; exit 3; }
         try bsdtar -lf "$path" && { dump | trim; exit 0; }
@@ -74,6 +74,8 @@ case "$extension" in
     rar)
         # avoid password prompt by providing empty password
         try unrar -p- lt "$path" && { dump | trim; exit 0; } || exit 1;;
+    zip)
+        try unzip -l "$path" && { dump | trim; exit 0; } || exit 1;;
     7z)
         # avoid password prompt by providing empty password
         try 7z -p l "$path" && { dump | trim; exit 0; } || exit 1;;
@@ -99,15 +101,16 @@ case "$mimetype" in
     # Syntax highlight for text files:
     text/* | */xml)
         if [ "$(tput colors)" -ge 256 ]; then
-            pygmentize_format=terminal256
+            pygmentize_format=terminal # I hate the previous terminal256 syntax highlighter format
             highlight_format=xterm256
         else
             pygmentize_format=terminal
             highlight_format=ansi
         fi
-        try safepipe highlight --out-format=${highlight_format} "$path" && { dump | trim; exit 5; }
-        try safepipe pygmentize -f ${pygmentize_format} "$path" && { dump | trim; exit 5; }
-        exit 2;;
+        try safepipe pygmentize -f ${pygmentize_format} "$path" 2>/dev/null && { dump | trim; exit 5; }
+        # try safepipe highlight --out-format=${highlight_format} "$path" 2>/dev/null && { dump | trim; exit 5; }
+        try safepipe cat "$path" 2>/dev/null && { dump | trim; exit 5; }
+        exit 2;; # this will be ignored since the previous command just cats the output, it would do the same however
     # Ascii-previews of images:
     image/*)
         img2txt --gamma=0.6 --width="$width" "$path" && exit 4 || exit 1;;

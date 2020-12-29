@@ -45,6 +45,7 @@ A script is provided to link the files. Run `install_my_config.sh --help` for it
 
  - `gawk` for building ble.sh
  - `fzf` for some keybindings and bookmark directories in bash
+ - `delta` for generating git diffs (setup in `.gitconfig`) [delta](https://github.com/dandavison/delta#used-by-delta)
 
 ## Screenshots
 
