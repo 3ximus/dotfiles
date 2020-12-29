@@ -41,50 +41,20 @@ If new submodules where added you might need to run `git submodule init` again
 
 A script is provided to link the files. Run `install_my_config.sh --help` for its usage.
 
-### Dependencies for bash
+## Dependencies
 
  - `gawk` for building ble.sh
  - `fzf` for some keybindings and bookmark directories in bash
  - `delta` for generating git diffs (setup in `.gitconfig`) [delta](https://github.com/dandavison/delta#used-by-delta)
 
-## Screenshots
-
-### Prompt 1
-
-![1](screenshots/1_normal.png)
-![1f](screenshots/1_full.png)
-
-### Prompt 2
-
-![2](screenshots/2_normal.png)
-![2f](screenshots/2_full.png)
-
-### Prompt 3
-
-![3](screenshots/3_normal.png)
-![3f](screenshots/3_full.png)
-
-### Prompt 4
-
-![4](screenshots/4_normal.png)
-![4f](screenshots/4_full.png)
-
-### Prompt 5
-
-![5](screenshots/5_normal.png)
-![5f](screenshots/5_full.png)
-
-### Prompt 6
-
-![6](screenshots/6_normal.png)
-![6f](screenshots/6_full.png)
+## Prompts
 
 ### Prompt 7
 
 ![77](screenshots/7_normal.png)
 ![77f](screenshots/7_full.png)
 
-These prompts are in the order that i made them so the last ones are improved.
+Other prompts are available and can be set with the function `prompt [1-7]`
 
 Prompts support:
 
@@ -168,13 +138,8 @@ Tmux has a lot of custom configurations added in `.tmux.conf` and a few plugins 
 
 ## More Screenshots
 
-I use [quarter-tiling](https://github.com/Jazqa/kwin-quarter-tiling) KWin script for window tiling
-
 ![10](screenshots/complete1.png)
 vim, htop and ranger (all in tmux sessions)
-
-![11](screenshots/complete2.png)
-firefox, dolphin and visual studio code
 
 ![12](screenshots/rofi.png)
 rofi (launched with [.bash/scripts/rofi-blurred](.bash/scripts/rofi-blurred))
