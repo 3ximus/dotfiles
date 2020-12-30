@@ -70,9 +70,6 @@
 [submodule "ctrlpvim/ctrlp.vim"]
 	path = .vim/bundle/ctrlp.vim
 	url = https://github.com/ctrlpvim/ctrlp.vim
-[submodule "osyo-manga/vim-anzu"]
-	path = .vim/bundle/vim-anzu
-	url = https://github.com/osyo-manga/vim-anzu
 [submodule "Yilin-Yang/vim-markbar"]
 	path = .vim/bundle/vim-markbar
 	url = https://github.com/Yilin-Yang/vim-markbar
@@ -109,3 +106,9 @@
 [submodule "tmux-plugins/tmux-battery"]
 	path = .tmux/tmux-battery
 	url = https://github.com/tmux-plugins/tmux-battery
+[submodule "dart-lang/dart-vim-plugin"]
+	path = .vim/bundle/dart-vim-plugin
+	url = https://github.com/dart-lang/dart-vim-plugin
+[submodule "obcat/vim-hitspop"]
+	path = .vim/bundle/vim-hitspop
+	url = https://github.com/obcat/vim-hitspop
