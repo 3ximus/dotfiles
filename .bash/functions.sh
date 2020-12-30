@@ -39,7 +39,7 @@ findremove() {
 	read -r -n 1 -p "Remove these files? [y/n]: " REPLY
 	case "$REPLY" in
 		[yY])		echo; find . -iname "*$1*" -exec rm -r "{}" \; ;;
-		*) 			echo -e "\nNothing deleted." ;;
+		*)			echo -e "\nNothing deleted." ;;
 	esac
 
 }
@@ -91,7 +91,7 @@ extract () {
 			case "$f" in
 				*.tar.bz2)	 echo "tar xjf $f"	&& tar xjf "$f"				;;
 				*.tar.gz)	 echo "tar xzf $f"	&& tar xzf "$f"				;;
-				*.tar.xz)	 echo "tar xJf $f"  && gunzip "$f"				;;
+				*.tar.xz)	 echo "tar xJf $f"	&& gunzip "$f"				;;
 				*.bz1)		 echo "bunzip2 $f"	&& bunzip2 "$f"				;;
 				*.rar)		 echo "unrar e $f"	&& unrar x "$f"				;;
 				*.gz)		 echo "gunzip $f"  && gunzip "$f"				;;
@@ -112,9 +112,24 @@ extract () {
 # i hate typing extract...
 alias un=extract
 
+# GIT
+
 # delete files from cache
 git-delete-cached() {
 	git filter-branch --force --index-filter "git rm --cached --ignore-unmatch $@" --prune-empty --tag-name-filter cat -- --all
+}
+
+glfzf() {
+	git rev-parse --is-inside-work-tree >/dev/null || return 1
+	local cmd opts files
+	files=$(sed -nE 's/.* -- (.*)/\1/p' <<< "$*") # extract files parameters for `git show` command
+	cmd="echo {} |grep -Eo '[a-f0-9]+' |head -1 |xargs -I% git show --color=always % -- $files | delta"
+	opts="
+		--tiebreak=index
+		--bind=\"enter:execute($cmd | LESS='-r' less)\"
+		--bind=\"ctrl-y:execute-silent(echo {} |grep -Eo '[a-f0-9]+' | head -1 | tr -d '\n')\"
+	"
+	eval "git lol $* " | FZF_DEFAULT_OPTS="$opts" fzf --preview="$cmd" --ansi --no-sort --no-multi
 }
 
 # activate a virtual environment
@@ -204,7 +219,7 @@ unicode() {
 	local a b c
 	for a in {0..9} {a..f}; do
 		for b in {0..9} {a..f}; do
-			printf "${a}${b}00  "
+			printf "${a}${b}00	"
 			for c in {0..3}{{0..9},{a..f}} ; do printf "\u$a$b$c "; done
 			printf "\n${a}${b}40  "
 			for c in {4..7}{{0..9},{a..f}}; do printf "\u$a$b$c "; done
@@ -221,24 +236,24 @@ unicode() {
 colors() {
 	local i FGs FG column
 	if [[ -z $1 || $1 == 1 ]]; then
-		echo -en '\n     '
-		for i in {0..7} ; do printf "\e[48;5;${i}m     "; done
-		echo -en '\e[0m\n     '
-		for i in {0..7} ; do printf "\e[48;5;${i}m     "; done
-		echo -en '\e[0m\n     '
-		for i in {8..15} ; do printf "\e[48;5;${i}m     "; done
-		echo -en '\e[0m\n     '
-		for i in {8..15} ; do printf "\e[48;5;${i}m     "; done
+		echo -en '\n	 '
+		for i in {0..7} ; do printf "\e[48;5;${i}m	   "; done
+		echo -en '\e[0m\n	  '
+		for i in {0..7} ; do printf "\e[48;5;${i}m	   "; done
+		echo -en '\e[0m\n	  '
+		for i in {8..15} ; do printf "\e[48;5;${i}m		"; done
+		echo -en '\e[0m\n	  '
+		for i in {8..15} ; do printf "\e[48;5;${i}m		"; done
 		printf "\e[0m\n\n"
 	elif [[ $1 == 2 ]]; then
-		echo -e "\n                 40m     41m     42m     43m     44m     45m     46m     47m";
-		for FGs in '    m' '   1m' '  30m' '1;30m' '  31m' '1;31m' '  32m' \
+		echo -e "\n					40m		41m		42m		43m		44m		45m		46m		47m";
+		for FGs in '	m' '   1m' '  30m' '1;30m' '  31m' '1;31m' '  32m' \
 			'1;32m' '  33m' '1;33m' '  34m' '1;34m' '  35m' '1;35m' \
 				'  36m' '1;36m' '  37m' '1;37m';
 			do FG=${FGs// /}
 			echo -en " $FGs \033[$FG  eXz  "
 				for BG in 40m 41m 42m 43m 44m 45m 46m 47m;
-			do echo -en " \033[$FG\033[$BG  eXz  \033[0m";
+			do echo -en " \033[$FG\033[$BG	eXz  \033[0m";
 			done
 			echo;
 		done
