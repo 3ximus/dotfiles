@@ -185,6 +185,7 @@ highlight link markbarSectionBrackets GruvboxFg1
 " Coc
 highlight link CocErrorSign GruvboxRedBold
 highlight link CocWarningSign GruvboxYellowBold
+highlight link CocInfoSign GruvboxPurpleBold
 
 if !has('gui_running')
 	" Highlighted Yank
