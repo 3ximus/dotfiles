@@ -11,6 +11,7 @@
 	last = log -1 HEAD
 	lol = log --oneline --graph --pretty=format:'%C(yellow)%h%Creset %C(auto)%d%Creset %s (%Cblue%an%Creset, %cr)' --date-order  --color=always
 	log-all = log --all --graph --oneline --pretty=format:'%C(yellow)%h%Creset %C(auto)%d%Creset %s (%Cblue%an%Creset, %cr)' --date-order --color=always
+
 [diff]
 	tool = vimdiff
 [difftool]
@@ -28,9 +29,20 @@
 	diffFilter = delta --color-only
 
 [delta]
-	features = side-by-side unobtrusive-line-numbers decorations
+	features = line-numbers decorations
+	syntax-theme = none
+	minus-style = bold 234 1
+	minus-emph-style = bold 9 reverse
+	minus-non-emph-style = bold 234 1
+	plus-style = bold 234 2
+	plus-emph-style = bold 10 reverse
+	plus-non-emph-style = bold 234 2
 	whitespace-error-style = 22 reverse
 
 [delta "decorations"]
 	file-style = bold yellow ul
 	file-decoration-style = none
+
+[delta "line-numbers"]
+	line-numbers-minus-style = 1 bold
+	line-numbers-plus-style = 2 bold
