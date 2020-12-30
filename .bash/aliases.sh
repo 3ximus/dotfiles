@@ -53,6 +53,7 @@ alias gp='git push'
 alias gc='git commit'
 alias ga='git add .'
 alias gl='git lol' # because my own alias is too much typing
+alias gd='git diff'
 
 # python3 alias
 alias python='python3'
@@ -63,12 +64,7 @@ alias aur-packages='pacman -Qm'
 alias list-packages='expac -H M "%m\t%-30n" | sort -rh | less'
 alias paccache-clean='paccache -rk1 && paccache -ruk0'
 
-# transmission
-alias transmissiond-start='transmission-daemon -g ~eximus/.config/transmission/'
-
 # SSH
-alias ssh-new-bash-session='eval `ssh-agent` && ssh-add'
-alias ssh-new-session='keychain ~/.ssh/id_rsa && source ~/.keychain/$HOSTNAME-sh'
 alias load-keychain='[[ -f "${HOME}/.ssh/id_rsa" ]] && keychain "${HOME}/.ssh/id_rsa" --quiet && source "${HOME}/.keychain/${HOSTNAME}-sh"'
 
 # PLASMA
