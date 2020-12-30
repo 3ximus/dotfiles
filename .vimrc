@@ -34,7 +34,6 @@ Plugin 'jeetsukumaran/vim-markology'
 
 " COMPLETION
 Plugin 'neoclide/coc.nvim'
-" Plugin 'davidhalter/jedi-vim'
 
 " TMUX CLIPBOARD SHARING
 Plugin 'tmux-plugins/vim-tmux-focus-events'
@@ -56,8 +55,8 @@ Plugin 'mhinz/vim-startify'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 "auto folds
 Plugin 'benknoble/vim-auto-origami'
-"improved incremental search
-Plugin 'osyo-manga/vim-anzu'
+"search popup, only supported in vim >8.2.0896
+Plugin 'obcat/vim-hitspop'
 Plugin 'machakann/vim-highlightedyank'
 
 call vundle#end()
@@ -404,6 +403,10 @@ let g:markbar_marks_to_display = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRST
 " clever-f
 let g:clever_f_mark_direct=1
 
+" hitspop
+let g:hitspop_line = 'wintop'
+let g:hitspop_line_mod = 1
+
 " }}}
 
 " PLUGIN KEYMAPS {{{
@@ -414,11 +417,6 @@ map <C-f> :NERDTreeFind<CR>
 nnoremap U :GundoToggle<CR>
 
 nmap <leader>' <Plug>ToggleMarkbar
-
-nmap n <Plug>(anzu-n)
-nmap N <Plug>(anzu-N)
-nmap * <Plug>(anzu-star)
-nmap # <Plug>(anzu-sharp)
 
 let g:ctrlp_map = '<leader>p'
 nmap <leader>b :CtrlPBuffer<CR>
