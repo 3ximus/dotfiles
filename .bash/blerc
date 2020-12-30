@@ -80,6 +80,11 @@ bleopt vbell_duration=2000
 bleopt vbell_align=right
 
 ##-----------------------------------------------------------------------------
+## Custom key bindings
+
+ble-bind -s 'C-[' '\C-a\ef\C-u'
+
+##-----------------------------------------------------------------------------
 ## Settings for completion
 
 
@@ -221,15 +226,3 @@ function blerc/vim-load-hook {
 }
 blehook/eval-after-load keymap_vi blerc/vim-load-hook
 
-# # Define prompt sequence >> \q{vim-mode}
-# function ble/prompt/backslash:vim-mode {
-#   bleopt keymap_vi_mode_update_prompt:=1
-#   case $_ble_decode_keymap in
-#   (vi_[on]map) ble/prompt/print 'cmd ' ;;
-#   (vi_imap) ble/prompt/print 'ins ' ;;
-#   (vi_smap) ble/prompt/print 'sel ' ;;
-#   (vi_xmap) ble/prompt/print 'vis ' ;;
-#   XXX TEST THIS:
-#   #(vi_xmap) ble/prompt/print ansi 'vis ' ;;
-#   esac
-# }
