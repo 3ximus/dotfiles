@@ -18,16 +18,9 @@ set vi-cmd-mode-string "\033[1;32mcmd\033[m "
 set emacs-mode-string ""
 set visible-stats on
 
-# input modes
+# input modes (NOTE, C-z changes the input mode)
 set show-mode-in-prompt on
 
-set keymap vi-command
-"\ee": emacs-editing-mode
-
-# key bindings to get out of vi-editing-mode
-set keymap vi-insert
-"\ee": emacs-editing-mode
-"\ex": vi-movement-mode
 # make vi-insert behave like usual emacs
 "\C-k": kill-line
 "\C-a": beginning-of-line
@@ -36,15 +29,10 @@ set keymap vi-insert
 "\eb": backward-word
 "\ef": forward-word
 
-set keymap emacs
-"\ee": vi-editing-mode
-
 # delete until the previous path separator /
 "\C-b": unix-filename-rubout
 
 # cicle through completions
-# "\C-i": menu-complete
-# "\e[Z": menu-complete-backward
 "\e[Z": menu-complete
 
 "\C-p": history-search-backward
@@ -74,8 +62,6 @@ set keymap emacs
 # "\C-ja": 'awk \'{}\'\eOD\eOD'
 # # make subcommand
 # "\C-jm": '\C-a "$(\C-e)"\C-a'
-# # change comand
-# "\C-jc": "\C-a\ef\C-u"
 # # add sudo before command
 # "\C-js": "\C-asudo \C-e"
 # # run command in every subdirectory
