@@ -34,6 +34,7 @@ Plugin 'jeetsukumaran/vim-markology'
 
 " COMPLETION
 Plugin 'neoclide/coc.nvim'
+" Plugin 'davidhalter/jedi-vim'
 
 " TMUX CLIPBOARD SHARING
 Plugin 'tmux-plugins/vim-tmux-focus-events'
@@ -217,7 +218,7 @@ endfunction
 function! ConvertToTabs(tabsize)
 	let &tabstop = a:tabsize
 	set noexpandtab
-	%retab!
+	:%s/\(^\s*\)\@<=    /\t/g
 endfunction
 command! -nargs=1 ConvertToTabs :call ConvertToTabs( '<args>' )
 
