@@ -13,13 +13,7 @@ set completion-map-case on
 set mark-directories on
 set mark-symlinked-directories on
 
-set vi-ins-mode-string "\033[1;33mins\033[m "
-set vi-cmd-mode-string "\033[1;32mcmd\033[m "
-set emacs-mode-string ""
 set visible-stats on
-
-# input modes (NOTE, C-z changes the input mode)
-set show-mode-in-prompt on
 
 # make vi-insert behave like usual emacs
 "\C-k": kill-line
