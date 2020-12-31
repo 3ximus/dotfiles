@@ -84,6 +84,12 @@ bleopt vbell_align=right
 
 ble-bind -s 'M-k' '\C-a\C-] \C-u'
 
+# change from vim mode to normal mode
+ble-bind -m 'emacs' -f 'M-e' 'vi-editing-mode'
+ble-bind -m 'vi_imap' -f 'M-e' 'emacs-editing-mode'
+ble-bind -m 'vi_nmap' -f 'M-e' 'emacs-editing-mode'
+ble-bind -m 'vi_xmap' -f 'M-e' 'emacs-editing-mode'
+
 ##-----------------------------------------------------------------------------
 ## Settings for completion
 
@@ -187,16 +193,15 @@ function blerc/vim-load-hook {
   ((_ble_bash>=40300)) && builtin bind 'set keyseq-timeout 1'
 
   # bleopt keymap_vi_macro_depth=64
-  # bleopt keymap_vi_mode_string_nmap:=$'\e[1m~\e[m'
+  bleopt keymap_vi_mode_string_nmap:=$'\e[1;36mcmd\e[m'
 
   bleopt keymap_vi_mode_update_prompt=1
 
-  bleopt keymap_vi_mode_show=
-
-  # bleopt keymap_vi_mode_name_insert=INSERT
-  # bleopt keymap_vi_mode_name_replace=REPLACE
+  bleopt keymap_vi_mode_show=1
+  bleopt keymap_vi_mode_name_insert:=$'\e[1;33mins\e[m'
+  bleopt keymap_vi_mode_name_visual:=$'\e[1;38;5;202mvis\e[m'
+  bleopt keymap_vi_mode_name_replace:=$'\e[1;35mrep\e[m'
   # bleopt keymap_vi_mode_name_vreplace=VREPLACE
-  # bleopt keymap_vi_mode_name_visual=VISUAL
   # bleopt keymap_vi_mode_name_select=SELECT
   # bleopt keymap_vi_mode_name_linewise=LINE
   # bleopt keymap_vi_mode_name_blockwise=BLOCK

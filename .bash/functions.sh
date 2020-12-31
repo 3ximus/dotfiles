@@ -129,7 +129,7 @@ glfzf() {
 		--bind=\"enter:execute($cmd | LESS='-r' less)\"
 		--bind=\"ctrl-y:execute-silent(echo {} |grep -Eo '[a-f0-9]+' | head -1 | tr -d '\n')\"
 	"
-	eval "git lol $* " | FZF_DEFAULT_OPTS="$opts" fzf --preview="$cmd" --ansi --no-sort --no-multi
+	eval "git lol $* " | FZF_DEFAULT_OPTS="$opts" fzf --preview="$cmd" --ansi --no-sort --no-multi --reverse
 }
 
 # activate a virtual environment
