@@ -112,3 +112,6 @@
 [submodule "obcat/vim-hitspop"]
 	path = .vim/bundle/vim-hitspop
 	url = https://github.com/obcat/vim-hitspop
+[submodule "Morantron/tmux-fingers"]
+	path = .tmux/tmux-fingers
+	url = https://github.com/Morantron/tmux-fingers
