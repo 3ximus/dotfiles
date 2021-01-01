@@ -82,7 +82,7 @@ bleopt vbell_align=right
 ##-----------------------------------------------------------------------------
 ## Custom key bindings
 
-ble-bind -s 'M-k' '\C-a\C-] \C-u'
+ble-bind -s 'M-c' '\C-a\C-] \C-u'
 
 # change from vim mode to normal mode
 ble-bind -m 'emacs' -f 'M-e' 'vi-editing-mode'

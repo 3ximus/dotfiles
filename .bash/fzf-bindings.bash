@@ -61,7 +61,7 @@ if [[ $- =~ i ]]; then
       fi
     }
 
-    if [ "${BASH_VERSINFO[0]}" -lt 4 ]; then
+    if [ "${BASH_VERSINFO[0]}" -ge 4 ]; then
       # CTRL-T - Paste the selected file path into the command line
       bind -m emacs-standard -x '"\C-t": fzf-file-widget'
       bind -m vi-command -x '"\C-t": fzf-file-widget'
@@ -76,8 +76,4 @@ if [[ $- =~ i ]]; then
     if [[ $BLE_VERSION ]]; then
         ble-bind -c 'M-j' '__fzf_cd__'
     fi
-
-    # bind -m vi-command '"\M-e": emacs-editing-mode'
-    # bind -m vi-insert '"\M-e": emacs-editing-mode'
-    # bind -m emacs-standard '"\M-e": vi-editing-mode'
 fi

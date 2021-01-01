@@ -119,19 +119,6 @@ git-delete-cached() {
 	git filter-branch --force --index-filter "git rm --cached --ignore-unmatch $@" --prune-empty --tag-name-filter cat -- --all
 }
 
-glfzf() {
-	git rev-parse --is-inside-work-tree >/dev/null || return 1
-	local cmd opts files
-	files=$(sed -nE 's/.* -- (.*)/\1/p' <<< "$*") # extract files parameters for `git show` command
-	cmd="echo {} |grep -Eo '[a-f0-9]+' |head -1 |xargs -I% git show --color=always % -- $files | delta"
-	opts="
-		--tiebreak=index
-		--bind=\"enter:execute($cmd | LESS='-r' less)\"
-		--bind=\"ctrl-y:execute-silent(echo {} |grep -Eo '[a-f0-9]+' | head -1 | tr -d '\n')\"
-	"
-	eval "git lol $* " | FZF_DEFAULT_OPTS="$opts" fzf --preview="$cmd" --ansi --no-sort --no-multi --reverse
-}
-
 # activate a virtual environment
 activate() {
 	local path=${1:-'.'}
