@@ -84,6 +84,8 @@ bleopt vbell_align=right
 
 ble-bind -s 'M-c' '\C-a\C-] \C-u'
 
+ble-bind -c 'M-u' 'cd ..'
+
 # change from vim mode to normal mode
 ble-bind -m 'emacs' -f 'M-e' 'vi-editing-mode'
 ble-bind -m 'vi_imap' -f 'M-e' 'emacs-editing-mode'
