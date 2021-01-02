@@ -123,7 +123,6 @@ set showcmd
 set wildmenu
 set wildmode=longest:list,full
 
-
 " enable mouse for resizing window splits
 set mouse=n
 set ttymouse=xterm2
@@ -510,6 +509,7 @@ nnoremap <silent><nowait> <leader>ce  :<C-u>CocList extensions<cr>
 nnoremap <silent><nowait> <leader>cc  :<C-u>CocList commands<cr>
 " Find symbol of current document.
 nnoremap <silent><nowait> <leader>co  :<C-u>CocList outline<cr>
+nnoremap <silent><nowait> <leader>ca  :<C-u>CocAction<cr>
 " Search workspace symbols.
 nnoremap <silent><nowait> <leader>cs  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
@@ -559,6 +559,9 @@ endif
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab autoindent "because someone has too much screen space in their eyesight
 autocmd FileType python setlocal indentkeys-=<:> " colon will auto indent line in insert mode, remove that behavior
 autocmd FileType python setlocal indentkeys-=:
+
+" use dart#dmt or :DartFmt to format dart the file
+autocmd FileType dart setlocal formatexpr=dart#fmt()
 " }}}
 
 " RUN COMMANDS ON EVENTS {{{
