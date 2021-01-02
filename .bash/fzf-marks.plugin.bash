@@ -93,15 +93,15 @@ function fzm {
     local delete_key=${FZF_MARKS_DELETE:-ctrl-d} paste_key=${FZF_MARKS_PASTE:-ctrl-k}
 
     local _fzm_keymap_description="ctrl-y:jump, ctrl-t:toggle, $delete_key:delete"
-    local _fzm_expected_keys=$delete_key
-    if [[ $_fzm_is_running_widget ]]; then
+    if [[ $FZF_MARKS_PASTE_COMMAND ]]; then
       _fzm_keymap_description="$_fzm_keymap_description, $paste_key:paste"
-      _fzm_expected_keys=$_fzm_expected_keys,$paste_key
+    else
+      _fzm_keymap_description="$_fzm_keymap_description, $paste_key:print"
     fi
 
     local lines=$(_color_marks < "${FZF_MARKS_FILE}" | eval ${FZF_MARKS_COMMAND} \
         --ansi \
-        --expect='"$_fzm_expected_keys"' \
+        --expect='"$delete_key,$paste_key"' \
         --multi \
         --bind=ctrl-y:accept,ctrl-t:toggle \
         --query='"$*"' \
@@ -142,8 +142,9 @@ function jump {
 }
 
 function pmark {
-  local selected="$(echo "${1}" | sed 's/.*: \(.*\)$/\1/' | sed "s#^~#${HOME}#")"
-  _fzm_paste=$selected
+    local selected="$(echo "${1}" | sed 's/.*: \(.*\)$/\1/' | sed "s#^~#${HOME}#")"
+    local paste_command=${FZF_MARKS_PASTE_COMMAND:-"printf '%s\n'"}
+    eval -- "$paste_command \"\$selected\""
 }
 
 function dmark {
@@ -226,12 +227,9 @@ if ((BASH_VERSINFO[0] >= 4)); then
         fi
     }
     function _fzm-widget {
-        local _fzm_is_running_widget=1 _fzm_paste= pwd=$PWD
+        local pwd=$PWD
+        local FZF_MARKS_PASTE_COMMAND=_fzm-widget-insert
         fzm
-
-        if [[ $_fzm_paste ]]; then
-            _fzm-widget-insert "$_fzm_paste"
-        fi
 
         if [[ $PWD != "$pwd" ]]; then
             # Force the prompt update
@@ -286,15 +284,13 @@ else
         _fzm_keyseq=$value
     }
     function _fzm-widget {
-        local _fzm_is_running_widget=1 _fzm_paste= pwd=$PWD
+        local pwd=$PWD
+        local FZF_MARKS_PASTE_COMMAND=_fzm-widget-untranslate_keyseq _fzm_keyseq=
         fzm
-
-        local _fzm_keyseq
-        _fzm-widget-untranslate_keyseq "$_fzm_paste"
 
         if [[ $PWD != "$pwd" ]]; then
             # Force the prompt update
-            _fzm_keyseq='\C-k\C-e\C-u\C-m\C-y\e \C-y\ey\C-x\C-x'$_fzm_keyseq
+            _fzm_keyseq=' \C-b\C-k \C-u\C-m\C-y\C-?\e \C-y\ey\C-x\C-x\C-d'$_fzm_keyseq
         fi
         bind "\"$_fzm_key2\": \"$_fzm_keyseq\""
     }
@@ -305,10 +301,9 @@ function ble/widget/fzm {
     ble/widget/.hide-current-line
     ble/util/buffer.flush >&2
 
-    local _fzm_is_running_widget=1 _fzm_paste= pwd=$PWD
+    local pwd=$PWD
+    local FZF_MARKS_PASTE_COMMAND=ble/widget/insert-string
     fzm
-
-    [[ $_fzm_paste ]] && ble/widget/insert-string "$_fzm_paste"
 
     # Force the prompt update
     [[ $PWD != "$pwd" ]] && ble/prompt/clear
