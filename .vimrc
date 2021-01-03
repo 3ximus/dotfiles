@@ -562,6 +562,10 @@ autocmd FileType python setlocal indentkeys-=:
 
 " use dart#dmt or :DartFmt to format dart the file
 autocmd FileType dart setlocal formatexpr=dart#fmt()
+
+" must be used from the first line
+autocmd FileType json setlocal formatprg=python3\ -m\ json.tool
+
 " }}}
 
 " RUN COMMANDS ON EVENTS {{{
