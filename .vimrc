@@ -122,6 +122,7 @@ set showcmd
 "autocomplete vim commands
 set wildmenu
 set wildmode=longest:list,full
+set wildignorecase
 
 " enable mouse for resizing window splits
 set mouse=n
@@ -361,16 +362,16 @@ let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
 " let g:NERDTreeGitStatusShowClean = 1 " default: 0
 " let g:NERDTreeGitStatusShowIgnored = 1 " a heavy feature may cost much more time. default: 0
 " let g:NERDTreeGitStatusIndicatorMapCustom = {
-"	\ "Modified"	: "*",
-"	\ "Staged"		: "+",
-"	\ "Untracked"	: "-",
-"	\ "Renamed"		: "->",
-"	\ "Unmerged"	: "!=",
-"	\ "Deleted"		: "x",
-"	\ "Dirty"		: "~",
-"	\ "Clean"		: "v",
-"	\ "Unknown"		: "?"
-"	\ }
+"   \ "Modified"    : "*",
+"   \ "Staged"      : "+",
+"   \ "Untracked"   : "-",
+"   \ "Renamed"     : "->",
+"   \ "Unmerged"    : "!=",
+"   \ "Deleted"     : "x",
+"   \ "Dirty"       : "~",
+"   \ "Clean"       : "v",
+"   \ "Unknown"     : "?"
+"   \ }
 
 "Auto Origami (auto manage fold columns)
 augroup auto_origami
@@ -572,4 +573,11 @@ autocmd FileType json setlocal formatprg=python3\ -m\ json.tool
 " ===========================
 
 " autocmd VimEnter * call ToggleHiddenAll()
+
+" assumes set noignorecase
+augroup dynamic_smartcase
+	autocmd!
+	autocmd CmdLineEnter : set ignorecase
+	autocmd CmdLineLeave : set noignorecase
+augroup END
 " }}}
