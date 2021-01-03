@@ -161,6 +161,8 @@ export PATH=$HOME/.bash/scripts:$PATH
 
 # fzf CTRL_T options, since i already have a script to generate previews lets use it...
 export FZF_CTRL_T_OPTS="--preview '[ -f {} ] && { if [ -e ~/.config/ranger/scope.sh ] ; then ~/.config/ranger/scope.sh {} ; else file {} ; fi } '"
+# change fzf-marks paste binding
+export FZF_MARKS_PASTE="ctrl-l"
 
 # ============================
 # ble.sh

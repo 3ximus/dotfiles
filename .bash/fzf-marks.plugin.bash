@@ -90,15 +90,8 @@ function _color_marks {
 }
 
 function fzm {
-    local delete_key=${FZF_MARKS_DELETE:-ctrl-d} paste_key=${FZF_MARKS_PASTE:-ctrl-k}
-
-    local _fzm_keymap_description="ctrl-y:jump, ctrl-t:toggle, $delete_key:delete"
-    if [[ $FZF_MARKS_PASTE_COMMAND ]]; then
-      _fzm_keymap_description="$_fzm_keymap_description, $paste_key:paste"
-    else
-      _fzm_keymap_description="$_fzm_keymap_description, $paste_key:print"
-    fi
-
+    local delete_key=${FZF_MARKS_DELETE:-ctrl-d} paste_key=${FZF_MARKS_PASTE:-ctrl-v}
+    local _fzm_keymap_description="ctrl-y:jump, ctrl-t:toggle, $delete_key:delete, $paste_key:paste"
     local lines=$(_color_marks < "${FZF_MARKS_FILE}" | eval ${FZF_MARKS_COMMAND} \
         --ansi \
         --expect='"$delete_key,$paste_key"' \
@@ -115,8 +108,8 @@ function fzm {
 
     if [[ $key == "$delete_key" ]]; then
         dmark "-->-->-->" "$(sed 1d <<< "$lines")"
-    elif [[ $key == "$paste_key" ]]; then
-        pmark "$(tail -1 <<< "$lines")"
+    elif [[ $key == "$paste_key" || ! -t 1 ]]; then
+        pmark "-->-->-->" "$(tail -1 <<< "$lines")"
     else
         jump "-->-->-->" "$(tail -1 <<< "${lines}")"
     fi
@@ -127,8 +120,8 @@ function jump {
     if [[ $1 == "-->-->-->" ]]; then
         jumpline=$2
     else
-        local _fzm_keymap_description="ctrl-y:jump, ctrl-t:toggle"
-        jumpline=$(_color_marks < "${FZF_MARKS_FILE}" | eval ${FZF_MARKS_COMMAND} --ansi --bind=ctrl-y:accept --query="$*" --select-1 --tac)
+        local _fzm_keymap_description="ctrl-y:jump"
+        jumpline=$(_color_marks < "${FZF_MARKS_FILE}" | eval ${FZF_MARKS_COMMAND} --ansi --bind=ctrl-y:accept --query='"$*"' --select-1 --tac)
     fi
     if [[ -n ${jumpline} ]]; then
         jumpdir=$(echo "${jumpline}" | sed 's/.*: \(.*\)$/\1/' | sed "s#^~#${HOME}#")
@@ -142,9 +135,18 @@ function jump {
 }
 
 function pmark {
-    local selected="$(echo "${1}" | sed 's/.*: \(.*\)$/\1/' | sed "s#^~#${HOME}#")"
-    local paste_command=${FZF_MARKS_PASTE_COMMAND:-"printf '%s\n'"}
-    eval -- "$paste_command \"\$selected\""
+    local selected
+    if [[ $1 == "-->-->-->" ]]; then
+        selected=$2
+    else
+        local _fzm_keymap_description="ctrl-y:paste"
+        selected=$(_color_marks < "${FZF_MARKS_FILE}" | eval ${FZF_MARKS_COMMAND} --ansi --bind=ctrl-y:accept --query='"$*"' --select-1 --tac)
+    fi
+    if [[ $selected ]]; then
+        selected=$(sed 's/.*: \(.*\)$/\1/;s#^~#${HOME}#' <<< $selected)
+        local paste_command=${FZF_MARKS_PASTE_COMMAND:-"printf '%s\n'"}
+        eval -- "$paste_command \"\$selected\""
+    fi
 }
 
 function dmark {
@@ -153,7 +155,7 @@ function dmark {
         marks_to_delete=$2
     else
         local _fzm_keymap_description="ctrl-y:delete, ctrl-t:toggle"
-        marks_to_delete=$(_color_marks < "${FZF_MARKS_FILE}" | eval ${FZF_MARKS_COMMAND} -m --ansi --bind=ctrl-y:accept,ctrl-t:toggle --query="$*" --tac)
+        marks_to_delete=$(_color_marks < "${FZF_MARKS_FILE}" | eval ${FZF_MARKS_COMMAND} -m --ansi --bind=ctrl-y:accept,ctrl-t:toggle --query='"$*"' --tac)
     fi
     bookmarks=$(_handle_symlinks)
 
