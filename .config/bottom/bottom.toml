@@ -12,24 +12,24 @@ avg_cpu_color = "White"
 
 # Layout
 [[row]]
-  ratio=30
+  ratio=20
   [[row.child]]
   type="cpu"
 [[row]]
-    ratio=20
-    [[row.child]]
-      type="mem"
-    [[row.child]]
-      type="net"
-[[row]]
-  ratio=30
+  ratio=70
   [[row.child]]
     ratio=2
     type="proc"
     default=true
   [[row.child]]
     [[row.child.child]]
-      type="temp"
+      ratio=2
+      type="mem"
     [[row.child.child]]
+      ratio=2
       type="disk"
+    [[row.child.child]]
+      type="net"
+    [[row.child.child]]
+      type="temp"
 
