@@ -27,9 +27,9 @@ avg_cpu_color = "White"
       type="mem"
     [[row.child.child]]
       ratio=2
-      type="disk"
-    [[row.child.child]]
       type="net"
+    [[row.child.child]]
+      type="disk"
     [[row.child.child]]
       type="temp"
 

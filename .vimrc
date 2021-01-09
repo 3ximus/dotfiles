@@ -361,17 +361,18 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
 " let g:NERDTreeGitStatusShowClean = 1 " default: 0
 " let g:NERDTreeGitStatusShowIgnored = 1 " a heavy feature may cost much more time. default: 0
-" let g:NERDTreeGitStatusIndicatorMapCustom = {
-"   \ "Modified"    : "*",
-"   \ "Staged"      : "+",
-"   \ "Untracked"   : "-",
-"   \ "Renamed"     : "->",
-"   \ "Unmerged"    : "!=",
-"   \ "Deleted"     : "x",
-"   \ "Dirty"       : "~",
-"   \ "Clean"       : "v",
-"   \ "Unknown"     : "?"
-"   \ }
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+				\ 'Modified'  :'∗',
+				\ 'Staged'    :'→',
+				\ 'Untracked' :'',
+				\ 'Renamed'   :'↻',
+				\ 'Unmerged'  :'═',
+				\ 'Deleted'   :'',
+				\ 'Dirty'     :'',
+				\ 'Ignored'   :'',
+				\ 'Clean'     :'',
+				\ 'Unknown'   :'?',
+				\ }
 
 "Auto Origami (auto manage fold columns)
 augroup auto_origami
