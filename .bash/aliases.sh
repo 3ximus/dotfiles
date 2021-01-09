@@ -52,7 +52,7 @@ alias gs='git status'
 alias gp='git push'
 alias gc='git commit'
 alias ga='git add .'
-alias gl='git lol' # because my own alias is too much typing
+alias gl='git lol | less' # because my own alias is too much typing
 alias gd='git diff'
 
 # python3 alias
