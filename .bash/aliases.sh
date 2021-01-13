@@ -95,3 +95,4 @@ alias plex-status='systemctl status plexmediaserver.service'
 alias plex-stop='sudo systemctl stop plexmediaserver.service'
 alias plex-restart='sudo systemctl restart plexmediaserver.service'
 
+alias conda-envfzf='conda activate $(conda env list | grep "^#" -v | fzf --height 5 --reverse | awk "{print \$1}")'
