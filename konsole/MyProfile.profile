@@ -1,7 +1,7 @@
 [Appearance]
 BoldIntense=true
 ColorScheme=Gruvbox_Dark_Real_Colors
-Font=Source Code Pro for Powerline,9,-1,5,50,0,0,0,0,0,Regular
+Font=Terminus (TTF),10,-1,5,57,0,0,0,0,0,Medium
 UseFontLineChararacters=false
 
 [Cursor Options]
