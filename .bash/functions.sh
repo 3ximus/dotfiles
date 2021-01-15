@@ -1,13 +1,10 @@
-# vi: tabstop=4 filetype=bash
+# vi: tabstop=4 foldmethod=marker
 
-# ==================================
-# ----------------------------------
-# -------------WRAPPERS-------------
-# ----------------------------------
-# ==================================
+# WRAPPERS {{{1
+# ===================
 
 # Color man pages
-man() {
+man() { # {{{2
 	env \
 		LESS_TERMCAP_mb=$(printf "\e[1;31m") \
 		LESS_TERMCAP_md=$(printf "\e[1;36m") \
@@ -17,23 +14,58 @@ man() {
 		LESS_TERMCAP_ue=$(printf "\e[0m") \
 		LESS_TERMCAP_us=$(printf "\e[1;35m") \
 			man "$@"
-}
+} # }}}2
 
 # execute a function as sudo
-sudofunction() {
-	local tmpfile="/dev/shm/$RANDOM"
-	declare -f "$1" | head -n -1 | tail -n +3 > "$tmpfile"
-	sudo bash "$tmpfile" "${@:2}"
+sudofunction() { # {{{2
+	# From : https://stackoverflow.com/a/12230307/4719158
+	# I use underscores to remember it's been passed
+	local _funcname_="$1"
+
+	local params=( "$@" )               ## array containing all params passed here
+	local tmpfile="/dev/shm/$RANDOM"    ## temporary file
+	local content                       ## content of the temporary file
+	local regex                         ## regular expression
+
+	# Shift the first param (which is the name of the function)
+	unset params[0]
+
+	# WORKING ON THE TEMPORARY FILE:
+	content="#!/bin/bash\n\n"
+
+	# Write the params array
+	content="${content}params=(\n"
+
+	regex="\s+"
+	for param in "${params[@]}"
+	do
+		if [[ "$param" =~ $regex ]]
+			then
+				content="${content}\t\"${param}\"\n"
+			else
+				content="${content}\t${param}\n"
+		fi
+	done
+
+	content="$content)\n"
+	echo -e "$content" > "$tmpfile"
+
+	# Append the function source
+	echo "#$( type "$_funcname_" )" >> "$tmpfile"
+
+	# Append the call to the function
+	echo -e "\n$_funcname_ \"\${params[@]}\"\n" >> "$tmpfile"
+	sudo bash "$tmpfile"
 	rm "$tmpfile"
-}
+} # }}}2
 
 # Simplify searching for keyword in current dir
-findhere() {
+findhere() { # {{{2
 	find . -iname "*$1*" "${@:2}"
-}
+} # }}}2
 
 # Delete files with patern in current dir
-findremove() {
+findremove() { # {{{2
 	local REPLY
 	find . -iname "*$1*"
 	read -r -n 1 -p "Remove these files? [y/n]: " REPLY
@@ -42,9 +74,9 @@ findremove() {
 		*)          echo -e "\nNothing deleted." ;;
 	esac
 
-}
+} # }}}2
 
-delete_older_than_xdays() {
+delete_older_than_xdays() { # {{{2
 	if [ $# -eq 0 ] ; then
 		echo 'delete_older_than_xdays N_DAYS [path]'
 	else
@@ -54,14 +86,15 @@ delete_older_than_xdays() {
 			find "$2" -mtime +$1 -delete
 		fi
 	fi
-}
+} # }}}2
 
 # Simplify searching for keyword in current dir, and allow to pass more parameters to grep
-grephere() {
+grephere() { # {{{2
 	grep -e "$1" "${@:2}" -d recurse .
-}
 
-remove-special-chars-from-name() {
+} # }}}2
+
+remove-special-chars-from-name() { # {{{2
 	local f
 	if [[ -z $1 ]]; then
 		echo "Give a file as argument"
@@ -74,16 +107,15 @@ remove-special-chars-from-name() {
 	else # single file
 		mv "$1" "${1//[\ \(\)\[\]]/_}";
 	fi
-}
+} # }}}2
 
 # preview markdown files as a man page
-md() {
+md() { # {{{2
 	pandoc -sf markdown -t man "$1" | man -l -
-}
-
+} # }}}2
 
 # Extract files
-extract () {
+extract () { # {{{2
 	local f
 	for f in "${@}" ; do
 		echo extracting $f
@@ -107,20 +139,64 @@ extract () {
 			echo "'$f' is not a valid file"
 		fi
 	done
-}
+} # }}}2
 
 # i hate typing extract...
 alias un=extract
 
-# GIT
+# find process by name
+psgrep() { # {{{2
+	local list=$(ps -ef)
+	echo -e "$list" | head -n1
+	echo -e "$list" | grep -i $1 --color=always | grep -v grep
+} # }}}2
+
+memhogs () { # {{{2
+	local TR=`free|grep Mem:|awk '{print $2}'`
+
+	ps axo rss,comm,pid | awk -v tr=$TR '{proc_list[$2]+=$1;} END {for (proc in proc_list) {proc_pct=(proc_list[proc]/tr)*100; printf("%d\t%-16s\t%0.2f%%\n",proc_list[proc],proc,proc_pct);}}' | sort -rn | head -n 10
+} # }}}2
+
+psmem () { # {{{2
+	# not working properly
+	[[ $# -eq 0 ]] && { echo "Give some process names to search for" ; return 1; }
+
+	local PROCNAME="$@";
+
+	echo $PROCNAME IS USING \
+	$(
+		echo "scale=4; ($( ps axo rss,comm | grep $PROCNAME | awk '{ TOTAL += $1 } END { print TOTAL }' )/$( free | head -n 2 | tail -n 1 | awk '{ print $2 }' ))*100" | bc
+	)% of system RAM;
+} # }}}2
+
+# }}}1
+
+# GIT {{{1
+# =========
 
 # delete files from cache
-git-delete-cached() {
+git-delete-cached() { # {{{2
 	git filter-branch --force --index-filter "git rm --cached --ignore-unmatch $@" --prune-empty --tag-name-filter cat -- --all
-}
+} # }}}2
 
+# }}}1
+
+# FZF FUNCTIONS {{{1
+# ==================================
+
+# Select and load a conda environment
+conda-envfzf() { # {{{2
+	local env=$(conda env list | grep "^#\|^$" -v | fzf --height 5 --reverse | awk "{print \$1}")
+	if [ ! -z $env ] ; then
+		conda activate $env
+	fi
+} # }}}2
+
+# }}}1
+
+# {{{1
 # activate a virtual environment
-activate() {
+activate() { # {{{2
 	local path=${1:-'.'}
 	# local venvs=$(find . -regex .*activate$ | awk --field-separator=/ '{print $(NF-2)}')
 	local venvs=$(find . -regex .*activate$)
@@ -142,67 +218,35 @@ activate() {
 		echo -e "Activating: \033[1;35m$acfile\033[m"
 		source $acfile
 	}
-
-}
-
-# find process by name
-psgrep() {
-	local list=$(ps -ef)
-	echo -e "$list" | head -n1
-	echo -e "$list" | grep -i $1 --color=always | grep -v grep
-}
-
-memhogs () {
-	local TR=`free|grep Mem:|awk '{print $2}'`
-
-	ps axo rss,comm,pid | awk -v tr=$TR '{proc_list[$2]+=$1;} END {for (proc in proc_list) {proc_pct=(proc_list[proc]/tr)*100; printf("%d\t%-16s\t%0.2f%%\n",proc_list[proc],proc,proc_pct);}}' | sort -rn | head -n 10
-}
-
-psmem () { # not working properly
-	[[ $# -eq 0 ]] && { echo "Give some process names to search for" ; return 1; }
-
-	local PROCNAME="$@";
-
-	echo $PROCNAME IS USING \
-	$(
-		echo "scale=4; ($( ps axo rss,comm | grep $PROCNAME | awk '{ TOTAL += $1 } END { print TOTAL }' )/$( free | head -n 2 | tail -n 1 | awk '{ print $2 }' ))*100" | bc
-	)% of system RAM;
-}
-
-download_m3u8_to_mp4() { # download m3u8 stream to an mp4 file
-	ffmpeg -i "$1" -c copy -bsf:a aac_adtstoasc output.mp4
-}
-
+} # }}}2
 
 # fork to the background silently and send its output to the /dev/null
 # NOTES: generic form #>/dev/null (# is 1 by default)
 #       2>&-            ---->       #>&-   (close fd)
 #       |&              ---->       2>&1
 #       &>/dev/null     ---->       1>/dev/null 2>&1
-ds() {
+ds() { # {{{2
 	echo "$@ |& > /dev/null &"
 	"$@" |& > /dev/null &
-}
+} # }}}2
 
+# }}}1
 
-# ==================================
-# ----------------------------------
-# -------------OTHERS---------------
-# ----------------------------------
+# OTHERS {{{1
 # ==================================
 
 # Use -p to make prompt changes permanent on .bashrc
-prompt() {
+prompt() { # {{{2
 	local bashrc=$([[ -L "$HOME/.bashrc" ]] && echo `file "$HOME/.bashrc" | cut -d' ' -f5` || echo "$HOME/.bashrc")
 	if [ -f ~/.bash/prompts/prompt_${1}.sh ]; then
 		[[ ! -z $2 ]] && [[ $2 == "-p" ]] && sed -i "s/prompt_[0-9]\.sh[^\ \n]*/prompt_${1}\.sh/" $bashrc || echo "Use -p to make changes permanent on .bashrc";
 		echo "Sourcing ~/.bash/prompts/prompt_${1}.sh"
 		source ~/.bash/prompts/prompt_${1}.sh
 	fi
-}
+} # }}}2
 
 # Display unicode chars
-unicode() {
+unicode() { # {{{2
 	local a b c
 	for a in {0..9} {a..f}; do
 		for b in {0..9} {a..f}; do
@@ -217,10 +261,10 @@ unicode() {
 			echo
 		done
 	done | LESSUTFBINFMT='?' less
-}
+} # }}}2
 
 # Function to display terminal colors. $1 -> (1 - simple, 2 - with numbers, 3 - 256 colors)
-colors() {
+colors() { # {{{2
 	local i FGs FG column
 	if [[ -z $1 || $1 == 1 ]]; then
 		echo -en '\n     '
@@ -268,4 +312,6 @@ colors() {
 		done
 		echo
 	fi
-}
+} # }}}2
+
+# }}}1
