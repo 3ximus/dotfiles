@@ -46,3 +46,5 @@
 [delta "line-numbers"]
 	line-numbers-minus-style = 1 bold
 	line-numbers-plus-style = 2 bold
+[pull]
+	rebase = false
