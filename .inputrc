@@ -32,34 +32,6 @@ set visible-stats on
 "\C-p": history-search-backward
 "\C-n": history-search-forward
 
-# "\C-f": shell-expand-line
-# "\C-f": glob-expand-word
-# "\C-g": dabbrev-expand
-# "\C-h": complete-into-braces
-
 "\C-xr": re-read-init-file
 "\C-xi": redraw-current-line
-
-# NOTE C-j is now bound in ble.sh
-# "\C-je": edit-and-execute-command
-
-# "\C-j": nop
-# # quote word near cursor
-# "\C-jq": "\eb\"\ef\""
-# # reload bashrc
-# "\C-jb": "\C-u source ~/.bashrc\C-m"
-# # edit the path
-# "\C-jp": "PATH=${PATH}\e\C-e\C-a\ef\C-f"
-# # jump into last comand directory
-# "\C-jd": 'cd !$ \015'
-# # generate awk command
-# "\C-ja": 'awk \'{}\'\eOD\eOD'
-# # make subcommand
-# "\C-jm": '\C-a "$(\C-e)"\C-a'
-# # add sudo before command
-# "\C-js": "\C-asudo \C-e"
-# # run command in every subdirectory
-# "\C-jf": 'for f in *; do cd $f &&  && cd .. ; done\eb\eb\eOD\eOD\eOD\eOD'
-# # sync history
-# "\C-jh": ' history -a; history -n\C-m'
 
