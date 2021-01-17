@@ -1,11 +1,11 @@
 [Background]
-Color=40,40,40
+Color=30,30,30
 
 [BackgroundFaint]
 Color=30,30,30
 
 [BackgroundIntense]
-Color=40,40,40
+Color=41,41,41
 
 [Color0]
 Color=40,40,40
@@ -86,9 +86,11 @@ Color=235,219,178
 Color=230,212,163
 
 [ForegroundIntense]
-Color=151,135,113
+Color=235,219,178
 
 [General]
+Blur=true
+ColorRandomization=false
 Description=Gruvbox Dark Real Colors
-Opacity=0.9
+Opacity=0.85
 Wallpaper=

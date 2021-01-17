@@ -1,7 +1,8 @@
 [Appearance]
+AntiAliasFonts=true
 BoldIntense=true
 ColorScheme=Gruvbox_Dark_Real_Colors
-Font=Terminus (TTF),10,-1,5,57,0,0,0,0,0,Medium
+Font=Terminus (TTF),13,-1,5,57,0,0,0,0,0,Medium
 UseFontLineChararacters=false
 
 [Cursor Options]
@@ -16,7 +17,11 @@ Name=MyProfile
 Parent=FALLBACK/
 StartInCurrentSessionDir=false
 TerminalColumns=100
+TerminalMargin=15
 TerminalRows=60
+
+[Keyboard]
+KeyBindings=default
 
 [Scrolling]
 HistoryMode=2
