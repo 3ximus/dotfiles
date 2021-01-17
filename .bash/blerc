@@ -116,7 +116,8 @@ bleopt complete_menu_maxlines=20
 
 bleopt term_index_colors=256
 
-bleopt filename_ls_colors="$LS_COLORS"
+# This might not let the colors respect the colorsheme
+# bleopt filename_ls_colors="$LS_COLORS"
 
 bleopt highlight_syntax=1
 bleopt highlight_filename=1
