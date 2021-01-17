@@ -26,7 +26,6 @@ alias egrep='egrep --color=auto'
 alias diff='diff --color=auto'
 alias pacman='pacman --color=auto'
 alias less='less -Mrix4'
-alias vi='vim'
 alias gdb='gdb -q'
 alias dd='dd status=progress'
 alias alert="echo -ne '\a'"
@@ -54,8 +53,8 @@ alias gl='git lol | less' # because my own alias is too much typing
 alias gd='git diff'
 
 # python3 alias
-alias python='python3'
-alias ipython='ipython3'
+# alias python='python3'
+# alias ipython='ipython3'
 
 # pacman / aur
 alias aur-packages='pacman -Qm'
