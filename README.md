@@ -2,7 +2,7 @@
 
 ## My main configuration files:
 
-- fonts in .fonts are mostly fonts for [powerline](https://github.com/powerline/fonts) support
+- fonts in .fonts are from [powerline](https://github.com/powerline/fonts)  and [nerd fonts](https://github.com/ryanoasis/nerd-fonts)
 - konsole contains my konsole themes and profile (lives in `$HOME/.local/share/konsole`)
 - icons contains [papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) icons edited to match gruvbox style _(see my topbar screenshot)_
 - inside .bash there is `blerc` and `ble.sh` to configure [ble.sh](https://github.com/akinomyoga/ble.sh) **NOTE** You need to run make inside `.bash/ble.sh` (gawk is needed for this)
