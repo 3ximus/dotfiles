@@ -148,9 +148,14 @@ onoremap in :<C-u>normal vin<CR>
 " ================
 
 set t_Co=256 "terminal color range
-color gruvbox
-let g:gruvbox_termcolors = 16 "256 colors look really bad
-set background=dark
+try "try to set the theme as gruvbox
+	colorscheme gruvbox
+	let g:gruvbox_termcolors = 16 "256 colors look really bad
+	set background=dark
+catch /^Vim\%((\a\+)\)\=:E185/
+	colorscheme darkblue
+endtry
+
 " makes the background be this color so that when reversed for the airline
 " mode foreground it stays FUCKING BLACK!!
 hi Normal ctermbg=236
@@ -374,12 +379,14 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
 				\ 'Unknown'   :'?',
 				\ }
 
-"Auto Origami (auto manage fold columns)
-augroup auto_origami
-	au!
-	au CursorHold,BufWinEnter,WinEnter * AutoOrigamiFoldColumn
-augroup END
-let g:auto_origami_foldcolumn = 1
+if &rtp =~ 'vim-auto-origami'
+	"Auto Origami (auto manage fold columns)
+	augroup auto_origami
+		au!
+		au CursorHold,BufWinEnter,WinEnter * AutoOrigamiFoldColumn
+	augroup END
+	let g:auto_origami_foldcolumn = 1
+endif
 
 "Python syntax highlight
 let g:python_highlight_all = 1
@@ -527,7 +534,7 @@ nnoremap <silent><nowait> <leader>cp  :<C-u>CocListResume<CR>
 " =================
 
 if has("gui_running")
-	colo gruvbox
+	colorscheme gruvbox
 	let g:gruvbox_contrast_dark = 'medium'
 	let g:gruvbox_contrast_light = 'soft'
 	set background=dark
