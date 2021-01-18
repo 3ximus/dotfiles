@@ -348,14 +348,12 @@ if !exists('g:airline_symbols')
 	let g:airline_symbols = {}
 endif
 if !has("gui_running") "running on console
-	" unicode symbols
-	" let g:airline_left_sep = ''
-	" let g:airline_right_sep = ''
-	" let g:airline_left_alt_sep = ''
-	" let g:airline_right_alt_sep = ''
-	" let g:airline_symbols.branch = ''
-	" let g:airline_symbols.linenr = 'ln'
-	" let g:airline_symbols.whitespace = ''
+	"this will only worked with patched fonts from NERD FONTS
+	let g:airline_left_sep = "\uE0B8"
+	let g:airline_right_sep = "\uE0BA"
+
+	let g:airline_left_alt_sep = "\uE0B9"
+	let g:airline_right_alt_sep =  "\uE0BB"
 endif
 
 "NERDTree
@@ -369,13 +367,13 @@ let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
 let g:NERDTreeGitStatusIndicatorMapCustom = {
 				\ 'Modified'  :'∗',
 				\ 'Staged'    :'→',
-				\ 'Untracked' :'',
+				\ 'Untracked' :'%',
 				\ 'Renamed'   :'↻',
 				\ 'Unmerged'  :'═',
-				\ 'Deleted'   :'',
+				\ 'Deleted'   :'✘',
 				\ 'Dirty'     :'',
 				\ 'Ignored'   :'',
-				\ 'Clean'     :'',
+				\ 'Clean'     :'✔',
 				\ 'Unknown'   :'?',
 				\ }
 
@@ -403,7 +401,7 @@ endif
 let g:markology_include='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 " Markbar
-let g:markbar_mark_marker = '➜'
+let g:markbar_mark_marker = '>'
 " let g:markbar_set_default_peekaboo_mappings = v:false
 let g:markbar_explicitly_remap_mark_mappings = v:true
 let g:markbar_peekaboo_marks_to_display = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
