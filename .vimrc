@@ -197,6 +197,8 @@ if !has('gui_running')
 	highlight HighlightedyankRegion cterm=reverse gui=reverse
 
 	highlight link logLevelInfo GruvboxBlueBold
+	highlight Error cterm=bold ctermfg=234 ctermbg=9
+	highlight ErrorMsg cterm=bold ctermfg=234 ctermbg=9
 endif
 
 " }}}
@@ -347,14 +349,13 @@ let g:airline#extensions#whitespace#mixed_indent_algo = 1
 if !exists('g:airline_symbols')
 	let g:airline_symbols = {}
 endif
-if !has("gui_running") "running on console
-	"this will only worked with patched fonts from NERD FONTS
-	let g:airline_left_sep = "\uE0B8"
-	let g:airline_right_sep = "\uE0BA"
 
-	let g:airline_left_alt_sep = "\uE0B9"
-	let g:airline_right_alt_sep =  "\uE0BB"
-endif
+"this will only worked with patched fonts from NERD FONTS
+let g:airline_left_sep = "\uE0B8"
+let g:airline_right_sep = "\uE0BA"
+
+let g:airline_left_alt_sep = "\uE0B9"
+let g:airline_right_alt_sep =  "\uE0BB"
 
 "NERDTree
 let g:NERDTreeDirArrowExpandable = '▸'
@@ -537,11 +538,10 @@ if has("gui_running")
 	let g:gruvbox_contrast_light = 'soft'
 	set background=dark
 
-	"set guifont=Liberation\ Mono\ for\ Powerline\ 9 " normal
 	"set guifont=Roboto\ Mono\ for\ Powerline\ Regular\ 9
-	"set guifont=monofur\ for\ Powerline\ Regular\ 11 " funny
-	set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 9
+	"set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 9
 	"set guifont=Fira\ Mono\ for\ Powerline\ 9
+	set guifont=TerminessTTF\ Nerd\ Font\ Mono\ 13
 
 	set linespace=0
 
