@@ -82,8 +82,21 @@ bleopt vbell_align=right
 ##-----------------------------------------------------------------------------
 ## Custom key bindings
 
-ble-bind -s 'M-c' '\C-a\C-] \C-u'
+# bring back default bash behavior for some keys
+ble-bind -m 'emacs' -f 'home' '@nomarked beginning-of-logical-line'
+ble-bind -m 'emacs' -f 'C-a' '@nomarked beginning-of-logical-line'
+ble-bind -m 'emacs' -f 'end' '@nomarked end-of-logical-line'
+ble-bind -m 'emacs' -f 'C-e' '@nomarked end-of-logical-line'
+ble-bind -m 'emacs' -f 'S-home' '@marked beginning-of-logical-line'
+ble-bind -m 'emacs' -f 'C-S-a' '@marked beginning-of-logical-line'
+ble-bind -m 'emacs' -f 'S-end' '@marked end-of-logical-line'
+ble-bind -m 'emacs' -f 'C-S-e' '@marked end-of-logical-line'
+ble-bind -m 'emacs' -f 'C-k' 'kill-forward-logical-line'
+ble-bind -m 'emacs' -f 'C-u' 'kill-backward-logical-line'
 
+# my extra bingings
+
+ble-bind -s 'M-c' '\C-a\C-] \C-u'
 ble-bind -c 'M-u' 'cd ..'
 
 # change from vim mode to normal mode
