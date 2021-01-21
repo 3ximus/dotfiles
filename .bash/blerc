@@ -93,6 +93,7 @@ ble-bind -m 'emacs' -f 'S-end' '@marked end-of-logical-line'
 ble-bind -m 'emacs' -f 'C-S-e' '@marked end-of-logical-line'
 ble-bind -m 'emacs' -f 'C-k' 'kill-forward-logical-line'
 ble-bind -m 'emacs' -f 'C-u' 'kill-backward-logical-line'
+ble-bind -m 'emacs' -f 'C-w' 'kill-region-or kill-backward-uword'
 
 # my extra bingings
 
