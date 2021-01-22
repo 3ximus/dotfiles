@@ -82,17 +82,6 @@ bleopt vbell_align=right
 ##-----------------------------------------------------------------------------
 ## Custom key bindings
 
-# bring back default bash behavior for some keys
-ble-bind -m 'emacs' -f 'home' '@nomarked beginning-of-logical-line'
-ble-bind -m 'emacs' -f 'C-a' '@nomarked beginning-of-logical-line'
-ble-bind -m 'emacs' -f 'end' '@nomarked end-of-logical-line'
-ble-bind -m 'emacs' -f 'C-e' '@nomarked end-of-logical-line'
-ble-bind -m 'emacs' -f 'S-home' '@marked beginning-of-logical-line'
-ble-bind -m 'emacs' -f 'C-S-a' '@marked beginning-of-logical-line'
-ble-bind -m 'emacs' -f 'S-end' '@marked end-of-logical-line'
-ble-bind -m 'emacs' -f 'C-S-e' '@marked end-of-logical-line'
-ble-bind -m 'emacs' -f 'C-k' 'kill-forward-logical-line'
-ble-bind -m 'emacs' -f 'C-u' 'kill-backward-logical-line'
 ble-bind -m 'emacs' -f 'C-w' 'kill-region-or kill-backward-uword'
 
 # my extra bingings
