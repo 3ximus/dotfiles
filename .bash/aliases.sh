@@ -74,7 +74,7 @@ alias tmux-attach-session='tmux list-sessions; read -r -p "Attach to > " REPLY; 
 alias tmux-kill-session='tmux list-sessions; read -r -p "Kill session > " REPLY; tmux kill-session -t $REPLY'
 
 # i keep forgetting this...
-alias man-pipes='echo "Generic form #>/dev/null (# is 1 by default)"; echo "  2>&-        ----> #>&-  (close fd)"; echo "  |&          ----> 2>&1"; echo "  &>/dev/null ----> 1>/dev/null 2>&1"'
+alias man-pipes='echo "Generic form #>/dev/null (# is 1 by default) or #>&# to send one fd to another"; echo "  2>&-        ----> #>&-  (close fd)"; echo "  |&          ----> 2>&1 |"; echo "  &>/dev/null ----> 1>/dev/null 2>&1"'
 
 # wget to download directory, use -P to specify output directory
 # -k option might give memory issues when continuing (-c) the download of large files but without it wget wont check for partially downlaoded files and will assume they are downloaded if they exist
