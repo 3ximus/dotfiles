@@ -2,44 +2,33 @@
 
 ## My main configuration files:
 
+- [Dependencies](https://github.com/3ximus/dotfiles#dependencies)
+- [Installation/Cloning](https://github.com/3ximus/dotfiles#installation-and-cloning)
+- [Vim](https://github.com/3ximus/dotfiles#vim)
+- [Tmux](https://github.com/3ximus/dotfiles#tmux)
+- `.bashrc` only contains some bash options and sources all scripts inside [.bash](https://github.com/3ximus/dotfiles/tree/master/.bash), which contains:
+    - [prompts](https://github.com/3ximus/dotfiles#prompts)
+    - [functions](https://github.com/3ximus/dotfiles/blob/master/.bash/functions.sh) and [aliases](https://github.com/3ximus/dotfiles/blob/master/.bash/aliases.sh)
+    - `ble.sh` contains [ble.sh](https://github.com/akinomyoga/ble.sh), which is a new readline implementation and it's simply amazing! There is also `blerc` which contains custom settings and themes to make blesh suit my preferences...
+    - [fzf-bindings.bash](https://github.com/junegunn/fzf/blob/master/shell/key-bindings.bash) for fzf bindings that defines some custom bindings through ble.sh. And [fzf-marks-plugin.sh](https://github.com/urbainvaes/fzf-marks) for directory marks with fzf which saves a lot of typing :)
+    - [fzf-git.bash](https://github.com/3ximus/dotfiles/blob/master/.bash/fzf-git.bash) contains some functions to use fzf with git. There are some better projects with these
+    - `scripts` with some useless utilities that I didn't want to create as a function...
+- `inputrc` contains some bindings for bash readline that are accepted in `ble.sh` too. I use this file for more barebones configs that I don't want running `ble.sh`
+- `.gitconfig` with my configuration for git (uses [delta](https://github.com/dandavison/delta#used-by-delta) to view diffs)
 - fonts in .fonts are from [powerline](https://github.com/powerline/fonts)  and [nerd fonts](https://github.com/ryanoasis/nerd-fonts)
-- konsole contains my konsole themes and profile (lives in `$HOME/.local/share/konsole`)
-- icons contains [papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) icons edited to match gruvbox style _(see my topbar screenshot)_
-- inside .bash there is `blerc` and `ble.sh` to configure [ble.sh](https://github.com/akinomyoga/ble.sh) **NOTE** You need to run make inside `.bash/ble.sh` (gawk is needed for this)
-  - there is also [fzf-bindings.sh](https://github.com/junegunn/fzf/blob/master/shell/key-bindings.bash) for fzf bindings and [fzf-marks-plugin.sh](https://github.com/urbainvaes/fzf-marks) for directory marks with fzf
-- .gdbinit was downloaded from [gdb-dashboard](https://github.com/cyrus-and/gdb-dashboard)
+- [konsole](https://github.com/3ximus/dotfiles/tree/master/konsole) contains my konsole themes and profile (lives in `$HOME/.local/share/konsole`)
+- [icons](https://github.com/3ximus/dotfiles/tree/master/icons) contains [papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) icons edited to match gruvbox style (there is a script inside to install these icons) _(see my topbar screenshot)_
+- `.gdbinit` contains a dashboard from [gdb-dashboard](https://github.com/cyrus-and/gdb-dashboard) that takes gdb out of the dark ages.
 
 
-## .config files (Mainly files for [bspwm](https://github.com/baskerville/bspwm) + [sxhkd](https://github.com/baskerville/sxhkd) + [polybar](https://github.com/jaagr/polybar) + [Compton](https://github.com/chjj/compton))
-- rofi directory used for [rofi](https://github.com/DaveDavenport/rofi) - see my custom [rofi launch script for Plasma](.bash/scripts/rofi-blurred)
-- zathura directory with gruvbox colorstyle for zathura copied from [abdullaev](https://github.com/abdullaev/dotfiles/blob/master/.config/zathura/zathurarc)
-- Code contains my _user settings_, _keyboard shortcuts_ and a _list of installed extensions_
+- *Files inside `.config`*
+    - [bottom](https://github.com/ClementTsang/bottom) and `htop` configs
+    - [ranger](https://github.com/ranger/ranger) configs. The `scope.sh` inside it is also used by `fzf` to preview files if it exists. Which makes not sense but I didn't bother to place it better where it can be used by both programs...
+    - [rofi](https://github.com/DaveDavenport/rofi) with a custom colorscheme, that I use in [rofi launch script for Plasma](.bash/scripts/rofi-blurred) to look like [this](https://github.com/3ximus/dotfiles/blob/master/screenshots/rofi.png) and bind a key to something like this `$HOME/.bash/scripts/rofi-blurred.sh -show run`
+    - `zathura` directory with gruvbox colorstyle for zathura copied from [abdullaev](https://github.com/abdullaev/dotfiles/blob/master/.config/zathura/zathurarc)
+    - other old files for the combo: [bspwm](https://github.com/baskerville/bspwm) + [sxhkd](https://github.com/baskerville/sxhkd) + [polybar](https://github.com/jaagr/polybar) + [Compton](https://github.com/chjj/compton). Now I just use `plasma` for mental health reasons...
 
-Most of my files are set with the [gruvbox](https://github.com/morhetz/gruvbox) colorscheme.
-
-## Installation and Cloning
-
-This repository contains submodules for the vim extensions, therefore you have to clone the submodules for vim to work correctly. Do either:
-
-`git clone --recurse-submodules -j8 [this-repo-url]`
-
-where -j8 is the number of jobs to run in paralell. Or:
-
-```
-git clone [this-repo-url]
-git submodule init
-git submodule update
-```
-
-To update the vim plugins and the repo use
-
-```
-git pull --recurse-submodules
-```
-
-If new submodules where added you might need to run `git submodule init` again
-
-A script is provided to link the files. Run `install_my_config.sh --help` for its usage.
+Most of my files are set with the [gruvbox](https://github.com/morhetz/gruvbox) colorscheme that is the only one I don't get tired of...
 
 ## Dependencies
 
@@ -47,20 +36,46 @@ A script is provided to link the files. Run `install_my_config.sh --help` for it
  - `fzf` for some keybindings and bookmark directories in bash
  - `delta` for generating git diffs (setup in `.gitconfig`) [delta](https://github.com/dandavison/delta#used-by-delta)
 
+## Installation and Cloning
+
+This repository contains submodules for the vim extensions, therefore you have to clone the submodules for vim to work correctly. Do either:
+
+`git clone --recurse-submodules -j8 https://github.com/3ximus/dotfiles.git`
+
+where -j8 is the number of jobs to run in paralell. Or:
+
+```
+git clone https://github.com/3ximus/dotfiles.git
+git submodule init
+git submodule update
+```
+
+ **NOTE** To configure the first time you need to run make inside `.bash/ble.sh` (this is where the `gawk` dependency comes in)
+
+To update the vim plugins and the repo use
+
+```
+git pull --recurse-submodules -j8
+```
+
+If new submodules where added you might need to run `git submodule init` again
+
+To copy/link the files you want run `install_my_config.sh --help` to check the usage of this script
+
 ## Prompts
 
-### Prompt 7
+### Current prompt:
 
 ![77](screenshots/7_normal.png)
 ![77f](screenshots/7_full.png)
 
-Other prompts are available and can be set with the function `prompt [1-7]`
+Other prompts are available and can be set with the function `prompt [1-7]`, or directly source one of the files inside [promtps](https://github.com/3ximus/dotfiles/tree/master/.bash/prompts)
 
 Prompts support:
 
 - git directories and status of the files (untracked, staged... aswell as upstream checks), but you must source `.bash/git-prompt.sh`
 - diferent colors for normal user / root / ssh session user (in **prompt 6, 7** this segment is hidden unless the user is root or in an ssh session)
-- python virtual environments. **except prompt 1**
+- python conda/virtual environments. **except prompt 1**
 - last command exit status ( failed or succeded )
 z,s
 - compress some paths ( my repository path is compressed into "R:" . **except prompt 5, 6, 7**
@@ -69,7 +84,12 @@ z,s
 - show the respective tty. **except 6, 7**
 - display virtual machine environment indicator **only prompt 7**
 
-## Vim plugins (using [Vundle](https://github.com/VundleVim/Vundle.vim))
+
+## Vim
+
+Vim configuration is huge but it's organized and documented, so just open the `.vimrc` file and check it out
+
+### Plugin list (using [Vundle](https://github.com/VundleVim/Vundle.vim)):
 
  -  [vim-airline](https://github.com/vim-airline/vim-airline)
  -  [nerdtree](https://github.com/scrooloose/nerdtree)
@@ -117,10 +137,11 @@ z,s
 ## Tmux
 ![12](screenshots/tmux2.png)
 
-Tmux has a lot of custom configurations added in `.tmux.conf` and a few plugins added as submodules that are managed through [TPM (Tmux Plugin Manager)](https://github.com/tmux-plugins/tpm)
+Tmux has a lot of custom configurations added in `.tmux.conf` and a few plugins inside `.tmux` added as submodules that are managed through [TPM (Tmux Plugin Manager)](https://github.com/tmux-plugins/tpm)
 
  - [tmux-prefix-highlight](https://github.com/tmux-plugins/tmux-prefix-highlight)
  - [tmux-copycat](https://github.com/tmux-plugins/tmux-copycat)
+ - [tmux-fingers](https://github.com/morantron/tmux-fingers)
  - [tmux-battery](https://github.com/tmux-plugins/tmux-battery)
  - [tmux-plugin-uptime](https://github.com/3ximus/tmux-plugin-uptime)
  - [tmux-plugin-datetime](https://github.com/3ximus/tmux-plugin-datetime)

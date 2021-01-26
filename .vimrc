@@ -119,6 +119,8 @@ set autoread
 "display command key pressed
 set showcmd
 
+set cmdheight=1
+
 "autocomplete vim commands
 set wildmenu
 set wildmode=longest:list,full
@@ -372,8 +374,8 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
 				\ 'Renamed'   :'↻',
 				\ 'Unmerged'  :'═',
 				\ 'Deleted'   :'✘',
-				\ 'Dirty'     :'',
-				\ 'Ignored'   :'',
+				\ 'Dirty'     :'∗',
+				\ 'Ignored'   :'?',
 				\ 'Clean'     :'✔',
 				\ 'Unknown'   :'?',
 				\ }
