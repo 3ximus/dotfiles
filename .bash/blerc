@@ -82,7 +82,7 @@ bleopt vbell_align=right
 ##-----------------------------------------------------------------------------
 ## Custom key bindings
 
-ble-bind -m 'emacs' -f 'C-w' 'kill-region-or kill-backward-uword'
+# ble-bind -m 'emacs' -f 'C-w' 'kill-region-or kill-backward-uword'
 
 # my extra bingings
 
