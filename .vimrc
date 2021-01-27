@@ -464,6 +464,8 @@ let g:coc_global_extensions = [
 	  \]
 
 " other extensions
+	  " \'coc-angular',
+	  " \'coc-tsserver',
 	  " \'coc-clangd',
 	  " \'coc-flutter-tools',
 
