@@ -121,6 +121,9 @@ Vim configuration is huge but it's organized and documented, so just open the `.
  -  [vim-ps1](https://github.com/PProvost/vim-ps1)
  -  [python-syntax](https://github.com/vim-python/python-syntax)
 
+### Extra
+ - [emmet-vim](https://github.com/mattn/emmet-vim)
+
 ### Colors
  -  [gruvbox](https://github.com/morhetz/gruvbox)
 
@@ -128,7 +131,7 @@ Vim configuration is huge but it's organized and documented, so just open the `.
  -  [vim-startify](https://github.com/mhinz/vim-startify)
  -  [vim-numbertoggle](https://github.com/jeffkreeftmeijer/vim-numbertoggle)
  -  [vim-auto-origami](https://github.com/benknoble/vim-auto-origami)
- -  [vim-anzu](https://github.com/osyo-manga/vim-anzu)
+ -  [vim-devicons](https://github.com/ryanoasis/vim-devicons)
 
 ## Vim (gruvbox theme) screenshots
 

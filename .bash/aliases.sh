@@ -50,6 +50,7 @@ alias gp='git push'
 alias gc='git commit'
 alias ga='git add .'
 alias gl='git lol | less' # because my own alias is too much typing
+alias gla='git lol --all | less'
 alias gd='git diff'
 
 # python3 alias
