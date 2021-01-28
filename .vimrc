@@ -34,7 +34,6 @@ Plugin 'jeetsukumaran/vim-markology'
 
 " COMPLETION
 Plugin 'neoclide/coc.nvim'
-" Plugin 'davidhalter/jedi-vim'
 
 " TMUX CLIPBOARD SHARING
 Plugin 'tmux-plugins/vim-tmux-focus-events'
@@ -46,6 +45,9 @@ Plugin 'PProvost/vim-ps1'
 Plugin 'vim-python/python-syntax'
 Plugin 'MTDL9/vim-log-highlighting'
 Plugin 'dart-lang/dart-vim-plugin'
+
+" EXTRAS
+Plugin 'mattn/emmet-vim'
 
 " COLORSCHEME
 Plugin 'morhetz/gruvbox'
@@ -59,6 +61,9 @@ Plugin 'benknoble/vim-auto-origami'
 "search popup, only supported in vim >8.2.0896
 Plugin 'obcat/vim-hitspop'
 Plugin 'machakann/vim-highlightedyank'
+
+"NerdFont icons in NerdTree, startify and Ctrl-p
+Plugin 'ryanoasis/vim-devicons'
 
 call vundle#end()
 filetype plugin indent on
@@ -446,6 +451,10 @@ noremap <leader>gb :Gblame<CR>
 
 noremap <leader>D :LinediffReset<CR>
 noremap <leader>d :Linediff<CR>
+
+" Emmet mappings
+nmap <leader>tt :Emmet<space>
+let g:user_emmet_leader_key='<leader>t'
 
 " }}}
 

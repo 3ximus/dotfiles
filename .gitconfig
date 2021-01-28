@@ -10,7 +10,6 @@
 	unstage = restore --staged
 	last = log -1 HEAD
 	lol = log --oneline --graph --pretty=format:'%C(yellow)%h%Creset %C(auto)%d%Creset %s (%Cblue%an%Creset, %cr)' --date-order  --color=always
-	log-all = log --all --graph --oneline --pretty=format:'%C(yellow)%h%Creset %C(auto)%d%Creset %s (%Cblue%an%Creset, %cr)' --date-order --color=always
 
 [diff]
 	tool = vimdiff
