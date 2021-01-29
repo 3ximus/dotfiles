@@ -432,8 +432,8 @@ let g:markbar_marks_to_display = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRST
 let g:clever_f_mark_direct=1
 
 " hitspop
-let g:hitspop_line = 'wintop'
-let g:hitspop_line_mod = 1
+let g:hitspop_line = 'winbot'
+" let g:hitspop_line_mod = 1
 
 " }}}
 
