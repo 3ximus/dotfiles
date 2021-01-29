@@ -1,9 +1,12 @@
 [submodule "VundleVim/Vundle.vim"]
 	path = .vim/bundle/Vundle.vim
 	url = https://github.com/VundleVim/Vundle.vim.git
+	update = merge
 [submodule "akinomyoga/ble.sh"]
 	path = .bash/ble.sh
 	url = https://github.com/akinomyoga/ble.sh
+	update = merge
 [submodule "tmux-plugins/tpm"]
 	path = .tmux/tpm
 	url = https://github.com/tmux-plugins/tpm
+	update = merge
