@@ -7,21 +7,3 @@
 [submodule "tmux-plugins/tpm"]
 	path = .tmux/tpm
 	url = https://github.com/tmux-plugins/tpm
-[submodule "tmux-plugins/tmux-prefix-highlight"]
-	path = .tmux/tmux-prefix-highlight
-	url = https://github.com/tmux-plugins/tmux-prefix-highlight
-[submodule "tmux-plugins/tmux-copycat"]
-	path = .tmux/tmux-copycat
-	url = https://github.com/tmux-plugins/tmux-copycat
-[submodule "3ximus/tmux-plugin-uptime"]
-	path = .tmux/tmux-plugin-uptime
-	url = https://github.com/3ximus/tmux-plugin-uptime
-[submodule "3ximus/tmux-plugin-datetime"]
-	path = .tmux/tmux-plugin-datetime
-	url = https://github.com/3ximus/tmux-plugin-datetime
-[submodule "tmux-plugins/tmux-battery"]
-	path = .tmux/tmux-battery
-	url = https://github.com/tmux-plugins/tmux-battery
-[submodule "Morantron/tmux-fingers"]
-	path = .tmux/tmux-fingers
-	url = https://github.com/Morantron/tmux-fingers

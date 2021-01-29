@@ -64,7 +64,11 @@ To copy/link the files you want run `install_my_config.sh --help` to check the u
 
 #### Vim
 
-After cloning this repo open vim and run `:PluginInstall`
+To install all the vim plugins open vim and run `:PluginInstall`
+
+#### Tmux
+
+To install the tmux plugins press `<prefix>+I` (it will freeze for a few seconds...)
 
 ## Prompts
 
@@ -147,7 +151,6 @@ Vim configuration is huge but it's organized and documented, so just open the `.
 Tmux has a lot of custom configurations added in `.tmux.conf` and a few plugins inside `.tmux` added as submodules that are managed through [TPM (Tmux Plugin Manager)](https://github.com/tmux-plugins/tpm)
 
  - [tmux-prefix-highlight](https://github.com/tmux-plugins/tmux-prefix-highlight)
- - [tmux-copycat](https://github.com/tmux-plugins/tmux-copycat)
  - [tmux-fingers](https://github.com/morantron/tmux-fingers)
  - [tmux-battery](https://github.com/tmux-plugins/tmux-battery)
  - [tmux-plugin-uptime](https://github.com/3ximus/tmux-plugin-uptime)
