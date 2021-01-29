@@ -221,7 +221,7 @@ endfunction
 command! -nargs=1 Fold :call Fold( '<args>' ) "command to use Fold function
 
 "remove trailing whitespaces
-function StripTrailingWhitespace()
+function! StripTrailingWhitespace()
 	if !&binary && &filetype != 'diff'
 		normal m'
 		%s/\s\+$//e
@@ -369,8 +369,16 @@ let g:airline_left_alt_sep = "\uE0B9"
 let g:airline_right_alt_sep =  "\uE0BB"
 
 "NERDTree
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
+let g:NERDTreeDirArrowExpandable = ''
+let g:NERDTreeDirArrowCollapsible = ''
+
+" devicons
+let g:WebDevIconsNerdTreeBeforeGlyphPadding = ''
+let g:webdevicons_enable_airline_statusline = 1
+let g:webdevicons_enable_airline_tabline = 1
+let g:webdevicons_conceal_nerdtree_brackets = 1
+let g:DevIconsEnableFoldersOpenClose = 1
+" let g:DevIconsEnableDistro = 0
 
 "nerdtree-git
 let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
@@ -604,4 +612,9 @@ augroup dynamic_smartcase
 	autocmd CmdLineEnter : set ignorecase
 	autocmd CmdLineLeave : set noignorecase
 augroup END
+
+" fix artifacts on screen from tmux-focus-events
+autocmd FocusGained * silent redraw!
+" autocmd FocusLost * silent redraw!
+
 " }}}

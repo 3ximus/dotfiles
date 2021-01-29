@@ -6,8 +6,6 @@
 .vim/view/
 konsole/bookmarks.xml*
 
-# tmux plugins repos
-
 # vim plugins repos (this is needed because .vim/bundle/Vundle is necessary)
 .vim/bundle/emmet-vim
 .vim/bundle/python-syntax
@@ -41,3 +39,11 @@ konsole/bookmarks.xml*
 .vim/bundle/vim-syntax-extra
 .vim/bundle/vim-tmux-clipboard
 .vim/bundle/vim-tmux-focus-events
+
+# tmux plugins repos (.tmux/tpm is needed)
+.tmux/tmux-prefix-highlight
+.tmux/tmux-battery
+.tmux/tmux-copycat
+.tmux/tmux-fingers
+.tmux/tmux-plugin-datetime
+.tmux/tmux-plugin-uptime
