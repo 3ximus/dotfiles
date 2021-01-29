@@ -397,9 +397,8 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
 				\ 'Unknown'   :'?',
 				\ }
 
-" TODO Doesn't seem to work...
-if &rtp =~ 'vim-auto-origami'
-	"Auto Origami (auto manage fold columns)
+"Auto Origami (auto manage fold columns)
+if &rtp =~ 'vim-auto-origami' && glob("~/.vim/bundle/vim-auto-origami/plugin/auto_origami.vim")!=#""
 	augroup auto_origami
 		au!
 		au CursorHold,BufWinEnter,WinEnter * AutoOrigamiFoldColumn
@@ -474,84 +473,86 @@ nmap <leader>tt :Emmet<space>
 " COC CONFIGURATION {{{
 " ======================
 
-" let g:coc_start_at_startup = 0
+if &rtp =~ 'coc.nvim' && glob("~/.vim/bundle/coc.nvim/plugin/coc.vim")!=#""
+	" let g:coc_start_at_startup = 0
 
-let g:coc_disable_startup_warning = 1
+	let g:coc_disable_startup_warning = 1
 
-" Coc Extensions
-let g:coc_global_extensions = [
-	  \'coc-python',
-	  \'coc-json',
-	  \'coc-sh',
-	  \]
+	" Coc Extensions
+	let g:coc_global_extensions = [
+		  \'coc-python',
+		  \'coc-json',
+		  \'coc-sh',
+		  \]
 
-" other extensions
-	  " \'coc-angular',
-	  " \'coc-tsserver',
-	  " \'coc-clangd',
-	  " \'coc-flutter-tools',
+	" other extensions
+		  " \'coc-angular',
+		  " \'coc-tsserver',
+		  " \'coc-clangd',
+		  " \'coc-flutter-tools',
 
-inoremap <silent><expr> <c-@> coc#refresh()
+	inoremap <silent><expr> <c-@> coc#refresh()
 
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+	" Use `[g` and `]g` to navigate diagnostics
+	" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+	nmap <silent> [g <Plug>(coc-diagnostic-prev)
+	nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+	" GoTo code navigation.
+	nmap <silent> gd <Plug>(coc-definition)
+	nmap <silent> gy <Plug>(coc-type-definition)
+	nmap <silent> gi <Plug>(coc-implementation)
+	nmap <silent> gr <Plug>(coc-references)
 
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-nnoremap <silent> <leader>K :execute '!' . &keywordprg . " " . expand('<cword>')<CR>
+	" Use K to show documentation in preview window.
+	nnoremap <silent> K :call <SID>show_documentation()<CR>
+	nnoremap <silent> <leader>K :execute '!' . &keywordprg . " " . expand('<cword>')<CR>
 
-function! s:show_documentation()
-	if (index(['vim','help'], &filetype) >= 0)
-		execute 'h '.expand('<cword>')
-	elseif (coc#rpc#ready())
-		call CocActionAsync('doHover')
-	else
-		execute '!' . &keywordprg . " " . expand('<cword>')
-	endif
-endfunction
+	function! s:show_documentation()
+		if (index(['vim','help'], &filetype) >= 0)
+			execute 'h '.expand('<cword>')
+		elseif (coc#rpc#ready())
+			call CocActionAsync('doHover')
+		else
+			execute '!' . &keywordprg . " " . expand('<cword>')
+		endif
+	endfunction
 
-" Map function and class text objects
-" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap af <Plug>(coc-funcobj-a)
-xmap ic <Plug>(coc-classobj-i)
-omap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)
+	" Map function and class text objects
+	" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+	xmap if <Plug>(coc-funcobj-i)
+	omap if <Plug>(coc-funcobj-i)
+	xmap af <Plug>(coc-funcobj-a)
+	omap af <Plug>(coc-funcobj-a)
+	xmap ic <Plug>(coc-classobj-i)
+	omap ic <Plug>(coc-classobj-i)
+	xmap ac <Plug>(coc-classobj-a)
+	omap ac <Plug>(coc-classobj-a)
 
-" Add Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+	" Add Vim's native statusline support.
+	" NOTE: Please see `:h coc-status` for integrations with external plugins that
+	" provide custom statusline: vim-airline.
+	set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-" Mappings for CoCList
-" Show all diagnostics.
-nnoremap <silent><nowait> <leader>cd  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
-nnoremap <silent><nowait> <leader>ce  :<C-u>CocList extensions<cr>
-" Show commands.
-nnoremap <silent><nowait> <leader>cc  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-nnoremap <silent><nowait> <leader>co  :<C-u>CocList outline<cr>
-nnoremap <silent><nowait> <leader>ca  :<C-u>CocAction<cr>
-" Search workspace symbols.
-nnoremap <silent><nowait> <leader>cs  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent><nowait> <leader>cj  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent><nowait> <leader>ck  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-nnoremap <silent><nowait> <leader>cp  :<C-u>CocListResume<CR>
+	" Mappings for CoCList
+	" Show all diagnostics.
+	nnoremap <silent><nowait> <leader>cd  :<C-u>CocList diagnostics<cr>
+	" Manage extensions.
+	nnoremap <silent><nowait> <leader>ce  :<C-u>CocList extensions<cr>
+	" Show commands.
+	nnoremap <silent><nowait> <leader>cc  :<C-u>CocList commands<cr>
+	" Find symbol of current document.
+	nnoremap <silent><nowait> <leader>co  :<C-u>CocList outline<cr>
+	nnoremap <silent><nowait> <leader>ca  :<C-u>CocAction<cr>
+	" Search workspace symbols.
+	nnoremap <silent><nowait> <leader>cs  :<C-u>CocList -I symbols<cr>
+	" Do default action for next item.
+	nnoremap <silent><nowait> <leader>cj  :<C-u>CocNext<CR>
+	" Do default action for previous item.
+	nnoremap <silent><nowait> <leader>ck  :<C-u>CocPrev<CR>
+	" Resume latest coc list.
+	nnoremap <silent><nowait> <leader>cp  :<C-u>CocListResume<CR>
+endif
 
 " }}}
 
