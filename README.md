@@ -38,7 +38,7 @@ Most of my files are set with the [gruvbox](https://github.com/morhetz/gruvbox) 
 
 ## Installation and Cloning
 
-This repository contains submodules for the vim extensions, therefore you have to clone the submodules for vim to work correctly. Do either:
+This repository contains submodules for the `ble.sh`, `Vundle` and `Tmux Plugin Manager`. Do either:
 
 `git clone --recurse-submodules -j8 https://github.com/3ximus/dotfiles.git`
 
@@ -61,6 +61,10 @@ git pull --recurse-submodules -j8
 If new submodules where added you might need to run `git submodule init` again
 
 To copy/link the files you want run `install_my_config.sh --help` to check the usage of this script
+
+#### Vim
+
+After cloning this repo open vim and run `:PluginInstall`
 
 ## Prompts
 
