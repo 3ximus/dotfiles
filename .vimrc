@@ -231,8 +231,12 @@ endfunction
 
 function! ConvertToTabs(tabsize)
 	let &tabstop = a:tabsize
+	let l:spaces = repeat(' ', &tabstop)
 	set noexpandtab
-	:%s/\(^\s*\)\@<=    /\t/g
+	" get one of these to work...
+	" silent! execute "%s/\(^\s*\)\@<=". l:spaces. "/\t/g"
+	" :%s/\(^\s*\)\@<=". l:spaces. "/\t/g
+	:retab!
 endfunction
 command! -nargs=1 ConvertToTabs :call ConvertToTabs( '<args>' )
 
@@ -385,6 +389,7 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
 				\ 'Unknown'   :'?',
 				\ }
 
+" TODO Doesn't seem to work...
 if &rtp =~ 'vim-auto-origami'
 	"Auto Origami (auto manage fold columns)
 	augroup auto_origami
@@ -454,7 +459,7 @@ noremap <leader>d :Linediff<CR>
 
 " Emmet mappings
 nmap <leader>tt :Emmet<space>
-let g:user_emmet_leader_key='<leader>t'
+" let g:user_emmet_leader_key='<leader>t'
 
 " }}}
 
