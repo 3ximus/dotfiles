@@ -192,32 +192,20 @@ conda-envfzf() { # {{{2
 	fi
 } # }}}2
 
-# }}}1
-
-# {{{1
 # activate a virtual environment
 activate() { # {{{2
 	local path=${1:-'.'}
-	# local venvs=$(find . -regex .*activate$ | awk --field-separator=/ '{print $(NF-2)}')
-	local venvs=$(find . -regex .*activate$)
+	local venv_file
 	if [ $# -eq 0 ] ; then
-		if [ $(find . -regex .*activate$ |wc -l) -gt 1 ] ; then
-			echo "Found multiple Virtual Environments:"
-			select vv in $venvs ; do
-				acfile=$vv
-				break
-			done
-		else
-			acfile=$venvs
-		fi
+		venv_file=$(find . -regex '.*activate$' | fzf --height 5 --reverse)
 	else
-		acfile=$(find $path -regex .*activate$)
+		venv_file=$(find $path -regex .*activate$)
 	fi
 
-	[[ -f $acfile ]] && {
-		echo -e "Activating: \033[1;35m$acfile\033[m"
-		source $acfile
-	}
+	if [ -f $venv_file ] ; then
+		echo -e "Activating: \033[1;35m$venv_file\033[m"
+		source $venv_file
+	fi
 } # }}}2
 
 # fork to the background silently and send its output to the /dev/null
