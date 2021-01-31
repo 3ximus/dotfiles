@@ -466,7 +466,8 @@ noremap <leader>d :Linediff<CR>
 
 " Emmet mappings
 nmap <leader>tt :Emmet<space>
-" let g:user_emmet_leader_key='<leader>t'
+let g:user_emmet_leader_key='<leader>t'
+let g:user_emmet_mode='nv'
 
 " }}}
 
