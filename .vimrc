@@ -371,6 +371,10 @@ let g:airline_right_alt_sep =  "\uE0BB"
 "NERDTree
 let g:NERDTreeDirArrowExpandable = ''
 let g:NERDTreeDirArrowCollapsible = ''
+let g:NERDTreeMinimalUI=1
+let g:NERDTreeCreatePrefix='silent keepalt keepjumps'
+let g:NERDTreeShowLineNumbers=1
+let g:NERDTreeWinSize=30
 
 " devicons
 let g:WebDevIconsNerdTreeBeforeGlyphPadding = ''
