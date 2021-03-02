@@ -18,6 +18,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rhubarb'
+" Plugin 'rhysd/git-messenger.vim'
 
 " TOOLS
 Plugin 'tpope/vim-surround'
@@ -344,6 +345,8 @@ nnoremap <leader>a :call ToggleHiddenAll()<CR>
 nmap <leader>vs :mkview<CR>
 nmap <leader>vl :loadview<CR>
 
+nmap <silent><Leader>gm :call setbufvar(winbufnr(popup_atcursor(split(system("git log -n 1 -L " . line(".") . ",+1:" . expand("%:p")), "\n"), { "padding": [1,1,1,1], "pos": "botleft", "wrap": 0 })), "&filetype", "git")<CR>
+
 " }}}
 
 " PLUGIN CONFIGURATION {{{
@@ -459,11 +462,11 @@ nmap <leader>hn <Plug>(GitGutterNextHunk)
 nmap <leader>hp <Plug>(GitGutterPrevHunk)
 
 noremap <leader>gs :Gstatus<CR>
-noremap <leader>gc :Gcommit<CR>
+noremap <leader>gc :Git commit<CR>
 noremap <leader>ge :Gedit<CR>
-noremap <leader>gd :Gdiff<CR>
-noremap <leader>gl :Glog<CR>
-noremap <leader>gb :Gblame<CR>
+noremap <leader>gd :Git diff<CR>
+noremap <leader>gl :Git log<CR>
+noremap <leader>gb :Git blame<CR>
 
 noremap <leader>D :LinediffReset<CR>
 noremap <leader>d :Linediff<CR>
