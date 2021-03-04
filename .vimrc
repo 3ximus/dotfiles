@@ -358,6 +358,8 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':p:.' "show only file names on buffer names
 let g:airline#extensions#tabline#buffer_nr_show = 0
 let g:airline#extensions#tabline#fnamecollapse = 1
+let g:airline#extensions#tabline#show_close_button = 0
+let g:airline#extensions#tabline#show_tabs = 0
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 if !exists('g:airline_symbols')
