@@ -362,6 +362,8 @@ let g:airline#extensions#tabline#show_close_button = 0
 let g:airline#extensions#tabline#show_tabs = 0
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
+let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]' "hide encoding if its utf8
+let g:airline#extensions#hunks#enabled=0
 if !exists('g:airline_symbols')
 	let g:airline_symbols = {}
 endif
