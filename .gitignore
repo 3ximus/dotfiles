@@ -39,6 +39,7 @@ konsole/bookmarks.xml*
 .vim/bundle/vim-syntax-extra
 .vim/bundle/vim-tmux-clipboard
 .vim/bundle/vim-tmux-focus-events
+.vim/bundle/tabular
 
 # tmux plugins repos (.tmux/tpm is needed)
 .tmux/tmux-prefix-highlight

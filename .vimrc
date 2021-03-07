@@ -19,6 +19,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rhubarb'
 " Plugin 'rhysd/git-messenger.vim'
+Plugin 'godlygeek/tabular'
 
 " TOOLS
 Plugin 'tpope/vim-surround'
@@ -102,7 +103,7 @@ set smarttab
 "set expandtab "tabs are spaces, aka cancer
 "setlocal lcs=tab:>-,trail:-,eol:¬ list! " use list mode mapped to F2 when vim is opened
 
-set cmdheight=2
+set updatetime=400
 
 "search settings
 set incsearch
@@ -417,6 +418,25 @@ if &rtp =~ 'vim-auto-origami' && glob("~/.vim/bundle/vim-auto-origami/plugin/aut
 	let g:auto_origami_foldcolumn = 1
 endif
 
+if isdirectory(expand("~/.vim/bundle/tabular"))
+	nmap <leader>a& :Tabularize /&<CR>
+	vmap <leader>a& :Tabularize /&<CR>
+	nmap <leader>a= :Tabularize /^[^=]*\zs=<CR>
+	vmap <leader>a= :Tabularize /^[^=]*\zs=<CR>
+	nmap <leader>a=> :Tabularize /=><CR>
+	vmap <leader>a=> :Tabularize /=><CR>
+	nmap <leader>a: :Tabularize /:<CR>
+	vmap <leader>a: :Tabularize /:<CR>
+	nmap <leader>a:: :Tabularize /:\zs<CR>
+	vmap <leader>a:: :Tabularize /:\zs<CR>
+	nmap <leader>a, :Tabularize /,<CR>
+	vmap <leader>a, :Tabularize /,<CR>
+	nmap <leader>a,, :Tabularize /,\zs<CR>
+	vmap <leader>a,, :Tabularize /,\zs<CR>
+	nmap <leader>a<Bar> :Tabularize /<Bar><CR>
+	vmap <leader>a<Bar> :Tabularize /<Bar><CR>
+endif
+
 "Python syntax highlight
 let g:python_highlight_all = 1
 let g:python_highlight_indent_errors = 1
@@ -464,6 +484,9 @@ nmap <leader>hu <Plug>(GitGutterUndoHunk)
 nmap <leader>hv <Plug>(GitGutterPreviewHunk)
 nmap <leader>hn <Plug>(GitGutterNextHunk)
 nmap <leader>hp <Plug>(GitGutterPrevHunk)
+nmap ]h <Plug>(GitGutterNextHunk)
+nmap [h <Plug>(GitGutterPrevHunk)
+nmap <leader>hf :GitGutterFold<CR>
 
 noremap <leader>gs :Gstatus<CR>
 noremap <leader>gc :Git commit<CR>
