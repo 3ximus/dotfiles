@@ -73,7 +73,7 @@ HISTFILESIZE=10000
 # or place this in /etc/default/console-setup
 #    FONTFACE="TerminusBold"
 if [ "$TERM" = "linux" ]; then
-    echo -en "\e]P0282828" #black
+    echo -en "\e]P01D2021" #black
     echo -en "\e]P8928374" #darkgrey
     echo -en "\e]P1CC241D" #darkred
     echo -en "\e]P9FB4934" #red
