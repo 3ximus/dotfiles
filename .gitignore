@@ -12,7 +12,7 @@ konsole/bookmarks.xml*
 .vim/bundle/vim-devicons
 .vim/bundle/vim-hitspop
 .vim/bundle/vim-numbertoggle
-.vim/bundle/clever-f.vim
+.vim/bundle/quick-scope
 .vim/bundle/coc.nvim
 .vim/bundle/ctrlp.vim
 .vim/bundle/dart-vim-plugin
