@@ -18,6 +18,7 @@
 - fonts in .fonts are from [powerline](https://github.com/powerline/fonts)  and [nerd fonts](https://github.com/ryanoasis/nerd-fonts)
 - [konsole](https://github.com/3ximus/dotfiles/tree/master/konsole) contains my konsole themes and profile (lives in `$HOME/.local/share/konsole`)
 - [icons](https://github.com/3ximus/dotfiles/tree/master/icons) contains [papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) icons edited to match gruvbox style (there is a script inside to install these icons) _(see my topbar screenshot)_
+- [css](https://github.com/3ximus/dotfiles/tree/master/css) contains styles to inject somewhere
 - `.gdbinit` contains a dashboard from [gdb-dashboard](https://github.com/cyrus-and/gdb-dashboard) that takes gdb out of the dark ages.
 
 
@@ -160,6 +161,7 @@ Tmux has a lot of custom configurations added in `.tmux.conf` and a few plugins 
  - [GTK](https://github.com/3ximus/gruvbox-gtk)
  - [Plasma](https://github.com/3ximus/gruvbox-plasma)
  - [VS Code](https://github.com/jdinhlife/vscode-theme-gruvbox)
+ - [WhatsApp](https://github.com/3ximus/gruvbox-dark-whatsapp)
 
 ## More Screenshots
 
