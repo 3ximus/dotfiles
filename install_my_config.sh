@@ -89,10 +89,10 @@ post_action_XXX() {
 install_whatsapp() {
 	if hash nativefier &>/dev/null ; then
 		# INJECT CSS CODE, NOT WORKING FOR WHATSAPP ANYMORE
-		# echo "Choose whatsapp theme:"
-		# select theme_path in ${DATA_PATH}/css/* ; do break; done
-		# nativefier --inject $theme_path --icon "${DATA_PATH}/icons/whatsapp.png" --name whatsapp --counter --single-instance web.whatsapp.com /tmp/whatsapp
-		nativefier --icon "${DATA_PATH}/icons/whatsapp.png" --name whatsapp --counter --single-instance web.whatsapp.com /tmp/whatsapp
+		echo "Choose whatsapp theme:"
+		select theme_path in ${DATA_PATH}/css/* ; do break; done
+		nativefier --inject $theme_path --icon "${DATA_PATH}/icons/whatsapp.png" --name whatsapp --counter --single-instance web.whatsapp.com /tmp/whatsapp
+		# nativefier --icon "${DATA_PATH}/icons/whatsapp.png" --name whatsapp --counter --single-instance web.whatsapp.com /tmp/whatsapp
 		if [ -d "/opt/whatsapp" ] ; then
 			echo "Deleting previous WhatsApp installation"
 			sudo rm -r "/opt/whatsapp"
