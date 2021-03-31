@@ -388,16 +388,8 @@ let g:NERDTreeCreatePrefix='silent keepalt keepjumps'
 let g:NERDTreeShowLineNumbers=1
 let g:NERDTreeWinSize=30
 
-" devicons
-let g:WebDevIconsNerdTreeBeforeGlyphPadding = ''
-let g:webdevicons_enable_airline_statusline = 1
-let g:webdevicons_enable_airline_tabline = 1
-let g:webdevicons_conceal_nerdtree_brackets = 1
-let g:DevIconsEnableFoldersOpenClose = 1
-" let g:DevIconsEnableDistro = 0
-
 "nerdtree-git
-let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
+" let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
 " let g:NERDTreeGitStatusShowClean = 1 " default: 0
 " let g:NERDTreeGitStatusShowIgnored = 1 " a heavy feature may cost much more time. default: 0
 let g:NERDTreeGitStatusIndicatorMapCustom = {
@@ -412,6 +404,14 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
                 \ 'Clean'     :'✔',
                 \ 'Unknown'   :'?',
                 \ }
+
+" devicons
+" let g:WebDevIconsNerdTreeBeforeGlyphPadding = ''
+let g:webdevicons_enable_airline_statusline = 1
+let g:webdevicons_enable_airline_tabline = 1
+let g:webdevicons_conceal_nerdtree_brackets = 1
+let g:DevIconsEnableFoldersOpenClose = 1
+let g:DevIconsEnableDistro = 0
 
 "Auto Origami (auto manage fold columns)
 if &rtp =~ 'vim-auto-origami' && glob("~/.vim/bundle/vim-auto-origami/plugin/auto_origami.vim")!=#""
