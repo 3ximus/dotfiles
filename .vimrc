@@ -500,6 +500,10 @@ nmap ]h <Plug>(GitGutterNextHunk)
 nmap [h <Plug>(GitGutterPrevHunk)
 nmap <leader>hf :GitGutterFold<CR>
 
+"nertree git
+let g:NERDTreeGitStatusMapNextHunk=']h'
+let g:NERDTreeGitStatusMapPrevHunk='[h'
+
 noremap <leader>gs :Gstatus<CR>
 noremap <leader>gc :Git commit<CR>
 noremap <leader>ge :Gedit<CR>
