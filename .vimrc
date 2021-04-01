@@ -380,6 +380,9 @@ let g:airline_right_sep = "\uE0BA"
 let g:airline_left_alt_sep = "\uE0B9"
 let g:airline_right_alt_sep =  "\uE0BB"
 
+"CtrlP
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
 "NERDTree
 let g:NERDTreeDirArrowExpandable = ''
 let g:NERDTreeDirArrowCollapsible = ''
