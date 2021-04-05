@@ -114,7 +114,7 @@ Vim configuration is huge but it's organized and documented, so just open the `.
  -  [vim-commentary](https://github.com/tpope/vim-commentary)
  -  [gundo.vim](https://github.com/sjl/gundo.vim)
  -  [vim-easymotion](https://github.com/easymotion/vim-easymotion)
- -  [clever-f.vim](https://github.com/rhysd/clever-f.vim)
+ -  [quick-scope](https://github.com/unblevable/quick-scope)
  -  [linediff.vim](https://github.com/AndrewRadev/linediff.vim)
  -  [vim-peekaboo](https://github.com/junegunn/vim-peekaboo)
  -  [ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim)
@@ -124,6 +124,7 @@ Vim configuration is huge but it's organized and documented, so just open the `.
 ### Tmux integration
  -  [vim-tmux-focus-events](https://github.com/tmux-plugins/vim-tmux-focus-events)
  -  [vim-tmux-clipboard](https://github.com/roxma/vim-tmux-clipboard)
+ -  [vimux](https://github.com/preservim/vimux)
 
 ### Syntax highlight
  -  [vim-syntax-extra](https://github.com/justinmk/vim-syntax-extra)
