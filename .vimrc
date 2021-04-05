@@ -41,6 +41,8 @@ Plugin 'neoclide/coc.nvim'
 Plugin 'tmux-plugins/vim-tmux-focus-events'
 Plugin 'roxma/vim-tmux-clipboard'
 
+Plugin 'preservim/vimux'
+
 " EXTRA SYNTAX HIGHLIGHT
 Plugin 'justinmk/vim-syntax-extra'
 Plugin 'PProvost/vim-ps1'
@@ -474,6 +476,8 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 let g:hitspop_line = 'winbot'
 " let g:hitspop_line_mod = 1
 
+let g:VimuxPromptString = "$ "
+
 " }}}
 
 " PLUGIN KEYMAPS {{{
@@ -513,7 +517,9 @@ noremap <leader>ge :Gedit<CR>
 noremap <leader>gd :Git diff<CR>
 noremap <leader>gl :Git log<CR>
 noremap <leader>gb :Git blame<CR>
+noremap <leader>gp :Git push<CR>
 
+" Line diff
 noremap <leader>D :LinediffReset<CR>
 noremap <leader>d :Linediff<CR>
 
@@ -521,6 +527,24 @@ noremap <leader>d :Linediff<CR>
 nmap <leader>tt :Emmet<space>
 let g:user_emmet_leader_key='<leader>t'
 let g:user_emmet_mode='nv'
+
+"Vimux
+noremap <leader>rc  :VimuxPromptCommand<CR>
+noremap <leader>rl  :VimuxRunLastCommand<CR>
+noremap <leader>rk  :VimuxInterruptRunner<CR>
+noremap <leader>rq  :VimuxCloseRunner<CR>
+noremap <leader>ro  :VimuxOpenRunner<CR>
+noremap <leader>ri  :VimuxInspectRunner<CR>
+function! VimuxSendSelectedText() range
+    let [lnum1, col1] = getpos("'<")[1:2]
+    let [lnum2, col2] = getpos("'>")[1:2]
+    let lines = getline(lnum1, lnum2)
+    let lines[-1] = lines[-1][: col2 - (&selection == 'inclusive' ? 1 : 2)]
+    let lines[0] = lines[0][col1 - 1:]
+    let selectedText = join(lines, "\n")
+    call VimuxSendText(selectedText)
+endfunction
+xnoremap <leader>rr :call VimuxSendSelectedText()<CR>
 
 " }}}
 
@@ -590,16 +614,16 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/bundle/coc.nvim/plugin/coc.vim")!=#""
 
     " Mappings for CoCList
     " Show all diagnostics.
-    nnoremap <silent><nowait> <leader>cd  :<C-u>CocList diagnostics<cr>
+    nnoremap <silent><nowait> <leader>cd  :<C-u>CocList diagnostics<CR>
     " Manage extensions.
-    nnoremap <silent><nowait> <leader>ce  :<C-u>CocList extensions<cr>
+    nnoremap <silent><nowait> <leader>ce  :<C-u>CocList extensions<CR>
     " Show commands.
-    nnoremap <silent><nowait> <leader>cc  :<C-u>CocList commands<cr>
+    nnoremap <silent><nowait> <leader>cc  :<C-u>CocList commands<CR>
     " Find symbol of current document.
-    nnoremap <silent><nowait> <leader>co  :<C-u>CocList outline<cr>
-    nnoremap <silent><nowait> <leader>ca  :<C-u>CocAction<cr>
+    nnoremap <silent><nowait> <leader>co  :<C-u>CocList outline<CR>
+    nnoremap <silent><nowait> <leader>ca  :<C-u>CocAction<CR>
     " Search workspace symbols.
-    nnoremap <silent><nowait> <leader>cs  :<C-u>CocList -I symbols<cr>
+    nnoremap <silent><nowait> <leader>cs  :<C-u>CocList -I symbols<CR>
     " Do default action for next item.
     nnoremap <silent><nowait> <leader>cj  :<C-u>CocNext<CR>
     " Do default action for previous item.
