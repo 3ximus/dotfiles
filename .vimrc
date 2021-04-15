@@ -320,10 +320,10 @@ nmap <silent><Leader>gm :call setbufvar(winbufnr(popup_atcursor(split(system("gi
 
 "GitGutter
 highlight clear SignColumn
-highlight link GitGutterAdd GruvboxGreenBold
-highlight link GitGutterChange GruvboxBlueBold
-highlight link GitGutterDelete GruvboxRedBold
-highlight link GitGutterChangeDelete GruvboxBlueBold
+highlight link GitGutterAdd GruvboxGreen
+highlight link GitGutterChange GruvboxYellow
+highlight link GitGutterDelete GruvboxRed
+highlight link GitGutterChangeDelete GruvboxYellow
 
 " Markology
 highlight link MarkologyHLl GruvboxYellowBold
@@ -427,26 +427,11 @@ if &rtp =~ 'vim-auto-origami' && glob("~/.vim/bundle/vim-auto-origami/plugin/aut
     let g:auto_origami_foldcolumn = 1
 endif
 
-if isdirectory(expand("~/.vim/bundle/tabular"))
-    nmap <leader>a& :Tabularize /&<CR>
-    vmap <leader>a& :Tabularize /&<CR>
-    nmap <leader>a= :Tabularize /^[^=]*\zs=<CR>
-    vmap <leader>a= :Tabularize /^[^=]*\zs=<CR>
-    nmap <leader>a=> :Tabularize /=><CR>
-    vmap <leader>a=> :Tabularize /=><CR>
-    nmap <leader>a: :Tabularize /:<CR>
-    vmap <leader>a: :Tabularize /:<CR>
-    nmap <leader>a; :Tabularize /;<CR>
-    vmap <leader>a; :Tabularize /;<CR>
-    nmap <leader>a:: :Tabularize /:\zs<CR>
-    vmap <leader>a:: :Tabularize /:\zs<CR>
-    nmap <leader>a, :Tabularize /,<CR>
-    vmap <leader>a, :Tabularize /,<CR>
-    nmap <leader>a,, :Tabularize /,\zs<CR>
-    vmap <leader>a,, :Tabularize /,\zs<CR>
-    nmap <leader>a<Bar> :Tabularize /<Bar><CR>
-    vmap <leader>a<Bar> :Tabularize /<Bar><CR>
-endif
+
+" Gitgutter
+let g:gitgutter_sign_added = '┃'
+let g:gitgutter_sign_modified = '┃'
+let g:gitgutter_sign_modified_removed = '┻'
 
 "Python syntax highlight
 let g:python_highlight_all = 1
@@ -546,6 +531,27 @@ function! VimuxSendSelectedText() range
 endfunction
 xnoremap <leader>rr :call VimuxSendSelectedText()<CR>
 
+" Tabularize
+if isdirectory(expand("~/.vim/bundle/tabular"))
+    nmap <leader>a& :Tabularize /&<CR>
+    vmap <leader>a& :Tabularize /&<CR>
+    nmap <leader>a= :Tabularize /^[^=]*\zs=<CR>
+    vmap <leader>a= :Tabularize /^[^=]*\zs=<CR>
+    nmap <leader>a=> :Tabularize /=><CR>
+    vmap <leader>a=> :Tabularize /=><CR>
+    nmap <leader>a: :Tabularize /:<CR>
+    vmap <leader>a: :Tabularize /:<CR>
+    nmap <leader>a; :Tabularize /;<CR>
+    vmap <leader>a; :Tabularize /;<CR>
+    nmap <leader>a:: :Tabularize /:\zs<CR>
+    vmap <leader>a:: :Tabularize /:\zs<CR>
+    nmap <leader>a, :Tabularize /,<CR>
+    vmap <leader>a, :Tabularize /,<CR>
+    nmap <leader>a,, :Tabularize /,\zs<CR>
+    vmap <leader>a,, :Tabularize /,\zs<CR>
+    nmap <leader>a<Bar> :Tabularize /<Bar><CR>
+    vmap <leader>a<Bar> :Tabularize /<Bar><CR>
+endif
 " }}}
 
 " COC CONFIGURATION {{{
