@@ -119,7 +119,6 @@ Vim configuration is huge but it's organized and documented, so just open the `.
  -  [vim-peekaboo](https://github.com/junegunn/vim-peekaboo)
  -  [ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim)
  -  [vim-markology](https://github.com/jeetsukumaran/vim-markology)
- -  [vim-markbar](https://github.com/Yilin-Yang/vim-markbar)
 
 ### Tmux integration
  -  [vim-tmux-focus-events](https://github.com/tmux-plugins/vim-tmux-focus-events)

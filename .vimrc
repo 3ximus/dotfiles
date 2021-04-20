@@ -31,7 +31,7 @@ Plugin 'AndrewRadev/linediff.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 
 Plugin 'junegunn/vim-peekaboo'
-Plugin 'Yilin-Yang/vim-markbar'
+" Plugin 'Yilin-Yang/vim-markbar'
 Plugin 'jeetsukumaran/vim-markology'
 
 " COMPLETION
@@ -330,11 +330,11 @@ highlight link MarkologyHLl GruvboxYellowBold
 highlight link MarkologyHLu GruvboxPurpleBold
 highlight link MarkologyHLm GruvboxOrangeBold
 
-" Markbar
-highlight link markbarContextMarkHighlight GruvboxRedBold
-highlight link markbarSectionLowercaseMark GruvboxYellowBold
-highlight link markbarSectionUppercaseMark GruvboxPurpleBold
-highlight link markbarSectionBrackets GruvboxFg1
+" " Markbar
+" highlight link markbarContextMarkHighlight GruvboxRedBold
+" highlight link markbarSectionLowercaseMark GruvboxYellowBold
+" highlight link markbarSectionUppercaseMark GruvboxPurpleBold
+" highlight link markbarSectionBrackets GruvboxFg1
 
 " Coc
 highlight link CocErrorSign GruvboxRedBold
@@ -447,12 +447,12 @@ endif
 " Markology
 let g:markology_include='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-" Markbar
-let g:markbar_mark_marker = '>'
-" let g:markbar_set_default_peekaboo_mappings = v:false
-let g:markbar_explicitly_remap_mark_mappings = v:true
-let g:markbar_peekaboo_marks_to_display = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-let g:markbar_marks_to_display = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+" " Markbar
+" let g:markbar_mark_marker = '>'
+" " let g:markbar_set_default_peekaboo_mappings = v:false
+" let g:markbar_explicitly_remap_mark_mappings = v:true
+" let g:markbar_peekaboo_marks_to_display = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+" let g:markbar_marks_to_display = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 " quick-scope
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
