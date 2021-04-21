@@ -496,7 +496,7 @@ nmap <leader>hf :GitGutterFold<CR>
 let g:NERDTreeGitStatusMapNextHunk=']h'
 let g:NERDTreeGitStatusMapPrevHunk='[h'
 
-noremap <leader>gs :Gstatus<CR>
+noremap <leader>gs :Git<CR>
 noremap <leader>gc :Git commit<CR>
 noremap <leader>ge :Gedit<CR>
 noremap <leader>gd :Git diff<CR>
