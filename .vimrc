@@ -500,7 +500,9 @@ noremap <leader>gs :Git<CR>
 noremap <leader>gc :Git commit<CR>
 noremap <leader>ge :Gedit<CR>
 noremap <leader>gd :Git diff<CR>
-noremap <leader>gl :Git log<CR>
+noremap <leader>gl :0Gclog<CR>:copen<CR>
+noremap <leader>gld :Gclog -- %<CR>:copen<CR>
+noremap <leader>gla :Gclog<CR>:copen<CR>
 noremap <leader>gb :Git blame<CR>
 noremap <leader>gp :Git push<CR>
 
