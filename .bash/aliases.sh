@@ -35,10 +35,8 @@ alias htop-mem='htop --sort-key=PERCENT_MEM'
 alias htop-cpu='htop --sort-key=PERCENT_CPU'
 
 # Clipboard
-alias clipboard-in='xclip -in -selection clipboard'
-alias ccopy='xclip -in -selection clipboard'
-alias clipboard-out='xclip -out -selection clipboard'
-alias cpaste='xclip -out -selection clipboard'
+alias clip-in='xclip -in -selection clipboard'
+alias clip-out='xclip -out -selection clipboard'
 
 # mount ntfs filesystems with correct permissions
 alias mount-ntfs='sudo mount -o uid=1000,gid=1000,dmask=027,fmask=137'
