@@ -28,7 +28,9 @@ Plugin 'sjl/gundo.vim'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'unblevable/quick-scope'
 Plugin 'AndrewRadev/linediff.vim'
-Plugin 'ctrlpvim/ctrlp.vim'
+" Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
 
 Plugin 'junegunn/vim-peekaboo'
 " Plugin 'Yilin-Yang/vim-markbar'
@@ -388,7 +390,16 @@ let g:airline_left_alt_sep = "\uE0B9"
 let g:airline_right_alt_sep =  "\uE0BB"
 
 "CtrlP
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+if &rtp =~ 'ctrlp.vim' && glob("~/.vim/bundle/ctrlp.vim/plugin/ctrlp.vim")!=#""
+    let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+endif
+
+" FZF
+if &rtp =~ 'fzf.vim' && glob("~/.vim/bundle/fzf.vim/plugin/fzf.vim")!=#""
+    let g:fzf_command_prefix = 'FZF'
+    let g:fzf_layout = {'window':'10'}
+endif
+
 
 "NERDTree
 let g:NERDTreeDirArrowExpandable = ''
@@ -479,8 +490,15 @@ nnoremap U :GundoToggle<CR>
 
 nmap <leader>' <Plug>ToggleMarkbar
 
-let g:ctrlp_map = '<leader>p'
-nmap <leader>b :CtrlPBuffer<CR>
+if &rtp =~ 'ctrlp.vim' && glob("~/.vim/bundle/ctrlp.vim/plugin/ctrlp.vim")!=#""
+    let g:ctrlp_map = '<leader>p'
+    nmap <leader>b :CtrlPBuffer<CR>
+elseif &rtp =~ 'fzf.vim' && glob("~/.vim/bundle/fzf.vim/plugin/fzf.vim")!=#""
+    nmap <leader>p :FZFFiles<CR>
+    nmap <leader>b :FZFBuffers<CR>
+    nmap <leader>l :FZFLines<CR>
+    nmap <leader>f :FZFAg<CR>
+endif
 
 omap ih <Plug>(GitGutterTextObjectInnerPending)
 omap ah <Plug>(GitGutterTextObjectOuterPending)

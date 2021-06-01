@@ -41,6 +41,8 @@ konsole/bookmarks.xml*
 .vim/bundle/vim-tmux-focus-events
 .vim/bundle/tabular
 .vim/bundle/vimux
+.vim/bundle/fzf
+.vim/bundle/fzf.vim
 
 # tmux plugins repos (.tmux/tpm is needed)
 .tmux/tmux-prefix-highlight
