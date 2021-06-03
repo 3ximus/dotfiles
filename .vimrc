@@ -28,7 +28,9 @@ Plugin 'sjl/gundo.vim'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'unblevable/quick-scope'
 Plugin 'AndrewRadev/linediff.vim'
-Plugin 'ctrlpvim/ctrlp.vim'
+" Plugin 'ctrlpvim/ctrlp.vim'
+Plugin '3ximus/fzf' " use my fork to allow passing g:fzf_no_term
+Plugin 'junegunn/fzf.vim'
 
 Plugin 'junegunn/vim-peekaboo'
 " Plugin 'Yilin-Yang/vim-markbar'
@@ -388,7 +390,36 @@ let g:airline_left_alt_sep = "\uE0B9"
 let g:airline_right_alt_sep =  "\uE0BB"
 
 "CtrlP
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+if &rtp =~ 'ctrlp.vim' && glob("~/.vim/bundle/ctrlp.vim/plugin/ctrlp.vim")!=#""
+    let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+endif
+
+" FZF
+if &rtp =~ 'fzf.vim' && glob("~/.vim/bundle/fzf.vim/plugin/fzf.vim")!=#""
+    let g:fzf_command_prefix = 'FZF'
+
+    let g:fzf_no_term = 1
+    let g:fzf_layout = { 'down': '30%' }
+    " autocmd! FileType fzf
+    " autocmd  FileType fzf set laststatus=0 noshowmode noruler
+    "     \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
+    let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+    " function to make quick fiz with selected results
+    function! s:build_quickfix_list(lines)
+        call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+        copen
+        cc
+    endfunction
+
+    let g:fzf_action = {
+        \ 'ctrl-q': function('s:build_quickfix_list'),
+        \ 'ctrl-t': 'tab split',
+        \ 'ctrl-x': 'split',
+        \ 'ctrl-v': 'vsplit' }
+endif
+
 
 "NERDTree
 let g:NERDTreeDirArrowExpandable = ''
@@ -479,8 +510,15 @@ nnoremap U :GundoToggle<CR>
 
 nmap <leader>' <Plug>ToggleMarkbar
 
-let g:ctrlp_map = '<leader>p'
-nmap <leader>b :CtrlPBuffer<CR>
+if &rtp =~ 'ctrlp.vim' && glob("~/.vim/bundle/ctrlp.vim/plugin/ctrlp.vim")!=#""
+    let g:ctrlp_map = '<leader>p'
+    nmap <leader>b :CtrlPBuffer<CR>
+elseif &rtp =~ 'fzf.vim' && glob("~/.vim/bundle/fzf.vim/plugin/fzf.vim")!=#""
+    nmap <leader>p :FZFFiles<CR>
+    nmap <leader>b :FZFBuffers<CR>
+    nmap <leader>l :FZFLines<CR>
+    nmap <leader>f :FZFAg<CR>
+endif
 
 omap ih <Plug>(GitGutterTextObjectInnerPending)
 omap ah <Plug>(GitGutterTextObjectOuterPending)

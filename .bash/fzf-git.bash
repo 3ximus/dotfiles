@@ -12,16 +12,17 @@ glfzf() {
 		--date-order --color=always $* \
 		| fzf --preview="$cmd" --ansi --no-sort --no-multi --reverse \
 		--tiebreak=index \
+		--height 50% --min-height 20 \
 		--bind="enter:execute($cmd | LESS='-r' less)"
 }
 
 gafzf() {
 	local cmd reload _stage_key _commit_key _reset_key _discard_key header
 
-	_stage_key="${GIT_FUZZY_STATUS_ADD_KEY:-Alt-S}"
-	_commit_key="${GIT_FUZZY_STATUS_COMMIT_KEY:-Alt-C}"
-	_reset_key="${GIT_FUZZY_STATUS_RESET_KEY:-Alt-R}"
-	_discard_key="${GIT_FUZZY_STATUS_DISCARD_KEY:-Alt-U}"
+	_stage_key="${GIT_FUZZY_STATUS_ADD_KEY:-ctrl-S}"
+	_commit_key="${GIT_FUZZY_STATUS_COMMIT_KEY:-ctrl-C}"
+	_reset_key="${GIT_FUZZY_STATUS_RESET_KEY:-ctrl-R}"
+	_discard_key="${GIT_FUZZY_STATUS_DISCARD_KEY:-ctrl-U}"
 
 	header="Stage: $_stage_key / Unstage: $_discard_key / Commit: $_commit_key"
 
@@ -31,10 +32,10 @@ gafzf() {
 	$cmd \
 		| fzf -m --header "$header" \
 		--reverse -0 -m --nth 2..,.. --ansi \
+		--height 50% --min-height 20 \
 		--expect="$_commit_key" \
 		--preview="git diff --color=always -- {+2..} | delta" \
 		--bind "$_stage_key:execute-silent(git add {+2..})+down+$reload" \
-		--bind "Alt-A:execute-silent(git add {+2..})+down+$reload" \
 		--bind "$_discard_key:execute-silent(git restore --staged {2..})+down+$reload" \
 		| [ "$(head -n1)" = "$_commit_key" ] && git commit || return 0
 		# --bind "$_reset_key:execute-silent(git reset {2..}))+down+$reload" \
