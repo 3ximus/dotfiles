@@ -135,8 +135,6 @@ ble-color-setface region_target             fg=black,bg=153
 ble-color-setface disabled                  fg=242
 ble-color-setface overwrite_mode            fg=black,bg=51
 ble-color-setface auto_complete             fg=238,bg=254
-ble-color-setface menu_filter_fixed         bold
-ble-color-setface menu_filter_input         fg=white,bg=black,bold
 ble-color-setface vbell                     reverse
 ble-color-setface vbell_erase               none
 ble-color-setface vbell_flash               fg=green,reverse
