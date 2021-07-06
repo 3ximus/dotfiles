@@ -140,6 +140,7 @@ Vim configuration is huge but it's organized and documented, so just open the `.
  -  [vim-startify](https://github.com/mhinz/vim-startify)
  -  [vim-numbertoggle](https://github.com/jeffkreeftmeijer/vim-numbertoggle)
  -  [vim-auto-origami](https://github.com/benknoble/vim-auto-origami)
+ -  [vim-startuptime](https://github.com/dstein64/vim-startuptime)
  -  [vim-devicons](https://github.com/ryanoasis/vim-devicons)
 
 ## Vim (gruvbox theme) screenshots
