@@ -65,8 +65,10 @@ Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 "auto folds
 Plugin 'benknoble/vim-auto-origami'
 "search popup, only supported in vim >8.2.0896
-Plugin 'obcat/vim-hitspop'
+"Plugin 'obcat/vim-hitspop' "airline already doest this...
 Plugin 'machakann/vim-highlightedyank'
+" Profiler
+Plugin 'dstein64/vim-startuptime'
 
 "NerdFont icons in NerdTree, startify and Ctrl-p
 Plugin 'ryanoasis/vim-devicons'
