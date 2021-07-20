@@ -203,7 +203,7 @@ activate() { # {{{2
 	fi
 
 	if [ -f $venv_file ] ; then
-		echo -e "Activating: \033[1;35m$venv_file\033[m"
+		echo -e "Activating virtual environment: \033[1;35m$venv_file\033[m"
 		source $venv_file
 	fi
 } # }}}2
