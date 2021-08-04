@@ -557,8 +557,8 @@ noremap <leader>D :LinediffReset<CR>
 noremap <leader>d :Linediff<CR>
 
 " Emmet mappings
-nmap <leader>tt :Emmet<space>
-let g:user_emmet_leader_key='<leader>t'
+nmap <leader>E :Emmet<space>
+let g:user_emmet_leader_key='<leader>e'
 let g:user_emmet_mode='nv'
 
 "Vimux
