@@ -91,3 +91,6 @@ alias plex-status='systemctl status plexmediaserver.service'
 alias plex-stop='sudo systemctl stop plexmediaserver.service'
 alias plex-restart='sudo systemctl restart plexmediaserver.service'
 
+# WEATHER
+alias weather='curl wttr.in'
+alias weather2='curl v2.wttr.in'
