@@ -44,6 +44,7 @@ konsole/bookmarks.xml*
 .vim/bundle/fzf
 .vim/bundle/fzf.vim
 .vim/bundle/vim-startuptime
+.vim/bundle/argtextobj.vim
 
 # tmux plugins repos (.tmux/tpm is needed)
 .tmux/tmux-prefix-highlight

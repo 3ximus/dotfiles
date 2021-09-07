@@ -33,7 +33,6 @@ Plugin '3ximus/fzf' " use my fork to allow passing g:fzf_no_term
 Plugin 'junegunn/fzf.vim'
 
 Plugin 'junegunn/vim-peekaboo'
-" Plugin 'Yilin-Yang/vim-markbar'
 Plugin 'jeetsukumaran/vim-markology'
 
 " COMPLETION
@@ -54,6 +53,8 @@ Plugin 'dart-lang/dart-vim-plugin'
 
 " EXTRAS
 Plugin 'mattn/emmet-vim'
+" argument text object
+Plugin 'inkarkat/argtextobj.vim'
 
 " COLORSCHEME
 Plugin 'morhetz/gruvbox'
@@ -64,8 +65,6 @@ Plugin 'mhinz/vim-startify'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 "auto folds
 Plugin 'benknoble/vim-auto-origami'
-"search popup, only supported in vim >8.2.0896
-"Plugin 'obcat/vim-hitspop' "airline already doest this...
 Plugin 'machakann/vim-highlightedyank'
 " Profiler
 Plugin 'dstein64/vim-startuptime'
@@ -339,12 +338,6 @@ highlight link MarkologyHLl GruvboxYellowBold
 highlight link MarkologyHLu GruvboxPurpleBold
 highlight link MarkologyHLm GruvboxOrangeBold
 
-" " Markbar
-" highlight link markbarContextMarkHighlight GruvboxRedBold
-" highlight link markbarSectionLowercaseMark GruvboxYellowBold
-" highlight link markbarSectionUppercaseMark GruvboxPurpleBold
-" highlight link markbarSectionBrackets GruvboxFg1
-
 " Coc
 highlight link CocErrorSign GruvboxRedBold
 highlight link CocWarningSign GruvboxYellowBold
@@ -485,19 +478,8 @@ endif
 " Markology
 let g:markology_include='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-" " Markbar
-" let g:markbar_mark_marker = '>'
-" " let g:markbar_set_default_peekaboo_mappings = v:false
-" let g:markbar_explicitly_remap_mark_mappings = v:true
-" let g:markbar_peekaboo_marks_to_display = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-" let g:markbar_marks_to_display = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-
 " quick-scope
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-
-" hitspop
-let g:hitspop_line = 'winbot'
-" let g:hitspop_line_mod = 1
 
 let g:VimuxPromptString = "$ "
 
@@ -509,8 +491,6 @@ let g:VimuxPromptString = "$ "
 map <C-t> :NERDTreeToggle<CR>
 map <C-f> :NERDTreeFind<CR>
 nnoremap U :GundoToggle<CR>
-
-nmap <leader>' <Plug>ToggleMarkbar
 
 if &rtp =~ 'ctrlp.vim' && glob("~/.vim/bundle/ctrlp.vim/plugin/ctrlp.vim")!=#""
     let g:ctrlp_map = '<leader>p'
@@ -551,6 +531,10 @@ noremap <leader>gla :Gclog<CR>:copen<CR>
 noremap <leader>gb :Git branch<CR>
 noremap <leader>gB :Git blame<CR>
 noremap <leader>gp :Git push<CR>
+if !exists(":Gdiffoff")
+  command Gdiffoff diffoff | q | Gedit
+endif
+noremap <leader>gD :Gdiffoff<CR>
 
 " Line diff
 noremap <leader>D :LinediffReset<CR>
@@ -558,8 +542,8 @@ noremap <leader>d :Linediff<CR>
 
 " Emmet mappings
 nmap <leader>E :Emmet<space>
-let g:user_emmet_leader_key='<leader>e'
-let g:user_emmet_mode='nv'
+let g:user_emmet_leader_key='<C-y>'
+let g:user_emmet_mode='inv'
 
 "Vimux
 noremap <leader>rc  :VimuxPromptCommand<CR>
