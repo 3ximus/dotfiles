@@ -45,11 +45,7 @@ Plugin 'roxma/vim-tmux-clipboard'
 Plugin 'preservim/vimux'
 
 " EXTRA SYNTAX HIGHLIGHT
-Plugin 'justinmk/vim-syntax-extra'
-Plugin 'PProvost/vim-ps1'
-Plugin 'vim-python/python-syntax'
-Plugin 'MTDL9/vim-log-highlighting'
-Plugin 'dart-lang/dart-vim-plugin'
+Plugin 'sheerun/vim-polyglot'
 
 " EXTRAS
 Plugin 'mattn/emmet-vim'
