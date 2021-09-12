@@ -145,11 +145,6 @@ if ! shopt -oq posix; then
     fi
 fi
 
-# source keychain file if it exists
-if [ -f ~/.keychain/$HOSTNAME-sh ]; then
-    source ~/.keychain/$HOSTNAME-sh
-fi
-
 # ==============
 #   VARIABLES
 # ==============

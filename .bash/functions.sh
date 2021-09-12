@@ -302,4 +302,17 @@ colors() { # {{{2
 	fi
 } # }}}2
 
+# Check weather
+weather() { #  {{{2
+	curl wttr.in/$1
+}
+weather2() {
+	curl v2.wttr.in/$1
+} # }}}2
+
+# Crypto Currencies
+crypto() { # {{{2
+	curl rate.sx/$1
+} #}}}2
+
 # }}}1
