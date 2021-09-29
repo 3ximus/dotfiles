@@ -584,8 +584,11 @@ endif
 " COC CONFIGURATION {{{
 " ======================
 
+if !executable('node')
+    let g:coc_start_at_startup = 0
+endif
+
 if &rtp =~ 'coc.nvim' && glob("~/.vim/bundle/coc.nvim/plugin/coc.vim")!=#""
-    " let g:coc_start_at_startup = 0
 
     let g:coc_disable_startup_warning = 1
 
