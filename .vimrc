@@ -28,7 +28,6 @@ Plugin 'sjl/gundo.vim'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'unblevable/quick-scope'
 Plugin 'AndrewRadev/linediff.vim'
-" Plugin 'ctrlpvim/ctrlp.vim'
 Plugin '3ximus/fzf' " use my fork to allow passing g:fzf_no_term
 Plugin 'junegunn/fzf.vim'
 
@@ -383,9 +382,9 @@ let g:airline_right_sep = "\uE0BA"
 let g:airline_left_alt_sep = "\uE0B9"
 let g:airline_right_alt_sep =  "\uE0BB"
 
-"CtrlP
-if &rtp =~ 'ctrlp.vim' && glob("~/.vim/bundle/ctrlp.vim/plugin/ctrlp.vim")!=#""
-    let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+"Vimux " disable if tmux isnt available
+if !executable('tmux')
+    let g:loaded_vimux = 1
 endif
 
 " FZF
@@ -491,10 +490,7 @@ map <C-t> :NERDTreeToggle<CR>
 map <C-f> :NERDTreeFind<CR>
 nnoremap U :GundoToggle<CR>
 
-if &rtp =~ 'ctrlp.vim' && glob("~/.vim/bundle/ctrlp.vim/plugin/ctrlp.vim")!=#""
-    let g:ctrlp_map = '<leader>p'
-    nmap <leader>b :CtrlPBuffer<CR>
-elseif &rtp =~ 'fzf.vim' && glob("~/.vim/bundle/fzf.vim/plugin/fzf.vim")!=#""
+if &rtp =~ 'fzf.vim' && glob("~/.vim/bundle/fzf.vim/plugin/fzf.vim")!=#""
     nmap <leader>p :FZFFiles<CR>
     nmap <leader>b :FZFBuffers<CR>
     nmap <leader>l :FZFLines<CR>
