@@ -303,7 +303,7 @@ nmap <leader>x :bp<bar>bd #<CR>
 nmap <leader>s :call StripTrailingWhitespace()<CR>
 nnoremap <leader><Tab> :call TabSpaceToogle()<CR>
 " map hide terminal elements
-nnoremap <leader>a :call ToggleHiddenAll()<CR>
+" nnoremap <leader>a :call ToggleHiddenAll()<CR>
 
 " save and load view of files
 nmap <leader>vs :mkview<CR>
