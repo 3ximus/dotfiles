@@ -375,6 +375,9 @@ if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
 
+"startify
+let g:startify_change_to_dir = 0
+
 "this will only worked with patched fonts from NERD FONTS
 let g:airline_left_sep = "\uE0B8"
 let g:airline_right_sep = "\uE0BA"
