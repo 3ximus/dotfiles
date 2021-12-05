@@ -597,13 +597,13 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/bundle/coc.nvim/plugin/coc.vim")!=#""
 
     " Coc Extensions
     let g:coc_global_extensions = [
-          \'coc-python',
           \'coc-json',
           \'coc-sh',
           \]
 
     " other extensions
           " \'coc-angular',
+          " \'coc-pyright',
           " \'coc-tsserver',
           " \'coc-clangd',
           " \'coc-flutter-tools',
@@ -650,6 +650,16 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/bundle/coc.nvim/plugin/coc.vim")!=#""
     " NOTE: Please see `:h coc-status` for integrations with external plugins that
     " provide custom statusline: vim-airline.
     set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+    function! CocToggle()
+        if g:coc_enabled
+            CocDisable
+        else
+            CocEnable
+        endif
+    endfunction
+    command! CocToggle :call CocToggle()
+    nnoremap <silent><nowait> <leader>ct  :<C-u>CocToggle<CR>
 
     " Mappings for CoCList
     " Show all diagnostics.

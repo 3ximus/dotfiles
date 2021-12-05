@@ -197,9 +197,9 @@ activate() { # {{{2
 	local path=${1:-'.'}
 	local venv_file
 	if [ $# -eq 0 ] ; then
-		venv_file=$(find . -regex '.*activate$' | fzf --height 5 --reverse)
+		venv_file=$(find . -regex '.*/bin/activate$' | fzf --height 5 --reverse)
 	else
-		venv_file=$(find $path -regex .*activate$)
+		venv_file=$(find $path -regex '.*/bin/activate$')
 	fi
 
 	if [ -f $venv_file ] ; then
