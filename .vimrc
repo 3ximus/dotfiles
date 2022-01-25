@@ -541,6 +541,7 @@ noremap <leader>d :Linediff<CR>
 " Emmet mappings
 nmap <leader>E :Emmet<space>
 let g:user_emmet_leader_key='<C-y>'
+let g:user_emmet_expandabbr_key='<C-e>'
 let g:user_emmet_mode='inv'
 
 "Vimux
