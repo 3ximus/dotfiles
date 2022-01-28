@@ -79,7 +79,7 @@ To install the tmux plugins press `<prefix>+I` (it will freeze for a few seconds
 ![77](screenshots/7_normal.png)
 ![77f](screenshots/7_full.png)
 
-Other prompts are available and can be set with the function `prompt [1-7]`, or directly source one of the files inside [promtps](https://github.com/3ximus/dotfiles/tree/master/.bash/prompts)
+Other prompts are available and can be set with the function `prompt [1-7]`, or directly source one of the files inside [prompts](https://github.com/3ximus/dotfiles/tree/master/.bash/prompts)
 
 Prompts support:
 
