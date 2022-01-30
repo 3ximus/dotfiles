@@ -111,7 +111,7 @@ bleopt complete_ambiguous=1
 
 # Options are "dense" "dense-nowrap" "linewise" "desc" "desc-raw" "align" and "align-nowrap"
 bleopt complete_menu_style=align-nowrap
-bleopt complete_menu_align=20
+bleopt menu_align_max=20
 bleopt complete_menu_maxlines=20
 
 ##-----------------------------------------------------------------------------
