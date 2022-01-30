@@ -20,6 +20,7 @@
 - [icons](https://github.com/3ximus/dotfiles/tree/master/icons) contains [papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) icons edited to match gruvbox style (there is a script inside to install these icons) _(see my topbar screenshot)_
 - [css](https://github.com/3ximus/dotfiles/tree/master/css) contains styles to inject somewhere
 - `.gdbinit` contains a dashboard from [gdb-dashboard](https://github.com/cyrus-and/gdb-dashboard) that takes gdb out of the dark ages.
+- `custom.layout.latte` contains [latte-dock](/etc/update-manager/release-upgrades.) configuration
 
 
 - *Files inside `.config`*
@@ -78,7 +79,7 @@ To install the tmux plugins press `<prefix>+I` (it will freeze for a few seconds
 ![77](screenshots/7_normal.png)
 ![77f](screenshots/7_full.png)
 
-Other prompts are available and can be set with the function `prompt [1-7]`, or directly source one of the files inside [promtps](https://github.com/3ximus/dotfiles/tree/master/.bash/prompts)
+Other prompts are available and can be set with the function `prompt [1-7]`, or directly source one of the files inside [prompts](https://github.com/3ximus/dotfiles/tree/master/.bash/prompts)
 
 Prompts support:
 
