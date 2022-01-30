@@ -340,6 +340,7 @@ highlight link MarkologyHLm GruvboxOrangeBold
 highlight link CocErrorSign GruvboxRedBold
 highlight link CocWarningSign GruvboxYellowBold
 highlight link CocInfoSign GruvboxPurpleBold
+highlight link CocHintSign GruvboxBlueBold
 
 if !has('gui_running')
     " Highlighted Yank

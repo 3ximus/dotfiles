@@ -3,5 +3,6 @@
   "diagnostic.errorSign": ">>",
   "diagnostic.warningSign": "!",
   "diagnostic.infoSign": "==",
-  "clangd.path": "/home/eximus/.config/coc/extensions/coc-clangd-data/install/13.0.0/clangd_13.0.0/bin/clangd"
+  "clangd.path": "/home/eximus/.config/coc/extensions/coc-clangd-data/install/13.0.0/clangd_13.0.0/bin/clangd",
+  "python.analysis.typeCheckingMode": "off"
 }
