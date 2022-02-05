@@ -1,5 +1,86 @@
 " vim: foldmethod=marker foldlevel=0
 
+" GENERIC SETTINGS {{{
+" =====================
+
+"encoding
+set encoding=utf-8
+
+"backspace functionality
+set backspace=indent,eol,start
+
+"use X clipboard as default
+"you might need to install 'vim-gui-common' to enable clipboard support
+set clipboard=unnamedplus
+
+"line numbers
+set relativenumber
+set number
+"set foldcolumn=0
+
+"syntax and indentation
+if !exists("g:syntax_on")
+    syntax enable
+endif
+set tabstop=2 "number of spaces in a tab
+set shiftwidth=2 "number of spaces for indent
+set softtabstop=2 noexpandtab
+set autoindent
+set smartindent
+set smarttab
+"set expandtab "tabs are spaces, aka cancer
+"setlocal lcs=tab:>-,trail:-,eol:¬ list! " use list mode mapped to F2 when vim is opened
+
+set updatetime=400
+
+"search settings
+set incsearch
+set hlsearch
+
+"split and buffer settings
+set splitright
+set splitbelow
+set hidden "dont close buffers unless ordered to
+
+"scrolling
+set scrolloff=4
+
+"swapfiles
+set noswapfile
+set nowritebackup
+
+set autoread
+
+"display command key pressed
+set showcmd
+
+set cmdheight=1
+
+"autocomplete vim commands
+set wildmenu
+set wildmode=longest:list,full
+set wildignorecase
+
+" enable mouse for resizing window splits
+set mouse=n
+set ttymouse=xterm2
+
+" To diable bell sounds, specially on windows
+set noerrorbells visualbell t_vb=
+
+" number text object (integer and float)
+" --------------------------------------
+" in
+function! VisualNumber()
+  call search('\d\([^0-9\.]\|$\)', 'cW')
+  normal v
+  call search('\(^\|[^0-9\.]\d\)', 'becW')
+endfunction
+xnoremap in :<C-u>call VisualNumber()<CR>
+onoremap in :<C-u>normal vin<CR>
+
+" }}}
+
 " VUNDLE PLUGINS {{{
 " ===================
 
@@ -72,97 +153,16 @@ filetype plugin indent on
 
 " }}}
 
-" GENERIC SETTINGS {{{
-" =====================
-
-"encoding
-set encoding=utf-8
-
-"backspace functionality
-set backspace=indent,eol,start
-
-"use X clipboard as default
-"you might need to install 'vim-gui-common' to enable clipboard support
-set clipboard=unnamedplus
-
-"line numbers
-set relativenumber
-set number
-"set foldcolumn=0
-
-"syntax and indentation
-if !exists("g:syntax_on")
-    syntax enable
-endif
-set ts=4 "number of spaces in a tab
-set sw=4 "number of spaces for indent
-set softtabstop=0 noexpandtab
-set autoindent
-set smartindent
-set smarttab
-"set expandtab "tabs are spaces, aka cancer
-"setlocal lcs=tab:>-,trail:-,eol:¬ list! " use list mode mapped to F2 when vim is opened
-
-set updatetime=400
-
-"search settings
-set incsearch
-set hlsearch
-
-"split and buffer settings
-set splitright
-set splitbelow
-set hidden "dont close buffers unless ordered to
-
-"scrolling
-set scrolloff=4
-
-"swapfiles
-set noswapfile
-set nowritebackup
-
-set autoread
-
-"display command key pressed
-set showcmd
-
-set cmdheight=1
-
-"autocomplete vim commands
-set wildmenu
-set wildmode=longest:list,full
-set wildignorecase
-
-" enable mouse for resizing window splits
-set mouse=n
-set ttymouse=xterm2
-
-" To diable bell sounds, specially on windows
-set noerrorbells visualbell t_vb=
-
-" number text object (integer and float)
-" --------------------------------------
-" in
-function! VisualNumber()
-    call search('\d\([^0-9\.]\|$\)', 'cW')
-    normal v
-    call search('\(^\|[^0-9\.]\d\)', 'becW')
-endfunction
-xnoremap in :<C-u>call VisualNumber()<CR>
-onoremap in :<C-u>normal vin<CR>
-
-" }}}
-
 " COLORSCHEME {{{
 " ================
 
 set t_Co=256 "terminal color range
 try "try to set the theme as gruvbox
-    colorscheme gruvbox
-    let g:gruvbox_termcolors = 16 "256 colors look really bad
-    set background=dark
+  colorscheme gruvbox
+  let g:gruvbox_termcolors = 16 "256 colors look really bad
+  set background=dark
 catch /^Vim\%((\a\+)\)\=:E185/
-    colorscheme darkblue
+  colorscheme darkblue
 endtry
 
 " makes the background be this color so that when reversed for the airline
@@ -180,71 +180,71 @@ autocmd VimEnter * highlight Normal ctermbg=none
 
 "fold function to auto fold entire document based on indent
 function! Fold(depth)
-    let &foldnestmax = a:depth
-    set foldmethod=indent
+  let &foldnestmax = a:depth
+  set foldmethod=indent
 endfunction
 command! -nargs=1 Fold :call Fold( '<args>' ) "command to use Fold function
 
 "remove trailing whitespaces
 function! StripTrailingWhitespace()
-    if !&binary && &filetype != 'diff'
-        normal m'
-        %s/\s\+$//e
-        normal `'
-    endif
+  if !&binary && &filetype != 'diff'
+    normal m'
+    %s/\s\+$//e
+    normal `'
+  endif
 endfunction
 
 function! ConvertToTabs(tabsize)
-    let &tabstop = a:tabsize
-    let l:spaces = repeat(' ', &tabstop)
-    set noexpandtab
-    " get one of these to work...
-    " silent! execute "%s/\(^\s*\)\@<=". l:spaces. "/\t/g"
-    " :%s/\(^\s*\)\@<=". l:spaces. "/\t/g
-    :retab!
+  let &tabstop = a:tabsize
+  let l:spaces = repeat(' ', &tabstop)
+  set noexpandtab
+  " get one of these to work...
+  " silent! execute "%s/\(^\s*\)\@<=". l:spaces. "/\t/g"
+  " :%s/\(^\s*\)\@<=". l:spaces. "/\t/g
+  :retab!
 endfunction
 command! -nargs=1 ConvertToTabs :call ConvertToTabs( '<args>' )
 
 function! ConvertToSpaces(spacesize)
-    let &tabstop = a:spacesize
-    let &sw = a:spacesize "number of spaces when indenting
-    set expandtab
-    %retab!
+  let &tabstop = a:spacesize
+  let &sw = a:spacesize "number of spaces when indenting
+  set expandtab
+  %retab!
 endfunction
 command! -nargs=1 ConvertToSpaces :call ConvertToSpaces( '<args>' )
 
 function! TabSpaceToogle()
-    if &expandtab
-        :call ConvertToTabs(&ts)
-    else
-        :call ConvertToSpaces(&sw)
-    endif
+  if &expandtab
+    :call ConvertToTabs(&ts)
+  else
+    :call ConvertToSpaces(&sw)
+  endif
 endfunction
 
 let s:hidden_all = 0
 function! ToggleHiddenAll()
-    if s:hidden_all == 0
-        let s:hidden_all = 1
-        set showtabline=0
-        set noshowmode
-        set noruler
-        set laststatus=0
-        set noshowcmd
-    else
-        let s:hidden_all = 0
-        set showtabline=2
-        set showmode
-        set ruler
-        set laststatus=2
-        set showcmd
-    endif
+  if s:hidden_all == 0
+    let s:hidden_all = 1
+    set showtabline=0
+    set noshowmode
+    set noruler
+    set laststatus=0
+    set noshowcmd
+  else
+    let s:hidden_all = 0
+    set showtabline=2
+    set showmode
+    set ruler
+    set laststatus=2
+    set showcmd
+  endif
 endfunction
 
 function! ClearRegisters()
-    let regs=split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"', '\zs')
-    for r in regs
-      call setreg(r, [])
-    endfor
+  let regs=split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"', '\zs')
+  for r in regs
+    call setreg(r, [])
+  endfor
 endfunction
 command! -nargs=0 ClearRegisters :call ClearRegisters()
 
@@ -343,12 +343,12 @@ highlight link CocInfoSign GruvboxPurpleBold
 highlight link CocHintSign GruvboxBlueBold
 
 if !has('gui_running')
-    " Highlighted Yank
-    highlight HighlightedyankRegion cterm=reverse gui=reverse
+  " Highlighted Yank
+  highlight HighlightedyankRegion cterm=reverse gui=reverse
 
-    highlight link logLevelInfo GruvboxBlueBold
-    highlight Error cterm=bold ctermfg=234 ctermbg=9
-    highlight ErrorMsg cterm=bold ctermfg=234 ctermbg=9
+  highlight link logLevelInfo GruvboxBlueBold
+  highlight Error cterm=bold ctermfg=234 ctermbg=9
+  highlight ErrorMsg cterm=bold ctermfg=234 ctermbg=9
 endif
 
 " quick-scope
@@ -373,7 +373,7 @@ let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]' "hide encoding if its utf8
 let g:airline#extensions#hunks#enabled=0
 if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
+  let g:airline_symbols = {}
 endif
 
 "startify
@@ -388,29 +388,29 @@ let g:airline_right_alt_sep =  "\uE0BB"
 
 "Vimux " disable if tmux isnt available
 if !executable('tmux')
-    let g:loaded_vimux = 1
+  let g:loaded_vimux = 1
 endif
 
 " FZF
 if &rtp =~ 'fzf.vim' && glob("~/.vim/bundle/fzf.vim/plugin/fzf.vim")!=#""
-    let g:fzf_command_prefix = 'FZF'
+  let g:fzf_command_prefix = 'FZF'
 
-    let g:fzf_no_term = 1
-    let g:fzf_layout = { 'down': '30%' }
-    " autocmd! FileType fzf
-    " autocmd  FileType fzf set laststatus=0 noshowmode noruler
-    "     \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+  let g:fzf_no_term = 1
+  let g:fzf_layout = { 'down': '30%' }
+  " autocmd! FileType fzf
+  " autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  "     \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
-    let g:fzf_history_dir = '~/.local/share/fzf-history'
+  let g:fzf_history_dir = '~/.local/share/fzf-history'
 
-    " function to make quick fiz with selected results
-    function! s:build_quickfix_list(lines)
-        call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-        copen
-        cc
-    endfunction
+  " function to make quick fiz with selected results
+  function! s:build_quickfix_list(lines)
+    call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+    copen
+    cc
+  endfunction
 
-    let g:fzf_action = {
+  let g:fzf_action = {
         \ 'ctrl-q': function('s:build_quickfix_list'),
         \ 'ctrl-t': 'tab split',
         \ 'ctrl-x': 'split',
@@ -431,17 +431,17 @@ let g:NERDTreeWinSize=30
 " let g:NERDTreeGitStatusShowClean = 1 " default: 0
 " let g:NERDTreeGitStatusShowIgnored = 1 " a heavy feature may cost much more time. default: 0
 let g:NERDTreeGitStatusIndicatorMapCustom = {
-                \ 'Modified'  :'∗',
-                \ 'Staged'    :'→',
-                \ 'Untracked' :'%',
-                \ 'Renamed'   :'↻',
-                \ 'Unmerged'  :'═',
-                \ 'Deleted'   :'✘',
-                \ 'Dirty'     :'∗',
-                \ 'Ignored'   :'?',
-                \ 'Clean'     :'✔',
-                \ 'Unknown'   :'?',
-                \ }
+      \ 'Modified'  :'∗',
+      \ 'Staged'    :'→',
+      \ 'Untracked' :'%',
+      \ 'Renamed'   :'↻',
+      \ 'Unmerged'  :'═',
+      \ 'Deleted'   :'✘',
+      \ 'Dirty'     :'∗',
+      \ 'Ignored'   :'?',
+      \ 'Clean'     :'✔',
+      \ 'Unknown'   :'?',
+      \ }
 
 " devicons
 " let g:WebDevIconsNerdTreeBeforeGlyphPadding = ''
@@ -453,11 +453,11 @@ let g:DevIconsEnableDistro = 0
 
 "Auto Origami (auto manage fold columns)
 if &rtp =~ 'vim-auto-origami' && glob("~/.vim/bundle/vim-auto-origami/plugin/auto_origami.vim")!=#""
-    augroup auto_origami
-        au!
-        au CursorHold,BufWinEnter,WinEnter * AutoOrigamiFoldColumn
-    augroup END
-    let g:auto_origami_foldcolumn = 1
+  augroup auto_origami
+    au!
+    au CursorHold,BufWinEnter,WinEnter * AutoOrigamiFoldColumn
+  augroup END
+  let g:auto_origami_foldcolumn = 1
 endif
 
 
@@ -485,6 +485,8 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 let g:VimuxPromptString = "$ "
 
+let g:polyglot_disabled = ["sensible"]
+
 " }}}
 
 " PLUGIN KEYMAPS {{{
@@ -495,10 +497,10 @@ map <C-f> :NERDTreeFind<CR>
 nnoremap U :GundoToggle<CR>
 
 if &rtp =~ 'fzf.vim' && glob("~/.vim/bundle/fzf.vim/plugin/fzf.vim")!=#""
-    nmap <leader>p :FZFFiles<CR>
-    nmap <leader>b :FZFBuffers<CR>
-    nmap <leader>l :FZFLines<CR>
-    nmap <leader>f :FZFAg<CR>
+  nmap <leader>p :FZFFiles<CR>
+  nmap <leader>b :FZFBuffers<CR>
+  nmap <leader>l :FZFLines<CR>
+  nmap <leader>f :FZFAg<CR>
 endif
 
 omap ih <Plug>(GitGutterTextObjectInnerPending)
@@ -553,36 +555,36 @@ noremap <leader>rq  :VimuxCloseRunner<CR>
 noremap <leader>ro  :VimuxOpenRunner<CR>
 noremap <leader>ri  :VimuxInspectRunner<CR>
 function! VimuxSendSelectedText() range
-    let [lnum1, col1] = getpos("'<")[1:2]
-    let [lnum2, col2] = getpos("'>")[1:2]
-    let lines = getline(lnum1, lnum2)
-    let lines[-1] = lines[-1][: col2 - (&selection == 'inclusive' ? 1 : 2)]
-    let lines[0] = lines[0][col1 - 1:]
-    let selectedText = join(lines, "\n")
-    call VimuxSendText(selectedText)
+  let [lnum1, col1] = getpos("'<")[1:2]
+  let [lnum2, col2] = getpos("'>")[1:2]
+  let lines = getline(lnum1, lnum2)
+  let lines[-1] = lines[-1][: col2 - (&selection == 'inclusive' ? 1 : 2)]
+  let lines[0] = lines[0][col1 - 1:]
+  let selectedText = join(lines, "\n")
+  call VimuxSendText(selectedText)
 endfunction
 xnoremap <leader>rr :call VimuxSendSelectedText()<CR>
 
 " Tabularize
 if isdirectory(expand("~/.vim/bundle/tabular"))
-    nmap <leader>a& :Tabularize /&<CR>
-    vmap <leader>a& :Tabularize /&<CR>
-    nmap <leader>a= :Tabularize /^[^=]*\zs=<CR>
-    vmap <leader>a= :Tabularize /^[^=]*\zs=<CR>
-    nmap <leader>a=> :Tabularize /=><CR>
-    vmap <leader>a=> :Tabularize /=><CR>
-    nmap <leader>a: :Tabularize /:<CR>
-    vmap <leader>a: :Tabularize /:<CR>
-    nmap <leader>a; :Tabularize /;<CR>
-    vmap <leader>a; :Tabularize /;<CR>
-    nmap <leader>a:: :Tabularize /:\zs<CR>
-    vmap <leader>a:: :Tabularize /:\zs<CR>
-    nmap <leader>a, :Tabularize /,<CR>
-    vmap <leader>a, :Tabularize /,<CR>
-    nmap <leader>a,, :Tabularize /,\zs<CR>
-    vmap <leader>a,, :Tabularize /,\zs<CR>
-    nmap <leader>a<Bar> :Tabularize /<Bar><CR>
-    vmap <leader>a<Bar> :Tabularize /<Bar><CR>
+  nmap <leader>a& :Tabularize /&<CR>
+  vmap <leader>a& :Tabularize /&<CR>
+  nmap <leader>a= :Tabularize /^[^=]*\zs=<CR>
+  vmap <leader>a= :Tabularize /^[^=]*\zs=<CR>
+  nmap <leader>a=> :Tabularize /=><CR>
+  vmap <leader>a=> :Tabularize /=><CR>
+  nmap <leader>a: :Tabularize /:<CR>
+  vmap <leader>a: :Tabularize /:<CR>
+  nmap <leader>a; :Tabularize /;<CR>
+  vmap <leader>a; :Tabularize /;<CR>
+  nmap <leader>a:: :Tabularize /:\zs<CR>
+  vmap <leader>a:: :Tabularize /:\zs<CR>
+  nmap <leader>a, :Tabularize /,<CR>
+  vmap <leader>a, :Tabularize /,<CR>
+  nmap <leader>a,, :Tabularize /,\zs<CR>
+  vmap <leader>a,, :Tabularize /,\zs<CR>
+  nmap <leader>a<Bar> :Tabularize /<Bar><CR>
+  vmap <leader>a<Bar> :Tabularize /<Bar><CR>
 endif
 " }}}
 
@@ -590,97 +592,97 @@ endif
 " ======================
 
 if !executable('node')
-    let g:coc_start_at_startup = 0
+  let g:coc_start_at_startup = 0
 endif
 
 if &rtp =~ 'coc.nvim' && glob("~/.vim/bundle/coc.nvim/plugin/coc.vim")!=#""
 
-    let g:coc_disable_startup_warning = 1
+  let g:coc_disable_startup_warning = 1
 
-    " Coc Extensions
-    let g:coc_global_extensions = [
-          \'coc-json',
-          \'coc-sh',
-          \]
+  " Coc Extensions
+  let g:coc_global_extensions = [
+        \'coc-json',
+        \'coc-sh',
+        \]
 
-    " other extensions
-          " \'coc-angular',
-          " \'coc-pyright',
-          " \'coc-tsserver',
-          " \'coc-clangd',
-          " \'coc-flutter-tools',
+  " other extensions
+  " \'coc-angular',
+  " \'coc-pyright',
+  " \'coc-tsserver',
+  " \'coc-clangd',
+  " \'coc-flutter-tools',
 
-    inoremap <silent><expr> <c-@> coc#refresh()
+  inoremap <silent><expr> <c-@> coc#refresh()
 
-    " Use `[d` and `]d` to navigate diagnostics
-    " Use `:docDiagnodtics` to get all diagnostics of current buffer in location list.
-    nmap <silent> [d <Plug>(coc-diagnostic-prev)
-    nmap <silent> ]d <Plug>(coc-diagnostic-next)
+  " Use `[d` and `]d` to navigate diagnostics
+  " Use `:docDiagnodtics` to get all diagnostics of current buffer in location list.
+  nmap <silent> [d <Plug>(coc-diagnostic-prev)
+  nmap <silent> ]d <Plug>(coc-diagnostic-next)
 
-    " GoTo code navigation.
-    nmap <silent> gd <Plug>(coc-definition)
-    nmap <silent> gy <Plug>(coc-type-definition)
-    nmap <silent> gi <Plug>(coc-implementation)
-    nmap <silent> gr <Plug>(coc-references)
+  " GoTo code navigation.
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> gi <Plug>(coc-implementation)
+  nmap <silent> gr <Plug>(coc-references)
 
-    " Use K to show documentation in preview window.
-    nnoremap <silent> K :call <SID>show_documentation()<CR>
-    nnoremap <silent> <leader>K :execute '!' . &keywordprg . " " . expand('<cword>')<CR>
+  " Use K to show documentation in preview window.
+  nnoremap <silent> K :call <SID>show_documentation()<CR>
+  nnoremap <silent> <leader>K :execute '!' . &keywordprg . " " . expand('<cword>')<CR>
 
-    function! s:show_documentation()
-        if (index(['vim','help'], &filetype) >= 0)
-            execute 'h '.expand('<cword>')
-        elseif (coc#rpc#ready())
-            call CocActionAsync('doHover')
-        else
-            execute '!' . &keywordprg . " " . expand('<cword>')
-        endif
-    endfunction
+  function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+      execute 'h '.expand('<cword>')
+    elseif (coc#rpc#ready())
+      call CocActionAsync('doHover')
+    else
+      execute '!' . &keywordprg . " " . expand('<cword>')
+    endif
+  endfunction
 
-    " Map function and class text objects
-    " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-    xmap if <Plug>(coc-funcobj-i)
-    omap if <Plug>(coc-funcobj-i)
-    xmap af <Plug>(coc-funcobj-a)
-    omap af <Plug>(coc-funcobj-a)
-    xmap ic <Plug>(coc-classobj-i)
-    omap ic <Plug>(coc-classobj-i)
-    xmap ac <Plug>(coc-classobj-a)
-    omap ac <Plug>(coc-classobj-a)
+  " Map function and class text objects
+  " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+  xmap if <Plug>(coc-funcobj-i)
+  omap if <Plug>(coc-funcobj-i)
+  xmap af <Plug>(coc-funcobj-a)
+  omap af <Plug>(coc-funcobj-a)
+  xmap ic <Plug>(coc-classobj-i)
+  omap ic <Plug>(coc-classobj-i)
+  xmap ac <Plug>(coc-classobj-a)
+  omap ac <Plug>(coc-classobj-a)
 
-    " Add Vim's native statusline support.
-    " NOTE: Please see `:h coc-status` for integrations with external plugins that
-    " provide custom statusline: vim-airline.
-    set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+  " Add Vim's native statusline support.
+  " NOTE: Please see `:h coc-status` for integrations with external plugins that
+  " provide custom statusline: vim-airline.
+  set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-    function! CocToggle()
-        if g:coc_enabled
-            CocDisable
-        else
-            CocEnable
-        endif
-    endfunction
-    command! CocToggle :call CocToggle()
-    nnoremap <silent><nowait> <leader>ct  :<C-u>CocToggle<CR>
+  function! CocToggle()
+    if g:coc_enabled
+      CocDisable
+    else
+      CocEnable
+    endif
+  endfunction
+  command! CocToggle :call CocToggle()
+  nnoremap <silent><nowait> <leader>ct  :<C-u>CocToggle<CR>
 
-    " Mappings for CoCList
-    " Show all diagnostics.
-    nnoremap <silent><nowait> <leader>cd  :<C-u>CocList diagnostics<CR>
-    " Manage extensions.
-    nnoremap <silent><nowait> <leader>ce  :<C-u>CocList extensions<CR>
-    " Show commands.
-    nnoremap <silent><nowait> <leader>cc  :<C-u>CocList commands<CR>
-    " Find symbol of current document.
-    nnoremap <silent><nowait> <leader>co  :<C-u>CocList outline<CR>
-    nnoremap <silent><nowait> <leader>ca  :<C-u>CocAction<CR>
-    " Search workspace symbols.
-    nnoremap <silent><nowait> <leader>cs  :<C-u>CocList -I symbols<CR>
-    " Do default action for next item.
-    nnoremap <silent><nowait> <leader>cj  :<C-u>CocNext<CR>
-    " Do default action for previous item.
-    nnoremap <silent><nowait> <leader>ck  :<C-u>CocPrev<CR>
-    " Resume latest coc list.
-    nnoremap <silent><nowait> <leader>cp  :<C-u>CocListResume<CR>
+  " Mappings for CoCList
+  " Show all diagnostics.
+  nnoremap <silent><nowait> <leader>cd  :<C-u>CocList diagnostics<CR>
+  " Manage extensions.
+  nnoremap <silent><nowait> <leader>ce  :<C-u>CocList extensions<CR>
+  " Show commands.
+  nnoremap <silent><nowait> <leader>cc  :<C-u>CocList commands<CR>
+  " Find symbol of current document.
+  nnoremap <silent><nowait> <leader>co  :<C-u>CocList outline<CR>
+  nnoremap <silent><nowait> <leader>ca  :<C-u>CocAction<CR>
+  " Search workspace symbols.
+  nnoremap <silent><nowait> <leader>cs  :<C-u>CocList -I symbols<CR>
+  " Do default action for next item.
+  nnoremap <silent><nowait> <leader>cj  :<C-u>CocNext<CR>
+  " Do default action for previous item.
+  nnoremap <silent><nowait> <leader>ck  :<C-u>CocPrev<CR>
+  " Resume latest coc list.
+  nnoremap <silent><nowait> <leader>cp  :<C-u>CocListResume<CR>
 endif
 
 " }}}
@@ -689,28 +691,28 @@ endif
 " =================
 
 if has("gui_running")
-    colorscheme gruvbox
-    let g:gruvbox_contrast_dark = 'medium'
-    let g:gruvbox_contrast_light = 'soft'
-    set background=dark
+  colorscheme gruvbox
+  let g:gruvbox_contrast_dark = 'medium'
+  let g:gruvbox_contrast_light = 'soft'
+  set background=dark
 
-    "set guifont=Roboto\ Mono\ for\ Powerline\ Regular\ 9
-    "set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 9
-    "set guifont=Fira\ Mono\ for\ Powerline\ 9
-    set guifont=TerminessTTF\ Nerd\ Font\ Mono\ 13
+  "set guifont=Roboto\ Mono\ for\ Powerline\ Regular\ 9
+  "set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 9
+  "set guifont=Fira\ Mono\ for\ Powerline\ 9
+  set guifont=TerminessTTF\ Nerd\ Font\ Mono\ 13
 
-    set linespace=0
+  set linespace=0
 
-    set guicursor+=a:blinkon0
+  set guicursor+=a:blinkon0
 
-    "hide toolbar, scrollbar and menubar
-    set guioptions-=L
-    set guioptions-=l
-    set guioptions-=R
-    set guioptions-=r
-    set guioptions-=m
-    set guioptions-=T
-    set guioptions-=e
+  "hide toolbar, scrollbar and menubar
+  set guioptions-=L
+  set guioptions-=l
+  set guioptions-=R
+  set guioptions-=r
+  set guioptions-=m
+  set guioptions-=T
+  set guioptions-=e
 
 endif
 
@@ -719,7 +721,7 @@ endif
 " FILE SPECIFIC {{{
 " ==================
 
-autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab autoindent "because someone has too much screen space in their eyesight
+autocmd FileType python setlocal tabstop=2 shiftwidth=2 softtabstop=2 noexpandtab autoindent "because someone has too much screen space in their eyesight
 autocmd FileType python setlocal indentkeys-=<:> " colon will auto indent line in insert mode, remove that behavior
 autocmd FileType python setlocal indentkeys-=:
 
@@ -741,9 +743,9 @@ autocmd FileType scss setl iskeyword+=@-@
 
 " assumes set noignorecase
 augroup dynamic_smartcase
-    autocmd!
-    autocmd CmdLineEnter : set ignorecase
-    autocmd CmdLineLeave : set noignorecase
+  autocmd!
+  autocmd CmdLineEnter : set ignorecase
+  autocmd CmdLineLeave : set noignorecase
 augroup END
 
 " fix artifacts on screen from tmux-focus-events
