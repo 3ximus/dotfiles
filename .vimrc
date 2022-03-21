@@ -417,7 +417,6 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/bundle/fzf.vim/plugin/fzf.vim")!=#""
         \ 'ctrl-v': 'vsplit' }
 endif
 
-
 "NERDTree
 let g:NERDTreeDirArrowExpandable = ''
 let g:NERDTreeDirArrowCollapsible = ''
@@ -497,7 +496,8 @@ map <C-f> :NERDTreeFind<CR>
 nnoremap U :GundoToggle<CR>
 
 if &rtp =~ 'fzf.vim' && glob("~/.vim/bundle/fzf.vim/plugin/fzf.vim")!=#""
-  nmap <leader>p :FZFFiles<CR>
+  nmap <leader>p :FZFGFiles<CR>
+  nmap <leader>P :FZFFiles<CR>
   nmap <leader>b :FZFBuffers<CR>
   nmap <leader>l :FZFLines<CR>
   nmap <leader>f :FZFAg<CR>
