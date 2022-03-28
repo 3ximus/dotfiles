@@ -278,7 +278,7 @@ vnoremap <C-k> :m '<-2<CR>gv
 
 " fold with fold nest max of 1
 nmap zF :call Fold(1)<CR>:set foldmethod=manual<CR>
-nmap zM :set foldmethod=marker<CR>
+" nmap zM :set foldmethod=marker<CR>
 
 " display line endings and tabs
 nnoremap <F2> :<C-U>setlocal lcs=tab:>-,trail:-,eol:¬ list! list? <CR>
