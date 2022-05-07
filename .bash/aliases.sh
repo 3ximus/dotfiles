@@ -25,7 +25,7 @@ alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias diff='diff --color=auto'
 alias pacman='pacman --color=auto'
-alias less='less -Mrix4'
+alias less='less -MRix4'
 alias gdb='gdb -q'
 alias dd='dd status=progress'
 alias alert="echo -ne '\a'"
