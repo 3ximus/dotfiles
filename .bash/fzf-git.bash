@@ -2,7 +2,7 @@
 # Functions using fzf to use in git
 # Inspired by: https://github.com/wfxr/forgit and https://github.com/bigH/git-fuzzy
 
-glfzf() {
+glf() {
 	git rev-parse --is-inside-work-tree >/dev/null || return 1
 	local cmd opts files
 	files=$(sed -nE 's/.* -- (.*)/\1/p' <<< "$*") # extract files parameters for `git show` command
@@ -12,11 +12,20 @@ glfzf() {
 		--date-order --color=always $* \
 		| fzf --preview="$cmd" --ansi --no-sort --no-multi --reverse \
 		--tiebreak=index \
-		--height 50% --min-height 20 \
+		--min-height 20 \
 		--bind="enter:execute($cmd | LESS='-r' less)"
 }
 
-gafzf() {
+gbf() {
+	git branch -avv --color | fzf \
+		--preview="echo {} |grep -Eo '[a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9]'|xargs -n1 git diff | delta" \
+		--ansi --no-multi --reverse \
+		--tiebreak=index \
+		--height 50% --min-height 20 \
+		| grep -Po '(?<=^. )[^ ]+ ' | xargs -n1 git switch
+}
+
+gaf() {
 	local cmd reload _stage_key _commit_key _reset_key _discard_key header
 
 	_stage_key="${GIT_FUZZY_STATUS_ADD_KEY:-ctrl-S}"

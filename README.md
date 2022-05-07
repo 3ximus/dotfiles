@@ -159,6 +159,8 @@ Tmux has a lot of custom configurations added in `.tmux.conf` and a few plugins 
  - [tmux-plugin-uptime](https://github.com/3ximus/tmux-plugin-uptime)
  - [tmux-plugin-datetime](https://github.com/3ximus/tmux-plugin-datetime)
 
+## [Firefox color](https://color.firefox.com/?theme=XQAAAALmAQAAAAAAAABBqYhm849SCicxcT-BCXcGHf3p79EhVPcztfddumy8o_UrWNUWc0S9J4RYptWUwsIXMnwJBu_QklSG5xinXnzntyleAjqG3EsmVf5BGg4AmWSyU_xAoGCxzXEfOaGTXe_p7BplC1mvfb0GJQQlB6r2_HMAGaqaaiElrS53dEb0J8Lfv2vfHXYndC22e92RR0SSl_7rJVavT071zl5e2jAlorTz3jidNTkbFOcnYjii5MdbX5GeJDKp9V_DySOOeCREUzaF9In-_k950yRHSX0GJ1jwiK3pV0fNvHqBVFd1g1lD-OmjBlkbk9_MAJQlWM8NKK3_8LBLXg)
+
 ### My other themes to go along with the gruvbox colorscheme
  - [GTK](https://github.com/3ximus/gruvbox-gtk)
  - [Plasma](https://github.com/3ximus/gruvbox-plasma)
