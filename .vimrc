@@ -105,6 +105,7 @@ Plugin 'godlygeek/tabular'
 " TOOLS
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-repeat'
 Plugin 'sjl/gundo.vim'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'unblevable/quick-scope'
@@ -139,11 +140,13 @@ Plugin 'morhetz/gruvbox'
 Plugin 'mhinz/vim-startify'
 "absolute numbers when window looses focus
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
-"auto folds
+"auto show fold column
 Plugin 'benknoble/vim-auto-origami'
 Plugin 'machakann/vim-highlightedyank'
 " Profiler
 Plugin 'dstein64/vim-startuptime'
+" Support multiple emmet for vue files
+Plugin 'leafOfTree/vim-vue-plugin'
 
 "NerdFont icons in NerdTree, startify and Ctrl-p
 Plugin 'ryanoasis/vim-devicons'
@@ -247,6 +250,8 @@ function! ClearRegisters()
   endfor
 endfunction
 command! -nargs=0 ClearRegisters :call ClearRegisters()
+
+command! -nargs=0 Prettier :silent %!prettier --stdin-filepath %
 
 " }}}
 
@@ -642,7 +647,6 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/bundle/coc.nvim/plugin/coc.vim")!=#""
   " GoTo code navigation.
   nmap <silent> gd <Plug>(coc-definition)
   nmap <silent> gy <Plug>(coc-type-definition)
-  nmap <silent> gi <Plug>(coc-implementation)
   nmap <silent> gr <Plug>(coc-references)
 
   " Use K to show documentation in preview window.
