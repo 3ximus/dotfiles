@@ -99,12 +99,12 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rhubarb'
-" Plugin 'rhysd/git-messenger.vim'
 Plugin 'godlygeek/tabular'
 
 " TOOLS
 Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-commentary'
+" Plugin 'tpope/vim-commentary'
+Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-repeat'
 Plugin 'sjl/gundo.vim'
 Plugin 'easymotion/vim-easymotion'
@@ -147,6 +147,7 @@ Plugin 'machakann/vim-highlightedyank'
 Plugin 'dstein64/vim-startuptime'
 " Support multiple emmet for vue files
 Plugin 'leafOfTree/vim-vue-plugin'
+Plugin 'AndrewRadev/inline_edit.vim'
 
 "NerdFont icons in NerdTree, startify and Ctrl-p
 Plugin 'ryanoasis/vim-devicons'
@@ -528,6 +529,9 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/bundle/fzf.vim/plugin/fzf.vim")!=#""
   nmap <leader>f :FZFAg<CR>
 endif
 
+" Inline edit
+nmap <leader>i :InlineEdit<CR>
+
 omap ih <Plug>(GitGutterTextObjectInnerPending)
 omap ah <Plug>(GitGutterTextObjectOuterPending)
 xmap ih <Plug>(GitGutterTextObjectInnerVisual)
@@ -537,8 +541,7 @@ vmap <leader>ha <Plug>(GitGutterStageHunk)
 nmap <leader>ha <Plug>(GitGutterStageHunk)
 nmap <leader>hu <Plug>(GitGutterUndoHunk)
 nmap <leader>hv <Plug>(GitGutterPreviewHunk)
-nmap <leader>hn <Plug>(GitGutterNextHunk)
-nmap <leader>hp <Plug>(GitGutterPrevHunk)
+nmap <leader>hd <Plug>(GitGutterDiffOrig)
 nmap ]h <Plug>(GitGutterNextHunk)
 nmap [h <Plug>(GitGutterPrevHunk)
 nmap <leader>hf :GitGutterFold<CR>
@@ -549,8 +552,8 @@ let g:NERDTreeGitStatusMapPrevHunk='[h'
 
 noremap <leader>gs :Git<CR>
 noremap <leader>gc :Git commit<CR>
-noremap <leader>ge :Gedit<CR>
-noremap <leader>gd :Git diff<CR>
+noremap <leader>ge :Gedit
+noremap <leader>gd :Gdiffsplit<CR>
 noremap <leader>gl :0Gclog<CR>:copen<CR>
 noremap <leader>gld :Gclog -- %<CR>:copen<CR>
 noremap <leader>gla :Gclog<CR>:copen<CR>
