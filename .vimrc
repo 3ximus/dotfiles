@@ -423,23 +423,21 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/bundle/fzf.vim/plugin/fzf.vim")!=#""
         \ 'ctrl-x': 'split',
         \ 'ctrl-v': 'vsplit' }
 
+  " Function to checkout a branch with FZF
   function! GitCheckoutBranch(branch)
     " branch can look like this: "/remotes/origin/master [hash] info" or this: "master [hash] info"
     let l:name = split(split(trim(a:branch), "", 1)[0], "/", 1)[-1]
-
-    " just show what is happening
     echo "checking out ".l:name."\n"
-
-    " you can use !git, instead of Git, if you don't have Fugitive
     execute "Git checkout ".l:name
   endfunction
-
-  " -a option lists all branches (remotes aswell)
-  " -vv option shows more information about branch
-  " --color and --ansi enables colors
-  " --nth=1 makes sure you only search by names and not branch info
   command! -bang FZFGbranch call fzf#run(fzf#wrap({'source': 'git branch -avv --color', 'sink': function('GitCheckoutBranch'), 'options': '--ansi --nth=1'}, <bang>0))
 
+  " Function to checkout a file from another branch with FZF
+  function! GitEditBranchFile(branch)
+    let l:name = split(split(trim(a:branch), "", 1)[0], "/", 1)[-1]
+    execute "Gedit ".l:name.":%"
+  endfunction
+  command! -bang FZFGeditFile call fzf#run(fzf#wrap({'source': 'git branch -avv --color', 'sink': function('GitEditBranchFile'), 'options': '--ansi --nth=1'}, <bang>0))
 
 endif
 
@@ -527,6 +525,9 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/bundle/fzf.vim/plugin/fzf.vim")!=#""
   nmap <leader>b :FZFBuffers<CR>
   nmap <leader>l :FZFLines<CR>
   nmap <leader>f :FZFAg<CR>
+
+  nmap <leader>/ :FZFHistory/<CR>
+  nmap <leader>: :FZFHistory:<CR>
 endif
 
 " Inline edit
@@ -551,15 +552,19 @@ let g:NERDTreeGitStatusMapNextHunk=']h'
 let g:NERDTreeGitStatusMapPrevHunk='[h'
 
 noremap <leader>gs :Git<CR>
-noremap <leader>gc :Git commit<CR>
-noremap <leader>ge :Gedit
 noremap <leader>gd :Gdiffsplit<CR>
 noremap <leader>gl :0Gclog<CR>:copen<CR>
-noremap <leader>gld :Gclog -- %<CR>:copen<CR>
-noremap <leader>gla :Gclog<CR>:copen<CR>
-noremap <leader>gb :FZFGbranch<CR>
+vmap <leader>gl :Gclog<CR>:copen<CR>
+" noremap <leader>gld :Gclog -- %<CR>:copen<CR>
+" noremap <leader>gla :Gclog<CR>:copen<CR>
 noremap <leader>gB :Git blame<CR>
 noremap <leader>gp :Git push<CR>
+
+noremap <leader>gv :FZFGeditFile<CR>
+noremap <leader>gb :FZFGbranch<CR>
+noremap <leader>gc :FZFCommits<CR>
+vmap <leader>gc :FZFBCommits<CR>
+
 if !exists(":Gdiffoff")
   command Gdiffoff diffoff | q | Gedit
 endif
