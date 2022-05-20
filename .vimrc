@@ -269,7 +269,7 @@ nmap <C-N> :bn<CR>
 
 nmap <C-W>n :tabnext<CR>
 nmap <C-W>p :tabprevious<CR>
-nmap <C-W>N :tabnew<CR>
+nmap <C-W>N :tabe %<CR>
 
 " run macro saved to q
 nnoremap <leader>q @q
@@ -322,9 +322,6 @@ noremap [q :cprevious<CR>
 
 " toogle wrap
 nmap <leader>w :setlocal wrap!<CR>:setlocal wrap?<CR>
-
-" create a popup with git info about the current line
-nmap <silent><Leader>gm :call setbufvar(winbufnr(popup_atcursor(split(system("git log -n 1 -L " . line(".") . ",+1:" . expand("%:p")), "\n"), { "padding": [1,1,1,1], "pos": "botleft", "wrap": 0 })), "&filetype", "git")<CR>
 
 " }}}
 
@@ -520,6 +517,11 @@ map <C-f> :NERDTreeFind<CR>
 nnoremap U :GundoToggle<CR>
 
 if &rtp =~ 'fzf.vim' && glob("~/.vim/bundle/fzf.vim/plugin/fzf.vim")!=#""
+  let g:fzf_action = {
+        \ 'ctrl-t': 'tab split',
+        \ 'ctrl-s': 'split',
+        \ 'ctrl-v': 'vsplit' }
+
   nmap <leader>p :FZFGFiles<CR>
   nmap <leader>P :FZFFiles<CR>
   nmap <leader>b :FZFBuffers<CR>
@@ -551,8 +553,8 @@ nmap <leader>hf :GitGutterFold<CR>
 let g:NERDTreeGitStatusMapNextHunk=']h'
 let g:NERDTreeGitStatusMapPrevHunk='[h'
 
-noremap <leader>gs :Git<CR>
-noremap <leader>gd :Gdiffsplit<CR>
+noremap <leader>gs :Git\|12wincmd_<CR>
+noremap <leader>gd :Gvdiffsplit!<CR>
 noremap <leader>gl :0Gclog<CR>:copen<CR>
 vmap <leader>gl :Gclog<CR>:copen<CR>
 " noremap <leader>gld :Gclog -- %<CR>:copen<CR>
@@ -564,6 +566,8 @@ noremap <leader>gv :FZFGeditFile<CR>
 noremap <leader>gb :FZFGbranch<CR>
 noremap <leader>gc :FZFCommits<CR>
 vmap <leader>gc :FZFBCommits<CR>
+" create a popup with git info about the current line
+nmap <silent><Leader>gm :call setbufvar(winbufnr(popup_atcursor(split(system("git log -n 1 -L " . line(".") . ",+1:" . expand("%:p")), "\n"), { "padding": [1,1,1,1], "pos": "botleft", "wrap": 0 })), "&filetype", "git")<CR>
 
 if !exists(":Gdiffoff")
   command Gdiffoff diffoff | q | Gedit
