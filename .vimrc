@@ -399,8 +399,14 @@ endif
 if &rtp =~ 'fzf.vim' && glob("~/.vim/bundle/fzf.vim/plugin/fzf.vim")!=#""
   let g:fzf_command_prefix = 'FZF'
 
-  let g:fzf_no_term = 1
-  let g:fzf_layout = { 'down': '30%' }
+  if exists('$TMUX')
+    let g:fzf_layout = { 'tmux': '-p90%,60%' }
+  else
+    " let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 , 'border': 'sharp'} } " Causes airline gruvbox bug
+    let g:fzf_no_term = 1
+    let g:fzf_layout = { 'down': '30%' }
+  endif
+
   " autocmd! FileType fzf
   " autocmd  FileType fzf set laststatus=0 noshowmode noruler
   "     \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
@@ -414,28 +420,34 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/bundle/fzf.vim/plugin/fzf.vim")!=#""
     cc
   endfunction
 
-  let g:fzf_action = {
-        \ 'ctrl-q': function('s:build_quickfix_list'),
-        \ 'ctrl-t': 'tab split',
-        \ 'ctrl-x': 'split',
-        \ 'ctrl-v': 'vsplit' }
-
   " Function to checkout a branch with FZF
   function! GitCheckoutBranch(branch)
     " branch can look like this: "/remotes/origin/master [hash] info" or this: "master [hash] info"
     let l:name = split(split(trim(a:branch), "", 1)[0], "/", 1)[-1]
-    echo "checking out ".l:name."\n"
     execute "Git checkout ".l:name
   endfunction
   command! -bang FZFGbranch call fzf#run(fzf#wrap({'source': 'git branch -avv --color', 'sink': function('GitCheckoutBranch'), 'options': '--ansi --nth=1'}, <bang>0))
 
   " Function to checkout a file from another branch with FZF
   function! GitEditBranchFile(branch)
-    let l:name = split(split(trim(a:branch), "", 1)[0], "/", 1)[-1]
-    execute "Gedit ".l:name.":%"
+    if match(a:branch, '&&&& ') == 0
+      let l:name = split(split(trim(a:branch), "", 1)[1], "/", 1)[-1]
+      execute "Gsplit ".l:name.":%"
+    elseif match(a:branch, '>>>> ') == 0
+      let l:name = split(split(trim(a:branch), "", 1)[1], "/", 1)[-1]
+      execute "Gvsplit ".l:name.":%"
+    else
+      let l:name = split(split(trim(a:branch), "", 1)[0], "/", 1)[-1]
+      execute "Gedit ".l:name.":%"
+    endif
   endfunction
-  command! -bang FZFGeditFile call fzf#run(fzf#wrap({'source': 'git branch -avv --color', 'sink': function('GitEditBranchFile'), 'options': '--ansi --nth=1'}, <bang>0))
+  command! -bang FZFGeditFile call fzf#run(fzf#wrap({'source': 'git branch -avv --color', 'sink': function('GitEditBranchFile'), 'options': "'--bind=ctrl-v:execute@printf \">>>> \"@+accept' '--bind=ctrl-s:execute@printf \"&&&& \"@+accept' --ansi --nth=1"}, <bang>0))
 
+  let g:fzf_action = {
+        \ 'ctrl-q': function('s:build_quickfix_list'),
+        \ 'ctrl-t': 'tab split',
+        \ 'ctrl-s': 'split',
+        \ 'ctrl-v': 'vsplit' }
 endif
 
 "NERDTree
@@ -517,11 +529,6 @@ map <C-f> :NERDTreeFind<CR>
 nnoremap U :GundoToggle<CR>
 
 if &rtp =~ 'fzf.vim' && glob("~/.vim/bundle/fzf.vim/plugin/fzf.vim")!=#""
-  let g:fzf_action = {
-        \ 'ctrl-t': 'tab split',
-        \ 'ctrl-s': 'split',
-        \ 'ctrl-v': 'vsplit' }
-
   nmap <leader>p :FZFGFiles<CR>
   nmap <leader>P :FZFFiles<CR>
   nmap <leader>b :FZFBuffers<CR>
@@ -553,6 +560,7 @@ nmap <leader>hf :GitGutterFold<CR>
 let g:NERDTreeGitStatusMapNextHunk=']h'
 let g:NERDTreeGitStatusMapPrevHunk='[h'
 
+"fugitive
 noremap <leader>gs :Git\|12wincmd_<CR>
 noremap <leader>gd :Gvdiffsplit!<CR>
 noremap <leader>gl :0Gclog<CR>:copen<CR>
