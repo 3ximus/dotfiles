@@ -20,6 +20,7 @@
 - [icons](https://github.com/3ximus/dotfiles/tree/master/icons) contains [papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) icons edited to match gruvbox style (there is a script inside to install these icons) _(see my topbar screenshot)_
 - [css](https://github.com/3ximus/dotfiles/tree/master/css) contains styles to inject somewhere
 - `.gdbinit` contains a dashboard from [gdb-dashboard](https://github.com/cyrus-and/gdb-dashboard) that takes gdb out of the dark ages.
+- `custom.layout.latte` contains [latte-dock](/etc/update-manager/release-upgrades.) configuration
 
 
 - *Files inside `.config`*
@@ -78,7 +79,7 @@ To install the tmux plugins press `<prefix>+I` (it will freeze for a few seconds
 ![77](screenshots/7_normal.png)
 ![77f](screenshots/7_full.png)
 
-Other prompts are available and can be set with the function `prompt [1-7]`, or directly source one of the files inside [promtps](https://github.com/3ximus/dotfiles/tree/master/.bash/prompts)
+Other prompts are available and can be set with the function `prompt [1-7]`, or directly source one of the files inside [prompts](https://github.com/3ximus/dotfiles/tree/master/.bash/prompts)
 
 Prompts support:
 
@@ -157,6 +158,8 @@ Tmux has a lot of custom configurations added in `.tmux.conf` and a few plugins 
  - [tmux-battery](https://github.com/tmux-plugins/tmux-battery)
  - [tmux-plugin-uptime](https://github.com/3ximus/tmux-plugin-uptime)
  - [tmux-plugin-datetime](https://github.com/3ximus/tmux-plugin-datetime)
+
+## [Firefox color](https://color.firefox.com/?theme=XQAAAALmAQAAAAAAAABBqYhm849SCicxcT-BCXcGHf3p79EhVPcztfddumy8o_UrWNUWc0S9J4RYptWUwsIXMnwJBu_QklSG5xinXnzntyleAjqG3EsmVf5BGg4AmWSyU_xAoGCxzXEfOaGTXe_p7BplC1mvfb0GJQQlB6r2_HMAGaqaaiElrS53dEb0J8Lfv2vfHXYndC22e92RR0SSl_7rJVavT071zl5e2jAlorTz3jidNTkbFOcnYjii5MdbX5GeJDKp9V_DySOOeCREUzaF9In-_k950yRHSX0GJ1jwiK3pV0fNvHqBVFd1g1lD-OmjBlkbk9_MAJQlWM8NKK3_8LBLXg)
 
 ### My other themes to go along with the gruvbox colorscheme
  - [GTK](https://github.com/3ximus/gruvbox-gtk)

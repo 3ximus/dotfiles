@@ -104,6 +104,22 @@ install_whatsapp() {
 	fi
 }
 
+install_instagram() {
+	if hash nativefier &>/dev/null ; then
+		echo "Choose instagram theme:"
+		select theme_path in ${DATA_PATH}/css/* ; do break; done
+		nativefier --inject $theme_path --icon "${DATA_PATH}/icons/instagram.png" --name instagram --counter --single-instance instagram.com /tmp/instagram
+		if [ -d "/opt/instagram" ] ; then
+			echo "Deleting previous Instagram installation"
+			sudo rm -r "/opt/instagram"
+		fi
+		sudo mv /tmp/instagram/instagram* /opt/instagram
+		rm /tmp/instagram -r
+		echo "Instagram installed successfully"
+	else
+		echo -e '\033[31mnativefier is not installed\033[m'
+	fi
+}
 
 # ----------------------
 #   ACTION FUNCTIONS
@@ -173,6 +189,7 @@ Options:
 	generic                  only dot files
 	konsole                  Konsole terminal emulator files
 	whatsapp                 Whatsapp files (this creates uses nativefier application)
+	instagram                Instagram files (this creates uses nativefier application)
 	[none]                   No option or anything else assumes all files are gathered
 
 Remote:
@@ -283,6 +300,10 @@ elif [[ "$@" =~ "konsole" ]]; then
 elif [[ "$@" =~ "whatsapp" ]]; then
 	echo "Installing Whatsapp"
 	install_whatsapp
+
+elif [[ "$@" =~ "instagram" ]]; then
+	echo "Installing Instagram"
+	install_instagram
 
 elif [[ "$@" =~ "clean" ]]; then
 	echo "clean not implemented" && exit 0

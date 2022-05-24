@@ -1,0 +1,14 @@
+configuration {
+  modi: "window,run,ssh,drun,combi";
+  matching: "fuzzy";
+  timeout {
+      action: "kb-cancel";
+      delay:  0;
+  }
+  filebrowser {
+      directories-first: true;
+      sorting-method:    "name";
+  }
+}
+
+@theme "/home/eximus/.config/rofi/gruvbox.rasi"
