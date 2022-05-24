@@ -395,61 +395,6 @@ if !executable('tmux')
   let g:loaded_vimux = 1
 endif
 
-" FZF
-if &rtp =~ 'fzf.vim' && glob("~/.vim/bundle/fzf.vim/plugin/fzf.vim")!=#""
-  let g:fzf_command_prefix = 'FZF'
-
-  if exists('$TMUX')
-    let g:fzf_layout = { 'tmux': '-p90%,60%' }
-  else
-    " let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 , 'border': 'sharp'} } " Causes airline gruvbox bug
-    let g:fzf_no_term = 1
-    let g:fzf_layout = { 'down': '30%' }
-  endif
-
-  " autocmd! FileType fzf
-  " autocmd  FileType fzf set laststatus=0 noshowmode noruler
-  "     \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-
-  let g:fzf_history_dir = '~/.local/share/fzf-history'
-
-  " function to make quick fiz with selected results
-  function! s:build_quickfix_list(lines)
-    call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-    copen
-    cc
-  endfunction
-
-  " Function to checkout a branch with FZF
-  function! GitCheckoutBranch(branch)
-    " branch can look like this: "/remotes/origin/master [hash] info" or this: "master [hash] info"
-    let l:name = split(split(trim(a:branch), "", 1)[0], "/", 1)[-1]
-    execute "Git checkout ".l:name
-  endfunction
-  command! -bang FZFGbranch call fzf#run(fzf#wrap({'source': 'git branch -avv --color', 'sink': function('GitCheckoutBranch'), 'options': '--ansi --nth=1'}, <bang>0))
-
-  " Function to checkout a file from another branch with FZF
-  function! GitEditBranchFile(branch)
-    if match(a:branch, '&&&& ') == 0
-      let l:name = split(split(trim(a:branch), "", 1)[1], "/", 1)[-1]
-      execute "Gsplit ".l:name.":%"
-    elseif match(a:branch, '>>>> ') == 0
-      let l:name = split(split(trim(a:branch), "", 1)[1], "/", 1)[-1]
-      execute "Gvsplit ".l:name.":%"
-    else
-      let l:name = split(split(trim(a:branch), "", 1)[0], "/", 1)[-1]
-      execute "Gedit ".l:name.":%"
-    endif
-  endfunction
-  command! -bang FZFGeditFile call fzf#run(fzf#wrap({'source': 'git branch -avv --color', 'sink': function('GitEditBranchFile'), 'options': "'--bind=ctrl-v:execute@printf \">>>> \"@+accept' '--bind=ctrl-s:execute@printf \"&&&& \"@+accept' --ansi --nth=1"}, <bang>0))
-
-  let g:fzf_action = {
-        \ 'ctrl-q': function('s:build_quickfix_list'),
-        \ 'ctrl-t': 'tab split',
-        \ 'ctrl-s': 'split',
-        \ 'ctrl-v': 'vsplit' }
-endif
-
 "NERDTree
 let g:NERDTreeDirArrowExpandable = ''
 let g:NERDTreeDirArrowCollapsible = ''
@@ -528,17 +473,6 @@ map <C-t> :NERDTreeToggle<CR>
 map <C-f> :NERDTreeFind<CR>
 nnoremap U :GundoToggle<CR>
 
-if &rtp =~ 'fzf.vim' && glob("~/.vim/bundle/fzf.vim/plugin/fzf.vim")!=#""
-  nmap <leader>p :FZFGFiles<CR>
-  nmap <leader>P :FZFFiles<CR>
-  nmap <leader>b :FZFBuffers<CR>
-  nmap <leader>l :FZFLines<CR>
-  nmap <leader>f :FZFAg<CR>
-
-  nmap <leader>/ :FZFHistory/<CR>
-  nmap <leader>: :FZFHistory:<CR>
-endif
-
 " Inline edit
 nmap <leader>i :InlineEdit<CR>
 
@@ -570,10 +504,6 @@ vmap <leader>gl :Gclog<CR>:copen<CR>
 noremap <leader>gB :Git blame<CR>
 noremap <leader>gp :Git push<CR>
 
-noremap <leader>gv :FZFGeditFile<CR>
-noremap <leader>gb :FZFGbranch<CR>
-noremap <leader>gc :FZFCommits<CR>
-vmap <leader>gc :FZFBCommits<CR>
 " create a popup with git info about the current line
 nmap <silent><Leader>gm :call setbufvar(winbufnr(popup_atcursor(split(system("git log -n 1 -L " . line(".") . ",+1:" . expand("%:p")), "\n"), { "padding": [1,1,1,1], "pos": "botleft", "wrap": 0 })), "&filetype", "git")<CR>
 
@@ -630,6 +560,77 @@ if isdirectory(expand("~/.vim/bundle/tabular"))
   vmap <leader>a,, :Tabularize /,\zs<CR>
   nmap <leader>a<Bar> :Tabularize /<Bar><CR>
   vmap <leader>a<Bar> :Tabularize /<Bar><CR>
+endif
+" }}}
+
+" FZF CONFIGURATION {{{
+" =====================
+
+if &rtp =~ 'fzf.vim' && glob("~/.vim/bundle/fzf.vim/plugin/fzf.vim")!=#""
+  let g:fzf_command_prefix = 'FZF'
+
+  if exists('$TMUX')
+    let g:fzf_layout = { 'tmux': '-p90%,60%' }
+  else
+    " let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 , 'border': 'sharp'} } " Causes airline gruvbox bug
+    let g:fzf_no_term = 1
+    let g:fzf_layout = { 'down': '30%' }
+  endif
+
+  " autocmd! FileType fzf
+  " autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  "     \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
+  let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+  " function to make quick fiz with selected results
+  function! s:build_quickfix_list(lines)
+    call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+    copen
+    cc
+  endfunction
+
+  " Function to checkout a branch with FZF
+  function! GitCheckoutBranch(branch)
+    " branch can look like this: "/remotes/origin/master [hash] info" or this: "master [hash] info"
+    let l:name = split(split(trim(a:branch), "", 1)[0], "/", 1)[-1]
+    execute "Git checkout ".l:name
+  endfunction
+  command! -bang FZFGbranch call fzf#run({'source': 'git branch -avv --color', 'sink': function('GitCheckoutBranch'), 'options': '--ansi --nth=1', 'tmux': '-p60%,40%'})
+
+  " Function to checkout a file from another branch with FZF
+  function! GitEditBranchFile(branch)
+    if match(a:branch, '&&&& ') == 0
+      let l:name = split(split(trim(a:branch), "", 1)[1], "/", 1)[-1]
+      execute "Gsplit ".l:name.":%"
+    elseif match(a:branch, '>>>> ') == 0
+      let l:name = split(split(trim(a:branch), "", 1)[1], "/", 1)[-1]
+      execute "Gvsplit ".l:name.":%"
+    else
+      let l:name = split(split(trim(a:branch), "", 1)[0], "/", 1)[-1]
+      execute "Gedit ".l:name.":%"
+    endif
+  endfunction
+  command! -bang FZFGeditFile call fzf#run({'source': 'git branch -avv --color', 'sink': function('GitEditBranchFile'), 'options': "'--bind=ctrl-v:execute@printf \">>>> \"@+accept' '--bind=ctrl-s:execute@printf \"&&&& \"@+accept' --ansi --nth=1", 'tmux': '-p60%,40%'})
+
+  let g:fzf_action = {
+        \ 'ctrl-q': function('s:build_quickfix_list'),
+        \ 'ctrl-t': 'tab split',
+        \ 'ctrl-s': 'split',
+        \ 'ctrl-v': 'vsplit' }
+
+  nmap <leader>p :FZFGFiles<CR>
+  nmap <leader>P :FZFFiles<CR>
+  nmap <leader>b :FZFBuffers<CR>
+  nmap <leader>l :FZFLines<CR>
+  nmap <leader>f :FZFAg<CR>
+  nmap <leader>/ :FZFHistory/<CR>
+  nmap <leader>: :FZFHistory:<CR>
+
+  noremap <leader>gv :FZFGeditFile<CR>
+  noremap <leader>gb :FZFGbranch<CR>
+  noremap <leader>gc :FZFCommits<CR>
+  vmap <leader>gc :FZFBCommits<CR>
 endif
 " }}}
 
