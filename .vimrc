@@ -252,7 +252,12 @@ function! ClearRegisters()
 endfunction
 command! -nargs=0 ClearRegisters :call ClearRegisters()
 
-command! -nargs=0 Prettier :silent %!prettier --stdin-filepath %
+function! Prettier()
+  normal m'
+  silent %!prettier --stdin-filepath %
+  normal `'
+endfunction
+command! -nargs=0 Prettier :call Prettier()
 
 " }}}
 
@@ -305,6 +310,9 @@ vnoremap <leader>y :w !xclip -selection clipboard<CR><CR>
 nnoremap <leader>yy :w !xclip -selection clipboard<CR><CR>
 
 nmap <leader>x :bp<bar>bd #<CR>
+
+" Clear search highlight and close preview window
+nnoremap <silent> <backspace> :noh<CR>:pc<CR>:cclose<CR>
 
 " remove trailing whitespaces
 nmap <leader>s :call StripTrailingWhitespace()<CR>
@@ -495,7 +503,16 @@ let g:NERDTreeGitStatusMapNextHunk=']h'
 let g:NERDTreeGitStatusMapPrevHunk='[h'
 
 "fugitive
-noremap <leader>gs :Git\|12wincmd_<CR>
+function! ToggleGstatus() abort
+  for l:winnr in range(1, winnr('$'))
+    if !empty(getwinvar(l:winnr, 'fugitive_status'))
+      execute l:winnr.'close'
+    else
+      execute 'Git|12wincmd_'
+    endif
+  endfor
+endfunction
+noremap <leader>gs :call ToggleGstatus()<CR>
 noremap <leader>gd :Gvdiffsplit!<CR>
 noremap <leader>gl :0Gclog<CR>:copen<CR>
 vmap <leader>gl :Gclog<CR>:copen<CR>
