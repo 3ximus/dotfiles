@@ -1,6 +1,9 @@
 configuration {
   modi: "window,run,ssh,drun,combi";
   matching: "fuzzy";
+  hover-select: true;
+  me-select-entry: "";
+  me-accept-entry: [ MousePrimary ];
   timeout {
       action: "kb-cancel";
       delay:  0;
