@@ -379,14 +379,40 @@ let g:airline#extensions#tabline#fnamemod = ':p:.' "show only file names on buff
 let g:airline#extensions#tabline#buffer_nr_show = 0
 let g:airline#extensions#tabline#fnamecollapse = 1
 let g:airline#extensions#tabline#show_close_button = 0
-let g:airline#extensions#tabline#show_tabs = 0
+let g:airline#extensions#tabline#show_tabs = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]' "hide encoding if its utf8
-let g:airline#extensions#hunks#enabled=0
+let g:airline#extensions#hunks#enabled=1
+let g:airline#extensions#hunks#non_zero_only = 1
+let g:airline#extensions#term#enabled = 0
+
+let g:airline_section_z = airline#section#create(['windowswap', '%p%%','linenr', 'maxlinenr', g:airline_symbols.colnr, '%c'])
+
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
+
+let g:airline_mode_map = {
+  \ '__'     : '-',
+  \ 'c'      : 'C',
+  \ 'i'      : 'I',
+  \ 'ic'     : 'I',
+  \ 'ix'     : 'I',
+  \ 'n'      : 'N',
+  \ 'multi'  : 'M',
+  \ 'ni'     : 'N',
+  \ 'no'     : 'N',
+  \ 'R'      : 'R',
+  \ 'Rv'     : 'R',
+  \ 's'      : 'S',
+  \ 'S'      : 'S',
+  \ ''     : 'S',
+  \ 't'      : 'T',
+  \ 'v'      : 'V',
+  \ 'V'      : 'V',
+  \ ''     : 'V',
+  \ }
 
 "startify
 let g:startify_change_to_dir = 0
@@ -715,7 +741,7 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/bundle/coc.nvim/plugin/coc.vim")!=#""
   " Add Vim's native statusline support.
   " NOTE: Please see `:h coc-status` for integrations with external plugins that
   " provide custom statusline: vim-airline.
-  set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+  " set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
   function! CocToggle()
     if g:coc_enabled
@@ -726,6 +752,9 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/bundle/coc.nvim/plugin/coc.vim")!=#""
   endfunction
   command! CocToggle :call CocToggle()
   nnoremap <silent><nowait> <leader>ct  :<C-u>CocToggle<CR>
+
+  command! -nargs=0 Format :call CocActionAsync('format')
+  command! -nargs=0 OrganizeImports   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
 
   " Mappings for CoCList
   " Show all diagnostics.
