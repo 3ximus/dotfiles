@@ -155,7 +155,10 @@ export EDITOR="vim"
 export PATH=$HOME/.bash/scripts:$PATH
 
 # fzf CTRL_T options, since i already have a script to generate previews lets use it...
-export FZF_CTRL_T_OPTS="--preview '[ -f {} ] && { if hash batcat &>/dev/null ; then batcat --color=always --style=numbers,changes {} ; else file {} ; fi } ' --min-height 40"
+export FZF_COMPLETION_OPTS="--preview '[ -f {} ] && { if hash batcat &>/dev/null ; then batcat --color=always --style=header,numbers,changes {} ; else file {} ; fi } '"
+export FZF_CTRL_T_OPTS="$FZF_COMPLETION_OPTS --min-height 40"
+export BAT_THEME="gruvbox-dark"
+
 # change fzf-marks paste binding
 export FZF_MARKS_PASTE="ctrl-l"
 
