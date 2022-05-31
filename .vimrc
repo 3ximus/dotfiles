@@ -225,25 +225,6 @@ function! TabSpaceToogle()
   endif
 endfunction
 
-let s:hidden_all = 0
-function! ToggleHiddenAll()
-  if s:hidden_all == 0
-    let s:hidden_all = 1
-    set showtabline=0
-    set noshowmode
-    set noruler
-    set laststatus=0
-    set noshowcmd
-  else
-    let s:hidden_all = 0
-    set showtabline=2
-    set showmode
-    set ruler
-    set laststatus=2
-    set showcmd
-  endif
-endfunction
-
 function! ClearRegisters()
   let regs=split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"', '\zs')
   for r in regs
@@ -317,8 +298,6 @@ nnoremap <silent> <backspace> :noh<CR>:pc<CR>:cclose<CR>
 " remove trailing whitespaces
 nmap <leader>s :call StripTrailingWhitespace()<CR>
 nnoremap <leader><Tab> :call TabSpaceToogle()<CR>
-" map hide terminal elements
-" nnoremap <leader>a :call ToggleHiddenAll()<CR>
 
 " save and load view of files
 nmap <leader>vs :mkview<CR>
@@ -662,11 +641,24 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/bundle/fzf.vim/plugin/fzf.vim")!=#""
         \ 'ctrl-s': 'split',
         \ 'ctrl-v': 'vsplit' }
 
+  command! -bang -nargs=* FZFRg
+        \ call fzf#vim#grep('rg --no-heading --line-number --color=always --smart-case '.shellescape(<q-args>),
+        \ 1,
+        \ fzf#vim#with_preview({'options': '--delimiter : --nth 2..'}),
+        \ <bang>0)
+
+  command! -bang -nargs=* FZFRgWithFilenames
+        \ call fzf#vim#grep('rg --no-heading --line-number --color=always --smart-case '.shellescape(<q-args>),
+        \ 1,
+        \ fzf#vim#with_preview(),
+        \ <bang>0)
+
   nmap <leader>p :FZFGFiles<CR>
   nmap <leader>P :FZFFiles<CR>
   nmap <leader>b :FZFBuffers<CR>
   nmap <leader>l :FZFLines<CR>
-  nmap <leader>f :FZFAg<CR>
+  nmap <leader>f :FZFRg<CR>
+  nmap <leader>F :FZFRgWithFilenames<CR>
   nmap <leader>/ :FZFHistory/<CR>
   nmap <leader>: :FZFHistory:<CR>
 
