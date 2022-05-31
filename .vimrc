@@ -81,79 +81,75 @@ onoremap in :<C-u>normal vin<CR>
 
 " }}}
 
-" VUNDLE PLUGINS {{{
+" VIM PLUG PLUGINS {{{
 " ===================
 
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#rc()
+call plug#begin()
 
-Plugin 'VundleVim/Vundle.vim'
+Plug 'VundleVim/Vundle.vim'
 
-Plugin 'vim-airline/vim-airline'
-Plugin 'scrooloose/nerdtree'
+Plug 'vim-airline/vim-airline'
+Plug 'scrooloose/nerdtree'
 
 " GIT
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-rhubarb'
-Plugin 'godlygeek/tabular'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+Plug 'godlygeek/tabular'
 
 " TOOLS
-Plugin 'tpope/vim-surround'
-" Plugin 'tpope/vim-commentary'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'tpope/vim-repeat'
-Plugin 'sjl/gundo.vim'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'unblevable/quick-scope'
-Plugin 'AndrewRadev/linediff.vim'
-Plugin '3ximus/fzf' " use my fork to allow passing g:fzf_no_term
-Plugin 'junegunn/fzf.vim'
+Plug 'tpope/vim-surround'
+" Plug 'tpope/vim-commentary'
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-repeat'
+Plug 'sjl/gundo.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'unblevable/quick-scope'
+Plug 'AndrewRadev/linediff.vim'
+Plug '3ximus/fzf' " use my fork to allow passing g:fzf_no_term
+Plug 'junegunn/fzf.vim'
 
-Plugin 'junegunn/vim-peekaboo'
-Plugin 'jeetsukumaran/vim-markology'
+Plug 'junegunn/vim-peekaboo'
+Plug 'jeetsukumaran/vim-markology'
 
 " COMPLETION
-Plugin 'neoclide/coc.nvim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " TMUX CLIPBOARD SHARING
-Plugin 'tmux-plugins/vim-tmux-focus-events'
-Plugin 'roxma/vim-tmux-clipboard'
+Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'roxma/vim-tmux-clipboard'
 
-Plugin 'preservim/vimux'
+Plug 'preservim/vimux'
 
 " EXTRA SYNTAX HIGHLIGHT
-Plugin 'sheerun/vim-polyglot'
+Plug 'sheerun/vim-polyglot'
 
 " EXTRAS
-Plugin 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim'
 " argument text object
-Plugin 'inkarkat/argtextobj.vim'
+Plug 'inkarkat/argtextobj.vim'
 
 " COLORSCHEME
-Plugin 'morhetz/gruvbox'
+Plug 'morhetz/gruvbox'
 
 " OTHER
-Plugin 'mhinz/vim-startify'
+Plug 'mhinz/vim-startify'
 "absolute numbers when window looses focus
-Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
 "auto show fold column
-Plugin 'benknoble/vim-auto-origami'
-Plugin 'machakann/vim-highlightedyank'
+Plug 'benknoble/vim-auto-origami'
+Plug 'machakann/vim-highlightedyank'
 " Profiler
-Plugin 'dstein64/vim-startuptime'
+Plug 'dstein64/vim-startuptime'
 " Support multiple emmet for vue files
-Plugin 'leafOfTree/vim-vue-plugin'
-Plugin 'AndrewRadev/inline_edit.vim'
+Plug 'leafOfTree/vim-vue-plugin'
+Plug 'AndrewRadev/inline_edit.vim'
 
 "NerdFont icons in NerdTree, startify and Ctrl-p
-Plugin 'ryanoasis/vim-devicons'
+Plug 'ryanoasis/vim-devicons'
 
-call vundle#end()
-filetype plugin indent on
+call plug#end()
 
 " }}}
 
@@ -352,56 +348,62 @@ highlight link QuickScopeSecondary GruvboxOrangeBold
 " =========================
 
 "setup airline
-let g:airline_powerline_fonts=1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':p:.' "show only file names on buffer names
-let g:airline#extensions#tabline#buffer_nr_show = 0
-let g:airline#extensions#tabline#fnamecollapse = 1
-let g:airline#extensions#tabline#show_close_button = 0
-let g:airline#extensions#tabline#show_tabs = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-let g:airline#extensions#whitespace#mixed_indent_algo = 1
-let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]' "hide encoding if its utf8
-let g:airline#extensions#hunks#enabled=1
-let g:airline#extensions#hunks#non_zero_only = 1
-let g:airline#extensions#term#enabled = 0
+if &rtp =~ 'vim-airline' && glob("~/.vim/plugged/vim-airline/plugin/airline.vim")!=#""
+  let g:airline_powerline_fonts=1
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#fnamemod = ':p:.' "show only file names on buffer names
+  let g:airline#extensions#tabline#buffer_nr_show = 0
+  let g:airline#extensions#tabline#fnamecollapse = 1
+  let g:airline#extensions#tabline#show_close_button = 0
+  let g:airline#extensions#tabline#show_tabs = 1
+  let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+  let g:airline#extensions#whitespace#mixed_indent_algo = 1
+  let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]' "hide encoding if its utf8
+  let g:airline#extensions#hunks#enabled=1
+  let g:airline#extensions#hunks#non_zero_only = 1
+  let g:airline#extensions#term#enabled = 0
 
-let g:airline_section_z = airline#section#create(['windowswap', '%p%%','linenr', 'maxlinenr', g:airline_symbols.colnr, '%c'])
+  let g:airline_section_z = airline#section#create(['windowswap', '%p%%','linenr', 'maxlinenr', g:airline_symbols.colnr, '%c'])
 
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
+  if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+  endif
+
+  let g:airline_mode_map = {
+    \ '__'     : '-',
+    \ 'c'      : 'C',
+    \ 'i'      : 'I',
+    \ 'ic'     : 'I',
+    \ 'ix'     : 'I',
+    \ 'n'      : 'N',
+    \ 'multi'  : 'M',
+    \ 'ni'     : 'N',
+    \ 'no'     : 'N',
+    \ 'R'      : 'R',
+    \ 'Rv'     : 'R',
+    \ 's'      : 'S',
+    \ 'S'      : 'S',
+    \ ''     : 'S',
+    \ 't'      : 'T',
+    \ 'v'      : 'V',
+    \ 'V'      : 'V',
+    \ ''     : 'V',
+    \ }
+
+  "this will only worked with patched fonts from NERD FONTS
+  let g:airline_left_sep = "\uE0B8"
+  let g:airline_right_sep = "\uE0BA"
+
+  let g:airline_left_alt_sep = "\uE0B9"
+  let g:airline_right_alt_sep =  "\uE0BB"
+
+
+  let g:airline_symbols.notexists = '%'
+  let g:airline_symbols.dirty='*'
 endif
-
-let g:airline_mode_map = {
-  \ '__'     : '-',
-  \ 'c'      : 'C',
-  \ 'i'      : 'I',
-  \ 'ic'     : 'I',
-  \ 'ix'     : 'I',
-  \ 'n'      : 'N',
-  \ 'multi'  : 'M',
-  \ 'ni'     : 'N',
-  \ 'no'     : 'N',
-  \ 'R'      : 'R',
-  \ 'Rv'     : 'R',
-  \ 's'      : 'S',
-  \ 'S'      : 'S',
-  \ ''     : 'S',
-  \ 't'      : 'T',
-  \ 'v'      : 'V',
-  \ 'V'      : 'V',
-  \ ''     : 'V',
-  \ }
 
 "startify
 let g:startify_change_to_dir = 0
-
-"this will only worked with patched fonts from NERD FONTS
-let g:airline_left_sep = "\uE0B8"
-let g:airline_right_sep = "\uE0BA"
-
-let g:airline_left_alt_sep = "\uE0B9"
-let g:airline_right_alt_sep =  "\uE0BB"
 
 "Vimux " disable if tmux isnt available
 if !executable('tmux')
@@ -442,7 +444,7 @@ let g:DevIconsEnableFoldersOpenClose = 1
 let g:DevIconsEnableDistro = 0
 
 "Auto Origami (auto manage fold columns)
-if &rtp =~ 'vim-auto-origami' && glob("~/.vim/bundle/vim-auto-origami/plugin/auto_origami.vim")!=#""
+if &rtp =~ 'vim-auto-origami' && glob("~/.vim/plugged/vim-auto-origami/plugin/auto_origami.vim")!=#""
   augroup auto_origami
     au!
     au CursorHold,BufWinEnter,WinEnter * AutoOrigamiFoldColumn
@@ -563,7 +565,7 @@ endfunction
 xnoremap <leader>rr :call VimuxSendSelectedText()<CR>
 
 " Tabularize
-if isdirectory(expand("~/.vim/bundle/tabular"))
+if isdirectory(expand("~/.vim/plugged/tabular"))
   nmap <leader>a& :Tabularize /&<CR>
   vmap <leader>a& :Tabularize /&<CR>
   nmap <leader>a= :Tabularize /^[^=]*\zs=<CR>
@@ -588,7 +590,7 @@ endif
 " FZF CONFIGURATION {{{
 " =====================
 
-if &rtp =~ 'fzf.vim' && glob("~/.vim/bundle/fzf.vim/plugin/fzf.vim")!=#""
+if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
   let g:fzf_command_prefix = 'FZF'
 
   if exists('$TMUX')
@@ -676,7 +678,7 @@ if !executable('node')
   let g:coc_start_at_startup = 0
 endif
 
-if &rtp =~ 'coc.nvim' && glob("~/.vim/bundle/coc.nvim/plugin/coc.vim")!=#""
+if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
 
   let g:coc_disable_startup_warning = 1
 
