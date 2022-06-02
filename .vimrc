@@ -355,7 +355,7 @@ if &rtp =~ 'vim-airline' && glob("~/.vim/plugged/vim-airline/plugin/airline.vim"
   let g:airline#extensions#tabline#buffer_nr_show = 0
   let g:airline#extensions#tabline#fnamecollapse = 1
   let g:airline#extensions#tabline#show_close_button = 0
-  let g:airline#extensions#tabline#show_tabs = 1
+  let g:airline#extensions#tabline#show_tabs = 0
   let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
   let g:airline#extensions#whitespace#mixed_indent_algo = 1
   let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]' "hide encoding if its utf8
@@ -750,24 +750,14 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
   command! -nargs=0 Format :call CocActionAsync('format')
   command! -nargs=0 OrganizeImports   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
 
-  " Mappings for CoCList
-  " Show all diagnostics.
+  " Mappings for Coc
+  nmap <leader>ca  <Plug>(coc-codeaction-cursor)
+  nmap <leader>cA  <Plug>(coc-codeaction)
   nnoremap <silent><nowait> <leader>cd  :<C-u>CocList diagnostics<CR>
-  " Manage extensions.
   nnoremap <silent><nowait> <leader>ce  :<C-u>CocList extensions<CR>
-  " Show commands.
   nnoremap <silent><nowait> <leader>cc  :<C-u>CocList commands<CR>
-  " Find symbol of current document.
   nnoremap <silent><nowait> <leader>co  :<C-u>CocList outline<CR>
-  nnoremap <silent><nowait> <leader>ca  :<C-u>CocAction<CR>
-  " Search workspace symbols.
   nnoremap <silent><nowait> <leader>cs  :<C-u>CocList -I symbols<CR>
-  " Do default action for next item.
-  nnoremap <silent><nowait> <leader>cj  :<C-u>CocNext<CR>
-  " Do default action for previous item.
-  nnoremap <silent><nowait> <leader>ck  :<C-u>CocPrev<CR>
-  " Resume latest coc list.
-  nnoremap <silent><nowait> <leader>cp  :<C-u>CocListResume<CR>
 endif
 
 " }}}
