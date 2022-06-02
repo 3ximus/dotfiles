@@ -28,10 +28,10 @@ gbf() {
 gaf() {
 	local cmd reload _stage_key _commit_key _reset_key _discard_key header
 
-	_stage_key="${GIT_FUZZY_STATUS_ADD_KEY:-ctrl-S}"
-	_commit_key="${GIT_FUZZY_STATUS_COMMIT_KEY:-ctrl-C}"
-	_reset_key="${GIT_FUZZY_STATUS_RESET_KEY:-ctrl-R}"
-	_discard_key="${GIT_FUZZY_STATUS_DISCARD_KEY:-ctrl-U}"
+	_stage_key="${GIT_FZF_STATUS_ADD_KEY:-ctrl-S}"
+	_commit_key="${GIT_FZF_STATUS_COMMIT_KEY:-ctrl-C}"
+	_reset_key="${GIT_FZF_STATUS_RESET_KEY:-ctrl-R}"
+	_discard_key="${GIT_FZF_STATUS_DISCARD_KEY:-ctrl-U}"
 
 	header="Stage: $_stage_key / Unstage: $_discard_key / Commit: $_commit_key"
 
