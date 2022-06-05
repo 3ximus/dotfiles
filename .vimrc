@@ -120,7 +120,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'roxma/vim-tmux-clipboard'
 
-Plug 'preservim/vimux'
+if exists('$TMUX')
+  Plug 'preservim/vimux'
+endif
 
 " EXTRA SYNTAX HIGHLIGHT
 Plug 'sheerun/vim-polyglot'
@@ -141,7 +143,9 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'benknoble/vim-auto-origami'
 Plug 'machakann/vim-highlightedyank'
 " Profiler
-Plug 'dstein64/vim-startuptime'
+if v:version >= 800
+  Plug 'dstein64/vim-startuptime'
+endif
 " Support multiple emmet for vue files
 Plug 'leafOfTree/vim-vue-plugin'
 Plug 'AndrewRadev/inline_edit.vim'
@@ -405,11 +409,6 @@ endif
 "startify
 let g:startify_change_to_dir = 0
 
-"Vimux " disable if tmux isnt available
-if !executable('tmux')
-  let g:loaded_vimux = 1
-endif
-
 "NERDTree
 let g:NERDTreeDirArrowExpandable = ''
 let g:NERDTreeDirArrowCollapsible = ''
@@ -444,7 +443,7 @@ let g:DevIconsEnableFoldersOpenClose = 1
 let g:DevIconsEnableDistro = 0
 
 "Auto Origami (auto manage fold columns)
-if &rtp =~ 'vim-auto-origami' && glob("~/.vim/plugged/vim-auto-origami/plugin/auto_origami.vim")!=#""
+if exists('&belloff') && &rtp =~ 'vim-auto-origami' && glob("~/.vim/plugged/vim-auto-origami/plugin/auto_origami.vim")!=#""
   augroup auto_origami
     au!
     au CursorHold,BufWinEnter,WinEnter * AutoOrigamiFoldColumn
@@ -817,11 +816,13 @@ autocmd FileType scss setl iskeyword+=@-@
 " autocmd VimEnter * call ToggleHiddenAll()
 
 " assumes set noignorecase
-augroup dynamic_smartcase
-  autocmd!
-  autocmd CmdLineEnter : set ignorecase
-  autocmd CmdLineLeave : set noignorecase
-augroup END
+if exists('##CmdLineEnter')
+  augroup dynamic_smartcase
+    autocmd!
+    autocmd CmdLineEnter : set ignorecase
+    autocmd CmdLineLeave : set noignorecase
+  augroup END
+endif
 
 " fix artifacts on screen from tmux-focus-events
 autocmd FocusGained * silent redraw!
