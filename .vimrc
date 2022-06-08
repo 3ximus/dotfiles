@@ -366,7 +366,9 @@ if &rtp =~ 'vim-airline' && glob("~/.vim/plugged/vim-airline/plugin/airline.vim"
   let g:airline#extensions#hunks#non_zero_only = 1
   let g:airline#extensions#term#enabled = 0
 
-  let g:airline_section_z = airline#section#create(['windowswap', '%p%%','linenr', 'maxlinenr', g:airline_symbols.colnr, '%c'])
+  call airline#parts#define('maxLine', { 'raw': '%L', 'accent': 'bold'})
+  " let g:airline_section_z = airline#section#create(['windowswap', '%p%%','linenr', 'maxlinenr', g:airline_symbols.colnr, '%c'])
+  let g:airline_section_z = airline#section#create(['%p%% l/', 'maxLine', ':%c'])
 
   if !exists('g:airline_symbols')
     let g:airline_symbols = {}
@@ -402,7 +404,7 @@ if &rtp =~ 'vim-airline' && glob("~/.vim/plugged/vim-airline/plugin/airline.vim"
 
 
   let g:airline_symbols.notexists = '%'
-  let g:airline_symbols.dirty='*'
+  let g:airline_symbols.dirty = '*'
 endif
 
 "startify
