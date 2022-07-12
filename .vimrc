@@ -146,7 +146,6 @@ if v:version >= 800
   Plug 'dstein64/vim-startuptime'
 endif
 " Support multiple emmet for vue files
-Plug 'leafOfTree/vim-vue-plugin'
 Plug 'AndrewRadev/inline_edit.vim'
 
 "NerdFont icons in NerdTree, startify and Ctrl-p
@@ -292,7 +291,7 @@ nnoremap <leader>yy :w !xclip -selection clipboard<CR><CR>
 nmap <leader>x :bp<bar>bd #<CR>
 
 " Clear search highlight and close preview window
-nnoremap <silent> <backspace> :noh<CR>:pc<CR>:cclose<CR>
+nnoremap <silent> <backspace> :noh<CR>:pc<CR>:cclose<CR>:call CloseGstatus()<CR>
 
 " remove trailing whitespaces
 nmap <leader>s :call StripTrailingWhitespace()<CR>
@@ -416,7 +415,6 @@ let g:NERDTreeDirArrowCollapsible = ''
 let g:NERDTreeMinimalUI=1
 let g:NERDTreeCreatePrefix='silent keepalt keepjumps'
 let g:NERDTreeShowLineNumbers=1
-let g:NERDTreeWinSize=30
 
 "nerdtree-git
 " let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
@@ -510,16 +508,14 @@ let g:NERDTreeGitStatusMapNextHunk=']h'
 let g:NERDTreeGitStatusMapPrevHunk='[h'
 
 "fugitive
-function! ToggleGstatus() abort
+function! CloseGstatus() abort
   for l:winnr in range(1, winnr('$'))
     if !empty(getwinvar(l:winnr, 'fugitive_status'))
       execute l:winnr.'close'
-    else
-      execute 'Git|12wincmd_'
     endif
   endfor
 endfunction
-noremap <leader>gs :call ToggleGstatus()<CR>
+noremap <leader>gs :Git\|12wincmd_<CR>
 noremap <leader>gd :Gvdiffsplit!<CR>
 noremap <leader>gl :0Gclog<CR>:copen<CR>
 vmap <leader>gl :Gclog<CR>:copen<CR>
