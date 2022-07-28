@@ -1,5 +1,5 @@
 [Background]
-Color=30,30,30
+Color=40,40,40
 
 [BackgroundFaint]
 Color=30,30,30
@@ -92,5 +92,5 @@ Color=235,219,178
 Blur=true
 ColorRandomization=false
 Description=Gruvbox Dark Real Colors
-Opacity=0.76
+Opacity=1
 Wallpaper=
