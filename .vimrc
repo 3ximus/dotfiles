@@ -485,6 +485,8 @@ let g:polyglot_disabled = ["sensible"]
 map <C-t> :NERDTreeToggle<CR>
 map <C-f> :NERDTreeFind<CR>
 nnoremap U :GundoToggle<CR>
+let NERDTreeMapOpenSplit='s'
+let NERDTreeMapOpenVSplit='v'
 
 " Inline edit
 nmap <leader>i :InlineEdit<CR>
@@ -727,6 +729,14 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
   omap ic <Plug>(coc-classobj-i)
   xmap ac <Plug>(coc-classobj-a)
   omap ac <Plug>(coc-classobj-a)
+
+  " Allow auto import when using C-n and C-p for navigating suggestions
+  inoremap <silent><expr> <C-n> coc#pum#visible() ? coc#pum#next(1) : "\<C-n>"
+  inoremap <silent><expr> <C-p> coc#pum#visible() ? coc#pum#prev(1) : "\<C-p>"
+  inoremap <silent><expr> <down> coc#pum#visible() ? coc#pum#next(0) : "\<down>"
+  inoremap <silent><expr> <up> coc#pum#visible() ? coc#pum#prev(0) : "\<up>"
+  inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-y>"
+  inoremap <silent><expr> <Tab> coc#pum#visible() ? coc#pum#confirm() : "\<C-y>"
 
   " Add Vim's native statusline support.
   " NOTE: Please see `:h coc-status` for integrations with external plugins that
