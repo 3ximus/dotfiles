@@ -1,0 +1,21 @@
+\set QUIET 1
+
+\set PROMPT1 '%033[1;32m%n%[%033[0m@%[%033[1;34m%/%R%[%033[0m%#%x '
+\set PROMPT2 '%033[1;32m%n%[%033[0m@%[%033[1;34m%/%R%[%033[0m%#%x '
+
+\set COMP_KEYWORD_CASE upper
+\set VERBOSITY verbose
+\set HISTCONTROL ignoredups
+
+\x auto
+
+\pset null '[NULL]'
+
+\set triggers 'SELECT  event_object_table AS table_name ,trigger_name FROM information_schema.triggers GROUP BY table_name , trigger_name ORDER BY table_name ,trigger_name;'
+\set indexes 'SELECT tablename, indexname, indexdef FROM pg_indexes WHERE schemaname = 'public' ORDER BY tablename, indexname;'
+
+\echo 'Type :triggers to all triggers.' 
+\echo 'Type :indexes to see all indexes.'
+
+\unset QUIET
+

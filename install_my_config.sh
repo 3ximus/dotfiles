@@ -5,7 +5,7 @@ DESTINATION_PATH="$HOME"
 
 TMP_FILE="/tmp/file_install_selection.cfg"
 
-DEFAULT_FILE_LIST=".bashrc .vimrc .gdbinit .gitconfig .inputrc .tmux.conf .tmux-powerlinerc"
+DEFAULT_FILE_LIST=".bashrc .vimrc .gdbinit .gitconfig .inputrc .tmux.conf"
 DEFAULT_DIR_LIST=".bash .vim .tmux"
 
 # will be appended by all the grab functions and contain all the path files
