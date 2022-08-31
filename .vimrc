@@ -146,7 +146,7 @@ if v:version >= 800
   Plug 'dstein64/vim-startuptime'
 endif
 " Support multiple emmet for vue files
-Plug 'AndrewRadev/inline_edit.vim'
+Plug 'leafOfTree/vim-vue-plugin'
 
 "NerdFont icons in NerdTree, startify and Ctrl-p
 Plug 'ryanoasis/vim-devicons'
@@ -237,6 +237,7 @@ function! Prettier()
   normal `'
 endfunction
 command! -nargs=0 Prettier :call Prettier()
+noremap g= :Prettier<CR>
 
 " }}}
 
@@ -477,6 +478,15 @@ let g:VimuxPromptString = "$ "
 
 let g:polyglot_disabled = ["sensible"]
 
+" vim-vue-plugin
+let g:vim_vue_plugin_config = {
+  \'syntax': {
+  \  'template': ['html'],
+  \  'script': ['typescript', 'javascript'],
+  \  'style': ['scss'],
+  \},
+\}
+
 " }}}
 
 " PLUGIN KEYMAPS {{{
@@ -543,6 +553,7 @@ nmap <leader>E :Emmet<space>
 let g:user_emmet_leader_key='<C-y>'
 let g:user_emmet_expandabbr_key='<C-e>'
 let g:user_emmet_mode='inv'
+imap <C-e> <plug>(emmet-expand-abbr)
 
 "Vimux
 noremap <leader>rc  :VimuxPromptCommand<CR>
