@@ -32,6 +32,8 @@ set smarttab
 
 set updatetime=400
 
+set modeline
+
 "search settings
 set incsearch
 set hlsearch

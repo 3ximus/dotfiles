@@ -20,6 +20,10 @@ TerminalColumns=100
 TerminalMargin=15
 TerminalRows=60
 
+[Interaction Options]
+TextEditorCmd=5
+UnderlineFilesEnabled=true
+
 [Keyboard]
 KeyBindings=default
 
