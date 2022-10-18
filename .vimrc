@@ -150,6 +150,9 @@ endif
 " Support multiple emmet for vue files
 Plug 'leafOfTree/vim-vue-plugin'
 
+" vim go
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
 "NerdFont icons in NerdTree, startify and Ctrl-p
 Plug 'ryanoasis/vim-devicons'
 
@@ -233,13 +236,51 @@ function! ClearRegisters()
 endfunction
 command! -nargs=0 ClearRegisters :call ClearRegisters()
 
+" FORMAT FUNCTIONS ===
+
 function! Prettier()
-  normal m'
-  silent %!prettier --stdin-filepath %
-  normal `'
+  let saved_view = winsaveview()
+  silent %!prettier --no-color --stdin-filepath %
+  cclose
+  if v:shell_error > 0
+    let l:errors = []
+    for l:line in getline(1,'$')
+      let l:match = matchlist(l:line, '^.*: \(.*\) (\(\d\{1,}\):\(\d\{1,}\)*)')
+      if !empty(l:match)
+        call add(l:errors, { 'bufnr': bufnr('%'), 'lnum': l:match[2], 'col': l:match[3] }) 'text': l:match[1],
+      endif
+    endfor
+
+    silent undo
+    call setqflist(l:errors, 'r')
+    cwindow
+  endif
+  call winrestview(saved_view)
 endfunction
-command! -nargs=0 Prettier :call Prettier()
-noremap g= :Prettier<CR>
+noremap g= :call Prettier()<CR>
+
+function! GoFmt()
+  let saved_view = winsaveview()
+  silent %!gofmt
+  if v:shell_error > 0
+    cexpr getline(1, '$')->map({ _, line -> line->substitute('<standard input>', expand('%'), '') })
+    let l:errors = []
+    for l:line in getline(1,'$')
+      let l:match = matchlist(l:line, '^\([^:]\+\):\(\d\{1,}\):\(\d\{1,}\): \(.*\)')
+      if !empty(l:match)
+        call add(l:errors, { 'bufnr': bufnr('%'), 'text': l:match[4], 'lnum': l:match[2], 'col': l:match[3] , 'filename': l:match[1]})
+      endif
+    endfor
+
+    silent undo
+    call setqflist(l:errors, 'r')
+    cwindow
+  else
+    cclose
+  endif
+  call winrestview(saved_view)
+endfunction
+
 
 " }}}
 
@@ -477,6 +518,7 @@ let g:markology_include='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 let g:VimuxPromptString = "$ "
+let g:VimuxExpandCommand = 1
 
 let g:polyglot_disabled = ["sensible"]
 
@@ -488,6 +530,18 @@ let g:vim_vue_plugin_config = {
   \  'style': ['scss'],
   \},
 \}
+
+" vim-go (with vim-polyglot)
+let g:go_highlight_function_parameters = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_variable_declarations = 1
+let g:go_highlight_variable_assignments = 1
 
 " }}}
 
@@ -558,12 +612,12 @@ let g:user_emmet_mode='inv'
 imap <C-e> <plug>(emmet-expand-abbr)
 
 "Vimux
-noremap <leader>rc  :VimuxPromptCommand<CR>
-noremap <leader>rl  :VimuxRunLastCommand<CR>
-noremap <leader>rk  :VimuxInterruptRunner<CR>
-noremap <leader>rq  :VimuxCloseRunner<CR>
-noremap <leader>ro  :VimuxOpenRunner<CR>
-noremap <leader>ri  :VimuxInspectRunner<CR>
+noremap <leader>rc :VimuxPromptCommand<CR>
+noremap <leader>rl :VimuxRunLastCommand<CR>
+noremap <leader>rk :VimuxInterruptRunner<CR>
+noremap <leader>rq :VimuxCloseRunner<CR>
+noremap <leader>ro :VimuxOpenRunner<CR>
+noremap <leader>ri :VimuxInspectRunner<CR>
 function! VimuxSendSelectedText() range
   let [lnum1, col1] = getpos("'<")[1:2]
   let [lnum2, col2] = getpos("'>")[1:2]
@@ -826,6 +880,8 @@ autocmd FileType dart setlocal formatexpr=dart#fmt()
 
 " must be used from the first line
 autocmd FileType json setlocal formatprg=python3\ -m\ json.tool
+
+autocmd FileType go map g= :call GoFmt()<CR>
 
 " add @ completion
 autocmd FileType scss setl iskeyword+=@-@
