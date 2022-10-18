@@ -1,3 +1,4 @@
+" vim: foldmethod=marker foldlevel=0
 
 " GENERIC SETTINGS {{{
 " =====================
