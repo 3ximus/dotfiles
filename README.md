@@ -40,7 +40,7 @@ Most of my files are set with the [gruvbox](https://github.com/morhetz/gruvbox) 
 
 ## Installation and Cloning
 
-This repository contains submodules for the `ble.sh`, `Vundle` and `Tmux Plugin Manager`. Do either:
+This repository contains submodules for the `ble.sh`, `vim-plug` and `Tmux Plugin Manager`. Do either:
 
 `git clone --recurse-submodules -j8 https://github.com/3ximus/dotfiles.git`
 
@@ -99,7 +99,9 @@ z,s
 
 Vim configuration is huge but it's organized and documented, so just open the `.vimrc` file and check it out
 
-### Plugin list (using [Vundle](https://github.com/VundleVim/Vundle.vim)):
+### Plugin list (using [vim-plug](https://github.com/junegunn/vim-plug)):
+
+It might have changed, so just check the `.vimrc` on the `VIM PLUG PLUGINS` section
 
  -  [vim-airline](https://github.com/vim-airline/vim-airline)
  -  [nerdtree](https://github.com/scrooloose/nerdtree)
