@@ -87,9 +87,6 @@ onoremap in :<C-u>normal vin<CR>
 " ===================
 
 call plug#begin()
-
-Plug 'VundleVim/Vundle.vim'
-
 Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdtree'
 
@@ -410,9 +407,17 @@ if &rtp =~ 'vim-airline' && glob("~/.vim/plugged/vim-airline/plugin/airline.vim"
   let g:airline#extensions#hunks#non_zero_only = 1
   let g:airline#extensions#term#enabled = 0
 
+  " coc configuration
+  let g:airline#extensions#coc#error_symbol = '#'
+  let g:airline#extensions#coc#warning_symbol = '#'
+  let g:airline#extensions#coc#show_coc_status = 0
+  let g:airline#extensions#coc#stl_format_err = '-%d'
+  let g:airline#extensions#coc#stl_format_warn = '-%d'
+
+  call airline#parts#define('coc_status', { 'raw': '%{airline#util#shorten(get(g:, "coc_status", ""), 91, 9)}', 'accent': 'bold'})
   call airline#parts#define('maxLine', { 'raw': '%L', 'accent': 'bold'})
-  " let g:airline_section_z = airline#section#create(['windowswap', '%p%%','linenr', 'maxlinenr', g:airline_symbols.colnr, '%c'])
   let g:airline_section_z = airline#section#create(['%p%% %l/', 'maxLine', ':%c'])
+  let g:airline_section_x = airline#section#create(['%{WebDevIconsGetFileTypeSymbol()}', ' ', 'filetype', ' ', 'coc_status'])
 
   if !exists('g:airline_symbols')
     let g:airline_symbols = {}
@@ -442,10 +447,14 @@ if &rtp =~ 'vim-airline' && glob("~/.vim/plugged/vim-airline/plugin/airline.vim"
   "this will only worked with patched fonts from NERD FONTS
   let g:airline_left_sep = "\uE0B8"
   let g:airline_right_sep = "\uE0BA"
-
   let g:airline_left_alt_sep = "\uE0B9"
   let g:airline_right_alt_sep =  "\uE0BB"
 
+  "no symbols
+  let g:airline_left_sep = ""
+  let g:airline_right_sep = ""
+  let g:airline_left_alt_sep = ""
+  let g:airline_right_alt_sep =  ""
 
   let g:airline_symbols.notexists = '%'
   let g:airline_symbols.dirty = '*'
@@ -480,7 +489,7 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
 
 " devicons
 " let g:WebDevIconsNerdTreeBeforeGlyphPadding = ''
-let g:webdevicons_enable_airline_statusline = 1
+let g:webdevicons_enable_airline_statusline = 0
 let g:webdevicons_enable_airline_tabline = 1
 let g:webdevicons_conceal_nerdtree_brackets = 1
 let g:DevIconsEnableFoldersOpenClose = 1

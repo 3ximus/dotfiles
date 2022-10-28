@@ -62,7 +62,7 @@ shopt -s histappend
 
 # set history length)
 HISTSIZE=20000
-HISTFILESIZE=10000
+HISTFILESIZE=40000
 
 # ==================
 #    TTY SPECIFIC
