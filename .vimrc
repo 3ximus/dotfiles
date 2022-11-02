@@ -410,17 +410,26 @@ if &rtp =~ 'vim-airline' && glob("~/.vim/plugged/vim-airline/plugin/airline.vim"
   " coc configuration
   let g:airline#extensions#coc#error_symbol = '#'
   let g:airline#extensions#coc#warning_symbol = '#'
-  let g:airline#extensions#coc#show_coc_status = 0
+  let g:airline#extensions#coc#show_coc_status = 0 " handled in custom section
   let g:airline#extensions#coc#stl_format_err = '-%d'
   let g:airline#extensions#coc#stl_format_warn = '-%d'
+  let g:airline#extensions#searchcount#enabled = 0 " handled in custom section
 
-  let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'w', 'y', 'z', 'warning', 'error']]
+  let g:airline#extensions#default#layout = [['a', 'b', 'd', 'c'], ['x', 'w', 'y', 'z', 'warning', 'error']]
 
-  call airline#parts#define('coc_status', { 'raw': '%{airline#util#shorten(get(g:, "coc_status", ""), 90, 5)}', 'accent': 'bold'})
+  call airline#parts#define('coc_status', { 'raw': '%#__restore__#ﭧ %{airline#util#shorten(trim(get(g:, "coc_status", "")), 100, 5)}'})
   call airline#parts#define('maxLine', { 'raw': '%L', 'accent': 'bold'})
-  let g:airline_section_x = airline#section#create(['%{WebDevIconsGetFileTypeSymbol()}', ' ', 'filetype', ' ', 'coc_status'])
+  call airline#parts#define('newSearchCount', { 'raw': '%{v:hlsearch ? trim(airline#extensions#searchcount#status()) : ""}', 'accent': 'bold'})
+
+  let g:airline_section_d = airline#section#create(['coc_status'])
+  let g:airline_section_x = airline#section#create(['%{WebDevIconsGetFileTypeSymbol()}', ' ', 'filetype'])
   let g:airline_section_w = airline#section#create(['%{get(b:,"coc_current_function","")}'])
+  let g:airline_section_y = airline#section#create(['%{airline#util#wrap(airline#parts#ffenc(),0)}', 'newSearchCount'])
   let g:airline_section_z = airline#section#create(['%p%% %l/', 'maxLine', ':%c'])
+
+  " set color on custom sections
+  autocmd VimEnter * let g:airline#themes#gruvbox#palette.normal.airline_w = ['#282828', '#8ec07c', 0, 14]
+  autocmd VimEnter * let g:airline#themes#gruvbox#palette.normal.airline_d = ['#ebdbb2', '#458588', 15, 4]
 
   if !exists('g:airline_symbols')
     let g:airline_symbols = {}
@@ -903,8 +912,6 @@ autocmd FileType scss setl iskeyword+=@-@
 
 " RUN COMMANDS ON EVENTS {{{
 " ===========================
-
-autocmd VimEnter * let g:airline#themes#gruvbox#palette.normal.airline_w = ['#282828', '#8ec07c', 0, 14]
 
 " assumes set noignorecase
 if exists('##CmdLineEnter')
