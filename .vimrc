@@ -87,8 +87,26 @@ onoremap in :<C-u>normal vin<CR>
 " ===================
 
 call plug#begin()
+
+" COLORSCHEME
+Plug '3ximus/gruvbox'
+
+" BASE
 Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdtree'
+Plug '3ximus/fzf' " use my fork to allow passing g:fzf_no_term
+Plug 'junegunn/fzf.vim'
+Plug 'sjl/gundo.vim'
+Plug 'junegunn/vim-peekaboo'
+Plug 'jeetsukumaran/vim-markology'
+
+" TOOLS
+Plug 'tpope/vim-surround'
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-repeat'
+Plug 'easymotion/vim-easymotion'
+Plug 'unblevable/quick-scope'
+Plug 'AndrewRadev/linediff.vim'
 
 " GIT
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -96,21 +114,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'godlygeek/tabular'
-
-" TOOLS
-Plug 'tpope/vim-surround'
-" Plug 'tpope/vim-commentary'
-Plug 'tomtom/tcomment_vim'
-Plug 'tpope/vim-repeat'
-Plug 'sjl/gundo.vim'
-Plug 'easymotion/vim-easymotion'
-Plug 'unblevable/quick-scope'
-Plug 'AndrewRadev/linediff.vim'
-Plug '3ximus/fzf' " use my fork to allow passing g:fzf_no_term
-Plug 'junegunn/fzf.vim'
-
-Plug 'junegunn/vim-peekaboo'
-Plug 'jeetsukumaran/vim-markology'
 
 " COMPLETION
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -130,9 +133,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'mattn/emmet-vim'
 " argument text object
 Plug 'inkarkat/argtextobj.vim'
-
-" COLORSCHEME
-Plug 'morhetz/gruvbox'
 
 " OTHER
 Plug 'mhinz/vim-startify'
@@ -422,14 +422,14 @@ if &rtp =~ 'vim-airline' && glob("~/.vim/plugged/vim-airline/plugin/airline.vim"
   call airline#parts#define('newSearchCount', { 'raw': '%{v:hlsearch ? trim(airline#extensions#searchcount#status()) : ""}', 'accent': 'bold'})
 
   let g:airline_section_d = airline#section#create(['coc_status'])
-  let g:airline_section_x = airline#section#create(['%{WebDevIconsGetFileTypeSymbol()}', ' ', 'filetype'])
+  let g:airline_section_x = airline#section#create(['%{airline#util#shorten(airline#parts#filetype(),110,0) == "…" ? "" : airline#util#shorten(airline#parts#filetype(),110,0)}',' ','%{WebDevIconsGetFileTypeSymbol()}' ])
   let g:airline_section_w = airline#section#create(['%{get(b:,"coc_current_function","")}'])
   let g:airline_section_y = airline#section#create(['%{airline#util#wrap(airline#parts#ffenc(),0)}', 'newSearchCount'])
   let g:airline_section_z = airline#section#create(['%p%% %l/', 'maxLine', ':%c'])
 
   " set color on custom sections
-  autocmd VimEnter * let g:airline#themes#gruvbox#palette.normal.airline_w = ['#282828', '#8ec07c', 0, 14]
-  autocmd VimEnter * let g:airline#themes#gruvbox#palette.normal.airline_d = ['#ebdbb2', '#458588', 15, 4]
+  autocmd User AirlineAfterTheme let g:airline#themes#gruvbox#palette.normal.airline_w = ['#282828', '#8ec07c', 0, 14]
+  autocmd User AirlineAfterTheme let g:airline#themes#gruvbox#palette.normal.airline_d = ['#ebdbb2', '#458588', 15, 4]
 
   if !exists('g:airline_symbols')
     let g:airline_symbols = {}
