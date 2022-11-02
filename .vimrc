@@ -414,10 +414,13 @@ if &rtp =~ 'vim-airline' && glob("~/.vim/plugged/vim-airline/plugin/airline.vim"
   let g:airline#extensions#coc#stl_format_err = '-%d'
   let g:airline#extensions#coc#stl_format_warn = '-%d'
 
-  call airline#parts#define('coc_status', { 'raw': '%{airline#util#shorten(get(g:, "coc_status", ""), 91, 9)}', 'accent': 'bold'})
+  let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'w', 'y', 'z', 'warning', 'error']]
+
+  call airline#parts#define('coc_status', { 'raw': '%{airline#util#shorten(get(g:, "coc_status", ""), 90, 5)}', 'accent': 'bold'})
   call airline#parts#define('maxLine', { 'raw': '%L', 'accent': 'bold'})
-  let g:airline_section_z = airline#section#create(['%p%% %l/', 'maxLine', ':%c'])
   let g:airline_section_x = airline#section#create(['%{WebDevIconsGetFileTypeSymbol()}', ' ', 'filetype', ' ', 'coc_status'])
+  let g:airline_section_w = airline#section#create(['%{get(b:,"coc_current_function","")}'])
+  let g:airline_section_z = airline#section#create(['%p%% %l/', 'maxLine', ':%c'])
 
   if !exists('g:airline_symbols')
     let g:airline_symbols = {}
@@ -901,7 +904,7 @@ autocmd FileType scss setl iskeyword+=@-@
 " RUN COMMANDS ON EVENTS {{{
 " ===========================
 
-" autocmd VimEnter * call ToggleHiddenAll()
+autocmd VimEnter * let g:airline#themes#gruvbox#palette.normal.airline_w = ['#282828', '#8ec07c', 0, 14]
 
 " assumes set noignorecase
 if exists('##CmdLineEnter')

@@ -1,4 +1,5 @@
 {
+  "coc.preferences.currentFunctionSymbolAutoUpdate": true,
   "suggest.autoTrigger": "trigger",
   "diagnostic.errorSign": ">>",
   "diagnostic.warningSign": "!",
