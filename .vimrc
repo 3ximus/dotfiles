@@ -411,13 +411,13 @@ if &rtp =~ 'vim-airline' && glob("~/.vim/plugged/vim-airline/plugin/airline.vim"
   let g:airline#extensions#coc#error_symbol = '#'
   let g:airline#extensions#coc#warning_symbol = '#'
   let g:airline#extensions#coc#show_coc_status = 0 " handled in custom section
-  let g:airline#extensions#coc#stl_format_err = '-%d'
-  let g:airline#extensions#coc#stl_format_warn = '-%d'
+  let g:airline#extensions#coc#stl_format_err = '%C-%L'
+  let g:airline#extensions#coc#stl_format_warn = '%C-%L'
   let g:airline#extensions#searchcount#enabled = 0 " handled in custom section
 
   let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'd', 'w', 'y', 'z', 'warning', 'error']]
 
-  call airline#parts#define('coc_status', { 'raw': '%#__restore__# %{airline#util#shorten(trim(get(g:, "coc_status", "")), 100, 5)}'})
+  call airline#parts#define('coc_status', { 'raw': '%#__restore__#%{get(g:, "coc_status", "") != "" ? (get(g:, "coc_enabled", "") == 1 ? " " : " " ) : ""}%{airline#util#shorten(trim(get(g:, "coc_status", "")), 100, 6)}'})
   call airline#parts#define('maxLine', { 'raw': '%L', 'accent': 'bold'})
   call airline#parts#define('newSearchCount', { 'raw': '%{v:hlsearch ? trim(airline#extensions#searchcount#status()) : ""}', 'accent': 'bold'})
 
@@ -826,11 +826,6 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
   inoremap <silent><expr> <up> coc#pum#visible() ? coc#pum#prev(0) : "\<up>"
   inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>"
   inoremap <silent><expr> <Tab> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<Tab>"
-
-  " Add Vim's native statusline support.
-  " NOTE: Please see `:h coc-status` for integrations with external plugins that
-  " provide custom statusline: vim-airline.
-  " set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
   function! CocToggle()
     if g:coc_enabled
