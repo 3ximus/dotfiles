@@ -420,9 +420,12 @@ if &rtp =~ 'vim-airline' && glob("~/.vim/plugged/vim-airline/plugin/airline.vim"
   call airline#parts#define('coc_status', { 'raw': '%#__restore__#%{get(g:, "coc_status", "") != "" ? (get(g:, "coc_enabled", "") == 1 ? " " : " " ) : ""}%{airline#util#shorten(trim(get(g:, "coc_status", "")), 100, 6)}'})
   call airline#parts#define('maxLine', { 'raw': '%L', 'accent': 'bold'})
   call airline#parts#define('newSearchCount', { 'raw': '%{v:hlsearch ? trim(airline#extensions#searchcount#status()) : ""}', 'accent': 'bold'})
+  call airline#parts#define('filenamePath',  {'raw': '%<%{expand("%:p:h")}/'})
+  call airline#parts#define('filename',  {'raw': '%<%t%m ', 'accent':'bold'})
 
+  let g:airline_section_c = airline#section#create(['filenamePath', 'filename', 'readonly'])
   let g:airline_section_d = airline#section#create(['coc_status'])
-  let g:airline_section_x = airline#section#create(['%{airline#util#shorten(airline#parts#filetype(),120,0) == "…" ? "" : airline#util#shorten(airline#parts#filetype(),110,0)}',' ','%{WebDevIconsGetFileTypeSymbol()}' ])
+  let g:airline_section_x = airline#section#create(['%{airline#util#shorten(airline#parts#filetype(),140,0) == "…" ? "" : airline#util#shorten(airline#parts#filetype(),110,0)}',' ','%{WebDevIconsGetFileTypeSymbol()}' ])
   let g:airline_section_w = airline#section#create(['%{get(b:,"coc_current_function","")}'])
   let g:airline_section_y = airline#section#create(['%{airline#util#wrap(airline#parts#ffenc(),0)}', 'newSearchCount'])
   let g:airline_section_z = airline#section#create(['%p%% %l/', 'maxLine', ':%c'])
