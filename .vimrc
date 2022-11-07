@@ -333,7 +333,7 @@ nnoremap <leader>yy :w !xclip -selection clipboard<CR><CR>
 nmap <leader>x :bp<bar>bd #<CR>
 
 " Clear search highlight and close preview window
-nnoremap <silent> <backspace> :noh<CR>:pc<CR>:cclose<CR>:call CloseGstatus()<CR>
+nnoremap <silent> <backspace> :noh<CR>:pc<CR>:cclose<CR>:call CloseGstatus()<CR>:call CocAction('hideOutline')<CR>:call popup_clear(1)<CR>
 
 " remove trailing whitespaces
 nmap <leader>s :call StripTrailingWhitespace()<CR>
@@ -835,7 +835,15 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
     endif
   endfunction
   command! CocToggle :call CocToggle()
-  nnoremap <silent><nowait> <leader>ct  :<C-u>CocToggle<CR>
+
+  function! CocOutlineToggle()
+    let winid = coc#window#find('cocViewId', 'OUTLINE')
+    if winid == -1
+      call CocActionAsync('showOutline', 1)
+    else
+      call coc#window#close(winid)
+    endif
+  endfunction
 
   command! -nargs=0 Format :call CocActionAsync('format')
   command! -nargs=0 OrganizeImports   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
@@ -846,8 +854,10 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
   nnoremap <silent><nowait> <leader>cd  :<C-u>CocList diagnostics<CR>
   nnoremap <silent><nowait> <leader>ce  :<C-u>CocList extensions<CR>
   nnoremap <silent><nowait> <leader>cc  :<C-u>CocList commands<CR>
-  nnoremap <silent><nowait> <leader>co  :<C-u>CocList outline<CR>
+  " nnoremap <silent><nowait> <leader>co  :<C-u>CocList outline<CR>
   nnoremap <silent><nowait> <leader>cs  :<C-u>CocList -I symbols<CR>
+  nnoremap <silent><nowait> <leader>co  :<C-u>call CocOutlineToggle()<CR>
+  nnoremap <silent><nowait> <leader>ct  :<C-u>CocToggle<CR>
 endif
 
 " }}}
