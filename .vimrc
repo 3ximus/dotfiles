@@ -186,7 +186,7 @@ autocmd VimEnter * highlight Normal ctermbg=none
 "fold function to auto fold entire document based on indent
 function! Fold(depth)
   let &foldnestmax = a:depth
-  set foldmethod=indent
+  setlocal foldmethod=indent
 endfunction
 command! -nargs=1 Fold :call Fold( '<args>' ) "command to use Fold function
 
@@ -417,18 +417,19 @@ if &rtp =~ 'vim-airline' && glob("~/.vim/plugged/vim-airline/plugin/airline.vim"
 
   let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'd', 'w', 'y', 'z', 'warning', 'error']]
 
-  call airline#parts#define('coc_status', { 'raw': '%#__restore__#%{get(g:, "coc_status", "") != "" ? (get(g:, "coc_enabled", "") == 1 ? " " : " " ) : ""}%{airline#util#shorten(trim(get(g:, "coc_status", "")), 100, 6)}'})
-  call airline#parts#define('maxLine', { 'raw': '%L', 'accent': 'bold'})
-  call airline#parts#define('newSearchCount', { 'raw': '%{v:hlsearch ? trim(airline#extensions#searchcount#status()) : ""}', 'accent': 'bold'})
-  call airline#parts#define('filenamePath',  {'raw': '%<%{expand("%:p:h")}/'})
+  call airline#parts#define('coc_status_symbol', { 'raw': '%#__restore__#%{get(g:, "coc_status", "") != "" ? (get(g:, "coc_enabled", "") == 1 ? " " : " " ) : ""}'})
+  call airline#parts#define('coc_status', { 'raw': '%{airline#util#shorten(trim(get(g:, "coc_status", "")), 100, 6)}'})
+  call airline#parts#define('max_line', { 'raw': '%L', 'accent': 'bold'})
+  call airline#parts#define('new_search_count', { 'raw': '%{v:hlsearch ? trim(airline#extensions#searchcount#status()) : ""}', 'accent': 'bold'})
+  call airline#parts#define('filename_path',  {'raw': '%<%{expand("%:p:h")}/'})
   call airline#parts#define('filename',  {'raw': '%<%t%m ', 'accent':'bold'})
 
-  let g:airline_section_c = airline#section#create(['filenamePath', 'filename', 'readonly'])
-  let g:airline_section_d = airline#section#create(['coc_status'])
-  let g:airline_section_x = airline#section#create(['%{airline#util#shorten(airline#parts#filetype(),140,0) == "…" ? "" : airline#util#shorten(airline#parts#filetype(),110,0)}',' ','%{WebDevIconsGetFileTypeSymbol()}' ])
+  let g:airline_section_c = airline#section#create(['filename_path', 'filename', 'readonly'])
+  let g:airline_section_d = airline#section#create(['coc_status_symbol', 'coc_status'])
+  let g:airline_section_x = airline#section#create(['%{airline#util#wrap(airline#parts#filetype() . " " . WebDevIconsGetFileTypeSymbol(),140)}'])
   let g:airline_section_w = airline#section#create(['%{get(b:,"coc_current_function","")}'])
-  let g:airline_section_y = airline#section#create(['%{airline#util#wrap(airline#parts#ffenc(),0)}', 'newSearchCount'])
-  let g:airline_section_z = airline#section#create(['%p%% %l/', 'maxLine', ':%c'])
+  let g:airline_section_y = airline#section#create(['%{airline#util#wrap(airline#parts#ffenc(),0)}', 'new_search_count'])
+  let g:airline_section_z = airline#section#create(['%p%% %l/', 'max_line', ':%c'])
 
   " set color on custom sections
   autocmd User AirlineAfterTheme let g:airline#themes#gruvbox#palette.normal.airline_w = ['#282828', '#8ec07c', 0, 14]
@@ -611,9 +612,8 @@ endfunction
 noremap <leader>gs :Git\|12wincmd_<CR>
 noremap <leader>gd :Gvdiffsplit!<CR>
 noremap <leader>gl :0Gclog<CR>:copen<CR>
+noremap <leader>gL :G log --graph<CR>
 vmap <leader>gl :Gclog<CR>:copen<CR>
-" noremap <leader>gld :Gclog -- %<CR>:copen<CR>
-" noremap <leader>gla :Gclog<CR>:copen<CR>
 noremap <leader>gB :Git blame<CR>
 noremap <leader>gp :Git push<CR>
 
@@ -842,7 +842,7 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
   function! CocOutlineToggle()
     let winid = coc#window#find('cocViewId', 'OUTLINE')
     if winid == -1
-      call CocActionAsync('showOutline', 1)
+      call CocAction('showOutline')
     else
       call coc#window#close(winid)
     endif
