@@ -127,6 +127,7 @@ if exists('$TMUX')
 endif
 
 " EXTRA SYNTAX HIGHLIGHT
+let g:polyglot_disabled = ["sensible"]
 Plug 'sheerun/vim-polyglot'
 
 " EXTRAS
@@ -147,6 +148,8 @@ if v:version >= 800
 endif
 " Support multiple emmet for vue files
 Plug 'leafOfTree/vim-vue-plugin'
+
+Plug 'habamax/vim-godot'
 
 " vim go
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -309,7 +312,7 @@ vnoremap <C-j> :m '>+1<CR>gv
 vnoremap <C-k> :m '<-2<CR>gv
 
 " fold with fold nest max of 1
-nmap zF :call Fold(1)<CR>:set foldmethod=manual<CR>
+nmap zF :call Fold(v:count)<CR>:set foldmethod=manual<CR>
 " nmap zM :set foldmethod=marker<CR>
 
 " display line endings and tabs
@@ -456,8 +459,8 @@ if &rtp =~ 'vim-airline' && glob("~/.vim/plugged/vim-airline/plugin/airline.vim"
     \ ''     : 'S',
     \ 't'      : 'T',
     \ 'v'      : 'V',
-    \ 'V'      : 'V',
-    \ ''     : 'V',
+    \ 'V'      : 'VL',
+    \ ''     : 'VB',
     \ }
 
   "this will only worked with patched fonts from NERD FONTS
@@ -545,8 +548,6 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 let g:VimuxPromptString = "$ "
 let g:VimuxExpandCommand = 1
-
-let g:polyglot_disabled = ["sensible"]
 
 " vim-vue-plugin
 let g:vim_vue_plugin_config = {
