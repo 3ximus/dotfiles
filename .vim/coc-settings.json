@@ -4,14 +4,13 @@
   "diagnostic.errorSign": ">>",
   "diagnostic.warningSign": "!",
   "diagnostic.infoSign": "==",
+  "diagnostic.checkCurrentLine": true,
   "clangd.path": "/home/eximus/.config/coc/extensions/coc-clangd-data/install/13.0.0/clangd_13.0.0/bin/clangd",
   "python.analysis.typeCheckingMode": "off",
   "languageserver": {
     "godot": {
       "host": "127.0.0.1",
-      "filetypes": [
-        "gdscript"
-      ],
+      "filetypes": ["gdscript"],
       "port": 6008
     }
   }
