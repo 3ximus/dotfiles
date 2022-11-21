@@ -54,22 +54,8 @@ alias gl='git lol | less' # because my own alias is too much typing
 alias gla='git lol --all | less'
 alias gd='git diff'
 
-# python3 alias
-# alias python='python3'
-# alias ipython='ipython3'
-
-# pacman / aur
-alias aur-packages='pacman -Qm'
-alias list-packages='expac -H M "%m\t%-30n" | sort -rh | less'
-alias paccache-clean='paccache -rk1 && paccache -ruk0'
-
 # SSH
 alias load-keychain='[[ -f "${HOME}/.ssh/id_rsa" ]] && keychain "${HOME}/.ssh/id_rsa" --quiet && source "${HOME}/.keychain/${HOSTNAME}-sh"'
-
-# PLASMA
-alias restart-plasmashell='killall plasmashell && kstart5 $_ &>/dev/null'
-alias restart-tiling='qdbus org.kde.KWin /KWin reconfigure'
-alias restart-kwin='kwin_x11 --replace &'
 
 # attach/kill tmux sessions
 alias tmux-attach-session='tmux list-sessions; read -r -p "Attach to > " REPLY; tmux attach-session -t $REPLY'
