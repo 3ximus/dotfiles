@@ -64,6 +64,10 @@ shopt -s histappend
 HISTSIZE=20000
 HISTFILESIZE=40000
 
+tac $HISTFILE | awk '!x[$0]++' > /tmp/history_file && tac /tmp/history_file > $HISTFILE
+rm /tmp/history_file
+
+
 # ==================
 #    TTY SPECIFIC
 # ==================
