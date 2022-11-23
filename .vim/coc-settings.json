@@ -1,6 +1,9 @@
 {
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
   "suggest.autoTrigger": "trigger",
+  // "suggest.virtualText": true,
+  "codeLens.enable": true,
+  "codeLens.separator": "XX",
   "diagnostic.errorSign": ">>",
   "diagnostic.warningSign": "!",
   "diagnostic.infoSign": "==",
