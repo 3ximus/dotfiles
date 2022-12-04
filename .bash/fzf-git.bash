@@ -7,6 +7,20 @@ glf() {
 	local cmd opts files
 	files=$(sed -nE 's/.* -- (.*)/\1/p' <<< "$*") # extract files parameters for `git show` command
 	cmd="echo {} |grep -Eo '[a-f0-9]+' |head -1 |xargs -I% git show --color=always % -- $files | delta"
+	git log --oneline --graph \
+		--pretty=format:'%C(yellow)%h%Creset %C(auto)%d%Creset %s (%Cblue%an%Creset, %cr)' \
+		--date-order --color=always $* \
+		| fzf --preview="$cmd" --ansi --no-sort --no-multi --reverse \
+		--tiebreak=index \
+		--min-height 20 \
+		--bind="enter:execute($cmd | LESS='-r' less)"
+}
+
+glfa() {
+	git rev-parse --is-inside-work-tree >/dev/null || return 1
+	local cmd opts files
+	files=$(sed -nE 's/.* -- (.*)/\1/p' <<< "$*") # extract files parameters for `git show` command
+	cmd="echo {} |grep -Eo '[a-f0-9]+' |head -1 |xargs -I% git show --color=always % -- $files | delta"
 	git log --all --oneline --graph \
 		--pretty=format:'%C(yellow)%h%Creset %C(auto)%d%Creset %s (%Cblue%an%Creset, %cr)' \
 		--date-order --color=always $* \
