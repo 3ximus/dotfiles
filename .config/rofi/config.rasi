@@ -1,6 +1,6 @@
 configuration {
   modi: "window,run,ssh,drun,combi";
-  matching: "fuzzy";
+  matching: "normal";
   me-select-entry: "";
   me-accept-entry: [ MousePrimary ];
   timeout {
