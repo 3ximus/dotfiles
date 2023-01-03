@@ -489,6 +489,7 @@ let g:NERDTreeDirArrowCollapsible = ''
 let g:NERDTreeMinimalUI=1
 let g:NERDTreeCreatePrefix='silent keepalt keepjumps'
 let g:NERDTreeShowLineNumbers=1
+let g:NERDTreeMinimalMenu=1
 
 "nerdtree-git
 " let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
