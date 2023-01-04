@@ -57,7 +57,7 @@ DISPLAY_WIND="yes"
 BEAUFORTICON="yes"
 
 # Display in knots. yes/no
-KNOTS="yes"
+KNOTS="no"
 
 # How many decimals after the floating point
 DECIMALS=0
@@ -265,20 +265,21 @@ function setIcons {
         fi
     fi
     if [ "$DISPLAY_WIND" = "yes" ] && [ `echo "$WINDFORCE >= $MIN_WIND" |bc -l` -eq 1 ]; then
-        WIND="%{T$WEATHER_FONT_CODE}%{F$COLOR_WIND}$WINDICON%{F-}%{T-}"
+        # WIND="%{T$WEATHER_FONT_CODE}%{F$COLOR_WIND}$WINDICON%{F-}%{T-}"
+        WIND="<font color='$COLOR_WIND'>$WINDICON</font>"
         if [ $DISPLAY_FORCE = "yes" ]; then
-            WIND="$WIND $COLOR_TEXT_BEGIN$WINDFORCE$COLOR_TEXT_END"
+            WIND="$WIND $WINDFORCE"
             if [ $DISPLAY_WIND_UNIT = "yes" ]; then
                 if [ $KNOTS = "yes" ]; then
-                    WIND="$WIND ${COLOR_TEXT_BEGIN}kn$COLOR_TEXT_END"
+                    WIND="$WIND kn"
                 elif [ $UNITS = "imperial" ]; then
-                    WIND="$WIND ${COLOR_TEXT_BEGIN}mph$COLOR_TEXT_END"
+                    WIND="$WIND mph"
                 else
-                    WIND="$WIND ${COLOR_TEXT_BEGIN}km/h$COLOR_TEXT_END"
+                    WIND="$WIND km/h"
                 fi
             fi
         fi
-        WIND="$WIND |"
+        WIND="$WIND ·"
     fi
     if [ "$UNITS" = "metric" ]; then
         TEMP_ICON="糖"
@@ -291,20 +292,20 @@ function setIcons {
     TEMP=`echo "$TEMP" | cut -d "." -f 1`
 
     if [ "$TEMP" -le $COLD_TEMP ]; then
-        TEMP="<font color="$COLOR_COLD" size=3></font> $TEMP$TEMP_ICON"
+        TEMP="<font color="$COLOR_COLD">$TEMP$TEMP_ICON</font>"
         # TEMP="%{F$COLOR_COLD}%{T$TEMP_FONT_CODE}%{T-}%{F-} $COLOR_TEXT_BEGIN$TEMP%{T$TEMP_FONT_CODE}$TEMP_ICON%{T-}$COLOR_TEXT_END"
     elif [ `echo "$TEMP >= $HOT_TEMP" | bc` -eq 1 ]; then
-        TEMP="<font color="$COLOR_HOT" size=3></font> $TEMP$TEMP_ICON"
+        TEMP="<font color="$COLOR_HOT">$TEMP$TEMP_ICON</font>"
         # TEMP="%{F$COLOR_HOT}%{T$TEMP_FONT_CODE}%{T-}%{F-} $COLOR_TEXT_BEGIN$TEMP%{T$TEMP_FONT_CODE}$TEMP_ICON%{T-}$COLOR_TEXT_END"
     else
-        TEMP="<font size=3></font> $TEMP$TEMP_ICON"
+        TEMP="$TEMP$TEMP_ICON"
         # TEMP="%{F$COLOR_NORMAL_TEMP}%{T$TEMP_FONT_CODE}%{T-}%{F-} $COLOR_TEXT_BEGIN$TEMP%{T$TEMP_FONT_CODE}$TEMP_ICON%{T-}$COLOR_TEXT_END"
     fi
 }
 
 function outputCompact {
     # OUTPUT="$WIND %{T$WEATHER_FONT_CODE}%{F$ICON_COLOR}$ICON%{F-}%{T-} $ERR_MSG$COLOR_TEXT_BEGIN$DESCRIPTION$COLOR_TEXT_END| $TEMP"
-    OUTPUT="<font size=4 color="$ICON_COLOR">$WIND $ICON</font> $ERR_MSG$DESCRIPTION· $TEMP | size=16"
+    OUTPUT="<p style='margin:auto'>$WIND <font size=4 color="$ICON_COLOR">$ICON</font> $ERR_MSG$DESCRIPTION· $TEMP</p> | size=16"
     # echo "Output: $OUTPUT" >> "$HOME/.weather.log"
     echo "$OUTPUT"
 }
