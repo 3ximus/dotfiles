@@ -16,5 +16,7 @@
       "filetypes": ["gdscript"],
       "port": 6008
     }
-  }
+  },
+  "svelte.enable-ts-plugin": true,
+  "angular.enable-strict-mode-prompt": false
 }
