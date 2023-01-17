@@ -411,7 +411,7 @@ if &rtp =~ 'vim-airline' && glob("~/.vim/plugged/vim-airline/plugin/airline.vim"
   let g:airline#extensions#hunks#non_zero_only = 1
   let g:airline#extensions#term#enabled = 0
 
-  " coc configuration
+  " coc airline configuration
   let g:airline#extensions#coc#error_symbol = '#'
   let g:airline#extensions#coc#warning_symbol = '#'
   let g:airline#extensions#coc#show_coc_status = 0 " handled in custom section
@@ -464,7 +464,7 @@ if &rtp =~ 'vim-airline' && glob("~/.vim/plugged/vim-airline/plugin/airline.vim"
     \ ''     : 'VB',
     \ }
 
-  "this will only worked with patched fonts from NERD FONTS
+  "this will only worke with patched fonts from NERD FONTS
   let g:airline_left_sep = "\uE0B8"
   let g:airline_right_sep = "\uE0BA"
   let g:airline_left_alt_sep = "\uE0B9"
@@ -525,17 +525,10 @@ if exists('&belloff') && &rtp =~ 'vim-auto-origami' && glob("~/.vim/plugged/vim-
   let g:auto_origami_foldcolumn = 1
 endif
 
-
 " Gitgutter
 let g:gitgutter_sign_added = '┃'
 let g:gitgutter_sign_modified = '┃'
 let g:gitgutter_sign_modified_removed = '┻'
-
-"Python syntax highlight
-let g:python_highlight_all = 1
-let g:python_highlight_indent_errors = 1
-let g:python_highlight_space_errors = 0
-let g:python_highlight_operators = 0
 
 " Gundo
 if has('python3')
@@ -548,8 +541,15 @@ let g:markology_include='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 " quick-scope
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
+" Vimux
 let g:VimuxPromptString = "$ "
 let g:VimuxExpandCommand = 1
+
+"Python syntax highlight
+let g:python_highlight_all = 1
+let g:python_highlight_indent_errors = 1
+let g:python_highlight_space_errors = 0
+let g:python_highlight_operators = 0
 
 " vim-vue-plugin
 let g:vim_vue_plugin_config = {
@@ -571,6 +571,12 @@ let g:go_highlight_build_constraints = 1
 let g:go_highlight_generate_tags = 1
 let g:go_highlight_variable_declarations = 1
 let g:go_highlight_variable_assignments = 1
+
+" vim-svelte-plugin (with vim-polyglot)
+let g:vim_svelte_plugin_load_full_syntax = 1
+let g:vim_svelte_plugin_use_typescript = 1
+let g:vim_svelte_plugin_use_sass = 1
+let g:vim_svelte_plugin_has_init_indent = 1
 
 " }}}
 
