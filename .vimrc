@@ -242,6 +242,7 @@ command! -nargs=0 ClearRegisters :call ClearRegisters()
 
 function! Prettier()
   let saved_view = winsaveview()
+  let modified = &modified
   silent %!prettier --no-color --stdin-filepath %
   cclose
   if v:shell_error > 0
@@ -256,8 +257,13 @@ function! Prettier()
     silent undo
     call setqflist(l:errors, 'r')
     cwindow
+  else
+    if ! modified 
+      w
+    endif
   endif
   call winrestview(saved_view)
+  syntax sync fromstart
 endfunction
 noremap g= :call Prettier()<CR>
 
