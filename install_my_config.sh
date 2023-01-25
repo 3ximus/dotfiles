@@ -89,7 +89,7 @@ post_action_XXX() {
 install_whatsapp() {
 	if hash nativefier &>/dev/null ; then
 		echo "Choose whatsapp theme:"
-		select theme_path in ${DATA_PATH}/css/* ; do break; done
+		select theme_path in ${DATA_PATH}/styles/* ; do break; done
 		echo "if ('serviceWorker' in navigator) {caches.keys().then(function (cacheNames) {cacheNames.forEach(function (cacheName) {caches.delete(cacheName);});});}" > /tmp/whatsapp-inject.js
 		nativefier --inject $theme_path --inject /tmp/whatsapp-inject.js --icon "${DATA_PATH}/icons/whatsapp.png" --name whatsapp --counter --single-instance --user-agent "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:90.0) Gecko/20100101 Firefox/90.0" web.whatsapp.com /tmp/whatsapp
 		if [ -d "/opt/whatsapp" ] ; then
@@ -104,10 +104,22 @@ install_whatsapp() {
 	fi
 }
 
+install_slack() {
+	mkdir /tmp/slack-setup-hack
+	JS=$(cat "${DATA_PATH}/styles/slack-gruvbox.js")
+	npx asar extract /usr/lib/slack/resources/app.asar /tmp/slack-setup-hack/
+	echo $JS >> /tmp/slack-setup-hack/dist/preload.bundle.js
+	npx asar pack /tmp/slack-setup-hack/ /tmp/slack-setup-hack/app.asar
+	sudo mv /tmp/slack-setup-hack/app.asar /usr/lib/slack/resources/app.asar
+	echo "Slack setup successfully"
+	rm -r /tmp/slack-setup-hack
+}
+
+
 install_instagram() {
 	if hash nativefier &>/dev/null ; then
 		echo "Choose instagram theme:"
-		select theme_path in ${DATA_PATH}/css/* ; do break; done
+		select theme_path in ${DATA_PATH}/styles/*.css ; do break; done
 		nativefier --inject $theme_path --icon "${DATA_PATH}/icons/instagram.png" --name instagram --counter --single-instance instagram.com /tmp/instagram
 		if [ -d "/opt/instagram" ] ; then
 			echo "Deleting previous Instagram installation"
@@ -189,6 +201,7 @@ Options:
 	generic                  only dot files
 	konsole                  Konsole terminal emulator files
 	whatsapp                 Whatsapp files (this creates uses nativefier application)
+	slack                    Slack gruvbox setup
 	instagram                Instagram files (this creates uses nativefier application)
 	[none]                   No option or anything else assumes all files are gathered
 
@@ -300,6 +313,10 @@ elif [[ "$@" =~ "konsole" ]]; then
 elif [[ "$@" =~ "whatsapp" ]]; then
 	echo "Installing Whatsapp"
 	install_whatsapp
+
+elif [[ "$@" =~ "slack" ]]; then
+	echo "Installing Slack"
+	install_slack
 
 elif [[ "$@" =~ "instagram" ]]; then
 	echo "Installing Instagram"

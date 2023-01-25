@@ -1,8 +1,3 @@
-## Unpack /usr/lib/slack/resources/app.asar with `asar extract`
-
-## Append this to `dist/preload.bundle.js`
-
-```
 document.addEventListener('DOMContentLoaded', function() {
   let s = document.createElement('style');
     s.type = 'text/css';
@@ -24,6 +19,3 @@ document.addEventListener('DOMContentLoaded', function() {
     }`;
     document.head.appendChild(s);
 })
-```
-
-## Pack with `asar pack`
