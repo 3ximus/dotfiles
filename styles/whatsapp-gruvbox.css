@@ -353,8 +353,8 @@
   --panel-background-hover-rgb: var(--bg-4-rgb);
   --panel-background-lighter: var(--bg-3);
   --panel-background-lighter-rgb: var(--bg-3-rgb);
-  --panel-header-background: var(--bg-3);
-  --panel-header-background-rgb: var(--bg-3-rgb);
+  --panel-header-background: var(--bg-1);
+  --panel-header-background-rgb: var(--bg-1-rgb);
   --panel-header-icon: var(--fg-3);
   --panel-header-icon-rgb: var(--fg-3-rgb);
   --panel-input-background: var(--bg-2);
@@ -722,7 +722,7 @@ html > body [data-testid="intro-text"] {
   font-size: 0px !important;
 }
 html > body [data-testid="intro-text"]::before {
-  content: "Still looking for someone to help maintain Dark-WhatsApp. I will try to maintain it until a big breaking update. Also, check out my other project related to userstyles:\A\A 🌟 https://userstyles.world 🌟\A\A Changelog: https://github.com/vednoc/dark-whatsapp\AP.S. CSS can not create clickable links.";
+  content: "Chat'em up 💬";
   white-space: pre-wrap;
   font-size: 0.875rem;
 }

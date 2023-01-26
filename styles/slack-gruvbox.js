@@ -8,6 +8,14 @@ document.addEventListener('DOMContentLoaded', function() {
     .c-texty_input_unstyled {
       font-family: "TerminessTTF Nerd Font Mono", Slack-Lato,Slack-Fractions,appleLogo,sans-serif !important;
     }
+    .c-search_autocomplete__suggestion_item--selected{
+      background: #8ec07c !important;
+      color:#282828 !important;
+    }
+    .c-base_list_entity--highlight-dark{
+      background: #8ec07c !important;
+      color:#282828 !important;
+    }
     .sk-client-theme--dark {
       --sk_primary_background: 40,40,40;
       --sk_foreground_min_solid: 29,32,33;
