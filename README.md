@@ -151,7 +151,7 @@ It might have changed, so just check the `.vimrc` on the `VIM PLUG PLUGINS` sect
 ![7](screenshots/vim.png)
 
 ## Tmux
-![12](screenshots/tmux2.png)
+![8](screenshots/tmux.png)
 
 Tmux has a lot of custom configurations added in `.tmux.conf` and a few plugins inside `.tmux` added as submodules that are managed through [TPM (Tmux Plugin Manager)](https://github.com/tmux-plugins/tpm)
 
@@ -171,12 +171,10 @@ Tmux has a lot of custom configurations added in `.tmux.conf` and a few plugins 
 
 ## More Screenshots
 
-![10](screenshots/complete1.png)
+![9](screenshots/complete1.png)
 vim, htop and ranger (all in tmux sessions)
 
-![12](screenshots/rofi.png)
-rofi (launched with [.bash/scripts/rofi-blurred.sh](.bash/scripts/rofi-blurred.sh))
+![10](screenshots/slack.png)
+My slack style hack
 
-![13](screenshots/topbar.png)
-plasma top bar
 
