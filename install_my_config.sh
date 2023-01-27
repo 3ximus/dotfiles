@@ -108,6 +108,7 @@ install_slack() {
 	mkdir /tmp/slack-setup-hack
 	JS=$(cat "${DATA_PATH}/styles/slack-gruvbox.js")
 	npx asar extract /usr/lib/slack/resources/app.asar /tmp/slack-setup-hack/
+	sed -i '/EXIMUS PATCH/d' /tmp/slack-setup-hack/dist/preload.bundle.js
 	echo $JS >> /tmp/slack-setup-hack/dist/preload.bundle.js
 	npx asar pack /tmp/slack-setup-hack/ /tmp/slack-setup-hack/app.asar
 	sudo mv /tmp/slack-setup-hack/app.asar /usr/lib/slack/resources/app.asar
@@ -313,14 +314,17 @@ elif [[ "$@" =~ "konsole" ]]; then
 elif [[ "$@" =~ "whatsapp" ]]; then
 	echo "Installing Whatsapp"
 	install_whatsapp
+	exit
 
 elif [[ "$@" =~ "slack" ]]; then
-	echo "Installing Slack"
+	echo "Patching Slack"
 	install_slack
+	exit
 
 elif [[ "$@" =~ "instagram" ]]; then
 	echo "Installing Instagram"
 	install_instagram
+	exit
 
 elif [[ "$@" =~ "clean" ]]; then
 	echo "clean not implemented" && exit 0
