@@ -86,7 +86,7 @@ __job_count() {
 # PROMPT DEFINITION
 # -----------------
 
-ALT_PS1="$(__color "$__CountColor")#\#\$(__virtualization)$(__color "$__JobColor")\$(__job_count)\$([[ \$__MainColor != \$__UserColor ]] && echo \"$(__color "$__MainColor") \u@\h\") $(__color "$__DirColor")\w\$(__virtual_env)"
+ALT_PS1="$(__color "$__CountColor")#\#\$(__virtualization)$(__color "$__JobColor")\$(__job_count)\$([[ \$__MainColor != \$__UserColor ]] && echo \"$(__color "$__MainColor") $(whoami)@\h\") $(__color "$__DirColor")\w\$(__virtual_env)"
 
 ALT_PS2="$(__color 0) \$(__nested_level)\$([[ \$_COMMAND_FAILED_ == 1 ]] && echo -e \"$(__color "$__ErrorColor")\")\\$ $(__color 0)"
 
