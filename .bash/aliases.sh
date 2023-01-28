@@ -28,7 +28,7 @@ alias pacman='pacman --color=auto'
 alias less='less -MRix4'
 alias gdb='gdb -q'
 alias dd='dd status=progress'
-alias alert="echo -ne '\a'"
+alias alert="echo -ne '\a' && paplay /usr/share/sounds/freedesktop/stereo/complete.oga"
 alias perl-regex='perl -p -i -e'
 alias grep-bin='grep -oUaP' # pattern like: "\xde\xad"
 alias htop-mem='htop --sort-key=PERCENT_MEM'

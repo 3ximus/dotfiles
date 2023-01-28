@@ -21,10 +21,23 @@
 ##-----------------------------------------------------------------------------
 ## Basic settings
 
-bleopt input_encoding=UTF-8
-#bleopt pager=less
-bleopt editor=vim
 
+## The following setting specifies the input encoding. Currently only "UTF-8"
+## and "C" is available.
+
+bleopt input_encoding=UTF-8
+
+## The following setting specifies the pager used by ble.sh.  This is used to
+## show the help of commands (f1).
+
+#bleopt pager=less
+
+## The following setting specifies the editor used by ble.sh.  This is used for
+## the widget edit-and-execute (C-x C-e) and editor for a large amount of
+## command line texts.  Possible values include, for example, "vim", "emacs
+## -nw" and "nano".
+
+bleopt editor=vim
 
 ##-----------------------------------------------------------------------------
 ## Line editor settings
