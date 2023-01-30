@@ -93,7 +93,7 @@ Plug '3ximus/gruvbox'
 
 " BASE
 Plug 'vim-airline/vim-airline'
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', {'on':['NERDTreeToggle', 'NERDTreeFind']}
 Plug '3ximus/fzf' " use my fork to allow passing g:fzf_no_term
 Plug 'junegunn/fzf.vim'
 Plug 'sjl/gundo.vim'
@@ -109,12 +109,12 @@ Plug 'unblevable/quick-scope'
 Plug 'AndrewRadev/linediff.vim'
 
 " GIT
-Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Xuyuanp/nerdtree-git-plugin', {'on':['NERDTreeToggle', 'NERDTreeFind']}
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 
-Plug 'godlygeek/tabular'
+Plug 'godlygeek/tabular', { 'on': ['Tabularize'] }
 
 " COMPLETION
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -134,7 +134,7 @@ Plug 'sheerun/vim-polyglot'
 " EXTRAS
 Plug 'mattn/emmet-vim'
 " argument text object
-Plug 'inkarkat/argtextobj.vim'
+Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 
 " OTHER
 Plug 'mhinz/vim-startify'
@@ -258,7 +258,7 @@ function! Prettier()
     call setqflist(l:errors, 'r')
     cwindow
   else
-    if ! modified 
+    if ! modified
       w
     endif
   endif
@@ -859,7 +859,7 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
     if winid == -1
       call CocAction('showOutline')
     else
-      call coc#window#close(winid)
+      call CocAction('hideOutline')
     endif
   endfunction
 
