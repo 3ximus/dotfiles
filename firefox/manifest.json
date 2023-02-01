@@ -1,0 +1,65 @@
+{
+  "manifest_version": 2,
+  "version": "1.0",
+  "name": "Gruvbox Dark Cyan",
+  "description": "Gruvobx theme with cyan highlight",
+  "icons": {
+    "48": "images/gruv.png"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "3ximus@github.com",
+      "strict_min_version": "70.0"
+    }
+  },
+  "theme": {
+    "images": {
+      "additional_backgrounds": [
+        "images/bg-000-5672c42860d5b06e1058dc477397f3ef.svg"
+      ]
+    },
+    "properties": {
+      "additional_backgrounds_alignment": ["top"],
+      "additional_backgrounds_tiling": ["repeat"]
+    },
+    "colors": {
+      "frame": "#282828",
+      "toolbar": "#282828",
+      "toolbar_text": "#ebdbb2",
+      "toolbar_field": "#282828",
+      "toolbar_field_text": "#ebdbb2",
+      "toolbar_bottom_separator": "#282828",
+      "toolbar_field_border_focus": "#8ec07c",
+      "toolbar_field_border": "#282828",
+      "toolbar_field_focus": "#282828",
+      "toolbar_field_highlight_text": "#282828",
+      "toolbar_field_highlight": "#8ec07c",
+      "toolbar_field_text_focus": "#ebdbb2",
+      "toolbar_top_separator": "#282828",
+      "toolbar_vertical_separator": "#282828",
+      "tab_line": "#282828",
+      "tab_loading": "#8ec07c",
+      "tab_selected": "#8ec07c",
+      "tab_text": "#282828",
+      "tab_background_text": "#ebdbb2",
+      "tab_background_separator": "#282828",
+      "button_background_active": "#8ec07c",
+      "button_background_hover": "#665c54",
+      "frame_inactive": "#282828",
+      "icons_attention": "#fabd2f",
+      "icons": "#ebdbb2",
+      "ntp_background": "#282828",
+      "ntp_text": "#ebdbb2",
+      "popup": "#282828",
+      "popup_text": "#ebdbb2",
+      "popup_border": "#8ec07c",
+      "popup_highlight_text": "#282828",
+      "popup_highlight": "#8ec07c",
+      "sidebar_border": "#8ec07c",
+      "sidebar_highlight_text": "#282828",
+      "sidebar_highlight": "#8ec07c",
+      "sidebar_text": "#ebdbb2",
+      "sidebar": "#282828"
+    }
+  }
+}
