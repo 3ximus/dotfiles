@@ -360,6 +360,10 @@ noremap [q :cprevious<CR>
 " toogle wrap
 nmap <leader>w :setlocal wrap!<CR>:setlocal wrap?<CR>
 
+
+" recalculate syntxt highlight
+nmap zz zz:syntax sync fromstart<CR>
+
 " }}}
 
 " HIGHLIGHT REDEFINITIONS {{{
