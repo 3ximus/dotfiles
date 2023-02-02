@@ -173,10 +173,11 @@ I've used [firefox color](https://color.firefox.com/?theme=XQAAAAKOAgAAAAAAAABBq
 
 ## More Screenshots
 
-![9](screenshots/complete1.png)
-vim, htop and ranger (all in tmux sessions)
-
 ![10](screenshots/slack.png)
-My slack style hack
+My slack style hack with the follwing sidebar settings:
+
+```
+#282828,#232527,#3C3836,#EBDBB2,#3C3836,#EBDBB2,#EBDBB2,#3C3836,#282828,#EBDBB2
+```
 
 
