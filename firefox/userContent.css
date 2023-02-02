@@ -1,0 +1,47 @@
+/* Tab bar */
+@-moz-document url-prefix("about:devtools-toolbox") {
+  :root {
+    --theme-tab-toolbar-background: #282828 !important;
+    --theme-toolbar-color: #ebdbb2 !important;
+    --theme-toolbar-selected-color: #ebdbb2 !important;
+    --theme-icon-color: #ebdbb2 !important;
+    --tab-line-selected-color: #8ec07c !important;
+    --theme-icon-checked-color: #8ec07c !important;
+  }
+}
+
+/* Tab contents */
+@-moz-document url-prefix("chrome://devtools/content/")
+{
+  :root {
+    --theme-body-background: #282828 !important;
+    --theme-selection-background: #8ec07c !important;
+    --theme-selection-color: #282828 !important;
+
+    /* syntax color scheme */
+    --theme-text-color-strong: #ebdbb2;
+    --theme-highlight-green: #b8bb26 !important;
+    --theme-highlight-blue: #83c07c !important;
+    --theme-highlight-purple: #d3869b !important;
+    --theme-highlight-red: #fb4934 !important;
+    --theme-highlight-yellow: #fabd2f !important;
+    --theme-highlight-bluegrey: #5e88b0 !important;
+    --theme-highlight-lightorange: #d99b28 !important;
+    --theme-highlight-orange: #fe8019 !important;
+    --theme-highlight-pink: #83a598 !important;
+    --theme-highlight-gray: #928374 !important;
+
+    /* inner toolbar */
+    --theme-tab-toolbar-background: #282828 !important;
+    --theme-toolbar-color: #ebdbb2 !important;
+    --theme-toolbar-selected-color: #ebdbb2 !important;
+    --theme-icon-color: #ebdbb2 !important;
+    --tab-line-selected-color: #8ec07c !important;
+    --theme-icon-checked-color: #8ec07c !important;
+  }
+
+  /* fix for selected item icon */
+  .sources-list .tree .focused .img {
+    background-color: #282828 !important;
+  }
+}
