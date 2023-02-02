@@ -1,7 +1,23 @@
+/* remove folder icons from bookmarks */
 #personal-bookmarks .bookmark-item[container="true"] .toolbarbutton-icon {
   display: none !important;
 }
 
+/* remove title bar space between tab list and window buttons */
+.titlebar-spacer {
+  display: none;
+}
+
+.titlebar-button {
+  display: none !important;
+}
+
+/* remove close button from tabs */
+.tabbrowser-tab:not([pinned]) .tab-close-button {
+  display: none !important;
+}
+
+/* change color of urls on address bar dropdown popup */
 .urlbarView-url {
   color: #8ec07c !important;
   font-weight: bold;
