@@ -23,3 +23,14 @@
   font-weight: bold;
   font-size: 14px !important;
 }
+
+/* tab background before loading */
+:root {
+  --tabpanel-background-color: #282828 !important;
+}
+
+@-moz-document url-prefix(about:blank) {
+  * {
+    background-color: #282828;
+  }
+}

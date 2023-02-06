@@ -15,8 +15,12 @@
 {
   :root {
     --theme-body-background: #282828 !important;
+    --theme-body-color: #ebdbb2 !important;
     --theme-selection-background: #8ec07c !important;
     --theme-selection-color: #282828 !important;
+    --theme-icon-dimmed-color: #bdae93 !important;
+
+    --theme-icon-error-color: #fb4934 !important;
 
     /* syntax color scheme */
     --theme-text-color-strong: #ebdbb2;
@@ -38,6 +42,11 @@
     --theme-icon-color: #ebdbb2 !important;
     --tab-line-selected-color: #8ec07c !important;
     --theme-icon-checked-color: #8ec07c !important;
+  }
+
+  /* fix network headers details using this color for text */
+  .network-monitor .tabpanel-summary-value {
+    --theme-selection-color: #ebdbb2 !important;
   }
 
   /* fix for selected item icon */
