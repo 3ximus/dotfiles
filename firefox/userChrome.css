@@ -12,9 +12,12 @@
   display: none !important;
 }
 
-/* remove close button from tabs */
+/* show close button only on hover */
 .tabbrowser-tab:not([pinned]) .tab-close-button {
-  display: none !important;
+  opacity: 0;
+}
+.tabbrowser-tab:not([pinned]) .tab-close-button:hover {
+  opacity: 1;
 }
 
 /* change color of urls on address bar dropdown popup */
