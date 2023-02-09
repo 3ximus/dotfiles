@@ -17,7 +17,7 @@
 - `.gitconfig` with my configuration for git (uses [delta](https://github.com/dandavison/delta#used-by-delta) to view diffs)
 - fonts in .fonts are from [powerline](https://github.com/powerline/fonts)  and [nerd fonts](https://github.com/ryanoasis/nerd-fonts)
 - [konsole](https://github.com/3ximus/dotfiles/tree/master/konsole) contains my konsole themes and profile (lives in `$HOME/.local/share/konsole`)
-- [icons](https://github.com/3ximus/dotfiles/tree/master/icons) contains [papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) icons edited to match gruvbox style (there is a script inside to install these icons) _(see my topbar screenshot)_
+- [icons](https://github.com/3ximus/dotfiles/tree/master/icons) contains [papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) icons edited to match gruvbox style (there is a script inside to install these icons)
 - [css](https://github.com/3ximus/dotfiles/tree/master/css) contains styles to inject somewhere
 - `.gdbinit` contains a dashboard from [gdb-dashboard](https://github.com/cyrus-and/gdb-dashboard) that takes gdb out of the dark ages.
 - `custom.layout.latte` contains [latte-dock](/etc/update-manager/release-upgrades.) configuration
@@ -173,6 +173,8 @@ My slack style hack with the following sidebar settings:
 ```
 #282828,#232527,#3C3836,#EBDBB2,#3C3836,#EBDBB2,#EBDBB2,#3C3836,#282828,#EBDBB2
 ```
+
+# [Icons](https://github.com/SylEleuth/gruvbox-plus-icon-pack)
 
 ### Older themes to go along with the gruvbox colorscheme
  - [GTK](https://github.com/3ximus/gruvbox-gtk)

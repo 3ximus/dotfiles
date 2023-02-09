@@ -6,6 +6,8 @@ Vagrant.configure("2") do |config|
 
   # Disable GUI
   config.vm.provider "virtualbox" do |v|
+    v.cpus = 8
+    v.memory = 6144
     v.gui = false
   end
 
@@ -13,6 +15,9 @@ Vagrant.configure("2") do |config|
   config.ssh.forward_agent = true
   config.ssh.forward_x11 = true
 
-  # Open port 1337
+  # Open ports
   config.vm.network "forwarded_port", guest: 1337, host: 1337
+  config.vm.network "forwarded_port", guest: 13371, host: 13371
+  config.vm.network "forwarded_port", guest: 13372, host: 13372
+  config.vm.network "forwarded_port", guest: 8000, host: 8000
 end

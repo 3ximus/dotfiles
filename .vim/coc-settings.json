@@ -1,6 +1,7 @@
 {
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
   "suggest.autoTrigger": "trigger",
+  "suggest.insertMode": "insert",
   // "suggest.virtualText": true,
   "codeLens.enable": true,
   "codeLens.separator": "XX",
