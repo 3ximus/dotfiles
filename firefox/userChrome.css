@@ -7,9 +7,16 @@
 .titlebar-spacer {
   display: none;
 }
-
 .titlebar-button {
   display: none !important;
+}
+
+.tab-background {
+  margin-block: 0 !important;
+}
+#TabsToolbar-customization-target,
+#tabbrowser-tabs {
+  height: var(--tab-min-height);
 }
 
 /* show close button only on hover */
@@ -18,6 +25,22 @@
 }
 .tabbrowser-tab:not([pinned]) .tab-close-button:hover {
   opacity: 1;
+}
+
+/* hide the '+' (new tab) button from the tab bar until hover */
+#tabs-newtab-button {
+  display: none;
+}
+
+/* prepend the tab number before tab name */
+.browser-toolbar {
+  counter-reset: tabindex;
+}
+.tab-label::before {
+  counter-increment: tabindex;
+  content: counter(tabindex) ":";
+  white-space: pre;
+  opacity: 0.5;
 }
 
 /* change color of urls on address bar dropdown popup */
