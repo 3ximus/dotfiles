@@ -49,8 +49,11 @@
   font-weight: bold;
   font-size: 14px !important;
 }
+.urlbarView-row[aria-selected="true"] .urlbarView-url {
+  color: #282828 !important;
+}
 
-/* tab background before loading */
+/* tab background before loading and unable to load page */
 :root {
   --tabpanel-background-color: #282828 !important;
 }
