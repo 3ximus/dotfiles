@@ -58,3 +58,17 @@
     background-color: #282828 !important;
   }
 }
+
+/* fix the Unable to connect page */
+:root {
+  --in-content-page-background: #282828 !important;
+  --in-content-page-color: #ebdbb2 !important;
+  --in-content-primary-button-text-color: #282828 !important;
+  --in-content-primary-button-background: #8ec07c !important;
+  --in-content-primary-button-background-hover: #689d6a !important;
+  --in-content-primary-button-background-active: #d79921 !important;
+  --in-content-container-max-width: 47em !important;
+}
+body.neterror {
+  font-size: 18px !important;
+}
