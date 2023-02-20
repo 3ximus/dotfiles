@@ -323,7 +323,7 @@ nmap zF :call Fold(v:count)<CR>:set foldmethod=manual<CR>
 " nmap zM :set foldmethod=marker<CR>
 
 " display line endings and tabs
-nnoremap <F2> :<C-U>setlocal lcs=tab:>-,trail:-,eol:¬ list! list? <CR>
+nnoremap <F2> :<C-U>:execute 'setlocal lcs=tab:>-,trail:-,leadmultispace:\\|' . repeat('\ ', &sw -1) . ',eol:¬ list! list? '<CR>
 " toogle paste mode (to prevent indenting when pasting)
 set pastetoggle=<F3>
 
