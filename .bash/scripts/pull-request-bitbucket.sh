@@ -20,7 +20,7 @@ echo -e "Username: \e[33m${USERNAME}\e[m"
 echo "URL: ${URL}"
 read -p 'Press any key to continue... '
 
-curl -i -X POST \
+response=$(curl -i -X POST \
   -u "${USERNAME}:${APIKEY}" \
   -H "Content-Type: application/json" \
   -d "{
@@ -36,4 +36,10 @@ curl -i -X POST \
         { \"account_id\": \"5d94bd8d5247770c24548801\" },
         { \"account_id\": \"5f6e109058ea7b007091eb32\" }
       ]
-    }" $URL
+    }" $URL)
+
+if head -n1 <<< $response | grep 201; then
+  tail -n1 <<< $response | jq .links.html.href
+else
+  echo $response
+fi
