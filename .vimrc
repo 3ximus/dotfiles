@@ -136,6 +136,9 @@ Plug 'mattn/emmet-vim'
 " argument text object
 Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 
+Plug 'tpope/vim-dadbod'
+Plug 'kristijanhusak/vim-dadbod-ui'
+
 " OTHER
 Plug 'mhinz/vim-startify'
 "absolute numbers when window looses focus
@@ -343,7 +346,7 @@ nnoremap <leader>yy :w !xclip -selection clipboard<CR><CR>
 nmap <leader>x :bp<bar>bd #<CR>
 
 " Clear search highlight and close preview window
-nnoremap <silent> <backspace> :noh<CR>:pc<CR>:cclose<CR>:call CloseGstatus()<CR>:call CocAction('hideOutline')<CR>:call popup_clear(1)<CR>
+nnoremap <silent> <backspace> :noh<CR>:pc<CR>:cclose<CR>:call CloseGstatus()<CR>:call CocCloseOutline()<CR>:call popup_clear(1)<CR>
 
 " remove trailing whitespaces
 nmap <leader>s :call StripTrailingWhitespace()<CR>
@@ -800,7 +803,7 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
         \ fzf#vim#with_preview(),
         \ <bang>0)
 
-  nmap <leader>p :FZFGFiles<CR>
+  nmap <expr> <leader>p fugitive#Head() != '' ? ':FZFGFiles<CR>' : ':FZFFiles<CR>'
   nmap <leader>P :FZFFiles<CR>
   nmap <leader>b :FZFBuffers<CR>
   nmap <leader>l :FZFLines<CR>
@@ -860,7 +863,7 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
     if (index(['vim','help'], &filetype) >= 0)
       execute 'h '.expand('<cword>')
     elseif (coc#rpc#ready())
-      call CocActionAsync('doHover')
+      call CocActionAsync('definitionHover')
     else
       execute '!' . &keywordprg . " " . expand('<cword>')
     endif
@@ -893,6 +896,13 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
     endif
   endfunction
   command! CocToggle :call CocToggle()
+
+  function! CocCloseOutline()
+    let winid = coc#window#find('cocViewId', 'OUTLINE')
+    if winid != -1
+      call CocAction('hideOutline')
+    endif
+  endfunction
 
   function! CocOutlineToggle()
     let winid = coc#window#find('cocViewId', 'OUTLINE')
@@ -970,6 +980,9 @@ autocmd FileType go map g= :call GoFmt()<CR>
 
 " add @ completion
 autocmd FileType scss setl iskeyword+=@-@
+
+" disable folding on output of dadbod-ui
+autocmd FileType dbout setlocal nofoldenable
 
 " }}}
 
