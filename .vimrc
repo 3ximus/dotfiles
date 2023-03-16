@@ -309,6 +309,7 @@ nmap <C-N> :bn<CR>
 nmap <C-W>n :tabnext<CR>
 nmap <C-W>p :tabprevious<CR>
 nmap <C-W>N :tabe %<CR>
+nmap <C-W><C-N> :tabe %<CR>
 
 " run macro saved to q
 nnoremap <leader>q @q
@@ -425,24 +426,25 @@ if &rtp =~ 'vim-airline' && glob("~/.vim/plugged/vim-airline/plugin/airline.vim"
   let g:airline#extensions#term#enabled = 0
 
   " coc airline configuration
-  let g:airline#extensions#coc#error_symbol = '#'
-  let g:airline#extensions#coc#warning_symbol = '#'
+  let g:airline#extensions#coc#error_symbol = ' '
+  let g:airline#extensions#coc#warning_symbol = ' '
   let g:airline#extensions#coc#show_coc_status = 0 " handled in custom section
-  let g:airline#extensions#coc#stl_format_err = '%C-%L'
-  let g:airline#extensions#coc#stl_format_warn = '%C-%L'
+  let g:airline#extensions#coc#stl_format_err = '%C' " can use %L for line number
+  let g:airline#extensions#coc#stl_format_warn = '%C'
   let g:airline#extensions#searchcount#enabled = 0 " handled in custom section
 
   let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'd', 'w', 'y', 'z', 'warning', 'error']]
 
-  call airline#parts#define('coc_status_symbol', { 'raw': '%#__restore__#%{get(g:, "coc_status", "") != "" ? (get(g:, "coc_enabled", "") == 1 ? " " : " " ) : ""}'})
-  call airline#parts#define('coc_status', { 'raw': '%{airline#util#shorten(trim(get(g:, "coc_status", "")), 100, 6)}'})
+  call airline#parts#define('coc_status_symbol', { 'raw': '%#__restore__#%{get(g:, "coc_status", "") != "" ? (get(g:, "coc_enabled", "") == 1 ? "" : "" ) : ""}'})
+  call airline#parts#define('coc_status', { 'raw': ' %{airline#util#shorten(trim(get(g:, "coc_status", "")), 100, 6)}'})
   call airline#parts#define('max_line', { 'raw': '%L', 'accent': 'bold'})
   call airline#parts#define('new_search_count', { 'raw': '%{v:hlsearch ? trim(airline#extensions#searchcount#status()) : ""}', 'accent': 'bold'})
   call airline#parts#define('filename_path',  {'raw': '%<%{expand("%:p:h")}/'})
   call airline#parts#define('filename',  {'raw': '%<%t%m ', 'accent':'bold'})
 
   let g:airline_section_c = airline#section#create(['filename_path', 'filename', 'readonly'])
-  let g:airline_section_d = airline#section#create(['coc_status_symbol', 'coc_status'])
+  let g:airline_section_d = airline#section#create(['coc_status_symbol'])
+  " let g:airline_section_d = airline#section#create(['coc_status_symbol', 'coc_status'])
   let g:airline_section_x = airline#section#create(['%{airline#util#wrap(airline#parts#filetype() . " " . WebDevIconsGetFileTypeSymbol(),140)}'])
   let g:airline_section_w = airline#section#create(['%{get(b:,"coc_current_function","")}'])
   let g:airline_section_y = airline#section#create(['%{airline#util#wrap(airline#parts#ffenc(),0)}', 'new_search_count'])
@@ -836,17 +838,11 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
         \'coc-sh',
         \]
 
-  " other extensions
-  " \'coc-angular',
-  " \'coc-pyright',
-  " \'coc-tsserver',
-  " \'coc-clangd',
-  " \'coc-flutter-tools',
-
+  " map ctrl-space to get coc completion
   inoremap <silent><expr> <c-@> coc#refresh()
 
   " Use `[d` and `]d` to navigate diagnostics
-  " Use `:docDiagnodtics` to get all diagnostics of current buffer in location list.
+  " Use `:cocDiagnostics` to get all diagnostics of current buffer in location list.
   nmap <silent> [d <Plug>(coc-diagnostic-prev)
   nmap <silent> ]d <Plug>(coc-diagnostic-next)
 
@@ -922,8 +918,7 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
   nnoremap <silent><nowait> <leader>cd  :<C-u>CocList diagnostics<CR>
   nnoremap <silent><nowait> <leader>ce  :<C-u>CocList extensions<CR>
   nnoremap <silent><nowait> <leader>cc  :<C-u>CocList commands<CR>
-  " nnoremap <silent><nowait> <leader>co  :<C-u>CocList outline<CR>
-  nnoremap <silent><nowait> <leader>cs  :<C-u>CocList -I symbols<CR>
+  nnoremap <silent><nowait> <leader>cs  :<C-u>CocList services<CR>
   nnoremap <silent><nowait> <leader>co  :<C-u>call CocOutlineToggle()<CR>
   nnoremap <silent><nowait> <leader>ct  :<C-u>CocToggle<CR>
 endif
