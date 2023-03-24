@@ -409,7 +409,6 @@ highlight link QuickScopeSecondary GruvboxOrangeBold
 " PLUGIN CONFIGURATION {{{
 " =========================
 
-"setup airline
 "startify
 let g:startify_change_to_dir = 0
 let g:startify_fortune_use_unicode = 1
@@ -818,6 +817,7 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
   nmap <leader>F :FZFRgWithFilenames<CR>
   nmap <leader>/ :FZFHistory/<CR>
   nmap <leader>: :FZFHistory:<CR>
+  nmap <leader>m :FZFMaps:<CR>
 
   noremap <leader>gv :FZFGeditFile<CR>
   noremap <leader>gb :FZFGbranch<CR>
@@ -898,10 +898,15 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
   endfunction
   command! CocToggle :call CocToggle()
 
+  " it actually also closes CocTree with Outgoing and Incoming calls to be more convenient
   function! CocCloseOutline()
     let winid = coc#window#find('cocViewId', 'OUTLINE')
     if winid != -1
       call CocAction('hideOutline')
+    endif
+    let winid = coc#window#find('cocViewId', 'calls')
+    if winid != -1
+      call coc#window#close(winid)
     endif
   endfunction
 
@@ -926,6 +931,8 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
   nnoremap <silent><nowait> <leader>cs  :<C-u>CocList services<CR>
   nnoremap <silent><nowait> <leader>co  :<C-u>call CocOutlineToggle()<CR>
   nnoremap <silent><nowait> <leader>ct  :<C-u>CocToggle<CR>
+  nnoremap <silent><nowait> <leader>cf  :<C-u>call CocAction('showOutgoingCalls')<CR>
+  nnoremap <silent><nowait> <leader>cr  :<C-u>call CocAction('showIncomingCalls')<CR>
 endif
 
 " }}}
