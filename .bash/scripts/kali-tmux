@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+konsole --workdir /home/eximus/Desktop/kali -e "vagrant ssh -- -t tmux new-session -A -s KALI -c /vagrant"
