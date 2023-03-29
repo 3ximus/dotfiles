@@ -1,7 +1,7 @@
 e asm.bytes = false
 e asm.cmt.right = true
 e asm.cmt.col = 70
-e asm.pseudo = true
+# e asm.pseudo = true
 e asm.describe = true
 
 e graph.cmtright = false
