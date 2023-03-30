@@ -72,6 +72,7 @@ alias pip-upgrade='pip3 list --outdated --format=freeze | grep -v "^\-e" | cut -
 
 # start konsole emulator attached to remote tmux session
 alias kali-tmux='konsole --workdir /home/eximus/Desktop/kali -e "vagrant ssh -- -t tmux new-session -A -s KALI -c /vagrant"'
+alias cutter='LIBGL_ALWAYS_INDIRECT=1 /home/vagrant/tools/Cutter-v2.2.0-Linux-x86_64.AppImage'
 
 # PLEX
 # Add this to sudoers or a file in sudoers.d
