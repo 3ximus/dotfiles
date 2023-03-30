@@ -6,3 +6,4 @@ e asm.describe = true
 
 e graph.cmtright = false
 e scr.color = 1
+ec comment blue
