@@ -309,7 +309,6 @@ nmap <C-N> :bn<CR>
 nmap <C-W>n :tabnext<CR>
 nmap <C-W>p :tabprevious<CR>
 nmap <C-W>N :tabe %<CR>
-nmap <C-W><C-N> :tabe %<CR>
 
 " run macro saved to q
 nnoremap <leader>q @q
