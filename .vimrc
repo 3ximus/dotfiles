@@ -99,6 +99,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'sjl/gundo.vim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'jeetsukumaran/vim-markology'
+Plug 'wellle/context.vim'
 
 " TOOLS
 Plug 'tpope/vim-surround'
@@ -306,6 +307,10 @@ let mapleader=" "
 nmap <C-P> :bp<CR>
 nmap <C-N> :bn<CR>
 
+" jumplists remaps
+nmap <C-H> <C-O>
+nmap <C-L> <C-I>
+
 nmap <C-W>n :tabnext<CR>
 nmap <C-W>p :tabprevious<CR>
 nmap <C-W>N :tabe %<CR>
@@ -363,9 +368,12 @@ noremap [q :cprevious<CR>
 " toogle wrap
 nmap <leader>w :setlocal wrap!<CR>:setlocal wrap?<CR>
 
-
 " recalculate syntxt highlight
 nmap zz zz:syntax sync fromstart<CR>
+
+" 3 way diff get bindings
+nmap gh :diffget //3<CR>
+nmap gl :diffget //2<CR>
 
 " }}}
 
@@ -480,6 +488,11 @@ let g:webdevicons_conceal_nerdtree_brackets = 1
 let g:DevIconsEnableFoldersOpenClose = 1
 let g:DevIconsEnableDistro = 0
 
+" context.vim
+let g:context_presenter = 'vim-popup'
+let g:context_add_mappings = 0
+let g:context_enabled = 0
+
 "Auto Origami (auto manage fold columns)
 if exists('&belloff') && &rtp =~ 'vim-auto-origami' && glob("~/.vim/plugged/vim-auto-origami/plugin/auto_origami.vim")!=#""
   augroup auto_origami
@@ -553,8 +566,8 @@ nnoremap U :GundoToggle<CR>
 let NERDTreeMapOpenSplit='s'
 let NERDTreeMapOpenVSplit='v'
 
-" Inline edit
-nmap <leader>i :InlineEdit<CR>
+" context.vim
+nnoremap <F4> :<C-U>ContextToggle<CR>
 
 omap ih <Plug>(GitGutterTextObjectInnerPending)
 omap ah <Plug>(GitGutterTextObjectOuterPending)
@@ -656,12 +669,16 @@ endif
 if &rtp =~ 'vim-airline' && glob("~/.vim/plugged/vim-airline/plugin/airline.vim")!=#""
   let g:airline_powerline_fonts=1
   let g:airline#extensions#tabline#enabled = 1
-  let g:airline#extensions#tabline#fnamemod = ':p:.' "show only file names on buffer names
-  let g:airline#extensions#tabline#buffer_nr_show = 0
-  let g:airline#extensions#tabline#fnamecollapse = 1
   let g:airline#extensions#tabline#show_close_button = 0
-  let g:airline#extensions#tabline#show_tabs = 0
+  let g:airline#extensions#tabline#tab_nr_type = 0 " # of splits
+  let g:airline#extensions#tabline#tabnr_formatter = 'tabnr'
+  let g:airline#extensions#tabline#show_tab_type = 0
+  let g:airline#extensions#tabline#overflow_marker = '…'
+  let g:airline#extensions#tabline#fnamemod = ':p:.'
+  let g:airline#extensions#tabline#fnamecollapse = 1
+  " let g:airline#extensions#tabline#show_tabs = 0
   let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+
   let g:airline#extensions#whitespace#mixed_indent_algo = 1
   let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]' "hide encoding if its utf8
   let g:airline#extensions#hunks#enabled=1

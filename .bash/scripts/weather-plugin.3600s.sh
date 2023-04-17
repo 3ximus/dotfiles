@@ -305,7 +305,7 @@ function setIcons {
 
 function outputCompact {
     # OUTPUT="$WIND %{T$WEATHER_FONT_CODE}%{F$ICON_COLOR}$ICON%{F-}%{T-} $ERR_MSG$COLOR_TEXT_BEGIN$DESCRIPTION$COLOR_TEXT_END| $TEMP"
-    OUTPUT="<p style='margin:auto'>$WIND <font size=4 color="$ICON_COLOR">$ICON</font> $ERR_MSG$DESCRIPTION· $TEMP</p> | size=16"
+    OUTPUT="<p style='margin:auto'>$WIND <font size=4 color="$ICON_COLOR">$ICON</font> $ERR_MSG$DESCRIPTION· $TEMP</p> | size=14"
     # echo "Output: $OUTPUT" >> "$HOME/.weather.log"
     echo "$OUTPUT"
 }
