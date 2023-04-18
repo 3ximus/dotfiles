@@ -120,10 +120,6 @@ Plug 'godlygeek/tabular', { 'on': ['Tabularize'] }
 " COMPLETION
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" TMUX CLIPBOARD SHARING
-Plug 'tmux-plugins/vim-tmux-focus-events'
-Plug 'roxma/vim-tmux-clipboard'
-
 if exists('$TMUX')
   Plug 'preservim/vimux'
 endif
@@ -781,18 +777,21 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
   endfunction
   command! -bang FZFGbranch call fzf#run({'source': 'git branch -avv --color', 'sink': function('GitCheckoutBranch'), 'options': '--prompt "Branch> " --ansi --nth=1', 'tmux': '-p60%,40%'})
 
+  "Gedit file with normally or with splits
+  function GitEditFile(mode, commit, file)
+    if match(a:mode, '&&&&') == 0
+      execute "Gsplit ".a:commit.":".a:file
+    elseif match(a:mode, '>>>>') == 0
+      execute "Gvsplit ".a:commit.":".a:file
+    else
+      execute "Gedit ".a:commit.":".a:file
+    endif
+  endfunction
+
   " Function to checkout a file from another branch with FZF
   function! GitEditBranchFile(branch)
-    if match(a:branch, '&&&& ') == 0
-      let l:name = split(split(trim(a:branch), "", 1)[1], "/", 1)[-1]
-      execute "Gsplit ".l:name.":%"
-    elseif match(a:branch, '>>>> ') == 0
-      let l:name = split(split(trim(a:branch), "", 1)[1], "/", 1)[-1]
-      execute "Gvsplit ".l:name.":%"
-    else
-      let l:name = split(split(trim(a:branch), "", 1)[0], "/", 1)[-1]
-      execute "Gedit ".l:name.":%"
-    endif
+    let [l:mode, l:commit] = split(substitute(a:branch, "^\\(\\([&>#]\\{4\\}\\) *\\)\\? *\\([a-zA-Z0-9\\-]\\+/\\)*\\([^ \\/]\\+\\).*", "\\2 \\4", ""), "", 1)
+    call GitEditFile(l:mode, l:commit, '%')
   endfunction
   command! -bang FZFGitEditBranchFile
         \ call fzf#run({
@@ -805,22 +804,22 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
     let l:hash = substitute(a:commit, "^[^0-9a-zA-Z]\\+ \\([0-9a-zA-Z]\\+\\).*", "\\1", "")
     " TODO preview here is not correct since it doesnt view the file content
     " on the selected commit
-    let l:file = fzf#run(fzf#wrap({'source': 'git ls-tree --name-only -r ' . l:hash,
-      \ 'options': "--prompt --ansi --reverse --nth=1 --prompt 'ViewFile @ ".l:hash."> ' --inline-info --preview '~/.vim/plugged/fzf.vim/bin/preview.sh {}' '--bind=ctrl-v:execute@printf \">>>> \"@+accept' '--bind=ctrl-s:execute@printf \"&&&& \"@+accept'",
+    let l:file = fzf#run(fzf#wrap({'source': 'git ls-tree --name-only -r ' . l:hash, 'sink': '"',
+      \ 'options': "'--bind=ctrl-v:execute@printf \">>>> \"@+accept' '--bind=ctrl-s:execute@printf \"&&&& \"@+accept' --ansi --nth=1 --prompt 'ViewFile @ ".l:hash."> ' --inline-info --preview '~/.vim/plugged/fzf.vim/bin/preview.sh {}'",
       \ 'tmux': '-p80%,70%'}))
     if len(l:file) == 0
       return
     endif
-    if match(l:file[0], '&&&& ') == 0
-      execute "Gsplit ".l:hash.":".split(l:file[0], "", 1)[1]
-    elseif match(l:file[0], '>>>> ') == 0
-      execute "Gvsplit ".l:hash.":".split(l:file[0], "", 1)[1]
+    if len(split(l:file[0], "", 1)) == 1
+      let [l:mode, l:file] = ['', split(l:file[0], "", 1)[0]]
     else
-      execute "Gedit ".l:hash.":".l:file[0]
+      let [l:mode, l:file] = split(l:file[0], "", 1)
     endif
+    call GitEditFile(l:mode, l:hash, l:file)
   endfunction
+
   " TODO bind keys here so that by default it would do this action on the current file instead of opening files from the git repo
-  command! -bang FZFGitEditCommitFile call fzf#run({'source': 'git lol', 'sink': function('GitEditCommitFile'), 'options': "--prompt 'ViewFile> ' --ansi --reverse --nth=1 --no-info", 'tmux': '-p80%,70%'})
+  command! -bang FZFGitEditCommitFile call fzf#run({'source': 'git lol', 'sink': function('GitEditCommitFile'), 'options': "--prompt 'ViewFile> ' --ansi --layout=reverse-list --header ':: \e[1;33mEnter\e[m to open current file. \e[1;33mCtrl-Enter\e[m to select file' --nth=1 --no-info", 'tmux': '-p80%,70%'})
 
   let g:fzf_action = {
         \ 'ctrl-t': 'tab split',
