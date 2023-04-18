@@ -64,14 +64,6 @@ If new submodules where added you might need to run `git submodule init` again
 
 To copy/link the files you want run `install_my_config.sh --help` to check the usage of this script
 
-#### Vim
-
-To install all the vim plugins open vim and run `:PluginInstall`
-
-#### Tmux
-
-To install the tmux plugins press `<prefix>+I` (it will freeze for a few seconds...)
-
 ## Prompts
 
 ### Current prompt:
@@ -94,63 +86,22 @@ z,s
 - show the respective tty. **except 6, 7**
 - display virtual machine environment indicator **only prompt 7**
 
-
 ## Vim
+
+To install all the vim plugins open vim and run `:PluginInstall`
 
 Vim configuration is huge but it's organized and documented, so just open the `.vimrc` file and check it out
 
-### Plugin list (using [vim-plug](https://github.com/junegunn/vim-plug)):
+### Plugins (using [vim-plug](https://github.com/junegunn/vim-plug)):
 
-It might have changed, so just check the `.vimrc` on the `VIM PLUG PLUGINS` section
-
- -  [vim-airline](https://github.com/vim-airline/vim-airline)
- -  [nerdtree](https://github.com/scrooloose/nerdtree)
- -  [nerdtree-git-plugin](https://github.com/Xuyuanp/nerdtree-git-plugin)
-
-### Git
- -  [vim-gitgutter](https://github.com/airblade/vim-gitgutter)
- -  [vim-fugitive](https://github.com/tpope/vim-fugitive)
- -  [vim-rhubarb](https://github.com/tpope/vim-rhubarb)
-
-### Tools
- -  [vim-surround](https://github.com/tpope/vim-surround)
- -  [vim-commentary](https://github.com/tpope/vim-commentary)
- -  [gundo.vim](https://github.com/sjl/gundo.vim)
- -  [vim-easymotion](https://github.com/easymotion/vim-easymotion)
- -  [quick-scope](https://github.com/unblevable/quick-scope)
- -  [linediff.vim](https://github.com/AndrewRadev/linediff.vim)
- -  [vim-peekaboo](https://github.com/junegunn/vim-peekaboo)
- -  [ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim)
- -  [vim-markology](https://github.com/jeetsukumaran/vim-markology)
-
-### Tmux integration
- -  [vim-tmux-focus-events](https://github.com/tmux-plugins/vim-tmux-focus-events)
- -  [vim-tmux-clipboard](https://github.com/roxma/vim-tmux-clipboard)
- -  [vimux](https://github.com/preservim/vimux)
-
-### Syntax highlight
- -  [vim-syntax-extra](https://github.com/justinmk/vim-syntax-extra)
- -  [vim-ps1](https://github.com/PProvost/vim-ps1)
- -  [python-syntax](https://github.com/vim-python/python-syntax)
-
-### Extra
- - [emmet-vim](https://github.com/mattn/emmet-vim)
-
-### Colors
- -  [gruvbox](https://github.com/morhetz/gruvbox)
-
-### Others
- -  [vim-startify](https://github.com/mhinz/vim-startify)
- -  [vim-numbertoggle](https://github.com/jeffkreeftmeijer/vim-numbertoggle)
- -  [vim-auto-origami](https://github.com/benknoble/vim-auto-origami)
- -  [vim-startuptime](https://github.com/dstein64/vim-startuptime)
- -  [vim-devicons](https://github.com/ryanoasis/vim-devicons)
-
-## Vim (gruvbox theme) screenshots
+Check the `.vimrc` on the `VIM PLUG PLUGINS` section for the list of plugins
 
 ![7](screenshots/vim.png)
 
 ## Tmux
+
+To install the tmux plugins press `<prefix>+I` (it will freeze for a few seconds...)
+
 ![8](screenshots/tmux.png)
 
 Tmux has a lot of custom configurations added in `.tmux.conf` and a few plugins inside `.tmux` added as submodules that are managed through [TPM (Tmux Plugin Manager)](https://github.com/tmux-plugins/tpm)
@@ -160,6 +111,7 @@ Tmux has a lot of custom configurations added in `.tmux.conf` and a few plugins 
  - [tmux-battery](https://github.com/tmux-plugins/tmux-battery)
  - [tmux-plugin-uptime](https://github.com/3ximus/tmux-plugin-uptime)
  - [tmux-plugin-datetime](https://github.com/3ximus/tmux-plugin-datetime)
+ - [tmux-suspend](https://github.com/MunifTanjim/tmux-suspend)
 
 ## Firefox
 ![10](screenshots/firefox.png)
