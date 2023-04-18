@@ -26,6 +26,7 @@ glfa() {
 		--date-order --color=always $* \
 		| fzf --preview="$cmd" --ansi --no-sort --no-multi --reverse \
 		--tiebreak=index \
+		--no-info \
 		--min-height 20 \
 		--bind="enter:execute($cmd | LESS='-r' less)"
 }
@@ -35,6 +36,7 @@ gbf() {
 		--preview="echo {} |grep -Eo '[a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9]'|xargs -n1 git diff | delta" \
 		--ansi --no-multi --reverse \
 		--tiebreak=index \
+		--no-info \
 		--height 50% --min-height 20 \
 		| grep -Po '(?<=^. )[^ ]+ ' | xargs -n1 git switch
 }
@@ -54,6 +56,7 @@ gaf() {
 
 	$cmd \
 		| fzf -m --header "$header" \
+		--no-info \
 		--reverse -0 -m --nth 2..,.. --ansi \
 		--height 50% --min-height 20 \
 		--expect="$_commit_key" \
