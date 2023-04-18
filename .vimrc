@@ -801,25 +801,31 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
         \ 'tmux': '-p60%,40%'})
 
   function! GitEditCommitFile(commit)
-    let l:hash = substitute(a:commit, "^[^0-9a-zA-Z]\\+ \\([0-9a-zA-Z]\\+\\).*", "\\1", "")
-    " TODO preview here is not correct since it doesnt view the file content
-    " on the selected commit
-    let l:file = fzf#run(fzf#wrap({'source': 'git ls-tree --name-only -r ' . l:hash, 'sink': '"',
-      \ 'options': "'--bind=ctrl-v:execute@printf \">>>> \"@+accept' '--bind=ctrl-s:execute@printf \"&&&& \"@+accept' --ansi --nth=1 --prompt 'ViewFile @ ".l:hash."> ' --inline-info --preview '~/.vim/plugged/fzf.vim/bin/preview.sh {}'",
-      \ 'tmux': '-p80%,70%'}))
-    if len(l:file) == 0
-      return
-    endif
-    if len(split(l:file[0], "", 1)) == 1
-      let [l:mode, l:file] = ['', split(l:file[0], "", 1)[0]]
+    echo a:commit
+    if match(a:commit, '>>>>') == 0 || match(a:commit, '&&&&') == 0 || match(a:commit, '####') == 0
+      let l:hash = substitute(a:commit[5:], "^[^0-9a-zA-Z]\\+ \\([0-9a-zA-Z]\\+\\).*", "\\1", "")
+      let l:file = '%'
+      let l:mode = split(a:commit, "", 1)[0]
     else
-      let [l:mode, l:file] = split(l:file[0], "", 1)
+      let l:hash = substitute(a:commit, "^[^0-9a-zA-Z]\\+ \\([0-9a-zA-Z]\\+\\).*", "\\1", "")
+      " TODO preview here is not correct since it doesnt view the file content
+      " on the selected commit
+      let l:file = fzf#run(fzf#wrap({'source': 'git ls-tree --name-only -r ' . l:hash, 'sink': '"',
+        \ 'options': "'--bind=ctrl-v:execute@printf \">>>> \"@+accept' '--bind=ctrl-s:execute@printf \"&&&& \"@+accept' --ansi --nth=1 --prompt 'ViewFile @ ".l:hash."> ' --inline-info --preview '~/.vim/plugged/fzf.vim/bin/preview.sh {}'",
+        \ 'tmux': '-p80%,70%'}))
+      if len(l:file) == 0
+        return
+      endif
+      if len(split(l:file[0], "", 1)) == 1
+        let [l:mode, l:file] = ['', l:file[0]]
+      else
+        let [l:mode, l:file] = split(l:file[0], "", 1)
+      endif
     endif
     call GitEditFile(l:mode, l:hash, l:file)
   endfunction
 
-  " TODO bind keys here so that by default it would do this action on the current file instead of opening files from the git repo
-  command! -bang FZFGitEditCommitFile call fzf#run({'source': 'git lol', 'sink': function('GitEditCommitFile'), 'options': "--prompt 'ViewFile> ' --ansi --layout=reverse-list --header ':: \e[1;33mEnter\e[m to open current file. \e[1;33mCtrl-Enter\e[m to select file' --nth=1 --no-info", 'tmux': '-p80%,70%'})
+  command! -bang FZFGitEditCommitFile call fzf#run({'source': 'git lol', 'sink': function('GitEditCommitFile'), 'options': "--prompt 'ViewFile> ' --ansi --layout=reverse-list --header ':: \e[1;33mEnter\e[m / \e[1;33mctrl-s\e[m / \e[1;33mctrl-v\e[m to open current file. \e[1;33mCtrl-Space\e[m to open file selection on that commit' --nth=1 --no-info '--bind=enter:execute@printf \"#### \"@+accept' '--bind=ctrl-v:execute@printf \">>>> \"@+accept' '--bind=ctrl-s:execute@printf \"&&&& \"@+accept' '--bind=ctrl-space:accept'", 'tmux': '-p80%,70%'})
 
   let g:fzf_action = {
         \ 'ctrl-t': 'tab split',
