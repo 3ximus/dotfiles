@@ -130,9 +130,8 @@ Plug 'sheerun/vim-polyglot'
 
 " EXTRAS
 Plug 'mattn/emmet-vim'
-" argument text object
-Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 
+" DATABASE
 Plug 'tpope/vim-dadbod'
 Plug 'kristijanhusak/vim-dadbod-ui'
 
@@ -852,7 +851,8 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
   nmap <leader>F :FZFRgWithFilenames<space>
   nmap <leader>/ :FZFHistory/<CR>
   nmap <leader>: :FZFHistory:<CR>
-  nmap <leader>m :FZFMaps:<CR>
+  nmap <leader>M :FZFMaps<CR>
+  nmap <leader>m :FZFMarks<CR>
 
   noremap <leader>gv :FZFGitEditBranchFile<CR>
   noremap <leader>gV :FZFGitEditCommitFile<CR>
@@ -966,6 +966,7 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
   nnoremap <silent><nowait> <leader>ce  :<C-u>CocList extensions<CR>
   nnoremap <silent><nowait> <leader>cc  :<C-u>CocList commands<CR>
   nnoremap <silent><nowait> <leader>cs  :<C-u>CocList services<CR>
+  nnoremap <silent><nowait> <leader>cl  :<C-u>CocList outline<CR>
   nnoremap <silent><nowait> <leader>co  :<C-u>call CocOutlineToggle()<CR>
   nnoremap <silent><nowait> <leader>ct  :<C-u>CocToggle<CR>
   nnoremap <silent><nowait> <leader>cf  :<C-u>call CocAction('showOutgoingCalls')<CR>
