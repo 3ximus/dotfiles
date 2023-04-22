@@ -1,7 +1,5 @@
 # Spicetify themes
 
-![1](screenshots/spotify.png)
-
 This is meant to be used with spicetify
 
 ```
@@ -44,3 +42,6 @@ disable_ui_logging    = 1
 version = 1.2.8.923.g4f94bf0d
 with    = 2.17.2
 ```
+
+![1](../../screenshots/spotify.png)
+

@@ -1,5 +1,74 @@
 # My Dotfiles
 
+## Showcase
+
+## Vim
+
+To install all the vim plugins open vim and run `:PluginInstall`
+
+Vim configuration is huge but it's organized and documented, so just open the `.vimrc` file and check it out
+
+### Plugins (using [vim-plug](https://github.com/junegunn/vim-plug)):
+
+Check the `.vimrc` on the `VIM PLUG PLUGINS` section for the list of plugins
+
+![7](screenshots/vim.png)
+
+## Tmux
+
+To install the tmux plugins press `<prefix>+I` (it will freeze for a few seconds...)
+
+## Prompts
+
+### Current prompt:
+
+![77](screenshots/7_normal.png)
+![77f](screenshots/7_full.png)
+
+Other prompts are available and can be set with the function `prompt [1-7]`, or directly source one of the files inside [prompts](https://github.com/3ximus/dotfiles/tree/master/.bash/prompts)
+
+Prompts support:
+
+- git directories and status of the files (untracked, staged... aswell as upstream checks), but you must source `.bash/git-prompt.sh`
+- diferent colors for normal user / root / ssh session user (in **prompt 6, 7** this segment is hidden unless the user is root or in an ssh session)
+- python conda/virtual environments. **except prompt 1**
+- last command exit status ( failed or succeded )
+z,s
+- compress some paths ( my repository path is compressed into "R:" . **except prompt 5, 6, 7**
+- background jobs counter
+- command counter **only prompt 5, 6, 7**
+- show the respective tty. **except 6, 7**
+- display virtual machine environment indicator **only prompt 7**
+
+![8](screenshots/tmux.png)
+
+Tmux has a lot of custom configurations added in `.tmux.conf` and a few plugins inside `.tmux` added as submodules that are managed through [TPM (Tmux Plugin Manager)](https://github.com/tmux-plugins/tpm)
+
+## Firefox
+![10](screenshots/firefox.png)
+I've used [firefox color](https://color.firefox.com/?theme=XQAAAAKOAgAAAAAAAABBqYhm849SCicxcUHkAiuG_ebZUZXOFqt9j8_9G63umOx1Kzjw7Cy1V9l2m-eZCjY_-24JBu_QklSG5xinXnzntyleAjqG3EsmVf5BGg4AmWSyU_xAoGCxzXEfOaGTXe_p7BplC1mvfb0GJQQlB6r2_HMAGaqaaiElrS53dEb0J8Lfv20NSdqRq68iXu8XnsFWPnUhq8cZmevaOB7FNtYws1_se_EkH_e-v_pbpM8CBqIpli0i6SHIiEicmHi0jVWFAAC-d4NsoXQgKXmL7IG_NPxk9ZrkwnXnS0qqTvxFxuX0KqLdUEG3Jclm_Xb3XPP4KKzFDyyWleslqpZ3NzQlQSvKQRWWok0GjEWwIHcQ4G8EsRea41HmGmi_tX-UTmoYnS6toh3_5Rg24A) in the past but it's not able to theme everything. So I've made my own custom theme and got it [signed](https://addons.mozilla.org/en-US/developers/addon/cff3d1277a2f4f289b5f/versions/5520800): `firefox/gruvbox-dark-cyan.zip`. I also have some custom tweaks on `firefox/userChrome.css` and custom developer tools theme on `firefox/userContent.css`
+
+## Slack
+
+![10](screenshots/slack.png)
+My slack style hack with the following sidebar settings:
+
+```
+#282828,#232527,#3C3836,#EBDBB2,#3C3836,#EBDBB2,#EBDBB2,#3C3836,#282828,#EBDBB2
+```
+
+## Spotify
+
+My spotify modified [Matte](https://github.com/spicetify/spicetify-themes/tree/master/Matte) theme to use with [spicetify](https://github.com/spicetify/spicetify-cli)
+
+![21](screenshots/spotify.png)
+
+## Whatsapp
+
+My [modified whatsapp style](https://github.com/3ximus/gruvbox-dark-whatsapp) (not up to date with the modified style file on this repo)
+
+![22](screenshots/whatsapp.png)
+
 ## My main configuration files:
 
 - [Dependencies](https://github.com/3ximus/dotfiles#dependencies)
@@ -64,71 +133,9 @@ If new submodules where added you might need to run `git submodule init` again
 
 To copy/link the files you want run `install_my_config.sh --help` to check the usage of this script
 
-## Prompts
-
-### Current prompt:
-
-![77](screenshots/7_normal.png)
-![77f](screenshots/7_full.png)
-
-Other prompts are available and can be set with the function `prompt [1-7]`, or directly source one of the files inside [prompts](https://github.com/3ximus/dotfiles/tree/master/.bash/prompts)
-
-Prompts support:
-
-- git directories and status of the files (untracked, staged... aswell as upstream checks), but you must source `.bash/git-prompt.sh`
-- diferent colors for normal user / root / ssh session user (in **prompt 6, 7** this segment is hidden unless the user is root or in an ssh session)
-- python conda/virtual environments. **except prompt 1**
-- last command exit status ( failed or succeded )
-z,s
-- compress some paths ( my repository path is compressed into "R:" . **except prompt 5, 6, 7**
-- background jobs counter
-- command counter **only prompt 5, 6, 7**
-- show the respective tty. **except 6, 7**
-- display virtual machine environment indicator **only prompt 7**
-
-## Vim
-
-To install all the vim plugins open vim and run `:PluginInstall`
-
-Vim configuration is huge but it's organized and documented, so just open the `.vimrc` file and check it out
-
-### Plugins (using [vim-plug](https://github.com/junegunn/vim-plug)):
-
-Check the `.vimrc` on the `VIM PLUG PLUGINS` section for the list of plugins
-
-![7](screenshots/vim.png)
-
-## Tmux
-
-To install the tmux plugins press `<prefix>+I` (it will freeze for a few seconds...)
-
-![8](screenshots/tmux.png)
-
-Tmux has a lot of custom configurations added in `.tmux.conf` and a few plugins inside `.tmux` added as submodules that are managed through [TPM (Tmux Plugin Manager)](https://github.com/tmux-plugins/tpm)
-
-## Firefox
-![10](screenshots/firefox.png)
-I've used [firefox color](https://color.firefox.com/?theme=XQAAAAKOAgAAAAAAAABBqYhm849SCicxcUHkAiuG_ebZUZXOFqt9j8_9G63umOx1Kzjw7Cy1V9l2m-eZCjY_-24JBu_QklSG5xinXnzntyleAjqG3EsmVf5BGg4AmWSyU_xAoGCxzXEfOaGTXe_p7BplC1mvfb0GJQQlB6r2_HMAGaqaaiElrS53dEb0J8Lfv20NSdqRq68iXu8XnsFWPnUhq8cZmevaOB7FNtYws1_se_EkH_e-v_pbpM8CBqIpli0i6SHIiEicmHi0jVWFAAC-d4NsoXQgKXmL7IG_NPxk9ZrkwnXnS0qqTvxFxuX0KqLdUEG3Jclm_Xb3XPP4KKzFDyyWleslqpZ3NzQlQSvKQRWWok0GjEWwIHcQ4G8EsRea41HmGmi_tX-UTmoYnS6toh3_5Rg24A) in the past but it's not able to theme everything. So I've made my own custom theme and got it [signed](https://addons.mozilla.org/en-US/developers/addon/cff3d1277a2f4f289b5f/versions/5520800): `firefox/gruvbox-dark-cyan.zip`. I also have some custom tweaks on `firefox/userChrome.css` and custom developer tools theme on `firefox/userContent.css`
-
-## Slack
-
-![10](screenshots/slack.png)
-My slack style hack with the following sidebar settings:
-
-```
-#282828,#232527,#3C3836,#EBDBB2,#3C3836,#EBDBB2,#EBDBB2,#3C3836,#282828,#EBDBB2
-```
-
-## Spotify
-
-My spotify modified [Matte](https://github.com/spicetify/spicetify-themes/tree/master/Matte) theme to use with [spicetify](https://github.com/spicetify/spicetify-cli)
-
-![21](screenshots/spotify.png)
-
 # [Icons](https://github.com/SylEleuth/gruvbox-plus-icon-pack)
 
 ### Older themes to go along with the gruvbox colorscheme
  - [GTK](https://github.com/3ximus/gruvbox-gtk)
  - [Plasma](https://github.com/3ximus/gruvbox-plasma)
  - [VS Code](https://github.com/jdinhlife/vscode-theme-gruvbox)
- - [WhatsApp](https://github.com/3ximus/gruvbox-dark-whatsapp)
