@@ -126,6 +126,12 @@ My slack style hack with the following sidebar settings:
 #282828,#232527,#3C3836,#EBDBB2,#3C3836,#EBDBB2,#EBDBB2,#3C3836,#282828,#EBDBB2
 ```
 
+## Spotify
+
+My spotify modified [Matte](https://github.com/spicetify/spicetify-themes/tree/master/Matte) theme to use with [spicetify](https://github.com/spicetify/spicetify-cli)
+
+![21](screenshots/spotify.png)
+
 # [Icons](https://github.com/SylEleuth/gruvbox-plus-icon-pack)
 
 ### Older themes to go along with the gruvbox colorscheme
