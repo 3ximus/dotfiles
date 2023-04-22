@@ -106,6 +106,7 @@ Most of my files are set with the [gruvbox](https://github.com/morhetz/gruvbox) 
  - `gawk` for building ble.sh
  - `fzf` for some keybindings and bookmark directories in bash
  - `delta` for generating git diffs (setup in `.gitconfig`) [delta](https://github.com/dandavison/delta#used-by-delta)
+ - `ripgrep` to use with vim-fzf searching for file contents
 
 ## Installation and Cloning
 
