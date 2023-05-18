@@ -89,7 +89,7 @@ post_action_XXX() {
 install_whatsapp() {
 	if hash nativefier &>/dev/null ; then
 		echo "Choose whatsapp theme:"
-		select theme_path in ${DATA_PATH}/styles/* ; do break; done
+		select theme_path in ${DATA_PATH}/styles/*.css ; do break; done
 		echo "if ('serviceWorker' in navigator) {caches.keys().then(function (cacheNames) {cacheNames.forEach(function (cacheName) {caches.delete(cacheName);});});}" >/tmp/whatsapp-inject.js
 		# Ctrl+k functionality
 		echo "document.addEventListener('keydown', (event) => {if(event.ctrlKey && event.keyCode == 75) document.querySelector('div[data-testid=\"chat-list-search\"]').focus()});" >>/tmp/whatsapp-inject.js
