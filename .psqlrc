@@ -12,11 +12,12 @@
 \pset null '[NULL]'
 
 \set triggers 'SELECT  event_object_table AS table_name ,trigger_name FROM information_schema.triggers GROUP BY table_name , trigger_name ORDER BY table_name ,trigger_name;'
-\set indexes 'SELECT tablename, indexname, indexdef FROM pg_indexes WHERE schemaname = 'public' ORDER BY tablename, indexname;'
+\set indexes 'SELECT tablename, indexname, indexdef FROM pg_indexes WHERE schemaname = \'public\' ORDER BY tablename, indexname;'
+\set sequences 'SELECT sequence_schema, sequence_name, start_value, increment FROM information_schema.sequences ORDER BY sequence_name;'
 \set queries 'SELECT pid, now() - pg_stat_activity.query_start AS duration, query FROM pg_stat_activity WHERE state = \'active\';'
 \set functions 'SELECT routine_name FROM information_schema.routines WHERE routine_type = \'FUNCTION\' AND routine_schema = \'public\';'
 
-\echo 'Type :triggers :indexes :functions to list them.'
+\echo 'Type :triggers :indexes :functions :sequences to list them.'
 \echo 'Type :queries to see active queries.'
 
 \unset QUIET

@@ -2268,6 +2268,9 @@ set disassembly-flavor intel
 
 python Dashboard.start()
 
+# load some dashboard settings
+# dashboard memory watch $esp 96
+
 # File variables ---------------------------------------------------------------
 
 # vim: filetype=python

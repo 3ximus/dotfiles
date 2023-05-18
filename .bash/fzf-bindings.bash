@@ -20,7 +20,7 @@ __fzf_select__() {
     -o -type f -print \
     -o -type d -print \
     -o -type l -print 2> /dev/null | cut -b3-"}"
-  eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse $FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS" $(__fzfcmd) -m "$@" | while read -r item; do
+  eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-60%} --reverse $FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS" $(__fzfcmd) -m "$@" | while read -r item; do
     printf '%q ' "$item"
   done
   echo
@@ -33,7 +33,7 @@ if [[ $- =~ i ]]; then
         echo "fzf-tmux ${FZF_TMUX_OPTS:--d${FZF_TMUX_HEIGHT:-40%}} -- " || echo "fzf"
     }
 
-    fzf-file-widget() {
+    __fzf-file-widget() {
       local selected="$(__fzf_select__)"
       READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}$selected${READLINE_LINE:$READLINE_POINT}"
       READLINE_POINT=$(( READLINE_POINT + ${#selected} ))
@@ -63,9 +63,9 @@ if [[ $- =~ i ]]; then
 
     if [ "${BASH_VERSINFO[0]}" -ge 4 ]; then
       # CTRL-T - Paste the selected file path into the command line
-      bind -m emacs-standard -x '"\C-t": fzf-file-widget'
-      bind -m vi-command -x '"\C-t": fzf-file-widget'
-      bind -m vi-insert -x '"\C-t": fzf-file-widget'
+      bind -m emacs-standard -x '"\C-t": __fzf-file-widget'
+      bind -m vi-command -x '"\C-t": __fzf-file-widget'
+      bind -m vi-insert -x '"\C-t": __fzf-file-widget'
 
       # CTRL-R - Paste the selected command from history into the command line
       bind -m emacs-standard -x '"\C-r": __fzf_history__'
