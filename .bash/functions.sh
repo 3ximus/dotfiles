@@ -114,6 +114,11 @@ md() { # {{{2
 	pandoc -sf markdown -t man "$1" | man -l -
 } # }}}2
 
+# generate qr code
+generate_qr() { # {{{2
+	echo "$1" | curl -F-=\<- qrenco.de
+} # }}}2
+
 # Extract files
 extract () { # {{{2
 	local f
