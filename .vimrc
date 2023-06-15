@@ -582,6 +582,9 @@ nmap <leader>hf :GitGutterFold<CR>
 let g:NERDTreeGitStatusMapNextHunk=']h'
 let g:NERDTreeGitStatusMapPrevHunk='[h'
 
+"easy-motion
+nmap S <Plug>(easymotion-overwin-f)
+
 "fugitive
 function! CloseGstatus() abort
   for l:winnr in range(1, winnr('$'))
