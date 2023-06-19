@@ -228,6 +228,17 @@ ds() { # {{{2
 # OTHERS {{{1
 # ==================================
 
+# Url encode or decode stdinput string
+url_encoding() {
+	if [ "$1" = '-d' ] ; then
+		python3 -c "import sys; from urllib.parse import unquote; print(unquote(sys.stdin.read()));"
+	else
+		python3 -c "import sys; from urllib.parse import quote; print(quote(sys.stdin.read()));"
+		# another pure bash option
+		# xxd -plain | tr -d '\n' | sed 's/\(..\)/%\1/g'
+	fi 
+}
+
 # Use -p to make prompt changes permanent on .bashrc
 prompt() { # {{{2
 	local bashrc=$([[ -L "$HOME/.bashrc" ]] && echo `file "$HOME/.bashrc" | cut -d' ' -f5` || echo "$HOME/.bashrc")
