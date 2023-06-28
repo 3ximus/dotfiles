@@ -113,7 +113,6 @@ Plug 'AndrewRadev/linediff.vim'
 Plug 'Xuyuanp/nerdtree-git-plugin', {'on':['NERDTreeToggle', 'NERDTreeFind']}
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
 
 Plug 'godlygeek/tabular', { 'on': ['Tabularize'] }
 
@@ -123,6 +122,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 if exists('$TMUX')
   Plug 'preservim/vimux'
 endif
+
+Plug 'CoderCookE/vim-chatgpt', {'on': ['<Plug>(chatgpt-menu)', 'Ask', 'Review', 'Rewrite', 'Explain', 'Fix', 'Test']}
 
 " EXTRA SYNTAX HIGHLIGHT
 let g:polyglot_disabled = ["sensible"]
@@ -134,6 +135,7 @@ Plug 'mattn/emmet-vim'
 " DATABASE
 Plug 'tpope/vim-dadbod'
 Plug 'kristijanhusak/vim-dadbod-ui'
+Plug 'jidn/vim-dbml'
 
 " OTHER
 Plug 'mhinz/vim-startify'
@@ -449,6 +451,11 @@ let g:startify_lists = [
         \ { 'type': function('s:gitUntracked'), 'header': ['   Git untracked']},
         \ ]
 
+" chatgpt
+if glob("~/.config/openai.apikey")!=#""
+  let g:chat_gpt_key=join(readfile(expand("~/.config/openai.apikey")),'')
+  " let g:chat_gpt_model='gpt-4'
+endif
 
 "NERDTree
 let g:NERDTreeDirArrowExpandable = ''
@@ -659,6 +666,9 @@ if isdirectory(expand("~/.vim/plugged/tabular"))
   nmap <leader>a<Bar> :Tabularize /<Bar><CR>
   vmap <leader>a<Bar> :Tabularize /<Bar><CR>
 endif
+
+"Chat GPT
+vmap <silent> <leader>0 <Plug>(chatgpt-menu)
 " }}}
 
 " AIRLINE CONFIGURATION {{{

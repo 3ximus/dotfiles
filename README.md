@@ -1,7 +1,5 @@
 # My Dotfiles
 
-## Showcase
-
 ## Vim
 
 To install all the vim plugins open vim and run `:PluginInstall`
@@ -13,10 +11,6 @@ Vim configuration is huge but it's organized and documented, so just open the `.
 Check the `.vimrc` on the `VIM PLUG PLUGINS` section for the list of plugins
 
 ![7](screenshots/vim.png)
-
-## Tmux
-
-To install the tmux plugins press `<prefix>+I` (it will freeze for a few seconds...)
 
 ## Prompts
 
@@ -39,6 +33,10 @@ z,s
 - command counter **only prompt 5, 6, 7**
 - show the respective tty. **except 6, 7**
 - display virtual machine environment indicator **only prompt 7**
+
+## Tmux
+
+To install the tmux plugins press `<prefix>+I` (it will freeze for a few seconds...)
 
 ![8](screenshots/tmux.png)
 
