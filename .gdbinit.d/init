@@ -1,0 +1,2 @@
+# Stack memory watch
+dashboard memory watch $esp 100
