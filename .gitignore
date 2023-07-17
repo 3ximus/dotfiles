@@ -3,6 +3,7 @@
 .ipython/profile_default/startup/
 .config/ranger/tagged
 .config/ranger/history
+.config/pgcli/log
 .vim/view/
 konsole/bookmarks.xml*
 

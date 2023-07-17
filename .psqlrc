@@ -7,9 +7,9 @@
 /* \set VERBOSITY verbose */
 \set HISTCONTROL ignoredups
 
-\x auto
+/* \x auto */
 
-\pset null '[NULL]'
+\pset null '<null>'
 
 \set triggers 'SELECT  event_object_table AS table_name ,trigger_name FROM information_schema.triggers GROUP BY table_name , trigger_name ORDER BY table_name ,trigger_name;'
 \set indexes 'SELECT tablename, indexname, indexdef FROM pg_indexes WHERE schemaname = \'public\' ORDER BY tablename, indexname;'
