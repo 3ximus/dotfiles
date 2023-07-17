@@ -2,7 +2,7 @@
 
 set -e
 
-BRANCH_NAME=$(git branch --show-current)
+BRANCH_NAME=$(git branch --show-current | grep -o '[A-Z]\+-[0-9]\+')
 REMOTE=$(git remote get-url origin | sed 's@git\@bitbucket.org:\(.*/.*\).git@\1@')
 
 URL="https://api.bitbucket.org/2.0/repositories/${REMOTE}/pullrequests/"
