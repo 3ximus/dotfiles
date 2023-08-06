@@ -92,7 +92,7 @@ call plug#begin()
 Plug '3ximus/gruvbox'
 
 " BASE
-Plug 'vim-airline/vim-airline'
+Plug '3ximus/vim-airline' " my fork switches position of the tabs and splits on tabline
 Plug 'scrooloose/nerdtree', {'on':['NERDTreeToggle', 'NERDTreeFind']}
 Plug '3ximus/fzf' " use my fork to allow passing g:fzf_no_term
 Plug 'junegunn/fzf.vim'
@@ -684,7 +684,6 @@ if &rtp =~ 'vim-airline' && glob("~/.vim/plugged/vim-airline/plugin/airline.vim"
   let g:airline#extensions#tabline#overflow_marker = '…'
   let g:airline#extensions#tabline#fnamemod = ':p:.'
   let g:airline#extensions#tabline#fnamecollapse = 1
-  " let g:airline#extensions#tabline#show_tabs = 0
   let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
   let g:airline#extensions#whitespace#mixed_indent_algo = 1
@@ -837,7 +836,7 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
     call GitEditFile(l:mode, l:hash, l:file)
   endfunction
 
-  command! -bang FZFGitEditCommitFile call fzf#run({'source': 'git lol', 'sink': function('GitEditCommitFile'), 'options': "--prompt 'ViewFile> ' --ansi --layout=reverse-list --header ':: \e[1;33mEnter\e[m / \e[1;33mctrl-s\e[m / \e[1;33mctrl-v\e[m to open current file. \e[1;33mCtrl-Space\e[m to open file selection on that commit' --nth=1 --no-info '--bind=enter:execute@printf \"#### \"@+accept' '--bind=ctrl-v:execute@printf \">>>> \"@+accept' '--bind=ctrl-s:execute@printf \"&&&& \"@+accept' '--bind=ctrl-space:accept'", 'tmux': '-p80%,70%'})
+  command! -bang FZFGitEditCommitFile call fzf#run({'source': 'git lol --all', 'sink': function('GitEditCommitFile'), 'options': "--prompt 'ViewFile> ' --ansi --layout=reverse-list --header ':: \e[1;33mEnter\e[m / \e[1;33mctrl-s\e[m / \e[1;33mctrl-v\e[m to open current file. \e[1;33mCtrl-Space\e[m to open file selection on that commit' --nth=1 --no-info '--bind=enter:execute@printf \"#### \"@+accept' '--bind=ctrl-v:execute@printf \">>>> \"@+accept' '--bind=ctrl-s:execute@printf \"&&&& \"@+accept' '--bind=ctrl-space:accept'", 'tmux': '-p80%,70%'})
 
   let g:fzf_action = {
         \ 'ctrl-t': 'tab split',
