@@ -71,8 +71,6 @@ My [modified whatsapp style](https://github.com/3ximus/gruvbox-dark-whatsapp) (n
 
 - [Dependencies](https://github.com/3ximus/dotfiles#dependencies)
 - [Installation/Cloning](https://github.com/3ximus/dotfiles#installation-and-cloning)
-- [Vim](https://github.com/3ximus/dotfiles#vim)
-- [Tmux](https://github.com/3ximus/dotfiles#tmux)
 - `.bashrc` only contains some bash options and sources all scripts inside [.bash](https://github.com/3ximus/dotfiles/tree/master/.bash), which contains:
     - [prompts](https://github.com/3ximus/dotfiles#prompts)
     - [functions](https://github.com/3ximus/dotfiles/blob/master/.bash/functions.sh) and [aliases](https://github.com/3ximus/dotfiles/blob/master/.bash/aliases.sh)

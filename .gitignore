@@ -4,6 +4,7 @@
 .config/ranger/tagged
 .config/ranger/history
 .config/pgcli/log
+.config/pgcli/history
 .vim/view/
 konsole/bookmarks.xml*
 
