@@ -75,6 +75,7 @@ alias pip-upgrade='pip3 list --outdated --format=freeze | grep -v "^\-e" | cut -
 alias kali-tmux='vagrant ssh -- -t tmux new-session -A -s kali-vm -c /vagrant'
 alias cutter='LIBGL_ALWAYS_INDIRECT=1 /home/vagrant/tools/Cutter-v2.2.0-Linux-x86_64.AppImage'
 alias ffuf='ffuf -c -ic'
+alias py='ipython3'
 
 # PLEX
 # Add this to sudoers or a file in sudoers.d
