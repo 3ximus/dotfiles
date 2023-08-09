@@ -1,8 +1,8 @@
 
 # define xxd to dump memory
 define xxd
-	dump binary memory /tmp/gdb-dump.bin $arg0 $arg0+$arg1
-	eval "shell xxd -o %d /tmp/gdb-dump.bin; rm /tmp/gdb-dump.bin", $arg0
+  dump binary memory /tmp/gdb-dump.bin $arg0 $arg0+$arg1
+  eval "shell xxd -o %d /tmp/gdb-dump.bin; rm /tmp/gdb-dump.bin", $arg0
 end
 document xxd
   Dump memory with xxd command (keep the address as offset)
@@ -15,4 +15,4 @@ end
 
 
 # Stack memory watch
-dashboard memory watch $esp 100
+dashboard memory watch $sp 100
