@@ -15,6 +15,9 @@ esac
 # set edit mode
 set -o emacs
 
+# fail if any command in pipe fails
+set -o pipefail
+
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
