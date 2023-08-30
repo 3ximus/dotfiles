@@ -1,3 +1,7 @@
+# Stack memory watch
+dashboard memory watch $sp 96
+# use only these modes
+dashboard -layout assembly breakpoints memory registers stack
 
 # define xxd to dump memory
 define xxd
@@ -12,7 +16,3 @@ document xxd
     size -- size (in byte) of memory to dump
             sizeof(*addr) is used by default
 end
-
-
-# Stack memory watch
-dashboard memory watch $sp 100

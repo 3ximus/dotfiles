@@ -159,7 +159,7 @@ fi
 
 export EDITOR="vim"
 # add customs scripts
-export PATH=$HOME/.bash/scripts:$HOME/go/bin:$PATH
+export PATH=$HOME/.bash/scripts:$HOME/go/bin:$HOME/.cargo/bin:$PATH
 
 # fzf CTRL_T options
 export FZF_COMPLETION_OPTS="--preview '[ -f {} ] && { if hash batcat &>/dev/null ; then batcat --color=always --style=header,numbers,changes {} ; else file {} ; fi } '"
