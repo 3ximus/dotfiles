@@ -1,0 +1,33 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+$provision_script = <<-SCRIPT
+echo Installing extra software...
+sudo apt install -y docker.io npm fzf xclip patchelf hexedit cargo ghidra gdbserver ripgrep strace gdb imagemagick feh peass steghide ranger
+echo TODO: clone and setup dotfiles
+SCRIPT
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "kalilinux/rolling"
+  config.vm.box_check_update = false
+
+  config.vm.provider 'libvirt' do |libvirt|
+    libvirt.cpus = 8
+    libvirt.memory = 8192
+    libvirt.memorybacking :access, :mode => "shared"
+  end
+
+  config.vm.synced_folder "./", "/vagrant", type: "virtiofs"
+
+  # Forward X
+  config.ssh.forward_agent = true
+  config.ssh.forward_x11 = true
+
+  # Open ports
+  config.vm.network "forwarded_port", guest: 4444, host: 4444
+  config.vm.network "forwarded_port", guest: 44441, host: 44441
+  config.vm.network "forwarded_port", guest: 44442, host: 44442
+  config.vm.network "forwarded_port", guest: 8000, host: 8000
+
+  config.vm.provision "shell", inline: $provision_script
+end

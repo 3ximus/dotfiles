@@ -1,0 +1,11 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# RDP will work with free rdp, and an application can be launched with :
+#    vagrant rdp -- /cert:ignore /app:excel
+Vagrant.configure("2") do |config|
+  config.vm.box = "peru/windows-10-enterprise-x64-eval"
+  config.winssh.forward_agent = true
+  # needs to run `vagrant rsync` | `vagrant rsync-auto` to sync directory, also needs to add cygwin rsync to path
+  config.vm.synced_folder ".", 'C:\Users\vagrant\Share', type: "rsync"
+end
