@@ -92,7 +92,7 @@ install_whatsapp() {
 		select theme_path in ${DATA_PATH}/styles/*.css ; do break; done
 		echo "if ('serviceWorker' in navigator) {caches.keys().then(function (cacheNames) {cacheNames.forEach(function (cacheName) {caches.delete(cacheName);});});}" >/tmp/whatsapp-inject.js
 		# Ctrl+k functionality
-		echo "document.addEventListener('keydown', (event) => {if(event.ctrlKey && event.keyCode == 75) document.querySelector('div[data-testid=\"chat-list-search\"]').focus()});" >>/tmp/whatsapp-inject.js
+		echo "document.addEventListener('keydown', (event) => {if(event.ctrlKey && event.keyCode == 75) document.querySelector('div[data-lexical-editor=\"true\"]').focus()});" >>/tmp/whatsapp-inject.js
 		nativefier --inject $theme_path --inject /tmp/whatsapp-inject.js --icon "${DATA_PATH}/icons/whatsapp.png" --name whatsapp --counter --single-instance --user-agent "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:90.0) Gecko/20100101 Firefox/90.0" web.whatsapp.com /tmp/whatsapp
 		if [ -d "/opt/whatsapp" ] ; then
 			echo "Deleting previous WhatsApp installation"

@@ -3,8 +3,9 @@
 
 $provision_script = <<-SCRIPT
 echo Installing extra software...
-sudo apt install -y docker.io npm fzf xclip patchelf hexedit cargo ghidra gdbserver ripgrep strace gdb imagemagick feh peass steghide ranger
-echo TODO: clone and setup dotfiles
+sudo apt install -y vim-gtk3 docker.io npm fzf xclip patchelf hexedit cargo ghidra gdbserver ripgrep strace gdb imagemagick feh peass steghide ranger
+git clone git@github.com:3ximus/dotfiles ~/dotfiles --recurse-submodules -j8
+echo Install dotfiles manually by ssh into the machine and running `./install-my-config --force`
 SCRIPT
 
 Vagrant.configure("2") do |config|
