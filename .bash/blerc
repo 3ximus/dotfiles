@@ -1,64 +1,13 @@
 # -*- filetype: sh; mode: sh; mode: sh-bash -*-
 
-## This is a template for "~/.blerc".
-##
-## To use ble.sh in bash, please setup "~/.bashrc" as follows:
-##
-## ```bash
-## # bashrc
-##
-## # Please put the following line in the beginning of .bashrc
-## # Note: Please replace $HOME/.local/share/blesh with the path to your ble.sh
-## [[ $- == *i* ]] && "$HOME/.local/share/blesh/ble.sh" --noattach
-##
-## # Your bashrc contents should come between the two lines.
-##
-## # Please put the following line in the end of .bashrc
-## ((_ble_bash)) && ble-attach
-## ```
-##
-
 ##-----------------------------------------------------------------------------
 ## Basic settings
 
-
-## The following setting specifies the input encoding. Currently only "UTF-8"
-## and "C" is available.
-
 bleopt input_encoding=UTF-8
-
-## The following setting specifies the pager used by ble.sh.  This is used to
-## show the help of commands (f1).
-
-#bleopt pager=less
-
-## The following setting specifies the editor used by ble.sh.  This is used for
-## the widget edit-and-execute (C-x C-e) and editor for a large amount of
-## command line texts.  Possible values include, for example, "vim", "emacs
-## -nw" and "nano".
-
 bleopt editor=vim
 
 ##-----------------------------------------------------------------------------
 ## Line editor settings
-
-## The following setting turns on the delayed load of history when an
-## non-empty value is set.
-
-#bleopt history_lazyload=1
-
-
-## The following setting turns on the delete selection mode when an non-empty
-## value is set. When the mode is turned on the selection is removed when a
-## user inserts a character.
-
-#bleopt delete_selection_mode=1
-
-
-## The following settings control the indentation. "indent_offset" sets the
-## indent width. "indent_tabs" controls if tabs can be used for indentation
-## or not. If "indent_tabs" is set to 0, tabs will never be used. Otherwise
-## indentation is made with tabs and spaces.
 
 bleopt indent_offset=4
 bleopt indent_tabs=1

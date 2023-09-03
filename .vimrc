@@ -108,6 +108,7 @@ Plug 'tpope/vim-repeat'
 Plug 'easymotion/vim-easymotion'
 Plug 'unblevable/quick-scope'
 Plug 'AndrewRadev/linediff.vim'
+Plug 'fidian/hexmode'
 
 " GIT
 Plug 'Xuyuanp/nerdtree-git-plugin', {'on':['NERDTreeToggle', 'NERDTreeFind']}
