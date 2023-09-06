@@ -4,6 +4,7 @@
 $provision_script = <<-SCRIPT
 echo Installing extra software...
 sudo apt install -y vim-gtk3 docker.io npm fzf xclip patchelf hexedit cargo ghidra gdbserver ripgrep strace gdb imagemagick feh peass steghide ranger
+pip install pwntools z3
 git clone git@github.com:3ximus/dotfiles ~/dotfiles --recurse-submodules -j8
 echo Install dotfiles manually by ssh into the machine and running `./install-my-config --force`
 SCRIPT
@@ -13,7 +14,7 @@ Vagrant.configure("2") do |config|
   config.vm.box_check_update = false
 
   config.vm.provider 'libvirt' do |libvirt|
-    libvirt.cpus = 8
+    libvirt.cpus = 4
     libvirt.memory = 8192
     libvirt.memorybacking :access, :mode => "shared"
   end
