@@ -57,6 +57,10 @@ ble-bind -m 'vi_imap' -f 'M-e' 'emacs-editing-mode'
 ble-bind -m 'vi_nmap' -f 'M-e' 'emacs-editing-mode'
 ble-bind -m 'vi_xmap' -f 'M-e' 'emacs-editing-mode'
 
+# Fix weird behaviour on kali
+ble-bind -m 'emacs' -f left '@nomarked backward-char'
+ble-bind -m 'emacs' -f right '@nomarked forward-char'
+
 ##-----------------------------------------------------------------------------
 ## Settings for completion
 
