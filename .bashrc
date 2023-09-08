@@ -63,7 +63,7 @@ HISTCONTROL=ignoreboth:erasedups
 # append to the history file, don't overwrite it
 shopt -s histappend
 
-# set history length)
+# set history length
 HISTSIZE=20000
 HISTFILESIZE=40000
 

@@ -1,0 +1,17 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "debian/buster64"
+  config.vm.define "debian-test"
+
+  config.vm.provider 'libvirt' do |libvirt|
+    libvirt.memorybacking :access, :mode => "shared"
+  end
+
+  config.ssh.insert_key = false
+
+  config.vm.synced_folder './', '/vagrant', type: '9p', disabled: false, accessmode: "squash"
+  # config.vm.synced_folder '.', '/vagrant', disabled: true
+  config.ssh.forward_agent = true
+end
