@@ -22,19 +22,13 @@
   "languageserver": {
     "godot": {
       "host": "127.0.0.1",
-      "filetypes": [
-        "gdscript"
-      ],
+      "filetypes": ["gdscript"],
       "port": 6008
     },
     "intelephense": {
       "command": "intelephense",
-      "args": [
-        "--stdio"
-      ],
-      "filetypes": [
-        "php"
-      ],
+      "args": ["--stdio"],
+      "filetypes": ["php"],
       "initializationOptions": {
         "storagePath": "/tmp/intelephense"
       }
