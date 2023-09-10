@@ -19,6 +19,7 @@
   "python.analysis.typeCheckingMode": "off",
   "pyright.inlayHints.variableTypes": false,
   "pyright.inlayHints.functionReturnTypes": false,
+  "python.formatting.autopep8Args": ["--indent-size=2", "--ignore=E121"],
   "languageserver": {
     "godot": {
       "host": "127.0.0.1",
