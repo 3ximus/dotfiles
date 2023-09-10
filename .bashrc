@@ -152,23 +152,7 @@ if ! shopt -oq posix; then
     fi
 fi
 
-# ==============
-#   VARIABLES
-# ==============
-# This are basic variables, extra ones should be defined in variables.sh inside .bash
-
-export EDITOR="vim"
-# add customs scripts
-export PATH=$HOME/.bash/scripts:$HOME/go/bin:$HOME/.cargo/bin:$PATH
-
-# fzf CTRL_T options
-export FZF_COMPLETION_OPTS="--preview '[ -f {} ] && { if hash batcat &>/dev/null ; then batcat --color=always --style=header,numbers,changes {} ; else file {} ; fi } '"
-export FZF_CTRL_T_OPTS="$FZF_COMPLETION_OPTS"
-export BAT_THEME="gruvbox-dark"
-
-# change fzf-marks paste binding
-export FZF_MARKS_PASTE="ctrl-l"
-
 # ============================
 # ble.sh
 ((_ble_bash)) && ble-attach
+

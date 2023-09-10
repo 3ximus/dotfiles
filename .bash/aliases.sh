@@ -70,12 +70,13 @@ alias wget-directory='wget -r -np -nc -nd -k'
 
 alias pip-upgrade='pip3 list --outdated --format=freeze | grep -v "^\-e" | cut -d = -f 1 | xargs -n1 sudo pip3 install -U'
 
+alias ffuf='ffuf -c -ic'
+alias py='ipython3'
+
 # KALI
 # start konsole emulator attached to remote tmux session
 alias kali-tmux='vagrant ssh -- -t tmux new-session -A -c /vagrant -s vm'
 alias cutter='LIBGL_ALWAYS_INDIRECT=1 /vagrant/tools/Cutter-v2.2.0-Linux-x86_64.AppImage'
-alias ffuf='ffuf -c -ic'
-alias py='ipython3'
 
 # PLEX
 # Add this to sudoers or a file in sudoers.d
