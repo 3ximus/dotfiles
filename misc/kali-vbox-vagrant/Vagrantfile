@@ -1,0 +1,24 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "kalilinux/rolling"
+  config.vm.box_check_update = false
+
+  # Disable GUI
+  config.vm.provider "virtualbox" do |v|
+    v.cpus = 4
+    v.memory = 8192
+    v.gui = false
+  end
+
+  # Forward X
+  config.ssh.forward_agent = true
+  config.ssh.forward_x11 = true
+
+  # Open ports
+  config.vm.network "forwarded_port", guest: 4444, host: 4444
+  config.vm.network "forwarded_port", guest: 44441, host: 44441
+  config.vm.network "forwarded_port", guest: 44442, host: 44442
+  config.vm.network "forwarded_port", guest: 8000, host: 8000
+end
