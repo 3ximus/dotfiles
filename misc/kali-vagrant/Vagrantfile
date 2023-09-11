@@ -4,8 +4,11 @@
 $provision_script = <<-SCRIPT
 echo Installing extra software...
 sudo apt install -y vim-gtk3 docker.io npm fzf xclip patchelf hexedit cargo ghidra gdbserver ripgrep strace gdb imagemagick feh peass steghide ranger
-pip install pwntools z3
-git clone git@github.com:3ximus/dotfiles ~/dotfiles --recurse-submodules -j8
+pip install pwntools z3 ortools
+sudo chsh vagrant -s /bin/bash
+sudo localectl set-locale LANG=en_CA.UTF-8
+ssh-keyscan github.com >> .ssh/known_hosts
+git clone git@github.com:3ximus/dotfiles --recurse-submodules -j8 /home/vagrant/dotfiles
 echo Install dotfiles manually by ssh into the machine and running `./install-my-config --force`
 SCRIPT
 
@@ -21,6 +24,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.synced_folder "./", "/vagrant", type: "virtiofs"
 
+  config.ssh.insert_key = false
   # Forward X
   config.ssh.forward_agent = true
   config.ssh.forward_x11 = true
@@ -31,5 +35,5 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 44442, host: 44442
   config.vm.network "forwarded_port", guest: 8000, host: 8000
 
-  config.vm.provision "shell", inline: $provision_script
+  config.vm.provision "shell", inline: $provision_script, privileged: false
 end
