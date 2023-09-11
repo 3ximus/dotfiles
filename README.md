@@ -57,7 +57,10 @@ My slack style hack with the following sidebar settings:
 
 ## Spotify
 
-My spotify modified [Matte](https://github.com/spicetify/spicetify-themes/tree/master/Matte) theme to use with [spicetify](https://github.com/spicetify/spicetify-cli)
+My spotify modified [text](https://github.com/spicetify/spicetify-themes/tree/master/text) theme to use with [spicetify](https://github.com/spicetify/spicetify-cli)
+
+ - To fix spotify glitches disable gpu with `--disable-gpu`
+
 
 ![21](screenshots/spotify.png)
 
