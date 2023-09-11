@@ -62,8 +62,8 @@ ble-bind -m 'emacs' -f M-, insert-nth-argument
 ble-bind -m 'emacs' -f M-. insert-last-argument
 
 # Fix weird behaviour on kali
-ble-bind -m 'emacs' -f left '@nomarked backward-char'
-ble-bind -m 'emacs' -f right '@nomarked forward-char'
+# ble-bind -m 'emacs' -f left '@nomarked backward-char'
+# ble-bind -m 'emacs' -f right '@nomarked forward-char'
 
 ##-----------------------------------------------------------------------------
 ## Settings for completion
