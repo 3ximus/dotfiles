@@ -1,11 +1,21 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
+#
+# RDP will work with free rdp
 
-# RDP will work with free rdp, and an application can be launched with :
-#    vagrant rdp -- /cert:ignore /app:excel
+# Allow apps to be executed with   vagrant rdp -- /cert:ignore /app:excel
+$provision_rdp_apps = 'REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList" /v "fDisabledAllowList" /t REG_DWORD /d 00000001 /F'
+# Set default shell as being powershell
+$provision_powershell = 'New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -PropertyType String -Force'
+
 Vagrant.configure("2") do |config|
   config.vm.box = "peru/windows-10-enterprise-x64-eval"
+
+  config.vm.provision "cygwin-setup", type: 'shell', path: 'provision.bat', privileged: false
+  config.vm.provision "rdp-apps", type: 'shell', inline: $provision_rdp_apps, privileged: false
+  config.vm.provision "ps1-default", type: 'shell', inline: $provision_powershell, privileged: false
+
   config.winssh.forward_agent = true
   # needs to run `vagrant rsync` | `vagrant rsync-auto` to sync directory, also needs to add cygwin rsync to path
-  config.vm.synced_folder ".", 'C:\Users\vagrant\Share', type: "rsync"
+  config.vm.synced_folder ".", 'C:\Users\vagrant\Share', type: "rsync", disabled: false # start disabled since it won't be possible to setup without provision first
 end
