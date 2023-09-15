@@ -1,5 +1,6 @@
 {
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+  "coc.preferences.currentFunctionSymbolDebounceTime": 50,
   "suggest.autoTrigger": "trigger",
   "suggest.insertMode": "insert",
   // "suggest.virtualText": true,
