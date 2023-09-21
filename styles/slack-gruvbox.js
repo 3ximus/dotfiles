@@ -35,6 +35,8 @@ document.addEventListener("DOMContentLoaded", function () {
       --sk_highlight: 142,192,124;
       --sk_highlight_hover: 250,189,47;
       --sk_highlight_accent: 142,192,124;
+      --dt_color-content-pry: 235,219,178;
+      --dt_color-content-sec: 235,219,178;
     }
     .p-ia4_top_nav {
       background-color: #282828 !important;
