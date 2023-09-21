@@ -35,6 +35,13 @@ document.addEventListener("DOMContentLoaded", function () {
       --sk_highlight: 142,192,124;
       --sk_highlight_hover: 250,189,47;
       --sk_highlight_accent: 142,192,124;
-    }`;
+    }
+    .p-ia4_top_nav {
+      background-color: #282828 !important;
+    }
+    .p-tab_rail {
+      background-color: #282828 !important;
+    }
+  `;
   document.head.appendChild(s);
 }); // XXX EXIMUS PATCH -- DONT CHANGE THIS COMMENT, its used to remove this style when reapplying the patch
