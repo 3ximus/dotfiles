@@ -114,6 +114,7 @@ Plug 'fidian/hexmode'
 Plug 'Xuyuanp/nerdtree-git-plugin', {'on':['NERDTreeToggle', 'NERDTreeFind']}
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
+Plug 'stsewd/fzf-checkout.vim'
 
 Plug 'godlygeek/tabular', { 'on': ['Tabularize'] }
 
@@ -525,6 +526,9 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 let g:VimuxPromptString = "$ "
 let g:VimuxExpandCommand = 1
 
+" fzf-checkout
+let g:fzf_checkout_git_options = '--sort=-committerdate'
+
 "Python syntax highlight
 let g:python_highlight_all = 1
 let g:python_highlight_indent_errors = 1
@@ -781,14 +785,6 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
 
   let g:fzf_history_dir = '~/.local/share/fzf-history'
 
-  " Function to checkout a branch with FZF
-  function! GitCheckoutBranch(branch)
-    " branch can look like this: "/remotes/origin/master [hash] info" or this: "master [hash] info"
-    let l:name = split(split(trim(a:branch), "", 1)[0], "/", 1)[-1]
-    execute "Git checkout ".l:name
-  endfunction
-  command! -bang FZFGbranch call fzf#run({'source': 'git branch -avv --color', 'sink': function('GitCheckoutBranch'), 'options': '--prompt "Branch> " --ansi --nth=1', 'tmux': '-p60%,40%'})
-
   "Gedit file with normally or with splits
   function GitEditFile(mode, commit, file)
     if match(a:mode, '&&&&') == 0
@@ -869,7 +865,7 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
 
   noremap <leader>gv :FZFGitEditBranchFile<CR>
   noremap <leader>gV :FZFGitEditCommitFile<CR>
-  noremap <leader>gb :FZFGbranch<CR>
+  noremap <leader>gb :FZFGBranches<CR>
   noremap <leader>gC :FZFCommits --pretty=format:'\%C(yellow)\%h\%Creset \%C(auto)\%d\%Creset \%s (\%Cblue\%an\%Creset, \%cr)'<CR>
   noremap <leader>gc :FZFBCommits --pretty=format:'%C(yellow)%h%Creset %C(auto)%d%Creset %s (%Cblue%an%Creset, %cr)'<CR>
   vmap <leader>gc :FZFBCommits --pretty=format:'%C(yellow)%h%Creset %C(auto)%d%Creset %s (%Cblue%an%Creset, %cr)'<CR>
