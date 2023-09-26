@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
   let s = document.createElement("style");
-  s.type = "text/css";
   s.innerHTML = `
     body {
       font-family: "TerminessTTF Nerd Font Mono", Slack-Lato,Slack-Fractions,appleLogo,sans-serif !important;
@@ -44,6 +43,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     .p-tab_rail {
       background-color: #282828 !important;
+    }
+    .p-theme_background {
+      background: unset !important;
     }
   `;
   document.head.appendChild(s);
