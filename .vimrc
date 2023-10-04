@@ -103,10 +103,12 @@ Plug 'wellle/context.vim'
 
 " TOOLS
 Plug 'tpope/vim-surround'
-Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-repeat'
-Plug 'easymotion/vim-easymotion'
-Plug 'unblevable/quick-scope'
+Plug 'tomtom/tcomment_vim'
+" s motions
+Plug 'justinmk/vim-sneak'
+" highlight patterns and ranges in command
+Plug 'markonm/traces.vim'
 Plug 'AndrewRadev/linediff.vim'
 Plug 'fidian/hexmode'
 
@@ -406,10 +408,6 @@ if !has('gui_running')
   highlight ErrorMsg cterm=bold ctermfg=234 ctermbg=9
 endif
 
-" quick-scope
-highlight link QuickScopePrimary GruvboxRedBold
-highlight link QuickScopeSecondary GruvboxOrangeBold
-
 " }}}
 
 " PLUGIN CONFIGURATION {{{
@@ -528,9 +526,6 @@ endif
 " Markology
 let g:markology_include='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-" quick-scope
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-
 " Vimux
 let g:VimuxPromptString = "$ "
 let g:VimuxExpandCommand = 1
@@ -603,8 +598,11 @@ nmap <leader>hf :GitGutterFold<CR>
 let g:NERDTreeGitStatusMapNextHunk=']h'
 let g:NERDTreeGitStatusMapPrevHunk='[h'
 
-"easy-motion
-nmap S <Plug>(easymotion-overwin-f)
+"vim sneak
+map f <Plug>Sneak_f
+map F <Plug>Sneak_F
+map t <Plug>Sneak_t
+map T <Plug>Sneak_T
 
 "fugitive
 function! CloseGstatus() abort
