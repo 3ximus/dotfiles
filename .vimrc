@@ -124,7 +124,8 @@ Plug 'godlygeek/tabular', { 'on': ['Tabularize'] }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 if exists('$TMUX')
-  Plug 'preservim/vimux'
+  " Plug 'preservim/vimux'
+  Plug '3ximus/vimux-tasks'
 endif
 
 Plug 'CoderCookE/vim-chatgpt', {'on': ['<Plug>(chatgpt-menu)', 'Ask', 'Review', 'Rewrite', 'Explain', 'Fix', 'Test']}
@@ -529,6 +530,7 @@ let g:markology_include='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 " Vimux
 let g:VimuxPromptString = "$ "
 let g:VimuxExpandCommand = 1
+" let g:VimuxTaskAutodetect = []
 
 " fzf-checkout
 let g:fzf_checkout_git_options = '--sort=-committerdate'
@@ -640,6 +642,7 @@ let g:user_emmet_mode='inv'
 imap <C-e> <plug>(emmet-expand-abbr)
 
 "Vimux
+noremap <leader>rt :VimuxTasks<CR>
 noremap <leader>rc :VimuxPromptCommand<CR>
 noremap <leader>rl :VimuxRunLastCommand<CR>
 noremap <leader>rk :VimuxInterruptRunner<CR>
@@ -785,7 +788,8 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
   if exists('$TMUX')
     let g:fzf_layout = { 'tmux': '-p90%,70%' }
   else
-    " let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 , 'border': 'sharp'} } " Causes airline gruvbox bug
+    " Causes airline gruvbox bug
+    " let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 , 'border': 'sharp'} }
     let g:fzf_no_term = 1
     let g:fzf_layout = { 'down': '30%' }
   endif
@@ -812,7 +816,7 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
         \ call fzf#run({
         \ 'source': 'git branch -avv --color',
         \ 'sink': function('GitEditBranchFile'),
-        \ 'options': "'--bind=ctrl-v:execute@printf \">>>> \"@+accept' '--bind=ctrl-s:execute@printf \"&&&& \"@+accept' --prompt 'ViewCurrentFile> ' --ansi --nth=1 --no-info",
+        \ 'options': "'--bind=ctrl-v:execute@printf \">>>> \"@+accept' '--bind=ctrl-s:execute@printf \"&&&& \"@+accept' --prompt 'ViewCurrentFile> ' --ansi --no-info",
         \ 'tmux': '-p60%,40%'})
 
   function! GitEditCommitFile(commit)
@@ -826,7 +830,7 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
       " TODO preview here is not correct since it doesnt view the file content
       " on the selected commit
       let l:file = fzf#run(fzf#wrap({'source': 'git ls-tree --name-only -r ' . l:hash, 'sink': '"',
-        \ 'options': "'--bind=ctrl-v:execute@printf \">>>> \"@+accept' '--bind=ctrl-s:execute@printf \"&&&& \"@+accept' --ansi --nth=1 --prompt 'ViewFile @ ".l:hash."> ' --inline-info --preview '~/.vim/plugged/fzf.vim/bin/preview.sh {}'",
+        \ 'options': "'--bind=ctrl-v:execute@printf \">>>> \"@+accept' '--bind=ctrl-s:execute@printf \"&&&& \"@+accept' --ansi --prompt 'ViewFile @ ".l:hash."> ' --inline-info --preview '~/.vim/plugged/fzf.vim/bin/preview.sh {}'",
         \ 'tmux': '-p80%,70%'}))
       if len(l:file) == 0
         return
@@ -1026,6 +1030,12 @@ endif
 " ==================
 
 autocmd FileType vim setlocal foldmethod=marker foldlevel=0
+
+" list staches on fugitive
+augroup CustomFugitiveMappings
+  autocmd!
+  autocmd FileType fugitive nmap <buffer> czl :G --paginate stash list '--pretty=format:%h %as %<(10)%gd %<(76,trunc)%s'<cr>
+augroup END
 
 autocmd FileType python setlocal tabstop=2 shiftwidth=2 softtabstop=2 noexpandtab autoindent "because someone has too much screen space in their eyesight
 autocmd FileType python setlocal indentkeys-=<:> " colon will auto indent line in insert mode, remove that behavior
