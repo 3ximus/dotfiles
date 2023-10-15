@@ -2,7 +2,9 @@
 #   VARIABLES
 # ==============
 
-export EDITOR="vim"
+export EDITOR=vim
+
+export COLORTERM=truecolor
 
 # add customs scripts
 export PATH=$HOME/.bash/scripts:$PATH
@@ -26,3 +28,4 @@ export BAT_THEME="gruvbox-dark"
 
 # change fzf-marks paste binding
 export FZF_MARKS_PASTE="ctrl-l"
+

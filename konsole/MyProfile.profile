@@ -1,7 +1,7 @@
 [Appearance]
 AntiAliasFonts=true
 BoldIntense=true
-ColorScheme=Gruvbox_Dark_Real_Colors
+ColorScheme=Gruvbox_Dark
 Font=TerminessTTF Nerd Font Mono,13,-1,5,57,0,0,0,0,0,Medium
 UseFontLineChararacters=false
 
