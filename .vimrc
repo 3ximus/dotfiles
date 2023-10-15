@@ -175,6 +175,8 @@ set t_Co=256 "terminal color range
 try "try to set the theme as gruvbox
   colorscheme gruvbox
   let g:gruvbox_termcolors = 16 "256 colors look really bad
+  let g:gruvbox_improved_warnings = 1
+  let g:gruvbox_transparent_bg = 1
   set background=dark
 catch /^Vim\%((\a\+)\)\=:E185/
   colorscheme darkblue
@@ -820,7 +822,6 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
         \ 'tmux': '-p60%,40%'})
 
   function! GitEditCommitFile(commit)
-    echo a:commit
     if match(a:commit, '>>>>') == 0 || match(a:commit, '&&&&') == 0 || match(a:commit, '####') == 0
       let l:hash = substitute(a:commit[5:], "^[^0-9a-zA-Z]\\+ \\([0-9a-zA-Z]\\+\\).*", "\\1", "")
       let l:file = '%'
