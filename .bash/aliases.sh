@@ -77,6 +77,8 @@ alias py='ipython3'
 # start konsole emulator attached to remote tmux session
 alias kali-tmux='vagrant ssh -- -t tmux new-session -A -c /vagrant -s vm'
 alias cutter='LIBGL_ALWAYS_INDIRECT=1 /vagrant/tools/Cutter-v2.2.0-Linux-x86_64.AppImage'
+alias ghidra-server='sudo /usr/share/ghidra/server/ghidraSvr'
+alias ghidra-admin='sudo /usr/share/ghidra/server/svrAdmin'
 
 # PLEX
 # Add this to sudoers or a file in sudoers.d
