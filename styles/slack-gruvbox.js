@@ -38,10 +38,10 @@ document.addEventListener("DOMContentLoaded", function () {
       --dt_color-content-sec: #d5c4a1;
       --dt_color-content-inv-pry: #8ec07c;
     }
-    .p-ia4_top_nav {
-      background-color: #282828 !important;
+    .p-channel_sidebar__channel--selected {
+      background-color: #3c3836 !important
     }
-    .p-tab_rail {
+    .p-ia4_top_nav, .p-ia4_channel_list, .p-tab_rail {
       background-color: #282828 !important;
     }
     .p-theme_background {
