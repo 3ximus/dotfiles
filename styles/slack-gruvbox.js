@@ -26,17 +26,22 @@ document.addEventListener("DOMContentLoaded", function () {
       color:#282828 !important;
     }
     .sk-client-theme--dark {
-      --sk_primary_background: 40,40,40;
-      --sk_foreground_min_solid: 29,32,33;
-      --sk_primary_foreground: 235,219,178;
-      --sk_foreground_max: 235,219,178;
-      --sk_foreground_max_solid: 189,174,147;
-      --sk_highlight: 142,192,124;
-      --sk_highlight_hover: 250,189,47;
-      --sk_highlight_accent: 142,192,124;
-      --dt_color-content-pry: #ebdbb2;
-      --dt_color-content-sec: #d5c4a1;
-      --dt_color-content-inv-pry: #8ec07c;
+      --sk_primary_background: 40,40,40 !important;
+      --sk_foreground_min_solid: 29,32,33 !important;
+      --sk_primary_foreground: 235,219,178 !important;
+      --sk_foreground_max: 235,219,178 !important;
+      --sk_foreground_max_solid: 189,174,147 !important;
+      --sk_highlight: 142,192,124 !important;
+      --sk_highlight_hover: 250,189,47 !important;
+      --sk_highlight_accent: 142,192,124 !important;
+      --dt_color-content-pry: #ebdbb2 !important;
+      --dt_color-content-sec: #d5c4a1 !important;
+      --dt_color-content-inv-pry: #8ec07c !important;
+      --dt_color-theme-content-pry: #ebdbb2 !important;
+      --dt_color-theme-content-sec: #d5c4a1 !important;
+      --dt_color-theme-content-inv-pry: #8ec07c !important;
+
+      --dt_color-theme-surf-ter: #282828 !important;
     }
     .p-channel_sidebar__channel--selected {
       background-color: #3c3836 !important
