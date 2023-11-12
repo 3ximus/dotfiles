@@ -100,6 +100,7 @@ Plug 'sjl/gundo.vim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'jeetsukumaran/vim-markology'
 Plug 'wellle/context.vim'
+Plug 'skywind3000/asyncrun.vim'
 
 " TOOLS
 Plug 'tpope/vim-surround'
@@ -306,6 +307,10 @@ endfunction
 " map leader to space
 nnoremap <space> <nop>
 let mapleader=" "
+
+" disable F1 help key
+map <F1> <Esc>
+imap <F1> <Esc>
 
 " change buffers
 nmap <C-P> :bp<CR>
@@ -622,7 +627,7 @@ noremap <leader>gl :0Gclog<CR>:copen<CR>
 noremap <leader>gL :G log --graph<CR>
 vmap <leader>gl :Gclog<CR>:copen<CR>
 noremap <leader>gB :Git blame<CR>
-noremap <leader>gp :Git push<CR>
+noremap <leader>gp :AsyncRun git push<CR>
 
 " create a popup with git info about the current line
 nmap <silent><Leader>gm :call setbufvar(winbufnr(popup_atcursor(split(system("git log -n 1 -L " . line(".") . ",+1:" . expand("%:p")), "\n"), { "padding": [1,1,1,1], "pos": "botleft", "wrap": 0 })), "&filetype", "git")<CR>

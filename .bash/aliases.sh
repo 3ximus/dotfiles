@@ -34,6 +34,8 @@ alias grep-bin='grep -oUaP' # pattern like: "\xde\xad"
 alias htop-mem='htop --sort-key=PERCENT_MEM'
 alias htop-cpu='htop --sort-key=PERCENT_CPU'
 
+alias ls-open-ports='sudo netstat -tulpn | grep LISTEN'
+
 # Clipboard
 alias clip-in='xclip -in -selection clipboard'
 alias clip-out='xclip -out -selection clipboard'
@@ -96,4 +98,4 @@ alias map-view='telnet mapscii.me'
 # Cointop
 alias cointop='ssh cointop.sh'
 
-alias random-commit='git commit -m "$(curl -sk whatthecommit.com/index.txt)"'
+alias random-commit='git commit -m "$(curl -Lsk whatthecommit.com/index.txt)"'
