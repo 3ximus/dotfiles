@@ -107,6 +107,7 @@ Plug 'wellle/context.vim'
 Plug 'skywind3000/asyncrun.vim'
 
 if has('nvim')
+  Plug 'nvim-tree/nvim-web-devicons'
   Plug 'stevearc/oil.nvim'
 endif
 
