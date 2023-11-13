@@ -65,7 +65,11 @@ set wildignorecase
 
 " enable mouse for resizing window splits
 set mouse=n
-set ttymouse=xterm2
+set guicursor=""
+if !has('nvim')
+  set ttymouse=xterm2
+endif
+
 
 " To diable bell sounds, specially on windows
 set noerrorbells visualbell t_vb=
@@ -86,7 +90,7 @@ onoremap in :<C-u>normal vin<CR>
 " VIM PLUG PLUGINS {{{
 " ===================
 
-call plug#begin()
+call plug#begin('~/.vim/plugged')
 
 " COLORSCHEME
 Plug '3ximus/gruvbox'
@@ -101,6 +105,10 @@ Plug 'junegunn/vim-peekaboo'
 Plug 'jeetsukumaran/vim-markology'
 Plug 'wellle/context.vim'
 Plug 'skywind3000/asyncrun.vim'
+
+if has('nvim')
+  Plug 'stevearc/oil.nvim'
+endif
 
 " TOOLS
 Plug 'tpope/vim-surround'
@@ -907,7 +915,11 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
         \]
 
   " map ctrl-space to get coc completion
-  inoremap <silent><expr> <c-@> coc#refresh()
+  if has('nvim')
+    inoremap <silent><expr> <c-space> coc#refresh()
+  else
+    inoremap <silent><expr> <c-@> coc#refresh()
+  endif
 
   " Use `[d` and `]d` to navigate diagnostics
   " Use `:cocDiagnostics` to get all diagnostics of current buffer in location list.
