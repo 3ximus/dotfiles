@@ -34,11 +34,11 @@ alias grep-bin='grep -oUaP' # pattern like: "\xde\xad"
 alias htop-mem='htop --sort-key=PERCENT_MEM'
 alias htop-cpu='htop --sort-key=PERCENT_CPU'
 
-alias ls-open-ports='sudo netstat -tulpn | grep LISTEN'
+alias list-open-ports='sudo netstat -tulpn | grep LISTEN'
 
 # Clipboard
-alias clip-in='xclip -in -selection clipboard'
-alias clip-out='xclip -out -selection clipboard'
+alias clipin='xclip -in -selection clipboard'
+alias clipout='xclip -out -selection clipboard'
 
 # mount ntfs filesystems with correct permissions
 alias mount-ntfs='sudo mount -o uid=1000,gid=1000,dmask=027,fmask=137'
