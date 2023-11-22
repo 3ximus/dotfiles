@@ -53,18 +53,15 @@
   .theme-fg-color1 {
     color: var(--theme-highlight-yellow) !important;
   }
-  .theme-selected ~ .editor .theme-fg-color1 {
-    color: var(--theme-selection-color) !important;
-  }
   .theme-fg-color3 {
     color: var(--theme-highlight-red) !important;
   }
-
-  .ruleview-propertyvalue {
-    color: inherit !important;
+  .theme-selected ~ .editor .theme-fg-color1,
+  .theme-selected ~ .editor .theme-fg-color3 {
+    color: var(--theme-selection-color) !important;
   }
 
-  .treeTable {
+  .ruleview-propertyvalue {
     color: inherit !important;
   }
 
