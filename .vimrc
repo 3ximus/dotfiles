@@ -393,6 +393,9 @@ nmap zz zz:syntax sync fromstart<CR>
 nmap gh :diffget //3<CR>
 nmap gl :diffget //2<CR>
 
+vnoremap <leader>u] :B !python3 -c 'import sys,urllib.parse;print(urllib.parse.quote(sys.stdin.read()));'<cr>
+vnoremap <leader>u[ :B !python3 -c 'import sys,urllib.parse;print(urllib.parse.unquote(sys.stdin.read()));';<cr>
+
 " }}}
 
 " HIGHLIGHT REDEFINITIONS {{{
