@@ -25,7 +25,7 @@
     /* syntax color scheme */
     --theme-text-color-strong: #ebdbb2;
     --theme-highlight-green: #b8bb26 !important;
-    --theme-highlight-blue: #83c07c !important;
+    --theme-highlight-blue: #83a598 !important;
     --theme-highlight-purple: #d3869b !important;
     --theme-highlight-red: #fb4934 !important;
     --theme-highlight-yellow: #fabd2f !important;
@@ -42,6 +42,30 @@
     --theme-icon-color: #ebdbb2 !important;
     --tab-line-selected-color: #8ec07c !important;
     --theme-icon-checked-color: #8ec07c !important;
+
+    --status-code-color-4xx: var(--theme-highlight-yellow) !important;
+
+    --number-color: var(--theme-highlight-purple) !important;
+    --string-color: var(--theme-highlight-green) !important;
+    --object-color: var(--theme-highlight-orange) !important;
+  }
+
+  .theme-fg-color1 {
+    color: var(--theme-highlight-yellow) !important;
+  }
+  .theme-selected ~ .editor .theme-fg-color1 {
+    color: var(--theme-selection-color) !important;
+  }
+  .theme-fg-color3 {
+    color: var(--theme-highlight-red) !important;
+  }
+
+  .ruleview-propertyvalue {
+    color: inherit !important;
+  }
+
+  .treeTable {
+    color: inherit !important;
   }
 
   .theme-dark .generic-chart-container {
