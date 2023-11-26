@@ -5,11 +5,12 @@
 .config/ranger/history
 .config/pgcli/log
 .config/pgcli/history
-.vim/view/
 konsole/bookmarks.xml*
 
 .vim/plugged/*
+.vim/view/
 .vim/.netrwhist
+.vim/.VimballRecord
 
 .tmux/*
 !.tmux/tpm
