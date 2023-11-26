@@ -339,8 +339,8 @@ nnoremap <leader>q @q
 " move line
 nnoremap <C-j> :<C-U>m .+1<CR>
 nnoremap <C-k> :<C-U>m .-2<CR>
-inoremap <C-j> <Esc>:m .+1<CR>gi
-inoremap <C-k> <Esc>:m .-2<CR>gi
+" inoremap <C-j> <Esc>:m .+1<CR>gi
+" inoremap <C-k> <Esc>:m .-2<CR>gi
 vnoremap <C-j> :m '>+1<CR>gv
 vnoremap <C-k> :m '<-2<CR>gv
 
