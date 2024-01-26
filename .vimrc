@@ -879,6 +879,9 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
     inoremap <silent><expr> <c-@> coc#refresh()
   endif
 
+  " Use Ctrl l for expanding snippet
+  imap <C-l> <Plug>(coc-snippets-expand)
+
   " Use `[d` and `]d` to navigate diagnostics
   " Use `:cocDiagnostics` to get all diagnostics of current buffer in location list.
   nmap <silent> [d <Plug>(coc-diagnostic-prev)

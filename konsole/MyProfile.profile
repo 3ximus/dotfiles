@@ -25,7 +25,7 @@ TextEditorCmd=5
 UnderlineFilesEnabled=true
 
 [Keyboard]
-KeyBindings=linux
+KeyBindings=default
 
 [Scrolling]
 HistoryMode=2
