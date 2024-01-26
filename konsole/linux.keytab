@@ -16,9 +16,10 @@ key Up+Shift : ScrollLineUp
 key Up-Shift+Ansi-AppCursorKeys : "\E[A"
 key Up-Shift+Ansi+AppCursorKeys : "\EOA"
 key Up-Shift-Ansi : "\EA"
+key Left-Shift+Ansi-AppCursorKeys-AnyModifier : "\E[D"
 key Left-Shift+Ansi+AppCursorKeys : "\E[1;*D"
-key Left-Shift+Ansi-AppCursorKeys : "\E[1;*D"
-key Left-Shift-Ansi : "\ED"
+key Left-Shift-Ansi : "\E[D"
+key Left-Shift+Ansi-AppCursorKeys : "\E[D"
 key Left-Shift+Ansi+AnyModifier : "\E[1;*D"
 key Down+Shift : ScrollLineDown
 key Down-Shift+Ansi-AppCursorKeys : "\E[B"

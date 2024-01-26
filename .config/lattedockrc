@@ -1,3 +1,13 @@
+[ActionsWidget]
+ColumnState=AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAboAAAACAQAAAQAAAAAAAAAAAAAAAGT/////AAAAgQAAAAAAAAACAAAA+gAAAAEAAAAAAAAAwAAAAAEAAAAAAAAD6AAAAABk
+
+[ConfigDialog]
+1920x1080 screen: Height=550
+1920x1080 screen: Width=825
+
+[General]
+Number of Actions=0
+
 [KFileDialog Settings]
 Recent Files[$e]=custom.layout.latte,file:///usr/share/sounds/freedesktop/stereo/complete.oga
 Recent URLs[$e]=file:$HOME/Downloads/,file:///usr/share/sounds/freedesktop/stereo/
