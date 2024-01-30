@@ -10,7 +10,7 @@ DEFAULT_DIR_LIST=".bash .vim .tmux"
 
 # will be appended by all the grab functions and contain all the path files
 # all the the files in this variable are in the format origin::destination,
-#    and then the linker only has to split by the semi colon
+#		 and then the linker only has to split by the semi colon
 files="# vi:filetype=config
 \n# LIST OF FILES TO LINK\n
 # Remove the leading \'#\' predeciding the line to link some file.
@@ -21,7 +21,7 @@ files="# vi:filetype=config
 
 
 # ----------------------
-#    GRAB FUNCTIONS
+#		 GRAB FUNCTIONS
 # ----------------------
 
 grab_dot_files() {
@@ -75,7 +75,7 @@ grab_remaining_files() {
 
 
 # -------------------------
-#   POST ACTION FUNCTIONS
+#  POST ACTION FUNCTIONS
 # -------------------------
 
 post_action_XXX() {
@@ -83,7 +83,7 @@ post_action_XXX() {
 }
 
 # -------------------------
-#    INSTALL FUNCTIONS
+#  INSTALL FUNCTIONS
 # -------------------------
 
 install_whatsapp() {
@@ -137,7 +137,7 @@ install_instagram() {
 }
 
 # ----------------------
-#   ACTION FUNCTIONS
+#  ACTION FUNCTIONS
 # ----------------------
 
 startup() {
@@ -187,42 +187,42 @@ run_post_actions() {
 		read -r -n 1 -p "Install VSCode Extensions? [y/n]: " REPLY
 		case "$REPLY" in
 			[yY])		echo; post_action_XXX ;;
-			*) 			echo ;;
+			*)			echo ;;
 		esac
 
 	fi
 }
 
 # ----------------------
-#        HELP MENU
+#  HELP MENU
 # ----------------------
 
 if [[ "$1" = "help" || "$1" = "-help" || "$1" = "--help" || "$1" = "-h" ]]; then
 	echo "Usage install_my_config [OPTIONS] [PARAMETERS] [REMOTE]
 
 Options:
-	generic                  only dot files
-	konsole                  Konsole terminal emulator files
-	whatsapp                 Whatsapp files (this creates uses nativefier application)
-	slack                    Slack gruvbox setup
-	instagram                Instagram files (this creates uses nativefier application)
-	[none]                   No option or anything else assumes all files are gathered
+	generic									 only dot files
+	konsole									 Konsole terminal emulator files
+	whatsapp								 Whatsapp files (this creates uses nativefier application)
+	slack										 Slack gruvbox setup
+	instagram								 Instagram files (this creates uses nativefier application)
+	[none]									 No option or anything else assumes all files are gathered
 
 Remote:
 	remote=user@host [PORT]  copy files to remote location. This must be the last argument
 
 Parameters:
-	--copy                 Copy files instead of linking
-							  default option for remote locations
-	--force                Force overwrite when linking
-	--data-dir [DIRECTORY]   Data directory where to look for the files to link
-							  default: $DATA_PATH
-	--out-dir [DIRECTORY]    Destination directory, probably never needed since only \$HOME is used
-								  default: $DESTINATION_PATH" && exit 0
+	--copy								 Copy files instead of linking
+							default option for remote locations
+	--force								 Force overwrite when linking
+	--data-dir [DIRECTORY]	 Data directory where to look for the files to link
+								default: $DATA_PATH
+	--out-dir [DIRECTORY]		 Destination directory, probably never needed since only \$HOME is used
+									default: $DESTINATION_PATH" && exit 0
 fi
 
 # ----------------------
-#      PARAMETERS
+#			 PARAMETERS
 # ----------------------
 
 # initialize variables as empty
@@ -296,12 +296,12 @@ if [ -z $remote] && ! [ -d $DESTINATION_PATH ]; then
 	exit 1
 fi
 
-echo "Running with: DATA PATH:         $DATA_PATH"
-echo "              DESTINATION PATH:  $DESTINATION_PATH"
+echo "Running with: DATA PATH:				 $DATA_PATH"
+echo "							DESTINATION PATH:  $DESTINATION_PATH"
 echo "Press any key if this is okay..."; read
 
 # ----------------------
-#      SELECT FILES
+#			 SELECT FILES
 # ----------------------
 
 if [[ "$@" =~ "generic" || "$@" =~ "general" ]]; then
@@ -340,7 +340,7 @@ else
 fi
 
 # ----------------------
-#        ACTIONS
+#				 ACTIONS
 # ----------------------
 
 startup
