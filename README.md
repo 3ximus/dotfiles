@@ -14,8 +14,6 @@ Check the `.vimrc` on the `VIM PLUG PLUGINS` section for the list of plugins
 
 ## Prompts
 
-### Current prompt:
-
 ![77](screenshots/7_normal.png)
 ![77f](screenshots/7_full.png)
 
@@ -41,6 +39,13 @@ To install the tmux plugins press `<prefix>+I` (it will freeze for a few seconds
 ![8](screenshots/tmux.png)
 
 Tmux has a lot of custom configurations added in `.tmux.conf` and a few plugins inside `.tmux` added as submodules that are managed through [TPM (Tmux Plugin Manager)](https://github.com/tmux-plugins/tpm)
+
+## WM / KDE
+
+### Window decorations
+
+My custom KDE window decorations are [here](https://github.com/3ximus/Plasma-window-decorations) , a fork from [this](https://github.com/nclarius/Plasma-window-decorations)
+![12](screenshots/window_decorations.png)
 
 ## Firefox
 ![10](screenshots/firefox.png)

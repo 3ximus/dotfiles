@@ -57,6 +57,7 @@ set autoread
 set showcmd
 
 set cmdheight=1
+set noshowmode
 
 "autocomplete vim commands
 set wildmenu
@@ -268,7 +269,7 @@ function! Prettier()
     for l:line in getline(1,'$')
       let l:match = matchlist(l:line, '^.*: \(.*\) (\(\d\{1,}\):\(\d\{1,}\)*)')
       if !empty(l:match)
-        call add(l:errors, { 'bufnr': bufnr('%'), 'lnum': l:match[2], 'col': l:match[3] }) 'text': l:match[1],
+        call add(l:errors, { 'bufnr': bufnr('%'), 'lnum': l:match[2], 'col': l:match[3] })
       endif
     endfor
 
