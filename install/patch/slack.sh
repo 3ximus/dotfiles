@@ -7,13 +7,14 @@ if [[ ! -d styles ]] ; then
 	exit
 fi
 
-mkdir /tmp/slack-setup-hack
+TMP_DIR=/tmp/slack-setup-hack
+mkdir $TMP_DIR
 JS=$(cat "styles/slack-gruvbox.js")
-npx asar extract /usr/lib/slack/resources/app.asar /tmp/slack-setup-hack/
-sed -i '/EXIMUS PATCH/d' /tmp/slack-setup-hack/dist/preload.bundle.js
-echo $JS >> /tmp/slack-setup-hack/dist/preload.bundle.js
-npx asar pack /tmp/slack-setup-hack/ /tmp/slack-setup-hack/app.asar
-sudo mv /tmp/slack-setup-hack/app.asar /usr/lib/slack/resources/app.asar
-echo "Slack setup successfully"
-rm -r /tmp/slack-setup-hack
+npx asar extract /usr/lib/slack/resources/app.asar $TMP_DIR/
+sed -i '/EXIMUS PATCH/d' $TMP_DIR/dist/preload.bundle.js
+echo $JS >> $TMP_DIR/dist/preload.bundle.js
+npx asar pack $TMP_DIR/ $TMP_DIR/app.asar
+sudo mv $TMP_DIR/app.asar /usr/lib/slack/resources/app.asar
+echo "Slack patched successfully"
+rm -r $TMP_DIR
 
