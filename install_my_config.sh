@@ -82,60 +82,6 @@ post_action_XXX() {
 	:
 }
 
-# -------------------------
-#  INSTALL FUNCTIONS
-# -------------------------
-
-install_whatsapp() {
-	if hash nativefier &>/dev/null ; then
-		echo "Choose whatsapp theme:"
-		select theme_path in ${DATA_PATH}/styles/*.css ; do break; done
-		echo "if ('serviceWorker' in navigator) {caches.keys().then(function (cacheNames) {cacheNames.forEach(function (cacheName) {caches.delete(cacheName);});});}" >/tmp/whatsapp-inject.js
-		# Ctrl+k functionality
-		echo "document.addEventListener('keydown', (event) => {if(event.ctrlKey && event.keyCode == 75) document.querySelector('div[data-lexical-editor=\"true\"]').focus()});" >>/tmp/whatsapp-inject.js
-		nativefier --inject $theme_path --inject /tmp/whatsapp-inject.js --icon "${DATA_PATH}/icons/whatsapp.png" --name whatsapp --counter --single-instance --user-agent "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:90.0) Gecko/20100101 Firefox/90.0" web.whatsapp.com /tmp/whatsapp
-		if [ -d "/opt/whatsapp" ] ; then
-			echo "Deleting previous WhatsApp installation"
-			sudo rm -r "/opt/whatsapp"
-		fi
-		sudo mv /tmp/whatsapp/whatsapp* /opt/whatsapp
-		rm /tmp/whatsapp -r
-		echo "Whatsapp installed successfully"
-	else
-		echo -e '\033[31mnativefier is not installed\033[m'
-	fi
-}
-
-install_slack() {
-	mkdir /tmp/slack-setup-hack
-	JS=$(cat "${DATA_PATH}/styles/slack-gruvbox.js")
-	npx asar extract /usr/lib/slack/resources/app.asar /tmp/slack-setup-hack/
-	sed -i '/EXIMUS PATCH/d' /tmp/slack-setup-hack/dist/preload.bundle.js
-	echo $JS >> /tmp/slack-setup-hack/dist/preload.bundle.js
-	npx asar pack /tmp/slack-setup-hack/ /tmp/slack-setup-hack/app.asar
-	sudo mv /tmp/slack-setup-hack/app.asar /usr/lib/slack/resources/app.asar
-	echo "Slack setup successfully"
-	rm -r /tmp/slack-setup-hack
-}
-
-
-install_instagram() {
-	if hash nativefier &>/dev/null ; then
-		echo "Choose instagram theme:"
-		select theme_path in ${DATA_PATH}/styles/*.css ; do break; done
-		nativefier --inject $theme_path --icon "${DATA_PATH}/icons/instagram.png" --name instagram --counter --single-instance instagram.com /tmp/instagram
-		if [ -d "/opt/instagram" ] ; then
-			echo "Deleting previous Instagram installation"
-			sudo rm -r "/opt/instagram"
-		fi
-		sudo mv /tmp/instagram/instagram* /opt/instagram
-		rm /tmp/instagram -r
-		echo "Instagram installed successfully"
-	else
-		echo -e '\033[31mnativefier is not installed\033[m'
-	fi
-}
-
 # ----------------------
 #  ACTION FUNCTIONS
 # ----------------------
@@ -203,9 +149,6 @@ if [[ "$1" = "help" || "$1" = "-help" || "$1" = "--help" || "$1" = "-h" ]]; then
 Options:
 	generic									 only dot files
 	konsole									 Konsole terminal emulator files
-	whatsapp								 Whatsapp files (this creates uses nativefier application)
-	slack										 Slack gruvbox setup
-	instagram								 Instagram files (this creates uses nativefier application)
 	[none]									 No option or anything else assumes all files are gathered
 
 Remote:
@@ -312,24 +255,6 @@ if [[ "$@" =~ "generic" || "$@" =~ "general" ]]; then
 
 elif [[ "$@" =~ "konsole" ]]; then
 	grab_konsole_files
-
-elif [[ "$@" =~ "whatsapp" ]]; then
-	echo "Installing Whatsapp"
-	install_whatsapp
-	exit
-
-elif [[ "$@" =~ "slack" ]]; then
-	echo "Patching Slack"
-	install_slack
-	exit
-
-elif [[ "$@" =~ "instagram" ]]; then
-	echo "Installing Instagram"
-	install_instagram
-	exit
-
-elif [[ "$@" =~ "clean" ]]; then
-	echo "clean not implemented" && exit 0
 
 else
 	echo "Gathering files to link..."

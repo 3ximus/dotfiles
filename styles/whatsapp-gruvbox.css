@@ -1323,6 +1323,9 @@ span[class][data-icon="down-context"] {
 .fMR4l {
   background-color: rgba(var(--bg-4-rgb), 0.5) !important;
 }
+._1s7Pa {
+  background-color: var(--bg-5) !important;
+}
 #main > header ~ div[style*="height: 0px"] {
   border-top: 1px solid var(--bg-5) !important;
 }
