@@ -384,6 +384,9 @@ nmap <leader>vl :loadview<CR>
 noremap ]q :cnext<CR>
 noremap [q :cprevious<CR>
 
+noremap ]x />>>>>>>\\|=======\\|<<<<<<<<CR>
+noremap [x ?>>>>>>>\\|=======\\|<<<<<<<<CR>
+
 " toogle wrap
 nmap <leader>w :setlocal wrap!<CR>:setlocal wrap?<CR>
 
