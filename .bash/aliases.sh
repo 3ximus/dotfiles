@@ -81,6 +81,7 @@ alias kali-tmux='vagrant ssh -- -t tmux new-session -A -c /vagrant -s vm'
 alias cutter='LIBGL_ALWAYS_INDIRECT=1 /vagrant/tools/Cutter-v2.2.0-Linux-x86_64.AppImage'
 alias ghidra-server='sudo /usr/share/ghidra/server/ghidraSvr'
 alias ghidra-admin='sudo /usr/share/ghidra/server/svrAdmin'
+alias ysoserial='java -jar --add-opens=java.xml/com.sun.org.apache.xalan.internal.xsltc.trax=ALL-UNNAMED --add-opens=java.xml/com.sun.org.apache.xalan.internal.xsltc.runtime=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED /vagrant/tools/ysoserial-all.jar'
 
 # PLEX
 # Add this to sudoers or a file in sudoers.d
