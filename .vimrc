@@ -86,6 +86,9 @@ endfunction
 xnoremap in :<C-u>call VisualNumber()<CR>
 onoremap in :<C-u>normal vin<CR>
 
+" when running command W run w instead (preventing typos)
+cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
+
 " }}}
 
 " VIM PLUG PLUGINS {{{
@@ -644,6 +647,8 @@ noremap <leader>gL :G log --graph<CR>
 vmap <leader>gl :Gclog<CR>:copen<CR>
 noremap <leader>gB :Git blame<CR>
 noremap <leader>gp :AsyncRun git push<CR>
+" allow typing :git commands instead of :Git
+cnoreabbrev git Git
 
 " create a popup with git info about the current line
 nmap <silent><Leader>gm :call setbufvar(winbufnr(popup_atcursor(split(system("git log -n 1 -L " . line(".") . ",+1:" . expand("%:p")), "\n"), { "padding": [1,1,1,1], "pos": "botleft", "wrap": 0 })), "&filetype", "git")<CR>
@@ -723,6 +728,7 @@ if &rtp =~ 'vim-airline' && glob("~/.vim/plugged/vim-airline/plugin/airline.vim"
   let g:airline#extensions#tabline#fnamemod = ':p:.'
   let g:airline#extensions#tabline#fnamecollapse = 1
   let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+  let g:airline#extensions#tabline#show_buffers = 0
 
   let g:airline#extensions#whitespace#mixed_indent_algo = 1
   let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]' "hide encoding if its utf8
@@ -1051,6 +1057,11 @@ if exists('##CmdLineEnter')
     autocmd CmdLineLeave : set noignorecase
   augroup END
 endif
+
+augroup hitablinefill
+    autocmd!
+    autocmd User AirlineAfterInit hi airline_tabfill ctermbg=NONE
+augroup END
 
 " fix artifacts on screen from tmux-focus-events
 autocmd FocusGained * silent redraw!
