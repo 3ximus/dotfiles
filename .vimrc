@@ -746,26 +746,26 @@ if &rtp =~ 'vim-airline' && glob("~/.vim/plugged/vim-airline/plugin/airline.vim"
   let g:airline#extensions#coc#stl_format_warn = '%C'
   let g:airline#extensions#searchcount#enabled = 0 " handled in custom section
 
-  let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'd', 'w', 'y', 'z', 'warning', 'error']]
+  let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'd', 'y', 'z', 'warning', 'error']]
 
   call airline#parts#define('coc_status_symbol', { 'raw': '%#__restore__#%{get(g:, "coc_status", "") != "" ? (get(g:, "coc_enabled", "") == 1 ? "" : "" ) : ""}'})
   call airline#parts#define('coc_status', { 'raw': ' %{airline#util#shorten(trim(get(g:, "coc_status", "")), 100, 6)}'})
+  call airline#parts#define('coc_function',  {'raw': '%{get(b:,"coc_current_function","") != "" ? ("  ".get(b:,"coc_current_function","")) : ""}'})
   call airline#parts#define('max_line', { 'raw': '%L', 'accent': 'bold'})
   call airline#parts#define('new_search_count', { 'raw': '%{v:hlsearch ? trim(airline#extensions#searchcount#status()) : ""}', 'accent': 'bold'})
   call airline#parts#define('filename_path',  {'raw': '%<%{expand("%:p:h")}/'})
   call airline#parts#define('filename',  {'raw': '%<%t%m ', 'accent':'bold'})
 
   let g:airline_section_c = airline#section#create(['filename_path', 'filename', 'readonly'])
-  let g:airline_section_d = airline#section#create(['coc_status_symbol'])
-  " let g:airline_section_d = airline#section#create(['coc_status_symbol', 'coc_status'])
+  let g:airline_section_d = airline#section#create(['coc_status_symbol', 'coc_function'])
   let g:airline_section_x = airline#section#create(['%{airline#util#wrap(airline#parts#filetype() . " " . WebDevIconsGetFileTypeSymbol(),140)}'])
-  let g:airline_section_w = airline#section#create(['%{get(b:,"coc_current_function","")}'])
+  " let g:airline_section_w = airline#section#create(['%{get(b:,"coc_current_function","")}'])
   let g:airline_section_y = airline#section#create(['%{airline#util#wrap(airline#parts#ffenc(),0)}', 'new_search_count'])
   let g:airline_section_z = airline#section#create(['%p%% %l/', 'max_line', ':%c'])
 
   " set color on custom sections
-  autocmd User AirlineAfterTheme let g:airline#themes#gruvbox#palette.normal.airline_w = ['#282828', '#8ec07c', 0, 14]
-  autocmd User AirlineAfterTheme let g:airline#themes#gruvbox#palette.normal.airline_d = ['#ebdbb2', '#458588', 15, 4]
+  " autocmd User AirlineAfterTheme let g:airline#themes#gruvbox#palette.normal.airline_w = ['#282828', '#8ec07c', 0, 14]
+  autocmd User AirlineAfterTheme let g:airline#themes#gruvbox#palette.normal.airline_d = ['#ebdbb2', '#458588', 0, 14]
   " autocmd User AirlineAfterTheme let g:airline#themes#gruvbox#palette.normal.airline_b = ['#ebdbb2', '#282828', 3, 236]
   " autocmd User AirlineAfterTheme let g:airline#themes#gruvbox#palette.normal.airline_c = ['#ebdbb2', '#282828', 8, 0]
 
