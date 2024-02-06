@@ -728,7 +728,9 @@ if &rtp =~ 'vim-airline' && glob("~/.vim/plugged/vim-airline/plugin/airline.vim"
   let g:airline#extensions#tabline#fnamemod = ':p:.'
   let g:airline#extensions#tabline#fnamecollapse = 1
   let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-  let g:airline#extensions#tabline#show_buffers = 0
+  " let g:airline#extensions#tabline#show_buffers = 0
+  " let g:airline#extensions#tabline#tab_min_count = 2
+  " let g:airline#extensions#tabline#ignore_bufadd_pat = '!|defx|gundo|nerd_tree|startify|tagbar|term://|undotree|vimfiler'
 
   let g:airline#extensions#whitespace#mixed_indent_algo = 1
   let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]' "hide encoding if its utf8
@@ -764,6 +766,23 @@ if &rtp =~ 'vim-airline' && glob("~/.vim/plugged/vim-airline/plugin/airline.vim"
   " set color on custom sections
   autocmd User AirlineAfterTheme let g:airline#themes#gruvbox#palette.normal.airline_w = ['#282828', '#8ec07c', 0, 14]
   autocmd User AirlineAfterTheme let g:airline#themes#gruvbox#palette.normal.airline_d = ['#ebdbb2', '#458588', 15, 4]
+  " autocmd User AirlineAfterTheme let g:airline#themes#gruvbox#palette.normal.airline_b = ['#ebdbb2', '#282828', 3, 236]
+  " autocmd User AirlineAfterTheme let g:airline#themes#gruvbox#palette.normal.airline_c = ['#ebdbb2', '#282828', 8, 0]
+
+  " Hide/show tabline modes depending on open buffer list
+  function! Tablineshowhide()
+      let l:nbuf = len(airline#extensions#tabline#buflist#list())
+      if l:nbuf == 1
+        set showtabline=0
+      else
+        set showtabline=2
+      endif
+  endfunction
+
+  augroup tablinechange
+    autocmd!
+    autocmd BufEnter * call Tablineshowhide()
+  augroup END
 
   if !exists('g:airline_symbols')
     let g:airline_symbols = {}
