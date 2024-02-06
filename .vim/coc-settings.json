@@ -18,6 +18,7 @@
   // "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/15.0.6/clangd_15.0.6/bin/clangd",
   // "typescript.referencesCodeLens.enabled": true,
   "python.analysis.typeCheckingMode": "off",
+  "pyright.inlayHints.parameterTypes": false,
   "pyright.inlayHints.variableTypes": false,
   "pyright.inlayHints.functionReturnTypes": false,
   "python.formatting.autopep8Args": ["--indent-size=2", "--ignore=E121"],
