@@ -25,7 +25,6 @@ Prompts support:
 - diferent colors for normal user / root / ssh session user (in **prompt 6, 7** this segment is hidden unless the user is root or in an ssh session)
 - python conda/virtual environments. **except prompt 1**
 - last command exit status ( failed or succeded )
-z,s
 - compress some paths ( my repository path is compressed into "R:" . **except prompt 5, 6, 7**
 - background jobs counter
 - command counter **only prompt 5, 6, 7**
@@ -136,7 +135,7 @@ git pull --recurse-submodules -j8
 
 If new submodules where added you might need to run `git submodule init` again
 
-To copy/link the files you want run `install_my_config.sh --help` to check the usage of this script
+To copy/link the files you want run `install/config.sh --help` to check the usage of this script
 
 # [Icons](https://github.com/SylEleuth/gruvbox-plus-icon-pack)
 
