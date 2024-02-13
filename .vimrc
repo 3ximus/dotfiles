@@ -125,6 +125,7 @@ Plug 'justinmk/vim-sneak'
 Plug 'markonm/traces.vim'
 Plug 'AndrewRadev/linediff.vim'
 Plug 'fidian/hexmode'
+Plug 'vim-test/vim-test'
 
 " GIT
 Plug 'Xuyuanp/nerdtree-git-plugin', {'on':['NERDTreeToggle', 'NERDTreeFind']}
@@ -594,6 +595,14 @@ let g:vim_svelte_plugin_use_typescript = 1
 let g:vim_svelte_plugin_use_sass = 1
 let g:vim_svelte_plugin_has_init_indent = 1
 
+" vim-test
+" make test commands execute using dispatch.vim
+let test#strategy = 'vimux'
+" let test#strategy = 'asyncrun'
+" let test#strategy = 'asyncrun_background'
+let test#javascript#jest#executable = 'yarn test:watch'
+let test#enabled_runners = ["javascript#jest"]
+
 " }}}
 
 " PLUGIN KEYMAPS {{{
@@ -712,6 +721,11 @@ endif
 
 "Chat GPT
 vmap <silent> <leader>0 <Plug>(chatgpt-menu)
+
+" vim-test
+nnoremap <leader>tn :TestNearest<CR>
+nnoremap <leader>tf :TestFile<CR>
+
 " }}}
 
 " AIRLINE CONFIGURATION {{{

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 TMP_FILE="/tmp/file_install_selection.cfg"
-DATA_PATH="$PWD"
+SOURCE_PATH="$PWD"
 DESTINATION_PATH="$HOME"
 
 # simple check to make sure the script is being run on the repo root
@@ -10,8 +10,8 @@ if [[ ! -d "$PWD/.vim" ]] ; then
   exit
 fi
 
-DEFAULT_FILE_LIST=".bashrc .vimrc .gdbinit .gitconfig .inputrc .tmux.conf"
-DEFAULT_DIR_LIST=".bash .vim .tmux"
+DEFAULT_LIST=".bashrc .vimrc .gdbinit .gitconfig .inputrc .tmux.conf .psqlrc .radare2rc .bash .vim .tmux .ipython .gdbinit.d"
+DEFAULT_CONF_LIST="lf pgcli htop bottom"
 
 # will be appended by all the grab functions and contain all the path files
 # all the the files in this variable are in the format origin::destination,
@@ -30,15 +30,31 @@ files="# vi:filetype=config
 
 grab_dot_files() {
   files="${files}\n#---------------\n# main dot files\n#---------------\n\n"
-  for f in $DEFAULT_FILE_LIST ; do
-    if [[ -f "${DATA_PATH}/${f}" ]]; then
-      files="${files}${DATA_PATH}/${f}::${DESTINATION_PATH}\n"
+  for f in $DEFAULT_LIST ; do
+    if [[ -f "${SOURCE_PATH}/${f}" || -d "${SOURCE_PATH}/${f}" ]]; then
+      files="${files}${SOURCE_PATH}/${f}::${DESTINATION_PATH}\n"
     fi
   done
   files="${files}\n"
-  for f in $DEFAULT_DIR_LIST ; do
-    if [[ -d "${DATA_PATH}/${f}" ]]; then
-      files="${files}${DATA_PATH}/${f}::${DESTINATION_PATH}\n"
+  for f in $(find $SOURCE_PATH -maxdepth 1 -name ".*" | sort); do
+#XXX may be problematic for filenames that contain other filenames, like vimrc contains vim...
+    if [[ ! "$DEFAULT_LIST" =~ "$(basename $f)" ]]; then
+      files="${files}#${f}::${DESTINATION_PATH}\n"
+    fi
+  done
+}
+
+grab_dotconfig_files() {
+  files="${files}\n#------------\n# .config files\n#------------\n\n"
+  for f in $(find $SOURCE_PATH/.config -maxdepth 1 -mindepth 1 | sort); do
+    if [[ "$DEFAULT_CONF_LIST" =~ "$(basename $f)" ]]; then
+      files="${files}${f}::${DESTINATION_PATH}/.config\n"
+    fi
+  done
+  files="${files}\n"
+  for f in $(find $SOURCE_PATH/.config -maxdepth 1 -mindepth 1 | sort); do
+    if [[ ! "$DEFAULT_CONF_LIST" =~ "$(basename $f)" ]]; then
+      files="${files}#${f}::${DESTINATION_PATH}/.config\n"
     fi
   done
 }
@@ -47,30 +63,12 @@ grab_konsole_files() {
   files="${files}\n#---------\n# konsole files\n#---------\n\n"
 # konsole files destination
   konsole_location="${DESTINATION_PATH}/.local/share/konsole"
-  if [[ -d "$DATA_PATH/konsole" ]]; then
-    konsole_files=$(find ${DATA_PATH}/konsole/* -maxdepth 0 -type f)
+  if [[ -d "$SOURCE_PATH/konsole" ]]; then
+    konsole_files=$(find ${SOURCE_PATH}/konsole/* -maxdepth 0 -type f)
     for f in $konsole_files ; do
       files="${files}#${f}::${konsole_location}/${f##*/}\n"
     done
   fi
-}
-
-grab_dotconfig_files() {
-  files="${files}\n#------------\n# .config files\n#------------\n\n"
-  for f in $(find $DATA_PATH/.config -maxdepth 1 -mindepth 1 | sort); do
-    files="${files}#${f}::${DESTINATION_PATH}/.config\n"
-  done
-}
-
-grab_remaining_files() {
-  files="${files}\n#------------\n# other files\n#------------\n\n"
-  default_list="$DEFAULT_FILE_LIST $DEFAULT_DIR_LIST"
-  for f in $(find $DATA_PATH -maxdepth 1 -name ".*" | sort); do
-#XXX may be problematic for filenames that contain other filenames, like vimrc contains vim...
-    if [[ ! "$default_list" =~ "$(basename $f)" ]]; then
-      files="${files}#${f}::${DESTINATION_PATH}\n"
-    fi
-  done
 }
 
 select_files() {
@@ -124,6 +122,7 @@ Parameters:
   --copy     Copy files instead of linking
   --force    Force overwrite when linking
   --batch    Don't provide interactive selection for files to link and just run
+  --post     Run setup scripts after linking to perform remaining setup
   "
   exit 0
 fi
@@ -151,7 +150,6 @@ if [[ "$@" =~ "all" ]]; then
   grab_dot_files
   grab_dotconfig_files
   grab_konsole_files
-  grab_remaining_files
 elif [[ "$@" =~ "konsole" ]]; then
   grab_konsole_files
 else
