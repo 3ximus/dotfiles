@@ -3,7 +3,7 @@
 set -e
 
 if [[ ! -d styles ]] ; then
-	echo "Run from parent directory './install/instagram.sh'" 
+	echo "Run from parent directory './install/instagram.sh'"
 	exit
 fi
 

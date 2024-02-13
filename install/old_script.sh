@@ -128,15 +128,6 @@ run_post_actions() {
 	cd ${DESTINATION_PATH}/.bash/ble.sh
 	git checkout master
 	make
-
-	if [[ "$@" =~ "vscode" ]]; then
-		read -r -n 1 -p "Install VSCode Extensions? [y/n]: " REPLY
-		case "$REPLY" in
-			[yY])		echo; post_action_XXX ;;
-			*)			echo ;;
-		esac
-
-	fi
 }
 
 # ----------------------
