@@ -2,14 +2,16 @@
 # vi: set ft=ruby :
 
 $provision_script = <<-SCRIPT
-echo Installing extra software...
-sudo apt install -y vim-gtk3 docker.io npm fzf xclip patchelf hexedit cargo ghidra gdbserver ripgrep strace gdb imagemagick feh peass steghide ranger
+sudo apt update
+sudo apt install -y vim-gtk3 docker.io npm fzf xclip patchelf hexedit cargo ghidra gdbserver ripgrep strace gdb imagemagick feh peass steghide golang-go
+env CGO_ENABLED=0 go install -ldflags="-s -w" github.com/gokcehan/lf@latest
 pip install pwntools z3 ortools
 sudo chsh vagrant -s /bin/bash
 sudo localectl set-locale LANG=en_CA.UTF-8
 ssh-keyscan github.com >> .ssh/known_hosts
 git clone git@github.com:3ximus/dotfiles --recurse-submodules -j8 /home/vagrant/dotfiles
-echo Install dotfiles manually by ssh into the machine and running `./install-my-config --force`
+cd ~/dotfiles && ./install/config.sh --force --post --batch
+ln -s /vagrant ~/vagrant
 SCRIPT
 
 Vagrant.configure("2") do |config|
