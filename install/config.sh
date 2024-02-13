@@ -103,7 +103,8 @@ run_post_actions() {
   cd ${DESTINATION_PATH}/.bash/ble.sh
   git checkout master
   make
-  vim +'PlugInstall --sync' +qa
+  echo "Installing vim plugins..."
+  vim +'PlugInstall --sync' +qa >&/dev/null
 }
 
 # ==============================================
