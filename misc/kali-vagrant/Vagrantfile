@@ -2,16 +2,28 @@
 # vi: set ft=ruby :
 
 $provision_script = <<-SCRIPT
+# INSTALL SOFTWARE
 sudo apt update
-sudo apt install -y vim-gtk3 docker.io npm fzf xclip patchelf hexedit cargo ghidra gdbserver ripgrep strace gdb imagemagick feh peass steghide golang-go
+sudo apt install -y vim-gtk3 docker.io npm fzf xclip patchelf hexedit cargo ghidra gdbserver ripgrep strace gdb imagemagick feh peass golang-go
 env CGO_ENABLED=0 go install -ldflags="-s -w" github.com/gokcehan/lf@latest
+curl -sOL https://github.com/ClementTsang/bottom/releases/download/0.9.6/bottom_0.9.6_amd64.deb --output-dir /tmp && sudo dpkg -i /tmp/bottom_0.9.6_amd64.deb
 pip install pwntools z3 ortools
+
+# CHANGE SHELL AND SETUP DOTFILES
 sudo chsh vagrant -s /bin/bash
 sudo localectl set-locale LANG=en_CA.UTF-8
 ssh-keyscan github.com >> .ssh/known_hosts
 git clone git@github.com:3ximus/dotfiles --recurse-submodules -j8 /home/vagrant/dotfiles
 cd ~/dotfiles && ./install/config.sh --force --post --batch
+
+# SET DARK THEMES
+mkdir -p ~/.ghidra/.ghidra_11.0_DEV/ && echo "Theme=Class\:generic.theme.builtin.FlatDarkTheme" > ~/.ghidra/.ghidra_11.0_DEV/preferences
+mkdir -p ~/.BurpSuite && echo '{"user_options":{"display":{"user_interface":{"look_and_feel":"Dark"}}}}' > ~/.BurpSuite/UserConfigCommunity.json
+
+# OTHER SMALL TWEAKS TO SIMPLIFY LAUNCHING PROCESS
 ln -s /vagrant ~/vagrant
+sudo gunzip /usr/share/wordlists/rockyou.txt.gz
+echo | sudo tee /etc/motd
 SCRIPT
 
 Vagrant.configure("2") do |config|
