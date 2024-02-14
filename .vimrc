@@ -147,7 +147,8 @@ Plug 'CoderCookE/vim-chatgpt', {'on': ['<Plug>(chatgpt-menu)', 'Ask', 'Review', 
 
 " EXTRA SYNTAX HIGHLIGHT
 let g:polyglot_disabled = ["sensible"]
-Plug 'sheerun/vim-polyglot'
+" Plug 'sheerun/vim-polyglot' " hasn't been updated in a while and we need a fix
+Plug '00dani/vim-polyglot', { 'branch' : 'feature/fix-build' }
 
 " EXTRAS
 Plug 'mattn/emmet-vim'
@@ -155,7 +156,7 @@ Plug 'mattn/emmet-vim'
 " DATABASE
 Plug 'tpope/vim-dadbod'
 Plug 'kristijanhusak/vim-dadbod-ui'
-Plug 'jidn/vim-dbml'
+Plug 'jidn/vim-dbml', { 'for': 'dbml' }
 
 " OTHER
 Plug 'mhinz/vim-startify'
@@ -164,20 +165,20 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 "auto show fold column
 Plug 'benknoble/vim-auto-origami'
 Plug 'machakann/vim-highlightedyank'
+"NerdFont icons in NerdTree and startify
+Plug 'ryanoasis/vim-devicons'
+
 " Profiler
 if v:version >= 800
   Plug 'dstein64/vim-startuptime'
 endif
-" Support multiple emmet for vue files
-Plug 'leafOfTree/vim-vue-plugin'
 
-Plug 'habamax/vim-godot'
+" Support multiple emmet for vue files
+Plug 'leafOfTree/vim-vue-plugin', { 'for': 'vue' }
+Plug 'habamax/vim-godot', { 'for': 'gdscript' }
 
 " vim go
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-
-"NerdFont icons in NerdTree, startify and Ctrl-p
-Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
