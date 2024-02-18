@@ -143,8 +143,6 @@ if exists('$TMUX')
   Plug '3ximus/vimux-tasks'
 endif
 
-Plug 'CoderCookE/vim-chatgpt', {'on': ['<Plug>(chatgpt-menu)', 'Ask', 'Review', 'Rewrite', 'Explain', 'Fix', 'Test']}
-
 " EXTRA SYNTAX HIGHLIGHT
 let g:polyglot_disabled = ["sensible"]
 " Plug 'sheerun/vim-polyglot' " hasn't been updated in a while and we need a fix
@@ -656,7 +654,7 @@ noremap <leader>gl :0Gclog<CR>:copen<CR>
 noremap <leader>gL :G log --graph<CR>
 vmap <leader>gl :Gclog<CR>:copen<CR>
 noremap <leader>gB :Git blame<CR>
-noremap <leader>gp :AsyncRun git push<CR>
+noremap <leader>gp :AsyncRun -post=Git git push<CR>
 " allow typing :git commands instead of :Git
 cnoreabbrev git Git
 
@@ -765,7 +763,7 @@ if &rtp =~ 'vim-airline' && glob("~/.vim/plugged/vim-airline/plugin/airline.vim"
 
   call airline#parts#define('coc_status_symbol', { 'raw': '%#__restore__#%{get(g:, "coc_status", "") != "" ? (get(g:, "coc_enabled", "") == 1 ? "" : "" ) : ""}'})
   call airline#parts#define('coc_status', { 'raw': ' %{airline#util#shorten(trim(get(g:, "coc_status", "")), 100, 6)}'})
-  call airline#parts#define('coc_function',  {'raw': '%{get(b:,"coc_current_function","") != "" ? ("  ".get(b:,"coc_current_function","")) : ""}'})
+  call airline#parts#define('coc_function',  {'raw': '%{get(b:,"coc_current_function","") != "" ? ((get(g:, "coc_status", "") != "" ? "  " : "").get(b:,"coc_current_function","")) : ""}'})
   call airline#parts#define('max_line', { 'raw': '%L', 'accent': 'bold'})
   call airline#parts#define('new_search_count', { 'raw': '%{v:hlsearch ? trim(airline#extensions#searchcount#status()) : ""}', 'accent': 'bold'})
   call airline#parts#define('filename_path',  {'raw': '%<%{expand("%:p:h")}/'})

@@ -49,3 +49,5 @@
 	line-numbers-plus-style = 2 bold
 [pull]
 	rebase = false
+[branch]
+	sort = -committerdate
