@@ -35,7 +35,10 @@ shopt -s autocd
 
 # perform word expansion when trying filename completion
 # useful when trying to type path with variable on it
-shopt -s direxpand
+# shopt -s direxpand
+
+# disable programable completion
+shopt -u progcomp
 
 # minor errors in the spelling of a directory component in a cd command
 # will be corrected. The errors checked for are transposed characters,

@@ -28,6 +28,7 @@ set softtabstop=2 noexpandtab
 set autoindent
 set smartindent
 set smarttab
+set nowrap
 "set expandtab "tabs are spaces, aka cancer
 "setlocal lcs=tab:>-,trail:-,eol:¬ list! " use list mode mapped to F2 when vim is opened
 
