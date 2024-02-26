@@ -174,6 +174,11 @@ psmem () { # {{{2
 	)% of system RAM;
 } # }}}2
 
+lfcd () {
+	lf -print-last-dir $@ > /tmp/lfcd && cd $(cat /tmp/lfcd);
+}
+# alias lf=lfcd
+
 # }}}1
 
 # GIT {{{1

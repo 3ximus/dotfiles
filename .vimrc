@@ -388,8 +388,8 @@ nmap <leader>vl :loadview<CR>
 noremap ]q :cnext<CR>
 noremap [q :cprevious<CR>
 
-noremap ]x />>>>>>>\\|=======\\|<<<<<<<<CR>
-noremap [x ?>>>>>>>\\|=======\\|<<<<<<<<CR>
+noremap ]c />>>>>>>\\|<<<<<<<<CR>
+noremap [c ?>>>>>>>\\|<<<<<<<<CR>
 
 " toogle wrap
 nmap <leader>w :setlocal wrap!<CR>:setlocal wrap?<CR>
@@ -617,23 +617,21 @@ let NERDTreeMapOpenVSplit='v'
 " context.vim
 nnoremap <F4> :<C-U>ContextToggle<CR>
 
-omap ih <Plug>(GitGutterTextObjectInnerPending)
-omap ah <Plug>(GitGutterTextObjectOuterPending)
-xmap ih <Plug>(GitGutterTextObjectInnerVisual)
-xmap ah <Plug>(GitGutterTextObjectOuterVisual)
+omap id <Plug>(GitGutterTextObjectInnerPending)
+omap ad <Plug>(GitGutterTextObjectOuterPending)
+xmap id <Plug>(GitGutterTextObjectInnerVisual)
+xmap ad <Plug>(GitGutterTextObjectOuterVisual)
 " <leader>hs is the default for staging
-vmap <leader>ha <Plug>(GitGutterStageHunk)
-nmap <leader>ha <Plug>(GitGutterStageHunk)
-nmap <leader>hu <Plug>(GitGutterUndoHunk)
-nmap <leader>hv <Plug>(GitGutterPreviewHunk)
-nmap <leader>hd <Plug>(GitGutterDiffOrig)
-nmap ]h <Plug>(GitGutterNextHunk)
-nmap [h <Plug>(GitGutterPrevHunk)
-nmap <leader>hf :GitGutterFold<CR>
+vmap <leader>da <Plug>(GitGutterStageHunk)
+nmap <leader>du <Plug>(GitGutterUndoHunk)
+nmap <leader>dv <Plug>(GitGutterPreviewHunk)
+nmap ]d <Plug>(GitGutterNextHunk)
+nmap [d <Plug>(GitGutterPrevHunk)
+nmap <leader>df :GitGutterFold<CR>
 
 "nertree git
-let g:NERDTreeGitStatusMapNextHunk=']h'
-let g:NERDTreeGitStatusMapPrevHunk='[h'
+let g:NERDTreeGitStatusMapNextHunk=']d'
+let g:NERDTreeGitStatusMapPrevHunk='[d'
 
 "vim sneak
 map f <Plug>Sneak_f
@@ -927,8 +925,8 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
 
   " Use `[d` and `]d` to navigate diagnostics
   " Use `:cocDiagnostics` to get all diagnostics of current buffer in location list.
-  nmap <silent> [d <Plug>(coc-diagnostic-prev)
-  nmap <silent> ]d <Plug>(coc-diagnostic-next)
+  nmap <silent> [e <Plug>(coc-diagnostic-prev)
+  nmap <silent> ]e <Plug>(coc-diagnostic-next)
 
   " GoTo code navigation.
   nmap <silent> gd <Plug>(coc-definition)
