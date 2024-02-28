@@ -34,6 +34,9 @@ set nowrap
 
 set updatetime=400
 
+" show status line for every window
+set laststatus=2
+
 set modeline
 
 "search settings
@@ -101,43 +104,46 @@ call plug#begin('~/.vim/plugged')
 Plug '3ximus/gruvbox'
 
 " BASE
+
+" TODO eventually move to lightline since airline is bloated AF
 Plug '3ximus/vim-airline' " my fork switches position of the tabs and splits on tabline
-Plug 'scrooloose/nerdtree', {'on':['NERDTreeToggle', 'NERDTreeFind']}
+" Plug 'itchyny/lightline.vim'
+" Plug 'shinchu/lightline-gruvbox.vim'
+" let g:lightline = {}
+" let g:lightline.colorscheme = 'gruvbox'
+
+Plug 'scrooloose/nerdtree', { 'on':['NERDTreeToggle', 'NERDTreeFind'] }
 Plug '3ximus/fzf' " use my fork to allow passing g:fzf_no_term
 Plug 'junegunn/fzf.vim'
-Plug 'sjl/gundo.vim'
+Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
 Plug 'junegunn/vim-peekaboo'
 Plug 'jeetsukumaran/vim-markology'
-Plug 'wellle/context.vim'
+Plug 'wellle/context.vim', { 'on': 'ContextToggle' }
 Plug 'skywind3000/asyncrun.vim'
-
-if has('nvim')
-  Plug 'nvim-tree/nvim-web-devicons'
-  Plug 'stevearc/oil.nvim'
-endif
 
 " TOOLS
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tomtom/tcomment_vim'
 " s motions
-Plug 'justinmk/vim-sneak'
+Plug 'justinmk/vim-sneak', { 'on': ['<Plug>Sneak_f', '<Plug>Sneak_F', '<Plug>Sneak_t', '<Plug>Sneak_T'] }
+
 " highlight patterns and ranges in command
 Plug 'markonm/traces.vim'
 Plug 'AndrewRadev/linediff.vim'
 Plug 'fidian/hexmode'
-Plug 'vim-test/vim-test'
+Plug 'vim-test/vim-test', { 'on': ['TestNearest', 'TestFile'] }
 
 " GIT
-Plug 'Xuyuanp/nerdtree-git-plugin', {'on':['NERDTreeToggle', 'NERDTreeFind']}
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
-Plug 'stsewd/fzf-checkout.vim'
+Plug 'stsewd/fzf-checkout.vim', { 'on': 'FZFGBranches' }
 
 Plug 'godlygeek/tabular', { 'on': ['Tabularize'] }
 
 " COMPLETION
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
 if exists('$TMUX')
   " Plug 'preservim/vimux'
@@ -153,8 +159,8 @@ Plug '00dani/vim-polyglot', { 'branch' : 'feature/fix-build' }
 Plug 'mattn/emmet-vim'
 
 " DATABASE
-Plug 'tpope/vim-dadbod'
-Plug 'kristijanhusak/vim-dadbod-ui'
+Plug 'tpope/vim-dadbod', { 'on': 'DBUI' }
+Plug 'kristijanhusak/vim-dadbod-ui', { 'on': 'DBUI' }
 Plug 'jidn/vim-dbml', { 'for': 'dbml' }
 
 " OTHER
@@ -174,7 +180,6 @@ endif
 
 " Support multiple emmet for vue files
 Plug 'leafOfTree/vim-vue-plugin', { 'for': 'vue' }
-Plug 'habamax/vim-godot', { 'for': 'gdscript' }
 
 " vim go
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
