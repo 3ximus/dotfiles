@@ -13,9 +13,7 @@ cmd open &{{
     # case $(xdg-mime query filetype "$f") in
     case $(file --mime-type -Lb "$f") in
       text/*) lf -remote "send $id \$$EDITOR \"\$fx\"";;
-      application/json) lf -remote "send $id \$$EDITOR \"\$fx\"";;
-      application/x-shellscript) lf -remote "send $id \$$EDITOR \"\$fx\"";;
-      application/x-zerosize) lf -remote "send $id \$$EDITOR \"\$fx\"";;
+      application/*) lf -remote "send $id \$$EDITOR \"\$fx\"";;
       *) for f in "$fx"; do $OPENER "$f" > /dev/null 2> /dev/null & done;;
    esac
 }}

@@ -40,6 +40,11 @@ alias list-open-ports='sudo netstat -tulpn | grep LISTEN'
 alias clipin='xclip -in -selection clipboard'
 alias clipout='xclip -out -selection clipboard'
 
+# URL encoding-decoding
+alias urlencode='python3 -c "import sys,urllib.parse;print(urllib.parse.quote(sys.stdin.read()));"'
+alias urldecode='python3 -c "import sys,urllib.parse;print(urllib.parse.unquote(sys.stdin.read()));"'
+
+
 # mount ntfs filesystems with correct permissions
 alias mount-ntfs='sudo mount -o uid=1000,gid=1000,dmask=027,fmask=137'
 
