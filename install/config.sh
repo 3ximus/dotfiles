@@ -106,7 +106,9 @@ run_post_actions() {
   echo "Installing vim plugins..."
   vim +'PlugInstall --sync' +qa >&/dev/null
   echo "Installing tmux plugins..."
-  [ -f ~/.tmux/tpm/bin/install_plugins ] && ~/.tmux/tpm/bin/install_plugins
+  if hash tmux && test -f ~/.tmux/tpm/bin/install_plugins ; then
+    ~/.tmux/tpm/bin/install_plugins
+  fi
 }
 
 # ==============================================
