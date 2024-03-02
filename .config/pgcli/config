@@ -99,12 +99,12 @@ show_bottom_toolbar = True
 # sql-update-1, sql-update-2 (formatter with sql-* prefix can format query
 # output to executable insertion or updating sql).
 # Recommended: psql, fancy_grid and grid.
-table_format = psql
+table_format = simple
 
 # Syntax Style. Possible values: manni, igor, xcode, vim, autumn, vs, rrt,
 # native, perldoc, borland, tango, emacs, friendly, monokai, paraiso-dark,
 # colorful, murphy, bw, pastie, paraiso-light, trac, default, fruity
-syntax_style = native
+syntax_style = vim
 
 # Keybindings:
 # When Vi mode is enabled you can use modal editing features offered by Vi in the REPL.
@@ -146,7 +146,7 @@ less_chatty = True
 prompt = '\x1b[1;35m\u:\x1b[1;36m\d> '
 
 # Number of lines to reserve for the suggestion menu
-min_num_menu_lines = 8
+min_num_menu_lines = 3
 
 # Character used to left pad multi-line queries to match the prompt size.
 multiline_continuation_char = ''

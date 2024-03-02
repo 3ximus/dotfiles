@@ -34,9 +34,6 @@ set nowrap
 
 set updatetime=400
 
-" show status line for every window
-set laststatus=2
-
 set modeline
 
 "search settings
@@ -104,14 +101,7 @@ call plug#begin('~/.vim/plugged')
 Plug '3ximus/gruvbox'
 
 " BASE
-
-" TODO eventually move to lightline since airline is bloated AF
 Plug '3ximus/vim-airline' " my fork switches position of the tabs and splits on tabline
-" Plug 'itchyny/lightline.vim'
-" Plug 'shinchu/lightline-gruvbox.vim'
-" let g:lightline = {}
-" let g:lightline.colorscheme = 'gruvbox'
-
 Plug 'scrooloose/nerdtree', { 'on':['NERDTreeToggle', 'NERDTreeFind'] }
 Plug '3ximus/fzf' " use my fork to allow passing g:fzf_no_term
 Plug 'junegunn/fzf.vim'
@@ -493,12 +483,6 @@ let g:startify_lists = [
         \ { 'type': function('s:gitUntracked'), 'header': ['   Git untracked']},
         \ ]
 
-" chatgpt
-if glob("~/.config/openai.apikey")!=#""
-  let g:chat_gpt_key=join(readfile(expand("~/.config/openai.apikey")),'')
-  " let g:chat_gpt_model='gpt-4'
-endif
-
 "NERDTree
 let g:NERDTreeDirArrowExpandable = ''
 let g:NERDTreeDirArrowCollapsible = ''
@@ -660,7 +644,7 @@ vmap <leader>gl :Gclog<CR>:copen<CR>
 noremap <leader>gB :Git blame<CR>
 noremap <leader>gp :AsyncRun -post=Git git push<CR>
 " allow typing :git commands instead of :Git
-cnoreabbrev git Git
+" cnoreabbrev git Git
 
 " create a popup with git info about the current line
 nmap <silent><Leader>gm :call setbufvar(winbufnr(popup_atcursor(split(system("git log -n 1 -L " . line(".") . ",+1:" . expand("%:p")), "\n"), { "padding": [1,1,1,1], "pos": "botleft", "wrap": 0 })), "&filetype", "git")<CR>
@@ -763,26 +747,28 @@ if &rtp =~ 'vim-airline' && glob("~/.vim/plugged/vim-airline/plugin/airline.vim"
   let g:airline#extensions#coc#stl_format_warn = '%C'
   let g:airline#extensions#searchcount#enabled = 0 " handled in custom section
 
-  let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'd', 'y', 'z', 'warning', 'error']]
+  let g:airline#extensions#default#layout = [['a', 'b', 'c', 'd'], ['x', 'y', 'z', 'warning', 'error']]
 
-  call airline#parts#define('coc_status_symbol', { 'raw': '%#__restore__#%{get(g:, "coc_status", "") != "" ? (get(g:, "coc_enabled", "") == 1 ? "" : "" ) : ""}'})
-  call airline#parts#define('coc_status', { 'raw': ' %{airline#util#shorten(trim(get(g:, "coc_status", "")), 100, 6)}'})
-  call airline#parts#define('coc_function',  {'raw': '%{get(b:,"coc_current_function","") != "" ? ((get(g:, "coc_status", "") != "" ? "  " : "").get(b:,"coc_current_function","")) : ""}'})
+  " call airline#parts#define('coc_status_symbol', { 'raw': '%#__restore__#%{get(g:, "coc_status", "") != "" ? (get(g:, "coc_enabled", "") == 1 ? "" : "" ) : ""}'})
+  " call airline#parts#define('coc_status', { 'raw': ' %{airline#util#shorten(trim(get(g:, "coc_status", "")), 100, 6)}'})
+  " call airline#parts#define('coc_function',  {'raw': '%{get(b:,"coc_current_function","") != "" ? ((get(g:, "coc_status", "") != "" ? "  " : "").get(b:,"coc_current_function","")) : ""}'})
+  call airline#parts#define('coc_function_clean',  {'raw': '%{get(b:,"coc_current_function","")}', 'accent':'bold'})
   call airline#parts#define('max_line', { 'raw': '%L', 'accent': 'bold'})
   call airline#parts#define('new_search_count', { 'raw': '%{v:hlsearch ? trim(airline#extensions#searchcount#status()) : ""}', 'accent': 'bold'})
-  call airline#parts#define('filename_path',  {'raw': '%<%{expand("%:p:h")}/'})
-  call airline#parts#define('filename',  {'raw': '%<%t%m ', 'accent':'bold'})
+  call airline#parts#define('filename_path',  {'raw': '%<%{fnamemodify(expand("%:p:h"), ":~:.:g")}/'})
+  call airline#parts#define('filename',  {'raw': '%<%t%m', 'accent':'bold'})
 
   let g:airline_section_c = airline#section#create(['filename_path', 'filename', 'readonly'])
-  let g:airline_section_d = airline#section#create(['coc_status_symbol', 'coc_function'])
+  let g:airline_section_e = airline#section#create(['coc_status_symbol', 'coc_function'])
+  let g:airline_section_d = airline#section#create(['coc_function_clean'])
   let g:airline_section_x = airline#section#create(['%{airline#util#wrap(airline#parts#filetype() . " " . WebDevIconsGetFileTypeSymbol(),140)}'])
-  " let g:airline_section_w = airline#section#create(['%{get(b:,"coc_current_function","")}'])
   let g:airline_section_y = airline#section#create(['%{airline#util#wrap(airline#parts#ffenc(),0)}', 'new_search_count'])
   let g:airline_section_z = airline#section#create(['%p%% %l/', 'max_line', ':%c'])
 
   " set color on custom sections
   " autocmd User AirlineAfterTheme let g:airline#themes#gruvbox#palette.normal.airline_w = ['#282828', '#8ec07c', 0, 14]
-  autocmd User AirlineAfterTheme let g:airline#themes#gruvbox#palette.normal.airline_d = ['#ebdbb2', '#458588', 0, 14]
+  autocmd User AirlineAfterTheme let g:airline#themes#gruvbox#palette.normal.airline_d = ['#ebdbb2', '#282828', 208, 0]
+  " autocmd User AirlineAfterTheme let g:airline#themes#gruvbox#palette.normal.airline_e = ['#ebdbb2', '#458588', 0, 14]
   " autocmd User AirlineAfterTheme let g:airline#themes#gruvbox#palette.normal.airline_b = ['#ebdbb2', '#282828', 3, 236]
   " autocmd User AirlineAfterTheme let g:airline#themes#gruvbox#palette.normal.airline_c = ['#ebdbb2', '#282828', 8, 0]
 
@@ -840,6 +826,7 @@ if &rtp =~ 'vim-airline' && glob("~/.vim/plugged/vim-airline/plugin/airline.vim"
 
   let g:airline_symbols.notexists = '%'
   let g:airline_symbols.dirty = '*'
+  let g:airline_symbols.branch = ''
 endif
 
 " }}}
@@ -880,6 +867,7 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
   nmap <expr> <leader>p fugitive#Head() != '' ? ':FZFGFiles<CR>' : ':FZFFiles<CR>'
   nmap <leader>P :FZFFiles<CR>
   nmap <leader>b :FZFBuffers<CR>
+  nmap <F1> :FZFBuffers<CR>
   nmap <leader>l :FZFLines<CR>
   nmap <leader>f :FZFRg<CR>
   nmap <leader>F :FZFRgWithFilenames<space>
@@ -1098,9 +1086,5 @@ augroup hitablinefill
     autocmd!
     autocmd User AirlineAfterInit hi airline_tabfill ctermbg=NONE
 augroup END
-
-" fix artifacts on screen from tmux-focus-events
-autocmd FocusGained * silent redraw!
-" autocmd FocusLost * silent redraw!
 
 " }}}
