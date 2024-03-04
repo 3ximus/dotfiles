@@ -4,7 +4,7 @@
 $provision_script = <<-SCRIPT
 # INSTALL SOFTWARE
 sudo apt update
-sudo apt install -y vim-gtk3 docker.io npm fzf xclip patchelf hexedit cargo ghidra gdbserver ripgrep strace gdb imagemagick feh peass golang-go
+sudo apt install -y vim-gtk3 docker.io npm fzf xclip patchelf hexedit cargo ghidra gdbserver ripgrep strace gdb imagemagick feh peass golang-go xxd
 env CGO_ENABLED=0 go install -ldflags="-s -w" github.com/gokcehan/lf@latest
 curl -sOL https://github.com/ClementTsang/bottom/releases/download/0.9.6/bottom_0.9.6_amd64.deb --output-dir /tmp && sudo dpkg -i /tmp/bottom_0.9.6_amd64.deb
 pip install pwntools z3 ortools
@@ -12,6 +12,7 @@ pip install pwntools z3 ortools
 # CHANGE SHELL AND SETUP DOTFILES
 sudo chsh vagrant -s /bin/bash
 sudo localectl set-locale LANG=en_CA.UTF-8
+sudo usermod -a -G docker vagrant
 ssh-keyscan github.com >> .ssh/known_hosts
 git clone git@github.com:3ximus/dotfiles --recurse-submodules -j8 /home/vagrant/dotfiles
 cd ~/dotfiles && ./install/config.sh --force --post --batch
