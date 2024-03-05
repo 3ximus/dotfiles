@@ -1,0 +1,27 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+$provision_script = <<-SCRIPT
+sudo apt update && sudo apt install -y git make gawk vim openvpn freerdp2-x11
+git clone https://github.com/3ximus/dotfiles --recurse-submodules -j8 ~/dotfiles
+cd ~/dotfiles && ./install/config.sh --force --post --batch
+
+# Fix X11 sharing timeout for gnome windows
+echo 'eval `dbus-launch --sh-syntax`' >> ~/.profile
+SCRIPT
+
+Vagrant.configure("2") do |config|
+  config.vm.define "ebm-laser"
+  config.vm.box = "peru/ubuntu-20.04-desktop-amd64"
+  config.vm.hostname = "ebm-laser"
+
+  config.vm.provider 'libvirt' do |libvirt|
+    libvirt.memorybacking :access, :mode => "shared"
+  end
+
+  config.vm.synced_folder "./", "/vagrant", type: "virtiofs"
+  config.ssh.forward_agent = true
+  config.ssh.forward_x11 = true
+
+  config.vm.provision "shell", inline: $provision_script, privileged: false
+end
