@@ -35,7 +35,7 @@ windowSize=980,630
 outlineWidth=1
 
 [ScreenConnectors]
-10=eDP-1:::0,0 1920x1080
+10=eDP-1:::0,1080 1920x1080
 11=HDMI-1:::0,0 1920x1080
 
 [UniversalSettings]

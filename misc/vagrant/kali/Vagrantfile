@@ -40,7 +40,10 @@ Vagrant.configure("2") do |config|
 
   config.vm.synced_folder "./", "/vagrant", type: "virtiofs"
 
-  config.ssh.insert_key = false
+  # this prevents new ssh key from being generated for this box but shouldn't be needed anymore
+  # there was a bug where the private key was missing a new line at the end of the file
+  # config.ssh.insert_key = false
+
   # Forward X
   config.ssh.forward_agent = true
   config.ssh.forward_x11 = true
