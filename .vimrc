@@ -116,7 +116,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tomtom/tcomment_vim'
 " s motions
-Plug 'justinmk/vim-sneak', { 'on': ['<Plug>Sneak_f', '<Plug>Sneak_F', '<Plug>Sneak_t', '<Plug>Sneak_T'] }
+Plug 'justinmk/vim-sneak'
 
 " highlight patterns and ranges in command
 Plug 'markonm/traces.vim'
@@ -490,6 +490,7 @@ let g:NERDTreeMinimalUI=1
 let g:NERDTreeCreatePrefix='silent keepalt keepjumps'
 let g:NERDTreeShowLineNumbers=1
 let g:NERDTreeMinimalMenu=1
+let g:NERDTreeHijackNetrw=1
 
 "nerdtree-git
 " let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
@@ -627,6 +628,7 @@ map f <Plug>Sneak_f
 map F <Plug>Sneak_F
 map t <Plug>Sneak_t
 map T <Plug>Sneak_T
+let g:sneak#label = 1
 
 "fugitive
 function! CloseGstatus() abort
@@ -705,9 +707,6 @@ if isdirectory(expand("~/.vim/plugged/tabular"))
   nmap <leader>a<Bar> :Tabularize /<Bar><CR>
   vmap <leader>a<Bar> :Tabularize /<Bar><CR>
 endif
-
-"Chat GPT
-vmap <silent> <leader>0 <Plug>(chatgpt-menu)
 
 " vim-test
 nnoremap <leader>tn :TestNearest<CR>
