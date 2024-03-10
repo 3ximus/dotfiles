@@ -2,8 +2,10 @@
 
 # Basic Settings
 # set hidden true
+set icons true
 set ignorecase true
-# set icons true
+set preview true
+set previewer ~/.config/lf/preview.sh
 set scrolloff 5
 
 
