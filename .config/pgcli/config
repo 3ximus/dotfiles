@@ -143,7 +143,7 @@ less_chatty = True
 # \dsn_alias - name of dsn alias if -D option is used (empty otherwise)
 # \x1b[...m - insert ANSI escape sequence
 # eg: prompt = '\x1b[35m\u@\x1b[32m\h:\x1b[36m\d>'
-prompt = '\x1b[1;35m\u:\x1b[1;36m\d> '
+prompt = '\x1b[1;35m\u\x1b[m:\x1b[1;36m\d> '
 
 # Number of lines to reserve for the suggestion menu
 min_num_menu_lines = 3

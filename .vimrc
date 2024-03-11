@@ -111,6 +111,9 @@ Plug 'jeetsukumaran/vim-markology'
 Plug 'wellle/context.vim', { 'on': 'ContextToggle' }
 Plug 'skywind3000/asyncrun.vim'
 
+" Plug 'ptzz/lf.vim'
+" Plug 'voldikss/vim-floaterm'
+
 " TOOLS
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'

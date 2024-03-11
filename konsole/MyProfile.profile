@@ -10,7 +10,7 @@ CursorShape=0
 CustomCursorColor=255,255,255
 
 [General]
-Command=/bin/tmux
+Command=/bin/tmux new-session -A -s 0
 Directory=
 Icon=terminix
 Name=MyProfile
@@ -34,3 +34,4 @@ ScrollBarPosition=2
 
 [Terminal Features]
 FlowControlEnabled=false
+UrlHintsModifiers=0

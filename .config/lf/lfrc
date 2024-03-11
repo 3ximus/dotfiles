@@ -7,6 +7,7 @@ set ignorecase true
 set preview true
 set previewer ~/.config/lf/preview.sh
 set scrolloff 5
+set ifs "\n"
 
 
 # -------------- Custom commands
