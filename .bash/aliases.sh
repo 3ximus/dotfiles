@@ -37,8 +37,8 @@ alias htop-cpu='htop --sort-key=PERCENT_CPU'
 alias list-open-ports='sudo netstat -tulpn | grep LISTEN'
 
 # Clipboard
-alias clipin='xclip -in -selection clipboard'
-alias clipout='xclip -out -selection clipboard'
+alias cin='xclip -in -selection clipboard'
+alias cout='xclip -out -selection clipboard'
 
 # URL encoding-decoding
 alias urlencode='python3 -c "import sys,urllib.parse;print(urllib.parse.quote(sys.stdin.read()));"'
