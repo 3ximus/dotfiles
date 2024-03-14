@@ -20,6 +20,10 @@ cmd open &{{
   esac
 }}
 
+cmd mkdir ${{
+  mkdir $1
+}}
+
 cmd extract ${{
   set -f
   case $f in

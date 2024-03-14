@@ -139,8 +139,8 @@ Plug 'godlygeek/tabular', { 'on': ['Tabularize'] }
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
 if exists('$TMUX')
-  " Plug 'preservim/vimux'
-  Plug '3ximus/vimux-tasks'
+  Plug 'preservim/vimux'
+  Plug 'orrors/vimux-tasks'
 endif
 
 " EXTRA SYNTAX HIGHLIGHT
