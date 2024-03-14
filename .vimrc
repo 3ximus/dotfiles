@@ -125,7 +125,6 @@ Plug 'justinmk/vim-sneak'
 Plug 'markonm/traces.vim'
 Plug 'AndrewRadev/linediff.vim'
 Plug 'fidian/hexmode'
-Plug 'vim-test/vim-test', { 'on': ['TestNearest', 'TestFile'] }
 
 " GIT
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
@@ -147,6 +146,8 @@ endif
 let g:polyglot_disabled = ["sensible"]
 " Plug 'sheerun/vim-polyglot' " hasn't been updated in a while and we need a fix
 Plug '00dani/vim-polyglot', { 'branch' : 'feature/fix-build' }
+" Support multiple emmet for vue files
+Plug 'leafOfTree/vim-vue-plugin', { 'for': 'vue' }
 
 " EXTRAS
 Plug 'mattn/emmet-vim'
@@ -165,14 +166,12 @@ Plug 'benknoble/vim-auto-origami'
 Plug 'machakann/vim-highlightedyank'
 "NerdFont icons in NerdTree and startify
 Plug 'ryanoasis/vim-devicons'
+Plug 'vim-test/vim-test', { 'on': ['TestNearest', 'TestFile'] }
 
 " Profiler
 if v:version >= 800
   Plug 'dstein64/vim-startuptime'
 endif
-
-" Support multiple emmet for vue files
-Plug 'leafOfTree/vim-vue-plugin', { 'for': 'vue' }
 
 " vim go
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -189,19 +188,17 @@ try "try to set the theme as gruvbox
   colorscheme gruvbox
   let g:gruvbox_termcolors = 16 "256 colors look really bad
   let g:gruvbox_improved_warnings = 1
-  let g:gruvbox_transparent_bg = 1
   set background=dark
 catch /^Vim\%((\a\+)\)\=:E185/
   colorscheme darkblue
 endtry
 
+" This is now handled on my fork of gruvbox
 " makes the background be this color so that when reversed for the airline
 " mode foreground it stays FUCKING BLACK!!
-hi Normal ctermbg=236
+" hi Normal ctermbg=236
 "trasparent background
-autocmd VimEnter * highlight Normal ctermbg=none
-" highlight NonText ctermbg=none
-" highlight CursorLineNr ctermbg=none
+" autocmd VimEnter * highlight Normal ctermbg=none
 
 " }}}
 
