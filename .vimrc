@@ -612,16 +612,16 @@ omap ad <Plug>(GitGutterTextObjectOuterPending)
 xmap id <Plug>(GitGutterTextObjectInnerVisual)
 xmap ad <Plug>(GitGutterTextObjectOuterVisual)
 " <leader>hs is the default for staging
-vmap <leader>da <Plug>(GitGutterStageHunk)
-nmap <leader>du <Plug>(GitGutterUndoHunk)
-nmap <leader>dv <Plug>(GitGutterPreviewHunk)
-nmap ]d <Plug>(GitGutterNextHunk)
-nmap [d <Plug>(GitGutterPrevHunk)
+vmap <leader>ha <Plug>(GitGutterStageHunk)
+nmap <leader>hu <Plug>(GitGutterUndoHunk)
+nmap <leader>hv <Plug>(GitGutterPreviewHunk)
+nmap ]h <Plug>(GitGutterNextHunk)
+nmap [h <Plug>(GitGutterPrevHunk)
 nmap <leader>df :GitGutterFold<CR>
 
 "nertree git
-let g:NERDTreeGitStatusMapNextHunk=']d'
-let g:NERDTreeGitStatusMapPrevHunk='[d'
+let g:NERDTreeGitStatusMapNextHunk=']h'
+let g:NERDTreeGitStatusMapPrevHunk='[h'
 
 "vim sneak
 map f <Plug>Sneak_f
@@ -917,8 +917,8 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
 
   " Use `[d` and `]d` to navigate diagnostics
   " Use `:cocDiagnostics` to get all diagnostics of current buffer in location list.
-  nmap <silent> [e <Plug>(coc-diagnostic-prev)
-  nmap <silent> ]e <Plug>(coc-diagnostic-next)
+  nmap <silent> [d <Plug>(coc-diagnostic-prev)
+  nmap <silent> ]d <Plug>(coc-diagnostic-next)
 
   " GoTo code navigation.
   nmap <silent> gd <Plug>(coc-definition)
