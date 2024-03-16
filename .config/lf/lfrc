@@ -68,12 +68,21 @@ cmd bulk-rename ${{
     lf -remote "send $id unselect"
 }}
 
+cmd jump ${{
+  dir=$(find -L . -mindepth 1 \( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \) -prune -o -type d -print 2> /dev/null | \
+    cut -b3- | \
+    FZF_DEFAULT_OPTS="--reverse $FZF_DEFAULT_OPTS $FZF_ALT_J_OPTS" fzf +m)
+  if [ -n "$dir" ]; then
+    lf -remote "send $id cd $dir"
+  fi
+}}
 
 # -------------- Mapping --------------
 
 # map e edit
 map <enter> shell
 map R reload
+map <a-j> jump
 
 # Movement
 map gh cd ~

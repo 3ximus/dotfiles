@@ -11,7 +11,7 @@
 	unstage = restore --staged
 	last = log -1 HEAD
 	lol = log --oneline --graph --pretty=format:'%C(yellow)%h%Creset %C(auto)%d%Creset %s (%Cblue%an%Creset, %cr)' --date-order  --color=always
-	summary = !which onefetch && onefetch
+	summary = !which onefetch && onefetch --no-color-palette --no-art
 
 [diff]
 	tool = vimdiff
