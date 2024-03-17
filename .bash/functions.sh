@@ -175,9 +175,12 @@ psmem () { # {{{2
 } # }}}2
 
 lfcd () {
-	lf -print-last-dir $@ > /tmp/lfcd && cd $(cat /tmp/lfcd);
+	TMPFILE=$(mktemp /tmp/lfcd-XXXXXX)
+	command lf -print-last-dir $@ > $TMPFILE
+	cd $(cat $TMPFILE)
+	rm $TMPFILE
 }
-# alias lf=lfcd
+alias lf=lfcd
 
 # }}}1
 
