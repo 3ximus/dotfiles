@@ -15,23 +15,56 @@
   "diagnostic.infoSign": "=",
   "diagnostic.hintSign": ">",
   "diagnostic.checkCurrentLine": true,
+  "suggest.floatConfig": {
+    "border": true,
+    "highlight": "Normal",
+    "borderhighlight": "GruvboxBg3"
+  },
+  "hover.floatConfig": {
+    "border": true,
+    "highlight": "Normal",
+    "borderhighlight": "GruvboxBlueBold"
+  },
+  "diagnostic.floatConfig": {
+    "border": true,
+    "highlight": "Normal",
+    "borderhighlight": "GruvboxBg3"
+  },
+  "signature.floatConfig": {
+    "border": true,
+    "highlight": "Normal",
+    "borderhighlight": "GruvboxBlueBold"
+  },
+  "dialog.floatBorderHighlight": "GruvboxAquaBold",
+  "dialog.rounded": false,
+  "dialog.floatHighlight": "GruvboxFg0",
+
   // "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/15.0.6/clangd_15.0.6/bin/clangd",
   // "typescript.referencesCodeLens.enabled": true,
   "python.analysis.typeCheckingMode": "off",
   "pyright.inlayHints.parameterTypes": false,
   "pyright.inlayHints.variableTypes": false,
   "pyright.inlayHints.functionReturnTypes": false,
-  "python.formatting.autopep8Args": ["--indent-size=2", "--ignore=E121"],
+  "python.formatting.autopep8Args": [
+    "--indent-size=2",
+    "--ignore=E121"
+  ],
   "languageserver": {
     "godot": {
       "host": "127.0.0.1",
-      "filetypes": ["gdscript"],
+      "filetypes": [
+        "gdscript"
+      ],
       "port": 6008
     },
     "intelephense": {
       "command": "intelephense",
-      "args": ["--stdio"],
-      "filetypes": ["php"],
+      "args": [
+        "--stdio"
+      ],
+      "filetypes": [
+        "php"
+      ],
       "initializationOptions": {
         "storagePath": "/tmp/intelephense"
       }
