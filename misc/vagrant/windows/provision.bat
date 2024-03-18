@@ -6,7 +6,7 @@ IF NOT EXIST cygwin-setup.exe (
 	bitsadmin /transfer cygwinDownloadJob /download /priority normal https://cygwin.com/setup-x86_64.exe %CD%\\cygwin-setup.exe
 ) ELSE ( ECHO cygwin-setup.exe found! Skipping installer download...)
 
-SET SITE=https://cygwin.mirror.globo.tech/
+SET SITE=https://mirror.clarkson.edu/cygwin/
 SET LOCALDIR=%CD%
 SET ROOTDIR=C:/cygwin
 
@@ -18,9 +18,10 @@ cygwin-setup --quiet-mode --no-desktop --download --local-install --no-verify -s
 ECHO *** INSTALLING CUSTOM PACKAGES
 cygwin-setup -q -d -D -L -X -s %SITE% -l "%LOCALDIR%" -R "%ROOTDIR%" -P %PACKAGES%
 
-ENDLOCAL
+REM -- Append to the global path
+SETX /M path "%PATH%;%ROOTDIR%\bin"
 
-SET "PATH=%ROOTDIR%\bin;%PATH%"
+ENDLOCAL
 
 PAUSE
 EXIT /B 0

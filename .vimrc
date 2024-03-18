@@ -638,13 +638,15 @@ function! CloseGstatus() abort
     endif
   endfor
 endfunction
-noremap <leader>gs :Git\|12wincmd_<CR>
+noremap <silent><leader>gs :Git\|12wincmd_<CR>
 noremap <leader>gd :Gvdiffsplit!<CR>
 noremap <leader>gl :0Gclog<CR>:copen<CR>
 noremap <leader>gL :G log --graph<CR>
 vmap <leader>gl :Gclog<CR>:copen<CR>
 noremap <leader>gB :Git blame<CR>
-noremap <leader>gp :AsyncRun -post=Git git push<CR>
+" noremap <leader>gp :AsyncRun -post=Git git push<CR>
+noremap <silent><leader>gp :call asyncrun#run('', {'post':'call coc#notify#create(["git push complete"],{"title":" Git ","borderhighlight":"GruvboxGreenBold","highlight":"Normal","timeout":2000,"kind":"info"})'}, 'git push')<CR>
+
 " allow typing :git commands instead of :Git
 " cnoreabbrev git Git
 
@@ -989,7 +991,7 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
   endfunction
 
   command! -nargs=0 Format :call CocActionAsync('format')
-  command! -nargs=0 OrganizeImports   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
+  command! -nargs=0 OrganizeImports :call CocActionAsync('runCommand', 'editor.action.organizeImport')
 
   " Mappings for Coc
   nmap <leader>ca  <Plug>(coc-codeaction-cursor)
