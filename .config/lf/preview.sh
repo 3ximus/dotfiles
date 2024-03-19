@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# Clear the last preview (if any)
-$HOME/.config/lf/image clear
-
 # Calculate where the image should be placed on the screen.
 num=$(printf "%0.f\n" "`echo "$(tput cols) / 2" | bc`")
 numb=$(printf "%0.f\n" "`echo "$(tput cols) - $num - 1" | bc`")
@@ -23,6 +20,5 @@ case "$1" in
 	*odt,*.ods,*.odp,*.sxw) odt2txt "$1";;
 	*.doc) catdoc "$1" ;;
 	*.docx) docx2txt < "$1";;
-	*.csv) cat "$1" | sed s/,/\\n/g ;;
 	*) batcat --color always --decorations never "$1" || cat "$1";;
 esac
