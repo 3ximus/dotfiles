@@ -37,8 +37,7 @@
   },
   "dialog.floatBorderHighlight": "GruvboxAquaBold",
   "dialog.rounded": false,
-  "dialog.floatHighlight": "GruvboxFg0",
-
+  "dialog.floatHighlight": "GruvboxFg1",
   // "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/15.0.6/clangd_15.0.6/bin/clangd",
   // "typescript.referencesCodeLens.enabled": true,
   "python.analysis.typeCheckingMode": "off",
