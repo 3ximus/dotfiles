@@ -137,6 +137,11 @@ If new submodules where added you might need to run `git submodule init` again
 
 To copy/link the files you want run `install/config.sh --help` to check the usage of this script
 
+For unattendend install:
+```bash
+./install/config.sh --force --post --batch
+```
+
 # [Icons](https://github.com/SylEleuth/gruvbox-plus-icon-pack)
 
 ### Older themes to go along with the gruvbox colorscheme
