@@ -9,13 +9,17 @@ $provision_rdp_apps = 'REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT
 $provision_powershell = 'New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -PropertyType String -Force'
 
 Vagrant.configure("2") do |config|
+  config.vm.define "windows-sandbox"
   config.vm.box = "peru/windows-10-enterprise-x64-eval"
 
   config.vm.provision "cygwin-setup", type: 'shell', path: 'provision.bat', privileged: false
   config.vm.provision "rdp-apps", type: 'shell', inline: $provision_rdp_apps, privileged: false
   config.vm.provision "ps1-default", type: 'shell', inline: $provision_powershell, privileged: false
 
+  # for rdp use:
+  # vagrant rdp -- /cert:ignore /dynamic-resolution +clipboard +drive:smbfolder,$PWD
+
   config.winssh.forward_agent = true
   # needs to run `vagrant rsync` | `vagrant rsync-auto` to sync directory, also needs to add cygwin rsync to path
-  config.vm.synced_folder ".", 'C:\Users\vagrant\Share', type: "rsync", disabled: false # start disabled since it won't be possible to setup without provision first
+  # config.vm.synced_folder ".", 'C:\Users\vagrant\Desktop\Share', type: "rsync", disabled: false # start disabled since it won't be possible to setup without provision first
 end
