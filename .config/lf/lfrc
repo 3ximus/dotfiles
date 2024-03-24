@@ -77,12 +77,20 @@ cmd jump ${{
   fi
 }}
 
+cmd filewidget ${{
+  file=$(FZF_DEFAULT_OPTS="--reverse $FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS" fzf +m)
+  if [ -n "$file" ]; then
+    lf -remote "send $id select $file"
+  fi
+}}
+
 # -------------- Mapping --------------
 
 # map e edit
 map <enter> shell
 map R reload
 map <a-j> jump
+map <c-t> filewidget
 
 # Movement
 map gh cd ~
