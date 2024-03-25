@@ -69,7 +69,7 @@ __virtualization () {
 		hostnamectl status | grep 'Virt' &>/dev/null
 		out=$?
 	fi
-	[[ $out = 0 ]] && echo -en " \001\e[${__VirtColor}m\002(vm)"
+	[[ $out = 0 ]] && echo -en " \001\e[${__VirtColor}m\002vm"
 }
 
 
