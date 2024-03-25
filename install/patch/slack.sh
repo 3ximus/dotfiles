@@ -7,7 +7,7 @@ if [[ ! -d styles ]] ; then
 	exit
 fi
 
-TMP_DIR=/tmp/slack-setup-hack
+TMP_DIR=/tmp/slack-setup-patch
 mkdir $TMP_DIR
 JS=$(cat "styles/slack-gruvbox.js")
 npx asar extract /usr/lib/slack/resources/app.asar $TMP_DIR/
