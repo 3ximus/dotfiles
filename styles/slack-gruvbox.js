@@ -81,6 +81,19 @@ document.addEventListener("DOMContentLoaded", function () {
     .p-ia4_top_nav__right_container>.c-coachmark-anchor {
       display: none !important;
     }
+    .sk-client-theme--dark .p-ia4_client .p-client_workspace__layout {
+      border: none !important;
+      border-radius: 0 !important;
+    }
+    .p-ia4_client .p-client_workspace {
+      padding: 0 !important;
+    }
+    .p-ia4_client.p-ia4_client--with-search-in-top-nav .p-view_contents--primary {
+      max-height: unset !important;
+    }
+    .p-ia4_client.p-ia4_client--with-search-in-top-nav .p-view_contents--sidebar {
+      max-height: unset !important;
+    }
   `;
   document.head.appendChild(s);
 }); // XXX EXIMUS PATCH -- DONT CHANGE THIS COMMENT, its used to remove this style when reapplying the patch
