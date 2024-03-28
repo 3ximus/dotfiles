@@ -1,10 +1,10 @@
 # vi: tabstop=4 foldmethod=marker
 
-# WRAPPERS {{{1
+# WRAPPERS
 # ===================
 
 # Color man pages
-man() { # {{{2
+man() { # {{{
 	env \
 		LESS_TERMCAP_mb=$(printf "\e[1;31m") \
 		LESS_TERMCAP_md=$(printf "\e[1;36m") \
@@ -14,10 +14,10 @@ man() { # {{{2
 		LESS_TERMCAP_ue=$(printf "\e[0m") \
 		LESS_TERMCAP_us=$(printf "\e[1;35m") \
 			man "$@"
-} # }}}2
+} # }}}
 
 # execute a function as sudo
-sudofunction() { # {{{2
+sudofunction() { # {{{
 	# From : https://stackoverflow.com/a/12230307/4719158
 	# I use underscores to remember it's been passed
 	local _funcname_="$1"
@@ -57,15 +57,15 @@ sudofunction() { # {{{2
 	echo -e "\n$_funcname_ \"\${params[@]}\"\n" >> "$tmpfile"
 	sudo bash "$tmpfile"
 	rm "$tmpfile"
-} # }}}2
+} # }}}
 
 # Simplify searching for keyword in current dir
-findhere() { # {{{2
+findhere() { # {{{
 	find . -iname "*$1*" "${@:2}"
-} # }}}2
+} # }}}
 
 # Delete files with patern in current dir
-findremove() { # {{{2
+findremove() { # {{{
 	local REPLY
 	find . -iname "*$1*"
 	read -r -n 1 -p "Remove these files? [y/n]: " REPLY
@@ -74,9 +74,9 @@ findremove() { # {{{2
 		*)          echo -e "\nNothing deleted." ;;
 	esac
 
-} # }}}2
+} # }}}
 
-delete_older_than_xdays() { # {{{2
+delete_older_than_xdays() { # {{{
 	if [ $# -eq 0 ] ; then
 		echo 'delete_older_than_xdays N_DAYS [path]'
 	else
@@ -86,15 +86,15 @@ delete_older_than_xdays() { # {{{2
 			find "$2" -mtime +$1 -delete
 		fi
 	fi
-} # }}}2
+} # }}}
 
 # Simplify searching for keyword in current dir, and allow to pass more parameters to grep
-grephere() { # {{{2
+grephere() { # {{{
 	grep -e "$1" "${@:2}" -d recurse .
 
-} # }}}2
+} # }}}
 
-remove-special-chars-from-name() { # {{{2
+remove-special-chars-from-name() { # {{{
 	local f
 	if [[ -z $1 ]]; then
 		echo "Give a file as argument"
@@ -107,20 +107,15 @@ remove-special-chars-from-name() { # {{{2
 	else # single file
 		mv "$1" "${1//[\ \(\)\[\]]/_}";
 	fi
-} # }}}2
+} # }}}
 
 # preview markdown files as a man page
-md() { # {{{2
+md() { # {{{
 	pandoc -sf markdown -t man "$1" | man -l -
-} # }}}2
-
-# generate qr code
-generate_qr() { # {{{2
-	echo "$1" | curl -F-=\<- qrenco.de
-} # }}}2
+} # }}}
 
 # Extract files
-extract () { # {{{2
+extract () { # {{{
 	local f
 	for f in "${@}" ; do
 		echo extracting $f
@@ -144,69 +139,74 @@ extract () { # {{{2
 			echo "'$f' is not a valid file"
 		fi
 	done
-} # }}}2
+}
 
 # i hate typing extract...
 alias un=extract
 
+# }}}
+
+# copy files into clipboard with mime type
+cinf() { # {{{
+	if [[ $# == 0 ]]; then
+		xargs realpath | sed 's/.*/file:\/\/&/' | xclip -in -selection clipboard -t text/uri-list
+	else
+		echo ${@} | xargs realpath | sed 's/.*/file:\/\/&/' | xclip -in -selection clipboard -t text/uri-list
+	fi
+} # }}}
+
 # find process by name
-psgrep() { # {{{2
+psgrep() { # {{{
 	local list=$(ps -ef)
 	echo -e "$list" | head -n1
 	echo -e "$list" | grep -i $1 --color=always | grep -v grep
-} # }}}2
+} # }}}
 
-memhogs () { # {{{2
+memhogs () { # {{{
 	local TR=`free|grep Mem:|awk '{print $2}'`
-
 	ps axo rss,comm,pid | awk -v tr=$TR '{proc_list[$2]+=$1;} END {for (proc in proc_list) {proc_pct=(proc_list[proc]/tr)*100; printf("%d\t%-16s\t%0.2f%%\n",proc_list[proc],proc,proc_pct);}}' | sort -rn | head -n 10
-} # }}}2
+} # }}}
 
-psmem () { # {{{2
+psmem () { # {{{
 	# not working properly
 	[[ $# -eq 0 ]] && { echo "Give some process names to search for" ; return 1; }
-
 	local PROCNAME="$@";
-
 	echo $PROCNAME IS USING \
 	$(
 		echo "scale=4; ($( ps axo rss,comm | grep $PROCNAME | awk '{ TOTAL += $1 } END { print TOTAL }' )/$( free | head -n 2 | tail -n 1 | awk '{ print $2 }' ))*100" | bc
 	)% of system RAM;
-} # }}}2
+} # }}}
 
-lfcd () {
+lfcd () { # {{{
 	TMPFILE=$(mktemp /tmp/lfcd-XXXXXX)
 	command lf -print-last-dir $@ > $TMPFILE
 	cd $(cat $TMPFILE)
 	rm $TMPFILE
 }
 alias lf=lfcd
+# }}}
 
-# }}}1
-
-# GIT {{{1
+# GIT
 # =========
 
 # delete files from cache
-git-delete-cached() { # {{{2
+git-delete-cached() { # {{{
 	git filter-branch --force --index-filter "git rm --cached --ignore-unmatch $@" --prune-empty --tag-name-filter cat -- --all
-} # }}}2
+} # }}}
 
-# }}}1
-
-# FZF FUNCTIONS {{{1
+# FZF FUNCTIONS
 # ==================================
 
 # Select and load a conda environment
-conda-envfzf() { # {{{2
+conda-envfzf() { # {{{
 	local env=$(conda env list | grep "^#\|^$" -v | fzf --height 5 --reverse | awk "{print \$1}")
 	if [ ! -z $env ] ; then
 		conda activate $env
 	fi
-} # }}}2
+} # }}}
 
 # activate a virtual environment
-activate() { # {{{2
+activate() { # {{{
 	local path=${1:-'.'}
 	local venv_file
 	if [ $# -eq 0 ] ; then
@@ -219,35 +219,33 @@ activate() { # {{{2
 		echo -e "Activating virtual environment: \033[1;35m$venv_file\033[m"
 		source $venv_file
 	fi
-} # }}}2
+} # }}}
 
 # fork to the background silently and send its output to the /dev/null
 # NOTES: generic form #>/dev/null (# is 1 by default)
 #       2>&-            ---->       #>&-   (close fd)
 #       |&              ---->       2>&1
 #       &>/dev/null     ---->       1>/dev/null 2>&1
-ds() { # {{{2
+ds() { # {{{
 	echo "$@ |& > /dev/null &"
 	"$@" |& > /dev/null &
-} # }}}2
+} # }}}
 
-# }}}1
-
-# OTHERS {{{1
+# OTHERS
 # ==================================
 
 # Use -p to make prompt changes permanent on .bashrc
-prompt() { # {{{2
+prompt() { # {{{
 	local bashrc=$([[ -L "$HOME/.bashrc" ]] && echo `file "$HOME/.bashrc" | cut -d' ' -f5` || echo "$HOME/.bashrc")
 	if [ -f ~/.bash/prompts/prompt_${1}.sh ]; then
 		[[ ! -z $2 ]] && [[ $2 == "-p" ]] && sed -i "s/prompt_[0-9]\.sh[^\ \n]*/prompt_${1}\.sh/" $bashrc || echo "Use -p to make changes permanent on .bashrc";
 		echo "Sourcing ~/.bash/prompts/prompt_${1}.sh"
 		source ~/.bash/prompts/prompt_${1}.sh
 	fi
-} # }}}2
+} # }}}
 
 # Display unicode chars
-unicode() { # {{{2
+unicode() { # {{{
 	local a b c
 	for a in {0..9} {a..f}; do
 		for b in {0..9} {a..f}; do
@@ -262,10 +260,10 @@ unicode() { # {{{2
 			echo
 		done
 	done | LESSUTFBINFMT='?' less
-} # }}}2
+} # }}}
 
 # Function to display terminal colors. $1 -> (1 - simple, 2 - with numbers, 3 - 256 colors)
-colors() { # {{{2
+colors() { # {{{
 	local i FGs FG column
 	if [[ -z $1 || $1 == 1 ]]; then
 		echo -en '\n     '
@@ -313,19 +311,22 @@ colors() { # {{{2
 		done
 		echo
 	fi
-} # }}}2
+} # }}}
 
 # Check weather
-weather() { #  {{{2
+weather() { #  {{{
 	curl wttr.in/$1
 }
 weather2() {
 	curl v2.wttr.in/$1
-} # }}}2
+} # }}}
+
+# generate qr code
+generate_qr() { # {{{
+	echo "$1" | curl -F-=\<- qrenco.de
+} # }}}
 
 # Crypto Currencies
-crypto() { # {{{2
+crypto() { # {{{
 	curl rate.sx/$1
-} #}}}2
-
-# }}}1
+} #}}}

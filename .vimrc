@@ -389,7 +389,7 @@ noremap [c ?>>>>>>>\\|<<<<<<<<CR>
 " toogle wrap
 nmap <leader>w :setlocal wrap!<CR>:setlocal wrap?<CR>
 
-" recalculate syntxt highlight
+" recalculate syntax highlight
 nmap zz zz:syntax sync fromstart<CR>
 
 " 3 way diff get bindings

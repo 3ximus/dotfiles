@@ -44,7 +44,7 @@ cmd zip ${{
   rm -rf $1
 }}
 
-cmd bulk-rename ${{
+cmd bulkrename ${{
     old="$(mktemp)"
     new="$(mktemp)"
     if [ -n "$fs" ]; then
@@ -84,14 +84,21 @@ cmd filewidget ${{
   fi
 }}
 
+cmd clipboard &{{
+  echo $fx | xargs realpath | sed 's/.*/file:\/\/&/' | xclip -in -selection clipboard -t text/uri-list;
+  lf -remote "send $id unselect"
+}}
+
 # -------------- Mapping --------------
 
 # map e edit
 map <enter> shell
-map R reload
-map <a-j> jump
-map <c-t> filewidget
+map R bulkrename
+map <c-z> $ kill -STOP $PPID
+map Y clipboard
 
 # Movement
 map gh cd ~
 map g/ cd /
+map <a-j> jump
+map <c-t> filewidget
