@@ -149,9 +149,9 @@ alias un=extract
 # copy files into clipboard with mime type
 cinf() { # {{{
 	if [[ $# == 0 ]]; then
-		xargs realpath | sed 's/.*/file:\/\/&/' | xclip -in -selection clipboard -t text/uri-list
+		xargs -d '\n' realpath | sed 's/.*/file:\/\/&/' | xclip -in -selection clipboard -t text/uri-list
 	else
-		echo ${@} | xargs realpath | sed 's/.*/file:\/\/&/' | xclip -in -selection clipboard -t text/uri-list
+		echo ${@} | xargs -d '\n' realpath | sed 's/.*/file:\/\/&/' | xclip -in -selection clipboard -t text/uri-list
 	fi
 } # }}}
 

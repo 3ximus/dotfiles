@@ -512,7 +512,7 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
 " devicons
 " let g:WebDevIconsNerdTreeBeforeGlyphPadding = ''
 let g:webdevicons_enable_airline_statusline = 0
-let g:webdevicons_enable_airline_tabline = 1
+let g:webdevicons_enable_airline_tabline = 0
 let g:webdevicons_conceal_nerdtree_brackets = 1
 let g:DevIconsEnableFoldersOpenClose = 1
 let g:DevIconsEnableDistro = 0
@@ -736,7 +736,7 @@ if &rtp =~ 'vim-airline' && glob("~/.vim/plugged/vim-airline/plugin/airline.vim"
 
   let g:airline#extensions#whitespace#mixed_indent_algo = 1
   let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]' "hide encoding if its utf8
-  let g:airline#extensions#hunks#enabled=1
+  let g:airline#extensions#hunks#enabled = 0
   let g:airline#extensions#hunks#non_zero_only = 1
   let g:airline#extensions#term#enabled = 0
 
