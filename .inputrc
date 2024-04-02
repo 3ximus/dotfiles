@@ -35,3 +35,4 @@ set visible-stats on
 "\C-xr": re-read-init-file
 "\C-xi": redraw-current-line
 
+"\C-x\C-l": shell-expand-line

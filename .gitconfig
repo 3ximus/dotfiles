@@ -25,10 +25,12 @@
 	process = git-lfs filter-process
 	required = true
 
-# delta settings
-[interactive]
-	diffFilter = delta --color-only
+[pull]
+	rebase = false
+[branch]
+	sort = -committerdate
 
+# delta settings
 [delta]
 	features = line-numbers decorations
 	syntax-theme = none
@@ -39,15 +41,11 @@
 	plus-emph-style = bold 10 reverse
 	plus-non-emph-style = bold 234 2
 	whitespace-error-style = 22 reverse
-
+[interactive]
+	diffFilter = delta --color-only
 [delta "decorations"]
-	file-style = bold yellow ul
+	file-style = bold cyan ul
 	file-decoration-style = none
-
 [delta "line-numbers"]
 	line-numbers-minus-style = 1 bold
 	line-numbers-plus-style = 2 bold
-[pull]
-	rebase = false
-[branch]
-	sort = -committerdate
