@@ -151,7 +151,7 @@ cinf() { # {{{
 	if [[ $# == 0 ]]; then
 		xargs -d '\n' realpath | sed 's/.*/file:\/\/&/' | xclip -in -selection clipboard -t text/uri-list
 	else
-		echo ${@} | xargs -d '\n' realpath | sed 's/.*/file:\/\/&/' | xclip -in -selection clipboard -t text/uri-list
+		printf "%s\n" "${@}" | xargs -d '\n' realpath | sed 's/.*/file:\/\/&/' | xclip -in -selection clipboard -t text/uri-list
 	fi
 } # }}}
 

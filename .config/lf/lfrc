@@ -85,7 +85,7 @@ cmd filewidget ${{
 }}
 
 cmd clipboard &{{
-  echo $fx | xargs -d '\n' realpath | sed 's/.*/file:\/\/&/' | xclip -in -selection clipboard -t text/uri-list;
+  echo "$fx" | xargs -d '\n' realpath | sed 's/.*/file:\/\/&/' | xclip -in -selection clipboard -t text/uri-list;
   lf -remote "send $id unselect"
 }}
 
