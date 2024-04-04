@@ -35,6 +35,7 @@ alias htop-mem='htop --sort-key=PERCENT_MEM'
 alias htop-cpu='htop --sort-key=PERCENT_CPU'
 
 alias list-open-ports='sudo netstat -tulpn | grep LISTEN'
+alias ipaddr="ip -brief -f inet address | fzf +m --reverse --height 6 | awk '{gsub(\"/.*\",\"\",\$3);print\$3}' | tee | xclip -r -in -selection clipboard"
 
 # Clipboard
 alias cin='xclip -r -in -selection clipboard'
