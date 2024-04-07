@@ -27,13 +27,12 @@ __fzf_select__() {
 }
 
 if [[ $- =~ i ]]; then
-
     __fzfcmd() {
       [ -n "$TMUX_PANE" ] && { [ "${FZF_TMUX:-0}" != 0 ] || [ -n "$FZF_TMUX_OPTS" ]; } &&
         echo "fzf-tmux ${FZF_TMUX_OPTS:--d${FZF_TMUX_HEIGHT:-40%}} -- " || echo "fzf"
     }
 
-    fzf-file-widget() {
+    __fzf_file_widget__() {
       local selected="$(__fzf_select__)"
       READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}$selected${READLINE_LINE:$READLINE_POINT}"
       READLINE_POINT=$(( READLINE_POINT + ${#selected} ))
@@ -64,18 +63,13 @@ if [[ $- =~ i ]]; then
 
     if [ "${BASH_VERSINFO[0]}" -ge 4 ]; then
       # CTRL-T - Paste the selected file path into the command line
-      bind -m emacs-standard -x '"\C-t": fzf-file-widget'
-      bind -m vi-command -x '"\C-t": fzf-file-widget'
-      bind -m vi-insert -x '"\C-t": fzf-file-widget'
+      bind -m emacs-standard -x '"\C-t": __fzf_file_widget__'
+      bind -m vi-command -x '"\C-t": __fzf_file_widget__'
+      bind -m vi-insert -x '"\C-t": __fzf_file_widget__'
 
       # CTRL-R - Paste the selected command from history into the command line
       bind -m emacs-standard -x '"\C-r": __fzf_history__'
       bind -m vi-command -x '"\C-r": __fzf_history__'
       bind -m vi-insert -x '"\C-r": __fzf_history__'
-    fi
-
-    if [[ $BLE_VERSION ]]; then
-        ble-bind -c 'M-j' '__fzf_cd__'
-        ble-bind -c 'C-t' 'fzf-file-widget'
     fi
 fi

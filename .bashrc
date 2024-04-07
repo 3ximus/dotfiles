@@ -67,6 +67,7 @@ shopt -s histappend
 HISTSIZE=20000
 HISTFILESIZE=40000
 
+# remove duplicates from history file while preserving order
 tac $HISTFILE | awk '!x[$0]++' > /tmp/history_file && tac /tmp/history_file > $HISTFILE
 rm /tmp/history_file
 

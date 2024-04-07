@@ -1,0 +1,34 @@
+# vim: filetype=bash
+
+##-----------------------------------------------------------------------------
+## Custom key bindings
+
+# ble-bind -m 'emacs' -f 'C-w' 'kill-region-or kill-backward-uword'
+
+# my extra bingings
+
+ble-bind -s 'M-c' '\C-a\C-] \C-u'
+ble-bind -c 'M-u' 'cd ..'
+
+# change from vim mode to normal mode
+ble-bind -m 'emacs' -f 'M-e' 'vi-editing-mode'
+ble-bind -m 'vi_imap' -f 'M-e' 'emacs-editing-mode'
+ble-bind -m 'vi_nmap' -f 'M-e' 'emacs-editing-mode'
+ble-bind -m 'vi_xmap' -f 'M-e' 'emacs-editing-mode'
+
+# Alt+, and Alt+. to pick first/last arg from last command
+ble-bind -m 'emacs' -f M-, insert-nth-argument
+ble-bind -m 'emacs' -f M-. insert-last-argument
+
+# Fix weird behaviour on kali
+# ble-bind -m 'emacs' -f left '@nomarked backward-char'
+# ble-bind -m 'emacs' -f right '@nomarked forward-char'
+
+# fzf extra bindings
+ble-bind -m emacs   -c M-j 'builtin eval -- "$(__fzf_cd__)"'
+ble-bind -m vi_imap -c M-j 'builtin eval -- "$(__fzf_cd__)"'
+ble-bind -m vi_nmap -c M-j 'builtin eval -- "$(__fzf_cd__)"'
+
+ble-bind -m emacs   -x C-t '__fzf_file_widget__'
+ble-bind -m vi_imap -x C-t '__fzf_file_widget__'
+ble-bind -m vi_nmap -s C-t 'i\C-t'

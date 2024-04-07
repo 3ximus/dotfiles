@@ -8,9 +8,12 @@ bleopt input_encoding=UTF-8
 bleopt editor=vim
 
 # Include fzf extensions
-_ble_contrib_fzf_base=/home/eximus/.bash/fzf/
+_ble_contrib_fzf_base=~/.bash/fzf/
 ble-import -d integration/fzf-completion
 ble-import -d integration/fzf-key-bindings
+
+# load key bindings after initialization
+ble-import -d ~/.bash/ble-bindings
 
 ##-----------------------------------------------------------------------------
 ## Line editor settings
@@ -46,30 +49,6 @@ bleopt decode_error_kseq_vbell=1
 
 bleopt vbell_duration=2000
 bleopt vbell_align=right
-
-##-----------------------------------------------------------------------------
-## Custom key bindings
-
-# ble-bind -m 'emacs' -f 'C-w' 'kill-region-or kill-backward-uword'
-
-# my extra bingings
-
-ble-bind -s 'M-c' '\C-a\C-] \C-u'
-ble-bind -c 'M-u' 'cd ..'
-
-# change from vim mode to normal mode
-ble-bind -m 'emacs' -f 'M-e' 'vi-editing-mode'
-ble-bind -m 'vi_imap' -f 'M-e' 'emacs-editing-mode'
-ble-bind -m 'vi_nmap' -f 'M-e' 'emacs-editing-mode'
-ble-bind -m 'vi_xmap' -f 'M-e' 'emacs-editing-mode'
-
-# Alt+, and Alt+. to pick first/last arg from last command
-ble-bind -m 'emacs' -f M-, insert-nth-argument
-ble-bind -m 'emacs' -f M-. insert-last-argument
-
-# Fix weird behaviour on kali
-# ble-bind -m 'emacs' -f left '@nomarked backward-char'
-# ble-bind -m 'emacs' -f right '@nomarked forward-char'
 
 ##-----------------------------------------------------------------------------
 ## Settings for completion
@@ -201,13 +180,6 @@ function blerc/vim-load-hook {
 
   ## vim-surround
   source "$_ble_base/lib/vim-surround.sh"
-  #bleopt vim_surround_45:=$'$( \r )'
-  #bleopt vim_surround_61:=$'$(( \r ))'
-
-  ## vim-arpeggio
-  #source "$_ble_base/lib/vim-arpeggio.sh"
-  #bleopt vim_arpeggio_timeoutlen=10
-  #ble/lib/vim-arpeggio.sh/bind -s jk 'hello'
 }
 blehook/eval-after-load keymap_vi blerc/vim-load-hook
 
