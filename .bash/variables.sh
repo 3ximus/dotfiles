@@ -20,7 +20,7 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH=$BUN_INSTALL/bin:$PATH
 
 # fzf CTRL_T options
-export FZF_COMPLETION_OPTS="--preview '[ -f {} ] && { if hash batcat &>/dev/null ; then batcat --color=always --style=header,numbers,changes {} ; else file {} ; fi } '"
+export FZF_COMPLETION_OPTS="--preview '[ -f {} ] && { if hash batcat &>/dev/null ; then batcat --color=always --style=changes {} ; else file {} ; fi } '"
 export FZF_CTRL_T_OPTS="$FZF_COMPLETION_OPTS"
 # change fzf-marks paste binding
 export FZF_MARKS_PASTE="ctrl-l"
