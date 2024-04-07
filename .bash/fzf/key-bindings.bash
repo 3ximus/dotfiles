@@ -33,7 +33,7 @@ if [[ $- =~ i ]]; then
         echo "fzf-tmux ${FZF_TMUX_OPTS:--d${FZF_TMUX_HEIGHT:-40%}} -- " || echo "fzf"
     }
 
-    __fzf_file_widget__() {
+    fzf-file-widget() {
       local selected="$(__fzf_select__)"
       READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}$selected${READLINE_LINE:$READLINE_POINT}"
       READLINE_POINT=$(( READLINE_POINT + ${#selected} ))
@@ -64,9 +64,9 @@ if [[ $- =~ i ]]; then
 
     if [ "${BASH_VERSINFO[0]}" -ge 4 ]; then
       # CTRL-T - Paste the selected file path into the command line
-      bind -m emacs-standard -x '"\C-t": __fzf_file_widget__'
-      bind -m vi-command -x '"\C-t": __fzf_file_widget__'
-      bind -m vi-insert -x '"\C-t": __fzf_file_widget__'
+      bind -m emacs-standard -x '"\C-t": fzf-file-widget'
+      bind -m vi-command -x '"\C-t": fzf-file-widget'
+      bind -m vi-insert -x '"\C-t": fzf-file-widget'
 
       # CTRL-R - Paste the selected command from history into the command line
       bind -m emacs-standard -x '"\C-r": __fzf_history__'
@@ -76,6 +76,6 @@ if [[ $- =~ i ]]; then
 
     if [[ $BLE_VERSION ]]; then
         ble-bind -c 'M-j' '__fzf_cd__'
-        ble-bind -c 'C-t' '__fzf_file_widget__'
+        ble-bind -c 'C-t' 'fzf-file-widget'
     fi
 fi
