@@ -1,4 +1,4 @@
-# vim: foldmethod=manual foldlevel=2
+# vim: foldnestmax=1 foldmethod=indent
 #
 # Functions using fzf to use in git
 # Inspired by: https://github.com/wfxr/forgit and https://github.com/bigH/git-fuzzy
