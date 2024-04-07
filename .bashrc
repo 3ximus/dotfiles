@@ -26,9 +26,6 @@ shopt -s checkwinsize
 # see http://wiki.bash-hackers.org/syntax/pattern
 shopt -s extglob
 
-# turn on recursive globbing (enables ** to recurse all directories)
-shopt -s globstar 2>/dev/null
-
 # a command name that is the name of a directory is executed
 # as if it were the argument to the cd command.
 shopt -s autocd

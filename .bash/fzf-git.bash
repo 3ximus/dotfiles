@@ -1,4 +1,5 @@
-
+# vim: foldmethod=manual foldlevel=2
+#
 # Functions using fzf to use in git
 # Inspired by: https://github.com/wfxr/forgit and https://github.com/bigH/git-fuzzy
 

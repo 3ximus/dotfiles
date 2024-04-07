@@ -2,18 +2,26 @@
 # vi: set ft=ruby :
 
 $provision_script = <<-SCRIPT
-sudo apt update && sudo apt install -y git make gawk vim openvpn freerdp2-x11
+sudo apt update && sudo apt install -y git make gawk freerdp2-x11 curl expect
+curl https://filestore.fortinet.com/forticlient/forticlient_vpn_7.2.2.0753_amd64.deb > /tmp/forticlient.deb && sudo apt -y install /tmp/forticlient.deb
 git clone https://github.com/3ximus/dotfiles --recurse-submodules -j8 ~/dotfiles
 cd ~/dotfiles && ./install/config.sh --force --post --batch
 
 # Fix X11 sharing timeout for gnome windows
 echo 'eval `dbus-launch --sh-syntax`' >> ~/.profile
+
+# to automatically set the workdir on login
+echo "cd /vagrant" >> ~/.profile
+SCRIPT
+
+$connect_vpn = <<-SCRIPT
+/vagrant/vpn.exp
 SCRIPT
 
 Vagrant.configure("2") do |config|
-  config.vm.define "ebm-laser"
+  config.vm.define "qualtech"
   config.vm.box = "peru/ubuntu-20.04-desktop-amd64"
-  config.vm.hostname = "ebm-laser"
+  config.vm.hostname = "qualtech"
 
   config.vm.provider 'libvirt' do |libvirt|
     libvirt.memorybacking :access, :mode => "shared"
@@ -24,4 +32,5 @@ Vagrant.configure("2") do |config|
   config.ssh.forward_x11 = true
 
   config.vm.provision "shell", inline: $provision_script, privileged: false
+  config.vm.provision "shell", inline: $connect_vpn, after: :all, run: "always", privileged: false
 end

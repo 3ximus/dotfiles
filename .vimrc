@@ -768,7 +768,7 @@ if &rtp =~ 'vim-airline' && glob("~/.vim/plugged/vim-airline/plugin/airline.vim"
 
   " set color on custom sections
   " autocmd User AirlineAfterTheme let g:airline#themes#gruvbox#palette.normal.airline_w = ['#282828', '#8ec07c', 0, 14]
-  autocmd User AirlineAfterTheme let g:airline#themes#gruvbox#palette.normal.airline_d = ['#ebdbb2', '#282828', 208, 0]
+  autocmd User AirlineAfterTheme let g:airline#themes#gruvbox#palette.normal.airline_d = ['#ebdbb2', '#282828', 2, 0]
   " autocmd User AirlineAfterTheme let g:airline#themes#gruvbox#palette.normal.airline_e = ['#ebdbb2', '#458588', 0, 14]
   " autocmd User AirlineAfterTheme let g:airline#themes#gruvbox#palette.normal.airline_b = ['#ebdbb2', '#282828', 3, 236]
   " autocmd User AirlineAfterTheme let g:airline#themes#gruvbox#palette.normal.airline_c = ['#ebdbb2', '#282828', 8, 0]

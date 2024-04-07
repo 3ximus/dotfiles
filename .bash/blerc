@@ -1,3 +1,4 @@
+# vim: filetype=bash
 # -*- filetype: sh; mode: sh; mode: sh-bash -*-
 
 ##-----------------------------------------------------------------------------
@@ -5,6 +6,11 @@
 
 bleopt input_encoding=UTF-8
 bleopt editor=vim
+
+# Include fzf extensions
+_ble_contrib_fzf_base=/home/eximus/.bash/fzf/
+ble-import -d integration/fzf-completion
+ble-import -d integration/fzf-key-bindings
 
 ##-----------------------------------------------------------------------------
 ## Line editor settings
