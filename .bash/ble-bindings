@@ -25,9 +25,9 @@ ble-bind -m 'emacs' -f M-. insert-last-argument
 # ble-bind -m 'emacs' -f right '@nomarked forward-char'
 
 # fzf extra bindings
-ble-bind -m emacs   -c M-j 'builtin eval -- "$(__fzf_cd__)"'
-ble-bind -m vi_imap -c M-j 'builtin eval -- "$(__fzf_cd__)"'
-ble-bind -m vi_nmap -c M-j 'builtin eval -- "$(__fzf_cd__)"'
+ble-bind -m emacs   -c M-j '__fzf_cd__'
+ble-bind -m vi_imap -c M-j '__fzf_cd__'
+ble-bind -m vi_nmap -c M-j '__fzf_cd__'
 
 ble-bind -m emacs   -x C-t '__fzf_file_widget__'
 ble-bind -m vi_imap -x C-t '__fzf_file_widget__'
