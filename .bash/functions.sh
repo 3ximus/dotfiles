@@ -186,6 +186,12 @@ lfcd () { # {{{
 alias lf=lfcd
 # }}}
 
+ssh.localhost.run() { # {{{
+	local PORT=${1:-8000}
+	echo Forwarding port on localhost: ${PORT}
+	ssh -R 80:localhost:${PORT} localhost.run -- --no-inject-http-proxy-headers 2>&1 | grep https.*life
+} # }}}
+
 # GIT
 # =========
 
