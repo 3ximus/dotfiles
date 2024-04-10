@@ -7,12 +7,12 @@
 [core]
 	editor = vim
 	pager = delta
-[alias]
-	unstage = restore --staged
-	last = log -1 HEAD
-	lol = log --oneline --graph --pretty=format:'%C(yellow)%h%Creset %C(auto)%d%Creset %s (%Cblue%an%Creset, %cr)' --date-order  --color=always
-	summary = !which onefetch && onefetch --no-color-palette --no-art
-
+[advice]
+	statusHints = false
+[pull]
+	rebase = false
+[branch]
+	sort = -committerdate
 [diff]
 	tool = vimdiff
 [difftool]
@@ -25,12 +25,12 @@
 	process = git-lfs filter-process
 	required = true
 
-[pull]
-	rebase = false
-[branch]
-	sort = -committerdate
+[alias]
+	unstage = restore --staged
+	last = log -1 HEAD
+	lol = log --oneline --graph --pretty=format:'%C(yellow)%h%Creset %C(auto)%d%Creset %s (%Cblue%an%Creset, %cr)' --date-order  --color=always
+	summary = !which onefetch && onefetch --no-color-palette --no-art
 
-# delta settings
 [delta]
 	features = line-numbers decorations
 	syntax-theme = none
