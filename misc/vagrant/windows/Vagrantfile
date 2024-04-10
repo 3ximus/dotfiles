@@ -1,10 +1,14 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 #
-# RDP will work with free rdp
+# RDP will work with xfreerdp
 
 # Allow apps to be executed with   vagrant rdp -- /cert:ignore /app:excel
 $provision_rdp_apps = 'REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList" /v "fDisabledAllowList" /t REG_DWORD /d 00000001 /F'
+
+# Set dark explorer theme
+$provision_dark_explorer = 'REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "AppsUseLightTheme" /t REG_DWORD /d 00000001 /F'
+
 # Set default shell as being powershell
 $provision_powershell = 'New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -PropertyType String -Force'
 
@@ -14,6 +18,7 @@ Vagrant.configure("2") do |config|
 
   # config.vm.provision "cygwin-setup", type: 'shell', path: 'provision.bat', privileged: false
   config.vm.provision "rdp-apps", type: 'shell', inline: $provision_rdp_apps, privileged: false
+  config.vm.provision "dark-explorer", type: 'shell', inline: $provision_dark_explorer, privileged: false
   config.vm.provision "ps1-default", type: 'shell', inline: $provision_powershell, privileged: false
 
   # for rdp use:

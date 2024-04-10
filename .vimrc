@@ -607,17 +607,17 @@ let NERDTreeMapOpenVSplit='v'
 " context.vim
 nnoremap <F4> :<C-U>ContextToggle<CR>
 
-omap id <Plug>(GitGutterTextObjectInnerPending)
-omap ad <Plug>(GitGutterTextObjectOuterPending)
-xmap id <Plug>(GitGutterTextObjectInnerVisual)
-xmap ad <Plug>(GitGutterTextObjectOuterVisual)
-" <leader>hs is the default for staging
+" hunks mappings
+omap ih <Plug>(GitGutterTextObjectInnerPending)
+omap ah <Plug>(GitGutterTextObjectOuterPending)
+xmap ih <Plug>(GitGutterTextObjectInnerVisual)
+xmap ah <Plug>(GitGutterTextObjectOuterVisual)
 vmap <leader>ha <Plug>(GitGutterStageHunk)
 nmap <leader>hu <Plug>(GitGutterUndoHunk)
 nmap <leader>hv <Plug>(GitGutterPreviewHunk)
 nmap ]h <Plug>(GitGutterNextHunk)
 nmap [h <Plug>(GitGutterPrevHunk)
-nmap <leader>df :GitGutterFold<CR>
+nmap <leader>hf :GitGutterFold<CR>
 
 "nertree git
 let g:NERDTreeGitStatusMapNextHunk=']h'
