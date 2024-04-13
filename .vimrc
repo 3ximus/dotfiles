@@ -645,7 +645,7 @@ noremap <leader>gL :G log --graph<CR>
 vmap <leader>gl :Gclog<CR>:copen<CR>
 noremap <leader>gB :Git blame<CR>
 " noremap <leader>gp :AsyncRun -post=Git git push<CR>
-noremap <silent><leader>gp :call asyncrun#run('', {'post':'call coc#notify#create(["git push complete"],{"title":" Git ","borderhighlight":"GruvboxGreenBold","highlight":"Normal","timeout":2000,"kind":"info"})'}, 'git push')<CR>
+noremap <silent><leader>gp :call asyncrun#run('', {'post':'call coc#notify#create(["git push complete"],{"title":" Git ","borderhighlight":"GruvboxGreenBold","highlight":"Normal","timeout":2000,"kind":"info"})'}, 'git push -u')<CR>
 
 " allow typing :git commands instead of :Git
 " cnoreabbrev git Git
@@ -999,7 +999,7 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
   nnoremap <silent><nowait> <leader>cd  :<C-u>CocList diagnostics<CR>
   nnoremap <silent><nowait> <leader>ce  :<C-u>CocList extensions<CR>
   nnoremap <silent><nowait> <leader>cc  :<C-u>CocList commands<CR>
-  nnoremap <silent><nowait> <leader>cs  :<C-u>CocList services<CR>
+  nnoremap <silent><nowait> <leader>cs  :<C-u>CocList snippets<CR>
   nnoremap <silent><nowait> <leader>cl  :<C-u>CocList outline<CR>
   nnoremap <silent><nowait> <leader>co  :<C-u>call CocOutlineToggle()<CR>
   nnoremap <silent><nowait> <leader>ct  :<C-u>CocToggle<CR>

@@ -33,6 +33,7 @@ alias perl-regex='perl -p -i -e'
 alias grep-bin='grep -oUaP' # pattern like: "\xde\xad"
 alias htop-mem='htop --sort-key=PERCENT_MEM'
 alias htop-cpu='htop --sort-key=PERCENT_CPU'
+alias fzf='fzf --ansi --reverse --height ~20'
 
 alias list-open-ports='sudo netstat -tulpn | grep LISTEN'
 alias ipad="ip -brief -f inet address | fzf +m --reverse --height 10 | awk '{gsub(\"/.*\",\"\",\$3);print\$3}' | tee /dev/tty | xclip -r -in -selection clipboard"
