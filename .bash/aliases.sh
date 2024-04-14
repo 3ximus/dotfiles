@@ -1,5 +1,7 @@
 # vi: tabstop=4
 
+shopt -s expand_aliases
+
 # enable color support of ls
 if [ -x /usr/bin/dircolors ]; then
 	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"

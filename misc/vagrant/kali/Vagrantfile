@@ -12,6 +12,8 @@ pip install pwntools z3 ortools
 # CHANGE SHELL AND SETUP DOTFILES
 sudo chsh vagrant -s /bin/bash
 sudo localectl set-locale LANG=en_CA.UTF-8
+# Fix X11 sharing timeout for gnome windows
+echo 'eval `dbus-launch --sh-syntax`' >> ~/.profile
 sudo usermod -a -G docker vagrant
 ssh-keyscan github.com >> .ssh/known_hosts
 git clone git@github.com:3ximus/dotfiles --recurse-submodules -j8 /home/vagrant/dotfiles

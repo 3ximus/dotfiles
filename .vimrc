@@ -9,11 +9,9 @@ set encoding=utf-8
 "backspace functionality
 set backspace=indent,eol,start
 
-"use X clipboard as default
 "you might need to install 'vim-gui-common' to enable clipboard support
 set clipboard=unnamedplus
 
-"line numbers
 set relativenumber
 set number
 "set foldcolumn=0
@@ -35,6 +33,8 @@ set nowrap
 set updatetime=400
 
 set modeline
+" Load bash aliases in here
+let $BASH_ENV="~/.bash/aliases.sh"
 
 "search settings
 set incsearch
@@ -56,7 +56,6 @@ set autoread
 
 "display command key pressed
 set showcmd
-
 set cmdheight=1
 set noshowmode
 
