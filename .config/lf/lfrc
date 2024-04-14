@@ -89,6 +89,12 @@ cmd clipboard &{{
   lf -remote "send $id unselect"
 }}
 
+cmd diff ${{
+  if hash delta ; then delta $fs
+  else diff --color=always $fs | less -MRix4
+  fi
+}}
+
 # -------------- Mapping --------------
 
 # map e edit
