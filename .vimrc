@@ -71,7 +71,6 @@ if !has('nvim')
   set ttymouse=xterm2
 endif
 
-
 " To diable bell sounds, specially on windows
 set noerrorbells visualbell t_vb=
 
@@ -342,6 +341,8 @@ nnoremap <C-k> :<C-U>m .-2<CR>
 " inoremap <C-k> <Esc>:m .-2<CR>gi
 vnoremap <C-j> :m '>+1<CR>gv
 vnoremap <C-k> :m '<-2<CR>gv
+
+map Y y$
 
 " fold with fold nest max of 1
 nmap zF :call Fold(v:count)<CR>:set foldmethod=manual<CR>
