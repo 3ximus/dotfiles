@@ -71,5 +71,6 @@
   },
   "svelte.enable-ts-plugin": true,
   "angular.enable-strict-mode-prompt": false,
-  "snippets.ultisnips.pythonPrompt": false
+  "snippets.ultisnips.pythonPrompt": false,
+  "typescript.inlayHints.parameterNames.enabled": "literals",
 }

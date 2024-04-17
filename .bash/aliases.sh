@@ -105,7 +105,4 @@ alias plex-restart='sudo systemctl restart plexmediaserver.service'
 # Map
 alias map-view='telnet mapscii.me'
 
-# Cointop
-alias cointop='ssh cointop.sh'
-
 alias random-commit='git commit -m "$(curl -Lsk whatthecommit.com/index.txt)"'
