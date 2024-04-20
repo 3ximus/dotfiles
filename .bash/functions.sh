@@ -73,7 +73,6 @@ findremove() { # {{{
 		[yY])       echo; find . -iname "*$1*" -exec rm -r "{}" \; ;;
 		*)          echo -e "\nNothing deleted." ;;
 	esac
-
 } # }}}
 
 delete_older_than_xdays() { # {{{
@@ -91,7 +90,6 @@ delete_older_than_xdays() { # {{{
 # Simplify searching for keyword in current dir, and allow to pass more parameters to grep
 grephere() { # {{{
 	grep -e "$1" "${@:2}" -d recurse .
-
 } # }}}
 
 remove-special-chars-from-name() { # {{{
@@ -185,6 +183,11 @@ lfcd () { # {{{
 }
 alias lf=lfcd
 # }}}
+history-clean() {
+	local pattern="^bb\|^cd\|^ls\|^mv\|^rm\|^ln\|^wc\|^kill\|^vim\|^echo\|^mkdir\|^du\|^df\|^ll\|^diff\|^eval --\|^chmod\|^touch\|^type\|^lf\|^cat\|^gunzip\|^gzip\|^tar\|^un \|^unzip\|^\.\/\|^sudo cp\|^sudo apt list\|^file^\|^less\|^cout\|^cin\|^gd\|^git checkout\|^git diff\|^git show\|^git branch\|^git restore\|^yarn test\|^yarn start\|^dolphin\|^vlc\|^python\|^batcat"
+	sed "/${pattern}/d" -i ~/.bash_history
+	sed 's/\s\+$//' -i ~/.bash_history # strip trailing white spaces
+}
 
 ssh.localhost.run() { # {{{
 	local PORT=${1:-8000}
@@ -331,8 +334,3 @@ weather2() {
 generate_qr() { # {{{
 	echo "$1" | curl -F-=\<- qrenco.de
 } # }}}
-
-# Crypto Currencies
-crypto() { # {{{
-	curl rate.sx/$1
-} #}}}

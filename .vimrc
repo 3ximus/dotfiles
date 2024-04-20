@@ -100,7 +100,7 @@ Plug '3ximus/gruvbox'
 
 " BASE
 Plug '3ximus/vim-airline' " my fork switches position of the tabs and splits on tabline
-Plug 'scrooloose/nerdtree', { 'on':['NERDTreeToggle', 'NERDTreeFind'] }
+Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug '3ximus/fzf' " use my fork to allow passing g:fzf_no_term
 Plug 'junegunn/fzf.vim'
 Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
