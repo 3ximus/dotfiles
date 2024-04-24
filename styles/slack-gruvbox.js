@@ -40,6 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
       --dt_color-theme-content-pry: #ebdbb2 !important;
       --dt_color-theme-content-sec: #d5c4a1 !important;
       --dt_color-theme-content-inv-pry: #ebdbb2 !important;
+      --dt_color-theme-content-inv-sec: #ebdbb2 !important;
       --dt_color-theme-surf-ter: #282828 !important;
     }
     .p-channel_sidebar__channel--selected {
