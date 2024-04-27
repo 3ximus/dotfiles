@@ -1,6 +1,4 @@
 {
-  "coc.preferences.currentFunctionSymbolAutoUpdate": true,
-  "coc.preferences.currentFunctionSymbolDebounceTime": 50,
   "suggest.autoTrigger": "trigger",
   "suggest.insertMode": "insert",
   // "suggest.virtualText": true,
@@ -15,6 +13,9 @@
   "diagnostic.infoSign": "=",
   "diagnostic.hintSign": ">",
   "diagnostic.checkCurrentLine": true,
+  "coc.preferences.useQuickfixForLocations": true,
+  "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+  "coc.preferences.currentFunctionSymbolDebounceTime": 50,
   "suggest.floatConfig": {
     "border": true,
     "highlight": "Normal",

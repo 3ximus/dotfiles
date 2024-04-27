@@ -107,7 +107,12 @@ Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
 Plug 'junegunn/vim-peekaboo'
 Plug 'jeetsukumaran/vim-markology'
 Plug 'wellle/context.vim', { 'on': 'ContextToggle' }
+Plug 'markonm/traces.vim'
+Plug 'ronakg/quickr-preview.vim'
 Plug 'skywind3000/asyncrun.vim'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'benknoble/vim-auto-origami'
+Plug 'machakann/vim-highlightedyank'
 
 " Plug 'ptzz/lf.vim'
 " Plug 'voldikss/vim-floaterm'
@@ -120,7 +125,6 @@ Plug 'tomtom/tcomment_vim'
 Plug 'justinmk/vim-sneak'
 
 " highlight patterns and ranges in command
-Plug 'markonm/traces.vim'
 Plug 'AndrewRadev/linediff.vim'
 Plug 'fidian/hexmode'
 
@@ -140,14 +144,12 @@ if exists('$TMUX')
   Plug 'orrors/vimux-tasks'
 endif
 
-" EXTRA SYNTAX HIGHLIGHT
+" LANGUAGE STUFF
 let g:polyglot_disabled = ["sensible"]
 " Plug 'sheerun/vim-polyglot' " hasn't been updated in a while and we need a fix
 Plug '00dani/vim-polyglot', { 'branch' : 'feature/fix-build' }
 " Support multiple emmet for vue files
 Plug 'leafOfTree/vim-vue-plugin', { 'for': 'vue' }
-
-" EXTRAS
 Plug 'mattn/emmet-vim'
 
 " DATABASE
@@ -157,11 +159,6 @@ Plug 'jidn/vim-dbml', { 'for': 'dbml' }
 
 " OTHER
 Plug 'mhinz/vim-startify'
-"absolute numbers when window looses focus
-Plug 'jeffkreeftmeijer/vim-numbertoggle'
-"auto show fold column
-Plug 'benknoble/vim-auto-origami'
-Plug 'machakann/vim-highlightedyank'
 "NerdFont icons in NerdTree and startify
 Plug 'ryanoasis/vim-devicons'
 Plug 'vim-test/vim-test', { 'on': ['TestNearest', 'TestFile'] }
@@ -517,6 +514,10 @@ let g:webdevicons_conceal_nerdtree_brackets = 1
 let g:DevIconsEnableFoldersOpenClose = 1
 let g:DevIconsEnableDistro = 0
 
+" quickr-preview
+let g:quickr_preview_position = 'above'
+let g:quickr_preview_modifiable = 1
+
 " context.vim
 let g:context_presenter = 'vim-popup'
 let g:context_add_mappings = 0
@@ -848,7 +849,15 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
   endif
 
   let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+  " CTRL-A CTRL-Q to select all and build quickfix list
+  function! s:build_quickfix_list(lines)
+    call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+    copen
+    cc
+  endfunction
   let g:fzf_action = {
+        \ 'ctrl-q': function('s:build_quickfix_list'),
         \ 'ctrl-t': 'tab split',
         \ 'ctrl-s': 'split',
         \ 'ctrl-v': 'vsplit' }
