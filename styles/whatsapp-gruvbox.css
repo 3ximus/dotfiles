@@ -16,7 +16,7 @@
 :root:not(#z),
 .dark:not(#z) {
   --version: "GruvboxDark fork from Dark-WhatsApp v3.6.1 — March 3rd, 2021";
-  --ui-font: "TerminessTTF Nerd Font Mono", Segoe UI, Helvetica Neue, Helvetica,
+  --ui-font: "Terminess Nerd Font Mono", Segoe UI, Helvetica Neue, Helvetica,
     Lucida Grande, Arial, Ubuntu, Cantarell, Fira Sans, sans-serif;
   --r-menus: 4px;
   --r-inputs: 24px;

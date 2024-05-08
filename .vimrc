@@ -160,7 +160,7 @@ Plug 'jidn/vim-dbml', { 'for': 'dbml' }
 " OTHER
 Plug 'mhinz/vim-startify'
 "NerdFont icons in NerdTree and startify
-Plug 'ryanoasis/vim-devicons'
+Plug 'SarveshMD/vim-devicons'
 Plug 'vim-test/vim-test', { 'on': ['TestNearest', 'TestFile'] }
 
 " Profiler

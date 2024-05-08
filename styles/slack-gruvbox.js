@@ -2,10 +2,10 @@ document.addEventListener("DOMContentLoaded", function () {
   let s = document.createElement("style");
   s.innerHTML = `
     body {
-      font-family: "TerminessTTF Nerd Font Mono", Slack-Lato,Slack-Fractions,appleLogo,sans-serif !important;
+      font-family: "Terminess Nerd Font Mono", Slack-Lato,Slack-Fractions,appleLogo,sans-serif !important;
     }
     .c-texty_input_unstyled {
-      font-family: "TerminessTTF Nerd Font Mono", Slack-Lato,Slack-Fractions,appleLogo,sans-serif !important;
+      font-family: "Terminess Nerd Font Mono", Slack-Lato,Slack-Fractions,appleLogo,sans-serif !important;
     }
     .c-search_autocomplete__suggestion_item--selected{
       background: #8ec07c !important;

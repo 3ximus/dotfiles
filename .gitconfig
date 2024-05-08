@@ -7,6 +7,8 @@
 [core]
 	editor = vim
 	pager = delta
+[init]
+	defaultBranch = master
 [advice]
 	statusHints = false
 [pull]

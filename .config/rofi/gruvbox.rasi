@@ -5,7 +5,7 @@
     selectioncolor: #504945;
 
     /* font: "monospace 14"; */
-    font: "TerminessTTF Nerd Font Mono 16";
+    font: "Terminess Nerd Font Mono 16";
     background-color: @backgroundcolor;
     text-color: @foregroundcolor;
 }
