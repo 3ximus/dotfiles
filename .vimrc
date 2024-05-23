@@ -742,7 +742,7 @@ if &rtp =~ 'vim-airline' && glob("~/.vim/plugged/vim-airline/plugin/airline.vim"
   let g:airline#extensions#term#enabled = 0
 
   " coc airline configuration
-  let g:airline#extensions#coc#error_symbol = ' '
+  let g:airline#extensions#coc#error_symbol = ' '
   let g:airline#extensions#coc#warning_symbol = ' '
   let g:airline#extensions#coc#show_coc_status = 0 " handled in custom section
   let g:airline#extensions#coc#stl_format_err = '%C' " can use %L for line number
