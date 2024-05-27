@@ -180,10 +180,10 @@ call plug#end()
 
 set t_Co=256 "terminal color range
 try "try to set the theme as gruvbox
-  colorscheme gruvbox
   let g:gruvbox_termcolors = 16 "256 colors look really bad
   let g:gruvbox_improved_warnings = 1
   set background=dark
+  colorscheme gruvbox
 catch /^Vim\%((\a\+)\)\=:E185/
   colorscheme darkblue
 endtry

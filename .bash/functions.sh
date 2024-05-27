@@ -181,13 +181,15 @@ lfcd () { # {{{
 	cd $(cat $TMPFILE)
 	rm $TMPFILE
 }
-alias lf=lfcd
+# alias lf=lfcd
 # }}}
-history-clean() {
+
+history-clean() { # {{{
 	local pattern="^bb\|^cd\|^ls\|^mv\|^rm\|^ln\|^wc\|^kill\|^vim\|^echo\|^mkdir\|^du\|^df\|^ll\|^diff\|^eval --\|^chmod\|^touch\|^type\|^lf\|^cat\|^gunzip\|^gzip\|^tar\|^un \|^unzip\|^\.\/\|^sudo cp\|^sudo apt list\|^file^\|^less\|^cout\|^cin\|^gd\|^git checkout\|^git diff\|^git show\|^git branch\|^git restore\|^yarn test\|^yarn start\|^dolphin\|^vlc\|^python\|^batcat"
 	sed "/${pattern}/d" -i ~/.bash_history
 	sed 's/\s\+$//' -i ~/.bash_history # strip trailing white spaces
 }
+# }}}
 
 ssh.localhost.run() { # {{{
 	local PORT=${1:-8000}

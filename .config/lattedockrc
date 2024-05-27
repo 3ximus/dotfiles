@@ -10,7 +10,7 @@ Number of Actions=0
 
 [KFileDialog Settings]
 Recent Files[$e]=custom.layout.latte,file:///usr/share/sounds/freedesktop/stereo/complete.oga
-Recent URLs[$e]=file:$HOME/Downloads/,file:///usr/share/sounds/freedesktop/stereo/
+Recent URLs[$e]=file:$HOME/downloads/,file:///usr/share/sounds/freedesktop/stereo/
 detailViewIconSize=16
 
 [LatteSettingsDialog]
@@ -35,9 +35,9 @@ windowSize=980,630
 outlineWidth=1
 
 [ScreenConnectors]
-10=eDP-1:::1920,0 1920x1080
-11=HDMI-1:::0,0 1920x1080
-12=DP-1:::0,0 1920x1080
+10=eDP-1:::0,0 1920x1080
+11=HDMI-1:::1920,0 1920x1080
+12=DP-1:::3840,0 1920x1080
 
 [UniversalSettings]
 badges3DStyle=false
