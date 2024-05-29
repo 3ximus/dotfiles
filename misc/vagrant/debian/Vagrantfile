@@ -3,7 +3,7 @@
 
 $provision_script = <<-SCRIPT
 sudo apt update && sudo apt install -y git make gawk
-git clone https://github.com/3ximus/dotfiles --recurse-submodules -j8 ~/dotfiles
+git clone https://github.com/3ximus/dotfiles --depth 1 --recurse-submodules -j4 --shallow-submodules ~/dotfiles
 cd ~/dotfiles && ./install/config.sh --force --post --batch
 SCRIPT
 
