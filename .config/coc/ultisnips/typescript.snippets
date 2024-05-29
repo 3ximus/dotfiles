@@ -1,0 +1,21 @@
+# Snippet options:
+#
+#		b - Beginning of line.
+#		i - In-word expansion.
+#		w - Word boundary.
+#		r - Regular expression
+#		e - Custom context snippet
+#		A - Snippet will be triggered automatically, when condition matches.
+
+snippet  //ed "eslint disable" i
+/* eslint-disable ${1} */
+/* eslint-enable ${1} */
+endsnippet
+
+snippet  //edl "eslint disable line" i
+// eslint-disable-line ${1}
+endsnippet
+
+snippet  //ednl "eslint disable line" i
+// eslint-disable-next-line ${1}
+endsnippet

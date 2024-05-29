@@ -913,6 +913,8 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
   " Coc Extensions
   let g:coc_global_extensions = [
         \'coc-json',
+        \'coc-docker',
+        \'coc-snippets',
         \'coc-sh',
         \]
 
