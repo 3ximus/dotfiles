@@ -1,0 +1,4 @@
+TerminessNerdFontMono-BoldItalic.ttf filter=lfs diff=lfs merge=lfs -text
+TerminessNerdFontMono-Bold.ttf filter=lfs diff=lfs merge=lfs -text
+TerminessNerdFontMono-Italic.ttf filter=lfs diff=lfs merge=lfs -text
+TerminessNerdFontMono-Regular.ttf filter=lfs diff=lfs merge=lfs -text
