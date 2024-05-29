@@ -87,7 +87,7 @@ My [modified whatsapp style](https://github.com/3ximus/gruvbox-dark-whatsapp) (n
     - `scripts` with some useless utilities that I didn't want to create as a function...
 - `inputrc` contains some bindings for bash readline that are accepted in `ble.sh` too. I use this file for more barebones configs that I don't want running `ble.sh`
 - `.gitconfig` with my configuration for git (uses [delta](https://github.com/dandavison/delta#used-by-delta) to view diffs)
-- fonts in .fonts are from [powerline](https://github.com/powerline/fonts)  and [nerd fonts](https://github.com/ryanoasis/nerd-fonts)
+- fonts in .fonts are from [nerd fonts](https://github.com/ryanoasis/nerd-fonts). They are stored in lfs so see the lfs section bellow
 - [konsole](https://github.com/3ximus/dotfiles/tree/master/konsole) contains my konsole themes and profile (lives in `$HOME/.local/share/konsole`)
 - [icons](https://github.com/3ximus/dotfiles/tree/master/icons) contains [papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) icons edited to match gruvbox style (there is a script inside to install these icons)
 - [css](https://github.com/3ximus/dotfiles/tree/master/css) contains styles to inject somewhere
@@ -140,6 +140,15 @@ To copy/link the files you want run `install/config.sh --help` to check the usag
 For unattendend install:
 ```bash
 ./install/config.sh --force --post --batch
+```
+
+### lfs files
+
+Some larger files are stored on lfs, they are normally excluded so for pulling them use this command:
+```bash
+# Use -I to get only specific files, otherwise omitting that pulls all lfs files
+# -X is required so it doesn't use exclude rules on .lfsconfig
+git lfs pull -I '*.ttf' -X ''
 ```
 
 # [Icons](https://github.com/SylEleuth/gruvbox-plus-icon-pack)
