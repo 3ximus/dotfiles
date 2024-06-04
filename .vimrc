@@ -1032,7 +1032,7 @@ if has("gui_running")
   "set guifont=Roboto\ Mono\ for\ Powerline\ Regular\ 9
   "set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 9
   "set guifont=Fira\ Mono\ for\ Powerline\ 9
-  set guifont=TerminessTTF\ Nerd\ Font\ Mono\ 13
+  set guifont=Terminess\ Nerd\ Font\ Mono\ 13
 
   set linespace=0
 
