@@ -20,5 +20,5 @@ case "$1" in
 	*odt,*.ods,*.odp,*.sxw) odt2txt "$1";;
 	*.doc) catdoc "$1" ;;
 	*.docx) docx2txt < "$1";;
-	*) batcat --color always --decorations never "$1" || cat "$1";;
+	*) batcat --color always --decorations never --tabs=4 "$1" || cat "$1";;
 esac
