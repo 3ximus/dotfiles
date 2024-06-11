@@ -29,8 +29,8 @@ set visible-stats on
 # cicle through completions
 "\e[Z": menu-complete
 
-"\e[A": history-search-backward
-"\e[B": history-search-forward
+# "\e[A": history-search-backward
+# "\e[B": history-search-forward
 "\C-p": history-search-backward
 "\C-n": history-search-forward
 
