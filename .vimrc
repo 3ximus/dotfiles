@@ -1005,17 +1005,17 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
   command! -nargs=0 OrganizeImports :call CocActionAsync('runCommand', 'editor.action.organizeImport')
 
   " Mappings for Coc
-  nmap <leader>ca  <Plug>(coc-codeaction-cursor)
-  nmap <leader>cA  <Plug>(coc-codeaction)
-  nnoremap <silent><nowait> <leader>cd  :<C-u>CocList diagnostics<CR>
-  nnoremap <silent><nowait> <leader>ce  :<C-u>CocList extensions<CR>
-  nnoremap <silent><nowait> <leader>cc  :<C-u>CocList commands<CR>
-  nnoremap <silent><nowait> <leader>cs  :<C-u>CocList snippets<CR>
-  nnoremap <silent><nowait> <leader>cl  :<C-u>CocList outline<CR>
-  nnoremap <silent><nowait> <leader>co  :<C-u>call CocOutlineToggle()<CR>
-  nnoremap <silent><nowait> <leader>ct  :<C-u>CocToggle<CR>
-  nnoremap <silent><nowait> <leader>cf  :<C-u>call CocAction('showOutgoingCalls')<CR>
-  nnoremap <silent><nowait> <leader>cr  :<C-u>call CocAction('showIncomingCalls')<CR>
+  nmap <leader>ka  <Plug>(coc-codeaction-cursor)
+  nmap <leader>kA  <Plug>(coc-codeaction)
+  nnoremap <silent><nowait> <leader>kd  :<C-u>CocList diagnostics<CR>
+  nnoremap <silent><nowait> <leader>ke  :<C-u>CocList extensions<CR>
+  nnoremap <silent><nowait> <leader>kc  :<C-u>CocList commands<CR>
+  nnoremap <silent><nowait> <leader>ks  :<C-u>CocList snippets<CR>
+  nnoremap <silent><nowait> <leader>kl  :<C-u>CocList outline<CR>
+  nnoremap <silent><nowait> <leader>ko  :<C-u>call CocOutlineToggle()<CR>
+  nnoremap <silent><nowait> <leader>kt  :<C-u>CocToggle<CR>
+  nnoremap <silent><nowait> <leader>kf  :<C-u>call CocAction('showOutgoingCalls')<CR>
+  nnoremap <silent><nowait> <leader>kr  :<C-u>call CocAction('showIncomingCalls')<CR>
 endif
 
 " }}}
