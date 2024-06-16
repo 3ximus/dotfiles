@@ -2,6 +2,7 @@
 
 # Script to flash my corne
 
+sudo echo # ask for sudo password first
 echo Sleeping for 5 seconds. Hit the reset button now!
 sleep 5
 
