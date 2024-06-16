@@ -474,10 +474,10 @@ function! s:gitUntracked()
 endfunction
 
 let g:startify_lists = [
-        \ { 'type': 'files',     'header': ['   MRU']            },
         \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
         \ { 'type': function('s:gitModified'),  'header': ['   Git modified']},
         \ { 'type': function('s:gitUntracked'), 'header': ['   Git untracked']},
+        \ { 'type': 'files',     'header': ['   MRU']            },
         \ ]
 
 "NERDTree
