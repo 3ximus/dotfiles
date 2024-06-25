@@ -7,17 +7,17 @@ export EDITOR=vim
 export COLORTERM=truecolor
 
 # add customs scripts
-export PATH=$HOME/.bash/scripts:$PATH
+export PATH=$PATH:$HOME/.bash/scripts
 
 # go
-export PATH=$HOME/go/bin:$PATH
+export PATH=$PATH:$HOME/go/bin
 
 # cargo
-export PATH=$HOME/.cargo/bin:$PATH
+export PATH=$PATH:$HOME/.cargo/bin
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
-export PATH=$BUN_INSTALL/bin:$PATH
+export PATH=$PATH:$BUN_INSTALL/bin
 
 # fzf CTRL_T options
 export FZF_COMPLETION_OPTS="--preview '[ -f {} ] && { if hash batcat &>/dev/null ; then batcat --color=always --style=changes {} ; else file {} ; fi } '"
