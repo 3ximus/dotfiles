@@ -876,9 +876,9 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
 
   nmap <expr> <leader>p fugitive#Head() != '' ? ':FZFGFiles<CR>' : ':FZFFiles<CR>'
   nmap <leader>P :FZFFiles<CR>
-  nmap <leader>b :FZFBuffers<CR>
+  nmap <leader>l :FZFBuffers<CR>
   nmap <F1> :FZFBuffers<CR>
-  nmap <leader>l :FZFLines<CR>
+  nmap <leader>L :FZFLines<CR>
   nmap <leader>f :FZFRg<CR>
   nmap <leader>F :FZFRgWithFilenames<space>
   nmap <leader>/ :FZFHistory/<CR>
