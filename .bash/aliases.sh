@@ -38,20 +38,19 @@ alias htop-cpu='htop --sort-key=PERCENT_CPU'
 alias fzf='fzf --ansi --reverse --height ~20'
 alias bcat='batcat'
 
-alias list-open-ports='sudo netstat -tulpn | grep LISTEN'
-alias ipad="ip -brief -f inet address | fzf +m --reverse --height 10 | awk '{gsub(\"/.*\",\"\",\$3);print\$3}' | tee /dev/tty | xclip -r -in -selection clipboard"
-
 # Clipboard
 alias cin='xclip -r -in -selection clipboard'
 alias cout='xclip -r -out -selection clipboard'
 
+alias list-open-ports='sudo netstat -tulpn | grep LISTEN'
+alias ipad="ip -brief -f inet address | fzf +m --reverse --height 10 | awk '{gsub(\"/.*\",\"\",\$3);print\$3}' | tee /dev/tty | xclip -r -in -selection clipboard"
+
+# connect to a qemu virtual machine console
+alias virtview="virsh list --name | head -n-1 | fzf | xargs virt-manager -c qemu:///system --show-domain-console"
+
 # URL encoding-decoding
 alias urlencode='python3 -c "import sys,urllib.parse;print(urllib.parse.quote(sys.stdin.read()));"'
 alias urldecode='python3 -c "import sys,urllib.parse;print(urllib.parse.unquote(sys.stdin.read()));"'
-
-
-# mount ntfs filesystems with correct permissions
-alias mount-ntfs='sudo mount -o uid=1000,gid=1000,dmask=027,fmask=137'
 
 # git, the quoting hack is needed to use nested single quotes
 alias git-lfs='git rev-list --objects --all | grep "$(git verify-pack -v .git/objects/pack/*.idx | sort -k 3 -n | tail -10 | awk '"'"'{print$1}'"'"')"'
@@ -68,10 +67,6 @@ alias gd='git diff'
 
 # SSH
 alias load-keychain='[[ -f "${HOME}/.ssh/id_rsa" ]] && keychain "${HOME}/.ssh/id_rsa" --quiet && source "${HOME}/.keychain/${HOSTNAME}-sh"'
-
-# attach/kill tmux sessions
-alias tmux-attach-session='tmux list-sessions; read -r -p "Attach to > " REPLY; tmux attach-session -t $REPLY'
-alias tmux-kill-session='tmux list-sessions; read -r -p "Kill session > " REPLY; tmux kill-session -t $REPLY'
 
 # i keep forgetting this...
 alias man-pipes='echo "Generic form #>/dev/null (# is 1 by default) or #>&# to send one fd to another"; echo "  2>&-        ----> #>&-  (close fd)"; echo "  |&          ----> 2>&1 |"; echo "  >&/dev/null ----> 1>/dev/null 2>&1"'

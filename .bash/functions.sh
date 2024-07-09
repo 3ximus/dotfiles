@@ -232,6 +232,9 @@ activate() { # {{{
 	fi
 } # }}}
 
+# OTHERS
+# ==================================
+
 # fork to the background silently and send its output to the /dev/null
 # NOTES: generic form #>/dev/null (# is 1 by default)
 #       2>&-            ---->       #>&-   (close fd)
@@ -241,9 +244,6 @@ ds() { # {{{
 	echo "$@ |& > /dev/null &"
 	"$@" |& > /dev/null &
 } # }}}
-
-# OTHERS
-# ==================================
 
 # Use -p to make prompt changes permanent on .bashrc
 prompt() { # {{{
