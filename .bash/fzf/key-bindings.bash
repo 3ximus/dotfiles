@@ -33,7 +33,11 @@ if [[ $- =~ i ]]; then
     }
 
     __fzf_file_widget__() {
-      local selected="$(__fzf_select__)"
+      local prefix=${READLINE_LINE:0:$READLINE_POINT}
+      local token=$(sed 's/.* //' <<< "$prefix")
+      [ ${#token} -gt 0 ] && prefix=${prefix::-${#token}}
+
+      local selected="$(__fzf_select__ --query=$token)"
       READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}$selected${READLINE_LINE:$READLINE_POINT}"
       READLINE_POINT=$(( READLINE_POINT + ${#selected} ))
     }

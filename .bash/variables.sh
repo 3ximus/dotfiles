@@ -10,13 +10,13 @@ export COLORTERM=truecolor
 export PATH=$PATH:$HOME/.bash/scripts
 
 # go
-command -v go >/dev/null || export PATH=$PATH:$HOME/go/bin
+command -v go >/dev/null && export PATH=$PATH:$HOME/go/bin
 
 # cargo
-command -v cargo >/dev/null || export PATH=$PATH:$HOME/.cargo/bin
+command -v cargo >/dev/null && export PATH=$PATH:$HOME/.cargo/bin
 
 # bun
-command -v bun >/dev/null || export PATH=$PATH:$HOME/.bun/bin
+command -v bun >/dev/null && export PATH=$PATH:$HOME/.bun/bin
 
 # fzf CTRL_T options
 export FZF_COMPLETION_OPTS="--preview '[ -f {} ] && { if hash batcat &>/dev/null ; then batcat --color=always --style=changes {} ; else file {} ; fi } '"
