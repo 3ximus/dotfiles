@@ -50,6 +50,15 @@ if [[ $- =~ i ]]; then
       cd "$dir"
     }
 
+    __fzf_rg__() {
+      rg --color=always --line-number --no-heading --smart-case "${*:-}" |
+        fzf --ansi \
+          --color "hl:-1:underline,hl+:-1:underline:reverse" \
+          --delimiter : \
+          --preview 'batcat --color=always {1} --highlight-line {2}' \
+          --bind 'enter:become(vim {1} +{2})'
+    }
+
     __fzf_history__() {
       local output
       output=$(

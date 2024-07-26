@@ -4,6 +4,7 @@
 	signingkey = F6DC6D0149C7B715
 [push]
 	default = current
+	followTags = true
 [core]
 	editor = vim
 	pager = delta

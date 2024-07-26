@@ -32,3 +32,7 @@ ble-bind -m vi_nmap -c M-j '__fzf_cd__'
 ble-bind -m emacs   -x C-t '__fzf_file_widget__'
 ble-bind -m vi_imap -x C-t '__fzf_file_widget__'
 ble-bind -m vi_nmap -s C-t 'i\C-t'
+
+ble-bind -m emacs   -x C-f '__fzf_rg__'
+ble-bind -m vi_imap -x C-f '__fzf_rg__'
+ble-bind -m vi_nmap -s C-f 'i\C-f'

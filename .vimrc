@@ -366,7 +366,7 @@ nnoremap <leader>yy :w !xclip -selection clipboard<CR><CR>
 nmap <leader>x :bp<bar>bd #<CR>
 
 " Clear search highlight and close preview window
-nnoremap <silent> <backspace> :noh<CR>:pc<CR>:cclose<CR>:call CloseGstatus()<CR>:call CocCloseOutline()<CR>:call popup_clear(1)<CR>
+nnoremap <silent> <backspace> :noh<CR>:pc<CR>:cclose<CR>:helpclose<CR>:call CloseGstatus()<CR>:call CocCloseOutline()<CR>:call popup_clear(1)<CR>
 
 " remove trailing whitespaces
 nmap <leader>s :call StripTrailingWhitespace()<CR>
@@ -641,7 +641,7 @@ function! CloseGstatus() abort
 endfunction
 noremap <silent><leader>gs :Git\|12wincmd_<CR>
 noremap <leader>gd :Gvdiffsplit!<CR>
-noremap <leader>gl :0Gclog<CR>:copen<CR>
+noremap <leader>gl :0Gclog<CR>
 noremap <leader>gL :G log --graph<CR>
 vmap <leader>gl :Gclog<CR>:copen<CR>
 noremap <leader>gB :Git blame<CR>
