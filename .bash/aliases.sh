@@ -46,7 +46,7 @@ alias list-open-ports='sudo netstat -tulpn | grep LISTEN'
 alias ipad="ip -brief -f inet address | fzf +m --reverse --height 10 | awk '{gsub(\"/.*\",\"\",\$3);print\$3}' | tee /dev/tty | xclip -r -in -selection clipboard"
 
 # connect to a qemu virtual machine console
-alias virtview="virsh list --name | head -n-1 | fzf | xargs virt-manager -c qemu:///system --show-domain-console"
+alias vmview="virsh list --name | head -n-1 | fzf | xargs virt-manager -c qemu:///system --show-domain-console"
 
 # URL encoding-decoding
 alias urlencode='python3 -c "import sys,urllib.parse;print(urllib.parse.quote(sys.stdin.read()));"'

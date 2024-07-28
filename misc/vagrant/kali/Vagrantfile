@@ -1,15 +1,30 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-$provision_script = <<-SCRIPT
-# INSTALL SOFTWARE
+
+$provision_init = <<-SCRIPT
 sudo apt update
 echo '* libraries/restart-without-asking boolean true' | sudo debconf-set-selections
-sudo NEEDRESTART_MODE=a apt install -y vim-gtk3 git-lfs docker.io npm fzf xclip patchelf hexedit ghidra gdbserver ripgrep strace gdb feh peass golang-go xxd
+SCRIPT
+
+$provision_display = <<-SCRIPT
+sudo NEEDRESTART_MODE=a apt install -y -qq --no-install-recommends spice-vdagent qemu-system-modules-spice
+sudo systemctl start spice-vdagent
+
+# if we ever want to resize
+# cat <<EOF |
+#! /bin/sh
+# xrandr --output $(xrandr | awk '/ connected/{print $1; exit; }') --auto
+SCRIPT
+
+$provision_software = <<-SCRIPT
+sudo NEEDRESTART_MODE=a apt install -y -qq --no-install-recommends vim-gtk3 git-lfs docker.io npm fzf xclip patchelf hexedit ghidra gdbserver ripgrep strace gdb feh peass golang-go xxd
 env CGO_ENABLED=0 go install -ldflags="-s -w" github.com/gokcehan/lf@latest
 curl -sOL https://github.com/ClementTsang/bottom/releases/download/0.9.6/bottom_0.9.6_amd64.deb --output-dir /tmp && sudo dpkg -i /tmp/bottom_0.9.6_amd64.deb
 pip install pwntools z3-solver ortools pycryptodome
+SCRIPT
 
+$provision_personal = <<-SCRIPT
 # CHANGE SHELL AND SETUP DOTFILES
 sudo chsh vagrant -s /bin/bash
 sudo localectl set-locale LANG=en_CA.UTF-8
@@ -19,7 +34,9 @@ sudo usermod -a -G docker vagrant
 ssh-keyscan github.com >> .ssh/known_hosts
 git clone git@github.com:3ximus/dotfiles --depth 1 --recurse-submodules -j4 /home/vagrant/dotfiles
 cd ~/dotfiles && ./install/config.sh --force --post --batch
+SCRIPT
 
+$provision_tweaks = <<-SCRIPT
 # SET DARK THEMES
 mkdir -p ~/.ghidra/.ghidra_11.0_DEV/ && echo "Theme=Class\:generic.theme.builtin.FlatDarkTheme" > ~/.ghidra/.ghidra_11.0_DEV/preferences
 mkdir -p ~/.BurpSuite && echo '{"user_options":{"display":{"user_interface":{"look_and_feel":"Dark"}},"misc":{"hotkeys":[{"action":"open_embedded_browser","hotkey":"Ctrl+P"}]}}}' > ~/.BurpSuite/UserConfigCommunity.json
@@ -39,7 +56,15 @@ Vagrant.configure("2") do |config|
     libvirt.cpus = 8
     libvirt.memory = 8192
     libvirt.memorybacking :access, :mode => "shared"
-    libvirt.video_type = 'qxl'
+
+    libvirt.graphics_type  = "spice"
+    libvirt.nic_model_type = "virtio"
+    libvirt.sound_type     = "ich6"
+    libvirt.video_type     = "qxl"
+    libvirt.random  :model => 'random'
+
+    libvirt.channel :type  => 'spicevmc', :target_name => 'com.redhat.spice.0',     :target_type => 'virtio'
+    libvirt.channel :type  => 'unix',     :target_name => 'org.qemu.guest_agent.0', :target_type => 'virtio'
   end
 
   config.vm.synced_folder "./", "/vagrant", type: "virtiofs"
@@ -56,5 +81,9 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 4444, host: 4444
   config.vm.network "forwarded_port", guest: 8000, host: 8000
 
-  config.vm.provision "shell", inline: $provision_script, privileged: false
+  config.vm.provision "shell", inline: $provision_init, privileged: false
+  config.vm.provision "shell", inline: $provision_display, privileged: false
+  config.vm.provision "shell", inline: $provision_software, privileged: false
+  config.vm.provision "shell", inline: $provision_personal, privileged: false
+  config.vm.provision "shell", inline: $provision_tweaks, privileged: false
 end
