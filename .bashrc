@@ -68,10 +68,10 @@ HISTSIZE=20000
 HISTFILESIZE=40000
 
 # remove duplicates from history file while preserving order
-# TODO in the future ignore this pattern:
-#  ^bb\|^cd\|^ls\|^mv\|^rm\|^kill\|^vim\|^gd\|^echo\|^mkdir\|^du\|^df\|^ll\|^lf\|^cat\|^\.\/\|^sudo cp
-tac $HISTFILE | awk '!x[$0]++' > /tmp/history_file && tac /tmp/history_file > $HISTFILE
-rm /tmp/history_file
+if [ -f $HISTFILE ] ; then
+    tac $HISTFILE | awk '!x[$0]++' > /tmp/history_file && tac /tmp/history_file > $HISTFILE
+    rm /tmp/history_file
+fi
 
 
 # ==================
