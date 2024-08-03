@@ -9,15 +9,14 @@ set previewer ~/.config/lf/preview.sh
 set scrolloff 5
 set ifs "\n"
 
-
 # -------------- Custom commands
 
 cmd open &{{
-  case $(file --mime-type -Lb "$f") in
-    text/*) lf -remote "send $id \$$EDITOR \"\$fx\"";;
-    application/*) lf -remote "send $id \$$EDITOR \"\$fx\"";;
-    *) for f in "$fx"; do $OPENER "$f" > /dev/null 2> /dev/null & done;;
-  esac
+  lf -remote "send $id \$$EDITOR \"\$fx\""
+}}
+
+cmd openwith ${{
+  lf -remote "send $id \$$1 \"\$fx\""
 }}
 
 cmd mkdir ${{
@@ -102,6 +101,7 @@ map <enter> shell
 map R bulkrename
 map <c-z> $ kill -STOP $PPID
 map Y clipboard
+map o push :openwith<space>
 
 # Movement
 map gh cd ~
