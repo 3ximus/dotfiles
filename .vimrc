@@ -348,7 +348,7 @@ nmap zF :call Fold(v:count)<CR>:set foldmethod=manual<CR>
 " display line endings and tabs
 nnoremap <F2> :<C-U>:execute 'setlocal lcs=tab:>-,trail:-,leadmultispace:\\|' . repeat('\ ', &sw -1) . ',eol:¬ list! list? '<CR>
 " toogle paste mode (to prevent indenting when pasting)
-set pastetoggle=<F3>
+set pastetoggle=<F4>
 
 " Idenfigy syntax highlight value under the cursor
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
@@ -606,7 +606,7 @@ let NERDTreeMapOpenSplit='s'
 let NERDTreeMapOpenVSplit='v'
 
 " context.vim
-nnoremap <F4> :<C-U>ContextToggle<CR>
+nnoremap <F3> :<C-U>ContextToggle<CR>
 
 " hunks mappings
 omap ih <Plug>(GitGutterTextObjectInnerPending)
@@ -640,6 +640,7 @@ function! CloseGstatus() abort
   endfor
 endfunction
 noremap <silent><leader>gs :Git\|12wincmd_<CR>
+noremap <silent><F8> :Git\|12wincmd_<CR>
 noremap <leader>gd :Gvdiffsplit!<CR>
 noremap <leader>gl :0Gclog<CR>
 noremap <leader>gL :G log --graph<CR>
