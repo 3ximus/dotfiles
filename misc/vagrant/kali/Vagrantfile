@@ -1,7 +1,6 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-
 $provision_init = <<-SCRIPT
 sudo apt update
 echo '* libraries/restart-without-asking boolean true' | sudo debconf-set-selections
@@ -12,8 +11,6 @@ sudo NEEDRESTART_MODE=a apt install -y -qq --no-install-recommends spice-vdagent
 sudo systemctl start spice-vdagent
 
 # if we ever want to resize
-# cat <<EOF |
-#! /bin/sh
 # xrandr --output $(xrandr | awk '/ connected/{print $1; exit; }') --auto
 SCRIPT
 
@@ -61,10 +58,10 @@ Vagrant.configure("2") do |config|
     libvirt.nic_model_type = "virtio"
     libvirt.sound_type     = "ich6"
     libvirt.video_type     = "qxl"
-    libvirt.random  :model => 'random'
 
     libvirt.channel :type  => 'spicevmc', :target_name => 'com.redhat.spice.0',     :target_type => 'virtio'
     libvirt.channel :type  => 'unix',     :target_name => 'org.qemu.guest_agent.0', :target_type => 'virtio'
+    libvirt.random  :model => 'random'
   end
 
   config.vm.synced_folder "./", "/vagrant", type: "virtiofs"
