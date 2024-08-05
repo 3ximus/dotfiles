@@ -1,11 +1,9 @@
 [user]
 	email = fabio4335@gmail.com
 	name = eximus
-	signingkey = /home/eximus/.ssh/id_rsa.pub
+	signingkey = D3A533A5142DAA0E
 [commit]
 	gpgsign = true
-[gpg]
-	format = ssh
 [push]
 	default = current
 	followTags = true
