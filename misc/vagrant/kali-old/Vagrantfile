@@ -1,16 +1,33 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+$provision_init = <<-SCRIPT
+sudo apt update
+echo '* libraries/restart-without-asking boolean true' | sudo debconf-set-selections
+SCRIPT
 
-END {
-  puts "Some software is still being installed through apt and might not yet be available when started."
-}
+$provision_display = <<-SCRIPT
+sudo NEEDRESTART_MODE=a apt install -y -qq --no-install-recommends spice-vdagent qemu-system-modules-spice
+sudo systemctl start spice-vdagent
+
+# if we ever want to resize
+# xrandr --output $(xrandr | awk '/ connected/{print $1; exit; }') --auto
+SCRIPT
+
+$provision_software = <<-SCRIPT
+sudo NEEDRESTART_MODE=a apt install -y -qq --no-install-recommends vim-gtk3 git-lfs docker.io npm fzf xclip patchelf hexedit ghidra gdbserver ripgrep strace gdb feh peass golang-go xxd
+env CGO_ENABLED=0 go install -ldflags="-s -w" github.com/gokcehan/lf@latest
+curl -sOL https://github.com/ClementTsang/bottom/releases/download/0.9.6/bottom_0.9.6_amd64.deb --output-dir /tmp && sudo dpkg -i /tmp/bottom_0.9.6_amd64.deb
+pip install pwntools z3-solver ortools pycryptodome
+SCRIPT
 
 $provision_personal = <<-SCRIPT
-sudo apt install -y ghidra &
-
+# CHANGE SHELL AND SETUP DOTFILES
+sudo chsh vagrant -s /bin/bash
 sudo localectl set-locale LANG=en_CA.UTF-8
-echo 'eval `dbus-launch --sh-syntax`' >> ~/.profile # Fix X11 sharing timeout for gnome windows
+# Fix X11 sharing timeout for gnome windows
+echo 'eval `dbus-launch --sh-syntax`' >> ~/.profile
+sudo usermod -a -G docker vagrant
 ssh-keyscan github.com >> .ssh/known_hosts
 git clone https://github.com/3ximus/dotfiles.git --depth 1 --recurse-submodules -j4 /home/vagrant/dotfiles
 cd ~/dotfiles && ./install/config.sh --force --post --batch
@@ -22,29 +39,15 @@ mkdir -p ~/.ghidra/.ghidra_11.0_DEV/ && echo "Theme=Class\:generic.theme.builtin
 mkdir -p ~/.BurpSuite && echo '{"user_options":{"display":{"user_interface":{"look_and_feel":"Dark"}},"misc":{"hotkeys":[{"action":"open_embedded_browser","hotkey":"Ctrl+P"}]}}}' > ~/.BurpSuite/UserConfigCommunity.json
 
 # OTHER SMALL TWEAKS TO SIMPLIFY LAUNCHING PROCESS
-[[ -d /vagrant/desk ]] && ln -s /vagrant/desk ~/desk
-[[ -d /vagrant/ctf ]] && ln -s /vagrant/ctf ~/ctf
-[[ -d /vagrant/vpn ]] && ln -s /vagrant/ctf ~/vpn
+ln -s /vagrant ~/vagrant
 sudo gunzip /usr/share/wordlists/rockyou.txt.gz
 echo | sudo tee /etc/motd
 SCRIPT
 
-$post_up_message = <<MSG
-
-                 _ \\                _ \\
-                |   |   __|   __|  |   |   __|  __|
-                |   |  |     |     |   |  |   \\__ \\
-               \\___/  _|    _|    \\___/  _|   ____/
-
-                                         kali-2024.2
-
-MSG
-
-
 Vagrant.configure("2") do |config|
-  config.vm.box = "0rr0rs/kali"
-  config.vm.define "kali"
-  config.vm.box_check_update = true
+  config.vm.box = "kalilinux/rolling"
+  config.vm.define "kali-test"
+  # config.vm.box_check_update = false
 
   config.vm.provider 'libvirt' do |libvirt|
     libvirt.cpus = 8
@@ -63,13 +66,21 @@ Vagrant.configure("2") do |config|
 
   config.vm.synced_folder "./", "/vagrant", type: "virtiofs"
 
+  # this prevents new ssh key from being generated for this box but shouldn't be needed anymore
+  # there was a bug where the private key was missing a new line at the end of the file
+  # config.ssh.insert_key = false
+
+  # Forward X
   config.ssh.forward_agent = true
   config.ssh.forward_x11 = true
 
+  # Open ports
   config.vm.network "forwarded_port", guest: 4444, host: 4444
   config.vm.network "forwarded_port", guest: 8000, host: 8000
 
+  config.vm.provision "shell", inline: $provision_init, privileged: false
+  config.vm.provision "shell", inline: $provision_display, privileged: false
+  config.vm.provision "shell", inline: $provision_software, privileged: false
   config.vm.provision "shell", inline: $provision_personal, privileged: false
   config.vm.provision "shell", inline: $provision_tweaks, privileged: false
 end
-

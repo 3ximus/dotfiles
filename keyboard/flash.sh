@@ -2,6 +2,11 @@
 
 # Script to flash my corne
 
+if [[ ! -d keyboard ]] ; then
+	echo "Run from parent directory './install/flash.sh'"
+	exit
+fi
+
 # ask for sudo password first
 sudo echo Sleeping for 5 seconds. Hit the reset button now!
 sleep 5
