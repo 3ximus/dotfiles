@@ -11,16 +11,19 @@
 # - $FZF_ALT_J_COMMAND
 # - $FZF_ALT_J_OPTS
 
-# NOTE This keybindings were tweaked from the original file in https://github.com/junegunn/fzf/blob/master/shell/key-bindings.bash by me (3ximus)
-
-# Key bindings
-# ------------
 __fzf_select__() {
-  local cmd="${FZF_CTRL_T_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
-    -o -type f -print \
-    -o -type d -print \
-    -o -type l -print 2> /dev/null | cut -b3-"}"
-  eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-60%} --reverse $FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS" $(__fzfcmd) -m "$@" | while read -r item; do
+  local path="${1:-.}"
+  local query=""
+
+  if [ ! -d ${path/#\~/$HOME} ] ; then
+    query=${path##*/}
+    path=${path%/*}
+  fi
+
+  local cmd="${FZF_CTRL_T_COMMAND:-"command find -L ${path} \
+      -name .git -prune -o -name .hg -prune -o -name .svn -prune -o \\( -type d -o -type f -o -type l \\) \
+      -a -not -path ${path} -print 2> /dev/null"}"
+  eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-60%} --reverse $FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS" $(__fzfcmd) --query "$query" | while read -r item; do
     printf '%q ' "$item"
   done
   echo
@@ -33,13 +36,14 @@ if [[ $- =~ i ]]; then
     }
 
     __fzf_file_widget__() {
-      local prefix=${READLINE_LINE:0:$READLINE_POINT}
-      local token=$(sed 's/.* //' <<< "$prefix")
-      [ ${#token} -gt 0 ] && prefix=${prefix::-${#token}}
-
-      local selected="$(__fzf_select__ --query=$token)"
-      READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}$selected${READLINE_LINE:$READLINE_POINT}"
-      READLINE_POINT=$(( READLINE_POINT + ${#selected} ))
+      local line=${READLINE_LINE:0:$READLINE_POINT}
+      local path=${line/* /}
+      [ ${#path} -gt 0 ] && line=${line::-${#path}}
+      local selected="$(__fzf_select__ $path)"
+      if [[ -n $selected ]]; then
+        READLINE_LINE="${line}$selected${READLINE_LINE:$READLINE_POINT}"
+        READLINE_POINT=$(( READLINE_POINT + ${#selected} ))
+      fi
     }
 
     __fzf_cd__() {
