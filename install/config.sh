@@ -102,15 +102,16 @@ copy_files() {
 run_post_actions() {
   cd ${DESTINATION_PATH}/.bash/ble.sh
   git checkout master
-  make
+  make >/dev/null &
   if hash vim 2>/dev/null ; then
     echo "Installing vim plugins..."
-    vim +'PlugInstall --sync' +qa >&/dev/null
+    vim +'PlugInstall --sync' +qa >&/dev/null &
   fi
   if hash tmux 2>/dev/null && test -f ~/.tmux/tpm/bin/install_plugins ; then
     echo "Installing tmux plugins..."
-    ~/.tmux/tpm/bin/install_plugins
+    ~/.tmux/tpm/bin/install_plugins &
   fi
+  wait
 }
 
 # ==============================================
