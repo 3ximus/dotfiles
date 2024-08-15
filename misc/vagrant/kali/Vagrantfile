@@ -1,11 +1,6 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-
-END {
-  puts "Some software is still being installed through apt and might not yet be available when started."
-}
-
 $provision_personal = <<-SCRIPT
 sudo apt install -y ghidra &
 
@@ -27,19 +22,8 @@ mkdir -p ~/.BurpSuite && echo '{"user_options":{"display":{"user_interface":{"lo
 [[ -d /vagrant/vpn ]] && ln -s /vagrant/ctf ~/vpn
 sudo gunzip /usr/share/wordlists/rockyou.txt.gz
 echo | sudo tee /etc/motd
+echo -e "\nSome software is still being installed through apt and might not yet be available when started."
 SCRIPT
-
-$post_up_message = <<MSG
-
-                 _ \\                _ \\
-                |   |   __|   __|  |   |   __|  __|
-                |   |  |     |     |   |  |   \\__ \\
-               \\___/  _|    _|    \\___/  _|   ____/
-
-                                         kali-2024.2
-
-MSG
-
 
 Vagrant.configure("2") do |config|
   config.vm.box = "0rr0rs/kali"
