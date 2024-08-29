@@ -10,7 +10,7 @@ CursorShape=0
 CustomCursorColor=255,255,255
 
 [General]
-Command=/bin/tmux new-session -A -s 0
+Command=/bin/tmux new-session -A -s session
 Directory=
 Icon=terminix
 Name=MyProfile

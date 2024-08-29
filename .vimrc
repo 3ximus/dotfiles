@@ -108,7 +108,7 @@ Plug 'junegunn/vim-peekaboo'
 Plug 'jeetsukumaran/vim-markology'
 Plug 'wellle/context.vim', { 'on': 'ContextToggle' }
 Plug 'markonm/traces.vim'
-Plug 'ronakg/quickr-preview.vim'
+" Plug 'ronakg/quickr-preview.vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'benknoble/vim-auto-origami'
