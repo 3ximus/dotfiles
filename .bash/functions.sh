@@ -193,7 +193,7 @@ history-clean() { # {{{
 
 ssh.localhost.run() { # {{{
 	local PORT=${1:-8000}
-	echo Forwarding port on localhost: ${PORT}
+	echo -e "\033[1;33mForwarding port on localhost: ${PORT}\033[m"
 	ssh -R 80:localhost:${PORT} localhost.run -- --no-inject-http-proxy-headers 2>&1 | grep https.*life
 } # }}}
 
