@@ -6,7 +6,7 @@ clipboard-history(){
 	done
 }
 
-selected=$(clipboard-history | rofi -dmenu -format i -i -p "clipboard")
+selected=$(clipboard-history | /usr/bin/rofi -dmenu -format i -i -p "clipboard")
 if [ $? == 0 ] ; then
 	qdbus org.kde.plasmashell /klipper org.kde.klipper.klipper.getClipboardHistoryItem $selected \
 		| head -c -1 \
