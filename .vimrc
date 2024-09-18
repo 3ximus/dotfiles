@@ -101,7 +101,7 @@ Plug '3ximus/gruvbox'
 " BASE
 Plug '3ximus/vim-airline' " my fork switches position of the tabs and splits on tabline
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-Plug '3ximus/fzf' " use my fork to allow passing g:fzf_no_term
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
 Plug 'junegunn/vim-peekaboo'
@@ -451,17 +451,10 @@ let g:startify_fortune_use_unicode = 1
       " \ '                ⢻⣿⣿⣄   ⠈⠻⣿⣿⣿⣷⣿⣿⣿⣿⣿⡟ ⠫⢿⣿⡆     ',
       " \ '                 ⠻⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣀⣤⣾⡿⠃     ',
       " \]
-let g:ascii = [
-      \ '',
-      \ '',
-      \ '                     　　／)／)     ',
-      \ '                     　 / ⌒  ヽ     ',
-      \ '                       ｜_  |/＼  ',
-      \ '                       (〇～〇| ／  ',
-      \ '                       /　　　|<    ',
-      \]
+" let g:startify_custom_header =
+"       \ 'startify#pad(g:ascii + startify#fortune#boxed())'
 let g:startify_custom_header =
-      \ 'startify#pad(g:ascii + startify#fortune#boxed())'
+      \ 'startify#pad(startify#fortune#boxed())'
 
 function! s:gitModified()
     let files = systemlist('git ls-files -m 2>/dev/null')
@@ -549,9 +542,6 @@ let g:markology_include='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 let g:VimuxPromptString = "$ "
 let g:VimuxExpandCommand = 1
 " let g:VimuxTaskAutodetect = []
-
-" fzf-checkout
-let g:fzf_checkout_git_options = '--sort=-committerdate'
 
 "Python syntax highlight
 let g:python_highlight_all = 1
@@ -843,10 +833,7 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
   if exists('$TMUX')
     let g:fzf_layout = { 'tmux': '-p90%,70%' }
   else
-    " Causes airline gruvbox bug
-    " let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 , 'border': 'sharp'} }
-    let g:fzf_no_term = 1
-    let g:fzf_layout = { 'down': '30%' }
+    let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 , 'border': 'sharp'} }
   endif
 
   let g:fzf_history_dir = '~/.local/share/fzf-history'
@@ -887,7 +874,8 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
   nmap <leader>M :FZFMaps<CR>
   nmap <leader>m :FZFMarks<CR>
 
-  " from fzf-checkout
+  " fzf-checkout
+  let g:fzf_checkout_git_options = '--sort=-committerdate'
   noremap <leader>gb :FZFGBranches<CR>
   noremap <leader>gC :FZFCommits --pretty=format:'\%C(yellow)\%h\%Creset \%C(auto)\%d\%Creset \%s (\%Cblue\%an\%Creset, \%cr)'<CR>
   noremap <leader>gc :FZFBCommits --pretty=format:'%C(yellow)%h%Creset %C(auto)%d%Creset %s (%Cblue%an%Creset, %cr)'<CR>
@@ -897,6 +885,7 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
     noremap <leader>gv :FZFGitEditBranchFile<CR>
     noremap <leader>gV :FZFGitEditCommitFile<CR>
   endif
+
 endif
 " }}}
 

@@ -40,7 +40,7 @@ class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     if args.verbose > 0:
       print(f'\x1b[1;34mREQUEST #{REQUEST_COUNT}\x1b[m')
       print(self.headers)
-    if args.verbose > 1:
+    if args.verbose > 1 and hasattr(self, 'data'):
       try:
         print(self.data.decode())
       except UnicodeDecodeError:
