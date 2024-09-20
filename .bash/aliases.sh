@@ -73,7 +73,7 @@ alias gd='git diff'
 alias load-keychain='[[ -f "${HOME}/.ssh/id_rsa" ]] && keychain "${HOME}/.ssh/id_rsa" --quiet && source "${HOME}/.keychain/${HOSTNAME}-sh"'
 
 # i keep forgetting this...
-alias man-pipes='echo "Generic form #>/dev/null (# is 1 by default) or #>&# to send one fd to another"; echo "  2>&-        ----> #>&-  (close fd)"; echo "  |&          ----> 2>&1 |"; echo "  >&/dev/null ----> 1>/dev/null 2>&1"'
+alias man-pipes='echo "Generic form #>/dev/null (# is 1 by default) or #>&# to send one fd to another"; echo "  2>&-        ----> #>&-  (close fd)"; echo "  |&          ----> 2>&1 |"; echo "  &>/dev/null ----> 1>/dev/null 2>&1"'
 
 # wget to download directory, use -P to specify output directory
 # -k option might give memory issues when continuing (-c) the download of large files but without it wget wont check for partially downlaoded files and will assume they are downloaded if they exist
