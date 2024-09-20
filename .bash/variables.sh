@@ -7,7 +7,7 @@ export EDITOR=vim
 export COLORTERM=truecolor
 
 # add customs scripts
-export PATH=$PATH:$HOME/.bash/scripts
+export PATH=$PATH:$HOME/.bash/scripts:$HOME/.local/bin
 
 # go
 command -v go >/dev/null && export PATH=$PATH:$HOME/go/bin
