@@ -45,17 +45,6 @@ alias cout='xclip -r -out -selection clipboard'
 alias list-open-ports='sudo netstat -tulpn | grep LISTEN'
 alias ipad="ip -brief -f inet address | fzf +m --reverse --height 10 | awk '{gsub(\"/.*\",\"\",\$3);print\$3}' | tee /dev/tty | xclip -r -in -selection clipboard"
 
-# list vm images
-alias vml="virsh vol-list --pool default --details | tail -n +3 | head -n-1 | awk 'BEGIN {print \"Name Allocation Capacity\"}{print\$1\" \"\$6\".\"\$7\" \"\$4\".\"\$5}' | column -t"
-# connect to a qemu virtual machine console
-alias vmv="virsh list --name | head -n-1 | fzf --prompt='View vm > ' | xargs virt-manager -c qemu:///system --show-domain-console"
-# delete qemu image
-alias vmd="virsh vol-list --pool default --details | tail -n +3 | head -n-1 | awk '{print\$1\" \"\$6\" \"\$7}' | column -t | fzf --prompt='Delete image > ' | awk '{print\$1}' | xargs virsh vol-delete --pool default"
-
-# URL encoding-decoding
-alias urlencode='python3 -c "import sys,urllib.parse;print(urllib.parse.quote(sys.stdin.read()));"'
-alias urldecode='python3 -c "import sys,urllib.parse;print(urllib.parse.unquote(sys.stdin.read()));"'
-
 # git, the quoting hack is needed to use nested single quotes
 alias git-lfs='git rev-list --objects --all | grep "$(git verify-pack -v .git/objects/pack/*.idx | sort -k 3 -n | tail -10 | awk '"'"'{print$1}'"'"')"'
 alias gs='git status'
@@ -68,6 +57,23 @@ alias ga='git add .'
 alias gl='git lol | less' # because my own alias is too much typing
 alias gla='git lol --all | less'
 alias gd='git diff'
+
+# list vm images
+alias vml="virsh vol-list --pool default --details | tail -n +3 | head -n-1 | awk 'BEGIN {print \"Name Allocation Capacity\"}{print\$1\" \"\$6\".\"\$7\" \"\$4\".\"\$5}' | column -t"
+# connect to a qemu virtual machine console
+alias vmv="virsh list --name | head -n-1 | fzf --prompt='View vm > ' | xargs virt-manager -c qemu:///system --show-domain-console"
+# delete qemu image
+alias vmd="virsh vol-list --pool default --details | tail -n +3 | head -n-1 | awk '{print\$1\" \"\$6\" \"\$7}' | column -t | fzf --prompt='Delete image > ' | awk '{print\$1}' | xargs virsh vol-delete --pool default"
+
+# URL encoding-decoding
+alias urlencode='python3 -c "import sys,urllib.parse;print(urllib.parse.quote(sys.stdin.read()));"'
+alias urldecode='python3 -c "import sys,urllib.parse;print(urllib.parse.unquote(sys.stdin.read()));"'
+
+# vagrant alias
+alias vu="vagrant up"
+alias vs="vagrant status"
+alias vssh="vagrant ssh"
+alias vh="vagrant halt"
 
 # SSH
 alias load-keychain='[[ -f "${HOME}/.ssh/id_rsa" ]] && keychain "${HOME}/.ssh/id_rsa" --quiet && source "${HOME}/.keychain/${HOSTNAME}-sh"'
