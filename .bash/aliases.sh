@@ -72,7 +72,7 @@ alias urldecode='python3 -c "import sys,urllib.parse;print(urllib.parse.unquote(
 # vagrant alias
 alias vu="vagrant up"
 alias vs="vagrant status"
-alias vssh="vagrant ssh"
+alias vsh="vagrant ssh"
 alias vh="vagrant halt"
 
 # SSH
