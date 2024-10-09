@@ -38,7 +38,7 @@ class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     global REQUEST_COUNT
     REQUEST_COUNT += 1
     if args.verbose > 0:
-      print(f'\x1b[1;34mREQUEST #{REQUEST_COUNT}\x1b[m')
+      print(f'+ \x1b[1;34mREQUEST #{REQUEST_COUNT}\x1b[m')
       print(self.headers)
     if args.verbose > 1 and hasattr(self, 'data'):
       try:
@@ -52,7 +52,7 @@ class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
       os.mkdir(outdir)
 
     with tempfile.NamedTemporaryFile(prefix="", dir=outdir, delete=False) as ofile:
-      print(f'\x1b[1;34mSaving #{REQUEST_COUNT} > {ofile.name}\x1b[m')
+      print(f'+ \x1b[1;34msaving #{REQUEST_COUNT} > {ofile.name}\x1b[m')
       ofile.write(self.data)
 
 if __name__ == '__main__':
@@ -72,12 +72,12 @@ if __name__ == '__main__':
       self.RequestHandlerClass(request, client_address,
                                self, directory=args.directory)
   httpd = Server(('', args.port), HTTPRequestHandler)
-  print(f'Server running at http://localhost:{args.port}/')
+  print(f'+ server running at http://localhost:{args.port}/')
   if args.directory and args.output:
-    print(f'Saving post data to: {os.path.join(args.directory, args.output)}')
+    print(f'+ saving post data to: {os.path.join(args.directory, args.output)}')
 
   try:
     httpd.serve_forever()
   except KeyboardInterrupt:
-    print(' Bye')
+    print('bye')
     sys.exit()
