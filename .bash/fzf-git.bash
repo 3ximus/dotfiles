@@ -11,7 +11,7 @@ glf() {
 	git log --oneline --graph \
 		--pretty=format:'%C(yellow)%h%Creset %C(auto)%d%Creset %s (%Cblue%an%Creset, %cr)' \
 		--date-order --color=always $* \
-		| fzf --preview="$cmd" --ansi --no-sort --no-multi --reverse \
+		| command fzf --preview="$cmd" --ansi --no-sort --no-multi --reverse \
 		--tiebreak=index \
 		--min-height 20 \
 		--bind="enter:execute($cmd | LESS='-r' less)"
@@ -25,7 +25,7 @@ glfa() {
 	git log --all --oneline --graph \
 		--pretty=format:'%C(yellow)%h%Creset %C(auto)%d%Creset %s (%Cblue%an%Creset, %cr)' \
 		--date-order --color=always $* \
-		| fzf --preview="$cmd" --ansi --no-sort --no-multi --reverse \
+		| command fzf --preview="$cmd" --ansi --no-sort --no-multi --reverse \
 		--tiebreak=index \
 		--no-info \
 		--min-height 20 \

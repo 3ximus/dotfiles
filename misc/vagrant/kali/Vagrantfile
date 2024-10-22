@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 $provision_personal = <<-SCRIPT
-sudo apt install -y ghidra &
+sudo apt update && sudo apt install -y ghidra &
 
 sudo localectl set-locale LANG=en_CA.UTF-8
 echo 'eval `dbus-launch --sh-syntax`' >> ~/.profile # Fix X11 sharing timeout for gnome windows
@@ -19,7 +19,7 @@ mkdir -p ~/.BurpSuite && echo '{"user_options":{"display":{"user_interface":{"lo
 # OTHER SMALL TWEAKS TO SIMPLIFY LAUNCHING PROCESS
 [[ -d /vagrant/desk ]] && ln -s /vagrant/desk ~/desk
 [[ -d /vagrant/ctf ]] && ln -s /vagrant/ctf ~/ctf
-[[ -d /vagrant/vpn ]] && ln -s /vagrant/ctf ~/vpn
+[[ -d /vagrant/vpn ]] && ln -s /vagrant/vpn ~/vpn
 sudo gunzip /usr/share/wordlists/rockyou.txt.gz
 echo | sudo tee /etc/motd
 echo -e "\nSome software is still being installed through apt and might not yet be available when started."
@@ -28,6 +28,7 @@ SCRIPT
 Vagrant.configure("2") do |config|
   config.vm.box = "0rr0rs/kali"
   config.vm.define "kali"
+  config.vm.hostname = "kali"
   config.vm.box_check_update = true
 
   config.vm.provider 'libvirt' do |libvirt|
@@ -46,6 +47,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.synced_folder "./", "/vagrant", type: "virtiofs"
+  config.vm.synced_folder "~/downloads", "/home/vagrant/downloads", type: "virtiofs"
 
   config.ssh.forward_agent = true
   config.ssh.forward_x11 = true
