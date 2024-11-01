@@ -107,7 +107,7 @@ Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
 Plug 'junegunn/vim-peekaboo'
 Plug 'jeetsukumaran/vim-markology'
 Plug 'wellle/context.vim', { 'on': 'ContextToggle' }
-Plug 'markonm/traces.vim'
+Plug 'markonm/traces.vim' " highlight patterns and ranges in command
 " Plug 'ronakg/quickr-preview.vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
@@ -121,10 +121,7 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tomtom/tcomment_vim'
-" s motions
 Plug 'justinmk/vim-sneak'
-
-" highlight patterns and ranges in command
 Plug 'AndrewRadev/linediff.vim'
 Plug 'fidian/hexmode'
 
@@ -148,8 +145,6 @@ endif
 let g:polyglot_disabled = ["sensible"]
 " Plug 'sheerun/vim-polyglot' " hasn't been updated in a while and we need a fix
 Plug '00dani/vim-polyglot', { 'branch' : 'feature/fix-build' }
-" Support multiple emmet for vue files
-Plug 'leafOfTree/vim-vue-plugin', { 'for': 'vue' }
 Plug 'mattn/emmet-vim'
 
 " DATABASE
@@ -366,7 +361,12 @@ nnoremap <leader>yy :w !xclip -selection clipboard<CR><CR>
 nmap <leader>x :bp<bar>bd #<CR>
 
 " Clear search highlight and close preview window
-nnoremap <silent> <backspace> :noh<CR>:pc<CR>:cclose<CR>:helpclose<CR>:call CloseGstatus()<CR>:call CocCloseOutline()<CR>:call popup_clear(1)<CR>
+if has('nvim')
+  nnoremap <silent> <backspace> :noh<CR>:pc<CR>:cclose<CR>:helpclose<CR>:call CloseGstatus()<CR>:call CocCloseOutline()<CR>
+else
+  nnoremap <silent> <backspace> :noh<CR>:pc<CR>:cclose<CR>:helpclose<CR>:call CloseGstatus()<CR>:call CocCloseOutline()<CR>:call popup_clear(1)<CR>
+endif
+
 
 " remove trailing whitespaces
 nmap <leader>s :call StripTrailingWhitespace()<CR>
@@ -548,15 +548,6 @@ let g:python_highlight_all = 1
 let g:python_highlight_indent_errors = 1
 let g:python_highlight_space_errors = 0
 let g:python_highlight_operators = 0
-
-" vim-vue-plugin
-let g:vim_vue_plugin_config = {
-  \'syntax': {
-  \  'template': ['html'],
-  \  'script': ['typescript', 'javascript'],
-  \  'style': ['scss'],
-  \},
-\}
 
 " vim-go (with vim-polyglot)
 let g:go_highlight_function_parameters = 1

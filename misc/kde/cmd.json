@@ -1,0 +1,22 @@
+[
+    {
+        "command": "loginctl lock-session",
+        "name": "Lock Screen"
+    },
+    {
+        "command": "sudo systemctl restart plexmediaserver.service",
+        "name": "Restart Plex"
+    },
+    {
+        "command": "loginctl unlock-session",
+        "name": "Unlock Screen"
+    },
+    {
+        "command": "xdotool key Right",
+        "name": "Right Arrow"
+    },
+    {
+        "command": "xdotool key Left",
+        "name": "Left Arrow"
+    }
+]

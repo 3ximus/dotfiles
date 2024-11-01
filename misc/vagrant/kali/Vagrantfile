@@ -2,9 +2,9 @@
 # vi: set ft=ruby :
 
 $provision_personal = <<-SCRIPT
-sudo apt update && sudo apt install -y ghidra &
+sudo apt update
+sudo apt install -y ghidra &
 
-sudo localectl set-locale LANG=en_CA.UTF-8
 echo 'eval `dbus-launch --sh-syntax`' >> ~/.profile # Fix X11 sharing timeout for gnome windows
 ssh-keyscan github.com >> .ssh/known_hosts
 git clone https://github.com/3ximus/dotfiles.git --depth 1 --recurse-submodules -j4 /home/vagrant/dotfiles
@@ -22,6 +22,11 @@ mkdir -p ~/.BurpSuite && echo '{"user_options":{"display":{"user_interface":{"lo
 [[ -d /vagrant/vpn ]] && ln -s /vagrant/vpn ~/vpn
 sudo gunzip /usr/share/wordlists/rockyou.txt.gz
 echo | sudo tee /etc/motd
+cat >~/.fzf-marks <<EOF
+desk : /home/vagrant/desk
+ctf : /home/vagrant/ctf
+cheat-sheets : /vagrant/cheat-sheets
+EOF
 echo -e "\nSome software is still being installed through apt and might not yet be available when started."
 SCRIPT
 
