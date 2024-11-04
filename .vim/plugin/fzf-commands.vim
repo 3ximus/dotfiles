@@ -54,4 +54,4 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
         \ 'tmux': '-p60%,40%'})
   " }}}
 
-  endif
+endif

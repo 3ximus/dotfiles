@@ -101,6 +101,7 @@ Plug '3ximus/gruvbox'
 " BASE
 Plug '3ximus/vim-airline' " my fork switches position of the tabs and splits on tabline
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
@@ -124,9 +125,9 @@ Plug 'tomtom/tcomment_vim'
 Plug 'justinmk/vim-sneak'
 Plug 'AndrewRadev/linediff.vim'
 Plug 'fidian/hexmode'
+Plug 'lambdalisue/vim-suda', { 'on': ['SudaRead', 'SudaWrite'] }
 
 " GIT
-Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'stsewd/fzf-checkout.vim', { 'on': 'FZFGBranches' }
@@ -151,6 +152,11 @@ Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-dadbod', { 'on': 'DBUI' }
 Plug 'kristijanhusak/vim-dadbod-ui', { 'on': 'DBUI' }
 Plug 'jidn/vim-dbml', { 'for': 'dbml' }
+
+if has('nvim')
+  " Plug 'mfussenegger/nvim-dap'
+  Plug 'stevearc/oil.nvim'
+endif
 
 " OTHER
 Plug 'mhinz/vim-startify'
@@ -585,6 +591,9 @@ map <C-f> :NERDTreeFind<CR>
 nnoremap U :GundoToggle<CR>
 let NERDTreeMapOpenSplit='s'
 let NERDTreeMapOpenVSplit='v'
+"nertree git
+let g:NERDTreeGitStatusMapNextHunk=']h'
+let g:NERDTreeGitStatusMapPrevHunk='[h'
 
 " context.vim
 nnoremap <F3> :<C-U>ContextToggle<CR>
@@ -600,10 +609,6 @@ nmap <leader>hv <Plug>(GitGutterPreviewHunk)
 nmap ]h <Plug>(GitGutterNextHunk)
 nmap [h <Plug>(GitGutterPrevHunk)
 nmap <leader>hf :GitGutterFold<CR>
-
-"nertree git
-let g:NERDTreeGitStatusMapNextHunk=']h'
-let g:NERDTreeGitStatusMapPrevHunk='[h'
 
 "vim sneak
 map f <Plug>Sneak_f
