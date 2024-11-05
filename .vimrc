@@ -99,7 +99,13 @@ call plug#begin('~/.vim/plugged')
 Plug '3ximus/gruvbox'
 
 " BASE
-Plug '3ximus/vim-airline' " my fork switches position of the tabs and splits on tabline
+if has('nvim')
+  Plug 'stevearc/oil.nvim'
+  Plug 'nvim-lualine/lualine.nvim'
+else
+  Plug '3ximus/vim-airline' " my fork switches position of the tabs and splits on tabline
+endif
+
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -153,24 +159,14 @@ Plug 'tpope/vim-dadbod', { 'on': 'DBUI' }
 Plug 'kristijanhusak/vim-dadbod-ui', { 'on': 'DBUI' }
 Plug 'jidn/vim-dbml', { 'for': 'dbml' }
 
-if has('nvim')
-  " Plug 'mfussenegger/nvim-dap'
-  Plug 'stevearc/oil.nvim'
-endif
-
 " OTHER
 Plug 'mhinz/vim-startify'
-"NerdFont icons in NerdTree and startify
 Plug 'SarveshMD/vim-devicons'
 Plug 'vim-test/vim-test', { 'on': ['TestNearest', 'TestFile'] }
 
-" Profiler
 if v:version >= 800
-  Plug 'dstein64/vim-startuptime'
+  Plug 'dstein64/vim-startuptime' " Profiler
 endif
-
-" vim go
-" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 call plug#end()
 

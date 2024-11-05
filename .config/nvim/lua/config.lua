@@ -1,14 +1,14 @@
 -- NVIM CONFIG
 
 -- Safelly require modules, if they don't exist nothing happens
-local function prequire(m) 
-  local ok, err = pcall(require, m) 
+local function prequire(m)
+  local ok, err = pcall(require, m)
   if not ok then return nil, err end
   return err
 end
 
 local oil = prequire("oil")
-if oil then 
+if oil then
   oil.setup({
       columns = {
         "icon",
@@ -18,6 +18,8 @@ if oil then
       },
     })
 end
+
+prequire("_lualine")
 
 -- require'nvim-treesitter.configs'.setup {
 --   highlight = { enable = true },
