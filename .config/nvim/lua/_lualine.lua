@@ -101,5 +101,5 @@ require("lualine").setup({
       lualine_y = {},
       lualine_z = {{ 'tabs', mode = 2, symbols = { modified = '+', } }}
     },
-    extensions = {'quickfix', 'oil', 'fugitive'}
+    extensions = {'quickfix', 'oil', 'fugitive', 'nerdtree'}
   })
