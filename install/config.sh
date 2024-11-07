@@ -11,7 +11,7 @@ if [[ ! -d "$PWD/.vim" ]] ; then
 fi
 
 DEFAULT_LIST=".bashrc .vimrc .gdbinit .gitconfig .inputrc .tmux.conf .psqlrc .radare2rc .bash .vim .tmux .ipython .gdbinit.d"
-DEFAULT_CONF_LIST="lf pgcli htop bottom"
+DEFAULT_CONF_LIST="lf pgcli htop bottom nvim"
 
 # will be appended by all the grab functions and contain all the path files
 # all the the files in this variable are in the format origin::destination,

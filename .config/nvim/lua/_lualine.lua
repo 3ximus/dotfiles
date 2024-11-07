@@ -30,12 +30,12 @@ local gruvbox_theme = {
     c = { bg = colors.black, fg = colors.lightgray },
   },
   replace = {
-    a = { bg = colors.aqua, fg = colors.black, gui = 'bold' },
+    a = { bg = colors.green, fg = colors.black, gui = 'bold' },
     b = { bg = colors.darkgray, fg = colors.white },
     c = { bg = colors.black, fg = colors.lightgray },
   },
   command = {
-    a = { bg = colors.green, fg = colors.black, gui = 'bold' },
+    a = { bg = colors.aqua, fg = colors.black, gui = 'bold' },
     b = { bg = colors.darkgray, fg = colors.white },
     c = { bg = colors.black, fg = colors.lightgray },
   },
