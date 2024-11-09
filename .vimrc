@@ -520,7 +520,6 @@ let g:quickr_preview_position = 'above'
 let g:quickr_preview_modifiable = 1
 
 " context.vim
-let g:context_presenter = 'vim-popup'
 let g:context_add_mappings = 0
 let g:context_enabled = 0
 
