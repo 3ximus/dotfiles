@@ -66,7 +66,7 @@ set wildignorecase
 
 " enable mouse for resizing window splits
 set mouse=n
-set guicursor=""
+set guicursor=a:blinkon0
 if !has('nvim')
   set ttymouse=xterm2
 endif
