@@ -111,7 +111,12 @@ if __name__ == '__main__':
       self.RequestHandlerClass(request, client_address,
                                self, directory=args.directory)
   COLORED_OUTPUT = args.color or sys.stdout.isatty()
-  httpd = Server(('', args.port), HTTPRequestHandler)
+  try: 
+    httpd = Server(('', args.port), HTTPRequestHandler)
+  except PermissionError as exception:
+    if os.geteuid() != 0:
+      os.execvp("sudo", ["sudo", sys.executable] + sys.argv)
+    raise exception
   print(f'+ http server running: \033[1;32mhttp://localhost:{args.port}/\033[m')
   if args.directory and args.output:
     print(f'+ saving post data to: {os.path.join(args.directory, args.output)}')
