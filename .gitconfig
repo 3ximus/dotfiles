@@ -39,12 +39,12 @@
 [delta]
 	features = line-numbers decorations
 	syntax-theme = none
-	minus-style = bold 234 1
+	minus-style = bold 1
 	minus-emph-style = bold 9 reverse
-	minus-non-emph-style = bold 234 1
-	plus-style = bold 234 2
+	minus-non-emph-style = bold 1
+	plus-style = bold 2
 	plus-emph-style = bold 10 reverse
-	plus-non-emph-style = bold 234 2
+	plus-non-emph-style = bold 2
 	whitespace-error-style = 22 reverse
 [interactive]
 	diffFilter = delta --color-only

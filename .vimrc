@@ -523,7 +523,7 @@ let g:quickr_preview_modifiable = 1
 let g:context_add_mappings = 0
 let g:context_enabled = 0
 
-"Auto Origami (auto manage fold columns)
+"auto-origami (auto manage fold columns)
 if exists('&belloff') && &rtp =~ 'vim-auto-origami' && glob("~/.vim/plugged/vim-auto-origami/plugin/auto_origami.vim")!=#""
   augroup auto_origami
     au!
@@ -532,10 +532,20 @@ if exists('&belloff') && &rtp =~ 'vim-auto-origami' && glob("~/.vim/plugged/vim-
   let g:auto_origami_foldcolumn = 1
 endif
 
-" Gitgutter
+" gitgutter
 let g:gitgutter_sign_added = '┃'
 let g:gitgutter_sign_modified = '┃'
 let g:gitgutter_sign_modified_removed = '┻'
+let g:gitgutter_preview_win_floating = 1
+let g:gitgutter_floating_window_options = {
+      \ 'relative': 'cursor',
+      \ 'row': 1,
+      \ 'col': 0,
+      \ 'width': 42,
+      \ 'height': &previewheight,
+      \ 'style': 'minimal',
+      \ 'border': 'single'
+      \ }
 
 " Gundo
 if has('python3')
@@ -599,7 +609,7 @@ let g:NERDTreeGitStatusMapPrevHunk='[h'
 " context.vim
 nnoremap <F3> :<C-U>ContextToggle<CR>
 
-" hunks mappings
+" gitgutter mappings
 omap ih <Plug>(GitGutterTextObjectInnerPending)
 omap ah <Plug>(GitGutterTextObjectOuterPending)
 xmap ih <Plug>(GitGutterTextObjectInnerVisual)
