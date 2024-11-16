@@ -36,7 +36,7 @@ alias grep-bin='grep -oUaP' # pattern like: "\xde\xad"
 alias htop-mem='htop --sort-key=PERCENT_MEM'
 alias htop-cpu='htop --sort-key=PERCENT_CPU'
 alias fzf='fzf --ansi --reverse --height ~20'
-alias bcat='batcat'
+alias bat='batcat'
 
 # Clipboard
 alias cin='xclip -r -in -selection clipboard'

@@ -18,6 +18,8 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
     let [l:mode, l:commit] = split(substitute(a:branch, "^\\(\\([&>#]\\{4\\}\\) *\\)\\? *\\([a-zA-Z0-9\\-]\\+/\\)*\\([^ \\/]\\+\\).*", "\\2 \\4", ""), "", 1)
     call GitEditFile(l:mode, l:commit, '%')
   endfunction
+
+  " Function to edit file from selected commit
   function! GitEditCommitFile(commit)
     if match(a:commit, '>>>>') == 0 || match(a:commit, '&&&&') == 0 || match(a:commit, '####') == 0
       let l:hash = substitute(a:commit[5:], "^[^0-9a-zA-Z]\\+ \\([0-9a-zA-Z]\\+\\).*", "\\1", "")

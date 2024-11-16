@@ -131,6 +131,8 @@ else
 fi
 unset color_prompt force_color_prompt
 
+export PROMPT_COMMAND="history -a;${PROMPT_COMMAND}"
+
 # Automatically trim long paths in the prompt (requires Bash 4.x)
 # PROMPT_DIRTRIM=2
 

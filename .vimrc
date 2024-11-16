@@ -148,6 +148,7 @@ Plug 'godlygeek/tabular', { 'on': ['Tabularize'] }
 
 " COMPLETION
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'antoinemadec/coc-fzf'
 
 if exists('$TMUX')
   Plug 'preservim/vimux'
@@ -636,8 +637,8 @@ function! CloseGstatus() abort
     endif
   endfor
 endfunction
-noremap <silent><leader>gs :Git\|12wincmd_<CR>
-noremap <silent><F8> :Git\|12wincmd_<CR>
+noremap <silent><leader>gs :Git\|15wincmd_<CR>
+noremap <silent><F8> :Git\|15wincmd_<CR>
 noremap <leader>gd :Gvdiffsplit!<CR>
 noremap <leader>gl :0Gclog<CR>
 noremap <leader>gL :G log --graph<CR>
@@ -888,11 +889,11 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
   " Mappings for Coc
   nmap <leader>ka  <Plug>(coc-codeaction-cursor)
   nmap <leader>kA  <Plug>(coc-codeaction)
-  nnoremap <silent><nowait> <leader>kd  :<C-u>CocList diagnostics<CR>
-  nnoremap <silent><nowait> <leader>ke  :<C-u>CocList extensions<CR>
-  nnoremap <silent><nowait> <leader>kc  :<C-u>CocList commands<CR>
-  nnoremap <silent><nowait> <leader>ks  :<C-u>CocList snippets<CR>
-  nnoremap <silent><nowait> <leader>kl  :<C-u>CocList outline<CR>
+  nnoremap <silent><nowait> <leader>kd  :<C-u>CocFzfList diagnostics<CR>
+  nnoremap <silent><nowait> <leader>ke  :<C-u>CocFzfList extensions<CR>
+  nnoremap <silent><nowait> <leader>kc  :<C-u>CocFzfList commands<CR>
+  nnoremap <silent><nowait> <leader>ks  :<C-u>CocFzfList snippets<CR>
+  nnoremap <silent><nowait> <leader>kl  :<C-u>CocFzfList outline<CR>
   nnoremap <silent><nowait> <leader>ko  :<C-u>call CocOutlineToggle()<CR>
   nnoremap <silent><nowait> <leader>kt  :<C-u>CocToggle<CR>
   nnoremap <silent><nowait> <leader>kf  :<C-u>call CocAction('showOutgoingCalls')<CR>
