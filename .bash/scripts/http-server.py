@@ -14,6 +14,7 @@ import re
 import sys
 import tempfile
 import time
+from typing import override
 
 REQUEST_COUNT = 0
 COLORED_OUTPUT = False
@@ -28,8 +29,16 @@ def custom_print(*args, **kwargs):
 builtins._original_print = print
 builtins.print = custom_print
 
+def parse_headers(headers):
+  d = {}
+  for header in args.response_headers:
+    if ':' in header: 
+      params = header.split(':', 1)
+      d[params[0].strip()] = params[1].strip()
+  return d
 
 class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
+  @override
   def do_POST(self):
     try:
       size = int(self.headers['Content-Length'])
@@ -47,6 +56,7 @@ class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
       self.end_headers()
       self.wfile.write(b'failed\n')
 
+  @override
   def do_GET(self):
     super().do_GET()
     self.log(self.statuscode or HTTPStatus.OK)
@@ -81,17 +91,31 @@ class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     REQUEST_COUNT += 1
     print(f' +\033[1;30m{REQUEST_COUNT}\033[m {timestamp} \033[1;33m{self.address_string()}\033[m  |  \033[1;34m{self.requestline}\033[m {codeStr} {size}')
 
+  def send_custom_headers(self):
+    if not args.response_headers: return
+    for k, v in custom_headers.items():
+      self.send_header(k, v)
+
+  @override
+  def end_headers(self):
+    self.send_custom_headers()
+    super().end_headers()
+
+  @override
   def log_error(self, format, *args):
     sys.stderr.write(f'\033[1;31m -\033[m {format % args}\n')
 
+  @override
   def send_response(self, code, message=None):
     self.statuscode = code
     super().send_response(code, message);
 
+  @override
   def send_error(self, code, message=None, explain=None):
     self.statuscode = code
     super().send_error(code, message, explain)
 
+  @override
   def log_request(self, *_):
     pass
 
@@ -101,6 +125,7 @@ if __name__ == '__main__':
   parser.add_argument('port', nargs='?', default=8000, type=int, help="(default: %(default)s)")
   parser.add_argument('-H', '--headers', action='store_true', help="print headers")
   parser.add_argument('-B', '--body', action='store_true', help="print body")
+  parser.add_argument('-R', '--response-headers', nargs='*', help="set response headers (eg: 'Set-Cookie: <cookie-name>=<cookie-value>')")
   parser.add_argument('-d', '--directory', default=os.getcwd(), nargs='?', help="serve this directory (default: './')")
   parser.add_argument('-o', '--output', help="save post data in given OUTPUT directory. The base directory of the output destination is determined with the -d flag ( DIRECTORY/OUTPUT ). If absolute path is given then that's used instead")
   parser.add_argument('--color', action='store_true', help="force use colors even when output is redirected")
@@ -120,6 +145,11 @@ if __name__ == '__main__':
   print(f'+ http server running: \033[1;32mhttp://localhost:{args.port}/\033[m')
   if args.directory and args.output:
     print(f'+ saving post data to: {os.path.join(args.directory, args.output)}')
+  if args.response_headers:
+    print(f'+ using custom headers:')
+    custom_headers = parse_headers(args.response_headers)
+    for k, v in custom_headers.items():
+      print(f'    {k}: {v}')
 
   try:
     httpd.serve_forever()
