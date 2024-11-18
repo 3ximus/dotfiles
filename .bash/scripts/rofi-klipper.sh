@@ -1,7 +1,7 @@
 #!/bin/bash
 
 clipboard-history(){
-	for (( i=0; i<20 ; i++ )) ; do
+	for (( i=0; i<40 ; i++ )) ; do
 		qdbus org.kde.plasmashell /klipper org.kde.klipper.klipper.getClipboardHistoryItem $i | paste -sd ' ' | cut -c1-80
 	done
 }

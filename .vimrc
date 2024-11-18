@@ -121,14 +121,12 @@ Plug 'junegunn/vim-peekaboo'
 Plug 'jeetsukumaran/vim-markology'
 Plug 'wellle/context.vim', { 'on': 'ContextToggle' }
 Plug 'markonm/traces.vim' " highlight patterns and ranges in command
-" Plug 'ronakg/quickr-preview.vim'
-Plug 'skywind3000/asyncrun.vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'benknoble/vim-auto-origami'
 Plug 'machakann/vim-highlightedyank'
 
-" Plug 'ptzz/lf.vim'
-" Plug 'voldikss/vim-floaterm'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'orrors/asynctasks.vim'
 
 " TOOLS
 Plug 'tpope/vim-surround'
@@ -152,7 +150,6 @@ Plug 'antoinemadec/coc-fzf'
 
 if exists('$TMUX')
   Plug 'preservim/vimux'
-  Plug 'orrors/vimux-tasks'
 endif
 
 " LANGUAGE STUFF
@@ -307,6 +304,41 @@ function! GoFmt()
 endfunction
 " 1}}}
 
+function! s:RunTask(what)
+	let p1 = stridx(a:what, '|')
+	if p1 >= 0
+		let name = substitute(a:what[2:p1-1], '^\s*\(.\{-}\)\s*$', '\1', '')
+		if name != ''
+			exec "AsyncTask ". name
+		endif
+	endif
+endfunction
+
+function! s:AsyncTaskFzf()
+	let rows = asynctasks#source(&columns * 48 / 100)
+	let source = []
+	for row in rows
+    let type = substitute(substitute(row[1], '<local>', 'L', ''), '<global>', 'G', '')
+    let source += ["\e[1;30m". trim(type) . "\e[m " . substitute(row[0], '[^#]\+#', "\e[1;34m&\e[m", '') . " \e[1;30m|  " . row[2] . "\e[m"]
+  endfor
+  let opts = { 
+        \ 'source': source,
+        \ 'sink': function('s:RunTask'),
+        \ 'options': "+m --delimiter='[| ]+' --nth=2 --ansi --prompt 'Run Task > ' --no-info '--bind=ctrl-l:execute@printf \">>>> \"@+accept' --header ':: \e[1;33mEnter\e[m Run command. \e[1;33mCtrl-l\e[m Type command'",
+        \ 'tmux': '-p50%,40%'}
+
+	if exists('g:fzf_layout')
+    if exists('$TMUX')
+      let opts['tmux'] = '-p50%,40%'
+    else
+      let opts['window'] = { 'width': 0.5, 'height': 0.4 , 'border': 'sharp' }
+    endif
+	endif
+
+	call fzf#run(opts)
+endfunction
+
+command! -nargs=0 AsyncTaskFzf call s:AsyncTaskFzf()
 " }}}
 
 " KEYMAPS {{{
@@ -593,6 +625,10 @@ let test#strategy = 'vimux'
 let test#javascript#jest#executable = 'yarn test:watch'
 let test#enabled_runners = ["javascript#jest"]
 
+" asynctasks
+let g:asynctasks_term_pos = 'tmux'
+let g:asynctasks_config_name = '.vim/tasks.ini'
+
 " }}}
 
 " PLUGIN KEYMAPS {{{
@@ -669,8 +705,9 @@ let g:user_emmet_expandabbr_key='<C-e>'
 let g:user_emmet_mode='inv'
 imap <C-e> <plug>(emmet-expand-abbr)
 
+noremap <leader>rt :AsyncTaskFzf<CR>
+
 "Vimux
-noremap <leader>rt :VimuxTasks<CR>
 noremap <leader>rc :VimuxPromptCommand<CR>
 noremap <leader>rl :VimuxRunLastCommand<CR>
 noremap <leader>rk :VimuxInterruptRunner<CR>
