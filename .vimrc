@@ -327,13 +327,11 @@ function! s:AsyncTaskFzf()
         \ 'options': "+m --delimiter='[| ]+' --nth=2 --ansi --prompt 'Run Task > ' --no-info '--bind=ctrl-l:execute@printf \">>>> \"@+accept' --header ':: \e[1;33mEnter\e[m Run command. \e[1;33mCtrl-l\e[m Type command'",
         \ 'tmux': '-p50%,40%'}
 
-	if exists('g:fzf_layout')
-    if exists('$TMUX')
-      let opts['tmux'] = '-p50%,40%'
-    else
-      let opts['window'] = { 'width': 0.5, 'height': 0.4 , 'border': 'sharp' }
-    endif
-	endif
+  if exists('$TMUX')
+    let opts['tmux'] = '-p50%,40%'
+  else
+    let opts['window'] = { 'width': 0.5, 'height': 0.4 , 'border': 'sharp' }
+  endif
 
 	call fzf#run(opts)
 endfunction
