@@ -1,5 +1,4 @@
 if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
-
   " Sink Function Git Edit: {{{
   function GitEditFile(mode, commit, file)
     if match(a:mode, '&&&&') == 0
@@ -53,25 +52,34 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
   " AsyncTasks Runner: {{{
   function! s:RunTask(what)
     let p1 = stridx(a:what, '|')
-    if p1 >= 0
-      let name = substitute(a:what[2:p1-1], '^\s*\(.\{-}\)\s*$', '\1', '')
-      if name != ''
-        exec "AsyncTask ". name
+    if match(a:what, 'ctrl-l') == 0
+      " type it
+      let command = substitute(a:what[p1+2:], '^\s*\(.\{-}\)\s*$', '\1', '')
+      call VimuxOpenRunner()
+      call VimuxSendText(trim(command) . ' ')
+      call VimuxTmux('select-'.VimuxOption('VimuxRunnerType').' -t '.g:VimuxRunnerIndex)
+    else
+      " run task
+      if p1 >= 0
+        let name = substitute(a:what[2:p1-1], '^\s*\(.\{-}\)\s*$', '\1', '')
+        if name != ''
+          exec "AsyncTask ". name
+        endif
       endif
     endif
   endfunction
 
   function! s:AsyncTaskFzf()
-    let rows = asynctasks#source(&columns * 48 / 100)
+    let rows = asynctasks#source(999)
     let source = []
     for row in rows
       let type = substitute(substitute(row[1], '<local>', 'L', ''), '<global>', 'G', '')
       let source += ["\e[1;30m". trim(type) . "\e[m " . substitute(row[0], '[^#]\+#', "\e[1;34m&\e[m", '') . " \e[1;30m|  " . row[2] . "\e[m"]
     endfor
-    let opts = { 
+    let opts = {
           \ 'source': source,
           \ 'sink': function('s:RunTask'),
-          \ 'options': "+m --delimiter='[| ]+' --nth=2 --ansi --prompt 'Run Task > ' --no-info '--bind=ctrl-l:execute@printf \">>>> \"@+accept' --header ':: \e[1;33mEnter\e[m Run command. \e[1;33mCtrl-l\e[m Type command'",
+          \ 'options': "+m --delimiter='[| ]+' --nth=2 --ansi --expect=ctrl-l --print0 --prompt 'Run Task > ' --no-info  --header ':: \e[1;33menter\e[m Run command. \e[1;33mctrl-l\e[m Type command'",
           \ 'tmux': '-p50%,40%'}
 
     if exists('$TMUX')
@@ -85,5 +93,4 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
 
   command! -nargs=0 AsyncTaskFzf call s:AsyncTaskFzf()
   " }}}
-
 endif
