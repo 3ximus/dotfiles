@@ -835,7 +835,7 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
   command! -nargs=0 Format :call CocActionAsync('format')
   noremap g= :call CocActionAsync('format')<CR>
   command! -nargs=0 OrganizeImports :call CocActionAsync('runCommand', 'editor.action.organizeImport')
-  noremap go :call :call CocActionAsync('runCommand', 'editor.action.organizeImport')<CR>
+  noremap go :call CocActionAsync('runCommand', 'editor.action.organizeImport')<CR>
 
   " Mappings for Coc
   nmap <leader>ka  <Plug>(coc-codeaction-cursor)
@@ -904,8 +904,6 @@ autocmd FileType dart setlocal formatexpr=dart#fmt()
 
 " must be used from the first line
 autocmd FileType json setlocal formatprg=python3\ -m\ json.tool
-
-autocmd FileType go map g= :call GoFmt()<CR>
 
 " add @ completion
 autocmd FileType scss setl iskeyword+=@-@
