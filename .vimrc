@@ -307,11 +307,6 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 " start a search for visually selected text
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
-"use xclip, this is only needed if vim clipboard support isnt enabled
-"you might need to install 'vim-gui-common' or 'vim-gtk' to enable clipboard support
-vnoremap <leader>y :w !xclip -selection clipboard<CR><CR>
-nnoremap <leader>yy :w !xclip -selection clipboard<CR><CR>
-
 nmap <leader>x :bp<bar>bd #<CR>
 
 " Clear search highlight and close preview window
@@ -320,7 +315,6 @@ if has('nvim')
 else
   nnoremap <silent> <backspace> :noh<CR>:pc<CR>:cclose<CR>:helpclose<CR>:call CloseGstatus()<CR>:call CocCloseOutline()<CR>:call popup_clear(1)<CR>
 endif
-
 
 " remove trailing whitespaces
 nmap <leader>s :call StripTrailingWhitespace()<CR>
@@ -662,6 +656,22 @@ endif
 " vim-test
 nnoremap <leader>tn :TestNearest<CR>
 nnoremap <leader>tf :TestFile<CR>
+
+" dap
+if &rtp =~ 'nvim-dap' && &rtp =~ 'nvim-dap-ui' && glob("~/.vim/plugged/nvim-dap")!=#"" && glob("~/.vim/plugged/nvim-dap-ui")!=#""
+  nmap <F5> :lua require('dap').continue()<CR>
+  nmap <F6> :lua require('dap.ui.widgets').hover()<CR>
+  nmap <F7> :lua require('dap').terminate()<CR>
+  nmap <F8> :lua require('dap').step_over()<CR>
+  nmap <F9> :lua require('dap').step_into()<CR>
+  nmap <F10> :lua require('dap').step_out()<CR>
+  nmap <leader>i :lua require('dapui').toggle()<CR>
+  nmap <leader>B :lua require('dap').toggle_breakpoint()<CR>
+  nmap <leader>bl :lua require('dap').list_breakpoints(); vim.cmd('copen')<CR>
+  nmap <leader>bC :lua require('dap').clear_breakpoints()<CR>
+  nmap <leader>bc :lua require('dap').set_breakpoint(vim.fn.input('Break condition: '), nil, nil)<CR>
+  nmap <leader>bL :lua require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
+endif
 
 " }}}
 

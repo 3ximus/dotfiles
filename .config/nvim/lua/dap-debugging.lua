@@ -1,17 +1,5 @@
 local dap = require("dap")
 
-vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
-vim.keymap.set('n', '<F6>', function() require('dap.ui.widgets').hover() end)
-vim.keymap.set('n', '<F7>', function() require('dap').terminate() end)
-vim.keymap.set('n', '<F8>', function() require('dap').step_over() end)
--- vim.keymap.set('n', '<F9>', function() require('dap').step_into() end)
--- vim.keymap.set('n', '<F10>', function() require('dap').step_out() end)
-vim.keymap.set('n', '<Leader>B', function() require('dap').toggle_breakpoint() end)
-vim.keymap.set('n', '<Leader>bl', function() require('dap').list_breakpoints(); vim.cmd('copen') end)
-vim.keymap.set('n', '<Leader>bC', function() require('dap').clear_breakpoints() end)
-vim.keymap.set('n', '<Leader>bc', function() require('dap').set_breakpoint(vim.fn.input('Break condition: '), nil, nil) end)
-vim.keymap.set('n', '<Leader>bL', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
-
 -- use Esc to close the dap-float window type
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "dap-float",
@@ -22,7 +10,8 @@ vim.api.nvim_create_autocmd("FileType", {
 
 local dapui = require("dapui")
 dapui.setup({
-  controls = { icons = { pause = "󰏤", } },
+    --               
+  controls = { icons = { pause = "󰏤" } },
 })
 
 dap.listeners.before.attach.dapui_config = function()
