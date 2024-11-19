@@ -252,91 +252,6 @@ function! ClearRegisters()
 endfunction
 command! -nargs=0 ClearRegisters :call ClearRegisters()
 
-" Formatting Functions: 1{{{
-
-function! Prettier()
-  let saved_view = winsaveview()
-  let modified = &modified
-  silent %!prettier --no-color --stdin-filepath %
-  cclose
-  if v:shell_error > 0
-    let l:errors = []
-    for l:line in getline(1,'$')
-      let l:match = matchlist(l:line, '^.*: \(.*\) (\(\d\{1,}\):\(\d\{1,}\)*)')
-      if !empty(l:match)
-        call add(l:errors, { 'bufnr': bufnr('%'), 'lnum': l:match[2], 'col': l:match[3] })
-      endif
-    endfor
-
-    silent undo
-    call setqflist(l:errors, 'r')
-    cwindow
-  else
-    if ! modified
-      w
-    endif
-  endif
-  call winrestview(saved_view)
-  syntax sync fromstart
-endfunction
-noremap g= :call Prettier()<CR>
-
-function! GoFmt()
-  let saved_view = winsaveview()
-  silent %!gofmt
-  if v:shell_error > 0
-    cexpr getline(1, '$')->map({ _, line -> line->substitute('<standard input>', expand('%'), '') })
-    let l:errors = []
-    for l:line in getline(1,'$')
-      let l:match = matchlist(l:line, '^\([^:]\+\):\(\d\{1,}\):\(\d\{1,}\): \(.*\)')
-      if !empty(l:match)
-        call add(l:errors, { 'bufnr': bufnr('%'), 'text': l:match[4], 'lnum': l:match[2], 'col': l:match[3] , 'filename': l:match[1]})
-      endif
-    endfor
-
-    silent undo
-    call setqflist(l:errors, 'r')
-    cwindow
-  else
-    cclose
-  endif
-  call winrestview(saved_view)
-endfunction
-" 1}}}
-
-function! s:RunTask(what)
-	let p1 = stridx(a:what, '|')
-	if p1 >= 0
-		let name = substitute(a:what[2:p1-1], '^\s*\(.\{-}\)\s*$', '\1', '')
-		if name != ''
-			exec "AsyncTask ". name
-		endif
-	endif
-endfunction
-
-function! s:AsyncTaskFzf()
-	let rows = asynctasks#source(&columns * 48 / 100)
-	let source = []
-	for row in rows
-    let type = substitute(substitute(row[1], '<local>', 'L', ''), '<global>', 'G', '')
-    let source += ["\e[1;30m". trim(type) . "\e[m " . substitute(row[0], '[^#]\+#', "\e[1;34m&\e[m", '') . " \e[1;30m|  " . row[2] . "\e[m"]
-  endfor
-  let opts = { 
-        \ 'source': source,
-        \ 'sink': function('s:RunTask'),
-        \ 'options': "+m --delimiter='[| ]+' --nth=2 --ansi --prompt 'Run Task > ' --no-info '--bind=ctrl-l:execute@printf \">>>> \"@+accept' --header ':: \e[1;33mEnter\e[m Run command. \e[1;33mCtrl-l\e[m Type command'",
-        \ 'tmux': '-p50%,40%'}
-
-  if exists('$TMUX')
-    let opts['tmux'] = '-p50%,40%'
-  else
-    let opts['window'] = { 'width': 0.5, 'height': 0.4 , 'border': 'sharp' }
-  endif
-
-	call fzf#run(opts)
-endfunction
-
-command! -nargs=0 AsyncTaskFzf call s:AsyncTaskFzf()
 " }}}
 
 " KEYMAPS {{{
@@ -589,7 +504,6 @@ let g:markology_include='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 " Vimux
 let g:VimuxPromptString = "$ "
 let g:VimuxExpandCommand = 1
-" let g:VimuxTaskAutodetect = []
 
 "Python syntax highlight
 let g:python_highlight_all = 1
@@ -919,7 +833,9 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
   endfunction
 
   command! -nargs=0 Format :call CocActionAsync('format')
+  noremap g= :call CocActionAsync('format')<CR>
   command! -nargs=0 OrganizeImports :call CocActionAsync('runCommand', 'editor.action.organizeImport')
+  noremap go :call :call CocActionAsync('runCommand', 'editor.action.organizeImport')<CR>
 
   " Mappings for Coc
   nmap <leader>ka  <Plug>(coc-codeaction-cursor)

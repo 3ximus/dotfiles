@@ -6,6 +6,8 @@ local colors = {
   black        = '#282828',
   white        = 15,
   red          = 1,
+  lightred     = 9,
+  yellow       = 3,
   aqua         = 14,
   green        = 10,
   blue         = 12,
@@ -72,6 +74,37 @@ function custom_fname:update_status()
   return data
 end
 -- }}}
+-- Trailing Spaces Component {{{
+local function trailing_spaces()
+  local space = vim.fn.search([[\s\+$]], 'nwc', 0, 200)
+  return space ~= 0 and "󱁐" or ""
+end
+-- }}}
+-- Mixed Indent Component {{{
+local function mixed_indent()
+  local space_pat = [[\v^ +]]
+  local tab_pat = [[\v^\t+]]
+  local space_indent = vim.fn.search(space_pat, 'nwc')
+  local tab_indent = vim.fn.search(tab_pat, 'nwc')
+  local mixed = (space_indent > 0 and tab_indent > 0)
+  local mixed_same_line
+  if not mixed then
+    mixed_same_line = vim.fn.search([[\v^(\t+ | +\t)]], 'nwc')
+    mixed = mixed_same_line > 0
+  end
+  if not mixed then return '' end
+  if mixed_same_line ~= nil and mixed_same_line > 0 then
+     return 'MI:'..mixed_same_line
+  end
+  local space_indent_cnt = vim.fn.searchcount({pattern=space_pat, max_count=1e3}).total
+  local tab_indent_cnt =  vim.fn.searchcount({pattern=tab_pat, max_count=1e3}).total
+  if space_indent_cnt > tab_indent_cnt then
+    return 'MI:'..tab_indent
+  else
+    return 'MI:'..space_indent
+  end
+end
+-- }}}
 
 require("lualine").setup({
   options = {
@@ -94,11 +127,8 @@ require("lualine").setup({
     }
   },
   sections = {
-    lualine_a = {{  'mode', fmt = function(str) return str:sub(1,1) end }},
-    lualine_b = {
-      'branch',
-      {'diagnostics', sections = { 'error', 'warn', 'info', 'hint' }}
-    },
+    lualine_a = {{ 'mode', fmt = function(str) return str:sub(1,1) end }},
+    lualine_b = { 'branch' },
     lualine_c = {
       {
         custom_fname,
@@ -114,9 +144,25 @@ require("lualine").setup({
       },
       {'b:coc_current_function', color = { fg = colors.green, gui = 'bold' }}
     },
-    lualine_x = {'filetype'},
+    lualine_x = {'filetype', 
+      {'diagnostics', 
+        sections = { 'error', 'warn', 'info', 'hint' },
+        -- symbols = { error = '', warn = '', info = '' },
+        symbols = { error = '', warn = '', info = '' },
+        diagnostics_color = {
+          error = { bg = colors.lightred, fg = colors.black, gui='bold' },
+          warn = { bg = colors.yellow, fg = colors.black, gui='bold' },
+          info = { bg = colors.aqua, fg = colors.black, gui='bold' },
+        },
+      },
+    },
     lualine_y = {'searchcount'},
-    lualine_z = {'progress','location'}
+    lualine_z = {
+      'progress', 
+      'location',
+      { trailing_spaces, color = { bg = colors.orange, fg = colors.black, gui='bold' }},
+      { mixed_indent, color = { bg = colors.yellow, fg = colors.black, gui='bold' }}
+    }
   },
   inactive_sections = {
     lualine_a = {},
