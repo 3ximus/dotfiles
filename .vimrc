@@ -737,6 +737,8 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
     noremap <leader>gV :FZFGitEditCommitFile<CR>
   endif
 
+  " coc fzf
+  let g:coc_fzf_preview_toggle_key = '/'
 endif
 " }}}
 
