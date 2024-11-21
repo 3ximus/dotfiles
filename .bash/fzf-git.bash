@@ -33,12 +33,11 @@ glfa() {
 }
 
 gbf() {
-	git branch -avv --color | fzf \
+	git branch -avv --color --sort=v:refname | fzf \
 		--preview="echo {} |grep -Eo '[a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9]'|xargs -n1 git diff | delta" \
 		--ansi --no-multi --reverse \
 		--tiebreak=index \
 		--no-info \
-		--height 50% --min-height 20 \
 		| grep -Po '(?<=^. )[^ ]+ ' | xargs -n1 git switch
 }
 

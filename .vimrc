@@ -107,7 +107,7 @@ if has('nvim')
   Plug 'nvim-neotest/nvim-nio'
   Plug 'rcarriga/nvim-dap-ui'
   Plug 'mxsdev/nvim-dap-vscode-js'
-  Plug 'microsoft/vscode-js-debug', { 'do': 'npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out' }
+  Plug 'microsoft/vscode-js-debug', { 'do': 'npm ci --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out' }
 else
   Plug '3ximus/vim-airline' " my fork switches position of the tabs and splits on tabline
 endif
@@ -132,7 +132,8 @@ Plug 'orrors/asynctasks.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tomtom/tcomment_vim'
-Plug 'justinmk/vim-sneak'
+" Plug 'justinmk/vim-sneak'
+Plug 'ggandor/leap.nvim'
 Plug 'AndrewRadev/linediff.vim'
 Plug 'fidian/hexmode'
 Plug 'lambdalisue/vim-suda', { 'on': ['SudaRead', 'SudaWrite'] }
@@ -564,12 +565,16 @@ nmap ]h <Plug>(GitGutterNextHunk)
 nmap [h <Plug>(GitGutterPrevHunk)
 nmap <leader>hf :GitGutterFold<CR>
 
+"leap.nvim
+nmap s <Plug>(leap-forward)
+nmap S <Plug>(leap-backward)
+nmap gs <Plug>(leap-from-window)
 "vim sneak
-map f <Plug>Sneak_f
-map F <Plug>Sneak_F
-map t <Plug>Sneak_t
-map T <Plug>Sneak_T
-let g:sneak#label = 1
+" map f <Plug>Sneak_f
+" map F <Plug>Sneak_F
+" map t <Plug>Sneak_t
+" map T <Plug>Sneak_T
+" let g:sneak#label = 1
 
 "fugitive
 function! CloseGstatus() abort
@@ -611,11 +616,10 @@ let g:user_emmet_expandabbr_key='<C-e>'
 let g:user_emmet_mode='inv'
 imap <C-e> <plug>(emmet-expand-abbr)
 
-noremap <leader>rt :AsyncTaskFzf<CR>
-
 "Vimux
 noremap <leader>rc :VimuxPromptCommand<CR>
 noremap <leader>rl :VimuxRunLastCommand<CR>
+noremap <expr> <leader>rl g:asynctasks_last != '' ? ':AsyncTaskLast<CR>' : ':VimuxRunLastCommand<CR>'
 noremap <leader>rk :VimuxInterruptRunner<CR>
 noremap <leader>rq :VimuxCloseRunner<CR>
 noremap <leader>ro :VimuxOpenRunner<CR>
@@ -630,6 +634,8 @@ function! VimuxSendSelectedText() range
   call VimuxSendText(selectedText)
 endfunction
 xnoremap <leader>rr :call VimuxSendSelectedText()<CR>
+
+noremap <leader>rt :AsyncTaskFzf<CR>
 
 " Tabularize
 if isdirectory(expand("~/.vim/plugged/tabular"))

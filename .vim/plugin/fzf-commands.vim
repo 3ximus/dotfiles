@@ -1,6 +1,6 @@
 if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
   " Sink Function Git Edit: {{{
-  function GitEditFile(mode, commit, file)
+  function s:GitEditFile(mode, commit, file)
     if match(a:mode, 'ctrl-s') == 0
       execute "Gsplit ".a:commit.":".a:file
     elseif match(a:mode, 'ctrl-v') == 0
@@ -14,7 +14,7 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
   " Git Checkout File Branch: {{{
   function s:GitEditBranchFile(branch)
     let [l:mode, l:commit] = split(substitute(a:branch, "\\(ctrl-.\\)\\?[ *\\n]*\\(remotes\\/\\)\\?\\([a-zA-Z0-9\\/:-]\\+\\).*", '\1 \3', ''), '', 1)
-    call GitEditFile(l:mode, l:commit, '%')
+    call s:GitEditFile(l:mode, l:commit, '%')
   endfunction
 
   function s:FZFGitEditBranchFile()
@@ -23,12 +23,12 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
     let opts = {
           \ 'source': 'git branch -avv --color --sort=v:refname',
           \ 'sink': function('s:GitEditBranchFile'),
-          \ 'options': "--delimiter='[* ]+' --nth=2 --print0 --expect=ctrl-v,ctrl-s --prompt 'ViewCurrentFile> ' --ansi --no-info --preview 'git diff HEAD..{2} " . l:fname . l:suffix ."'"}
+          \ 'options': "--delimiter='[* ]+' --nth=2 --print0 --tiebreak=index --expect=ctrl-v,ctrl-s --bind='ctrl-/:toggle-preview' --prompt 'ViewCurrentFile> ' --ansi --no-info --preview 'git diff HEAD..{2} " . l:fname . l:suffix ."'"}
 
     if exists('$TMUX')
-      let opts['tmux'] = '-p90%,90%'
+      let opts['tmux'] = '-p80%,70%'
     else
-      let opts['window'] = { 'width': 0.5, 'height': 0.4 , 'border': 'sharp' }
+      let opts['window'] = { 'width': 0.8, 'height': 0.7 , 'border': 'sharp' }
     endif
 
     call fzf#run(opts)
@@ -38,18 +38,24 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
   " }}}
 
   " Git Edit Commit File: {{{
-  function GitEditCommitFile(commit)
-    if match(a:commit, '>>>>') == 0 || match(a:commit, '&&&&') == 0 || match(a:commit, '####') == 0
+  function s:GitEditCommitFile(commit)
+    " TODO THIS FUNCTION IS CURRENTLY BROKEN
+    if match(a:commit, 'ctrl-v') == 0 || match(a:commit, 'ctrl-s') == 0 || match(a:commit, 'enter') == 0
       let l:hash = substitute(a:commit[5:], "^[^0-9a-zA-Z]\\+ \\([0-9a-zA-Z]\\+\\).*", "\\1", "")
       let l:file = '%'
       let l:mode = split(a:commit, "", 1)[0]
     else
       let l:hash = substitute(a:commit, "^[^0-9a-zA-Z]\\+ \\([0-9a-zA-Z]\\+\\).*", "\\1", "")
-      " TODO preview here is not correct since it doesnt view the file content
-      " on the selected commit
-      let l:file = fzf#run(fzf#wrap({'source': 'git ls-tree --name-only -r ' . l:hash, 'sink': '"',
-            \ 'options': "'--bind=ctrl-v:execute@printf \">>>> \"@+accept' '--bind=ctrl-s:execute@printf \"&&&& \"@+accept' --ansi --prompt 'ViewFile @ ".l:hash."> ' --inline-info --preview '~/.vim/plugged/fzf.vim/bin/preview.sh {}'",
-            \ 'tmux': '-p80%,70%'}))
+      let opts = {
+            \ 'source': 'git ls-tree --name-only -r ' . l:hash,
+            \ 'sink': '"',
+            \ 'options': "--expect=ctrl-v,ctrl-s --print0 --ansi --prompt 'ViewFile @ ".l:hash."> ' --inline-info --bind='ctrl-/:toggle-preview' --preview '~/.vim/plugged/fzf.vim/bin/preview.sh {}'"}
+      if exists('$TMUX')
+        let opts['tmux'] = '-p80%,70%'
+      else
+        let opts['window'] = { 'width': 0.8, 'height': 0.7 , 'border': 'sharp' }
+      endif
+      let l:file = fzf#run(fzf#wrap(opts))
       if len(l:file) == 0
         return
       endif
@@ -59,9 +65,24 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
         let [l:mode, l:file] = split(l:file[0], "", 1)
       endif
     endif
-    call GitEditFile(l:mode, l:hash, l:file)
+    call s:GitEditFile(l:mode, l:hash, l:file)
   endfunction
-  command! -bang FZFGitEditCommitFile call fzf#run({'source': 'git lol --all', 'sink': function('GitEditCommitFile'), 'options': "--prompt 'ViewFile> ' --ansi --layout=reverse-list --header ':: \e[1;33mEnter\e[m / \e[1;33mctrl-s\e[m / \e[1;33mctrl-v\e[m to open current file. \e[1;33mCtrl-Space\e[m to open file selection on that commit' --nth=1 --no-info '--bind=enter:execute@printf \"#### \"@+accept' '--bind=ctrl-v:execute@printf \">>>> \"@+accept' '--bind=ctrl-s:execute@printf \"&&&& \"@+accept' '--bind=ctrl-space:accept'", 'tmux': '-p80%,70%'})
+
+  function s:FZFGitEditCommitFile()
+    let git_cmd = "git log --oneline --graph --pretty=format:'%C(yellow)%h%Creset %C(auto)%d%Creset %s (%Cblue%an%Creset, %cr)' --date-order  --color=always"
+    let opts = {
+          \ 'source': git_cmd,
+          \ 'sink': function('s:GitEditCommitFile'),
+          \ 'options': "--prompt 'ViewFile> ' --ansi --layout=reverse-list --header ':: \e[1;33mEnter\e[m / \e[1;33mctrl-s\e[m / \e[1;33mctrl-v\e[m to open current file. \e[1;33mCtrl-Space\e[m to open file selection on that commit' --no-info --tiebreak=index --print0 --expect enter,ctrl-v,ctrl-s '--bind=ctrl-space:accept'"}
+    if exists('$TMUX')
+      let opts['tmux'] = '-p80%,70%'
+    else
+      let opts['window'] = { 'width': 0.8, 'height': 0.7 , 'border': 'sharp' }
+    endif
+    call fzf#run(opts)
+  endfunction
+
+  command! -nargs=0 FZFGitEditCommitFile call s:FZFGitEditCommitFile()
   " }}}
 
   " AsyncTasks Runner: {{{
@@ -73,6 +94,8 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
       call VimuxOpenRunner()
       call VimuxSendText(trim(command) . ' ')
       call VimuxTmux('select-'.VimuxOption('VimuxRunnerType').' -t '.g:VimuxRunnerIndex)
+    elseif match(a:what, 'ctrl-e') == 0
+      exec "AsyncTaskEdit"
     else
       " run task
       if p1 >= 0
@@ -94,7 +117,7 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
     let opts = {
           \ 'source': source,
           \ 'sink': function('s:RunTask'),
-          \ 'options': "+m --delimiter='[| ]+' --nth=2 --ansi --expect=ctrl-l --print0 --prompt 'Run Task > ' --no-info  --header ':: \e[1;33menter\e[m Run command. \e[1;33mctrl-l\e[m Type command'"}
+          \ 'options': "+m --delimiter='[| ]+' --nth=2 --ansi --expect=ctrl-l,ctrl-e --print0 --prompt 'Run Task > ' --no-info  --header ':: \e[1;33menter\e[m Run command. \e[1;33mctrl-l\e[m Type command. \e[1;33mctrl-e\e[m Edit tasks file'"}
 
     if exists('$TMUX')
       let opts['tmux'] = '-p50%,40%'

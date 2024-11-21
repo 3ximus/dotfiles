@@ -10,7 +10,8 @@ local colors = {
   yellow       = 3,
   aqua         = 14,
   green        = 10,
-  blue         = 12,
+  blue         = 4,
+  lightblue    = 12,
   orange       = 208,
   gray         = 8,
   darkgray     = 239,
@@ -24,7 +25,7 @@ local gruvbox_theme = {
     c = { bg = colors.black, fg = colors.lightgray },
   },
   insert = {
-    a = { bg = colors.blue, fg = colors.black, gui = 'bold' },
+    a = { bg = colors.lightblue, fg = colors.black, gui = 'bold' },
     b = { bg = colors.darkgray, fg = colors.white },
     c = { bg = colors.black, fg = colors.lightgray },
   },
@@ -53,7 +54,7 @@ local gruvbox_theme = {
 -- Custom Filename Component {{{
 local custom_fname = require('lualine.components.filename'):extend()
 local highlight = require'lualine.highlight'
-local default_status_colors = { saved = colors.lightgray, modified = colors.blue }
+local default_status_colors = { saved = colors.lightgray, modified = colors.lightblue }
 
 function custom_fname:init(options)
   custom_fname.super.init(self, options)
@@ -144,21 +145,22 @@ require("lualine").setup({
       },
       {'b:coc_current_function', color = { fg = colors.green, gui = 'bold' }}
     },
-    lualine_x = {'filetype', 
-      {'diagnostics', 
+    lualine_x = {'filetype',
+      {'diagnostics',
         sections = { 'error', 'warn', 'info', 'hint' },
         -- symbols = { error = '', warn = '', info = '' },
         symbols = { error = '', warn = '', info = '' },
         diagnostics_color = {
-          error = { bg = colors.lightred, fg = colors.black, gui='bold' },
-          warn = { bg = colors.yellow, fg = colors.black, gui='bold' },
-          info = { bg = colors.aqua, fg = colors.black, gui='bold' },
+          error = { bg = colors.lightred, fg = colors.black, gui = 'bold' },
+          warn = { bg = colors.yellow, fg = colors.black, gui = 'bold' },
+          info = { bg = colors.aqua, fg = colors.black, gui = 'bold' },
+          hint = { bg = colors.blue, fg = colors.black, gui = 'bold' },
         },
       },
     },
     lualine_y = {'searchcount'},
     lualine_z = {
-      'progress', 
+      'progress',
       'location',
       { trailing_spaces, color = { bg = colors.orange, fg = colors.black, gui='bold' }},
       { mixed_indent, color = { bg = colors.yellow, fg = colors.black, gui='bold' }}
