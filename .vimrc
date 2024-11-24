@@ -150,7 +150,8 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'antoinemadec/coc-fzf'
 
 if exists('$TMUX')
-  Plug 'preservim/vimux'
+  " Plug 'preservim/vimux'
+  Plug '3ximus/vimux'
 endif
 
 " LANGUAGE STUFF
@@ -618,7 +619,6 @@ imap <C-e> <plug>(emmet-expand-abbr)
 
 "Vimux
 noremap <leader>rc :VimuxPromptCommand<CR>
-noremap <leader>rl :VimuxRunLastCommand<CR>
 noremap <expr> <leader>rl g:asynctasks_last != '' ? ':AsyncTaskLast<CR>' : ':VimuxRunLastCommand<CR>'
 noremap <leader>rk :VimuxInterruptRunner<CR>
 noremap <leader>rq :VimuxCloseRunner<CR>
@@ -635,7 +635,6 @@ function! VimuxSendSelectedText() range
 endfunction
 xnoremap <leader>rr :call VimuxSendSelectedText()<CR>
 
-noremap <leader>rt :AsyncTaskFzf<CR>
 
 " Tabularize
 if isdirectory(expand("~/.vim/plugged/tabular"))
@@ -741,6 +740,8 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
   if glob("~/.vim/plugin/fzf-commands.vim")!=#""
     noremap <leader>gv :FZFGitEditBranchFile<CR>
     noremap <leader>gV :FZFGitEditCommitFile<CR>
+    noremap <leader>rt :AsyncTaskFzf<CR>
+    noremap <leader>rp :FZFVimuxPickPane<CR>
   endif
 
   " coc fzf
@@ -907,10 +908,17 @@ endif
 
 autocmd FileType vim setlocal foldmethod=marker foldlevel=0
 
-" list staches on fugitive
+" list stashes on fugitive
 augroup CustomFugitiveMappings
+  function ListStashes()
+    let l:prevheight = &previewheight
+    set previewheight=4
+    :Git! --paginate stash list '--pretty=format:%h %as %<(10)%gd %<(76,trunc)%s'
+    let &previewheight=l:prevheight
+  endfunction
+
   autocmd!
-  autocmd FileType fugitive nmap <buffer> czl :G --paginate stash list '--pretty=format:%h %as %<(10)%gd %<(76,trunc)%s'<cr>
+  autocmd FileType fugitive nmap <buffer> czl :call ListStashes()<cr>
 augroup END
 
 autocmd FileType python setlocal tabstop=2 shiftwidth=2 softtabstop=2 noexpandtab autoindent "because someone has too much screen space in their eyesight

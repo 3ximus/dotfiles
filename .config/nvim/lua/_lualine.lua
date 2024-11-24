@@ -122,7 +122,7 @@ require("lualine").setup({
     always_show_tabline = false,
     globalstatus = false,
     refresh = {
-      statusline = 1000,
+      statusline = 400,
       tabline = 1000,
       winbar = 1000,
     }

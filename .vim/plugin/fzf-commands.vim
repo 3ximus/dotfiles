@@ -93,7 +93,7 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
       let command = substitute(a:what[p1+2:], '^\s*\(.\{-}\)\s*$', '\1', '')
       call VimuxOpenRunner()
       call VimuxSendText(trim(command) . ' ')
-      call VimuxTmux('select-'.VimuxOption('VimuxRunnerType').' -t '.g:VimuxRunnerIndex)
+      call VimuxTmux('select-pane -t '.g:VimuxRunnerIndex)
     elseif match(a:what, 'ctrl-e') == 0
       exec "AsyncTaskEdit"
     else
@@ -129,5 +129,29 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
   endfunction
 
   command! -nargs=0 AsyncTaskFzf call s:AsyncTaskFzf()
+  " }}}
+
+  " Vimux Pick Runner Pane: {{{
+  function s:VimuxSetPane(line)
+    let l:pane_path = substitute(a:line, '[* ]\+\(\d\+\.\d\+\) .*','\1', '')
+    let g:VimuxRunnerIndex = substitute(VimuxTmux('display -t '.l:pane_path.' -p "#{pane_id}"'), '\n$', '', '')
+  endfunction
+
+  function s:VimuxPickPaneFzf()
+    let opts = {
+          \ 'source': 'tmux list-panes -s -F "\033[1;33m#{?pane_active,*, }\033[m:#I.#P:#{pane_current_command}:\033[1;30m#{?#{==:#W,#{pane_current_command}},,(#W)}\033[m:#{?window_linked,\033[1;36m[linked]\033[m,}"|column -ts":" -o" "|while read -r l;do echo "$l";done',
+          \ 'sink': function('s:VimuxSetPane'),
+          \ 'options': "--prompt 'Vimux Pane> ' --delimiter='[* ]+' --nth=2.. --ansi --no-info --preview='tmux capture-pane -ep -t {2}|cat -s|tail -n $(tput lines)' --preview-window=up,70%"}
+
+    if exists('$TMUX')
+      let opts['tmux'] = '-p60%,70%'
+    else
+      let opts['window'] = { 'width': 0.6, 'height': 0.7 , 'border': 'sharp' }
+    endif
+
+    call fzf#run(opts)
+  endfunction
+
+  command! -nargs=0 FZFVimuxPickPane call s:VimuxPickPaneFzf()
   " }}}
 endif
