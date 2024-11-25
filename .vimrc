@@ -618,7 +618,7 @@ let g:user_emmet_mode='inv'
 imap <C-e> <plug>(emmet-expand-abbr)
 
 "Vimux
-noremap <leader>rc :VimuxPromptCommand<CR>
+noremap <leader>rc :let g:asynctasks_last = ''<CR>:VimuxPromptCommand<CR>
 noremap <expr> <leader>rl g:asynctasks_last != '' ? ':AsyncTaskLast<CR>' : ':VimuxRunLastCommand<CR>'
 noremap <leader>rk :VimuxInterruptRunner<CR>
 noremap <leader>rq :VimuxCloseRunner<CR>
