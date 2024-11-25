@@ -23,7 +23,7 @@ __fzf_select__() {
   local cmd="${FZF_CTRL_T_COMMAND:-"command find -L ${path} \
       -name .git -prune -o -name .hg -prune -o -name .svn -o -name node_modules -prune -o \\( -type d -o -type f -o -type l \\) \
       -a -not -path ${path} -print 2> /dev/null"}"
-  eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-60%} --reverse $FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS" $(__fzfcmd) --query "$query" | while read -r item; do
+  eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-60%} --bind='ctrl-/:toggle-preview' --reverse $FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS" $(__fzfcmd) --query "$query" | while read -r item; do
     printf '%q ' "$item"
   done
   echo
@@ -60,6 +60,7 @@ if [[ $- =~ i ]]; then
         --color "hl:-1:underline,hl+:-1:underline:reverse" \
         --delimiter : \
         --preview 'batcat --color=always {1} --highlight-line {2}' \
+        --bind='ctrl-/:toggle-preview' \
         --bind 'enter:become(vim {1} +{2})'
   }
 
