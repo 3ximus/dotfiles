@@ -26,6 +26,8 @@ cat >~/.fzf-marks <<EOF
 desk : /home/vagrant/desk
 ctf : /home/vagrant/ctf
 cheat-sheets : /vagrant/cheat-sheets
+wordlists : /usr/share/wordlists
+vpn : /home/vagrant/vpn
 EOF
 echo -e "\nSome software is still being installed through apt and might not yet be available when started."
 SCRIPT

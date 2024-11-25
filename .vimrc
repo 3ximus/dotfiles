@@ -758,6 +758,7 @@ endif
 
 if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
 
+  let g:coc_config_home = '~/.vim'
   let g:coc_disable_startup_warning = 1
 
   " Coc Extensions
