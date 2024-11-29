@@ -486,7 +486,7 @@ let g:gitgutter_floating_window_options = {
       \ 'width': 42,
       \ 'height': &previewheight,
       \ 'style': 'minimal',
-      \ 'border': 'single'
+      \ 'border': 'rounded'
       \ }
 
 " Gundo
@@ -594,12 +594,43 @@ vmap <leader>gl :Gclog<CR>:copen<CR>
 noremap <leader>gB :Git blame<CR>
 " noremap <leader>gp :AsyncRun -post=Git git push<CR>
 noremap <silent><leader>gp :call asyncrun#run('', {'post':'call coc#notify#create(["git push complete"],{"title":" Git ","borderhighlight":"GruvboxGreenBold","highlight":"Normal","timeout":2000,"kind":"info"})'}, 'git push -u')<CR>
+" create a popup with git info about the current line
+"
+if !has('nvim')
+  nmap <silent><Leader>gm :call setbufvar(winbufnr(popup_atcursor(split(system("git log -n 1 -L " . line(".") . ",+1:" . expand("%:p")), "\n"), { "padding": [1,1,1,1], "pos": "botleft", "wrap": 0 })), "&filetype", "git")<CR>
+else
+  function! ShowGitLogForLine()
+    let l:git_output = split(system('git log -n 1 -L ' . line(".") . ',+1:' . shellescape(expand("%:p"))), "\n")
+    if v:shell_error != 0
+      echohl ErrorMsg
+      echo "Failed to execute git command:"
+      echo join(l:git_output, "\n")
+      echohl None
+      return
+    endif
+
+    let l:buf = nvim_create_buf(v:false, v:true)
+    call nvim_buf_set_lines(l:buf, 0, -1, v:false, l:git_output)
+    call nvim_buf_set_option(l:buf, 'filetype', 'git')
+    let l:max_line_length = max(map(l:git_output, 'strwidth(v:val)'))
+    let l:width = min([l:max_line_length + 2, &columns - 4])
+    let l:height = min([len(l:git_output), &lines])
+    let l:opts = {
+          \ 'relative': 'cursor',
+          \ 'width': l:width,
+          \ 'height': l:height,
+          \ 'row': 1,
+          \ 'col': 1,
+          \ 'style': 'minimal',
+          \ 'border': 'rounded',
+          \ }
+    call nvim_open_win(l:buf, v:true, l:opts)
+  endfunction
+  nnoremap <silent> <Leader>gm :call ShowGitLogForLine()<CR>
+endif
 
 " allow typing :git commands instead of :Git
 " cnoreabbrev git Git
-
-" create a popup with git info about the current line
-nmap <silent><Leader>gm :call setbufvar(winbufnr(popup_atcursor(split(system("git log -n 1 -L " . line(".") . ",+1:" . expand("%:p")), "\n"), { "padding": [1,1,1,1], "pos": "botleft", "wrap": 0 })), "&filetype", "git")<CR>
 
 if !exists(":Gdiffoff")
   command Gdiffoff diffoff | q | Gedit
@@ -666,11 +697,11 @@ nnoremap <leader>tf :TestFile<CR>
 if &rtp =~ 'nvim-dap' && &rtp =~ 'nvim-dap-ui' && glob("~/.vim/plugged/nvim-dap")!=#"" && glob("~/.vim/plugged/nvim-dap-ui")!=#""
   nmap <F5> :lua require('dap').continue()<CR>
   nmap <F6> :lua require('dap.ui.widgets').hover()<CR>
-  nmap <F7> :lua require('dap').terminate()<CR>
+  nmap <F7> :lua require('dap').step_into()<CR>
   nmap <F8> :lua require('dap').step_over()<CR>
-  nmap <F9> :lua require('dap').step_into()<CR>
-  nmap <F10> :lua require('dap').step_out()<CR>
-  nmap <leader>i :lua require('dapui').toggle()<CR>
+  nmap <F9> :lua require('dap').step_out()<CR>
+  nmap <F10> :lua require('dap').terminate()<CR>
+  nmap <leader>iu :lua require('dapui').toggle()<CR>
   nmap <leader>B :lua require('dap').toggle_breakpoint()<CR>
   nmap <leader>bl :lua require('dap').list_breakpoints(); vim.cmd('copen')<CR>
   nmap <leader>bC :lua require('dap').clear_breakpoints()<CR>
@@ -730,6 +761,11 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
   nmap <leader>M :FZFMaps<CR>
   nmap <leader>m :FZFMarks<CR>
 
+  " coc fzf
+  let g:coc_fzf_preview_toggle_key = '/'
+  " let g:coc_fzf_opts = []
+  let g:coc_fzf_preview = 'up'
+
   " fzf-checkout
   let g:fzf_checkout_git_options = '--sort=-committerdate'
   noremap <leader>gb :FZFGBranches<CR>
@@ -741,11 +777,17 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
     noremap <leader>gv :FZFGitEditBranchFile<CR>
     noremap <leader>gV :FZFGitEditCommitFile<CR>
     noremap <leader>rt :AsyncTaskFzf<CR>
-    noremap <leader>rp :FZFVimuxPickPane<CR>
-  endif
 
-  " coc fzf
-  let g:coc_fzf_preview_toggle_key = '/'
+    if exists('$TMUX')
+      noremap <leader>rp :FZFVimuxPickPane<CR>
+    endif
+
+    if &rtp =~ 'nvim-dap' && &rtp =~ 'nvim-dap-ui' && glob("~/.vim/plugged/nvim-dap")!=#"" && glob("~/.vim/plugged/nvim-dap-ui")!=#""
+      noremap <leader>ic :FZFDapCommand<CR>
+      noremap <leader>ib :FZFDapBreakpoints<CR>
+      noremap <leader>if :FZFDapFrames<CR>
+    endif
+  endif
 endif
 " }}}
 
@@ -882,13 +924,8 @@ if has("gui_running")
   let g:gruvbox_contrast_light = 'soft'
   set background=dark
 
-  "set guifont=Roboto\ Mono\ for\ Powerline\ Regular\ 9
-  "set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 9
-  "set guifont=Fira\ Mono\ for\ Powerline\ 9
   set guifont=Terminess\ Nerd\ Font\ Mono\ 13
-
   set linespace=0
-
   set guicursor+=a:blinkon0
 
   "hide toolbar, scrollbar and menubar
@@ -899,7 +936,6 @@ if has("gui_running")
   set guioptions-=m
   set guioptions-=T
   set guioptions-=e
-
 endif
 
 " }}}

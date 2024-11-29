@@ -1,4 +1,13 @@
 if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
+
+  function s:FZFViewOpts(opts, width, height)
+    if exists('$TMUX')
+      let a:opts['tmux'] = '-p'.a:width.'%,'.a:height.'%'
+    else
+      let a:opts['window'] = { 'width': a:width/100, 'height': a:height/100 , 'border': 'sharp' }
+    endif
+  endfunction
+
   " Sink Function Git Edit: {{{
   function s:GitEditFile(mode, commit, file)
     if match(a:mode, 'ctrl-s') == 0
@@ -10,7 +19,6 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
     endif
   endfunction
   "}}}
-
   " Git Checkout File Branch: {{{
   function s:GitEditBranchFile(branch)
     let [l:mode, l:commit] = split(substitute(a:branch, "\\(ctrl-.\\)\\?[ *\\n]*\\(remotes\\/\\)\\?\\([a-zA-Z0-9\\/:-]\\+\\).*", '\1 \3', ''), '', 1)
@@ -25,18 +33,12 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
           \ 'sink': function('s:GitEditBranchFile'),
           \ 'options': "--delimiter='[* ]+' --nth=2 --print0 --tiebreak=index --expect=ctrl-v,ctrl-s --bind='ctrl-/:toggle-preview' --prompt 'ViewCurrentFile> ' --ansi --no-info --preview 'git diff HEAD..{2} " . l:fname . l:suffix ."'"}
 
-    if exists('$TMUX')
-      let opts['tmux'] = '-p80%,70%'
-    else
-      let opts['window'] = { 'width': 0.8, 'height': 0.7 , 'border': 'sharp' }
-    endif
-
+    call s:FZFViewOpts(opts, 80, 70)
     call fzf#run(opts)
   endfunction
 
   command! -nargs=0 FZFGitEditBranchFile call s:FZFGitEditBranchFile()
   " }}}
-
   " Git Edit Commit File: {{{
   function s:GitEditCommitFile(commit)
     " TODO THIS FUNCTION IS CURRENTLY BROKEN
@@ -50,11 +52,8 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
             \ 'source': 'git ls-tree --name-only -r ' . l:hash,
             \ 'sink': '"',
             \ 'options': "--expect=ctrl-v,ctrl-s --print0 --ansi --prompt 'ViewFile @ ".l:hash."> ' --inline-info --bind='ctrl-/:toggle-preview' --preview '~/.vim/plugged/fzf.vim/bin/preview.sh {}'"}
-      if exists('$TMUX')
-        let opts['tmux'] = '-p80%,70%'
-      else
-        let opts['window'] = { 'width': 0.8, 'height': 0.7 , 'border': 'sharp' }
-      endif
+
+      call s:FZFViewOpts(opts, 80, 70)
       let l:file = fzf#run(fzf#wrap(opts))
       if len(l:file) == 0
         return
@@ -74,11 +73,7 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
           \ 'source': git_cmd,
           \ 'sink': function('s:GitEditCommitFile'),
           \ 'options': "--prompt 'ViewFile> ' --ansi --layout=reverse-list --header ':: \e[1;33mEnter\e[m / \e[1;33mctrl-s\e[m / \e[1;33mctrl-v\e[m to open current file. \e[1;33mCtrl-Space\e[m to open file selection on that commit' --no-info --tiebreak=index --print0 --expect enter,ctrl-v,ctrl-s '--bind=ctrl-space:accept'"}
-    if exists('$TMUX')
-      let opts['tmux'] = '-p80%,70%'
-    else
-      let opts['window'] = { 'width': 0.8, 'height': 0.7 , 'border': 'sharp' }
-    endif
+    call s:FZFViewOpts(opts, 80, 70)
     call fzf#run(opts)
   endfunction
 
@@ -87,19 +82,24 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
 
   " AsyncTasks Runner: {{{
   function s:RunTask(what)
-    let p1 = stridx(a:what, '|')
-    if match(a:what, 'ctrl-l') == 0
+    if len(a:what) < 2
+      return
+    endif
+    let p1 = stridx(a:what[1], '|')
+    if match(a:what[0], 'ctrl-l') == 0
       " type it
-      let command = substitute(a:what[p1+2:], '^\s*\(.\{-}\)\s*$', '\1', '')
-      call VimuxOpenRunner()
+      let command = substitute(a:what[1][p1+2:], '^\s*\(.\{-}\)\s*$', '\1', '')
+      if !exists('g:VimuxRunnerIndex') || match(VimuxTmux("list-panes -a -F '#{pane_id}'"), g:VimuxRunnerIndex)
+        call VimuxOpenRunner()
+      endif
       call VimuxSendText(trim(command) . ' ')
       call VimuxTmux('select-pane -t '.g:VimuxRunnerIndex)
-    elseif match(a:what, 'ctrl-e') == 0
+    elseif match(a:what[0], 'ctrl-e') == 0
       exec "AsyncTaskEdit"
     else
       " run task
       if p1 >= 0
-        let name = substitute(a:what[2:p1-1], '^\s*\(.\{-}\)\s*$', '\1', '')
+        let name = substitute(a:what[1][2:p1-1], '^\s*\(.\{-}\)\s*$', '\1', '')
         if name != ''
           exec "AsyncTask ". name
         endif
@@ -116,15 +116,10 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
     endfor
     let opts = {
           \ 'source': source,
-          \ 'sink': function('s:RunTask'),
-          \ 'options': "+m --delimiter='[| ]+' --nth=2 --ansi --expect=ctrl-l,ctrl-e --print0 --prompt 'Run Task > ' --no-info  --header ':: \e[1;33menter\e[m Run command. \e[1;33mctrl-l\e[m Type command. \e[1;33mctrl-e\e[m Edit tasks file'"}
+          \ 'sink*': function('s:RunTask'),
+          \ 'options': "+m --delimiter='[| ]+' --nth=2 --ansi --expect=ctrl-l,ctrl-e --prompt 'Run Task > ' --no-info  --header ':: \e[1;33menter\e[m Run command. \e[1;33mctrl-l\e[m Type command. \e[1;33mctrl-e\e[m Edit tasks file'"}
 
-    if exists('$TMUX')
-      let opts['tmux'] = '-p50%,40%'
-    else
-      let opts['window'] = { 'width': 0.5, 'height': 0.4 , 'border': 'sharp' }
-    endif
-
+    call s:FZFViewOpts(opts, 50, 40)
     call fzf#run(opts)
   endfunction
 
@@ -133,25 +128,71 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
 
   " Vimux Pick Runner Pane: {{{
   function s:VimuxSetPane(line)
-    let l:pane_path = substitute(a:line, '[* ]\+\(\d\+\.\d\+\) .*','\1', '')
+    let l:pane_path = substitute(a:line, '[* ]\+\([^:]\+\):\(\d\+\.\d\+\) .*','\1:\2', '')
     let g:VimuxRunnerIndex = substitute(VimuxTmux('display -t '.l:pane_path.' -p "#{pane_id}"'), '\n$', '', '')
   endfunction
 
   function s:VimuxPickPaneFzf()
     let opts = {
-          \ 'source': 'tmux list-panes -s -F "\033[1;33m#{?pane_active,*, }\033[m:#I.#P:#{pane_current_command}:\033[1;30m#{?#{==:#W,#{pane_current_command}},,(#W)}\033[m:#{?window_linked,\033[1;36m[linked]\033[m,}"|column -ts":" -o" "|while read -r l;do echo "$l";done',
+          \ 'source': 'tmux list-panes -a -F "\033[1;33m#{?pane_active,*, }\033[m|\033[1;30m#S:\033[m#I.#P|#{pane_current_command}|\033[1;30m#{?#{==:#W,#{pane_current_command}},,(#W)}\033[m|#{?window_linked,\033[1;36m[linked]\033[m,}"|column -ts"|" -o" "|while read -r l;do echo "$l";done',
           \ 'sink': function('s:VimuxSetPane'),
           \ 'options': "--prompt 'Vimux Pane> ' --delimiter='[* ]+' --nth=2.. --ansi --no-info --preview='tmux capture-pane -ep -t {2}|cat -s|tail -n $(tput lines)' --preview-window=up,70%"}
 
-    if exists('$TMUX')
-      let opts['tmux'] = '-p60%,70%'
-    else
-      let opts['window'] = { 'width': 0.6, 'height': 0.7 , 'border': 'sharp' }
-    endif
-
+    call s:FZFViewOpts(opts, 60, 70)
     call fzf#run(opts)
   endfunction
 
   command! -nargs=0 FZFVimuxPickPane call s:VimuxPickPaneFzf()
+  " }}}
+
+  " Dap Api Command: {{{
+  function s:DapCommandSink(cmd)
+    execute 'lua ' . printf("require('dap')['%s']()", a:cmd)
+  endfunction
+
+  function s:DapCommandFZF()
+    let commands = luaeval("vim.tbl_filter(function(k) return type(require('dap')[k]) == 'function' end, vim.tbl_keys(require('dap')))")
+    call sort(commands)
+
+    let opts = {
+          \ 'source': commands,
+          \ 'sink': function('s:DapCommandSink'),
+          \ 'options': "--prompt 'DAP Command> '"}
+
+    call s:FZFViewOpts(opts, 50, 60)
+    call fzf#run(opts)
+  endfunction
+
+  command! -nargs=0 FZFDapCommand call s:DapCommandFZF()
+  " }}}
+  " Dap Api Breakpoints: {{{
+  function s:DapBreakpointsSink(position)
+    echo a:position
+    " execute 'lua ' . printf("require('dap')['%s']()", a:cmd)
+  endfunction
+
+  function s:DapBreakpointsFZF()
+    let breakpoints = luaeval(
+          \"vim.tbl_map("
+          \." function(bp) return vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bp.bufnr), ':~:.') .. ':' .. (bp.lnum or '') .. ': ' .. (bp.text or '') .. (bp.condition and ' ' .. bp.condition or '') end,"
+          \."(require('dap.breakpoints').to_qf_list(require('dap.breakpoints').get()) or {}) or {})")
+
+    if empty(breakpoints)
+      echohl ErrorMsg
+      echomsg "No breakpoints set."
+      echohl None
+      return
+    endif
+
+    let opts = {
+          \ 'source': breakpoints,
+          \ 'options': ['--reverse', '--preview-window=up', '--prompt=DAP Breakpoints> ']
+          \ }
+
+    call s:FZFViewOpts(opts, 60, 60)
+    call fzf#run(fzf#vim#with_preview(opts))
+  endfunction
+
+  command! -nargs=0 FZFDapBreakpoints call s:DapBreakpointsFZF()
   " }}}
 endif
