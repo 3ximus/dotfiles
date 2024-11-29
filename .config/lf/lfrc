@@ -58,7 +58,11 @@ cmd bulkrename ${{
     paste "$old" "$new" | while IFS= read -r names; do
         src="$(printf '%s' "$names" | cut -f1)"
         dst="$(printf '%s' "$names" | cut -f2)"
-        if [ "$src" = "$dst" ] || [ -e "$dst" ]; then
+        if [ "$src" = "$dst" ]; then
+            continue
+        fi
+        if [ -e "$dst" ]; then
+            lf -remote "send $id echoerr $src -> $dst failed. File already exists"
             continue
         fi
         mv -- "$src" "$dst"

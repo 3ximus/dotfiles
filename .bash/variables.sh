@@ -28,4 +28,6 @@ export FZF_MARKS_PASTE="ctrl-l"
 
 # batcat
 export BAT_THEME="gruvbox-dark"
+export BAT_PAGER=""
+export BAT_STYLE="numbers"
 

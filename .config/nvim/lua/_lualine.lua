@@ -143,13 +143,17 @@ require("lualine").setup({
           newfile = '[New]',
         }
       },
+      -- {'%<%{fnamemodify(expand("%:p:h"), ":~:.:g")}/',
+      --   color = function() return vim.bo.modified and {fg = default_status_colors.modified, gui = ''} or {fg = default_status_colors.saved, gui = ''} end },
+      -- {'%<%t%m',
+      --   color = function() return vim.bo.modified and {fg = default_status_colors.modified, gui = 'bold'} or {fg = default_status_colors.saved, gui = 'bold'} end },
       {'b:coc_current_function', color = { fg = colors.green, gui = 'bold' }}
     },
     lualine_x = {'filetype',
       {'diagnostics',
         sections = { 'error', 'warn', 'info', 'hint' },
         -- symbols = { error = '', warn = '', info = '' },
-        symbols = { error = '', warn = '', info = '' },
+        symbols = { error = '', warn = '', info = '', hint = '' },
         diagnostics_color = {
           error = { bg = colors.lightred, fg = colors.black, gui = 'bold' },
           warn = { bg = colors.yellow, fg = colors.black, gui = 'bold' },
@@ -160,8 +164,12 @@ require("lualine").setup({
     },
     lualine_y = {'searchcount'},
     lualine_z = {
-      'progress',
-      'location',
+      -- 'progress',
+      -- 'location',
+      '%p%% %l/%L:%c',
+      -- {'%p%% %l/', color = { fg=colors.black, gui='none' }, padding = { left = 1 }},
+      -- {'%L:', color = { fg=colors.black, gui='bold' }, padding = 0},
+      -- {'%c', color = { fg=colors.black, gui='none' }, padding = { left = 0 }},
       { trailing_spaces, color = { bg = colors.orange, fg = colors.black, gui='bold' }},
       { mixed_indent, color = { bg = colors.yellow, fg = colors.black, gui='bold' }}
     }
@@ -170,7 +178,7 @@ require("lualine").setup({
     lualine_a = {},
     lualine_b = {},
     lualine_c = {'filename'},
-    lualine_x = {'progress', 'location'},
+    lualine_x = {'%p%% %l/%L:%c'},
     lualine_y = {},
     lualine_z = {}
   },
