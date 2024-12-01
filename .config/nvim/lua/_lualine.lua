@@ -51,30 +51,6 @@ local gruvbox_theme = {
   },
 }
 -- }}}
--- Custom Filename Component {{{
-local custom_fname = require('lualine.components.filename'):extend()
-local highlight = require'lualine.highlight'
-local default_status_colors = { saved = colors.lightgray, modified = colors.lightblue }
-
-function custom_fname:init(options)
-  custom_fname.super.init(self, options)
-  self.status_colors = {
-    saved = highlight.create_component_highlight_group(
-      {fg = default_status_colors.saved}, 'filename_status_saved', self.options),
-    modified = highlight.create_component_highlight_group(
-      {fg = default_status_colors.modified, gui = 'bold'}, 'filename_status_modified', self.options),
-  }
-  if self.options.color == nil then self.options.color = '' end
-end
-
-function custom_fname:update_status()
-  local data = custom_fname.super.update_status(self)
-  data = highlight.component_format_highlight(vim.bo.modified
-                                              and self.status_colors.modified
-                                              or self.status_colors.saved) .. data
-  return data
-end
--- }}}
 -- Trailing Spaces Component {{{
 local function trailing_spaces()
   local space = vim.fn.search([[\s\+$]], 'nwc', 0, 200)
@@ -120,7 +96,7 @@ require("lualine").setup({
     ignore_focus = {},
     always_divide_middle = false,
     always_show_tabline = false,
-    globalstatus = false,
+    globalstatus = true,
     refresh = {
       statusline = 400,
       tabline = 1000,
@@ -131,23 +107,13 @@ require("lualine").setup({
     lualine_a = {{ 'mode', fmt = function(str) return str:sub(1,1) end }},
     lualine_b = { 'branch' },
     lualine_c = {
-      {
-        custom_fname,
-        file_status = true,
-        newfile_status = true,
-        path = 1,
-        symbols = {
-          modified = '+',
-          readonly = '[RO]',
-          unnamed = '[No Name]',
-          newfile = '[New]',
-        }
-      },
-      -- {'%<%{fnamemodify(expand("%:p:h"), ":~:.:g")}/',
-      --   color = function() return vim.bo.modified and {fg = default_status_colors.modified, gui = ''} or {fg = default_status_colors.saved, gui = ''} end },
-      -- {'%<%t%m',
-      --   color = function() return vim.bo.modified and {fg = default_status_colors.modified, gui = 'bold'} or {fg = default_status_colors.saved, gui = 'bold'} end },
-      {'b:coc_current_function', color = { fg = colors.green, gui = 'bold' }}
+      {'%<%{fnamemodify(expand("%:p:h"), ":~:.:g")}/',
+        padding = { right = 0 , left = 1},
+        color = function() return vim.bo.modified and {fg = colors.lightblue, gui = ''} or {fg = colors.lightgray, gui = ''} end },
+      {'%<%t%m',
+        padding = { left = 0 , right = 1},
+        color = function() return vim.bo.modified and {fg = colors.lightblue, gui = 'bold'} or {fg = colors.lightgray, gui = 'bold'} end },
+      {'b:coc_current_function', color = { bg = colors.blue, fg = colors.black, gui = 'bold' }}
     },
     lualine_x = {'filetype',
       {'diagnostics',

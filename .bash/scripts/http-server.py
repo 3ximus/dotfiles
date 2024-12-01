@@ -4,6 +4,9 @@
 #  - logging of headers and body content
 #  - serving files on a directory
 #  - saving files in body into an output directory
+#  - serving custom response headers
+#
+# see usage: http-server.py -h
 
 import argparse
 import builtins
@@ -31,8 +34,8 @@ builtins.print = custom_print
 
 def parse_headers(headers):
   d = {}
-  for header in args.response_headers:
-    if ':' in header: 
+  for header in headers:
+    if ':' in header:
       params = header.split(':', 1)
       d[params[0].strip()] = params[1].strip()
   return d
@@ -59,6 +62,12 @@ class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
   @override
   def do_GET(self):
     super().do_GET()
+    self.log(self.statuscode or HTTPStatus.OK)
+    self.verbose_print()
+
+  @override
+  def do_HEAD(self):
+    super().do_HEAD()
     self.log(self.statuscode or HTTPStatus.OK)
     self.verbose_print()
 
@@ -89,7 +98,8 @@ class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     timestamp = "%02d-%02d-%04d %02d:%02d:%02d" % (day, month, year, hh, mm, ss)
     codeStr = f'\033[1;31m{code}\033[m' if int(code)//100 >= 4  else f'\033[1;32m{code}\033[m'
     REQUEST_COUNT += 1
-    print(f' +\033[1;30m{REQUEST_COUNT}\033[m {timestamp} \033[1;33m{self.address_string()}\033[m  |  \033[1;34m{self.requestline}\033[m {codeStr} {size}')
+    method, path, protocol = self.requestline.split() # hopefully this is safe
+    print(f' +\033[1;30m{REQUEST_COUNT}\033[m {timestamp} \033[1;33m{self.address_string()}\033[m  |  \033[1;34m{method}\033[m {path} \033[1;30m{protocol}\033[m {codeStr} {size}')
 
   def send_custom_headers(self):
     if not args.response_headers: return
@@ -102,8 +112,9 @@ class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     super().end_headers()
 
   @override
-  def log_error(self, format, *args):
-    sys.stderr.write(f'\033[1;31m -\033[m {format % args}\n')
+  def log_error(self, _, *args):
+    if args[0] == 404: return
+    sys.stderr.write(f'\033[1;31m -\033[m {'\033[1;31m%d: %s\033[m' % args}\n')
 
   @override
   def send_response(self, code, message=None):
@@ -121,7 +132,7 @@ class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
 
 
 if __name__ == '__main__':
-  parser = argparse.ArgumentParser(prog='Simple HTTP Server wrapper',)
+  parser = argparse.ArgumentParser(prog='http-server.py',)
   parser.add_argument('port', nargs='?', default=8000, type=int, help="(default: %(default)s)")
   parser.add_argument('-H', '--headers', action='store_true', help="print headers")
   parser.add_argument('-B', '--body', action='store_true', help="print body")
@@ -136,7 +147,7 @@ if __name__ == '__main__':
       self.RequestHandlerClass(request, client_address,
                                self, directory=args.directory)
   COLORED_OUTPUT = args.color or sys.stdout.isatty()
-  try: 
+  try:
     httpd = Server(('', args.port), HTTPRequestHandler)
   except PermissionError as exception:
     if os.geteuid() != 0:
@@ -154,5 +165,5 @@ if __name__ == '__main__':
   try:
     httpd.serve_forever()
   except KeyboardInterrupt:
-    print('bye')
+    print('\rbye!')
     sys.exit()
