@@ -36,6 +36,8 @@
 	lol = log --oneline --graph --pretty=format:'%C(yellow)%h%Creset %C(auto)%d%Creset %s (%Cblue%an%Creset, %cr)' --date-order  --color=always
 	summary = !which onefetch && onefetch --no-color-palette --no-art
 
+[interactive]
+	diffFilter = delta --color-only
 [delta]
 	features = line-numbers decorations
 	syntax-theme = none
@@ -46,11 +48,12 @@
 	plus-emph-style = bold 10 reverse
 	plus-non-emph-style = bold 2
 	whitespace-error-style = 22 reverse
-[interactive]
-	diffFilter = delta --color-only
 [delta "decorations"]
-	file-style = bold cyan ul
+	file-style = bold yellow
 	file-decoration-style = none
+	hunk-header-decoration-style = none
+	hunk-header-line-number-style = bold blue
+	hunk-header-style = line-number blue
 [delta "line-numbers"]
 	line-numbers-minus-style = 1 bold
 	line-numbers-plus-style = 2 bold

@@ -1,6 +1,10 @@
-/* remove folder icons from bookmarks */
-#personal-bookmarks .bookmark-item[container="true"] .toolbarbutton-icon {
-  display: none !important;
+:root {
+  --tabpanel-background-color: #282828 !important;
+  --tab-min-height: 30px !important;
+  --tab-border-radius: 0 !important;
+  --tab-block-margin: 0 !important;
+  --toolbarbutton-inner-padding: 6px !important;
+  --toolbarbutton-border-radius: 0 !important;
 }
 
 /* remove title bar space between tab list and window buttons */
@@ -11,6 +15,8 @@
   display: none !important;
 }
 
+/* Tabs */
+
 .tab-background {
   margin-block: 0 !important;
 }
@@ -19,12 +25,41 @@
   height: var(--tab-min-height);
 }
 
-/* show close button only on hover */
-.tabbrowser-tab:not([pinned]) .tab-close-button {
-  opacity: 0;
+#tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs])
+  > #tabbrowser-arrowscrollbox
+  > .tabbrowser-tab[first-visible-unpinned-tab] {
+  margin-inline-start: 0 !important;
 }
-.tabbrowser-tab:not([pinned]) .tab-close-button:hover {
-  opacity: 1;
+#tabbrowser-tabs .tabbrowser-tab .tab-content {
+  padding: 6px !important;
+  max-height: 30px !important;
+}
+
+.tab-background {
+  border-right: 0px solid rgba(0, 0, 0, 0) !important;
+  margin-left: -4px !important;
+}
+
+.tabbrowser-tab:is([visuallyselected="true"], [multiselected])
+  > .tab-stack
+  > .tab-background {
+  box-shadow: none !important;
+}
+
+.tabbrowser-tab[last-visible-tab="true"] {
+  padding-inline-end: 0 !important;
+}
+
+.tab-close-button {
+  display: none;
+}
+
+/* greyed out unloaded tabs */
+.tabbrowser-tab[pending="true"] {
+  color: #7c6f64 !important;
+}
+.tabbrowser-tab:not([pinned])[pending="true"] .tab-icon-image {
+  filter: grayscale(0.8) brightness(50%);
 }
 
 /* hide the '+' (new tab) button from the tab bar until hover */
@@ -33,15 +68,17 @@
 }
 
 /* prepend the tab number before tab name */
-.browser-toolbar {
-  counter-reset: tabindex;
-}
-.tab-label::before {
-  counter-increment: tabindex;
-  content: counter(tabindex) ":";
-  white-space: pre;
-  opacity: 0.5;
-}
+/* .browser-toolbar { */
+/*   counter-reset: tabindex; */
+/* } */
+/* .tab-label::before { */
+/*   counter-increment: tabindex; */
+/*   content: counter(tabindex) ":"; */
+/*   white-space: pre; */
+/*   opacity: 0.5; */
+/* } */
+
+/* Url */
 
 /* change color of urls on address bar dropdown popup */
 .urlbarView-url {
@@ -53,9 +90,30 @@
   color: #282828 !important;
 }
 
-/* tab background before loading and unable to load page */
-:root {
-  --tabpanel-background-color: #282828 !important;
+/* #nav-bar:not([tabs-hidden="true"]) { */
+/*   box-shadow: none; */
+/* } */
+
+#urlbar-input-container {
+  background-color: var(--sfsecondary) !important;
+  border: 2px solid rgba(0, 0, 0, 0) !important;
+}
+
+#urlbar-container {
+  margin-left: 0 !important;
+}
+
+#urlbar[focused="true"] > #urlbar-background {
+  box-shadow: none !important;
+}
+
+#navigator-toolbox {
+  border: none !important;
+}
+
+/* remove folder icons from bookmarks */
+#personal-bookmarks .bookmark-item[container="true"] .toolbarbutton-icon {
+  display: none !important;
 }
 
 @-moz-document url-prefix(about:blank) {

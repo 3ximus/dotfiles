@@ -141,7 +141,7 @@ Plug 'lambdalisue/vim-suda', { 'on': ['SudaRead', 'SudaWrite'] }
 " GIT
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
-Plug 'stsewd/fzf-checkout.vim', { 'on': 'FZFGBranches' }
+Plug 'stsewd/fzf-checkout.vim', { 'on': ['FZFGBranches', 'FZFGTags'] }
 
 Plug 'godlygeek/tabular', { 'on': ['Tabularize'] }
 
@@ -768,7 +768,8 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
 
   " fzf-checkout
   let g:fzf_checkout_git_options = '--sort=-committerdate'
-  noremap <leader>gb :FZFGBranches<CR>
+  noremap <leader>gb :FZFGBranches --locals<CR>
+  noremap <leader>gt :FZFGTags<CR>
   noremap <leader>gC :FZFCommits --pretty=format:'\%C(yellow)\%h\%Creset \%C(auto)\%d\%Creset \%s (\%Cblue\%an\%Creset, \%cr)'<CR>
   noremap <leader>gc :FZFBCommits --pretty=format:'%C(yellow)%h%Creset %C(auto)%d%Creset %s (%Cblue%an%Creset, %cr)'<CR>
   vmap <leader>gc :FZFBCommits --pretty=format:'%C(yellow)%h%Creset %C(auto)%d%Creset %s (%Cblue%an%Creset, %cr)'<CR>

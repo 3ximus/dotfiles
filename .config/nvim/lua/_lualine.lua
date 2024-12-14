@@ -87,8 +87,8 @@ require("lualine").setup({
   options = {
     icons_enabled = false,
     theme = gruvbox_theme,
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
+    section_separators = '',
+    component_separators = '',
     disabled_filetypes = {
       statusline = {},
       winbar = {},
@@ -113,7 +113,10 @@ require("lualine").setup({
       {'%<%t%m',
         padding = { left = 0 , right = 1},
         color = function() return vim.bo.modified and {fg = colors.lightblue, gui = 'bold'} or {fg = colors.lightgray, gui = 'bold'} end },
-      {'b:coc_current_function', color = { bg = colors.blue, fg = colors.black, gui = 'bold' }}
+      {'b:coc_current_function',
+        separator = { left = '', right = ''},
+        padding = 0,
+        color = { fg = colors.black, bg = colors.blue, gui = 'bold' }}
     },
     lualine_x = {'filetype',
       {'diagnostics',
@@ -163,5 +166,5 @@ require("lualine").setup({
     lualine_y = {},
     lualine_z = {{ 'tabs', mode = 2, symbols = { modified = '+', } }}
   },
-  extensions = {'quickfix', 'oil', 'fugitive', 'nerdtree'}
+  extensions = {'quickfix', 'oil', 'fugitive', 'nerdtree', 'nvim-dap-ui'}
 })
