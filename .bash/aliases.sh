@@ -72,8 +72,10 @@ alias urldecode='python3 -c "import sys,urllib.parse;print(urllib.parse.unquote(
 # vagrant alias
 alias vu="vagrant up"
 alias vs="vagrant status"
-alias vsh="vagrant ssh"
 alias vh="vagrant halt"
+alias vrdp="vagrant rdp -- /cert:ignore /dynamic-resolution +clipboard +drive:smbfolder,$PWD"
+alias vsh="vagrant ssh"
+alias vsh-tmux="vagrant ssh -- -t tmux new-session -A -s vm"
 
 # SSH
 alias load-keychain='[[ -f "${HOME}/.ssh/id_rsa" ]] && keychain "${HOME}/.ssh/id_rsa" --quiet && source "${HOME}/.keychain/${HOSTNAME}-sh"'

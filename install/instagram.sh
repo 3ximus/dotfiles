@@ -9,8 +9,8 @@ fi
 
 if hash nativefier &>/dev/null ; then
 	echo "Choose instagram theme:"
-	select theme_path in ../styles/*.css ; do break; done
-	nativefier --inject $theme_path --icon "${DATA_PATH}/icons/instagram.png" --name instagram --counter --single-instance instagram.com /tmp/instagram
+	select theme_path in ./styles/*.css ; do break; done
+	nativefier --inject $theme_path --icon "./icons/instagram.png" --name instagram --counter --single-instance instagram.com /tmp/instagram
 	if [ -d "/opt/instagram" ] ; then
 		echo "Deleting previous Instagram installation"
 		sudo rm -r "/opt/instagram"
