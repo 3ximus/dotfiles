@@ -95,8 +95,6 @@ My [modified whatsapp style](https://github.com/3ximus/gruvbox-dark-whatsapp) (n
 - [icons](https://github.com/3ximus/dotfiles/tree/master/icons) contains [papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) icons edited to match gruvbox style (there is a script inside to install these icons)
 - [css](https://github.com/3ximus/dotfiles/tree/master/css) contains styles to inject somewhere
 - `.gdbinit` contains a dashboard from [gdb-dashboard](https://github.com/cyrus-and/gdb-dashboard) that takes gdb out of the dark ages.
-- `custom.layout.latte` contains [latte-dock](/etc/update-manager/release-upgrades.) configuration
-
 
 - *Files inside `.config`*
     - [bottom](https://github.com/ClementTsang/bottom) and `htop` configs
