@@ -9,6 +9,7 @@
 # see usage: http-server.py -h
 
 import argparse
+import base64
 import builtins
 from http import HTTPStatus
 import http.server
@@ -43,11 +44,12 @@ def parse_headers(headers):
 class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
   @override
   def do_POST(self):
+    global REQUEST_COUNT
     try:
       size = int(self.headers['Content-Length'])
       # store post data on the handler to be accessed later
       self.data = self.rfile.read(int(self.headers['Content-Length']))
-      if args.output: self.save_file()
+      if args.output: self.save_post_data()
       self.log(HTTPStatus.OK, size)
       self.verbose_print()
       self.send_response(HTTPStatus.OK)
@@ -58,18 +60,29 @@ class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
       self.send_response(HTTPStatus.INTERNAL_SERVER_ERROR)
       self.end_headers()
       self.wfile.write(b'failed\n')
+    finally:
+      REQUEST_COUNT += 1
+      if REQUEST_COUNT >= args.kill_after:
+        self.server.shutdown()
 
   @override
   def do_GET(self):
+    global REQUEST_COUNT
     super().do_GET()
     self.log(self.statuscode or HTTPStatus.OK)
     self.verbose_print()
+    REQUEST_COUNT += 1
+    if REQUEST_COUNT >= args.kill_after:
+      self.server.shutdown()
 
   @override
   def do_HEAD(self):
     super().do_HEAD()
     self.log(self.statuscode or HTTPStatus.OK)
     self.verbose_print()
+    REQUEST_COUNT += 1
+    if REQUEST_COUNT >= args.kill_after:
+      self.server.shutdown()
 
   def verbose_print(self):
     if args.headers:
@@ -78,26 +91,54 @@ class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
       try:
         print(self.data.decode())
       except UnicodeDecodeError:
-        print(self.data.hex())
+        print(base64.encodebytes(self.data).decode())
     if args.headers or (args.body and hasattr(self, 'data')):
       print(f'\033[1;30m{'-'*20} {REQUEST_COUNT}\033[m')
 
-  def save_file(self):
+  def save_post_data(self):
     outdir = os.path.join(args.directory, args.output)
     if not os.path.isdir(outdir):
       os.mkdir(outdir)
 
     with tempfile.NamedTemporaryFile(prefix="", dir=outdir, delete=False) as ofile:
-      print(f'+ \x1b[1;34msaving #{REQUEST_COUNT} > {ofile.name}\x1b[m')
+      print(f'+ \x1b[1;34msaving #{REQUEST_COUNT} >\x1b[m {ofile.name}')
       ofile.write(self.data)
 
+      if self.headers.get('Content-Type').startswith('multipart/form-data'):
+        boundary = self.headers.get('Content-Type').split('boundary=')[-1]
+        for part in self.parse_multipart(self.data, boundary):
+          headers = part['headers']
+          body = part['body']
+          if 'Content-Disposition' in headers:
+            if 'filename' in headers['Content-Disposition']:
+              filename = headers['Content-Disposition'].split('filename="')[-1].split('"')[0]
+              with open(f'{ofile.name}.{filename}', 'wb') as ofile_part:
+                print(f'+ \x1b[1;34msaving #{REQUEST_COUNT} (attachment) >\x1b[m {ofile_part.name}')
+                ofile_part.write(body)
+
+  def parse_multipart(self, data, boundary):
+    """Parse multipart form data."""
+    boundary = boundary.encode()
+    parts = data.split(b'--' + boundary)
+    parsed_data = []
+
+    for part in parts:
+      if not part or part == b'--\r\n': continue
+      headers, _, body = part.partition(b'\r\n\r\n')
+      headers = headers.decode('utf-8').split('\r\n')
+      header_dict = {}
+      for header in headers:
+        if ': ' in header:
+          key, value = header.split(': ', 1)
+          header_dict[key] = value
+      parsed_data.append({"headers": header_dict, "body": body.rstrip(b'\r\n')})
+    return parsed_data
+
   def log(self, code='-', size='-'):
-    global REQUEST_COUNT
     now = time.time()
     year, month, day, hh, mm, ss, _, _, _ = time.localtime(now)
     timestamp = "%02d-%02d-%04d %02d:%02d:%02d" % (day, month, year, hh, mm, ss)
     codeStr = f'\033[1;31m{code}\033[m' if int(code)//100 >= 4  else f'\033[1;32m{code}\033[m'
-    REQUEST_COUNT += 1
     method, path, protocol = self.requestline.split() # hopefully this is safe
     print(f' +\033[1;30m{REQUEST_COUNT}\033[m {timestamp} \033[1;33m{self.address_string()}\033[m  |  \033[1;34m{method}\033[m {path} \033[1;30m{protocol}\033[m {codeStr} {size}')
 
@@ -139,6 +180,7 @@ if __name__ == '__main__':
   parser.add_argument('-R', '--response-headers', nargs='*', help="set response headers (eg: 'Set-Cookie: <cookie-name>=<cookie-value>')")
   parser.add_argument('-d', '--directory', default=os.getcwd(), nargs='?', help="serve this directory (default: './')")
   parser.add_argument('-o', '--output', help="save post data in given OUTPUT directory. The base directory of the output destination is determined with the -d flag ( DIRECTORY/OUTPUT ). If absolute path is given then that's used instead")
+  parser.add_argument('-k', '--kill-after', type=int, help="kill server after n requests")
   parser.add_argument('--color', action='store_true', help="force use colors even when output is redirected")
   args = parser.parse_args()
 
