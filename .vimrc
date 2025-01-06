@@ -760,6 +760,7 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
   nmap <leader>: :FZFHistory:<CR>
   nmap <leader>M :FZFMaps<CR>
   nmap <leader>m :FZFMarks<CR>
+  nmap <leader>j :FZFJumps<CR>
 
   " coc fzf
   let g:coc_fzf_preview_toggle_key = '/'
