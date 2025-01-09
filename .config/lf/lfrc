@@ -98,6 +98,26 @@ cmd diff ${{
   fi
 }}
 
+cmd soft-link ${{
+  errfile="$(mktemp)"
+  ln -s $fs $PWD 2>$errfile
+  if [ $? -gt 0 ];then
+    lf -remote "send $id echoerr $(cat $errfile)"
+  else
+    lf -remote "send $id echo soft linked $fs"
+  fi
+}}
+
+cmd hard-link ${{
+  errfile="$(mktemp)"
+  ln $fs $PWD 2>$errfile
+  if [ $? -gt 0 ];then
+    lf -remote "send $id echoerr $(cat $errfile)"
+  else
+    lf -remote "send $id echo hard linked $fs"
+  fi
+}}
+
 # -------------- Mapping --------------
 
 # map e edit
@@ -106,6 +126,8 @@ map R bulkrename
 map <c-z> $ kill -STOP $PPID
 map Y clipboard
 map o push :openwith<space>
+map Ps soft-link
+map Ph hard-link
 
 # Movement
 map gh cd ~
