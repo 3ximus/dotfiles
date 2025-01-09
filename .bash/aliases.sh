@@ -54,8 +54,8 @@ alias gpd='git push --delete'
 alias gc='git commit'
 alias gca='git commit --amend'
 alias ga='git add .'
-alias gl='git lol | less' # because my own alias is too much typing
-alias gla='git lol --all | less'
+alias gl='git lol' # because my own alias is too much typing
+alias gla='git lol --all'
 alias gd='git diff'
 
 # list vm images
