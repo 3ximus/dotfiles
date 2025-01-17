@@ -185,7 +185,7 @@ lfcd () { # {{{
 # }}}
 
 history-clean() { # {{{
-	local pattern="^bb\|^cd\|^ls\|^mv\|^rm\|^ln\|^wc\|^kill\|^vim\|^echo\|^mkdir\|^du\|^df\|^ll\|^diff\|^eval --\|^chmod\|^touch\|^type\|^lf\|^cat\|^gunzip\|^gzip\|^tar\|^un \|^unzip\|^\.\/\|^sudo cp\|^sudo apt list\|^file^\|^less\|^cout\|^cin\|^gd\|^git checkout\|^git diff\|^git show\|^git branch\|^git restore\|^yarn test\|^yarn start\|^dolphin\|^vlc\|^python\|^batcat"
+	local pattern="^bb\|^cd\|^ls\|^mv\|^rm\|^ln\|^wc\|^kill\|^vim\|^echo\|^mkdir\|^du\|^df\|^ll\|^diff\|^delta\|^grep\|^eval --\|^chmod\|^touch\|^type\|^lf\|^cat\|^gunzip\|^gzip\|^tar\|^un \|^unzip\|^\.\/\|^sudo cp\|^sudo rm\|^sudo apt list\|^file^\|^less\|^cout\|^cin\|^gd\|^git checkout\|^git diff\|^git show\|^git branch\|^git restore\|^yarn test\|^yarn start\|^dolphin\|^vlc\|^python\|^batcat\|^bat\|^ping"
 	sed "/${pattern}/d" -i ~/.bash_history
 	sed 's/\s\+$//' -i ~/.bash_history # strip trailing white spaces
 }

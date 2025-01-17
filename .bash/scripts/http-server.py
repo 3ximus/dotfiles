@@ -72,7 +72,7 @@ class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     self.log(self.statuscode or HTTPStatus.OK)
     self.verbose_print()
     REQUEST_COUNT += 1
-    if REQUEST_COUNT >= args.kill_after:
+    if args.kill_after and REQUEST_COUNT >= args.kill_after:
       self.server.shutdown()
 
   @override

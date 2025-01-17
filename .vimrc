@@ -309,7 +309,9 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 " start a search for visually selected text
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
-nmap <leader>x :bp<bar>bd #<CR>
+nmap <leader>x :bp<bar>bd#<CR>
+" close all other buffers
+nmap <leader>X :%bd<bar>e#<bar>bd#<CR>
 
 " Clear search highlight and close preview window
 if has('nvim')
