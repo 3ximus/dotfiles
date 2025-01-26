@@ -140,7 +140,10 @@ class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     timestamp = "%02d-%02d-%04d %02d:%02d:%02d" % (day, month, year, hh, mm, ss)
     codeStr = f'\033[1;31m{code}\033[m' if int(code)//100 >= 4  else f'\033[1;32m{code}\033[m'
     method, path, protocol = self.requestline.split() # hopefully this is safe
-    print(f' +\033[1;30m{REQUEST_COUNT}\033[m {timestamp} \033[1;33m{self.address_string()}\033[m  |  \033[1;34m{method}\033[m {path} \033[1;30m{protocol}\033[m {codeStr} {size}')
+    proxy_ip = None
+    if self.headers.get('X-Forwarded-For'):
+      proxy_ip = self.headers.get('X-Forwarded-For')
+    print(f' +\033[1;30m{REQUEST_COUNT}\033[m {timestamp} {f'\033[33m[{proxy_ip}]' if proxy_ip else ''} \033[1;33m{self.address_string()}\033[m  |  \033[1;34m{method}\033[m {path} \033[1;30m{protocol}\033[m {codeStr} {size}')
 
   def send_custom_headers(self):
     if not args.response_headers: return

@@ -94,7 +94,6 @@ alias py='ipython3'
 
 # KALI
 # start konsole emulator attached to remote tmux session
-alias kali-tmux='vagrant ssh -- -t tmux new-session -A -c /vagrant -s vm'
 alias cutter='LIBGL_ALWAYS_INDIRECT=1 /vagrant/tools/Cutter-v2.2.0-Linux-x86_64.AppImage'
 alias ghidra-server='sudo /usr/share/ghidra/server/ghidraSvr'
 alias ghidra-admin='sudo /usr/share/ghidra/server/svrAdmin'
@@ -105,10 +104,10 @@ alias ysoserial='java -jar --add-opens=java.xml/com.sun.org.apache.xalan.interna
 #      %eximus ALL= NOPASSWD: /bin/systemctl start plexmediaserver.service
 #      %eximus ALL= NOPASSWD: /bin/systemctl stop plexmediaserver.service
 #      %eximus ALL= NOPASSWD: /bin/systemctl restart plexmediaserver.service
-alias plex='sudo systemctl start plexmediaserver.service'
-alias plex-status='systemctl status plexmediaserver.service'
-alias plex-stop='sudo systemctl stop plexmediaserver.service'
-alias plex-restart='sudo systemctl restart plexmediaserver.service'
+# alias plex='sudo systemctl start plexmediaserver.service'
+# alias plex-status='systemctl status plexmediaserver.service'
+# alias plex-stop='sudo systemctl stop plexmediaserver.service'
+# alias plex-restart='sudo systemctl restart plexmediaserver.service'
 
 # Map
 alias map-view='telnet mapscii.me'
