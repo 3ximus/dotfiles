@@ -17,6 +17,7 @@ import os
 import re
 import sys
 import tempfile
+from threading import Lock
 import time
 from typing import override
 
@@ -33,6 +34,15 @@ def custom_print(*args, **kwargs):
 builtins._original_print = print
 builtins.print = custom_print
 
+# make sure only one print function is run at one time
+# to prevent output being mixed together
+printlock = Lock()
+p = print
+def print(*a, **b):
+  with printlock:
+    p(*a, **b)
+
+# parse custom header parameters
 def parse_headers(headers):
   d = {}
   for header in headers:
