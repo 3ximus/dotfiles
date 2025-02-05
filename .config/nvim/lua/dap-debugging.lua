@@ -34,8 +34,6 @@ vim.fn.sign_define('DapBreakpointRejected', { text='', texthl='DapBreakpointS
 vim.fn.sign_define('DapLogPoint', { text='', texthl='DapUIBreakpointsInfo', linehl='DapUIBreakpointsInfo', numhl= 'DapUIBreakpointsInfo' })
 vim.fn.sign_define('DapStopped', { text='', texthl='DapStoppedSymbol', linehl='DapStoppedSymbol', numhl= 'DapStoppedSymbol' })
 
--- require("dap.utils").pick_file({ filter = ".*%.py", executables = false })
-
 -- javascript/typescript node {{{
 require("dap-vscode-js").setup({
   -- node_path = "node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
@@ -69,8 +67,17 @@ require('dap').configurations.python = {
     type = 'python',
     request = 'launch',
     name = 'Pick file',
-    program = '${command:pickFile}',
-    console = 'integratedTerminal'
+    console = 'integratedTerminal',
+    program = function()
+      local sel = vim.fn["fzf#run"](vim.fn["fzf#wrap"]({
+        source = "find . -type f -name '*.py' ! -path '*/venv/*' ! -path '*/.venv/*' ! -path '*/env/*'",
+        sink = function(file) print(file) end
+      }))
+      return sel[#sel] and sel[#sel] or require('dap').ABORT
+    end
   },
 }
+
+
+
 -- }}}
