@@ -1,53 +1,37 @@
 -- vim: foldmethod=marker foldlevel=0
 
--- Gruvbox theme {{{
-local colors = {
-  zero         = 0,
-  black        = '#282828',
-  white        = 15,
-  red          = 1,
-  lightred     = 9,
-  yellow       = 3,
-  aqua         = 14,
-  green        = 10,
-  blue         = 4,
-  lightblue    = 12,
-  orange       = 208,
-  gray         = 8,
-  darkgray     = 239,
-  lightgray    = 7,
-}
-
+-- Colorscheme {{{
+local colors = require('gruvbox').palette
 local gruvbox_theme = {
   normal = {
-    a = { bg = colors.lightgray, fg = colors.black, gui = 'bold' },
-    b = { bg = colors.darkgray, fg = colors.white },
-    c = { bg = colors.black, fg = colors.lightgray },
+    a = { bg = colors.light4, fg = colors.dark0, gui = 'bold' },
+    b = { bg = colors.dark2, fg = colors.light1 },
+    c = { bg = colors.dark0, fg = colors.light4 },
   },
   insert = {
-    a = { bg = colors.lightblue, fg = colors.black, gui = 'bold' },
-    b = { bg = colors.darkgray, fg = colors.white },
-    c = { bg = colors.black, fg = colors.lightgray },
+    a = { bg = colors.bright_blue, fg = colors.dark0, gui = 'bold' },
+    b = { bg = colors.dark2, fg = colors.light1 },
+    c = { bg = colors.dark0, fg = colors.light4 },
   },
   visual = {
-    a = { bg = colors.orange, fg = colors.black, gui = 'bold' },
-    b = { bg = colors.darkgray, fg = colors.white },
-    c = { bg = colors.black, fg = colors.lightgray },
+    a = { bg = colors.bright_orange, fg = colors.dark0, gui = 'bold' },
+    b = { bg = colors.dark2, fg = colors.light1 },
+    c = { bg = colors.dark0, fg = colors.light4 },
   },
   replace = {
-    a = { bg = colors.green, fg = colors.black, gui = 'bold' },
-    b = { bg = colors.darkgray, fg = colors.white },
-    c = { bg = colors.black, fg = colors.lightgray },
+    a = { bg = colors.bright_green, fg = colors.dark0, gui = 'bold' },
+    b = { bg = colors.dark2, fg = colors.light1 },
+    c = { bg = colors.dark0, fg = colors.light4 },
   },
   command = {
-    a = { bg = colors.aqua, fg = colors.black, gui = 'bold' },
-    b = { bg = colors.darkgray, fg = colors.white },
-    c = { bg = colors.black, fg = colors.lightgray },
+    a = { bg = colors.bright_aqua, fg = colors.dark0, gui = 'bold' },
+    b = { bg = colors.dark2, fg = colors.light1 },
+    c = { bg = colors.dark0, fg = colors.light4 },
   },
   inactive = {
-    a = { bg = colors.darkgray, fg = colors.lightgray, gui = 'bold' },
-    b = { bg = colors.darkgray, fg = colors.lightgray },
-    c = { bg = colors.black, fg = colors.lightgray },
+    a = { bg = colors.dark2, fg = colors.light4, gui = 'bold' },
+    b = { bg = colors.dark2, fg = colors.light4 },
+    c = { bg = colors.dark0, fg = colors.light4 },
   },
 }
 -- }}}
@@ -109,25 +93,36 @@ require("lualine").setup({
     lualine_c = {
       {'%<%{fnamemodify(expand("%:p:h"), ":~:.:g")}/',
         padding = { right = 0 , left = 1},
-        color = function() return vim.bo.modified and {fg = colors.lightblue, gui = ''} or {fg = colors.lightgray, gui = ''} end },
+        color = function() return vim.bo.modified and {fg = colors.bright_blue, gui = ''} or {fg = colors.light4, gui = ''} end },
       {'%<%t%m',
         padding = { left = 0 , right = 1},
-        color = function() return vim.bo.modified and {fg = colors.lightblue, gui = 'bold'} or {fg = colors.lightgray, gui = 'bold'} end },
+        color = function() return vim.bo.modified and {fg = colors.bright_blue, gui = 'bold'} or {fg = colors.light1, gui = 'bold'} end },
       {'b:coc_current_function',
         separator = { left = '', right = ''},
         padding = 0,
-        color = { fg = colors.black, bg = colors.blue, gui = 'bold' }}
+        color = { fg = colors.dark0, bg = colors.neutral_blue, gui = 'bold' }}
     },
-    lualine_x = {'filetype',
+    lualine_x = {
+      {
+        function() return require("dap").status() end,
+        separator = { left = '', right = ''},
+        padding = 0,
+        color = { fg = colors.dark0, bg = colors.neutral_green, gui = 'bold' },
+        cond = function()
+          if not package.loaded.dap then return false end
+          local session = require("dap").session()
+          return session ~= nil
+        end },
+      { 'filetype', cond = function() return vim.fn.winwidth(0) > 100 end },
       {'diagnostics',
         sections = { 'error', 'warn', 'info', 'hint' },
         -- symbols = { error = '', warn = '', info = '' },
         symbols = { error = '', warn = '', info = '', hint = '' },
         diagnostics_color = {
-          error = { bg = colors.lightred, fg = colors.black, gui = 'bold' },
-          warn = { bg = colors.yellow, fg = colors.black, gui = 'bold' },
-          info = { bg = colors.aqua, fg = colors.black, gui = 'bold' },
-          hint = { bg = colors.blue, fg = colors.black, gui = 'bold' },
+          error = { bg = colors.bright_red, fg = colors.dark0, gui = 'bold' },
+          warn = { bg = colors.bright_yellow, fg = colors.dark0, gui = 'bold' },
+          info = { bg = colors.bright_aqua, fg = colors.dark0, gui = 'bold' },
+          hint = { bg = colors.neutral_blue, fg = colors.dark0, gui = 'bold' },
         },
       },
     },
@@ -136,11 +131,11 @@ require("lualine").setup({
       -- 'progress',
       -- 'location',
       '%p%% %l/%L:%c',
-      -- {'%p%% %l/', color = { fg=colors.black, gui='none' }, padding = { left = 1 }},
-      -- {'%L:', color = { fg=colors.black, gui='bold' }, padding = 0},
-      -- {'%c', color = { fg=colors.black, gui='none' }, padding = { left = 0 }},
-      { trailing_spaces, color = { bg = colors.orange, fg = colors.black, gui='bold' }},
-      { mixed_indent, color = { bg = colors.yellow, fg = colors.black, gui='bold' }}
+      -- {'%p%% %l/', color = { fg=colors.dark0, gui='none' }, padding = { left = 1 }},
+      -- {'%L:', color = { fg=colors.dark0, gui='bold' }, padding = 0},
+      -- {'%c', color = { fg=colors.dark0, gui='none' }, padding = { left = 0 }},
+      { trailing_spaces, color = { bg = colors.bright_orange, fg = colors.dark0, gui='bold' }},
+      { mixed_indent, color = { bg = colors.bright_yellow, fg = colors.dark0, gui='bold' }}
     }
   },
   inactive_sections = {

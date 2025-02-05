@@ -96,18 +96,27 @@ cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W')
 call plug#begin('~/.vim/plugged')
 
 " COLORSCHEME
-Plug '3ximus/gruvbox'
+if has('nvim') && luaeval('vim.version()').major == 0 && luaeval('vim.version()').minor >= 10
+  Plug '3ximus/gruvbox.nvim'
+else
+  Plug '3ximus/gruvbox'
+endif
 
 " BASE
 if has('nvim')
+  Plug '3ximus/gruvbox.nvim'
   Plug 'stevearc/oil.nvim'
   Plug 'nvim-lualine/lualine.nvim'
 
+  " DAP
   Plug 'mfussenegger/nvim-dap'
   Plug 'nvim-neotest/nvim-nio'
   Plug 'rcarriga/nvim-dap-ui'
+  " nodejs debug
   Plug 'mxsdev/nvim-dap-vscode-js'
   Plug 'microsoft/vscode-js-debug', { 'do': 'npm ci --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out' }
+  " python debug
+  Plug 'mfussenegger/nvim-dap-python'
 else
   Plug '3ximus/vim-airline' " my fork switches position of the tabs and splits on tabline
 endif
@@ -353,23 +362,26 @@ vnoremap <leader>u[ :B !python3 -c 'import sys,urllib.parse;print(urllib.parse.u
 " HIGHLIGHT REDEFINITIONS {{{
 " ============================
 
-"GitGutter
-highlight clear SignColumn
-highlight link GitGutterAdd GruvboxGreen
-highlight link GitGutterChange GruvboxYellow
-highlight link GitGutterDelete GruvboxRed
-highlight link GitGutterChangeDelete GruvboxYellow
 
-" Markology
-highlight link MarkologyHLl GruvboxYellowBold
-highlight link MarkologyHLu GruvboxPurpleBold
-highlight link MarkologyHLm GruvboxOrangeBold
+if !(has('nvim') && luaeval('vim.version()').major == 0 && luaeval('vim.version()').major == 0 && luaeval('vim.version()').minor >= 10)
+  "GitGutter
+  highlight clear SignColumn
+  highlight link GitGutterAdd GruvboxGreen
+  highlight link GitGutterChange GruvboxYellow
+  highlight link GitGutterDelete GruvboxRed
+  highlight link GitGutterChangeDelete GruvboxYellow
 
-" Coc
-highlight link CocErrorSign GruvboxRedBold
-highlight link CocWarningSign GruvboxYellowBold
-highlight link CocInfoSign GruvboxPurpleBold
-highlight link CocHintSign GruvboxBlueBold
+  " Markology
+  highlight link MarkologyHLl GruvboxYellowBold
+  highlight link MarkologyHLu GruvboxPurpleBold
+  highlight link MarkologyHLm GruvboxOrangeBold
+
+  " Coc
+  highlight link CocErrorSign GruvboxRedBold
+  highlight link CocWarningSign GruvboxYellowBold
+  highlight link CocInfoSign GruvboxPurpleBold
+  highlight link CocHintSign GruvboxBlueBold
+endif
 
 if !has('gui_running')
   " Highlighted Yank
@@ -698,12 +710,12 @@ nnoremap <leader>tf :TestFile<CR>
 " dap
 if &rtp =~ 'nvim-dap' && &rtp =~ 'nvim-dap-ui' && glob("~/.vim/plugged/nvim-dap")!=#"" && glob("~/.vim/plugged/nvim-dap-ui")!=#""
   nmap <F5> :lua require('dap').continue()<CR>
-  nmap <F6> :lua require('dap.ui.widgets').hover()<CR>
+  nmap <F6> :lua require('dap').terminate()<CR>
   nmap <F7> :lua require('dap').step_into()<CR>
   nmap <F8> :lua require('dap').step_over()<CR>
   nmap <F9> :lua require('dap').step_out()<CR>
-  nmap <F10> :lua require('dap').terminate()<CR>
   nmap <leader>iu :lua require('dapui').toggle()<CR>
+  nmap <leader>ik :lua require('dap.ui.widgets').hover()<CR>
   nmap <leader>B :lua require('dap').toggle_breakpoint()<CR>
   nmap <leader>bl :lua require('dap').list_breakpoints(); vim.cmd('copen')<CR>
   nmap <leader>bC :lua require('dap').clear_breakpoints()<CR>
@@ -962,6 +974,7 @@ augroup CustomFugitiveMappings
   autocmd FileType fugitive nmap <buffer> czl :call ListStashes()<cr>
 augroup END
 
+let g:python_recommended_style = 0
 autocmd FileType python setlocal tabstop=2 shiftwidth=2 softtabstop=2 noexpandtab autoindent "because someone has too much screen space in their eyesight
 autocmd FileType python setlocal indentkeys-=<:> " colon will auto indent line in insert mode, remove that behavior
 autocmd FileType python setlocal indentkeys-=:

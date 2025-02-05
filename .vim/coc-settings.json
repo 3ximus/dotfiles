@@ -45,6 +45,7 @@
   "pyright.inlayHints.parameterTypes": false,
   "pyright.inlayHints.variableTypes": false,
   "pyright.inlayHints.functionReturnTypes": false,
+  "python.formatting.provider": "autopep8",
   "python.formatting.autopep8Args": ["--indent-size=2", "--ignore=E121"],
   "languageserver": {
     "godot": {
