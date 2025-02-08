@@ -113,8 +113,8 @@ if has('nvim')
   Plug 'nvim-neotest/nvim-nio'
   Plug 'rcarriga/nvim-dap-ui'
   " nodejs debug
-  Plug 'mxsdev/nvim-dap-vscode-js'
-  Plug 'microsoft/vscode-js-debug', { 'do': 'npm ci --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out' }
+  " Plug 'mxsdev/nvim-dap-vscode-js' -- I do this manually now
+  Plug 'microsoft/vscode-js-debug', { 'do': 'npm ci --legacy-peer-deps && npx gulp dapDebugServer' }
   " python debug
   Plug 'mfussenegger/nvim-dap-python'
 else
@@ -715,6 +715,7 @@ if &rtp =~ 'nvim-dap' && &rtp =~ 'nvim-dap-ui' && glob("~/.vim/plugged/nvim-dap"
   nmap <F8> :lua require('dap').step_over()<CR>
   nmap <F9> :lua require('dap').step_out()<CR>
   nmap <leader>iu :lua require('dapui').toggle()<CR>
+  " vmap <leader>ie :lua require('dapui').eval()<CR> " not working
   nmap <leader>ik :lua require('dap.ui.widgets').hover()<CR>
   nmap <leader>B :lua require('dap').toggle_breakpoint()<CR>
   nmap <leader>bl :lua require('dap').list_breakpoints(); vim.cmd('copen')<CR>

@@ -27,24 +27,38 @@ end
 dap.listeners.before.event_exited.dapui_config = function()
   dapui.close()
 end
--- •⦁⬤
-vim.fn.sign_define('DapBreakpoint', { text='⬤', texthl='DapBreakpointSymbol', linehl='DapBreakpointSymbol', numhl='DapBreakpointSymbol' })
+-- •⦁⬤⬣
+vim.fn.sign_define('DapBreakpoint', { text='⬣', texthl='DapBreakpointSymbol', linehl='DapBreakpointSymbol', numhl='DapBreakpointSymbol' })
 vim.fn.sign_define('DapBreakpointCondition', { text='', texthl='DapBreakpointSymbol', linehl='DapBreakpointSymbol', numhl='DapBreakpointSymbol' })
 vim.fn.sign_define('DapBreakpointRejected', { text='', texthl='DapBreakpointSymbol', linehl='DapBreakpointSymbol', numhl= 'DapBreakpointSymbol' })
 vim.fn.sign_define('DapLogPoint', { text='', texthl='DapUIBreakpointsInfo', linehl='DapUIBreakpointsInfo', numhl= 'DapUIBreakpointsInfo' })
 vim.fn.sign_define('DapStopped', { text='', texthl='DapStoppedSymbol', linehl='DapStoppedSymbol', numhl= 'DapStoppedSymbol' })
+vim.cmd('hi clear WinBarNC')
 
 -- javascript/typescript node {{{
-require("dap-vscode-js").setup({
-  -- node_path = "node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
-  debugger_path = "/home/eximus/.vim/plugged/vscode-js-debug", -- Path to vscode-js-debug installation.
-  -- debugger_cmd = { "js-debug-adapter" }, -- Command to use to launch the debug server. Takes precedence over `node_path` and `debugger_path`.
-  adapters = { 'pwa-node' }, -- which adapters to register in nvim-dap
-})
+
+-- require("dap-vscode-js").setup({
+--   -- node_path = "node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
+--   debugger_path = "/home/eximus/.vim/plugged/vscode-js-debug", -- Path to vscode-js-debug installation.
+--   -- debugger_cmd = { "js-debug-adapter" }, -- Command to use to launch the debug server. Takes precedence over `node_path` and `debugger_path`.
+--   adapters = { 'pwa-node' }, -- which adapters to register in nvim-dap
+-- })
+
+require('dap').adapters['pwa-node'] = {
+  type = 'server',
+  host = 'localhost',
+  port = '${port}',
+  executable = {
+    command = 'ts-node',
+    -- TODO improve building this path
+    args = { '/home/eximus/.vim/plugged/vscode-js-debug/dist/src/dapDebugServer.js', '${port}', },
+  },
+}
+
 for _, language in ipairs({ "typescript", "javascript" }) do
   require("dap").configurations[language] = {
     {
-      name = "Attach node",
+      name = "Node Attach",
       type = "pwa-node",
       request = "attach",
       cwd = "${workspaceFolder}",
@@ -59,7 +73,7 @@ require('dap').configurations.python = {
   {
     type = 'python',
     request = 'launch',
-    name = 'Launch current file',
+    name = 'Launch file',
     program = '${file}',
     console = 'integratedTerminal'
   },
@@ -77,7 +91,4 @@ require('dap').configurations.python = {
     end
   },
 }
-
-
-
 -- }}}

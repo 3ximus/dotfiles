@@ -33,11 +33,22 @@ require("gruvbox").setup({
     CocWarningSign = { link = 'GruvboxYellowBold' },
     CocInfoSign = { link = 'GruvboxPurpleBold' },
     CocHintSign = { link = 'GruvboxBlueBold' },
+
+    -- Dap
+    DapBreakpointSymbol = { fg = palette.bright_red, bg = palette.dark0 },
+    DapStoppedSymbol = { fg = palette.bright_green, bg = palette.dark0 },
+    DapUIPlayPause = { link = "GruvboxBlue" },
+    DapUIRestart = { link = "GruvboxBlue" },
+    DapUIStepBack = { link = "GruvboxBlue" },
+    DapUIStepInto = { link = "GruvboxBlue" },
+    DapUIStepOut = { link = "GruvboxBlue" },
+    DapUIStepOver = { link = "GruvboxBlue" },
+    DapUIStop = { link = "GruvboxRed" },
   }
 })
 vim.cmd("colorscheme gruvbox")
 
-prequire("_lualine")
+prequire("statusline")
 
 local oil = prequire("oil")
 if oil then
