@@ -104,7 +104,6 @@ endif
 
 " BASE
 if has('nvim')
-  Plug '3ximus/gruvbox.nvim'
   Plug 'stevearc/oil.nvim'
   Plug 'nvim-lualine/lualine.nvim'
 
