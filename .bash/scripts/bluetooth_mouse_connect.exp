@@ -1,0 +1,46 @@
+#!/usr/bin/expect -f
+
+set force_conservative 0  ;# set to 1 to force conservative mode even if script wasn't run conservatively originally
+if {$force_conservative} {
+	set send_slow {1 .1}
+	proc send {ignore arg} {
+		sleep .1
+		exp_send -s -- $arg
+	}
+}
+
+set mac_address "24:73:24:03:6C:C6"
+
+system "rfkill unblock bluetooth"
+
+set timeout -1
+spawn bluetoothctl
+match_max 100000
+expect "# "
+send -- "power on\r"
+expect "Changing power on succeeded"
+expect "# "
+send -- "remove $mac_address\r"
+expect -re "Device has been removed|Device $mac_address not available"
+
+expect "# "
+send -- "scan on\r"
+expect -re "Device $mac_address Insignia Bluetooth Mouse"
+
+send -- "scan off\r"
+expect "Discovery stopped"
+
+expect "# "
+send -- "pair $mac_address\r"
+expect "Pairing successful"
+
+expect "# "
+send -- "trust $mac_address\r"
+expect "Changing $mac_address trust succeeded"
+
+expect "# "
+send -- "connect $mac_address\r"
+expect "Connection successful"
+
+send -- ""
+expect eof
