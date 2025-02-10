@@ -50,19 +50,29 @@ require('dap').adapters['pwa-node'] = {
   port = '${port}',
   executable = {
     command = 'ts-node',
-    -- TODO improve building this path
-    args = { '/home/eximus/.vim/plugged/vscode-js-debug/dist/src/dapDebugServer.js', '${port}', },
+    args = { vim.fn.expand('$HOME/.vim/plugged/vscode-js-debug/dist/src/dapDebugServer.js'), '${port}', },
   },
 }
 
 for _, language in ipairs({ "typescript", "javascript" }) do
   require("dap").configurations[language] = {
     {
-      name = "Node Attach",
+      name = "Attach",
       type = "pwa-node",
       request = "attach",
       cwd = "${workspaceFolder}",
-    }
+    },
+    {
+      name = "Jest",
+      type = "pwa-node",
+      request = "launch",
+      runtimeExecutable = "node",
+      runtimeArgs = {"${workspaceFolder}/node_modules/.bin/jest", "--runInBand"},
+      args = function () return vim.fn.input({prompt = "Jest Arguments: ", default = ""}) end,
+      rootPath = "${workspaceFolder}",
+      cwd = "${workspaceFolder}",
+      console = "integratedTerminal",
+    },
   }
 end
 -- }}}
