@@ -991,6 +991,9 @@ autocmd FileType scss setl iskeyword+=@-@
 " disable folding on output of dadbod-ui
 autocmd FileType dbout setlocal nofoldenable
 
+" enable completion on dap repl
+autocmd FileType dap-repl lua require('dap.ext.autocompl').attach()
+
 " }}}
 
 " RUN COMMANDS ON EVENTS {{{

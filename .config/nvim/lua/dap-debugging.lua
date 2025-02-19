@@ -68,7 +68,7 @@ for _, language in ipairs({ "typescript", "javascript" }) do
       request = "launch",
       runtimeExecutable = "node",
       runtimeArgs = {"${workspaceFolder}/node_modules/.bin/jest", "--runInBand"},
-      args = function () return vim.fn.input({prompt = "Jest Arguments: ", default = ""}) end,
+      args = function () return vim.fn.input({ prompt = "Jest Arguments: ", default = "" }) end,
       rootPath = "${workspaceFolder}",
       cwd = "${workspaceFolder}",
       console = "integratedTerminal",

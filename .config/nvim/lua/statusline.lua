@@ -113,7 +113,7 @@ require("lualine").setup({
           local session = require("dap").session()
           return session ~= nil
         end },
-      { 'filetype', cond = function() return vim.fn.winwidth(0) > 100 end },
+      { 'filetype', cond = function() return vim.fn.winwidth(0) > 110 end },
       {'diagnostics',
         sections = { 'error', 'warn', 'info', 'hint' },
         -- symbols = { error = '', warn = '', info = '' },
