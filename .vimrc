@@ -287,16 +287,21 @@ nmap <C-W>n :tabnext<CR>
 nmap <C-W>p :tabprevious<CR>
 nmap <C-W>N :tabe %<CR>
 
+nnoremap <A-h> <C-W>h
+nnoremap <A-j> <C-W>j
+nnoremap <A-k> <C-W>k
+nnoremap <A-l> <C-W>l
+
 " run macro saved to q
 nnoremap <leader>q @q
 
 " move line
-nnoremap <C-j> :<C-U>m .+1<CR>
-nnoremap <C-k> :<C-U>m .-2<CR>
+" nnoremap <C-j> :<C-U>m .+1<CR>
+" nnoremap <C-k> :<C-U>m .-2<CR>
 " inoremap <C-j> <Esc>:m .+1<CR>gi
 " inoremap <C-k> <Esc>:m .-2<CR>gi
-vnoremap <C-j> :m '>+1<CR>gv
-vnoremap <C-k> :m '<-2<CR>gv
+" vnoremap <C-j> :m '>+1<CR>gv
+" vnoremap <C-k> :m '<-2<CR>gv
 
 map Y y$
 
