@@ -562,6 +562,9 @@ let g:asynctasks_config_name = '.vim/tasks.ini'
 
 map <C-t> :NERDTreeToggle<CR>
 map <C-f> :NERDTreeFind<CR>
+
+nmap <leader>o :Oil<CR>
+
 nnoremap U :GundoToggle<CR>
 let NERDTreeMapOpenSplit='s'
 let NERDTreeMapOpenVSplit='v'
