@@ -20,6 +20,7 @@ require("gruvbox").setup({
     CocWarningSign = { link = 'GruvboxYellowBold' },
     CocInfoSign = { link = 'GruvboxPurpleBold' },
     CocHintSign = { link = 'GruvboxBlueBold' },
+    CocMarkdownLink =  { link = 'GruvboxBlueBold' }, -- Should push this upstream
 
     -- Dap
     DapBreakpointSymbol = { fg = palette.bright_red, bg = palette.dark0 },

@@ -11,9 +11,8 @@ local function prequire(m)
 end
 
 prequire("colorscheme")
-
 prequire("statusline")
-
+prequire("statuscolumn")
 prequire("dap-debugging")
 
 local oil = prequire("oil")

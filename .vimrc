@@ -14,6 +14,7 @@ set clipboard=unnamedplus
 
 set relativenumber
 set number
+set nuw=3
 "set foldcolumn=0
 
 "syntax and indentation
@@ -106,6 +107,7 @@ endif
 if has('nvim')
   Plug 'stevearc/oil.nvim'
   Plug 'nvim-lualine/lualine.nvim'
+  Plug 'luukvbaal/statuscol.nvim'
 
   " DAP
   Plug 'mfussenegger/nvim-dap'
