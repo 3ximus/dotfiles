@@ -96,15 +96,9 @@ cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W')
 
 call plug#begin('~/.vim/plugged')
 
-" COLORSCHEME
-if has('nvim') && luaeval('vim.version()').major == 0 && luaeval('vim.version()').minor >= 10
-  Plug '3ximus/gruvbox.nvim'
-else
-  Plug '3ximus/gruvbox'
-endif
-
 " BASE
 if has('nvim')
+  Plug '3ximus/gruvbox.nvim'
   Plug 'stevearc/oil.nvim'
   Plug 'nvim-lualine/lualine.nvim'
   Plug 'luukvbaal/statuscol.nvim'
@@ -119,6 +113,7 @@ if has('nvim')
   " python debug
   Plug 'mfussenegger/nvim-dap-python'
 else
+  Plug '3ximus/gruvbox'
   Plug '3ximus/vim-airline' " my fork switches position of the tabs and splits on tabline
 endif
 
