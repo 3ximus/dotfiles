@@ -1,4 +1,47 @@
+
 if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
+
+" ================
+" CONFIG
+" ================
+
+  let g:fzf_command_prefix = 'FZF'
+
+  if exists('$TMUX')
+    let g:fzf_layout = { 'tmux': '-p90%,70%' }
+  else
+    let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 , 'border': 'sharp'} }
+  endif
+
+  let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+  " CTRL-A CTRL-Q to select all and build quickfix list
+  function! s:build_quickfix_list(lines)
+    call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+    copen
+    cc
+  endfunction
+  let g:fzf_action = {
+        \ 'ctrl-q': function('s:build_quickfix_list'),
+        \ 'ctrl-t': 'tab split',
+        \ 'ctrl-s': 'split',
+        \ 'ctrl-v': 'vsplit' }
+
+  command! -bang -nargs=* FZFRg
+        \ call fzf#vim#grep('rg --no-heading --line-number --color=always --smart-case '.shellescape(<q-args>),
+        \ 1,
+        \ fzf#vim#with_preview({'options': '--delimiter : --nth 2..'}),
+        \ <bang>0)
+
+  command! -bang -nargs=* FZFRgWithFilenames
+        \ call fzf#vim#grep('rg --no-heading --line-number --color=always --smart-case '.shellescape(<q-args>),
+        \ 1,
+        \ fzf#vim#with_preview(),
+        \ <bang>0)
+
+" ================
+" FUNCTIONS
+" ================
 
   function s:FZFViewOpts(opts, width, height)
     if exists('$TMUX')
@@ -143,56 +186,5 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
   endfunction
 
   command! -nargs=0 FZFVimuxPickPane call s:VimuxPickPaneFzf()
-  " }}}
-
-  " Dap Api Command: {{{
-  function s:DapCommandSink(cmd)
-    execute 'lua ' . printf("require('dap')['%s']()", a:cmd)
-  endfunction
-
-  function s:DapCommandFZF()
-    let commands = luaeval("vim.tbl_filter(function(k) return type(require('dap')[k]) == 'function' end, vim.tbl_keys(require('dap')))")
-    call sort(commands)
-
-    let opts = {
-          \ 'source': commands,
-          \ 'sink': function('s:DapCommandSink'),
-          \ 'options': "--prompt 'DAP Command> '"}
-
-    call s:FZFViewOpts(opts, 50, 60)
-    call fzf#run(opts)
-  endfunction
-
-  command! -nargs=0 FZFDapCommand call s:DapCommandFZF()
-  " }}}
-  " Dap Api Breakpoints: {{{
-  function s:DapBreakpointsSink(position)
-    echo a:position
-    " execute 'lua ' . printf("require('dap')['%s']()", a:cmd)
-  endfunction
-
-  function s:DapBreakpointsFZF()
-    let breakpoints = luaeval(
-          \"vim.tbl_map("
-          \." function(bp) return vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bp.bufnr), ':~:.') .. ':' .. (bp.lnum or '') .. ': ' .. (bp.text or '') .. (bp.condition and ' ' .. bp.condition or '') end,"
-          \."(require('dap.breakpoints').to_qf_list(require('dap.breakpoints').get()) or {}) or {})")
-
-    if empty(breakpoints)
-      echohl ErrorMsg
-      echomsg "No breakpoints set."
-      echohl None
-      return
-    endif
-
-    let opts = {
-          \ 'source': breakpoints,
-          \ 'options': ['--reverse', '--preview-window=up', '--prompt=DAP Breakpoints> ']
-          \ }
-
-    call s:FZFViewOpts(opts, 60, 60)
-    call fzf#run(fzf#vim#with_preview(opts))
-  endfunction
-
-  command! -nargs=0 FZFDapBreakpoints call s:DapBreakpointsFZF()
   " }}}
 endif

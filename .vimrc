@@ -1,6 +1,6 @@
 " vim: foldmethod=marker foldlevel=0
 
-" GENERIC SETTINGS {{{
+" GENERIC {{{
 " =====================
 
 "encoding
@@ -91,17 +91,17 @@ cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W')
 
 " }}}
 
-" VIM PLUG PLUGINS {{{
+" PLUGINS {{{
 " ===================
 
 call plug#begin('~/.vim/plugged')
 
-" BASE
 if has('nvim')
   Plug '3ximus/gruvbox.nvim'
   Plug 'stevearc/oil.nvim'
   Plug 'nvim-lualine/lualine.nvim'
   Plug 'luukvbaal/statuscol.nvim'
+  Plug 'ibhagwan/fzf-lua'
 
   " DAP
   Plug 'mfussenegger/nvim-dap'
@@ -115,12 +115,17 @@ if has('nvim')
 else
   Plug '3ximus/gruvbox'
   Plug '3ximus/vim-airline' " my fork switches position of the tabs and splits on tabline
+
+  " fzf
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'
+  Plug 'stsewd/fzf-checkout.vim', { 'on': ['FZFGBranches', 'FZFGTags'] }
+  Plug 'antoinemadec/coc-fzf'
 endif
 
+" BASE
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
 Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
 Plug 'junegunn/vim-peekaboo'
 Plug 'jeetsukumaran/vim-markology'
@@ -137,8 +142,8 @@ Plug 'orrors/asynctasks.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tomtom/tcomment_vim'
-" Plug 'justinmk/vim-sneak'
-Plug 'ggandor/leap.nvim'
+Plug 'justinmk/vim-sneak'
+" Plug 'ggandor/leap.nvim'
 Plug 'AndrewRadev/linediff.vim'
 Plug 'fidian/hexmode'
 Plug 'lambdalisue/vim-suda', { 'on': ['SudaRead', 'SudaWrite'] }
@@ -146,13 +151,11 @@ Plug 'lambdalisue/vim-suda', { 'on': ['SudaRead', 'SudaWrite'] }
 " GIT
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
-Plug 'stsewd/fzf-checkout.vim', { 'on': ['FZFGBranches', 'FZFGTags'] }
 
 Plug 'godlygeek/tabular', { 'on': ['Tabularize'] }
 
 " COMPLETION
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'antoinemadec/coc-fzf'
 
 if exists('$TMUX')
   " Plug 'preservim/vimux'
@@ -360,9 +363,8 @@ vnoremap <leader>u[ :B !python3 -c 'import sys,urllib.parse;print(urllib.parse.u
 
 " }}}
 
-" HIGHLIGHT REDEFINITIONS {{{
+" HIGHLIGHT {{{
 " ============================
-
 
 if !(has('nvim') && luaeval('vim.version()').major == 0 && luaeval('vim.version()').major == 0 && luaeval('vim.version()').minor >= 10)
   "GitGutter
@@ -585,15 +587,15 @@ nmap [h <Plug>(GitGutterPrevHunk)
 nmap <leader>hf :GitGutterFold<CR>
 
 "leap.nvim
-nmap s <Plug>(leap-forward)
-nmap S <Plug>(leap-backward)
-nmap gs <Plug>(leap-from-window)
+" nmap s <Plug>(leap-forward)
+" nmap S <Plug>(leap-backward)
+" nmap gs <Plug>(leap-from-window)
 "vim sneak
-" map f <Plug>Sneak_f
-" map F <Plug>Sneak_F
-" map t <Plug>Sneak_t
-" map T <Plug>Sneak_T
-" let g:sneak#label = 1
+map f <Plug>Sneak_f
+map F <Plug>Sneak_F
+map t <Plug>Sneak_t
+map T <Plug>Sneak_T
+let g:sneak#label = 1
 
 "fugitive
 function! CloseGstatus() abort
@@ -730,44 +732,10 @@ endif
 
 " }}}
 
-" FZF CONFIGURATION {{{
+" FZF {{{
 " =====================
 
 if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
-  let g:fzf_command_prefix = 'FZF'
-
-  if exists('$TMUX')
-    let g:fzf_layout = { 'tmux': '-p90%,70%' }
-  else
-    let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 , 'border': 'sharp'} }
-  endif
-
-  let g:fzf_history_dir = '~/.local/share/fzf-history'
-
-  " CTRL-A CTRL-Q to select all and build quickfix list
-  function! s:build_quickfix_list(lines)
-    call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-    copen
-    cc
-  endfunction
-  let g:fzf_action = {
-        \ 'ctrl-q': function('s:build_quickfix_list'),
-        \ 'ctrl-t': 'tab split',
-        \ 'ctrl-s': 'split',
-        \ 'ctrl-v': 'vsplit' }
-
-  command! -bang -nargs=* FZFRg
-        \ call fzf#vim#grep('rg --no-heading --line-number --color=always --smart-case '.shellescape(<q-args>),
-        \ 1,
-        \ fzf#vim#with_preview({'options': '--delimiter : --nth 2..'}),
-        \ <bang>0)
-
-  command! -bang -nargs=* FZFRgWithFilenames
-        \ call fzf#vim#grep('rg --no-heading --line-number --color=always --smart-case '.shellescape(<q-args>),
-        \ 1,
-        \ fzf#vim#with_preview(),
-        \ <bang>0)
-
   nmap <expr> <leader>p fugitive#Head() != '' ? ':FZFGFiles<CR>' : ':FZFFiles<CR>'
   nmap <leader>P :FZFFiles<CR>
   nmap <leader>l :FZFBuffers<CR>
@@ -794,7 +762,7 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
   noremap <leader>gc :FZFBCommits --pretty=format:'%C(yellow)%h%Creset %C(auto)%d%Creset %s (%Cblue%an%Creset, %cr)'<CR>
   vmap <leader>gc :FZFBCommits --pretty=format:'%C(yellow)%h%Creset %C(auto)%d%Creset %s (%Cblue%an%Creset, %cr)'<CR>
 
-  if glob("~/.vim/plugin/fzf-commands.vim")!=#""
+  if glob("~/.vim/plugin/fzf.vim")!=#""
     noremap <leader>gv :FZFGitEditBranchFile<CR>
     noremap <leader>gV :FZFGitEditCommitFile<CR>
     noremap <leader>rt :AsyncTaskFzf<CR>
@@ -810,9 +778,44 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
     endif
   endif
 endif
+
+if &rtp =~ 'fzf-lua' && glob("~/.vim/plugged/fzf-lua/plugin/fzf-lua.lua")!=#""
+  nmap <leader>F :FzfLua<CR>
+  nmap <expr> <leader>p fugitive#Head() != '' ? ':FzfLua git_files<CR>' : ':FzfLua files<CR>'
+  nmap <leader>P :FzfLua files<CR>
+  nmap <leader>l :FzfLua buffers<CR>
+  nmap <F1> :FzfLua buffers<CR>
+  nmap <leader>L :FzfLua lines<CR>
+  nmap <leader>f :FzfLua live_grep<CR>
+  vmap <leader>f :FzfLua grep_visual<CR>
+  nmap <leader>/ :FzfLua search_history<CR>
+  nmap <leader>: :FzfLua command_history:<CR>
+  nmap <leader>M :FzfLua keymaps<CR>
+  nmap <leader>m :FzfLua marks<CR>
+  nmap <leader>j :FzfLua jumps<CR>
+  nmap <leader>c :FzfLua commands<CR>
+  " git
+  noremap <leader>gb :FzfLua git_branches<CR>
+  noremap <leader>gt :FzfLua git_tags<CR>
+  noremap <leader>gc :FzfLua git_bcommits<CR>
+  vmap <leader>gc :FzfLua git_bcommits<CR>
+  noremap <leader>gC :FzfLua git_commits<CR>
+
+  " dap
+  noremap <leader>ic :FzfLua dap_commands<CR>
+  noremap <leader>ib :FzfLua dap_breakpoints<CR>
+  noremap <leader>if :FzfLua dap_frames<CR>
+  noremap <leader>il :FzfLua dap_configurations<CR>
+  noremap <leader>iv :FzfLua dap_variables<CR>
+
+  noremap <leader>rt :AsyncTaskFzf<CR>
+  if exists('$TMUX')
+    noremap <leader>rp :FZFVimuxPickPane<CR>
+  endif
+endif
 " }}}
 
-" COC CONFIGURATION {{{
+" COC {{{
 " ======================
 
 if !executable('node')
@@ -923,11 +926,14 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
 
   nmap <leader>ka  <Plug>(coc-codeaction-cursor)
   nmap <leader>kA  <Plug>(coc-codeaction)
-  nnoremap <silent><nowait> <leader>kd  :<C-u>CocFzfList diagnostics<CR>
-  nnoremap <silent><nowait> <leader>ke  :<C-u>CocFzfList extensions<CR>
-  nnoremap <silent><nowait> <leader>kc  :<C-u>CocFzfList commands<CR>
-  nnoremap <silent><nowait> <leader>ks  :<C-u>CocFzfList snippets<CR>
-  nnoremap <silent><nowait> <leader>kl  :<C-u>CocFzfList outline<CR>
+
+  if &rtp =~ 'coc-fzf' && glob("~/.vim/plugged/coc-fzf")!=#""
+    nnoremap <silent><nowait> <leader>kd  :<C-u>CocFzfList diagnostics<CR>
+    nnoremap <silent><nowait> <leader>ke  :<C-u>CocFzfList extensions<CR>
+    nnoremap <silent><nowait> <leader>kc  :<C-u>CocFzfList commands<CR>
+    nnoremap <silent><nowait> <leader>ks  :<C-u>CocFzfList snippets<CR>
+    nnoremap <silent><nowait> <leader>kl  :<C-u>CocFzfList outline<CR>
+  endif
   nnoremap <silent><nowait> <leader>ko  :<C-u>call CocOutlineToggle()<CR>
   nnoremap <silent><nowait> <leader>kt  :<C-u>CocToggle<CR>
   nnoremap <silent><nowait> <leader>kf  :<C-u>call CocAction('showOutgoingCalls')<CR>

@@ -10,6 +10,10 @@ require("gruvbox").setup({
     GitGutterDelete = { link = 'GruvboxRed' },
     GitGutterChangeDelete = { link = 'GruvboxYellow' },
 
+    -- Sneak
+    Sneak = { link = 'Search' },
+    SneakCurrent = { link = 'IncSearch' },
+
     -- Markology
     MarkologyHLl = { link = 'GruvboxYellowBold' },
     MarkologyHLu = { link = 'GruvboxPurpleBold' },
