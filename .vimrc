@@ -15,7 +15,7 @@ set clipboard=unnamedplus
 set relativenumber
 set number
 set nuw=3
-"set foldcolumn=0
+set foldcolumn=auto:1
 
 "syntax and indentation
 if !exists("g:syntax_on")
@@ -750,9 +750,16 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
   nmap <leader>j :FZFJumps<CR>
 
   " coc fzf
-  let g:coc_fzf_preview_toggle_key = '/'
-  " let g:coc_fzf_opts = []
-  let g:coc_fzf_preview = 'up'
+  if &rtp =~ 'coc-fzf' && glob("~/.vim/plugged/coc-fzf")!=#""
+    let g:coc_fzf_preview_toggle_key = '/'
+    " let g:coc_fzf_opts = []
+    let g:coc_fzf_preview = 'up'
+    nnoremap <silent><nowait> <leader>kd  :<C-u>CocFzfList diagnostics<CR>
+    nnoremap <silent><nowait> <leader>ke  :<C-u>CocFzfList extensions<CR>
+    nnoremap <silent><nowait> <leader>kc  :<C-u>CocFzfList commands<CR>
+    nnoremap <silent><nowait> <leader>ks  :<C-u>CocFzfList snippets<CR>
+    nnoremap <silent><nowait> <leader>kl  :<C-u>CocFzfList outline<CR>
+  endif
 
   " fzf-checkout
   let g:fzf_checkout_git_options = '--sort=-committerdate'
@@ -781,6 +788,7 @@ endif
 
 if &rtp =~ 'fzf-lua' && glob("~/.vim/plugged/fzf-lua/plugin/fzf-lua.lua")!=#""
   nmap <leader>F :FzfLua<CR>
+  nmap <leader>R :FzfLua resume<CR>
   nmap <expr> <leader>p fugitive#Head() != '' ? ':FzfLua git_files<CR>' : ':FzfLua files<CR>'
   nmap <leader>P :FzfLua files<CR>
   nmap <leader>l :FzfLua buffers<CR>
@@ -789,7 +797,7 @@ if &rtp =~ 'fzf-lua' && glob("~/.vim/plugged/fzf-lua/plugin/fzf-lua.lua")!=#""
   nmap <leader>f :FzfLua live_grep<CR>
   vmap <leader>f :FzfLua grep_visual<CR>
   nmap <leader>/ :FzfLua search_history<CR>
-  nmap <leader>: :FzfLua command_history:<CR>
+  nmap <leader>: :FzfLua command_history<CR>
   nmap <leader>M :FzfLua keymaps<CR>
   nmap <leader>m :FzfLua marks<CR>
   nmap <leader>j :FzfLua jumps<CR>
@@ -800,6 +808,13 @@ if &rtp =~ 'fzf-lua' && glob("~/.vim/plugged/fzf-lua/plugin/fzf-lua.lua")!=#""
   noremap <leader>gc :FzfLua git_bcommits<CR>
   vmap <leader>gc :FzfLua git_bcommits<CR>
   noremap <leader>gC :FzfLua git_commits<CR>
+
+  " lsp
+  nnoremap <silent><nowait> <leader>kd  :<C-u>FzfLua lsp_document_diagnostics<CR>
+  nnoremap <silent><nowait> <leader>kD  :<C-u>FzfLua lsp_workspace_diagnostics<CR>
+  " nnoremap <silent><nowait> <leader>ke  :<C-u>CocFzfList extensions<CR>
+  " nnoremap <silent><nowait> <leader>kc  :<C-u>CocFzfList commands<CR>
+  " nnoremap <silent><nowait> <leader>ks  :<C-u>CocFzfList snippets<CR>
 
   " dap
   noremap <leader>ic :FzfLua dap_commands<CR>
@@ -927,13 +942,6 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
   nmap <leader>ka  <Plug>(coc-codeaction-cursor)
   nmap <leader>kA  <Plug>(coc-codeaction)
 
-  if &rtp =~ 'coc-fzf' && glob("~/.vim/plugged/coc-fzf")!=#""
-    nnoremap <silent><nowait> <leader>kd  :<C-u>CocFzfList diagnostics<CR>
-    nnoremap <silent><nowait> <leader>ke  :<C-u>CocFzfList extensions<CR>
-    nnoremap <silent><nowait> <leader>kc  :<C-u>CocFzfList commands<CR>
-    nnoremap <silent><nowait> <leader>ks  :<C-u>CocFzfList snippets<CR>
-    nnoremap <silent><nowait> <leader>kl  :<C-u>CocFzfList outline<CR>
-  endif
   nnoremap <silent><nowait> <leader>ko  :<C-u>call CocOutlineToggle()<CR>
   nnoremap <silent><nowait> <leader>kt  :<C-u>CocToggle<CR>
   nnoremap <silent><nowait> <leader>kf  :<C-u>call CocAction('showOutgoingCalls')<CR>

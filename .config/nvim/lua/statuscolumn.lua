@@ -39,7 +39,7 @@ require("statuscol").setup({
         " ",
       },
       -- text = { builtin.lnumfunc, " " },
-      condition = { true, builtin.not_empty },
+      condition = { true },
       hl = "FoldColumn", -- TODO find a way to get highlight coc/dap but not gutter
     }
   },
