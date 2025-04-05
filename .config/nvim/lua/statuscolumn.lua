@@ -2,6 +2,7 @@
 
 local builtin = require("statuscol.builtin")
 
+
 require("statuscol").setup({
   relculright = true,
   segments = {
@@ -21,7 +22,8 @@ require("statuscol").setup({
     -- COC + DAP + Marks
     {
       sign = {
-        name = { "Dap.*", "Coc.*", "ShowMark.*", ".*" },
+        name = { "Dap.*", "Coc.*", "ShowMark.*" },
+        text = { ".*" },
         maxwidth = 1,
         colwidth = 1,
         foldclosed = true,
