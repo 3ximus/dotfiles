@@ -17,42 +17,42 @@
 
 /* Tabs */
 
-.tab-background {
-  margin-block: 0 !important;
-}
-#TabsToolbar-customization-target,
-#tabbrowser-tabs {
-  height: var(--tab-min-height);
-}
-
-#tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs])
-  > #tabbrowser-arrowscrollbox
-  > .tabbrowser-tab[first-visible-unpinned-tab] {
-  margin-inline-start: 0 !important;
-}
-#tabbrowser-tabs .tabbrowser-tab .tab-content {
-  padding: 6px !important;
-  max-height: 30px !important;
-}
-
-.tab-background {
-  border-right: 0px solid rgba(0, 0, 0, 0) !important;
-  margin-left: -4px !important;
-}
-
-.tabbrowser-tab:is([visuallyselected="true"], [multiselected])
-  > .tab-stack
-  > .tab-background {
-  box-shadow: none !important;
-}
-
-.tabbrowser-tab[last-visible-tab="true"] {
-  padding-inline-end: 0 !important;
-}
-
-.tab-close-button {
-  display: none;
-}
+/* .tab-background { */
+/*   margin-block: 0 !important; */
+/* } */
+/* #TabsToolbar-customization-target, */
+/* #tabbrowser-tabs { */
+/*   height: var(--tab-min-height); */
+/* } */
+/*  */
+/* #tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs]) */
+/*   > #tabbrowser-arrowscrollbox */
+/*   > .tabbrowser-tab[first-visible-unpinned-tab] { */
+/*   margin-inline-start: 0 !important; */
+/* } */
+/* #tabbrowser-tabs .tabbrowser-tab .tab-content { */
+/*   padding: 6px !important; */
+/*   max-height: 30px !important; */
+/* } */
+/*  */
+/* .tab-background { */
+/*   border-right: 0px solid rgba(0, 0, 0, 0) !important; */
+/*   margin-left: -4px !important; */
+/* } */
+/*  */
+/* .tabbrowser-tab:is([visuallyselected="true"], [multiselected]) */
+/*   > .tab-stack */
+/*   > .tab-background { */
+/*   box-shadow: none !important; */
+/* } */
+/*  */
+/* .tabbrowser-tab[last-visible-tab="true"] { */
+/*   padding-inline-end: 0 !important; */
+/* } */
+/*  */
+/* .tab-close-button { */
+/*   display: none; */
+/* } */
 
 /* greyed out unloaded tabs */
 .tabbrowser-tab[pending="true"] {
