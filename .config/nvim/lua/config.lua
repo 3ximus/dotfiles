@@ -14,6 +14,7 @@ prequire("colorscheme")
 prequire("statusline")
 prequire("statuscolumn")
 prequire("fzf")
+require("lsp")
 prequire("dap-debugging")
 
 local oil = prequire("oil")

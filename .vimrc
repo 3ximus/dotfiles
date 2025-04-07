@@ -96,12 +96,19 @@ cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W')
 
 call plug#begin('~/.vim/plugged')
 
-if has('nvim')
+if has('nvim') " {{{
   Plug '3ximus/gruvbox.nvim'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
   Plug 'stevearc/oil.nvim'
   Plug 'nvim-lualine/lualine.nvim'
   Plug 'luukvbaal/statuscol.nvim'
   Plug 'ibhagwan/fzf-lua'
+
+  " LSP
+  Plug 'williamboman/mason.nvim'
+  Plug 'williamboman/mason-lspconfig.nvim'
+  Plug 'neovim/nvim-lspconfig'
 
   " DAP
   Plug 'mfussenegger/nvim-dap'
@@ -112,33 +119,30 @@ if has('nvim')
   Plug 'microsoft/vscode-js-debug', { 'do': 'npm ci --legacy-peer-deps && npx gulp dapDebugServer' }
   " python debug
   Plug 'mfussenegger/nvim-dap-python'
-else
+  " }}}
+else " vim {{{
   Plug '3ximus/gruvbox'
   Plug '3ximus/vim-airline' " my fork switches position of the tabs and splits on tabline
+  Plug 'jeffkreeftmeijer/vim-numbertoggle'
+  Plug 'benknoble/vim-auto-origami'
 
   " fzf
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
   Plug 'stsewd/fzf-checkout.vim', { 'on': ['FZFGBranches', 'FZFGTags'] }
+
+  Plug 'neoclide/coc.nvim', { 'branch': 'release' }
   Plug 'antoinemadec/coc-fzf'
-endif
+  let g:polyglot_disabled = ["sensible"]
+  Plug '00dani/vim-polyglot', { 'branch' : 'feature/fix-build' }
+endif " }}}
+
+" Move to vim only
+" Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+" let g:polyglot_disabled = ["sensible"]
+" Plug '00dani/vim-polyglot', { 'branch' : 'feature/fix-build' }
 
 " BASE
-Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
-Plug 'junegunn/vim-peekaboo'
-Plug 'jeetsukumaran/vim-markology'
-Plug 'wellle/context.vim', { 'on': 'ContextToggle' }
-Plug 'markonm/traces.vim' " highlight patterns and ranges in command
-Plug 'jeffkreeftmeijer/vim-numbertoggle'
-Plug 'benknoble/vim-auto-origami'
-Plug 'machakann/vim-highlightedyank'
-
-Plug 'skywind3000/asyncrun.vim'
-Plug 'orrors/asynctasks.vim'
-
-" TOOLS
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tomtom/tcomment_vim'
@@ -147,6 +151,16 @@ Plug 'justinmk/vim-sneak'
 Plug 'AndrewRadev/linediff.vim'
 Plug 'fidian/hexmode'
 Plug 'lambdalisue/vim-suda', { 'on': ['SudaRead', 'SudaWrite'] }
+Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
+Plug 'junegunn/vim-peekaboo'
+Plug 'jeetsukumaran/vim-markology'
+Plug 'wellle/context.vim', { 'on': 'ContextToggle' }
+Plug 'markonm/traces.vim' " highlight patterns and ranges in command
+Plug 'machakann/vim-highlightedyank'
+
+" TODO replace eventually
+Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 
 " GIT
 Plug 'airblade/vim-gitgutter'
@@ -154,18 +168,14 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'godlygeek/tabular', { 'on': ['Tabularize'] }
 
-" COMPLETION
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'skywind3000/asyncrun.vim'
+Plug 'orrors/asynctasks.vim'
 
 if exists('$TMUX')
   " Plug 'preservim/vimux'
   Plug '3ximus/vimux'
 endif
 
-" LANGUAGE STUFF
-let g:polyglot_disabled = ["sensible"]
-" Plug 'sheerun/vim-polyglot' " hasn't been updated in a while and we need a fix
-Plug '00dani/vim-polyglot', { 'branch' : 'feature/fix-build' }
 Plug 'mattn/emmet-vim'
 
 " DATABASE
@@ -328,7 +338,7 @@ nmap <leader>X :%bd<bar>e#<bar>bd#<CR>
 
 " Clear search highlight and close preview window
 if has('nvim')
-  nnoremap <silent> <backspace> :noh<CR>:pc<CR>:cclose<CR>:helpclose<CR>:call CloseGstatus()<CR>:call CocCloseOutline()<CR>
+  nnoremap <silent> <backspace> :noh<CR>:pc<CR>:cclose<CR>:helpclose<CR>:call CloseGstatus()<CR>
 else
   nnoremap <silent> <backspace> :noh<CR>:pc<CR>:cclose<CR>:helpclose<CR>:call CloseGstatus()<CR>:call CocCloseOutline()<CR>:call popup_clear(1)<CR>
 endif
