@@ -22,7 +22,7 @@ require("statuscol").setup({
     -- COC + DAP + Marks
     {
       sign = {
-        name = { "Dap.*", "Coc.*", "ShowMark.*" },
+        name = { "Dap.*", "Coc.*", "ShowMark.*", ".*"},
         text = { ".*" },
         maxwidth = 1,
         colwidth = 1,

@@ -4,12 +4,13 @@ local fzf_lua = require("fzf-lua")
 local actions = fzf_lua.actions
 local utils = fzf_lua.utils
 
+
 fzf_lua.setup({
   -- fzf_bin = "fzf-tmux",
   -- fzf_tmux_opts = { ["-p"] = "90%,70%" },
   fzf_opts = {
     ["--border"] = "rounded",
-    ['--info']   = false ,
+    ['--info']   = false,
     ["--layout"] = false,
     ["--tmux"]   = "center,90%,70%",
   },
@@ -45,7 +46,12 @@ fzf_lua.setup({
   },
   manpages = { previewer = "man_native" },
   helptags = { previewer = "help_native" },
-  lsp = { code_actions = { previewer = "codeaction_native" } },
+  lsp = {
+    code_actions = {
+      previewer = "codeaction_native",
+      -- preview_pager = "delta --side-by-side --width=$FZF_PREVIEW_COLUMNS",
+    }
+  },
   tags = { previewer = "bat" },
   btags = { previewer = "bat" },
   lines = { _treesitter = false, },
@@ -60,6 +66,19 @@ fzf_lua.setup({
     bcommits = {
       cmd = [[git log --color --pretty=format:'%C(yellow)%h%Creset %C(auto)%d%Creset %s (%Cblue%an%Creset, %cr)' {file}]],
     }
+  },
+})
+
+fzf_lua.register_ui_select({
+  fzf_opts = {
+    ["--border"]         = "rounded",
+    ['--info']           = false,
+    ["--layout"]         = false,
+    ["--tmux"]           = "center,60%,40%",
+    ["--preview-window"] = "up:70%"
+  },
+  winopts = {
+    preview = { vertical = 'up:70%' },
   }
 })
 
@@ -69,19 +88,22 @@ local function async_task_fzf()
   local source = {}
   for _, row in ipairs(rows) do
     local type = string.gsub(string.gsub(row[2], '<local>', 'L'), '<global>', 'G')
-    table.insert(source, string.format("\27[1;30m%s\27[m %s \27[1;30m|  %s\27[m", vim.trim(type), string.gsub(row[1], '[^#]+#', "\27[1;34m%0\27[m"), row[3]))
+    table.insert(source,
+      string.format("\27[1;30m%s\27[m %s \27[1;30m|  %s\27[m", vim.trim(type),
+        string.gsub(row[1], '[^#]+#', "\27[1;34m%0\27[m"), row[3]))
   end
 
   local opts = {
     fzf_opts = {
       ["--border"]    = "rounded",
-      ['--no-info']   = true ,
+      ['--no-info']   = true,
       ["--layout"]    = false,
       ["--delimiter"] = "[| ]+",
       ["--nth"]       = "2",
       ["--tmux"]      = "center,50%,40%",
       ["--prompt"]    = "Run Task > ",
-      ["--header"]    = ":: \27[1;33menter\27[m Run command. \27[1;33mctrl-l\27[m Type command. \27[1;33mctrl-e\27[m Edit tasks file"
+      ["--header"]    =
+      ":: \27[1;33menter\27[m Run command. \27[1;33mctrl-l\27[m Type command. \27[1;33mctrl-e\27[m Edit tasks file"
     },
     actions = {
       ['default'] = function(selected, opts)

@@ -747,6 +747,7 @@ endif
 " FZF {{{
 " =====================
 
+" fzf.vim {{{
 if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
   nmap <expr> <leader>p fugitive#Head() != '' ? ':FZFGFiles<CR>' : ':FZFFiles<CR>'
   nmap <leader>P :FZFFiles<CR>
@@ -797,7 +798,8 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
     endif
   endif
 endif
-
+" }}}
+" fzf-lua {{{
 if &rtp =~ 'fzf-lua' && glob("~/.vim/plugged/fzf-lua/plugin/fzf-lua.lua")!=#""
   nmap <leader>F :FzfLua<CR>
   nmap <leader>R :FzfLua resume<CR>
@@ -824,9 +826,10 @@ if &rtp =~ 'fzf-lua' && glob("~/.vim/plugged/fzf-lua/plugin/fzf-lua.lua")!=#""
   " lsp
   nnoremap <silent><nowait> <leader>kd  :<C-u>FzfLua lsp_document_diagnostics<CR>
   nnoremap <silent><nowait> <leader>kD  :<C-u>FzfLua lsp_workspace_diagnostics<CR>
-  " nnoremap <silent><nowait> <leader>ke  :<C-u>CocFzfList extensions<CR>
-  " nnoremap <silent><nowait> <leader>kc  :<C-u>CocFzfList commands<CR>
-  " nnoremap <silent><nowait> <leader>ks  :<C-u>CocFzfList snippets<CR>
+  nnoremap <silent><nowait> <leader>kl  :<C-u>FzfLua lsp_document_symbols<CR>
+  nnoremap <silent><nowait> <leader>kL  :<C-u>FzfLua lsp_workspace_symbols<CR>
+  nnoremap <silent><nowait> <leader>kr  :<C-u>FzfLua lsp_references<CR>
+  nnoremap <silent><nowait> <leader>kf  :<C-u>FzfLua lsp_finder<CR>
 
   " dap
   noremap <leader>ic :FzfLua dap_commands<CR>
@@ -840,6 +843,7 @@ if &rtp =~ 'fzf-lua' && glob("~/.vim/plugged/fzf-lua/plugin/fzf-lua.lua")!=#""
     noremap <leader>rp :FZFVimuxPickPane<CR>
   endif
 endif
+" }}}
 " }}}
 
 " COC {{{
