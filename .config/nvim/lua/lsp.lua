@@ -1,7 +1,9 @@
 ---@diagnostic disable: undefined-global
 
 vim.diagnostic.config({
-  virtual_text = true,
+  virtual_text = {
+    prefix = '●', -- Could be '■', '▎', 'x'
+  },
   float = { source = "always" },
   signs = true,
   underline = true,
@@ -19,21 +21,48 @@ vim.diagnostic.config({
   },
 })
 
--- vim.keymap.set("n", "<leader>l", vim.diagnostic.open_float, {})
 vim.keymap.set("n", "<leader>kt", function()
   vim.diagnostic.config({ virtual_text = not vim.diagnostic.config().virtual_text })
 end)
-
 vim.keymap.set("n", "gd", "<cmd>FzfLua lsp_definitions<CR>", {})
 vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {})
 vim.keymap.set("n", "gr", "<cmd>FzfLua lsp_references<CR>", {})
 vim.keymap.set("n", "<leader>ka", vim.lsp.buf.code_action, {})
 vim.keymap.set("n", "g=", vim.lsp.buf.format, {})
 
-require('nvim-treesitter.configs').setup({
-  -- A list of parser names, or "all" (the listed parsers MUST always be installed)
-  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "python", "go" },
+-- automatically show float when hovering diagnostic
+vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+  group = vim.api.nvim_create_augroup("float_diagnostic_cursor", { clear = true }),
+  callback = function ()
+    vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})
+  end
 })
+
+-- float options
+local border = {
+    { '┌', 'FloatBorder' },
+    { '─', 'FloatBorder' },
+    { '┐', 'FloatBorder' },
+    { '│', 'FloatBorder' },
+    { '┘', 'FloatBorder' },
+    { '─', 'FloatBorder' },
+    { '└', 'FloatBorder' },
+    { '│', 'FloatBorder' },
+}
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+  opts = opts or {}
+  opts.border = opts.border or border
+  opts.max_width= opts.max_width or 80
+  return orig_util_open_floating_preview(contents, syntax, opts, ...)
+end
+
+local lspconfig = require('lspconfig')
+lspconfig.lua_ls.setup({})
+lspconfig.pyright.setup({})
+lspconfig.ts_ls.setup({})
+lspconfig.rust_analyzer.setup({})
+lspconfig.gopls.setup({})
 
 require("mason").setup({
   ui = { border = "rounded" }
@@ -42,12 +71,9 @@ require("mason-lspconfig").setup({
   ensure_installed = { "lua_ls", "pyright", "ts_ls", "rust_analyzer", "gopls" }
 })
 
-local lspconfig = require('lspconfig')
-lspconfig.lua_ls.setup({})
-lspconfig.pyright.setup({})
-lspconfig.ts_ls.setup({})
-lspconfig.rust_analyzer.setup({})
-lspconfig.gopls.setup({})
+require('nvim-treesitter.configs').setup({
+  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "python", "go" },
+})
 
 require('blink.cmp').setup({
   keymap = { preset = 'enter' },
@@ -73,7 +99,8 @@ require('blink.cmp').setup({
       },
     },
   },
-  fuzzy = { implementation = "prefer_rust" },
+  -- fuzzy = { implementation = "prefer_rust" },
+  fuzzy = { implementation = "lua" },
 })
 require("colorful-menu").setup({})
 

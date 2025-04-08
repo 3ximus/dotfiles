@@ -109,7 +109,7 @@ if has('nvim') " {{{
   Plug 'williamboman/mason.nvim'
   Plug 'williamboman/mason-lspconfig.nvim'
   Plug 'neovim/nvim-lspconfig'
-  Plug 'saghen/blink.cmp', { 'do': 'cargo build --release' }
+  Plug 'saghen/blink.cmp' ", { 'do': 'cargo build --release' }
   Plug 'xzbdmw/colorful-menu.nvim'
 
   " DAP
