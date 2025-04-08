@@ -131,8 +131,6 @@ Plug 'junegunn/vim-peekaboo'
 Plug 'jeetsukumaran/vim-markology'
 Plug 'wellle/context.vim', { 'on': 'ContextToggle' }
 Plug 'markonm/traces.vim' " highlight patterns and ranges in command
-Plug 'jeffkreeftmeijer/vim-numbertoggle'
-Plug 'benknoble/vim-auto-origami'
 Plug 'machakann/vim-highlightedyank'
 
 Plug 'skywind3000/asyncrun.vim'
