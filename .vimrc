@@ -472,10 +472,6 @@ let g:webdevicons_conceal_nerdtree_brackets = 1
 let g:DevIconsEnableFoldersOpenClose = 1
 let g:DevIconsEnableDistro = 0
 
-" quickr-preview
-let g:quickr_preview_position = 'above'
-let g:quickr_preview_modifiable = 1
-
 " context.vim
 let g:context_add_mappings = 0
 let g:context_enabled = 0
@@ -810,12 +806,17 @@ if &rtp =~ 'fzf-lua' && glob("~/.vim/plugged/fzf-lua/plugin/fzf-lua.lua")!=#""
   noremap <leader>gC :FzfLua git_commits<CR>
 
   " lsp
-  nnoremap <silent><nowait> <leader>kd  :<C-u>FzfLua lsp_document_diagnostics<CR>
-  nnoremap <silent><nowait> <leader>kD  :<C-u>FzfLua lsp_workspace_diagnostics<CR>
-  nnoremap <silent><nowait> <leader>kl  :<C-u>FzfLua lsp_document_symbols<CR>
-  nnoremap <silent><nowait> <leader>kL  :<C-u>FzfLua lsp_workspace_symbols<CR>
-  nnoremap <silent><nowait> <leader>kr  :<C-u>FzfLua lsp_references<CR>
-  nnoremap <silent><nowait> <leader>kf  :<C-u>FzfLua lsp_finder<CR>
+  if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
+    " these mappings are defined inside .config/nvim/lua/fzf.lua
+  else
+    nnoremap <silent><nowait> <leader>kd  :<C-u>FzfLua lsp_document_diagnostics<CR>
+    nnoremap <silent><nowait> <leader>kD  :<C-u>FzfLua lsp_workspace_diagnostics<CR>
+    nnoremap <silent><nowait> <leader>kl  :<C-u>FzfLua lsp_document_symbols<CR>
+    nnoremap <silent><nowait> <leader>kL  :<C-u>FzfLua lsp_workspace_symbols<CR>
+    nnoremap <silent><nowait> <leader>kr  :<C-u>FzfLua lsp_references<CR>
+    nnoremap <silent><nowait> <leader>kf  :<C-u>FzfLua lsp_finder<CR>
+  endif
+
 
   " dap
   noremap <leader>ic :FzfLua dap_commands<CR>
