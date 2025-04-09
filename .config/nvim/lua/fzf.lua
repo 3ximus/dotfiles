@@ -18,7 +18,14 @@ fzf_lua.setup({
     ["border"] = { "fg", "Comment" },
   },
   file_icon_padding = '',
-  winopts = { preview = { default = "bat", border = "border-left" } },
+  winopts = {
+    preview = {
+      default = "bat",
+      border = "border-left",
+      layout = "horizontal",
+      horizontal = "right:50%",
+    }
+  },
   keymap = {
     builtin = {
       true,
@@ -38,7 +45,6 @@ fzf_lua.setup({
       ["ctrl-v"] = actions.file_vsplit,
       ["ctrl-t"] = actions.file_tabedit,
       ["ctrl-q"] = actions.file_sel_to_qf,
-      -- ["alt-l"] = actions.file_sel_to_ll,
     },
   },
   files = {
@@ -52,6 +58,7 @@ fzf_lua.setup({
       -- preview_pager = "delta --side-by-side --width=$FZF_PREVIEW_COLUMNS",
     }
   },
+  grep = { winopts = { preview = { hidden = true } } },
   tags = { previewer = "bat" },
   btags = { previewer = "bat" },
   lines = { _treesitter = false, },
@@ -75,10 +82,9 @@ fzf_lua.register_ui_select({
     ['--info']           = false,
     ["--layout"]         = false,
     ["--tmux"]           = "center,60%,40%",
-    ["--preview-window"] = "up:70%"
   },
   winopts = {
-    preview = { vertical = 'up:70%' },
+    preview = { layout = "vertical", vertical = 'up:70%' },
   }
 })
 
@@ -143,7 +149,77 @@ local fzf_lua = require("fzf-lua")
 local fzf_lua_config = require("fzf-lua.config")
 local builtin = require("fzf-lua.previewer.builtin")
 local utils = require("fzf-lua.utils")
+local path = require "fzf-lua.path"
 local CocActionAsync = fn.CocActionAsync
+
+local _single  = { "┌", "─", "┐", "│", "┘", "─", "└", "│" }
+local _rounded = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
+local _border  = true and _rounded or _single
+base_opts = {
+    fzf_opts = { ["--tmux"] = false, ["--reverse"] = true, ["--border"] = false },
+    winopts = {
+      border  = function(_, m)
+        assert(m.type == "nvim" and m.name == "fzf")
+        if m.nwin == 1 then
+          -- No preview, return the border whole
+          return _border
+        else
+          -- has preview `nwim==2`
+          assert(type(m.layout) == "string")
+          local b = vim.deepcopy(_border)
+          if m.layout == "down" then
+            b[5] = "┤" -- bottom right
+            b[6] = "" -- remove bottom
+            b[7] = "├" -- bottom left
+          elseif m.layout == "up" then
+            b[1] = "├" --top right
+            b[3] = "┤" -- top left
+          elseif m.layout == "left" then
+            b[1] = "┬" -- top left
+            b[8] = "" -- remove left
+            b[7] = "┴" -- bottom right
+          else -- right
+            b[3] = "┬" -- top right
+            b[4] = "" -- remove right
+            b[5] = "┴" -- bottom right
+          end
+          return b
+        end
+      end,
+      preview = {
+        scrollbar = "border",
+        border = function(_, m)
+          if m.type == "fzf" then
+            -- Always return none, let `bat --style=default` to draw our border
+            return "single"
+          else
+            assert(m.type == "nvim" and m.name == "prev" and type(m.layout) == "string")
+            local b = vim.deepcopy(_border)
+            if m.layout == "down" then
+              b[1] = "├" --top right
+              b[3] = "┤" -- top left
+            elseif m.layout == "up" then
+              b[7] = "├" -- bottom left
+              b[6] = "" -- remove bottom
+              b[5] = "┤" -- bottom right
+            elseif m.layout == "left" then
+              b[3] = "┬" -- top right
+              b[5] = "┴" -- bottom right
+            else -- right
+              b[1] = "┬" -- top left
+              b[7] = "┴" -- bottom left
+            end
+            return b
+          end
+        end,
+        layout = "vertical",
+        vertical = "up:50%"
+      }
+    },
+}
+-- local fname = path.join({ vim.g.fzf_lua_directory, "profiles", "border-fused.lua" })
+-- base_opts = vim.tbl_deep_extend("force", base_opts, utils.load_profile_fname(fname, nil, true))
+-- print(vim.inspect(base_opts))
 
 local store = { results = {}, items = {} }
 
@@ -375,8 +451,8 @@ local function parse_symbol_string(str)
   return "", tonumber(lnum), tonumber(col)
 end
 
-local CommonPreviewr = getNewPreviewer(parse_string)
-local SymbolPreviewr = getNewPreviewer(parse_symbol_string)
+local CommonPreviewer = getNewPreviewer(parse_string)
+local SymbolPreviewer = getNewPreviewer(parse_symbol_string)
 
 -- 选中后跳转到对应的位置
 local function jump_to_location(selected)
@@ -524,12 +600,13 @@ local function list_or_jump(provider, has_jump)
     -- _ctor 是为了防止 fzf 内部有深拷贝，导致报错
     previewer = {
       _ctor = function()
-        return CommonPreviewr
+        return CommonPreviewer
       end,
     },
     actions = { ["enter"] = jump_to_location, ["ctrl-q"] = send_selected_to_qf },
   }
 
+  opts = vim.tbl_deep_extend("keep", base_opts, opts)
   local normalized_opts = fzf_lua_config.normalize_opts(opts, "lsp")
   normalized_opts.winopts.title_pos = nil -- 默认值是 "center"，把它移除掉，否则会最终传给 vim.api.nvim_open_win(bufnr, true, opts)，nvim_open_win 不接受 title_pos
   return fzf_lua.fzf_exec(strings, normalized_opts)
@@ -643,12 +720,13 @@ local function diagnostic_from_current_buffer()
     -- _ctor 是为了防止 fzf 内部有深拷贝，导致报错
     previewer = {
       _ctor = function()
-        return CommonPreviewr
+        return CommonPreviewer
       end,
     },
     actions = { ["enter"] = jump_to_location, ["ctrl-q"] = send_selected_to_qf },
   }
 
+  opts = vim.tbl_deep_extend("keep", base_opts, opts)
   local normalized_opts = fzf_lua_config.normalize_opts(opts, "lsp")
   normalized_opts.winopts.title_pos = nil -- 默认值是 "center"，把它移除掉，否则会最终传给 vim.api.nvim_open_win(bufnr, true, opts)，nvim_open_win 不接受 title_pos
   fzf_lua.fzf_exec(strings, normalized_opts)
@@ -665,12 +743,13 @@ local function diagnostic_from_workspace()
     -- _ctor 是为了防止 fzf 内部有深拷贝，导致报错
     previewer = {
       _ctor = function()
-        return CommonPreviewr
+        return CommonPreviewer
       end,
     },
     actions = { ["enter"] = jump_to_location, ["ctrl-q"] = send_selected_to_qf },
   }
 
+  opts = vim.tbl_deep_extend("keep", base_opts, opts)
   local normalized_opts = fzf_lua_config.normalize_opts(opts, "lsp")
   normalized_opts.winopts.title_pos = nil -- 默认值是 "center"，把它移除掉，否则会最终传给 vim.api.nvim_open_win(bufnr, true, opts)，nvim_open_win 不接受 title_pos
   fzf_lua.fzf_exec(strings, normalized_opts)
@@ -787,10 +866,9 @@ local function get_symbols(symbols)
   store.items = items
 
   local opts = {
-    -- _ctor 是为了防止 fzf 内部有深拷贝，导致报错
     previewer = {
       _ctor = function()
-        return SymbolPreviewr
+        return SymbolPreviewer
       end,
     },
     actions = {
@@ -815,6 +893,7 @@ local function get_symbols(symbols)
     },
   }
 
+  opts = vim.tbl_deep_extend("keep", base_opts, opts)
   local normalized_opts = fzf_lua_config.normalize_opts(opts, "lsp")
   normalized_opts.winopts.title_pos = nil -- 默认值是 "center"，把它移除掉，否则会最终传给 vim.api.nvim_open_win(bufnr, true, opts)，nvim_open_win 不接受 title_pos
   fzf_lua.fzf_exec(strings, normalized_opts)
