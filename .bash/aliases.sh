@@ -59,7 +59,7 @@ alias gla='git lol --all'
 alias gd='git diff'
 
 # list vm images
-alias vml="virsh vol-list --pool default --details | tail -n +3 | head -n-1 | awk 'BEGIN {print \"Name Allocation Capacity\"}{print\$1\" \"\$6\".\"\$7\" \"\$4\".\"\$5}' | column -t"
+alias vml="virsh vol-list --pool default --details | tail -n +3 | head -n-1 | sort -rhk 6 | awk 'BEGIN {print \"Name Allocation Capacity\"}{print\$1\" \"\$6\".\"\$7\" \"\$4\".\"\$5}' | column -t"
 # connect to a qemu virtual machine console
 alias vmv="virsh list --name | head -n-1 | fzf --prompt='View vm > ' | xargs -r virt-manager -c qemu:///system --show-domain-console || :"
 # delete qemu image
