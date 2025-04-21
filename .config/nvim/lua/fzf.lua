@@ -13,6 +13,7 @@ fzf_lua.setup({
     ['--info']   = false,
     ["--layout"] = false,
     ["--tmux"]   = "center,90%,70%",
+    ["--history"] = vim.fn.stdpath("data") .. '/fzf-lua-history',
   },
   fzf_colors = {
     ["border"] = { "fg", "Comment" },
@@ -58,7 +59,9 @@ fzf_lua.setup({
       -- preview_pager = "delta --side-by-side --width=$FZF_PREVIEW_COLUMNS",
     }
   },
-  grep = { winopts = { preview = { hidden = true } } },
+  grep = {
+    winopts = { preview = { hidden = true } }
+  },
   tags = { previewer = "bat" },
   btags = { previewer = "bat" },
   lines = { _treesitter = false, },
