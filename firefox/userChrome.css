@@ -130,9 +130,3 @@
 #personal-bookmarks .bookmark-item[container="true"] .toolbarbutton-icon {
   display: none !important;
 }
-
-@-moz-document url-prefix(about:blank) {
-  * {
-    background-color: #1d2021;
-  }
-}

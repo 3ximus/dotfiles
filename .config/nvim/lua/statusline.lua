@@ -98,15 +98,15 @@ require("lualine").setup({
         padding = { left = 0 , right = 1},
         color = function() return vim.bo.modified and {fg = colors.bright_blue, gui = 'bold'} or {fg = colors.light1, gui = 'bold'} end },
       {'b:coc_current_function',
-        separator = { left = '', right = ''},
-        padding = 0,
+        -- separator = { left = '', right = ''},
+        -- padding = 0,
         color = { fg = colors.dark0, bg = colors.neutral_blue, gui = 'bold' }}
     },
     lualine_x = {
       {
         function() return require("dap").status() end,
-        separator = { left = '', right = ''},
-        padding = 0,
+        -- separator = { left = '', right = ''},
+        -- padding = 0,
         color = { fg = colors.dark0, bg = colors.neutral_green, gui = 'bold' },
         cond = function()
           if not package.loaded.dap then return false end

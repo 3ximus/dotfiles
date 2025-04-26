@@ -1,3 +1,19 @@
+@-moz-document url-prefix(about:blank) {
+  * {
+    background-color: #1d2021 !important;
+  }
+}
+@-moz-document url-prefix(about:newtab) {
+  * {
+    background-color: #1d2021 !important;
+  }
+}
+@-moz-document url-prefix(view-source:) {
+  * {
+    background-color: #1d2021 !important;
+  }
+}
+
 /* Tab bar */
 @-moz-document url-prefix("about:devtools-toolbox") {
   :root {
