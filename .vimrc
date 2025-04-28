@@ -91,6 +91,7 @@ cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W')
 
 " }}}
 
+
 " PLUGINS {{{
 " ===================
 
@@ -126,7 +127,7 @@ endif
 " BASE
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
+Plug 'simnalamburt/vim-mundo'
 Plug 'junegunn/vim-peekaboo'
 Plug 'jeetsukumaran/vim-markology'
 Plug 'wellle/context.vim', { 'on': 'ContextToggle' }
@@ -394,6 +395,7 @@ if !has('gui_running')
 endif
 
 " }}}
+"
 
 " PLUGIN CONFIGURATION {{{
 " =========================
@@ -500,11 +502,6 @@ let g:gitgutter_floating_window_options = {
       \ 'border': 'rounded'
       \ }
 
-" Gundo
-if has('python3')
-    let g:gundo_prefer_python3 = 1
-endif
-
 " Markology
 let g:markology_include='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
@@ -558,7 +555,7 @@ map <C-f> :NERDTreeFind<CR>
 
 nmap <leader>o :Oil<CR>
 
-nnoremap U :GundoToggle<CR>
+nnoremap U :MundoToggle<CR>
 let NERDTreeMapOpenSplit='s'
 let NERDTreeMapOpenVSplit='v'
 "nertree git
