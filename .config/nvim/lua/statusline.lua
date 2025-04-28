@@ -104,10 +104,23 @@ require("lualine").setup({
     },
     lualine_x = {
       {
-        function() return require("dap").status() end,
+        -- function() return require("dap").status() end,
+        function()
+          local s = require('dap').session()
+          if s.initialized then
+            return s.config.request .. ": " .. s.config.type
+          end
+          return " - "
+        end,
         -- separator = { left = '', right = ''},
         -- padding = 0,
-        color = { fg = colors.dark0, bg = colors.neutral_green, gui = 'bold' },
+        color = function ()
+          local s = require("dap").session()
+          if s and next(s.children) == nil then
+            return { fg = colors.dark0, bg = colors.neutral_yellow, gui = 'bold' }
+          end
+          return { fg = colors.dark0, bg = colors.neutral_green, gui = 'bold' }
+        end,
         cond = function()
           if not package.loaded.dap then return false end
           local session = require("dap").session()
