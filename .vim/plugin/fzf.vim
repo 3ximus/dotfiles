@@ -185,6 +185,6 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
     call fzf#run(opts)
   endfunction
 
-  command! -nargs=0 FZFVimuxPickPane call s:VimuxPickPaneFzf()
+  command! -nargs=0 VimuxPickPaneFzf call s:VimuxPickPaneFzf()
   " }}}
 endif

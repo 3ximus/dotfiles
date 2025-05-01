@@ -145,6 +145,37 @@ end
 vim.api.nvim_create_user_command('AsyncTaskFzf', async_task_fzf, {})
 -- }}}
 
+-- Vimux Pick Pane {{{
+local function vimux_pick_pane_fzf()
+  fzf_lua.fzf_exec(
+    [[tmux list-panes -a -F "\033[1;33m#{?pane_active,*, }\033[m|\033[1;30m#S:\033[m#I.#P|#{pane_current_command}|\033[1;30m#{?#{==:#W,#{pane_current_command}},,(#W)}\033[m|#{?window_linked,\033[1;36m[linked]\033[m,}"|column -ts"|" -o" "|while read -r l;do echo "$l";done]],
+    {
+      prompt = "Vimux Pane> ",
+      actions = {
+        ["default"] = function(selected)
+          if selected and #selected > 0 then
+            local pane_path = selected[1]:gsub("[* ]+([^:]+):(%d+%.%d+) .*", "%1:%2")
+            local pane_id = vim.fn.system("tmux display -t " .. pane_path .. " -p \"#{pane_id}\""):gsub("\n$", "")
+            vim.g.VimuxRunnerIndex = pane_id
+          end
+        end
+      },
+      fzf_opts = {
+        ["--delimiter"]      = "[* ]+",
+        ["--nth"]            = "2..",
+        ["--tmux"]           = "center,60%,70%",
+        ["--ansi"]           = "",
+        ["--no-info"]        = "",
+        ["--preview"]        = "tmux capture-pane -ep -t {2}|cat -s|tail -n $(tput lines)",
+        ["--preview-window"] = "up,70%"
+      },
+    }
+  )
+end
+
+vim.api.nvim_create_user_command('VimuxPickPaneFzf', vimux_pick_pane_fzf, {})
+-- }}}
+
 -- Coc Stuff {{{
 local api = vim.api
 local fn = vim.fn

@@ -764,10 +764,10 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
   if glob("~/.vim/plugin/fzf.vim")!=#""
     noremap <leader>gv :FZFGitEditBranchFile<CR>
     noremap <leader>gV :FZFGitEditCommitFile<CR>
-    noremap <leader>rt :AsyncTaskFzf<CR>
 
     if exists('$TMUX')
-      noremap <leader>rp :FZFVimuxPickPane<CR>
+      noremap <leader>rt :AsyncTaskFzf<CR>
+      noremap <leader>rp :VimuxPickPaneFzf<CR>
     endif
 
     if &rtp =~ 'nvim-dap' && &rtp =~ 'nvim-dap-ui' && glob("~/.vim/plugged/nvim-dap")!=#"" && glob("~/.vim/plugged/nvim-dap-ui")!=#""
@@ -822,9 +822,9 @@ if &rtp =~ 'fzf-lua' && glob("~/.vim/plugged/fzf-lua/plugin/fzf-lua.lua")!=#""
   noremap <leader>il :FzfLua dap_configurations<CR>
   noremap <leader>iv :FzfLua dap_variables<CR>
 
-  noremap <leader>rt :AsyncTaskFzf<CR>
   if exists('$TMUX')
-    noremap <leader>rp :FZFVimuxPickPane<CR>
+    noremap <leader>rt :AsyncTaskFzf<CR>
+    noremap <leader>rp :VimuxPickPaneFzf<CR>
   endif
 endif
 " }}}
