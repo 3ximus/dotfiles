@@ -15,7 +15,11 @@ set clipboard=unnamedplus
 set relativenumber
 set number
 set nuw=3
-set foldcolumn=auto:1
+if has('nvim')
+  set foldcolumn=auto:1
+else
+  set foldcolumn=0
+endif
 
 "syntax and indentation
 if !exists("g:syntax_on")
@@ -91,7 +95,6 @@ cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W')
 
 " }}}
 
-
 " PLUGINS {{{
 " ===================
 
@@ -122,6 +125,9 @@ else
   Plug 'junegunn/fzf.vim'
   Plug 'stsewd/fzf-checkout.vim', { 'on': ['FZFGBranches', 'FZFGTags'] }
   Plug 'antoinemadec/coc-fzf'
+
+  Plug 'benknoble/vim-auto-origami'
+  Plug 'jeffkreeftmeijer/vim-numbertoggle'
 endif
 
 " BASE
@@ -395,7 +401,6 @@ if !has('gui_running')
 endif
 
 " }}}
-"
 
 " PLUGIN CONFIGURATION {{{
 " =========================
