@@ -9,7 +9,7 @@
 	followTags = true
 [core]
 	editor = vim
-	pager = delta
+	pager = sh -c 'command -v delta >/dev/null 2>&1 && delta "$@" || less -FRX "$@"' --
 [init]
 	defaultBranch = master
 [advice]
