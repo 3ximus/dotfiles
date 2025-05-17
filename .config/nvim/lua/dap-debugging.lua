@@ -15,6 +15,14 @@ dapui.setup({
   controls = { icons = { pause = "󰏤 F5", continue = " F5", step_into = " F7", step_over = " F8", step_out = " F9" , terminate = " F6"} },
 })
 
+-- disable completion for dap-repl
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "dap-repl",
+  callback = function()
+    vim.bo.omnifunc = ""
+  end
+})
+
 dap.listeners.before.attach.dapui_config = function()
   dapui.open()
 end

@@ -1,7 +1,23 @@
+@-moz-document url-prefix(about:blank) {
+  * {
+    background-color: #1d2021 !important;
+  }
+}
+@-moz-document url-prefix(about:newtab) {
+  * {
+    background-color: #1d2021 !important;
+  }
+}
+@-moz-document url-prefix(view-source:) {
+  * {
+    background-color: #1d2021 !important;
+  }
+}
+
 /* Tab bar */
 @-moz-document url-prefix("about:devtools-toolbox") {
   :root {
-    --theme-tab-toolbar-background: #282828 !important;
+    --theme-tab-toolbar-background: #1d2021 !important;
     --theme-toolbar-color: #ebdbb2 !important;
     --theme-toolbar-selected-color: #ebdbb2 !important;
     --theme-icon-color: #ebdbb2 !important;
@@ -14,10 +30,10 @@
 @-moz-document url-prefix("chrome://devtools/content/")
 {
   :root {
-    --theme-body-background: #282828 !important;
+    --theme-body-background: #1d2021 !important;
     --theme-body-color: #ebdbb2 !important;
     --theme-selection-background: #8ec07c !important;
-    --theme-selection-color: #282828 !important;
+    --theme-selection-color: #1d2021 !important;
     --theme-icon-dimmed-color: #bdae93 !important;
 
     --theme-icon-error-color: #fb4934 !important;
@@ -36,7 +52,7 @@
     --theme-highlight-gray: #928374 !important;
 
     /* inner toolbar */
-    --theme-tab-toolbar-background: #282828 !important;
+    --theme-tab-toolbar-background: #1d2021 !important;
     --theme-toolbar-color: #ebdbb2 !important;
     --theme-toolbar-selected-color: #ebdbb2 !important;
     --theme-icon-color: #ebdbb2 !important;
@@ -76,15 +92,15 @@
 
   /* fix for selected item icon */
   .sources-list .tree .focused .img {
-    background-color: #282828 !important;
+    background-color: #1d2021 !important;
   }
 }
 
 /* fix the Unable to connect page */
 :root {
-  --in-content-page-background: #282828 !important;
+  --in-content-page-background: #1d2021 !important;
   --in-content-page-color: #ebdbb2 !important;
-  --in-content-primary-button-text-color: #282828 !important;
+  --in-content-primary-button-text-color: #1d2021 !important;
   --in-content-primary-button-background: #8ec07c !important;
   --in-content-primary-button-background-hover: #689d6a !important;
   --in-content-primary-button-background-active: #d79921 !important;

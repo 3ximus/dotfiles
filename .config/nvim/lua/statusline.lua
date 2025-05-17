@@ -89,7 +89,10 @@ require("lualine").setup({
   },
   sections = {
     lualine_a = {{ 'mode', fmt = function(str) return str:sub(1,1) end }},
-    lualine_b = { 'branch' },
+    lualine_b = {
+      'branch',
+      { 'diff', colored = false }
+    },
     lualine_c = {
       {'%<%{fnamemodify(expand("%:p:h"), ":~:.:g")}/',
         padding = { right = 0 , left = 1},
@@ -98,16 +101,29 @@ require("lualine").setup({
         padding = { left = 0 , right = 1},
         color = function() return vim.bo.modified and {fg = colors.bright_blue, gui = 'bold'} or {fg = colors.light1, gui = 'bold'} end },
       {'b:coc_current_function',
-        separator = { left = '', right = ''},
-        padding = 0,
+        -- separator = { left = '', right = ''},
+        -- padding = 0,
         color = { fg = colors.dark0, bg = colors.neutral_blue, gui = 'bold' }}
     },
     lualine_x = {
       {
-        function() return require("dap").status() end,
-        separator = { left = '', right = ''},
-        padding = 0,
-        color = { fg = colors.dark0, bg = colors.neutral_green, gui = 'bold' },
+        -- function() return require("dap").status() end,
+        function()
+          local s = require('dap').session()
+          if s.initialized then
+            return s.config.request .. ": " .. s.config.type
+          end
+          return " - "
+        end,
+        -- separator = { left = '', right = ''},
+        -- padding = 0,
+        color = function ()
+          local s = require("dap").session()
+          if s and next(s.children) == nil then
+            return { fg = colors.dark0, bg = colors.neutral_yellow, gui = 'bold' }
+          end
+          return { fg = colors.dark0, bg = colors.neutral_green, gui = 'bold' }
+        end,
         cond = function()
           if not package.loaded.dap then return false end
           local session = require("dap").session()

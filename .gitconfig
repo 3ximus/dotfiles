@@ -1,7 +1,7 @@
 [user]
 	email = fabio4335@gmail.com
 	name = eximus
-	signingkey = D3A533A5142DAA0E
+	signingkey = 25C403774F37DD6C
 [commit]
 	gpgsign = true
 [push]
@@ -9,7 +9,7 @@
 	followTags = true
 [core]
 	editor = vim
-	pager = delta
+	pager = sh -c 'command -v delta >/dev/null 2>&1 && delta "$@" || less -FRX "$@"' --
 [init]
 	defaultBranch = master
 [advice]

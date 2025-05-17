@@ -1,6 +1,7 @@
 local palette = require("gruvbox").palette
 require("gruvbox").setup({
   transparent_mode = true,
+  contrast = 'hard',
   overrides = {
     Todo = { link = 'GruvboxYellowBold' },
 

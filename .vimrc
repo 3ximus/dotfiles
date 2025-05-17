@@ -15,7 +15,11 @@ set clipboard=unnamedplus
 set relativenumber
 set number
 set nuw=3
-set foldcolumn=auto:1
+if has('nvim')
+  set foldcolumn=auto:1
+else
+  set foldcolumn=0
+endif
 
 "syntax and indentation
 if !exists("g:syntax_on")
@@ -136,15 +140,9 @@ else " vim {{{
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
   Plug 'antoinemadec/coc-fzf'
   let g:polyglot_disabled = ["sensible"]
-  Plug '00dani/vim-polyglot', { 'branch' : 'feature/fix-build' }
+  Plug 'sheerun/vim-polyglot', { 'branch' : 'feature/fix-build' }
 endif " }}}
 
-" Move to vim only
-" Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-" let g:polyglot_disabled = ["sensible"]
-" Plug '00dani/vim-polyglot', { 'branch' : 'feature/fix-build' }
-
-" BASE
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tomtom/tcomment_vim'
@@ -153,7 +151,7 @@ Plug 'justinmk/vim-sneak'
 Plug 'AndrewRadev/linediff.vim'
 Plug 'fidian/hexmode'
 Plug 'lambdalisue/vim-suda', { 'on': ['SudaRead', 'SudaWrite'] }
-Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
+Plug 'simnalamburt/vim-mundo'
 Plug 'junegunn/vim-peekaboo'
 Plug 'jeetsukumaran/vim-markology'
 Plug 'wellle/context.vim', { 'on': 'ContextToggle' }
@@ -354,8 +352,10 @@ nmap <leader>vs :mkview<CR>
 nmap <leader>vl :loadview<CR>
 
 " jump forward and backward in quickfix results
-noremap ]q :cnext<CR>
-noremap [q :cprevious<CR>
+nmap ]q :cnext<CR>
+nmap [q :cprevious<CR>
+nmap <leader>. :cnext<CR>
+nmap <leader>m :cprevious<CR>
 
 noremap ]c />>>>>>>\\|<<<<<<<<CR>
 noremap [c ?>>>>>>>\\|<<<<<<<<CR>
@@ -486,10 +486,6 @@ let g:webdevicons_conceal_nerdtree_brackets = 1
 let g:DevIconsEnableFoldersOpenClose = 1
 let g:DevIconsEnableDistro = 0
 
-" quickr-preview
-let g:quickr_preview_position = 'above'
-let g:quickr_preview_modifiable = 1
-
 " context.vim
 let g:context_add_mappings = 0
 let g:context_enabled = 0
@@ -518,11 +514,6 @@ let g:gitgutter_floating_window_options = {
       \ 'border': 'rounded'
       \ }
 
-" Gundo
-if has('python3')
-    let g:gundo_prefer_python3 = 1
-endif
-
 " Markology
 let g:markology_include='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
@@ -536,23 +527,25 @@ let g:python_highlight_indent_errors = 1
 let g:python_highlight_space_errors = 0
 let g:python_highlight_operators = 0
 
-" vim-go (with vim-polyglot)
-let g:go_highlight_function_parameters = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_generate_tags = 1
-let g:go_highlight_variable_declarations = 1
-let g:go_highlight_variable_assignments = 1
+if !has('nvim')
+  " vim-go (with vim-polyglot)
+  let g:go_highlight_function_parameters = 1
+  let g:go_highlight_extra_types = 1
+  let g:go_highlight_operators = 1
+  let g:go_highlight_function_calls = 1
+  let g:go_highlight_types = 1
+  let g:go_highlight_fields = 1
+  let g:go_highlight_build_constraints = 1
+  let g:go_highlight_generate_tags = 1
+  let g:go_highlight_variable_declarations = 1
+  let g:go_highlight_variable_assignments = 1
 
-" vim-svelte-plugin (with vim-polyglot)
-let g:vim_svelte_plugin_load_full_syntax = 1
-let g:vim_svelte_plugin_use_typescript = 1
-let g:vim_svelte_plugin_use_sass = 1
-let g:vim_svelte_plugin_has_init_indent = 1
+  " vim-svelte-plugin (with vim-polyglot)
+  let g:vim_svelte_plugin_load_full_syntax = 1
+  let g:vim_svelte_plugin_use_typescript = 1
+  let g:vim_svelte_plugin_use_sass = 1
+  let g:vim_svelte_plugin_has_init_indent = 1
+endif
 
 " vim-test
 " make test commands execute using dispatch.vim
@@ -576,7 +569,7 @@ map <C-f> :NERDTreeFind<CR>
 
 nmap <leader>o :Oil<CR>
 
-nnoremap U :GundoToggle<CR>
+nnoremap U :MundoToggle<CR>
 let NERDTreeMapOpenSplit='s'
 let NERDTreeMapOpenVSplit='v'
 "nertree git
@@ -624,13 +617,12 @@ noremap <leader>gl :0Gclog<CR>
 noremap <leader>gL :G log --graph<CR>
 vmap <leader>gl :Gclog<CR>:copen<CR>
 noremap <leader>gB :Git blame<CR>
-" noremap <leader>gp :AsyncRun -post=Git git push<CR>
-noremap <silent><leader>gp :call asyncrun#run('', {'post':'call coc#notify#create(["git push complete"],{"title":" Git ","borderhighlight":"GruvboxGreenBold","highlight":"Normal","timeout":2000,"kind":"info"})'}, 'git push -u')<CR>
-" create a popup with git info about the current line
-"
+
 if !has('nvim')
   nmap <silent><Leader>gm :call setbufvar(winbufnr(popup_atcursor(split(system("git log -n 1 -L " . line(".") . ",+1:" . expand("%:p")), "\n"), { "padding": [1,1,1,1], "pos": "botleft", "wrap": 0 })), "&filetype", "git")<CR>
+  noremap <silent><leader>gp :call asyncrun#run('', {'post':'call coc#notify#create(["git push complete"],{"title":" Git ","borderhighlight":"GruvboxGreenBold","highlight":"Normal","timeout":2000,"kind":"info"})'}, 'git push -u')<CR>
 else
+  noremap <silent><leader>gp :call asyncrun#run('', {'post': 'lua vim.schedule(function() vim.notify("Git push complete", vim.log.levels.INFO, { title = "Git", border = "rounded", highlight = "Normal", timeout = 2000 }) end)'}, 'git push -u')<CR>
   function! ShowGitLogForLine()
     let l:git_output = split(system('git log -n 1 -L ' . line(".") . ',+1:' . shellescape(expand("%:p"))), "\n")
     if v:shell_error != 0
@@ -759,7 +751,6 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
   nmap <leader>/ :FZFHistory/<CR>
   nmap <leader>: :FZFHistory:<CR>
   nmap <leader>M :FZFMaps<CR>
-  nmap <leader>m :FZFMarks<CR>
   nmap <leader>j :FZFJumps<CR>
 
   " coc fzf
@@ -785,10 +776,10 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
   if glob("~/.vim/plugin/fzf.vim")!=#""
     noremap <leader>gv :FZFGitEditBranchFile<CR>
     noremap <leader>gV :FZFGitEditCommitFile<CR>
-    noremap <leader>rt :AsyncTaskFzf<CR>
 
     if exists('$TMUX')
-      noremap <leader>rp :FZFVimuxPickPane<CR>
+      noremap <leader>rt :AsyncTaskFzf<CR>
+      noremap <leader>rp :VimuxPickPaneFzf<CR>
     endif
 
     if &rtp =~ 'nvim-dap' && &rtp =~ 'nvim-dap-ui' && glob("~/.vim/plugged/nvim-dap")!=#"" && glob("~/.vim/plugged/nvim-dap-ui")!=#""
@@ -813,7 +804,6 @@ if &rtp =~ 'fzf-lua' && glob("~/.vim/plugged/fzf-lua/plugin/fzf-lua.lua")!=#""
   nmap <leader>/ :FzfLua search_history<CR>
   nmap <leader>: :FzfLua command_history<CR>
   nmap <leader>M :FzfLua keymaps<CR>
-  nmap <leader>m :FzfLua marks<CR>
   nmap <leader>j :FzfLua jumps<CR>
   nmap <leader>c :FzfLua commands<CR>
   " git
@@ -824,12 +814,17 @@ if &rtp =~ 'fzf-lua' && glob("~/.vim/plugged/fzf-lua/plugin/fzf-lua.lua")!=#""
   noremap <leader>gC :FzfLua git_commits<CR>
 
   " lsp
-  nnoremap <silent><nowait> <leader>kd  :<C-u>FzfLua lsp_document_diagnostics<CR>
-  nnoremap <silent><nowait> <leader>kD  :<C-u>FzfLua lsp_workspace_diagnostics<CR>
-  nnoremap <silent><nowait> <leader>kl  :<C-u>FzfLua lsp_document_symbols<CR>
-  nnoremap <silent><nowait> <leader>kL  :<C-u>FzfLua lsp_workspace_symbols<CR>
-  nnoremap <silent><nowait> <leader>kr  :<C-u>FzfLua lsp_references<CR>
-  nnoremap <silent><nowait> <leader>kf  :<C-u>FzfLua lsp_finder<CR>
+  if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
+    " these mappings are defined inside .config/nvim/lua/fzf.lua
+  else
+    nnoremap <silent><nowait> <leader>kd  :<C-u>FzfLua lsp_document_diagnostics<CR>
+    nnoremap <silent><nowait> <leader>kD  :<C-u>FzfLua lsp_workspace_diagnostics<CR>
+    nnoremap <silent><nowait> <leader>kl  :<C-u>FzfLua lsp_document_symbols<CR>
+    nnoremap <silent><nowait> <leader>kL  :<C-u>FzfLua lsp_workspace_symbols<CR>
+    nnoremap <silent><nowait> <leader>kr  :<C-u>FzfLua lsp_references<CR>
+    nnoremap <silent><nowait> <leader>kf  :<C-u>FzfLua lsp_finder<CR>
+  endif
+
 
   " dap
   noremap <leader>ic :FzfLua dap_commands<CR>
@@ -838,9 +833,9 @@ if &rtp =~ 'fzf-lua' && glob("~/.vim/plugged/fzf-lua/plugin/fzf-lua.lua")!=#""
   noremap <leader>il :FzfLua dap_configurations<CR>
   noremap <leader>iv :FzfLua dap_variables<CR>
 
-  noremap <leader>rt :AsyncTaskFzf<CR>
   if exists('$TMUX')
-    noremap <leader>rp :FZFVimuxPickPane<CR>
+    noremap <leader>rt :AsyncTaskFzf<CR>
+    noremap <leader>rp :VimuxPickPaneFzf<CR>
   endif
 endif
 " }}}

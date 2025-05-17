@@ -1,10 +1,11 @@
 :root {
-  --tabpanel-background-color: #282828 !important;
+  --tabpanel-background-color: #1d2021 !important;
   --tab-min-height: 30px !important;
   --tab-border-radius: 0 !important;
   --tab-block-margin: 0 !important;
   --toolbarbutton-inner-padding: 6px !important;
   --toolbarbutton-border-radius: 0 !important;
+  --tab-inline-padding: 12px !important;
 }
 
 /* remove title bar space between tab list and window buttons */
@@ -15,10 +16,12 @@
   display: none !important;
 }
 
-/* Tabs */
+/* Tabs topbar */
 
 /* .tab-background { */
 /*   margin-block: 0 !important; */
+/*   border-right: 0px solid rgba(0, 0, 0, 0) !important; */
+/*   margin-left: -4px !important; */
 /* } */
 /* #TabsToolbar-customization-target, */
 /* #tabbrowser-tabs { */
@@ -35,11 +38,6 @@
 /*   max-height: 30px !important; */
 /* } */
 /*  */
-/* .tab-background { */
-/*   border-right: 0px solid rgba(0, 0, 0, 0) !important; */
-/*   margin-left: -4px !important; */
-/* } */
-/*  */
 /* .tabbrowser-tab:is([visuallyselected="true"], [multiselected]) */
 /*   > .tab-stack */
 /*   > .tab-background { */
@@ -49,10 +47,27 @@
 /* .tabbrowser-tab[last-visible-tab="true"] { */
 /*   padding-inline-end: 0 !important; */
 /* } */
-/*  */
-/* .tab-close-button { */
-/*   display: none; */
-/* } */
+
+/* Tab sidebar */
+.tab-background {
+  border-radius: 0 !important;
+  margin-inline: 0 !important;
+  width: 100% !important;
+}
+#tabbrowser-tabs[orient="vertical"] {
+  --tab-min-width: unset;
+  --tab-inline-padding: unset; /*calc((var(--tab-collapsed-width) - var(--icon-size-default)) / 2);*/
+}
+.actions-list {
+  & > moz-button:not(.tools-overflow) {
+    --button-outer-padding-inline: var(--space-xxsmall);
+    --button-outer-padding-block: var(--space-xxsmall);
+  }
+}
+
+.tab-close-button {
+  display: none !important;
+}
 
 /* greyed out unloaded tabs */
 .tabbrowser-tab[pending="true"] {
@@ -87,7 +102,7 @@
   font-size: 14px !important;
 }
 .urlbarView-row[aria-selected="true"] .urlbarView-url {
-  color: #282828 !important;
+  color: #1d2021 !important;
 }
 
 /* #nav-bar:not([tabs-hidden="true"]) { */
@@ -114,10 +129,4 @@
 /* remove folder icons from bookmarks */
 #personal-bookmarks .bookmark-item[container="true"] .toolbarbutton-icon {
   display: none !important;
-}
-
-@-moz-document url-prefix(about:blank) {
-  * {
-    background-color: #282828;
-  }
 }
