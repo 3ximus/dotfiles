@@ -89,7 +89,10 @@ require("lualine").setup({
   },
   sections = {
     lualine_a = {{ 'mode', fmt = function(str) return str:sub(1,1) end }},
-    lualine_b = { 'branch' },
+    lualine_b = {
+      'branch',
+      { 'diff', colored = false }
+    },
     lualine_c = {
       {'%<%{fnamemodify(expand("%:p:h"), ":~:.:g")}/',
         padding = { right = 0 , left = 1},

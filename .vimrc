@@ -169,8 +169,7 @@ endif
 
 " LANGUAGE STUFF
 let g:polyglot_disabled = ["sensible"]
-" Plug 'sheerun/vim-polyglot' " hasn't been updated in a while and we need a fix
-Plug '00dani/vim-polyglot', { 'branch' : 'feature/fix-build' }
+Plug 'sheerun/vim-polyglot'
 Plug 'mattn/emmet-vim'
 
 " DATABASE
@@ -347,8 +346,10 @@ nmap <leader>vs :mkview<CR>
 nmap <leader>vl :loadview<CR>
 
 " jump forward and backward in quickfix results
-noremap ]q :cnext<CR>
-noremap [q :cprevious<CR>
+nmap ]q :cnext<CR>
+nmap [q :cprevious<CR>
+nmap <leader>. :cnext<CR>
+nmap <leader>m :cprevious<CR>
 
 noremap ]c />>>>>>>\\|<<<<<<<<CR>
 noremap [c ?>>>>>>>\\|<<<<<<<<CR>
@@ -608,13 +609,12 @@ noremap <leader>gl :0Gclog<CR>
 noremap <leader>gL :G log --graph<CR>
 vmap <leader>gl :Gclog<CR>:copen<CR>
 noremap <leader>gB :Git blame<CR>
-" noremap <leader>gp :AsyncRun -post=Git git push<CR>
-noremap <silent><leader>gp :call asyncrun#run('', {'post':'call coc#notify#create(["git push complete"],{"title":" Git ","borderhighlight":"GruvboxGreenBold","highlight":"Normal","timeout":2000,"kind":"info"})'}, 'git push -u')<CR>
-" create a popup with git info about the current line
-"
+
 if !has('nvim')
   nmap <silent><Leader>gm :call setbufvar(winbufnr(popup_atcursor(split(system("git log -n 1 -L " . line(".") . ",+1:" . expand("%:p")), "\n"), { "padding": [1,1,1,1], "pos": "botleft", "wrap": 0 })), "&filetype", "git")<CR>
+  noremap <silent><leader>gp :call asyncrun#run('', {'post':'call coc#notify#create(["git push complete"],{"title":" Git ","borderhighlight":"GruvboxGreenBold","highlight":"Normal","timeout":2000,"kind":"info"})'}, 'git push -u')<CR>
 else
+  noremap <silent><leader>gp :call asyncrun#run('', {'post': 'lua vim.schedule(function() vim.notify("Git push complete", vim.log.levels.INFO, { title = "Git", border = "rounded", highlight = "Normal", timeout = 2000 }) end)'}, 'git push -u')<CR>
   function! ShowGitLogForLine()
     let l:git_output = split(system('git log -n 1 -L ' . line(".") . ',+1:' . shellescape(expand("%:p"))), "\n")
     if v:shell_error != 0
@@ -743,7 +743,6 @@ if &rtp =~ 'fzf.vim' && glob("~/.vim/plugged/fzf.vim/plugin/fzf.vim")!=#""
   nmap <leader>/ :FZFHistory/<CR>
   nmap <leader>: :FZFHistory:<CR>
   nmap <leader>M :FZFMaps<CR>
-  nmap <leader>m :FZFMarks<CR>
   nmap <leader>j :FZFJumps<CR>
 
   " coc fzf
@@ -797,7 +796,6 @@ if &rtp =~ 'fzf-lua' && glob("~/.vim/plugged/fzf-lua/plugin/fzf-lua.lua")!=#""
   nmap <leader>/ :FzfLua search_history<CR>
   nmap <leader>: :FzfLua command_history<CR>
   nmap <leader>M :FzfLua keymaps<CR>
-  nmap <leader>m :FzfLua marks<CR>
   nmap <leader>j :FzfLua jumps<CR>
   nmap <leader>c :FzfLua commands<CR>
   " git
