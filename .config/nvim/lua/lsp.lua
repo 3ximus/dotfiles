@@ -40,14 +40,14 @@ vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 
 -- float options
 local border = {
-    { '┌', 'FloatBorder' },
-    { '─', 'FloatBorder' },
-    { '┐', 'FloatBorder' },
-    { '│', 'FloatBorder' },
-    { '┘', 'FloatBorder' },
-    { '─', 'FloatBorder' },
-    { '└', 'FloatBorder' },
-    { '│', 'FloatBorder' },
+    { '┌', 'LineNr' },
+    { '─', 'LineNr' },
+    { '┐', 'LineNr' },
+    { '│', 'LineNr' },
+    { '┘', 'LineNr' },
+    { '─', 'LineNr' },
+    { '└', 'LineNr' },
+    { '│', 'LineNr' },
 }
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
 function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
@@ -64,57 +64,63 @@ lspconfig.ts_ls.setup({})
 lspconfig.rust_analyzer.setup({})
 lspconfig.gopls.setup({})
 
+require('nvim-treesitter.configs').setup({
+  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "python", "go" },
+  sync_install = false,
+  auto_install = true,
+  highlight = { enable = true },
+})
+-- vim.opt.foldmethod = "expr"
+-- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- vim.opt.foldlevel = 99
+
 require("mason").setup({
   ui = { border = "rounded" }
 })
-require("mason-lspconfig").setup({
-  ensure_installed = { "lua_ls", "pyright", "ts_ls", "rust_analyzer", "gopls" }
-})
-
-require('nvim-treesitter.configs').setup({
-  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "python", "go" },
-})
-
-require('blink.cmp').setup({
-  keymap = { preset = 'enter' },
-  completion = {
-    documentation = { auto_show = true },
-    trigger = { show_on_insert_on_trigger_character = true },
-    menu = {
-      draw = {
-        -- We don't need label_description now because label and label_description are already
-        -- combined together in label by colorful-menu.nvim.
-        treesitter = { 'lsp' },
-        -- columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
-        components = {
-          label = {
-            text = function(ctx)
-              return require("colorful-menu").blink_components_text(ctx)
-            end,
-            highlight = function(ctx)
-              return require("colorful-menu").blink_components_highlight(ctx)
-            end,
-          },
-        },
-      },
-    },
-  },
-  -- fuzzy = { implementation = "prefer_rust" },
-  fuzzy = { implementation = "lua" },
-})
-require("colorful-menu").setup({})
-
--- auto setup lsp servers
--- require("mason-lspconfig").setup_handlers {
---   -- The first entry (without a key) will be the default handler
---   -- and will be called for each installed server that doesn't have
---   -- a dedicated handler.
---   function (server_name) -- default handler (optional)
---     require("lspconfig")[server_name].setup {}
---   end,
---   -- Next, you can provide a dedicated handler for specific servers.
---   -- For example, a handler override for the `rust_analyzer`:
---   -- ["rust_analyzer"] = function ()
---   --   require("rust-tools").setup {}
---   -- end
--- }
+-- require("mason-lspconfig").setup({
+--   ensure_installed = { "lua_ls", "pyright", "ts_ls", "rust_analyzer", "gopls" }
+-- })
+--
+-- require('blink.cmp').setup({
+--   keymap = { preset = 'enter' },
+--   completion = {
+--     documentation = { auto_show = true },
+--     trigger = { show_on_insert_on_trigger_character = true },
+--     menu = {
+--       draw = {
+--         -- We don't need label_description now because label and label_description are already
+--         -- combined together in label by colorful-menu.nvim.
+--         treesitter = { 'lsp' },
+--         -- columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
+--         components = {
+--           label = {
+--             text = function(ctx)
+--               return require("colorful-menu").blink_components_text(ctx)
+--             end,
+--             highlight = function(ctx)
+--               return require("colorful-menu").blink_components_highlight(ctx)
+--             end,
+--           },
+--         },
+--       },
+--     },
+--   },
+--   -- fuzzy = { implementation = "prefer_rust" },
+--   fuzzy = { implementation = "lua" },
+-- })
+-- require("colorful-menu").setup({})
+--
+-- -- auto setup lsp servers
+-- -- require("mason-lspconfig").setup_handlers {
+-- --   -- The first entry (without a key) will be the default handler
+-- --   -- and will be called for each installed server that doesn't have
+-- --   -- a dedicated handler.
+-- --   function (server_name) -- default handler (optional)
+-- --     require("lspconfig")[server_name].setup {}
+-- --   end,
+-- --   -- Next, you can provide a dedicated handler for specific servers.
+-- --   -- For example, a handler override for the `rust_analyzer`:
+-- --   -- ["rust_analyzer"] = function ()
+-- --   --   require("rust-tools").setup {}
+-- --   -- end
+-- -- }
