@@ -33,10 +33,12 @@ fzf_lua.setup({
       -- nvim registers <C-/> as <C-_>, use insert mode
       -- and press <C-v><C-/> should output ^_
       ["<C-_>"] = "toggle-preview",
+      ["ctrl-a"] = "toggle-all",
     },
     fzf = {
       true,
       ["ctrl-/"] = "toggle-preview",
+      ["ctrl-a"] = "toggle-all",
     },
   },
   actions = {
