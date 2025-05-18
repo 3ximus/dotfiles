@@ -3,6 +3,9 @@ require("gruvbox").setup({
   transparent_mode = true,
   contrast = 'hard',
   overrides = {
+    Pmenu = { fg = palette.light1, bg = palette.dark1 },
+    PmenuSel  =  { fg = palette.dark1, bg = palette.bright_blue, bold = true },
+
     Todo = { link = 'GruvboxYellowBold' },
 
     -- GitGutter
@@ -37,6 +40,22 @@ require("gruvbox").setup({
     DapUIStepOut = { link = "GruvboxBlue" },
     DapUIStepOver = { link = "GruvboxBlue" },
     DapUIStop = { link = "GruvboxRed" },
+
+    ["@lsp.type.function.typescript"] = { link = "cleared" },
+    ["@lsp.type.parameter.typescript"] = { link = "cleared" },
+    ["@lsp.type.property.typescript"] = { link = "cleared" },
+    ["@lsp.typemod.property.declaration.typescript"] = { link = "GruvboxAqua" },
+    ["@variable.member.typescript"] = { link = "cleared" },
+    ["@punctuation.bracket.typescript"] = { link = "cleared" },
+    ["@punctuation.delimiter.typescript"] = { link = "cleared" },
+    ["@attribute.typescript"] = { link = "GruvboxOrange" },
+
+
+    ["@variable.parameter.bash"] = { link = "cleared" },
+    ["@variable.bash"] = { link = "GruvboxBlueBold" },
+
+    ["@string.yaml"] = { link = "cleared" },
+    ["@lsp.type.parameter.dockerfile"] = { link = "cleared" },
   }
 })
 vim.cmd("colorscheme gruvbox")

@@ -305,14 +305,6 @@ nnoremap <A-l> <C-W>l
 " run macro saved to q
 nnoremap <leader>q @q
 
-" move line
-" nnoremap <C-j> :<C-U>m .+1<CR>
-" nnoremap <C-k> :<C-U>m .-2<CR>
-" inoremap <C-j> <Esc>:m .+1<CR>gi
-" inoremap <C-k> <Esc>:m .-2<CR>gi
-" vnoremap <C-j> :m '>+1<CR>gv
-" vnoremap <C-k> :m '<-2<CR>gv
-
 map Y y$
 
 " fold with fold nest max of 1
@@ -325,9 +317,13 @@ nnoremap <silent><F2> :<C-U>:execute 'setlocal lcs=tab:>-,trail:-,leadmultispace
 set pastetoggle=<F4>
 
 " Idenfigy syntax highlight value under the cursor
-map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+if has('nvim')
+  nmap <F10> :Inspect<CR>
+else
+  nmap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+  \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+  \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+endif
 
 " start a search for visually selected text
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
