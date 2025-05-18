@@ -819,8 +819,8 @@ if &rtp =~ 'fzf-lua' && glob("~/.vim/plugged/fzf-lua/plugin/fzf-lua.lua")!=#""
     nnoremap <silent><nowait> <leader>kL  :<C-u>FzfLua lsp_workspace_symbols<CR>
     nnoremap <silent><nowait> <leader>kr  :<C-u>FzfLua lsp_references<CR>
     nnoremap <silent><nowait> <leader>kf  :<C-u>FzfLua lsp_finder<CR>
+    " more lsp mappings defined inside ~/.config/nvim/lua/lsp.lua
   endif
-
 
   " dap
   noremap <leader>ic :FzfLua dap_commands<CR>

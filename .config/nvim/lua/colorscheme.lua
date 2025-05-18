@@ -56,6 +56,8 @@ require("gruvbox").setup({
 
     ["@string.yaml"] = { link = "cleared" },
     ["@lsp.type.parameter.dockerfile"] = { link = "cleared" },
+
+    ["@markup.heading.gitcommit"] = { link = "cleared"},
   }
 })
 vim.cmd("colorscheme gruvbox")
