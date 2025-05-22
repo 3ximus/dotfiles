@@ -41,15 +41,15 @@ require("gruvbox").setup({
     DapUIStepOver = { link = "GruvboxBlue" },
     DapUIStop = { link = "GruvboxRed" },
 
+    ["@punctuation.bracket"] = { link = "cleared" },
+    ["@punctuation.delimiter"] = { link = "cleared" },
+
     ["@lsp.type.function.typescript"] = { link = "cleared" },
     ["@lsp.type.parameter.typescript"] = { link = "cleared" },
     ["@lsp.type.property.typescript"] = { link = "cleared" },
     ["@lsp.typemod.property.declaration.typescript"] = { link = "GruvboxAqua" },
     ["@variable.member.typescript"] = { link = "cleared" },
-    ["@punctuation.bracket.typescript"] = { link = "cleared" },
-    ["@punctuation.delimiter.typescript"] = { link = "cleared" },
     ["@attribute.typescript"] = { link = "GruvboxOrange" },
-
 
     ["@variable.parameter.bash"] = { link = "cleared" },
     ["@variable.bash"] = { link = "GruvboxBlueBold" },

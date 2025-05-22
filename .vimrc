@@ -139,11 +139,12 @@ else " vim {{{
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
   Plug 'antoinemadec/coc-fzf'
   let g:polyglot_disabled = ["sensible"]
-  Plug 'sheerun/vim-polyglot', { 'branch' : 'feature/fix-build' }
+  Plug 'sheerun/vim-polyglot'
 endif " }}}
 
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-sleuth'
 Plug 'tomtom/tcomment_vim'
 Plug 'justinmk/vim-sneak'
 " Plug 'ggandor/leap.nvim'
