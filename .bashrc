@@ -23,8 +23,10 @@ set -o pipefail
 shopt -s checkwinsize
 
 # enable extended pattern matching features
-# see http://wiki.bash-hackers.org/syntax/pattern
 shopt -s extglob
+
+# enable ** patterns to recurse
+shopt -s globstar
 
 # a command name that is the name of a directory is executed
 # as if it were the argument to the cd command.
