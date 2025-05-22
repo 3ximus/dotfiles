@@ -4,7 +4,6 @@ local fzf_lua = require("fzf-lua")
 local actions = fzf_lua.actions
 local utils = fzf_lua.utils
 
-
 fzf_lua.setup({
   -- fzf_bin = "fzf-tmux",
   -- fzf_tmux_opts = { ["-p"] = "90%,70%" },
@@ -450,10 +449,10 @@ if packer_plugins and packer_plugins['coc.nvim'] and packer_plugins['coc.nvim'].
       -- 设置语法高亮
       local lcount = vim.api.nvim_buf_line_count(tmpbuf)
       local bytes = vim.api.nvim_buf_get_offset(tmpbuf, lcount)
-      local max_filesize = 500 * 1024   -- 500K
+      local max_filesize = 500 * 1024 -- 500K
       if bytes <= max_filesize then
         -- api.nvim_buf_set_option(tmpbuf, 'filetype', filetype) -- 使用 filetype 会启用 treesitter
-        api.nvim_buf_set_option(tmpbuf, "syntax", filetype)   -- 使用 syntax 不会启用 treesitter，用普通的语法高亮
+        api.nvim_buf_set_option(tmpbuf, "syntax", filetype) -- 使用 syntax 不会启用 treesitter，用普通的语法高亮
       end
       self:set_preview_buf(tmpbuf)
 
@@ -465,7 +464,7 @@ if packer_plugins and packer_plugins['coc.nvim'] and packer_plugins['coc.nvim'].
         fn.clearmatches()
         -- 高亮
         highlight_lsp_range(tmpbuf, -1, "LspReferenceText", target.source)
-        self.orig_pos = api.nvim_win_get_cursor(0)   -- 给 previewer:scroll() 用的原始光标位置，用于判断是否需要设置 cursorline
+        self.orig_pos = api.nvim_win_get_cursor(0) -- 给 previewer:scroll() 用的原始光标位置，用于判断是否需要设置 cursorline
         utils.zz()
       end)
 
