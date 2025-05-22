@@ -11,14 +11,8 @@ local function prequire(m)
 end
 
 prequire("colorscheme")
+prequire("oil-conf")
 prequire("statusline")
 prequire("statuscolumn")
 prequire("fzf")
 prequire("dap-debugging")
-
-local oil = prequire("oil")
-if oil then
-  oil.setup({
-      columns = { "icon", "permissions", "size", },
-    })
-end

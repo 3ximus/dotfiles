@@ -4,7 +4,6 @@ local fzf_lua = require("fzf-lua")
 local actions = fzf_lua.actions
 local utils = fzf_lua.utils
 
-
 fzf_lua.setup({
   -- fzf_bin = "fzf-tmux",
   -- fzf_tmux_opts = { ["-p"] = "90%,70%" },
