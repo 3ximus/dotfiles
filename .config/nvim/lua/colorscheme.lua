@@ -13,7 +13,10 @@ require("gruvbox").setup({
 
     -- Sneak
     Sneak = { link = 'Search' },
-    SneakCurrent = { link = 'IncSearch' },
+    SneakCurrent = { link = 'CurSearch' },
+    SneakScope = { link = 'CurSearch' },
+    SneakLabelMask = { link = 'LineNr' },
+    SneakLabel= { link = 'Search' },
 
     -- Markology
     MarkologyHLl = { link = 'GruvboxYellowBold' },
