@@ -3,6 +3,7 @@ require("oil").setup({
   view_options = {
     show_hidden = false,
   },
+  constrain_cursor = "name",
   use_default_keymaps = false,
   keymaps = {
     ["g?"] = { "actions.show_help", mode = "n" },
