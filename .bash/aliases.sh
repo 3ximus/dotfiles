@@ -99,6 +99,11 @@ alias ghidra-server='sudo /usr/share/ghidra/server/ghidraSvr'
 alias ghidra-admin='sudo /usr/share/ghidra/server/svrAdmin'
 alias ysoserial='java -jar --add-opens=java.xml/com.sun.org.apache.xalan.internal.xsltc.trax=ALL-UNNAMED --add-opens=java.xml/com.sun.org.apache.xalan.internal.xsltc.runtime=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED /vagrant/tools/ysoserial-all.jar'
 
+# AWS
+alias aws-ec2-list="aws ec2 describe-instances --query 'Reservations[*].Instances[*].{ID:InstanceId,Name:Tags[?Key==\`Name\`].Value|[0],State:State.Name,Type:InstanceType,PublicIP:PublicIpAddress}' --output table"
+alias aws-ec2-keys="aws ec2 describe-key-pairs --query 'KeyPairs[*].{Name:KeyName,Fingerprint:KeyPairId,Type:KeyType}' --output table"
+alias aws-ec2-ssh="aws ec2-instance-connect ssh"
+
 # PLEX
 # Add this to sudoers or a file in sudoers.d
 #      %eximus ALL= NOPASSWD: /bin/systemctl start plexmediaserver.service

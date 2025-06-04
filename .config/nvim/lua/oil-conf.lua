@@ -1,16 +1,17 @@
 require("oil").setup({
-  columns = { "icon", "permissions", "size", },
+  columns = { "ctime", "permissions", "size" },
   view_options = {
     show_hidden = false,
   },
+  constrain_cursor = "name",
   use_default_keymaps = false,
   keymaps = {
     ["g?"] = { "actions.show_help", mode = "n" },
     ["<CR>"] = "actions.select",
-    ["<C-v>"] = { "actions.select", opts = { vertical = true } },
-    ["<C-s>"] = { "actions.select", opts = { horizontal = true } },
-    ["<C-t>"] = { "actions.select", opts = { tab = true } },
-    ["<C-p>"] = "actions.preview",
+    ["gv"] = { "actions.select", opts = { vertical = true } },
+    ["gs"] = { "actions.select", opts = { horizontal = true } },
+    ["gt"] = { "actions.select", opts = { tab = true } },
+    ["gp"] = "actions.preview",
     ["<C-c>"] = { "actions.close", mode = "n" },
     ["<C-l>"] = "actions.refresh",
     ["-"] = { "actions.parent", mode = "n" },

@@ -349,8 +349,6 @@ nmap <leader>vl :loadview<CR>
 " jump forward and backward in quickfix results
 nmap ]q :cnext<CR>
 nmap [q :cprevious<CR>
-nmap <leader>. :cnext<CR>
-nmap <leader>m :cprevious<CR>
 
 noremap ]c />>>>>>>\\|<<<<<<<<CR>
 noremap [c ?>>>>>>>\\|<<<<<<<<CR>
@@ -559,10 +557,11 @@ let g:asynctasks_config_name = '.vim/tasks.ini'
 " PLUGIN KEYMAPS {{{
 " ===================
 
-map <C-t> :NERDTreeToggle<CR>
-map <C-f> :NERDTreeFind<CR>
+" map <C-t> :NERDTreeToggle<CR>
+" map <C-f> :NERDTreeFind<CR>
 
 nmap <leader>o :Oil<CR>
+nmap <leader>O :Oil .<CR>
 
 nnoremap U :MundoToggle<CR>
 let NERDTreeMapOpenSplit='s'
@@ -584,6 +583,8 @@ nmap <leader>hu <Plug>(GitGutterUndoHunk)
 nmap <leader>hv <Plug>(GitGutterPreviewHunk)
 nmap ]h <Plug>(GitGutterNextHunk)
 nmap [h <Plug>(GitGutterPrevHunk)
+nmap ]* <Plug>(GitGutterNextHunk)
+nmap [* <Plug>(GitGutterPrevHunk)
 nmap <leader>hf :GitGutterFold<CR>
 
 "leap.nvim
@@ -933,6 +934,8 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
   " Use `:cocDiagnostics` to get all diagnostics of current buffer in location list.
   nmap <silent> [d <Plug>(coc-diagnostic-prev)
   nmap <silent> ]d <Plug>(coc-diagnostic-next)
+  nmap <silent> [= <Plug>(coc-diagnostic-prev)
+  nmap <silent> ]= <Plug>(coc-diagnostic-next)
 
   " GoTo code navigation.
   nmap <silent> gd <Plug>(coc-definition)
