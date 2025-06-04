@@ -553,10 +553,11 @@ let g:asynctasks_config_name = '.vim/tasks.ini'
 " PLUGIN KEYMAPS {{{
 " ===================
 
-map <C-t> :NERDTreeToggle<CR>
-map <C-f> :NERDTreeFind<CR>
+" map <C-t> :NERDTreeToggle<CR>
+" map <C-f> :NERDTreeFind<CR>
 
 nmap <leader>o :Oil<CR>
+nmap <leader>O :Oil .<CR>
 
 nnoremap U :MundoToggle<CR>
 let NERDTreeMapOpenSplit='s'
