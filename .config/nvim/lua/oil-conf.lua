@@ -18,7 +18,7 @@ require("oil").setup({
     ["_"] = { "actions.open_cwd", mode = "n" },
     ["`"] = { "actions.cd", mode = "n" },
     ["~"] = { "actions.cd", opts = { scope = "tab" }, mode = "n" },
-    ["gs"] = { "actions.change_sort", mode = "n" },
+    ["zs"] = { "actions.change_sort", mode = "n" },
     ["gx"] = "actions.open_external",
     ["zh"] = { "actions.toggle_hidden", mode = "n" },
   },

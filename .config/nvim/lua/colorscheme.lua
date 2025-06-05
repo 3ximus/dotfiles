@@ -23,6 +23,10 @@ require("gruvbox").setup({
     MarkologyHLu = { link = 'GruvboxPurpleBold' },
     MarkologyHLm = { link = 'GruvboxOrangeBold' },
 
+    -- Oil
+    OilDir = { link = 'GruvboxBlueBold' },
+    OilDirIcon = { link = 'GruvboxBlueBold' },
+
     -- Coc
     CocErrorSign = { link = 'GruvboxRedBold' },
     CocWarningSign = { link = 'GruvboxYellowBold' },
