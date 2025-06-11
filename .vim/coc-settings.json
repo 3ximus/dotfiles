@@ -51,6 +51,7 @@
   "python.formatting.provider": "autopep8",
   "python.formatting.autopep8Args": ["--indent-size=2", "--ignore=E121"],
   "rust-analyzer.inlayHints.typeHints.enable": false,
+  "rust-analyzer.inlayHints.parameterHints.enable": false,
   "rust-analyzer.lens.enable": false,
   "languageserver": {
     "godot": {

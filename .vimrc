@@ -295,8 +295,10 @@ nnoremap <A-j> <C-W>j
 nnoremap <A-k> <C-W>k
 nnoremap <A-l> <C-W>l
 
+map <C-w>z :tab split<CR>
+map <C-w>t :tab split<CR>
 " run macro saved to q
-nnoremap <leader>q @q
+" nnoremap <leader>q @q
 
 " move line
 " nnoremap <C-j> :<C-U>m .+1<CR>
