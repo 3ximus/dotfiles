@@ -8,14 +8,7 @@
 // └───────────────────────────────────────────────────────────┘
 
 typedef enum {
-  QWERTY = SAFE_RANGE,
-  COLEMAK,
-  LOWER,
-  RAISE,
-  ADJUST,
-  OS_SWAP,
-  MAKE_H,
-  CTL_EXLM,
+  CTL_EXLM = SAFE_RANGE,
 } custom_keycodes;
 
 #endif
