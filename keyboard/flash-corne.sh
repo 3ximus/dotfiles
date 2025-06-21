@@ -3,7 +3,7 @@
 # Script to flash my corne
 
 if [[ ! -d keyboard ]] ; then
-	echo "Run from parent directory './keyboard/flash.sh'"
+	echo "Run from parent directory './keyboard/flash-corne.sh'"
 	exit
 fi
 

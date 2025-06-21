@@ -199,7 +199,7 @@ try "try to set the theme as gruvbox
   set background=dark
   colorscheme gruvbox
 catch /^Vim\%((\a\+)\)\=:E185/
-  colorscheme darkblue
+  colorscheme sorbet
 endtry
 
 " This is now handled on my fork of gruvbox
@@ -352,6 +352,8 @@ nmap [q :cprevious<CR>
 
 noremap ]c />>>>>>>\\|<<<<<<<<CR>
 noremap [c ?>>>>>>>\\|<<<<<<<<CR>
+noremap ]@ />>>>>>>\\|<<<<<<<<CR>
+noremap [@ ?>>>>>>>\\|<<<<<<<<CR>
 
 " toogle wrap
 nmap <leader>w :setlocal wrap!<CR>:setlocal wrap?<CR>
