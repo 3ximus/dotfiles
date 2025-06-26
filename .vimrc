@@ -157,10 +157,6 @@ Plug 'wellle/context.vim', { 'on': 'ContextToggle' }
 Plug 'markonm/traces.vim' " highlight patterns and ranges in command
 Plug 'machakann/vim-highlightedyank'
 
-" TODO replace eventually
-Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-
 " GIT
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
@@ -445,40 +441,6 @@ let g:startify_lists = [
         \ { 'type': 'files',     'header': ['   MRU']            },
         \ ]
 
-"NERDTree
-let g:NERDTreeDirArrowExpandable = ''
-let g:NERDTreeDirArrowCollapsible = ''
-let g:NERDTreeMinimalUI=1
-let g:NERDTreeCreatePrefix='silent keepalt keepjumps'
-let g:NERDTreeShowLineNumbers=1
-let g:NERDTreeMinimalMenu=1
-let g:NERDTreeHijackNetrw=1
-
-"nerdtree-git
-" let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
-" let g:NERDTreeGitStatusShowClean = 1 " default: 0
-" let g:NERDTreeGitStatusShowIgnored = 1 " a heavy feature may cost much more time. default: 0
-let g:NERDTreeGitStatusIndicatorMapCustom = {
-      \ 'Modified'  :'∗',
-      \ 'Staged'    :'→',
-      \ 'Untracked' :'%',
-      \ 'Renamed'   :'↻',
-      \ 'Unmerged'  :'═',
-      \ 'Deleted'   :'✘',
-      \ 'Dirty'     :'∗',
-      \ 'Ignored'   :'?',
-      \ 'Clean'     :'✔',
-      \ 'Unknown'   :'?',
-      \ }
-
-" devicons
-" let g:WebDevIconsNerdTreeBeforeGlyphPadding = ''
-let g:webdevicons_enable_airline_statusline = 0
-let g:webdevicons_enable_airline_tabline = 0
-let g:webdevicons_conceal_nerdtree_brackets = 1
-let g:DevIconsEnableFoldersOpenClose = 1
-let g:DevIconsEnableDistro = 0
-
 " context.vim
 let g:context_add_mappings = 0
 let g:context_enabled = 0
@@ -557,18 +519,11 @@ let g:asynctasks_config_name = '.vim/tasks.ini'
 " PLUGIN KEYMAPS {{{
 " ===================
 
-" map <C-t> :NERDTreeToggle<CR>
-" map <C-f> :NERDTreeFind<CR>
-
 nmap <leader>o :Oil<CR>
 nmap <leader>O :Oil .<CR>
+nmap <C-f> :Oil<CR>
 
 nnoremap U :MundoToggle<CR>
-let NERDTreeMapOpenSplit='s'
-let NERDTreeMapOpenVSplit='v'
-"nertree git
-let g:NERDTreeGitStatusMapNextHunk=']h'
-let g:NERDTreeGitStatusMapPrevHunk='[h'
 
 " context.vim
 nnoremap <F3> :<C-U>ContextToggle<CR>
@@ -835,153 +790,6 @@ if &rtp =~ 'fzf-lua' && glob("~/.vim/plugged/fzf-lua/plugin/fzf-lua.lua")!=#""
   endif
 endif
 " }}}
-" }}}
-
-" COC {{{
-" ======================
-
-if !executable('node')
-  let g:coc_start_at_startup = 0
-endif
-
-if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
-
-  let g:coc_config_home = '~/.vim'
-  let g:coc_disable_startup_warning = 1
-
-  " Coc Extensions
-  let g:coc_global_extensions = [
-        \'coc-json',
-        \'coc-docker',
-        \'coc-snippets',
-        \'coc-sh',
-        \]
-
-  function! s:show_documentation()
-    if (index(['vim','help'], &filetype) >= 0)
-      execute 'h '.expand('<cword>')
-    elseif (coc#rpc#ready())
-      call CocActionAsync('definitionHover')
-    else
-      execute '!' . &keywordprg . " " . expand('<cword>')
-    endif
-  endfunction
-
-  " Map function and class text objects
-  " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-  xmap if <Plug>(coc-funcobj-i)
-  omap if <Plug>(coc-funcobj-i)
-  xmap af <Plug>(coc-funcobj-a)
-  omap af <Plug>(coc-funcobj-a)
-  xmap ic <Plug>(coc-classobj-i)
-  omap ic <Plug>(coc-classobj-i)
-  xmap ac <Plug>(coc-classobj-a)
-  omap ac <Plug>(coc-classobj-a)
-
-  " Allow auto import when using C-n and C-p for navigating suggestions
-  inoremap <silent><expr> <C-n> coc#pum#visible() ? coc#pum#next(1) : "\<C-n>"
-  inoremap <silent><expr> <C-p> coc#pum#visible() ? coc#pum#prev(1) : "\<C-p>"
-  inoremap <silent><expr> <down> coc#pum#visible() ? coc#pum#next(0) : "\<down>"
-  inoremap <silent><expr> <up> coc#pum#visible() ? coc#pum#prev(0) : "\<up>"
-  inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>"
-  inoremap <silent><expr> <Tab> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<Tab>"
-
-  function! CocToggle()
-    if g:coc_enabled
-      CocDisable
-    else
-      CocEnable
-    endif
-  endfunction
-  command! CocToggle :call CocToggle()
-
-  " it actually also closes CocTree with Outgoing and Incoming calls to be more convenient
-  function! CocCloseOutline()
-    let winid = coc#window#find('cocViewId', 'OUTLINE')
-    if winid != -1
-      call CocAction('hideOutline')
-    endif
-    let winid = coc#window#find('cocViewId', 'calls')
-    if winid != -1
-      call coc#window#close(winid)
-    endif
-  endfunction
-
-  function! CocOutlineToggle()
-    let winid = coc#window#find('cocViewId', 'OUTLINE')
-    if winid == -1
-      call CocAction('showOutline')
-    else
-      call CocAction('hideOutline')
-    endif
-  endfunction
-
-  " map ctrl-space to get coc completion
-  if has('nvim')
-    inoremap <silent><expr> <c-space> coc#refresh()
-  else
-    inoremap <silent><expr> <c-@> coc#refresh()
-  endif
-
-  " Use K to show documentation in preview window.
-  nnoremap <silent> K :call <SID>show_documentation()<CR>
-  nnoremap <silent> <leader>K :execute '!' . &keywordprg . " " . expand('<cword>')<CR>
-
-  " Use Ctrl l for expanding snippet
-  imap <C-l> <Plug>(coc-snippets-expand)
-
-  " Use `[d` and `]d` to navigate diagnostics
-  " Use `:cocDiagnostics` to get all diagnostics of current buffer in location list.
-  nmap <silent> [d <Plug>(coc-diagnostic-prev)
-  nmap <silent> ]d <Plug>(coc-diagnostic-next)
-  nmap <silent> [= <Plug>(coc-diagnostic-prev)
-  nmap <silent> ]= <Plug>(coc-diagnostic-next)
-
-  " GoTo code navigation.
-  nmap <silent> gd <Plug>(coc-definition)
-  nmap <silent> gD :tab split<CR>:call CocAction('jumpDefinition')<CR>
-  nmap <silent> gl <Plug>(coc-declaration)
-  nmap <silent> gy <Plug>(coc-type-definition)
-  nmap <silent> gr <Plug>(coc-references)
-  nmap <silent> gR <Plug>(coc-rename)
-
-  noremap go :call CocActionAsync('runCommand', 'editor.action.organizeImport')<CR>
-  noremap g= :call CocActionAsync('format')<CR>
-
-  nmap <leader>ka  <Plug>(coc-codeaction-cursor)
-  nmap <leader>kA  <Plug>(coc-codeaction)
-
-  nnoremap <silent><nowait> <leader>ko  :<C-u>call CocOutlineToggle()<CR>
-  nnoremap <silent><nowait> <leader>kt  :<C-u>CocToggle<CR>
-  nnoremap <silent><nowait> <leader>kf  :<C-u>call CocAction('showOutgoingCalls')<CR>
-  nnoremap <silent><nowait> <leader>kr  :<C-u>call CocAction('showIncomingCalls')<CR>
-endif
-
-" }}}
-
-" GUI SPECIFIC {{{
-" =================
-
-if has("gui_running")
-  colorscheme gruvbox
-  let g:gruvbox_contrast_dark = 'medium'
-  let g:gruvbox_contrast_light = 'soft'
-  set background=dark
-
-  set guifont=Terminess\ Nerd\ Font\ Mono\ 13
-  set linespace=0
-  set guicursor+=a:blinkon0
-
-  "hide toolbar, scrollbar and menubar
-  set guioptions-=L
-  set guioptions-=l
-  set guioptions-=R
-  set guioptions-=r
-  set guioptions-=m
-  set guioptions-=T
-  set guioptions-=e
-endif
-
 " }}}
 
 " FILE SPECIFIC {{{
