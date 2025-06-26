@@ -16,6 +16,7 @@ if command -v qmk 2>&1 >/dev/null; then
 	uf2file="$(qmk compile -kb $kb -km $km -n 2>&1 | tr ' ' '\n' | sed -n '/TARGET/s/TARGET=//p').uf2"
 	echo "Hold the reset button and mount the device when prompted."
 	read -p "Press any key to continue..." answer
+	# sudo mount -o defaults,uid=1000,gid=1000 /dev/sdb1 /media/eximus/RPI
 	qmk flash -kb $kb -km $km
 	firmware=$(find "$qmkhome" -maxdepth 1 -name "$uf2file")
 	if [ -z $firmware ]; then
