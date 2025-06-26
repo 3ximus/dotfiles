@@ -518,11 +518,6 @@ else
 endif
 
 nnoremap U :MundoToggle<CR>
-let NERDTreeMapOpenSplit='s'
-let NERDTreeMapOpenVSplit='v'
-"nertree git
-let g:NERDTreeGitStatusMapNextHunk=']h'
-let g:NERDTreeGitStatusMapPrevHunk='[h'
 
 " context.vim
 nnoremap <F3> :<C-U>ContextToggle<CR>
@@ -909,31 +904,6 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
   nnoremap <silent><nowait> <leader>kt  :<C-u>CocToggle<CR>
   nnoremap <silent><nowait> <leader>kf  :<C-u>call CocAction('showOutgoingCalls')<CR>
   nnoremap <silent><nowait> <leader>kr  :<C-u>call CocAction('showIncomingCalls')<CR>
-endif
-
-" }}}
-
-" GUI SPECIFIC {{{
-" =================
-
-if has("gui_running")
-  colorscheme gruvbox
-  let g:gruvbox_contrast_dark = 'medium'
-  let g:gruvbox_contrast_light = 'soft'
-  set background=dark
-
-  set guifont=Terminess\ Nerd\ Font\ Mono\ 13
-  set linespace=0
-  set guicursor+=a:blinkon0
-
-  "hide toolbar, scrollbar and menubar
-  set guioptions-=L
-  set guioptions-=l
-  set guioptions-=R
-  set guioptions-=r
-  set guioptions-=m
-  set guioptions-=T
-  set guioptions-=e
 endif
 
 " }}}
