@@ -115,6 +115,8 @@ if has('nvim')
   Plug 'microsoft/vscode-js-debug', { 'do': 'npm ci --legacy-peer-deps && npx gulp dapDebugServer' }
   " python debug
   Plug 'mfussenegger/nvim-dap-python'
+  " lldb debug
+  Plug 'julianolf/nvim-dap-lldb'
 else
   Plug '3ximus/gruvbox'
   Plug '3ximus/vim-airline' " my fork switches position of the tabs and splits on tabline
@@ -130,8 +132,6 @@ else
 endif
 
 " BASE
-Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'simnalamburt/vim-mundo'
 Plug 'junegunn/vim-peekaboo'
 Plug 'jeetsukumaran/vim-markology'
@@ -145,9 +145,9 @@ Plug 'orrors/asynctasks.vim'
 " TOOLS
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+" Plug 'tpope/vim-eunuch'
 Plug 'tomtom/tcomment_vim'
 Plug 'justinmk/vim-sneak'
-" Plug 'ggandor/leap.nvim'
 Plug 'AndrewRadev/linediff.vim'
 Plug 'fidian/hexmode'
 Plug 'lambdalisue/vim-suda', { 'on': ['SudaRead', 'SudaWrite'] }
@@ -178,7 +178,6 @@ Plug 'jidn/vim-dbml', { 'for': 'dbml' }
 
 " OTHER
 Plug 'mhinz/vim-startify'
-Plug 'SarveshMD/vim-devicons'
 Plug 'vim-test/vim-test', { 'on': ['TestNearest', 'TestFile'] }
 
 if v:version >= 800
@@ -407,28 +406,13 @@ endif
 " PLUGIN CONFIGURATION {{{
 " =========================
 
+" netrw
+let g:netrw_liststyle = 3
+
 "startify
 let g:startify_change_to_dir = 0
 let g:startify_fortune_use_unicode = 1
-" let g:startify_custom_header =
-"     \ 'startify#pad(startify#fortune#cowsay())'
-" let g:ascii = [
-      " \ '             ⣴⣶⣤⡤⠦⣤⣀⣤⠆     ⣈⣭⣿⣶⣿⣦⣼⣆          ',
-      " \ '              ⠉⠻⢿⣿⠿⣿⣿⣶⣦⠤⠄⡠⢾⣿⣿⡿⠋⠉⠉⠻⣿⣿⡛⣦       ',
-      " \ '                    ⠈⢿⣿⣟⠦ ⣾⣿⣿⣷    ⠻⠿⢿⣿⣧⣄     ',
-      " \ '                     ⣸⣿⣿⢧ ⢻⠻⣿⣿⣷⣄⣀⠄⠢⣀⡀⠈⠙⠿⠄    ',
-      " \ '                    ⢠⣿⣿⣿⠈    ⣻⣿⣿⣿⣿⣿⣿⣿⣛⣳⣤⣀⣀   ',
-      " \ '             ⢠⣧⣶⣥⡤⢄ ⣸⣿⣿⠘  ⢀⣴⣿⣿⡿⠛⣿⣿⣧⠈⢿⠿⠟⠛⠻⠿⠄  ',
-      " \ '            ⣰⣿⣿⠛⠻⣿⣿⡦⢹⣿⣷   ⢊⣿⣿⡏  ⢸⣿⣿⡇ ⢀⣠⣄⣾⠄   ',
-      " \ '           ⣠⣿⠿⠛ ⢀⣿⣿⣷⠘⢿⣿⣦⡀ ⢸⢿⣿⣿⣄ ⣸⣿⣿⡇⣪⣿⡿⠿⣿⣷⡄  ',
-      " \ '           ⠙⠃   ⣼⣿⡟  ⠈⠻⣿⣿⣦⣌⡇⠻⣿⣿⣷⣿⣿⣿ ⣿⣿⡇ ⠛⠻⢷⣄ ',
-      " \ '                ⢻⣿⣿⣄   ⠈⠻⣿⣿⣿⣷⣿⣿⣿⣿⣿⡟ ⠫⢿⣿⡆     ',
-      " \ '                 ⠻⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣀⣤⣾⡿⠃     ',
-      " \]
-" let g:startify_custom_header =
-"       \ 'startify#pad(g:ascii + startify#fortune#boxed())'
-let g:startify_custom_header =
-      \ 'startify#pad(startify#fortune#boxed())'
+let g:startify_custom_header = ''
 
 function! s:gitModified()
     let files = systemlist('git ls-files -m 2>/dev/null')
@@ -446,40 +430,6 @@ let g:startify_lists = [
         \ { 'type': function('s:gitUntracked'), 'header': ['   Git untracked']},
         \ { 'type': 'files',     'header': ['   MRU']            },
         \ ]
-
-"NERDTree
-let g:NERDTreeDirArrowExpandable = ''
-let g:NERDTreeDirArrowCollapsible = ''
-let g:NERDTreeMinimalUI=1
-let g:NERDTreeCreatePrefix='silent keepalt keepjumps'
-let g:NERDTreeShowLineNumbers=1
-let g:NERDTreeMinimalMenu=1
-let g:NERDTreeHijackNetrw=1
-
-"nerdtree-git
-" let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
-" let g:NERDTreeGitStatusShowClean = 1 " default: 0
-" let g:NERDTreeGitStatusShowIgnored = 1 " a heavy feature may cost much more time. default: 0
-let g:NERDTreeGitStatusIndicatorMapCustom = {
-      \ 'Modified'  :'∗',
-      \ 'Staged'    :'→',
-      \ 'Untracked' :'%',
-      \ 'Renamed'   :'↻',
-      \ 'Unmerged'  :'═',
-      \ 'Deleted'   :'✘',
-      \ 'Dirty'     :'∗',
-      \ 'Ignored'   :'?',
-      \ 'Clean'     :'✔',
-      \ 'Unknown'   :'?',
-      \ }
-
-" devicons
-" let g:WebDevIconsNerdTreeBeforeGlyphPadding = ''
-let g:webdevicons_enable_airline_statusline = 0
-let g:webdevicons_enable_airline_tabline = 0
-let g:webdevicons_conceal_nerdtree_brackets = 1
-let g:DevIconsEnableFoldersOpenClose = 1
-let g:DevIconsEnableDistro = 0
 
 " context.vim
 let g:context_add_mappings = 0
@@ -557,12 +507,15 @@ let g:asynctasks_config_name = '.vim/tasks.ini'
 " PLUGIN KEYMAPS {{{
 " ===================
 
-" map <C-t> :NERDTreeToggle<CR>
-" map <C-f> :NERDTreeFind<CR>
-
-nmap <leader>o :Oil<CR>
-nmap <leader>O :Oil .<CR>
-map <C-f> :Oil<CR>
+if has('nvim')
+  nmap <leader>o :Oil<CR>
+  nmap <leader>O :Oil .<CR>
+  map <C-f> :Oil<CR>
+else
+  nmap <leader>o :e .<CR>
+  nmap <leader>O :e .<CR>
+  map <C-f> :e .<CR>
+endif
 
 nnoremap U :MundoToggle<CR>
 let NERDTreeMapOpenSplit='s'

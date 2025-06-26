@@ -52,7 +52,7 @@ vim.cmd('hi clear WinBarNC')
 --   adapters = { 'pwa-node' }, -- which adapters to register in nvim-dap
 -- })
 
-require('dap').adapters['pwa-node'] = {
+dap.adapters['pwa-node'] = {
   type = 'server',
   host = 'localhost',
   port = '${port}',
@@ -87,7 +87,7 @@ end
 
 -- python {{{
 require("dap-python").setup("python3")
-require('dap').configurations.python = {
+dap.configurations.python = {
   {
     type = 'python',
     request = 'launch',
@@ -105,8 +105,50 @@ require('dap').configurations.python = {
         source = "find . -type f -name '*.py' ! -path '*/venv/*' ! -path '*/.venv/*' ! -path '*/env/*'",
         sink = function(file) print(file) end
       }))
-      return sel[#sel] and sel[#sel] or require('dap').ABORT
+      return sel[#sel] and sel[#sel] or dap.ABORT
     end
   },
 }
+-- }}}
+
+-- lldb + rust {{{
+require("dap-lldb").setup({
+  {
+    name = "rust",
+    type = "lldb",
+    request = "launch",
+    program = function()
+      local cwd = vim.fn.getcwd()
+
+      -- Try to get package name from Cargo.toml
+      local file = io.open(cwd .. "/Cargo.toml", "r")
+      if file then
+        local content = file:read("*all")
+        file:close()
+        local package_name = content:match('%[package%].-name%s*=%s*["\']([^"\']+)["\']')
+        if package_name then
+          local binary = cwd .. "/target/debug/" .. package_name
+          if vim.loop.fs_stat(binary) then
+            return binary
+          end
+        end
+      end
+
+      -- Fallback: find any executable in target/debug
+      local handle = io.popen("find " .. cwd .. "/target/debug -maxdepth 1 -type f -executable 2>/dev/null | head -1")
+      if handle then
+        local result = handle:read("*all"):gsub("\n", "")
+        handle:close()
+        if result ~= "" then
+          return result
+        end
+      end
+
+      vim.notify("No debug binary found", vim.log.levels.WARN)
+      return cwd .. "/target/debug/main"
+    end,
+    cwd = "${workspaceFolder}",
+    stopOnEntry = false,
+  },
+})
 -- }}}
