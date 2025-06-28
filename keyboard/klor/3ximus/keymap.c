@@ -1,84 +1,58 @@
-/*
-
-                                        █         █    █            ▄▄▄▀▀▀▀▀▀▄▄▄        █▀▀▀▀▀▀▀▀▀▀█
-                                        █        █     █          ▄▀            ▀▄      █          █
-                                        █       █      █        ▄▀                ▀▄    █          █
-                                        █      █       █        █                  █    █          █
-                                        █     █        █       █                    █   █          █
-                                        █    █         █       █                    █   █▄▄▄▄▄▄▄▄▄▄█
-                                        █   █ █        █       █                    █   █      █
-                                        █  █   █       █        █                  █    █       █
-                                        █ █     █      █        ▀▄                ▄▀    █        █
-                                        ██       █     █          ▀▄            ▄▀      █         █
-                                        █         █    █▄▄▄▄▄▄▄▄    ▀▀▀▄▄▄▄▄▄▀▀▀        █          █
-
-                                        ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-                                        3 X I M U S
-
-*/
 #include <stdio.h>
 #include <string.h>
-#ifdef HAPTIC_ENABLE
-#include "drivers/haptic/DRV2605L.h"
-#endif //HAPTIC ENABLE
-
 
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 // │ D E F I N I T I O N S                                                                                                                      │
 // └────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 
 // ┌───────────────────────────────────────────────────────────┐
-// │ d e f i n e   m a c r o n a m e s                         │
-// └───────────────────────────────────────────────────────────┘
-
-// LEFT HAND HOME ROW MODS ├───────────────────────────────────┐
-
-#define GUI_A MT(MOD_LGUI, KC_A)
-#define ALT_R MT(MOD_LALT, KC_R)
-#define CTL_S MT(MOD_LCTL, KC_S)
-#define SHT_T MT(MOD_LSFT, KC_T)
-
-// RIGHT HAND HOME ROW MODS ├───────────────────────────────────┐
-
-#define SHT_N MT(MOD_RSFT, KC_N)
-#define CTL_E MT(MOD_LCTL, KC_E)
-#define ALT_I MT(MOD_LALT, KC_I)
-#define GUI_O MT(MOD_LGUI, KC_O)
-
-// ┌───────────────────────────────────────────────────────────┐
 // │ l a y o u t  a n d  k e y m a p                           │
 // └───────────────────────────────────────────────────────────┘
 
-// Import the layout that you use from the layouts folder
-#include "layouts/saegewerk/layout_saegewerk.cfg"
-#include "layouts/saegewerk/keymap_saegewerk.h"
+#include "layout_saegewerk.cfg"
+#include "keymap_saegewerk.h"
 #define LAYOUT LAYOUT_saegewerk
 
-
-// ┌───────────────────────────────────────────────────────────┐
-// │ d e f i n e   s o u n d s                                 │
-// └───────────────────────────────────────────────────────────┘
-
-#ifdef AUDIO_ENABLE
-#define WINXP_SOUND W__NOTE(_DS6), Q__NOTE(_DS5), H__NOTE(_AS5), H__NOTE(_GS5), H__NOTE(_DS5), H__NOTE(_DS6), H__NOTE(_AS5)
-#define MAC_SOUND S__NOTE(_CS5), B__NOTE(_C5)
-
-float winxp_song[][2] = SONG(WINXP_SOUND);
-float mac_song[][2] = SONG(MAC_SOUND);
-#endif // AUDIO_ENABLE
-
-
-
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-// │ H A P T I C   F E E D B A C K                                                                                                              │
+// │ M A C R O S                                                                                                                                │
 // └────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 
-void keyboard_post_init_user(void) {
-// Call the post init code.
-#if HAPTIC_ENABLE
-  haptic_disable(); // disables per key haptic feedback by default
-#endif //HAPTIC ENABLE
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  static uint16_t ctl_exlm_timer;
+  switch (keycode) {
+    case CTL_EXLM:
+      if (record->event.pressed) {
+        ctl_exlm_timer = timer_read();
+        register_code(KC_LCTL);
+      } else {
+        unregister_code(KC_LCTL);
+        if (timer_elapsed(ctl_exlm_timer) < TAPPING_TERM) {
+          SEND_STRING("!");
+        }
+      }
+      return false;
+  }
+  return true;
 }
+
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+// │ E N C O D E R                                                                                                                              │
+// └────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+#ifdef ENCODER_ENABLE
+
+bool encoder_update_user(uint8_t index, bool clockwise) {
+  if (index == 0) {
+    if (clockwise) tap_code(KC_VOLD);
+    else tap_code(KC_VOLU);
+  } else if (index == 1) {
+    if (clockwise) tap_code(KC_PGDN);
+    else tap_code(KC_PGUP);
+  }
+  return false;
+}
+
+#endif // ENCODER_ENABLE
 
 
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -298,98 +272,3 @@ bool oled_task_kb(void) {
 }
 #endif // OLED_ENABLE
 
-
-
-uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    case SHT_T:
-      return TAPPING_TERM - 150;
-    case SHT_N:
-      return TAPPING_TERM - 150;
-    default:
-      return TAPPING_TERM;
-  }
-}
-
-
-// ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-// │ M A C R O S                                                                                                                                │
-// └────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  static uint16_t ctl_exlm_timer;
-  switch (keycode) {
-    case CTL_EXLM:
-      if (record->event.pressed) {
-        ctl_exlm_timer = timer_read();
-        register_code(KC_LCTL);
-      } else {
-        unregister_code(KC_LCTL);
-        if (timer_elapsed(ctl_exlm_timer) < TAPPING_TERM) {
-          SEND_STRING("!");
-        }
-      }
-      return false;
-  }
-  return true;
-}
-
-
-// ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-// │ E N C O D E R                                                                                                                              │
-// └────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-
-#ifdef ENCODER_ENABLE
-
-// ┌───────────────────────────────────────────────────────────┐
-// │ e n c o d e r  L                                          │
-// └───────────────────────────────────────────────────────────┘
-
-bool encoder_update_user(uint8_t index, bool clockwise) {
-  if (index == 0) {
-    if (clockwise) {
-      tap_code(KC_VOLU);
-    } else {
-      tap_code(KC_VOLD);
-    }
-
-// ┌───────────────────────────────────────────────────────────┐
-// │ e n c o d e r  R                                          │
-// └───────────────────────────────────────────────────────────┘
-
-  } else if (index == 1) {
-    if(IS_LAYER_ON(1)){
-      if (clockwise) {
-        tap_code(KC_MNXT);
-      } else {
-        tap_code(KC_MPRV);
-      }
-    }
-  }
-  return true;
-}
-
-#endif // ENCODER_ENABLE
-
-
-
-
-/*
-
-                                                       ▐█    ▟▛ ▐█     ▄▆▀▀▀▀▀█▌
-                                                       ▐█   ▟▛  ▐█    ▟▛        ▜▙ ▐█     █▌
-                                                       ▐█  ▟▛   ▐█   ▐█          █▋▐█     █▌
-                                                       ▐█ ▟█▙   ▐█   ▐█          █▋▐█▀▀▜█▀▀▘
-                                                       ▐█▟▛ ▜▙  ▐█    ▜▙        ▟▛ ▐█   ▜▙
-                                                       ▐█▛   ▜▙ ▐█▄▄▄▄ ▀▜▆▄▄▄▄▆▛▀  ▐█    ▜▙
-
-                                                                 ▄██████████████▄
-                                                                 ████████████████
-                                                            ▄██████▀  ▀████▀  ▀██████▄
-                                                            ███████▄  ▄████▄  ▄███████
-                                                            ███████████▀▀▀▀███████████
-                                                            ▀█████████▀ ▄▄ ▀█████████▀
-                                                                 ████▀ ▄██▄ ▀████
-                                                                 ████▄▄████▄▄████
-
-*/
