@@ -62,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    │ s y m b o l                                               │
    └───────────────────────────────────────────────────────────┘
    ┌─────────┬─────────┬─────────┬─────────┬─────────┐                    ┌─────────┬─────────┬─────────┬─────────┬─────────┐
-   │         │    <    │    `    │    >    │    ?    │ ╭╮╭╮╭╮╭╮╭╮╭╮╭╮╭╮╭╮ │    +    │    {    │    ~    │    }    │  BSPC   │
+   │    Q    │    <    │    `    │    >    │    ?    │ ╭╮╭╮╭╮╭╮╭╮╭╮╭╮╭╮╭╮ │    +    │    {    │    ~    │    }    │  BSPC   │
    ├─────────┼─────────┼─────────┼─────────┼─────────┤ │╰╯╰╯╰╯╰╯╰╯╰╯╰╯╰╯│ ├─────────┼─────────┼─────────┼─────────┼─────────┤
    │  CTL/!  │    ^    │    =    │    $    │    #    ├─╯                ╰─┤    *    │    (    │    -    │    )    │    |    │
    ├─────────┼─────────┼─────────┼─────────┼─────────┤╭────────╮╭────────╮├─────────┼─────────┼─────────┼─────────┼─────────┤
@@ -72,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                        └─────────┴─────────┴─────────┘                    └─────────┴─────────┴─────────┘ */
 
    [2] = LAYOUT_saegewerk(
-      KC_NO    , KC_LT   , KC_GRV , KC_GT   , KC_QUES ,                     KC_PPLS , KC_LCBR , KC_TILD , KC_RCBR , KC_BSPC ,
+      KC_Q     , KC_LT   , KC_GRV , KC_GT   , KC_QUES ,                     KC_PPLS , KC_LCBR , KC_TILD , KC_RCBR , KC_BSPC ,
       CTL_EXLM , KC_CIRC , KC_EQL , KC_DLR  , KC_HASH ,                     KC_ASTR , KC_LPRN , KC_PMNS , KC_RPRN , KC_PIPE ,
       KC_LSFT  , KC_AMPR , KC_AT  , KC_PERC , KC_COMM , KC_MUTE,   KC_MPLY, KC_SCLN , KC_LBRC , KC_UNDS , KC_RBRC , KC_BSLS ,
                               KC_LGUI, KC_TRNS, KC_SPC,                     KC_COLN, MO(3), KC_LALT),
