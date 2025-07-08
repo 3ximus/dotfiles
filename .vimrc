@@ -360,9 +360,9 @@ nmap <leader>w :setlocal wrap!<CR>:setlocal wrap?<CR>
 " recalculate syntax highlight
 nmap zz zz:syntax sync fromstart<CR>
 
-" 3 way diff get bindings
-nmap gh :diffget //3<CR>
-nmap gl :diffget //2<CR>
+" 3 way diff get bindings (get left / get right)
+nmap gl :diffget //3<CR>
+nmap gh :diffget //2<CR>
 
 vnoremap <leader>u] :B !python3 -c 'import sys,urllib.parse;print(urllib.parse.quote(sys.stdin.read()));'<cr>
 vnoremap <leader>u[ :B !python3 -c 'import sys,urllib.parse;print(urllib.parse.unquote(sys.stdin.read()));';<cr>
@@ -889,8 +889,8 @@ if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""
   " GoTo code navigation.
   nmap <silent> gd <Plug>(coc-definition)
   nmap <silent> gD :tab split<CR>:call CocAction('jumpDefinition')<CR>
-  nmap <silent> gl <Plug>(coc-declaration)
-  nmap <silent> gy <Plug>(coc-type-definition)
+  " nmap <silent> gl <Plug>(coc-declaration)
+  " nmap <silent> gy <Plug>(coc-type-definition)
   nmap <silent> gr <Plug>(coc-references)
   nmap <silent> gR <Plug>(coc-rename)
 

@@ -1,5 +1,6 @@
 from PIL import Image
-im = Image.open('mew.bmp')
+import sys
+im = Image.open(sys.argv[1])
 
 # print in ascii
 # for i in range(0, im.size[0]):
