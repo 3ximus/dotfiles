@@ -42,12 +42,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #ifdef ENCODER_ENABLE
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
+  // left side
   if (index == 0) {
     if (clockwise) tap_code(KC_VOLD);
     else tap_code(KC_VOLU);
+
+  // right side
   } else if (index == 1) {
-    if (clockwise) tap_code(KC_PGDN);
-    else tap_code(KC_PGUP);
+    if(IS_LAYER_ON(2)){
+      if (clockwise) tap_code(KC_LEFT);
+      else tap_code(KC_RIGHT);
+    } else {
+      if (clockwise) tap_code(KC_DOWN);
+      else tap_code(KC_UP);
+    }
   }
   return false;
 }

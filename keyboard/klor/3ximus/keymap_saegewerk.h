@@ -21,7 +21,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    ├─────────┼─────────┼─────────┼─────────┼─────────┤ │╰╯╰╯╰╯╰╯╰╯╰╯╰╯╰╯│ ├─────────┼─────────┼─────────┼─────────┼─────────┤
    │    A    │    S    │    D    │    F    │    G    ├─╯                ╰─┤    H    │    J    │    K    │    L    │    '    │
    ├─────────┼─────────┼─────────┼─────────┼─────────┤╭────────╮╭────────╮├─────────┼─────────┼─────────┼─────────┼─────────┤
-   │    Z    │    X    │    C    │    V    │    B    ││  MUTE  ││PLY/PSE ││    N    │    M    │    ,    │    .    │    /    │
+   │    Z    │    X    │    C    │    V    │    B    ││  MPLY  ││  MUTE  ││    N    │    M    │    ,    │    .    │    /    │
    └─────────┴─────────┼─────────┼─────────┼─────────┼╰────────╯╰────────╯┼─────────┼─────────┼─────────┼─────────┴─────────┘
                        │  META   │  SYMBOL │  SPACE  │                    │  ENTER  │  NUMBER │   ALT   │
                        └─────────┴─────────┴─────────┘                    └─────────┴─────────┴─────────┘ */
@@ -30,7 +30,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    [0] = LAYOUT_saegewerk(
       KC_Q         , KC_W         , KC_E , KC_R , KC_T ,                     KC_Y , KC_U , KC_I    , KC_O         , KC_P            ,
       LCTL_T(KC_A) , LSFT_T(KC_S) , KC_D , KC_F , KC_G ,                     KC_H , KC_J , KC_K    , RSFT_T(KC_L) , RCTL_T(KC_QUOT) ,
-      KC_Z         , KC_X         , KC_C , KC_V , KC_B , KC_MUTE,   KC_MPLY, KC_N , KC_M , KC_COMM , KC_DOT       , KC_SLSH         ,
+      KC_Z         , KC_X         , KC_C , KC_V , KC_B , KC_MPLY,   KC_MUTE, KC_N , KC_M , KC_COMM , KC_DOT       , KC_SLSH         ,
                                  KC_LGUI, MO(2), KC_SPC,                     RSFT_T(KC_ENT), LT(1, KC_ESC), KC_LALT),
 
  /*
@@ -44,7 +44,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    ├─────────┼─────────┼─────────┼─────────┼─────────┤ │╰╯╰╯╰╯╰╯╰╯╰╯╰╯╰╯│ ├─────────┼─────────┼─────────┼─────────┼─────────┤
    │  CTL/1  │ SHFT/2  │    3    │    4    │    5    ├─╯                ╰─┤    6    │    7    │    8    │  SHFT/9 │  CTL/0  │
    ├─────────┼─────────┼─────────┼─────────┼─────────┤╭────────╮╭────────╮├─────────┼─────────┼─────────┼─────────┼─────────┤
-   │  LSFT   │    ▼    │    ▼    │    ▼    │   F10   ││  MUTE  ││PLY/PSE ││   F11   │   F12   │    ▼    │    ▼    │    ▼    │
+   │  LSFT   │    ▼    │    ▼    │    ▼    │   F10   ││  MPLY  ││  MUTE  ││   F11   │   F12   │    ▼    │    ▼    │    ▼    │
    └─────────┴─────────┼─────────┼─────────┼─────────┤╰────────╯╰────────╯├─────────┼─────────┼─────────┼─────────┴─────────┘
                        │  META   │  MISC   │   TAB   │                    │  ENTER  │    ▼    │   ALT   │
                        └─────────┴─────────┴─────────┘                    └─────────┴─────────┴─────────┘ */
@@ -52,7 +52,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    [1] = LAYOUT_saegewerk(
       KC_F1        , KC_F2        , KC_F3   , KC_F4   , KC_F5   ,                      KC_F6    , KC_F7   , KC_F8  , KC_F9  , KC_BSPC      ,
       LCTL_T(KC_1) , LSFT_T(KC_2) , KC_3    , KC_4    , KC_5    ,                      KC_6     , KC_7    , KC_8   , LSFT_T(KC_9) , RCTL_T(KC_0) ,
-      KC_LSFT      , KC_TRNS      , KC_TRNS , KC_TRNS , KC_F10  , KC_MUTE  , KC_MPLY , KC_F11 , KC_F12 , KC_TRNS      , KC_TRNS , KC_RSFT ,
+      KC_LSFT      , KC_TRNS      , KC_TRNS , KC_TRNS , KC_F10  , KC_MPLY  , KC_MUTE , KC_F11 , KC_F12 , KC_TRNS      , KC_TRNS , KC_RSFT ,
                                     KC_LGUI      , MO(3)        , KC_TAB  ,            KC_ENT  , KC_TRNS , KC_LALT) ,
 
  /*
@@ -66,7 +66,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    ├─────────┼─────────┼─────────┼─────────┼─────────┤ │╰╯╰╯╰╯╰╯╰╯╰╯╰╯╰╯│ ├─────────┼─────────┼─────────┼─────────┼─────────┤
    │  CTL/!  │    ^    │    =    │    $    │    #    ├─╯                ╰─┤    *    │    (    │    -    │    )    │    |    │
    ├─────────┼─────────┼─────────┼─────────┼─────────┤╭────────╮╭────────╮├─────────┼─────────┼─────────┼─────────┼─────────┤
-   │  LSFT   │    &    │    @    │    %    │    ,    ││  MUTE  ││PLY/PSE ││    ;    │    [    │    _    │    ]    │    \    │
+   │  LSFT   │    &    │    @    │    %    │    ,    ││  MPLY  ││  MUTE  ││    ;    │    [    │    _    │    ]    │    \    │
    └─────────┴─────────┼─────────┼─────────┼─────────┤╰────────╯╰────────╯├─────────┼─────────┼─────────┼─────────┴─────────┘
                        │  META   │    ▼    │   TAB   │                    │  ENTER  │  MISC   │   ALT   │
                        └─────────┴─────────┴─────────┘                    └─────────┴─────────┴─────────┘ */
@@ -74,7 +74,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    [2] = LAYOUT_saegewerk(
       KC_Q     , KC_LT   , KC_GRV , KC_GT   , KC_QUES ,                     KC_PPLS , KC_LCBR , KC_TILD , KC_RCBR , KC_BSPC ,
       CTL_EXLM , KC_CIRC , KC_EQL , KC_DLR  , KC_HASH ,                     KC_ASTR , KC_LPRN , KC_PMNS , KC_RPRN , KC_PIPE ,
-      KC_LSFT  , KC_AMPR , KC_AT  , KC_PERC , KC_COMM , KC_MUTE,   KC_MPLY, KC_SCLN , KC_LBRC , KC_UNDS , KC_RBRC , KC_BSLS ,
+      KC_LSFT  , KC_AMPR , KC_AT  , KC_PERC , KC_COMM , KC_MPLY,   KC_MUTE, KC_SCLN , KC_LBRC , KC_UNDS , KC_RBRC , KC_BSLS ,
                               KC_LGUI, KC_TRNS, KC_SPC,                     KC_COLN, MO(3), KC_LALT),
 
 
@@ -89,43 +89,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    ├─────────┼─────────┼─────────┼─────────┼─────────┤ │╰╯╰╯╰╯╰╯╰╯╰╯╰╯╰╯│ ├─────────┼─────────┼─────────┼─────────┼─────────┤
    │  LCTL   │ SFT/HOME│ PG DWN  │  END    │  CAPS   ├─╯                ╰─┤  LEFT   │  DOWN   │   UP    │  RIGHT  │   CTL   │
    ├─────────┼─────────┼─────────┼─────────┼─────────┤╭────────╮╭────────╮├─────────┼─────────┼─────────┼─────────┼─────────┤
-   │         │ CTL+SH+Z│ CTL+SH+C│ CTL+SH+V│         ││  MUTE  ││ PLY/PSE││ALT+RIGHT│  VOL UP │VOL DOWN │  MUTE   │         │
+   │         │ CTL+SH+Z│ CTL+SH+C│ CTL+SH+V│         ││  MPLY  ││  MUTE  ││ALT+RIGHT│  VOL UP │VOL DOWN │  MPLY   │         │
    └─────────┴─────────┼─────────┼─────────┼─────────┤╰────────╯╰────────╯├─────────┼─────────┼─────────┼─────────┴─────────┘
                        │  META   │    ▼    │   TAB   │                    │  ENTER  │    ▼    │   ALT   │
                        └─────────┴─────────┴─────────┘                    └─────────┴─────────┴─────────┘ */
 
    [3] = LAYOUT_saegewerk(
-      KC_PAUS , KC_MPRV         , KC_MPLY   , KC_MNXT   , KC_NO         ,                    KC_NO         , KC_PGUP , RCS(KC_TAB) , LCTL(KC_TAB) , KC_DEL  ,
+      KC_PAUS , KC_MPRV         , KC_MUTE   , KC_MNXT   , KC_NO         ,                    KC_NO         , KC_PGUP , RCS(KC_TAB) , LCTL(KC_TAB) , KC_DEL  ,
       KC_LCTL , LSFT_T(KC_HOME) , KC_PGDN   , KC_END    , KC_CAPS       ,                    KC_LEFT       , KC_DOWN , KC_UP       , KC_RGHT      , KC_RCTL ,
-      KC_NO   , RCS(KC_X)       , RCS(KC_C) , RCS(KC_V) , LALT(KC_LEFT) , KC_MUTE,  KC_MPLY, LALT(KC_RGHT) , KC_VOLD , KC_VOLU     , KC_MUTE      , KC_NO   ,
+      KC_NO   , RCS(KC_X)       , RCS(KC_C) , RCS(KC_V) , LALT(KC_LEFT) , KC_MPLY,  KC_MUTE, LALT(KC_RGHT) , KC_VOLD , KC_VOLU     , KC_MPLY      , KC_NO   ,
                                                 KC_LGUI, KC_TRNS, KC_SPC,                    KC_ENT, KC_TRNS, KC_LALT),
-
- /*
-   ╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸
-
-   ┌─────────────────────────────────────────────────┐
-   │ t e m p l a t e   s a e g e w e r k             │
-   └─────────────────────────────────────────────────┘
-   ┌─────────┬─────────┬─────────┬─────────┬─────────┐                    ┌─────────┬─────────┬─────────┬─────────┬─────────┐
-   │         │         │         │         │         │ ╭╮╭╮╭╮╭╮╭╮╭╮╭╮╭╮╭╮ │         │         │         │         │         │
-   ├─────────┼─────────┼─────────┼─────────┼─────────┤ │╰╯╰╯╰╯╰╯╰╯╰╯╰╯╰╯│ ├─────────┼─────────┼─────────┼─────────┼─────────┤
-   │         │         │         │         │         ├─╯                ╰─┤         │         │         │         │         │
-   ├─────────┼─────────┼─────────┼─────────┼─────────┤╭────────╮╭────────╮├─────────┼─────────┼─────────┼─────────┼─────────┤
-   │         │         │         │         │         ││        ││        ││         │         │         │         │         │
-   └─────────┴─────────┼─────────┼─────────┼─────────┤╰────────╯╰────────╯├─────────┼─────────┼─────────┼─────────┴─────────┘
-                       │         │         │         │                    │         │         │         │
-                       └─────────┴─────────┴─────────┘                    └─────────┴─────────┴─────────┘
-
-   [_TEMPLATE] = LAYOUT_saegewerk(
- //╷         ╷         ╷         ╷         ╷         ╷         ╷╷         ╷         ╷         ╷         ╷         ╷         ╷
-    _______,  _______,  _______,  _______,  _______,                       _______,  _______,  _______,  _______,  _______,
-    _______,  _______,  _______,  _______,  _______,                       _______,  _______,  _______,  _______,  _______,
-    _______,  _______,  _______,  _______,  _______,  _______,   _______,  _______,  _______,  _______,  _______,  _______,
-                        _______,  _______,  _______,                       _______,  _______,  _______
- )
-
-   ╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸
- */
 };
 
 #endif
