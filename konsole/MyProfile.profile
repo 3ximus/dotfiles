@@ -17,7 +17,7 @@ Name=MyProfile
 Parent=FALLBACK/
 StartInCurrentSessionDir=false
 TerminalColumns=100
-TerminalMargin=15
+TerminalMargin=5
 TerminalRows=60
 
 [Interaction Options]
