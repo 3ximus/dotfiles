@@ -62,14 +62,33 @@ def parse_headers(headers):
 
 class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
   @override
+  def do_HEAD(self):
+    super().do_HEAD()
+    self.log(self.statuscode or HTTPStatus.OK)
+    self.verbose_print()
+    REQUEST_COUNT += 1
+    if REQUEST_COUNT >= args.kill_after:
+      self.server.shutdown()
+
+  @override
+  def do_GET(self):
+    global REQUEST_COUNT
+    super().do_GET()
+    self.log(self.statuscode or HTTPStatus.OK)
+    self.verbose_print()
+    REQUEST_COUNT += 1
+    if args.kill_after and REQUEST_COUNT >= args.kill_after:
+      self.server.shutdown()
+
+  @override
   def do_POST(self):
     global REQUEST_COUNT
     try:
-      size = int(self.headers['Content-Length'])
+      size = int(self.headers['Content-Length']) if self.headers['Content-Length'] else None
       # store post data on the handler to be accessed later
-      self.data = self.rfile.read(int(self.headers['Content-Length']))
+      self.data = self.rfile.read(size)
       if args.output:
-        self.save_post_data()
+        self.save_body_data()
       self.log(HTTPStatus.OK, size)
       self.verbose_print()
       self.send_response(HTTPStatus.OK)
@@ -86,23 +105,29 @@ class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         self.server.shutdown()
 
   @override
-  def do_GET(self):
+  def do_PUT(self):
     global REQUEST_COUNT
-    super().do_GET()
-    self.log(self.statuscode or HTTPStatus.OK)
-    self.verbose_print()
-    REQUEST_COUNT += 1
-    if args.kill_after and REQUEST_COUNT >= args.kill_after:
-      self.server.shutdown()
-
-  @override
-  def do_HEAD(self):
-    super().do_HEAD()
-    self.log(self.statuscode or HTTPStatus.OK)
-    self.verbose_print()
-    REQUEST_COUNT += 1
-    if REQUEST_COUNT >= args.kill_after:
-      self.server.shutdown()
+    try:
+      size = int(self.headers['Content-Length']) if self.headers['Content-Length'] else None
+      # store put data on the handler to be accessed later
+      self.data = self.rfile.read(size)
+      if args.output:
+        _, path, _ = self.requestline.split()  # hopefully this is safe
+        self.save_body_data(filename=path if path != '/' else None)
+      self.log(HTTPStatus.OK, size)
+      self.verbose_print()
+      self.send_response(HTTPStatus.OK)
+      self.end_headers()
+      self.wfile.write(b'success\n')
+    except ValueError:
+      self.log(HTTPStatus.INTERNAL_SERVER_ERROR)
+      self.send_response(HTTPStatus.INTERNAL_SERVER_ERROR)
+      self.end_headers()
+      self.wfile.write(b'failed\n')
+    finally:
+      REQUEST_COUNT += 1
+      if args.kill_after and REQUEST_COUNT >= args.kill_after:
+        self.server.shutdown()
 
   def verbose_print(self):
     if args.headers:
@@ -115,16 +140,16 @@ class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     if args.headers or (args.body and hasattr(self, 'data')):
       print(f'\033[1;30m{'-' * 20} {REQUEST_COUNT}\033[m')
 
-  def save_post_data(self):
+  def save_body_data(self, filename=None):
     outdir = os.path.join(args.directory, args.output)
     if not os.path.isdir(outdir):
       os.mkdir(outdir)
 
-    with tempfile.NamedTemporaryFile(prefix="", dir=outdir, delete=False) as ofile:
+    with open(os.path.normpath(os.path.join(outdir, filename.lstrip('/'))), 'wb') if filename else tempfile.NamedTemporaryFile(prefix="", dir=outdir, delete=False) as ofile:
       print(f'+ \x1b[1;34msaving #{REQUEST_COUNT} >\x1b[m {ofile.name}')
       ofile.write(self.data)
 
-      if self.headers.get('Content-Type').startswith('multipart/form-data'):
+      if self.headers.get('Content-Type') and self.headers.get('Content-Type').startswith('multipart/form-data'):
         boundary = self.headers.get('Content-Type').split('boundary=')[-1]
         for part in self.parse_multipart(self.data, boundary):
           headers = part['headers']
@@ -205,7 +230,20 @@ class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
 
 
 if __name__ == '__main__':
-  parser = argparse.ArgumentParser(prog='http-server.py',)
+  parser = argparse.ArgumentParser(prog='http-server.py', formatter_class=argparse.RawDescriptionHelpFormatter, description='''
+Simple http server that supports HEAD | GET | POST | PUT requests.
+
+-------
+Examples interactions:
+  curl http://HOST/filename # get a specific file
+  # store a file with the same name on this server output directory, new-name is optional
+  curl http://HOST/new-name -T filename # you can also pass multiple files with globs: "{fileA,fileB}"
+  # upload files with a random prefix
+  curl http://HOST -F a=@filename -F b=@filename
+  # if uploading from stdin this form is more reliable
+  cmd | curl http://HOST -d @-
+-------
+''', epilog='\t\t\t-- 0rr0rs')
   parser.add_argument('port', nargs='?', default=8000,
                       type=int, help="(default: %(default)s)")
   parser.add_argument(
@@ -215,7 +253,7 @@ if __name__ == '__main__':
                       help="set response headers (eg: 'Set-Cookie: <cookie-name>=<cookie-value>')")
   parser.add_argument('-d', '--directory', default=os.getcwd(),
                       nargs='?', help="serve this directory (default: './')")
-  parser.add_argument('-o', '--output', help="save post data in given OUTPUT directory. The base directory of the output destination is determined with the -d flag ( DIRECTORY/OUTPUT ). If absolute path is given then that's used instead")
+  parser.add_argument('-o', '--output', help="save post data in given OUTPUT directory. The base directory of the output destination is determined with the -d flag ( DIRECTORY/OUTPUT ). If absolute path is given then that's used instead. See above on how to upload files")
   parser.add_argument('-k', '--kill-after', type=int,
                       help="kill server after n requests")
   parser.add_argument('--color', action='store_true',
