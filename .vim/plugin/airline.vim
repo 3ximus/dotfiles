@@ -43,7 +43,7 @@ if &rtp =~ 'vim-airline' && glob("~/.vim/plugged/vim-airline/plugin/airline.vim"
   let g:airline_section_c = airline#section#create(['filename_path', 'filename', 'readonly'])
   let g:airline_section_e = airline#section#create(['coc_status_symbol', 'coc_function'])
   let g:airline_section_d = airline#section#create(['coc_function_clean'])
-  let g:airline_section_x = airline#section#create(['%{airline#util#wrap(airline#parts#filetype() . " " . WebDevIconsGetFileTypeSymbol(),140)}'])
+  let g:airline_section_x = airline#section#create(['%{airline#util#wrap(airline#parts#filetype(),140)}'])
   let g:airline_section_y = airline#section#create(['%{airline#util#wrap(airline#parts#ffenc(),0)}', 'new_search_count'])
   let g:airline_section_z = airline#section#create(['%p%% %l/', 'max_line', ':%c'])
 
