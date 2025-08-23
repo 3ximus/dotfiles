@@ -33,7 +33,7 @@
 [alias]
 	unstage = restore --staged
 	last = log -1 HEAD
-	lol = log --oneline --graph --pretty=format:'%C(yellow)%h%Creset%C(auto)%(decorate:prefix= {,suffix=})%Creset %s - %C(bold blue)%an - %C(black)%cr%Creset' --date-order  --color=always
+	lol = log --oneline --graph --pretty=format:'%C(yellow)%h%Creset%C(auto)%(decorate:prefix= {,suffix=})%Creset %s - %C(bold blue)%an - %C(black)%cd%Creset' --date=relative --date-order  --color=always
 	summary = !which onefetch && onefetch --no-color-palette --no-art
 
 [interactive]
