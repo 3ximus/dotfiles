@@ -118,3 +118,5 @@ alias aws-ec2-ssh="aws ec2-instance-connect ssh"
 alias map-view='telnet mapscii.me'
 
 alias random-commit='git commit -m "$(curl -Lsk whatthecommit.com/index.txt)"'
+
+alias whatsmyip='curl ifconfig.me/ip'
