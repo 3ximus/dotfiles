@@ -672,11 +672,11 @@ if &rtp =~ 'nvim-dap' && &rtp =~ 'nvim-dap-ui' && glob("~/.vim/plugged/nvim-dap"
   nmap <leader>iu :lua require('dapui').toggle()<CR>
   " vmap <leader>ie :lua require('dapui').eval()<CR> " not working
   nmap <leader>ik :lua require('dap.ui.widgets').hover()<CR>
-  nmap <leader>B :lua require('dap').toggle_breakpoint()<CR>
-  nmap <leader>bl :lua require('dap').list_breakpoints(); vim.cmd('copen')<CR>
-  nmap <leader>bC :lua require('dap').clear_breakpoints()<CR>
-  nmap <leader>bc :lua require('dap').set_breakpoint(vim.fn.input('Break condition: '), nil, nil)<CR>
-  nmap <leader>bL :lua require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
+  nmap <leader>b :lua require('dap').toggle_breakpoint()<CR>
+  " nmap <leader>bl :lua require('dap').list_breakpoints(); vim.cmd('copen')<CR>
+  " nmap <leader>bC :lua require('dap').clear_breakpoints()<CR>
+  " nmap <leader>bc :lua require('dap').set_breakpoint(vim.fn.input('Break condition: '), nil, nil)<CR>
+  " nmap <leader>bL :lua require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
 endif
 
 " }}}
