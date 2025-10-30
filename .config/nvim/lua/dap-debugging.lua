@@ -74,7 +74,7 @@ for _, language in ipairs({ "typescript", "javascript" }) do
       name = "Jest",
       type = "pwa-node",
       request = "launch",
-      runtimeExecutable = "node",
+      runtimeExecutable = "bash",
       runtimeArgs = {"${workspaceFolder}/node_modules/.bin/jest", "--runInBand"},
       args = function () return vim.fn.input({ prompt = "Jest Arguments: ", default = "" }) end,
       rootPath = "${workspaceFolder}",

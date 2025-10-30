@@ -665,7 +665,9 @@ nnoremap <leader>tf :TestFile<CR>
 " dap
 if &rtp =~ 'nvim-dap' && &rtp =~ 'nvim-dap-ui' && glob("~/.vim/plugged/nvim-dap")!=#"" && glob("~/.vim/plugged/nvim-dap-ui")!=#""
   nmap <F5> :lua require('dap').continue()<CR>
+  nmap <S-F5> :lua require('dap').run_last()<CR>
   nmap <F6> :lua require('dap').terminate()<CR>
+  nmap <S-F6> :lua require('dap').restart()<CR>
   nmap <F7> :lua require('dap').step_into()<CR>
   nmap <F8> :lua require('dap').step_over()<CR>
   nmap <F9> :lua require('dap').step_out()<CR>
