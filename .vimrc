@@ -198,7 +198,10 @@ try "try to set the theme as gruvbox
   set background=dark
   colorscheme gruvbox
 catch /^Vim\%((\a\+)\)\=:E185/
-  colorscheme sorbet
+  try
+    colorscheme sorbet
+  catch /^Vim\%((\a\+)\)\=:E185/
+  endtry
 endtry
 
 " This is now handled on my fork of gruvbox
@@ -759,6 +762,7 @@ if &rtp =~ 'fzf-lua' && glob("~/.vim/plugged/fzf-lua/plugin/fzf-lua.lua")!=#""
   noremap <leader>gc :FzfLua git_bcommits<CR>
   vmap <leader>gc :FzfLua git_bcommits<CR>
   noremap <leader>gC :FzfLua git_commits<CR>
+  noremap <leader>gg :GitCommandFzf<CR>
 
   " lsp
   if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""

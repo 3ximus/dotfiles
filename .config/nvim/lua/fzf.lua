@@ -92,6 +92,34 @@ fzf_lua.register_ui_select({
   }
 })
 
+-- Git commands {{{
+local function git_command_picker()
+  local git_commands = {
+    "fetch",
+    "pull",
+    "push",
+    "diff",
+    "merge",
+    "rebase",
+    "stash",
+  }
+
+  fzf_lua.fzf_exec(git_commands, {
+    prompt = "Git> ",
+    actions = {
+      ['default'] = function(selected)
+        if selected and #selected > 0 then
+          local cmd = selected[1]
+          vim.cmd('Git ' .. cmd)
+        end
+      end,
+    },
+  })
+end
+
+vim.api.nvim_create_user_command('GitCommandFzf', git_command_picker, {})
+-- }}}
+
 -- Async Task {{{
 local function async_task_fzf()
   local rows = vim.fn['asynctasks#source'](999)
