@@ -30,6 +30,7 @@ alias pacman='pacman --color=auto'
 alias less='less -MRix4'
 alias gdb='gdb -q'
 alias dd='dd status=progress'
+alias trim="sed 's/^[ \t]*//;s/[ \t]*$//'"
 alias alert="echo -ne '\a' && paplay /usr/share/sounds/freedesktop/stereo/complete.oga"
 alias perl-regex='perl -p -i -e'
 alias grep-bin='grep -oUaP' # pattern like: "\xde\xad"
@@ -85,7 +86,8 @@ alias man-pipes='echo "Generic form #>/dev/null (# is 1 by default) or #>&# to s
 
 # wget to download directory, use -P to specify output directory
 # -k option might give memory issues when continuing (-c) the download of large files but without it wget wont check for partially downlaoded files and will assume they are downloaded if they exist
-alias wget-directory='wget -r -np -nc -nd -k'
+alias wget-directory='wget -r -np -nc -nd -k --tries=2 -T 20'
+alias wget-clone='wget -r -np -nc -k --tries=2 -T 20'
 
 alias pip-upgrade='pip3 list --outdated --format=freeze | grep -v "^\-e" | cut -d = -f 1 | xargs -n1 sudo pip3 install -U'
 

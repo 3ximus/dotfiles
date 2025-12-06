@@ -18,6 +18,15 @@ command -v cargo >/dev/null && export PATH=$PATH:$HOME/.cargo/bin
 # bun
 command -v bun >/dev/null && export PATH=$PATH:$HOME/.bun/bin
 
+# pnpm
+if command -v pnpm >/dev/null ; then
+	export PNPM_HOME="/home/eximus/.local/share/pnpm"
+	case ":$PATH:" in
+		*":$PNPM_HOME:"*) ;;
+		*) export PATH="$PNPM_HOME:$PATH" ;;
+	esac
+fi
+
 # fzf CTRL_T options
 export FZF_COMPLETION_OPTS="--preview '[ -f {} ] && { if hash batcat &>/dev/null ; then batcat --color=always --style=changes {} ; else file {} ; fi } '"
 # export FZF_DEFAULT_OPTS='--color=spinner:#fb4934,hl:#928374,fg:#ebdbb2,header:#928374,info:#8ec07c,pointer:#fb4934,marker:#fb4934,fg+:#ebdbb2,prompt:#fb4934,hl+:#fb4934'
