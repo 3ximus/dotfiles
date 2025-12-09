@@ -763,6 +763,8 @@ if &rtp =~ 'fzf-lua' && glob("~/.vim/plugged/fzf-lua/plugin/fzf-lua.lua")!=#""
   vmap <leader>gc :FzfLua git_bcommits<CR>
   noremap <leader>gC :FzfLua git_commits<CR>
   noremap <leader>gg :GitCommandFzf<CR>
+  noremap <leader>gv :GitEditBranchFileFzf<CR>
+  noremap <leader>go :GitOpenBranchFileFzf<CR>
 
   " lsp
   if &rtp =~ 'coc.nvim' && glob("~/.vim/plugged/coc.nvim/plugin/coc.vim")!=#""

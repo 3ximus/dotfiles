@@ -105,7 +105,7 @@ local function git_command_picker()
   }
 
   fzf_lua.fzf_exec(git_commands, {
-    prompt = "Git> ",
+    prompt = "Git > ",
     actions = {
       ['default'] = function(selected)
         if selected and #selected > 0 then
@@ -114,10 +114,109 @@ local function git_command_picker()
         end
       end,
     },
+    fzf_opts = {
+      ["--tmux"]    = "center,40%,40%",
+      ["--ansi"]    = "",
+      ["--no-info"] = "",
+    },
   })
 end
 
 vim.api.nvim_create_user_command('GitCommandFzf', git_command_picker, {})
+-- }}}
+
+-- Git file version {{{
+local function find_branches_with_file()
+  local rel_path = vim.fn.fnamemodify(vim.fn.expand('%:p'), ':~:.')
+
+  -- Find all branches that contain this file
+  local cmd = string.format(
+    "git branch -a | sed 's/^[* ]*//' | sed 's/remotes\\///' | " ..
+    "while read branch; do " ..
+      "git ls-tree -r --name-only \"$branch\" 2>/dev/null | grep -q '^%s$' && echo \"$branch\"; " ..
+      "done | sort -u",
+      vim.fn.shellescape(rel_path):gsub("^'", ""):gsub("'$", "")
+      )
+
+    fzf_lua.fzf_exec(cmd, {
+        prompt = 'Branches> ',
+        actions = {
+          ['default'] = function(selected)
+            if not selected or #selected == 0 then
+              return
+            end
+            vim.cmd('Gedit ' .. string.format('%s:%s', selected[1], rel_path))
+          end,
+        },
+        fzf_opts = {
+          ['--no-info'] = true,
+          ["--tmux"]    = "center,50%,60%",
+          ["--ansi"]    = "",
+          ["--preview"] = string.format("git diff --color=always {1} %s", vim.fn.shellescape(rel_path)),
+          ["--preview-window"] = "up,70%"
+        },
+      })
+  end
+  vim.api.nvim_create_user_command('GitEditBranchFileFzf', find_branches_with_file, {})
+-- }}}
+
+-- Git browse branch {{{
+local function browse_branch_files()
+  -- List all branches
+  local branches_cmd = "git branch -a | sed 's/^[* ]*//' | sed 's/remotes\\///' | sort -u"
+
+  fzf_lua.fzf_exec(branches_cmd, {
+    prompt = 'Select Branch > ',
+    actions = {
+      ['default'] = function(selected)
+        if not selected or #selected == 0 then
+          return
+        end
+        local branch = selected[1]
+        -- List all files in the selected branch
+        local files_cmd = string.format("git ls-tree -r --name-only %s",
+          vim.fn.shellescape(branch))
+
+        fzf_lua.fzf_exec(files_cmd, {
+          prompt = string.format('%s> ', branch),
+          actions = {
+            ['default'] = function(files_selected)
+              if files_selected and #files_selected > 0 then
+                vim.cmd('Gedit ' .. string.format('%s:%s', branch, files_selected[1]))
+              end
+            end,
+            ['ctrl-s'] = function(files_selected)
+              if files_selected and #files_selected > 0 then
+                vim.cmd('Gsplit ' .. string.format('%s:%s', branch, files_selected[1]))
+              end
+            end,
+            ['ctrl-v'] = function(files_selected)
+              if files_selected and #files_selected > 0 then
+                vim.cmd('Gvsplit ' .. string.format('%s:%s', branch, files_selected[1]))
+              end
+            end,
+            ['ctrl-t'] = function(files_selected)
+              if files_selected and #files_selected > 0 then
+                vim.cmd('Gtabedit ' .. string.format('%s:%s', branch, files_selected[1]))
+              end
+            end,
+          },
+          fzf_opts = {
+            ['--no-info'] = true,
+            ["--tmux"]   = "center,90%,70%",
+            ["--preview"] = string.format("git show %s:{1}", vim.fn.shellescape(branch))
+          },
+        })
+      end,
+    },
+    fzf_opts = {
+      ['--no-info'] = true,
+      ["--tmux"]    = "center,50%,40%",
+    },
+  })
+end
+
+vim.api.nvim_create_user_command('GitOpenBranchFileFzf', browse_branch_files, {})
 -- }}}
 
 -- Async Task {{{
@@ -133,7 +232,6 @@ local function async_task_fzf()
 
   local opts = {
     fzf_opts = {
-      ["--border"]    = "rounded",
       ['--no-info']   = true,
       ["--layout"]    = false,
       ["--delimiter"] = "[| ]+",
