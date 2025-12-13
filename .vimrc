@@ -608,6 +608,7 @@ if !exists(":Gdiffoff")
   command Gdiffoff diffoff | q | Gedit
 endif
 noremap <leader>gD :Gdiffoff<CR>
+noremap <leader>ge :Gedit<CR>
 
 " Line diff
 noremap <leader>D :LinediffReset<CR>
