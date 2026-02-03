@@ -106,16 +106,6 @@ alias aws-ec2-list="aws ec2 describe-instances --query 'Reservations[*].Instance
 alias aws-ec2-keys="aws ec2 describe-key-pairs --query 'KeyPairs[*].{Name:KeyName,Fingerprint:KeyPairId,Type:KeyType}' --output table"
 alias aws-ec2-ssh="aws ec2-instance-connect ssh"
 
-# PLEX
-# Add this to sudoers or a file in sudoers.d
-#      %eximus ALL= NOPASSWD: /bin/systemctl start plexmediaserver.service
-#      %eximus ALL= NOPASSWD: /bin/systemctl stop plexmediaserver.service
-#      %eximus ALL= NOPASSWD: /bin/systemctl restart plexmediaserver.service
-# alias plex='sudo systemctl start plexmediaserver.service'
-# alias plex-status='systemctl status plexmediaserver.service'
-# alias plex-stop='sudo systemctl stop plexmediaserver.service'
-# alias plex-restart='sudo systemctl restart plexmediaserver.service'
-
 # Map
 alias map-view='telnet mapscii.me'
 

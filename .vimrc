@@ -170,6 +170,7 @@ endif
 let g:polyglot_disabled = ["sensible"]
 Plug 'sheerun/vim-polyglot'
 Plug 'mattn/emmet-vim'
+Plug 'kaarmu/typst.vim'
 
 " DATABASE
 Plug 'tpope/vim-dadbod', { 'on': 'DBUI' }
@@ -408,6 +409,8 @@ endif
 
 " PLUGIN CONFIGURATION {{{
 " =========================
+
+let g:markdown_folding = 1
 
 " netrw
 let g:netrw_liststyle = 3
