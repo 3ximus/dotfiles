@@ -32,6 +32,18 @@ glfa() {
 		--bind="enter:execute($cmd | LESS='-r' less)"
 }
 
+gdf() {
+	git rev-parse --is-inside-work-tree >/dev/null || return 1
+	local cmd
+	cmd="git diff $* -- {3} | delta"
+	git diff $* --numstat \
+		| command fzf --ansi --no-multi --reverse \
+		--preview="$cmd" \
+		--info-command 'echo -e $FZF_POS/$FZF_INFO' \
+		--min-height 20 \
+		--bind="enter:execute($cmd | LESS='-r' less)"
+}
+
 gbf() {
 	git branch -avv --color --sort=v:refname | fzf \
 		--preview="echo {} |grep -Eo '[a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9]'|xargs -n1 git diff | delta" \

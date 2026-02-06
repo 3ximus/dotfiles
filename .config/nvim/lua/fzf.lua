@@ -15,13 +15,20 @@ fzf_lua.setup({
     ["--history"] = vim.fn.stdpath("data") .. '/fzf-lua-history',
   },
   fzf_colors = {
-    ["border"] = { "fg", "Comment" },
+    ["border"] = { "fg", "NonText" },
   },
   file_icon_padding = '',
   winopts = {
     preview = {
       default = "bat",
-      border = "border-left",
+      -- border = "rounded", -- TODO check why this stopped working
+      border = function(_, m)
+        if m.type == "fzf" then
+          return "border-left"
+        else
+          return "rounded"
+        end
+      end,
       layout = "horizontal",
       horizontal = "right:50%",
     }
@@ -115,7 +122,7 @@ local function git_command_picker()
       end,
     },
     fzf_opts = {
-      ["--tmux"]    = "center,40%,40%",
+      ["--tmux"]    = "center,30%,30%",
       ["--ansi"]    = "",
       ["--no-info"] = "",
     },
