@@ -8,8 +8,6 @@ if [ -x /usr/bin/dircolors ]; then
 	alias ls='ls --color=auto'
 fi
 
-alias list-functions='select i in `grep -P "[a-zA-Z0-9_\-]+(?=\(\))" -o $HOME/.bash/functions.sh`; do declare -f $i; break; done'
-
 # more ls aliases
 alias ll='ls -lF'
 alias la='ls -AF'
@@ -30,6 +28,8 @@ alias pacman='pacman --color=auto'
 alias less='less -MRix4'
 alias gdb='gdb -q'
 alias dd='dd status=progress'
+alias to-h='numfmt --to=iec'
+alias wc-h='wc -c | numfmt --to=iec'
 alias trim="sed 's/^[ \t]*//;s/[ \t]*$//'"
 alias alert="echo -ne '\a' && paplay /usr/share/sounds/freedesktop/stereo/complete.oga"
 alias perl-regex='perl -p -i -e'
@@ -67,8 +67,8 @@ alias vmv="virsh list --name | head -n-1 | fzf --prompt='View vm > ' | xargs -r 
 alias vmd="virsh vol-list --pool default --details | tail -n +3 | head -n-1 | awk '{print\$1\" \"\$6\" \"\$7}' | column -t | fzf --prompt='Delete image > ' | awk '{print\$1}' | xargs -r virsh vol-delete --pool default || :"
 
 # URL encoding-decoding
-alias urlencode='python3 -c "import sys,urllib.parse;print(urllib.parse.quote(sys.stdin.read()));"'
-alias urldecode='python3 -c "import sys,urllib.parse;print(urllib.parse.unquote(sys.stdin.read()));"'
+alias urlencode='python3 -c "import sys,urllib.parse;print(urllib.parse.quote(sys.stdin.read()),end=\"\");"'
+alias urldecode='python3 -c "import sys,urllib.parse;print(urllib.parse.unquote(sys.stdin.read()),end=\"\");"'
 
 # vagrant alias
 alias vu="vagrant up"

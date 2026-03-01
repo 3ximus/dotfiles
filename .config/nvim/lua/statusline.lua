@@ -148,7 +148,7 @@ require("lualine").setup({
     lualine_z = {
       -- 'progress',
       -- 'location',
-      '%p%% %l/%L:%c',
+      '%p%% %L:%c',
       -- {'%p%% %l/', color = { fg=colors.dark0, gui='none' }, padding = { left = 1 }},
       -- {'%L:', color = { fg=colors.dark0, gui='bold' }, padding = 0},
       -- {'%c', color = { fg=colors.dark0, gui='none' }, padding = { left = 0 }},

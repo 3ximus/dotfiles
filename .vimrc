@@ -410,7 +410,7 @@ endif
 " PLUGIN CONFIGURATION {{{
 " =========================
 
-let g:markdown_folding = 1
+" let g:markdown_folding = 1
 
 " netrw
 let g:netrw_liststyle = 3

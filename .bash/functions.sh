@@ -1,5 +1,7 @@
 # vi: tabstop=4 foldmethod=marker
 
+alias list-functions='select i in `grep -P "[a-zA-Z0-9_\-]+(?=\(\))" -o $HOME/.bash/functions.sh`; do declare -f $i; break; done'
+
 # WRAPPERS
 # ===================
 
