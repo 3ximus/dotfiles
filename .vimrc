@@ -320,7 +320,8 @@ nmap zF :call Fold(v:count)<CR>:set foldmethod=manual<CR>
 " display line endings and tabs
 nnoremap <silent><F2> :<C-U>:execute 'setlocal lcs=tab:>-,trail:-,leadmultispace:\\|' . repeat('\ ', &sw -1) . ',eol:¬ list! list? '<CR>
 " toogle paste mode (to prevent indenting when pasting)
-set pastetoggle=<F4>
+nnoremap <silent> <f4> :set paste!<cr>
+inoremap <silent> <f4> <esc>:set paste!<cr>
 
 " Idenfigy syntax highlight value under the cursor
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
