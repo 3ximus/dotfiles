@@ -20,6 +20,20 @@ if hash nativefier &>/dev/null ; then
 	fi
 	sudo mv /tmp/whatsapp/whatsapp* /opt/whatsapp
 	rm /tmp/whatsapp -r
+	sudo tee /usr/share/applications/whatsapp.desktop >/dev/null <<EOF
+[Desktop Entry]
+Name=WhatsApp
+Comment=WhatsApp
+Exec=/opt/whatsapp/whatsapp --no-sandbox
+Icon=whatsapp
+Terminal=false
+Type=Application
+StartupNotify=true
+StartupWMClass=whatsapp
+Encoding=UTF-8
+Categories=Network;Application;
+X-KDE-Protocols=whatsapp
+EOF
 	echo "Whatsapp installed successfully"
 else
 	echo -e '\033[31mnativefier is not installed\033[m'
