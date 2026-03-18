@@ -16,29 +16,29 @@ system "rfkill unblock bluetooth"
 set timeout -1
 spawn bluetoothctl
 match_max 100000
-expect "# "
+expect "> "
 send -- "power on\r"
 expect "Changing power on succeeded"
-expect "# "
+expect "> "
 send -- "remove $mac_address\r"
 expect -re "Device has been removed|Device $mac_address not available"
 
-expect "# "
+expect "> "
 send -- "scan on\r"
 expect -re "Device $mac_address Insignia Bluetooth Mouse"
 
 send -- "scan off\r"
 expect "Discovery stopped"
 
-expect "# "
+expect "> "
 send -- "pair $mac_address\r"
 expect "Pairing successful"
 
-expect "# "
+expect "> "
 send -- "trust $mac_address\r"
 expect "Changing $mac_address trust succeeded"
 
-expect "# "
+expect "> "
 send -- "connect $mac_address\r"
 expect "Connection successful"
 

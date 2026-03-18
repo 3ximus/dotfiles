@@ -7,6 +7,7 @@ set ignorecase true
 set preview true
 set previewer ~/.config/lf/preview.sh
 set scrolloff 5
+set incfilter
 set ifs "\n"
 
 # -------------- Custom commands
@@ -98,6 +99,7 @@ cmd diff ${{
   fi
 }}
 
+# make sure you use "space" or "v" to select files not "y"
 cmd soft-link ${{
   errfile="$(mktemp)"
   ln -s $fs $PWD 2>$errfile
@@ -129,6 +131,7 @@ map o push :openwith<space>
 map Ps soft-link
 map Ph hard-link
 map D delete
+map f filter
 
 # Movement
 map gh cd ~
