@@ -65,6 +65,8 @@ font-style-italic = false
 adjust-cell-height = -10%
 adjust-font-baseline = 2
 
+keybind = ctrl+enter=unbind
+
 # Colors
 theme = Gruvbox Dark Hard
 bold-is-bright = true
