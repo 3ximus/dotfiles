@@ -2,6 +2,13 @@ local palette = require("gruvbox").palette
 require("gruvbox").setup({
   transparent_mode = true,
   contrast = 'hard',
+  italic = {
+    strings = false,
+    emphasis = false,
+    comments = false,
+    operators = false,
+    folds = false,
+  },
   overrides = {
     Todo = { link = 'GruvboxYellowBold' },
 

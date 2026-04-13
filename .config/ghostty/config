@@ -61,7 +61,8 @@ command = /bin/tmux new-session -A -s session
 # Font
 font-family = Terminess Nerd Font Mono
 font-size = 12
-font-style-italic = false
+font-style-italic = 'Regular'
+font-synthetic-style = false
 adjust-cell-height = -10%
 adjust-font-baseline = 2
 
