@@ -105,6 +105,7 @@ local function git_command_picker()
     "fetch",
     "pull",
     "push",
+    "push -f",
     "diff",
     "merge",
     "rebase",
@@ -301,7 +302,7 @@ local function vimux_pick_pane_fzf()
         ["--ansi"]           = "",
         ["--no-info"]        = "",
         ["--preview"]        = "tmux capture-pane -ep -t {2}|cat -s|tail -n $(tput lines)",
-        ["--preview-window"] = "up,70%"
+        ["--preview-window"] = "up,70%,border-bottom"
       },
     }
   )

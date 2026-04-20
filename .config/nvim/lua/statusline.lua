@@ -102,6 +102,13 @@ require("lualine").setup({
       {'%<%t%m',
         padding = { left = 0 , right = 1},
         color = function() return vim.bo.modified and {fg = colors.bright_blue, gui = 'bold'} or {fg = colors.light1, gui = 'bold'} end },
+      {
+        function()
+          return vim.bo.readonly and 'RO' or ''
+        end,
+        padding = { right = 1 , left = 0},
+        color = {fg = colors.neutral_yellow ,gui = 'bold'}
+      },
       {'b:coc_current_function',
         -- separator = { left = '', right = ''},
         -- padding = 0,
