@@ -1,3 +1,39 @@
+[Custom Commands][rofi-10.desktop]
+Exec=/usr/bin/rofi -show window -show-icons
+Name=/usr/bin/rofi -show window -show-icons
+
+[Custom Commands][rofi-4.desktop]
+Exec=/usr/bin/rofi -show drun -show-icons
+Name=/usr/bin/rofi -show drun -show-icons
+
+[Custom Commands][rofi-9.desktop]
+Exec=/usr/bin/rofi -show run
+Name=/usr/bin/rofi -show run
+
+[Custom Commands][rofi-klipper.sh-2.desktop]
+Exec=/home/eximus/.bash/scripts/rofi-klipper.sh
+Name=/home/eximus/.bash/scripts/rofi-klipper.sh
+
+[Custom Commands][{39ca1a5f-5fa3-4601-8d5f-73e9282be74e}.desktop]
+Exec=
+Name=
+
+[Custom Commands][{476f8a79-15ab-4cc6-ac3b-10a97fecc5ca}.desktop]
+Exec=
+Name=
+
+[Custom Commands][{50a0b33f-22f2-40a3-9382-deb67d188316}.desktop]
+Exec=
+Name=
+
+[Custom Commands][{a03d5c00-69b8-49d3-b0f3-cc66d26586f8}.desktop]
+Exec=
+Name=
+
+[com.mitchellh.ghostty.desktop][Global Shortcuts]
+_launch=Alt+Return; Ctrl+Alt+T
+new-window=
+
 [ksmserver][Global Shortcuts]
 Halt Without Confirmation=Ctrl+Alt+Shift+PgDown
 Lock Session=Ctrl+Alt+L; Screensaver
@@ -239,7 +275,7 @@ _launch=Meta+-
 _launch=Meta+=
 
 [{50a0b33f-22f2-40a3-9382-deb67d188316}.desktop][Global Shortcuts]
-_launch=Meta+Ctrl+S
+_launch=
 
 [{a03d5c00-69b8-49d3-b0f3-cc66d26586f8}.desktop][Global Shortcuts]
 _launch=Pause
