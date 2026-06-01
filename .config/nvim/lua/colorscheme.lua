@@ -42,8 +42,8 @@ require("gruvbox").setup({
     CocMarkdownLink =  { link = 'GruvboxBlueBold' }, -- Should push this upstream
 
     -- Dap
-    DapBreakpointSymbol = { fg = palette.bright_red, bg = palette.dark0 },
-    DapStoppedSymbol = { fg = palette.bright_green, bg = palette.dark0 },
+    DapBreakpointSymbol = { fg = palette.bright_red, bg = palette.dark0, bold=true },
+    DapStoppedSymbol = { fg = palette.bright_green, bg = palette.dark0, bold=true },
     DapUIPlayPause = { link = "GruvboxBlue" },
     DapUIRestart = { link = "GruvboxBlue" },
     DapUIStepBack = { link = "GruvboxBlue" },

@@ -111,4 +111,4 @@ alias map-view='telnet mapscii.me'
 
 alias random-commit='git commit -m "$(curl -Lsk whatthecommit.com/index.txt)"'
 
-alias whatsmyip='curl ifconfig.me/ip'
+alias whatsmyip='curl -s ifconfig.me/ip'

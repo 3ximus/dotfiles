@@ -105,7 +105,7 @@ local function git_command_picker()
     "fetch",
     "pull",
     "push",
-    "push -f",
+    "push --force",
     "diff",
     "merge",
     "rebase",

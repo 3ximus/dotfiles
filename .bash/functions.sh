@@ -200,7 +200,7 @@ ssh.localhost.run() { # {{{
 	ssh -R 80:localhost:${PORT} localhost.run -- --no-inject-http-proxy-headers 2>&1 | grep https.*life
 } # }}}
 
-heroku-pg() { # {{{
+pg-heroku() { # {{{
 	local url=$(heroku pg:credentials:url -a $1 | tail -n2 | head -n1 | tr -d ' ')
 	echo $url
 	if [ -n $url ] ; then
