@@ -1,13 +1,12 @@
 import IPython.terminal.prompts as prompts
 from prompt_toolkit.application import get_app
 from prompt_toolkit.key_binding.vi_state import InputMode
-from pygments.token import _TokenType, Token
+from pygments.token import Token
 from warnings import filterwarnings
 
 
 import sys, os
 sys.path.append(os.path.expanduser('~/.ipython/profile_default/'))
-from gruvbox import Color, GruvboxStyle
 
 config = get_config()  # type: ignore # noqa: E0602
 
@@ -61,11 +60,11 @@ config.TerminalInteractiveShell.editing_mode = "vi"
 config.TerminalInteractiveShell.true_color = True
 config.TerminalInteractiveShell.separate_in = ''
 config.TerminalInteractiveShell.prompts_class = Prompt
-config.TerminalInteractiveShell.highlighting_style = GruvboxStyle
+config.TerminalInteractiveShell.colors = "gruvbox-dark"
 config.TerminalInteractiveShell.highlighting_style_overrides = {
-	Token.InsertPrompt: f"{Color.bright_blue} bold",
-	Token.NavPrompt: f"{Color.bright_orange} bold",
-	Token.InsertPromptNum: f"{Color.neutral_purple} bold",
-	Token.NavPromptNum: f"{Color.neutral_blue} bold",
+	Token.InsertPrompt: f"#83a598 bold",
+	Token.NavPrompt: f"#fe8019 bold",
+	Token.InsertPromptNum: f"#b16286 bold",
+	Token.NavPromptNum: f"#458588 bold",
 }
 filterwarnings("ignore", "Attempting to work in a virtualenv")
