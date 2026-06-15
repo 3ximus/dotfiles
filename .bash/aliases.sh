@@ -94,6 +94,9 @@ alias pip-upgrade='pip3 list --outdated --format=freeze | grep -v "^\-e" | cut -
 alias ffuf='ffuf -c -ic'
 alias py='ipython3'
 
+# KDE
+alias logout="loginctl list-sessions --no-legend | grep tty | awk '{print\$1}' | xargs loginctl kill-session"
+
 # KALI
 # start konsole emulator attached to remote tmux session
 alias cutter='LIBGL_ALWAYS_INDIRECT=1 /vagrant/tools/Cutter-v2.2.0-Linux-x86_64.AppImage'

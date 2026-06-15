@@ -152,6 +152,8 @@ Plug 'AndrewRadev/linediff.vim'
 Plug 'fidian/hexmode'
 Plug 'lambdalisue/vim-suda', { 'on': ['SudaRead', 'SudaWrite'] }
 
+Plug 'shortcuts/no-neck-pain.nvim', { 'tag': '*' }
+
 " GIT
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
