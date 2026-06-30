@@ -15,9 +15,10 @@ from http import HTTPStatus
 import http.server
 import os
 import re
+import subprocess
 import sys
 import tempfile
-from threading import Lock
+from threading import Lock, Thread
 import time
 from typing import override
 
@@ -230,20 +231,22 @@ class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
 
 
 if __name__ == '__main__':
-  parser = argparse.ArgumentParser(prog='http-server.py', formatter_class=argparse.RawDescriptionHelpFormatter, description='''
-Simple http server that supports HEAD | GET | POST | PUT requests.
+  parser = argparse.ArgumentParser(prog='http-server.py', formatter_class=argparse.RawDescriptionHelpFormatter, description='Simple http server that supports HEAD | GET | POST | PUT requests.', epilog='''
 
--------
 Examples interactions:
   curl http://HOST/filename # get a specific file
+
   # store a file with the same name on this server output directory, new-name is optional
   curl http://HOST/new-name -T filename # you can also pass multiple files with globs: "{fileA,fileB}"
+
   # upload files with a random prefix
   curl http://HOST -F a=@filename -F b=@filename
+
   # if uploading from stdin this form is more reliable
   cmd | curl http://HOST -d @-
--------
-''', epilog='\t\t\t-- 0rr0rs')
+
+\t\t\t\t\t-- 0rr0rs
+''')
   parser.add_argument('port', nargs='?', default=8000,
                       type=int, help="(default: %(default)s)")
   parser.add_argument(
@@ -258,6 +261,8 @@ Examples interactions:
                       help="kill server after n requests")
   parser.add_argument('--color', action='store_true',
                       help="force use colors even when output is redirected")
+  parser.add_argument('--expose', action='store_true',
+                      help="expose publicly via localhost.run SSH tunnel")
   args = parser.parse_args()
 
   class Server(http.server.ThreadingHTTPServer):
@@ -281,6 +286,22 @@ Examples interactions:
     custom_headers = parse_headers(args.response_headers)
     for k, v in custom_headers.items():
       print(f'    {k}: {v}')
+
+  if args.expose:
+    def run_tunnel():
+      print(f'   + forwarding port via localhost.run...', end=' ')
+      try:
+        proc = subprocess.Popen(
+          ['ssh', '-R', f'80:localhost:{args.port}', 'localhost.run', '--', '--no-inject-http-proxy-headers'],
+          stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True
+        )
+        for line in proc.stdout:
+          if re.search(r'https.*life', line):
+            print(f'\r   + \033[1;32m{line.strip()}\033[m')
+      except Exception as e:
+        print(f'\r   - \033[1;31mtunnel error: {e}\033[m', file=sys.stderr)
+    t = Thread(target=run_tunnel, daemon=True)
+    t.start()
 
   try:
     httpd.serve_forever()

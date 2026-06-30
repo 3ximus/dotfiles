@@ -160,6 +160,8 @@ enable_pager = True
 # Use keyring to automatically save and load password in a secure manner
 keyring = False
 
+use_local_timezone = False
+
 # Custom colors for the completion menu, toolbar, etc.
 [colors]
 completion-menu.completion.current = 'bg:#282828 #83A598'
