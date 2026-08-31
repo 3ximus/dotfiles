@@ -212,6 +212,11 @@ pg-heroku() { # {{{
 	fi
 } # }}}
 
+pass_hash_generate_bcrypt() {
+	python3 -c "import bcrypt; print(bcrypt.hashpw(b\"$1\", bcrypt.gensalt(rounds=${2:-10})).decode())"
+}
+
+
 # GIT
 # =========
 

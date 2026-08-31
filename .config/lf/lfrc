@@ -124,6 +124,7 @@ cmd hard-link ${{
 
 # map e edit
 map <enter> shell
+map <c-e> $ vim .
 map R bulkrename
 map <c-z> $ kill -STOP $PPID
 map Y clipboard

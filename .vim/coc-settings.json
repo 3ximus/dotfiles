@@ -49,7 +49,11 @@
   "pyright.inlayHints.variableTypes": false,
   "pyright.inlayHints.functionReturnTypes": false,
   "python.formatting.provider": "autopep8",
-  "python.formatting.autopep8Args": ["--indent-size=2", "--ignore=E121"],
+  "python.formatting.autopep8Args": [
+    "--indent-size=2",
+    "--ignore=E121",
+    "--max-line-length=180"
+  ],
   "rust-analyzer.inlayHints.typeHints.enable": false,
   "rust-analyzer.inlayHints.parameterHints.enable": false,
   "rust-analyzer.lens.enable": false,
@@ -69,5 +73,9 @@
     }
   },
   "svelte.enable-ts-plugin": true,
-  "snippets.ultisnips.pythonPrompt": false
+  "snippets.ultisnips.pythonPrompt": false,
+  "json.schemaDownload.trustedDomains": {
+    "https://www.schemastore.org": true,
+    "https://json.schemastore.org": true
+  }
 }

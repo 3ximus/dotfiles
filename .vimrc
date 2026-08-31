@@ -454,6 +454,7 @@ if exists('&belloff') && &rtp =~ 'vim-auto-origami' && glob("~/.vim/plugged/vim-
 endif
 
 " gitgutter
+let g:gitgutter_diff_args = '--ignore-cr-at-eol'
 let g:gitgutter_sign_added = '┃'
 let g:gitgutter_sign_modified = '┃'
 let g:gitgutter_sign_modified_removed = '┻'
