@@ -1,7 +1,7 @@
 [user]
 	email = fabio4335@gmail.com
 	name = eximus
-	signingkey = 25C403774F37DD6C
+	signingkey = EEA2188636E92500
 [commit]
 	gpgsign = true
 [push]
